@@ -372,7 +372,10 @@
 </div>
 
 <script>
-    const API_URL = 'https://driving-test-backend-production.up.railway.app';
+    const API_URL =
+    location.hostname === "localhost" || location.hostname === "127.0.0.1"
+        ? "http://localhost:8080"   // ← backend when running locally
+        : "https://driving-test-backend-production.up.railway.app"; // ← built site
 
     // if logged in already, go to main
     if (localStorage.getItem('auth_token')) {
