@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bonnet Check | DriveFlow</title>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    
+    :root {
+        --bg-main: #0b132b;
+        --bg-elevated: #1c2541;
+        --bg-card: #2d3f5a;
+        --bg-card-soft: #2d3f5a;
+        --bg-card-smaller: #3a506b;
+        --border-subtle: rgba(91, 192, 190, 0.22);
+        --border-strong: rgba(111, 255, 233, 0.7);
+        --primary: #5bc0be;
+        --primary-soft: rgba(91, 192, 190, 0.18);
+        --accent: #6fffe9;
+        --accent-soft: rgba(111, 255, 233, 0.18);
+        --accent-orange: #f97316;
+        --accent-red: #ef4444;
+        --text-main: #e5e7eb;
+        --text-muted: #9ca3af;
+        --text-soft: #6b7280;
+        --shadow-card: 0 18px 60px rgba(0, 0, 0, 0.6);
+        --radius-lg: 22px;
+        --radius-xl: 26px;
+        --blur: 18px;
+        --primary-blue: #5bc0be;
+        --primary-blue-dark: #3a506b;
+        --accent-purple: #6fffe9;
+        --text-dark: #e5e7eb;
+        --text-light: #9ca3af;
+        --button-bg: #6fffe9;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: var(--bg-main);
+        color: var(--text-main);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+        max-width: 1400px;
+        margin: 96px auto 40px;
+        padding: 0 20px 40px;
+    }
+
+    .page-header {
+        position: relative;
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 40px;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    .page-header h1 {
+        margin: 0 0 12px;
+        color: var(--text-main);
+        font-size: 32px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+    }
+
+    .page-header p {
+        margin: 0;
+        color: var(--text-muted);
+        font-size: 16px;
+    }
+
+    .content-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+        margin-bottom: 40px;
+    }
+
+    .image-section {
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .image-section h2 {
+        margin: 0 0 24px;
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--text-main);
+        text-align: center;
+    }
+
+    .engine-image {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        border-radius: var(--radius-lg);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        object-fit: contain;
+    }
+
+    .info-section {
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 32px;
+    }
+
+    .info-section h2 {
+        margin: 0 0 8px;
+        font-size: 24px;
+        font-weight: 800;
+        color: var(--text-main);
+        letter-spacing: -0.01em;
+    }
+
+    .info-section .intro {
+        margin: 0 0 32px;
+        color: var(--text-muted);
+        font-size: 16px;
+        line-height: 1.6;
+        padding: 16px;
+        background: var(--primary-soft);
+        border-left: 4px solid var(--primary);
+        border-radius: 8px;
+    }
+
+    .component-item {
+        margin-bottom: 24px;
+        padding: 20px;
+        background: rgba(15, 23, 42, 0.4);
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border-subtle);
+        transition: all 0.2s ease;
+    }
+
+    .component-item:hover {
+        background: rgba(15, 23, 42, 0.6);
+        border-color: var(--primary);
+    }
+
+    .component-item h3 {
+        margin: 0 0 12px;
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--accent);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .component-item .location {
+        margin: 0 0 8px;
+        color: var(--text-muted);
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .component-item .check {
+        margin: 0 0 8px;
+        color: var(--text-main);
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    .component-item .why {
+        margin: 0;
+        color: var(--text-muted);
+        font-size: 14px;
+        font-style: italic;
+    }
+
+    .tips-section {
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 32px;
+        margin-bottom: 40px;
+    }
+
+    .tips-section h2 {
+        margin: 0 0 24px;
+        font-size: 24px;
+        font-weight: 800;
+        color: var(--text-main);
+        letter-spacing: -0.01em;
+    }
+
+    .tips-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .tips-list li {
+        padding: 16px;
+        margin-bottom: 12px;
+        background: rgba(15, 23, 42, 0.4);
+        border-left: 3px solid var(--accent-orange);
+        border-radius: 8px;
+        color: var(--text-main);
+        line-height: 1.6;
+    }
+
+    .tips-list li strong {
+        color: var(--accent-orange);
+    }
+
+    .btn-back {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 18px;
+        border-radius: 999px;
+        border: 1px solid var(--button-bg);
+        background: var(--button-bg);
+        color: var(--bg-main);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 13px;
+        transition: all 0.18s ease-out;
+    }
+
+    .btn-back:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 35px rgba(111, 255, 233, 0.4);
+        border-color: var(--button-bg);
+        background: var(--primary);
+        color: var(--text-main);
+    }
+
+    @media (max-width: 1024px) {
+        .content-wrapper {
+            grid-template-columns: 1fr;
+        }
+
+        .image-section {
+            order: -1;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            margin-top: 80px;
+            padding: 0 16px 32px;
+        }
+
+        .image-section,
+        .info-section,
+        .tips-section {
+            padding: 24px;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="page-header">
+        <h1>🔧 Bonnet Check</h1>
+        <p>What you MUST know for your driving test</p>
+    </div>
+
+    <div class="content-wrapper">
+        <!-- Image Section - Main Focus -->
+        <div class="image-section">
+            <h2>Engine Bay Overview</h2>
+            <img src="betterCheck.jpg" alt="Engine bay with labeled components" class="engine-image">
+        </div>
+
+        <!-- Information Section -->
+        <div class="info-section">
+            <h2>What You MUST Know</h2>
+            <div class="intro">
+                They want to see that you can identify each component and explain its purpose + how to check levels. <strong>You DO NOT need to touch anything.</strong>
+            </div>
+
+            <div class="component-item">
+                <h3>1. Engine Oil</h3>
+                <div class="location">📍 Location: Dipstick (usually yellow/orange)</div>
+                <div class="check">✅ Check: Pull out, wipe, dip again, level is between MIN and MAX. Ensure engine is cold and car is not on a hill.</div>
+                <div class="why">💡 Why: Lubricates engine</div>
+            </div>
+
+            <div class="component-item">
+                <h3>2. Coolant</h3>
+                <div class="location">📍 Location: Translucent tank with coloured liquid</div>
+                <div class="check">✅ Check: Level between MIN and MAX when engine is cold</div>
+                <div class="why">💡 Why: Stops engine overheating</div>
+            </div>
+
+            <div class="component-item">
+                <h3>3. Brake Fluid</h3>
+                <div class="location">📍 Location: Small reservoir near the back of engine bay. (Usually close to brake pedal)</div>
+                <div class="check">✅ Check: Level between MIN and MAX</div>
+                <div class="why">💡 Why: Lets brakes work properly</div>
+            </div>
+
+            <div class="component-item">
+                <h3>4. Windshield Washer Fluid</h3>
+                <div class="location">📍 Location: Blue cap usually</div>
+                <div class="check">✅ Check: Visual check / top up as required</div>
+                <div class="why">💡 Why: Clear visibility</div>
+            </div>
+
+            <div class="component-item">
+                <h3>5. Engine Coolant Fan / Belts</h3>
+                <div class="location">📍 (if asked)</div>
+                <div class="check">✅ Check: Belts shouldn't be torn or loose</div>
+                <div class="why">💡 Trick: They rarely ask this</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tips Section -->
+    <div class="tips-section">
+        <h2>🔥 Tips & Tricks (What Testers Actually Like)</h2>
+        <ul class="tips-list">
+            <li><strong>Say what you see.</strong> If you forget, just point and describe its job.</li>
+            <li><strong>Confidence > perfection.</strong> They don't need exact colour or part names.</li>
+            <li><strong>Memorise the "Big 3":</strong> Oil, Coolant, Brake Fluid — these matter most.</li>
+            <li><strong>Washer fluid is an easy win</strong> — don't overlook it.</li>
+            <li><strong>Don't touch a hot engine.</strong> If they ask, say: "You only check levels when the engine is cold."</li>
+        </ul>
+    </div>
+
+    <div style="text-align: center;">
+        <a href="drivingtest-theory.html" class="btn-back">← Back to Test Theory</a>
+    </div>
+</div>
+
+<script src="chatbot-widget.js"></script>
+
+</body>
+</html>
+

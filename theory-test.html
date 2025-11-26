@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Theory Test Resources | DriveFlow</title>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    
+    :root {
+        --bg-main: #0b132b;
+        --bg-elevated: #1c2541;
+        --bg-card: #2d3f5a;
+        --bg-card-soft: #2d3f5a;
+        --bg-card-smaller: #3a506b;
+        --border-subtle: rgba(91, 192, 190, 0.22);
+        --border-strong: rgba(111, 255, 233, 0.7);
+        --primary: #5bc0be;
+        --primary-soft: rgba(91, 192, 190, 0.18);
+        --accent: #6fffe9;
+        --accent-soft: rgba(111, 255, 233, 0.18);
+        --accent-orange: #f97316;
+        --accent-red: #ef4444;
+        --text-main: #e5e7eb;
+        --text-muted: #9ca3af;
+        --text-soft: #6b7280;
+        --shadow-card: 0 18px 60px rgba(0, 0, 0, 0.6);
+        --radius-lg: 22px;
+        --radius-xl: 26px;
+        --blur: 18px;
+        --primary-blue: #5bc0be;
+        --primary-blue-dark: #3a506b;
+        --accent-purple: #6fffe9;
+        --text-dark: #e5e7eb;
+        --text-light: #9ca3af;
+        --button-bg: #6fffe9;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: var(--bg-main);
+        color: var(--text-main);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 96px auto 40px;
+        padding: 0 20px 40px;
+    }
+
+    .page-header {
+        position: relative;
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 40px;
+        margin-bottom: 40px;
+        text-align: center;
+        transition: border-color 0.18s ease-out, background 0.18s ease-out;
+    }
+    
+    .page-header:hover {
+        border-color: var(--border-strong);
+        background: #3a506b;
+    }
+
+    .page-header h1 {
+        margin: 0 0 12px;
+        color: var(--text-main);
+        font-size: 32px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+    }
+
+    .page-header p {
+        margin: 0;
+        color: var(--text-muted);
+        font-size: 16px;
+    }
+
+    .resources-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 18px;
+        margin-bottom: 40px;
+    }
+
+    .resource-card {
+        position: relative;
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 28px;
+        transition: transform 0.18s ease-out, box-shadow 0.18s ease-out,
+                    border-color 0.18s ease-out;
+        text-decoration: none;
+        color: var(--text-main);
+        display: block;
+    }
+
+    .resource-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.95);
+        border-color: var(--border-strong);
+        background: #3a506b;
+    }
+
+    .resource-card h3 {
+        margin: 0 0 12px;
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--text-main);
+        letter-spacing: -0.01em;
+    }
+
+    .resource-card p {
+        margin: 0 0 20px;
+        color: var(--text-muted);
+        line-height: 1.6;
+        font-size: 14px;
+    }
+
+    .resource-link {
+        color: var(--accent);
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.18s ease-out;
+        font-size: 13px;
+    }
+
+    .resource-link:hover {
+        color: var(--button-bg);
+        gap: 12px;
+    }
+
+    .resource-link::after {
+        content: '→';
+        font-size: 16px;
+    }
+
+    .btn-back {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 18px;
+        border-radius: 999px;
+        border: 1px solid var(--button-bg);
+        background: var(--button-bg);
+        color: var(--bg-main);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 13px;
+        transition: all 0.18s ease-out;
+    }
+
+    .btn-back:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 35px rgba(111, 255, 233, 0.4);
+        border-color: var(--button-bg);
+        background: var(--primary);
+        color: var(--text-main);
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="page-header">
+        <h1>Theory Test Resources</h1>
+        <p>Everything you need to pass your Irish theory test</p>
+    </div>
+
+    <div class="resources-grid">
+        <a href="mock-test.html" class="resource-card">
+            <h3>Mock Test</h3>
+            <p>Take a full 40-question mock exam with a 45-minute timer. Practice under real test conditions.</p>
+            <span class="resource-link">Start Mock Test</span>
+        </a>
+
+        <a href="index.html#topics" class="resource-card">
+            <h3>Practice Questions</h3>
+            <p>Practice by topic with unlimited questions. Get instant feedback and explanations.</p>
+            <span class="resource-link">View Topics</span>
+        </a>
+
+        <a href="checklist.html" class="resource-card">
+            <h3>Test Day Checklist</h3>
+            <p>Everything you need to know and bring on test day.</p>
+            <span class="resource-link">View Checklist</span>
+        </a>
+    </div>
+
+    <div style="text-align: center;">
+        <a href="main.html" class="btn-back" id="backToHome">← Back to Home</a>
+    </div>
+
+<script>
+    // Store the current section when navigating to theory-test.html
+    // Check if we came from main.html and store the section
+    const urlParams = new URLSearchParams(window.location.search);
+    const fromSection = urlParams.get('from');
+    const fromPage = urlParams.get('page') || (fromSection ? 'main' : null);
+    
+    if (fromSection) {
+        localStorage.setItem('lastMainSection', fromSection);
+    }
+    if (fromPage) {
+        localStorage.setItem('lastPage', fromPage);
+    }
+    
+    // When clicking back to home, restore the section position
+    document.getElementById('backToHome').addEventListener('click', function(e) {
+        e.preventDefault();
+        const lastPage = localStorage.getItem('lastPage') || 'main';
+        const lastSection = localStorage.getItem('lastMainSection') || 'theory';
+        
+        if (lastPage === 'main') {
+            window.location.href = `main.html?section=${lastSection}`;
+        } else {
+            window.location.href = `${lastPage}.html`;
+        }
+    });
+</script>
+</div>
+
+<script src="chatbot-widget.js"></script>
+
+</body>
+</html>
+

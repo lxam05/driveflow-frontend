@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test Theory | DriveFlow</title>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    
+    :root {
+        --bg-main: #0b132b;
+        --bg-elevated: #1c2541;
+        --bg-card: #2d3f5a;
+        --bg-card-soft: #2d3f5a;
+        --bg-card-smaller: #3a506b;
+        --border-subtle: rgba(91, 192, 190, 0.22);
+        --border-strong: rgba(111, 255, 233, 0.7);
+        --primary: #5bc0be;
+        --primary-soft: rgba(91, 192, 190, 0.18);
+        --accent: #6fffe9;
+        --accent-soft: rgba(111, 255, 233, 0.18);
+        --accent-orange: #f97316;
+        --accent-red: #ef4444;
+        --text-main: #e5e7eb;
+        --text-muted: #9ca3af;
+        --text-soft: #6b7280;
+        --shadow-card: 0 18px 60px rgba(0, 0, 0, 0.6);
+        --radius-lg: 22px;
+        --radius-xl: 26px;
+        --blur: 18px;
+        --primary-blue: #5bc0be;
+        --primary-blue-dark: #3a506b;
+        --accent-purple: #6fffe9;
+        --text-dark: #e5e7eb;
+        --text-light: #9ca3af;
+        --button-bg: #6fffe9;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: var(--bg-main);
+        color: var(--text-main);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 96px auto 40px;
+        padding: 0 20px 40px;
+    }
+
+    .page-header {
+        position: relative;
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 40px;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    .page-header h1 {
+        margin: 0 0 12px;
+        color: var(--text-main);
+        font-size: 32px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+    }
+
+    .page-header p {
+        margin: 0;
+        color: var(--text-muted);
+        font-size: 16px;
+    }
+
+    .options-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+        margin-bottom: 40px;
+    }
+
+    .option-card {
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 32px;
+        text-decoration: none;
+        color: var(--text-main);
+        display: block;
+        transition: all 0.3s ease;
+    }
+
+    .option-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.95);
+        border-color: rgba(129, 140, 248, 0.8);
+    }
+
+    .option-card h2 {
+        margin: 0 0 12px;
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--text-main);
+        letter-spacing: -0.01em;
+    }
+
+    .option-card p {
+        margin: 0;
+        color: var(--text-muted);
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .btn-back {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 18px;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        background: rgba(15, 23, 42, 0.92);
+        color: var(--text-main);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 13px;
+        transition: all 0.18s ease-out;
+    }
+
+    .btn-back:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.9);
+        border-color: rgba(129, 140, 248, 0.8);
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="page-header">
+        <h1>Test Theory</h1>
+        <p>Essential knowledge and practice materials for your driving test</p>
+    </div>
+
+    <div class="options-grid">
+        <a href="road-signs.html" class="option-card">
+            <h2>Road Signs</h2>
+            <p>Learn all the road signs you need to know for your theory and practical test</p>
+        </a>
+
+        <a href="possible-questions.html" class="option-card">
+            <h2>Possible Questions</h2>
+            <p>Review common questions that appear in theory tests</p>
+        </a>
+
+        <a href="hand-signals.html" class="option-card">
+            <h2>Hand Signals</h2>
+            <p>Master the hand signals required for your driving test</p>
+        </a>
+
+
+        <a href="bonnet-check.html" class="option-card">
+            <h2>Bonnet Check</h2>
+            <p>Understand what to check under the bonnet during your test</p>
+        </a>
+
+
+        <a href="example-test-questions.html" class="option-card">
+            <h2>Example Test Questions</h2>
+            <p>Practice with example questions similar to the actual test</p>
+        </a>
+    </div>
+
+    <div style="text-align: center;">
+        <a href="main.html" class="btn-back" id="backToHome">← Back to Home</a>
+    </div>
+</div>
+
+<script>
+    // Store the current section when navigating to drivingtest-theory.html
+    const urlParams = new URLSearchParams(window.location.search);
+    const fromSection = urlParams.get('from');
+    const fromPage = urlParams.get('page') || (fromSection ? 'main' : null);
+    
+    if (fromSection) {
+        localStorage.setItem('lastMainSection', fromSection);
+    }
+    if (fromPage) {
+        localStorage.setItem('lastPage', fromPage);
+    }
+    
+    // When clicking back to home, restore the section position
+    document.getElementById('backToHome').addEventListener('click', function(e) {
+        e.preventDefault();
+        const lastPage = localStorage.getItem('lastPage') || 'main';
+        const lastSection = localStorage.getItem('lastMainSection') || 'preparing';
+        
+        if (lastPage === 'main') {
+            window.location.href = `main.html?section=${lastSection}`;
+        } else {
+            window.location.href = `${lastPage}.html`;
+        }
+    });
+</script>
+
+<script src="chatbot-widget.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Example Test Questions | DriveFlow</title>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    
+    :root {
+        --bg-main: #0b132b;
+        --bg-card: #2d3f5a;
+        --bg-card-smaller: #3a506b;
+        --border-subtle: rgba(91, 192, 190, 0.22);
+        --border-strong: rgba(111, 255, 233, 0.7);
+        --primary: #5bc0be;
+        --primary-soft: rgba(91, 192, 190, 0.18);
+        --accent: #6fffe9;
+        --accent-soft: rgba(111, 255, 233, 0.18);
+        --accent-orange: #f97316;
+        --accent-red: #ef4444;
+        --text-main: #e5e7eb;
+        --text-muted: #9ca3af;
+        --shadow-card: 0 18px 60px rgba(0, 0, 0, 0.6);
+        --radius-lg: 22px;
+        --radius-xl: 26px;
+        --button-bg: #6fffe9;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: var(--bg-main);
+        color: var(--text-main);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+        max-width: 1000px;
+        margin: 96px auto 40px;
+        padding: 0 20px 40px;
+    }
+
+    .page-header {
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 40px;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    .page-header h1 {
+        margin: 0 0 12px;
+        color: var(--text-main);
+        font-size: 32px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+    }
+
+    .page-header p {
+        margin: 0;
+        color: var(--text-muted);
+        font-size: 16px;
+    }
+
+    .progress-bar {
+        width: 100%;
+        height: 8px;
+        background: #32445c;
+        border-radius: 4px;
+        margin-bottom: 30px;
+        overflow: hidden;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+        border: 1px solid var(--border-subtle);
+    }
+
+    .progress-fill {
+        height: 100%;
+        background: var(--button-bg);
+        transition: width 0.4s ease;
+        border-radius: 4px;
+    }
+
+    .question-card {
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 32px;
+        margin-bottom: 24px;
+    }
+
+    .question-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .question-number {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .question-type {
+        font-size: 12px;
+        padding: 4px 12px;
+        background: var(--primary-soft);
+        color: var(--primary);
+        border-radius: 12px;
+        font-weight: 600;
+    }
+
+    .question-text {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 24px;
+        line-height: 1.5;
+    }
+
+    .question-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: var(--radius-lg);
+        margin-bottom: 24px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    .option-row {
+        padding: 16px 20px;
+        margin-bottom: 12px;
+        background: #32445c;
+        border: 1px solid var(--border-subtle);
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .option-row:hover:not(.selected):not(.correct):not(.incorrect) {
+        background: var(--bg-card-smaller);
+        border-color: var(--primary);
+    }
+
+    .option-row.selected {
+        background: var(--primary-soft);
+        border-color: var(--primary);
+        box-shadow: 0 0 0 2px var(--primary-soft);
+    }
+
+    .option-row.correct {
+        background: var(--accent-soft);
+        border-color: var(--accent);
+        box-shadow: 0 0 0 2px var(--accent-soft);
+    }
+
+    .option-row.incorrect {
+        background: rgba(239, 68, 68, 0.18);
+        border-color: var(--accent-red);
+        box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.18);
+    }
+
+    .option-row:disabled {
+        cursor: not-allowed;
+    }
+
+    .option-text {
+        flex: 1;
+        color: var(--text-main);
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
+    .feedback-section {
+        margin-top: 24px;
+        padding: 20px;
+        border-radius: 12px;
+        display: none;
+    }
+
+    .feedback-section.show {
+        display: block;
+    }
+
+    .feedback-section.correct {
+        background: var(--accent-soft);
+        border: 1px solid var(--accent);
+    }
+
+    .feedback-section.incorrect {
+        background: rgba(239, 68, 68, 0.18);
+        border: 1px solid var(--accent-red);
+    }
+
+    .feedback-title {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .feedback-section.correct .feedback-title {
+        color: var(--accent);
+    }
+
+    .feedback-section.incorrect .feedback-title {
+        color: var(--accent-red);
+    }
+
+    .btn-submit {
+        border: 1px solid var(--button-bg);
+        background: var(--button-bg);
+        color: var(--bg-main);
+        padding: 14px 28px;
+        font-size: 15px;
+        font-weight: 700;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 20px;
+    }
+
+    .btn-submit:hover:not(:disabled) {
+        background: var(--primary);
+        color: var(--text-main);
+    }
+
+    .btn-submit:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .btn-next {
+        border: 1px solid var(--button-bg);
+        background: var(--button-bg);
+        color: var(--bg-main);
+        padding: 14px 28px;
+        font-size: 15px;
+        font-weight: 700;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 20px;
+    }
+
+    .btn-next:hover {
+        background: var(--primary);
+        color: var(--text-main);
+    }
+
+    .btn-back {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 18px;
+        border-radius: 999px;
+        border: 1px solid var(--button-bg);
+        background: var(--button-bg);
+        color: var(--bg-main);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 13px;
+        transition: all 0.18s ease-out;
+    }
+
+    .btn-back:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 35px rgba(111, 255, 233, 0.4);
+        border-color: var(--button-bg);
+        background: var(--primary);
+        color: var(--text-main);
+    }
+
+    .completion-message {
+        text-align: center;
+        padding: 40px;
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+    }
+
+    .completion-message h2 {
+        margin: 0 0 16px;
+        color: var(--accent);
+        font-size: 28px;
+    }
+
+    .completion-message p {
+        color: var(--text-muted);
+        font-size: 16px;
+        margin-bottom: 24px;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="page-header">
+        <h1>Example Test Questions</h1>
+        <p>Practice with a mix of theory, road signs, hand signals, and bonnet checks</p>
+    </div>
+
+    <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+    </div>
+
+    <div id="questions-container">
+        <!-- Questions will be inserted here -->
+    </div>
+
+    <div style="text-align: center;">
+        <a href="drivingtest-theory.html" class="btn-back">← Back to Test Theory</a>
+    </div>
+</div>
+
+<script>
+    let allQuestions = [];
+    let currentQuestionIndex = 0;
+    let userAnswers = {};
+    let selectedAnswers = {};
+
+    // Map of sign numbers to their actual file extensions (prevents failed requests)
+    const signImageExtensions = {
+        10: 'jpeg', 32: 'jpeg', 59: 'jpeg', 60: 'jpeg', 61: 'jpeg', 62: 'jpeg', 65: 'jpeg', 68: 'jpeg',
+        71: 'webp', 72: 'webp', 73: 'webp', 74: 'jpeg', 77: 'jpg', 78: 'svg.png', 80: 'jpeg',
+        129: 'webp', 130: 'webp', 131: 'webp', 132: 'webp', 133: 'webp', 134: 'webp', 135: 'webp', 136: 'webp'
+    };
+
+    // Get the correct image path for a sign number
+    function getSignImagePath(signNumber) {
+        const extension = signImageExtensions[signNumber] || 'png';
+        return `All signs test day/${signNumber}.${extension}`;
+    }
+
+    // Hand signal questions
+    const handSignalQuestions = [
+        {
+            type: 'hand-signal',
+            question: 'How do you signal that you are turning left?',
+            options: [
+                'Put your left arm straight out horizontally through the window',
+                'Raise your left arm up with elbow bent',
+                'Put your right arm out and move it up and down',
+                'Extend your right arm out with a forward sweeping motion'
+            ],
+            correctAnswer: 0,
+            explanation: 'For turning left, put your left arm straight out horizontally through the window. Hand flat, palm facing forward.'
+        },
+        {
+            type: 'hand-signal',
+            question: 'How do you signal that you are turning right in a right-hand drive car?',
+            options: [
+                'Put your left arm straight out horizontally',
+                'Raise your left arm up, elbow bent, palm facing forward',
+                'Put your right arm out and move it up and down',
+                'Extend your right arm straight out'
+            ],
+            correctAnswer: 1,
+            explanation: 'In Irish RHD cars, if you can\'t use the right arm out the window, raise your left arm up, elbow bent, palm facing forward.'
+        },
+        {
+            type: 'hand-signal',
+            question: 'How do you signal that you are slowing down or stopping?',
+            options: [
+                'Put your left arm straight out horizontally',
+                'Raise your left arm up with elbow bent',
+                'Put your right arm out and move it up and down like patting a big dog',
+                'Extend your right arm out with a forward sweeping motion'
+            ],
+            correctAnswer: 2,
+            explanation: 'Put your right arm out and move it up and down like you\'re patting a big dog. Steady, clear movement — not frantic.'
+        },
+        {
+            type: 'hand-signal',
+            question: 'How do you signal that you are overtaking?',
+            options: [
+                'Put your left arm straight out horizontally',
+                'Raise your left arm up with elbow bent',
+                'Put your right arm out and move it up and down',
+                'Extend your right arm out, make a forward sweeping motion'
+            ],
+            correctAnswer: 3,
+            explanation: 'Extend your right arm out, make a forward sweeping motion. You won\'t use this often, but you must know it.'
+        }
+    ];
+
+    // Bonnet check questions
+    const bonnetCheckQuestions = [
+        {
+            type: 'bonnet-check',
+            question: 'How do you check the engine oil level?',
+            options: [
+                'Check the translucent tank when engine is cold',
+                'Pull out the dipstick, wipe it, dip again, check level is between MIN and MAX',
+                'Check the blue cap reservoir',
+                'Check the small reservoir near the back of engine bay'
+            ],
+            correctAnswer: 1,
+            explanation: 'Pull out the dipstick (usually yellow/orange), wipe it, dip again, and check that the level is between MIN and MAX. Ensure engine is cold and car is not on a hill.'
+        },
+        {
+            type: 'bonnet-check',
+            question: 'How do you check the coolant level?',
+            options: [
+                'Pull out the dipstick and check between MIN and MAX',
+                'Check the translucent tank - level between MIN and MAX when engine is cold',
+                'Check the blue cap reservoir',
+                'Check the small reservoir near the brake pedal'
+            ],
+            correctAnswer: 1,
+            explanation: 'Check the translucent tank with coloured liquid. Level should be between MIN and MAX when engine is cold. It stops engine overheating.'
+        },
+        {
+            type: 'bonnet-check',
+            question: 'Where is the brake fluid reservoir located?',
+            options: [
+                'Near the front of the engine bay with a blue cap',
+                'Small reservoir near the back of engine bay, usually close to brake pedal',
+                'On top of the engine with a yellow cap',
+                'Next to the battery'
+            ],
+            correctAnswer: 1,
+            explanation: 'Brake fluid is in a small reservoir near the back of engine bay, usually close to brake pedal. Check level is between MIN and MAX.'
+        },
+        {
+            type: 'bonnet-check',
+            question: 'How do you identify the windshield washer fluid reservoir?',
+            options: [
+                'It has a yellow/orange dipstick',
+                'It has a blue cap usually',
+                'It\'s a translucent tank with coloured liquid',
+                'It\'s a small reservoir near the brake pedal'
+            ],
+            correctAnswer: 1,
+            explanation: 'Windshield washer fluid is usually identified by a blue cap. Do a visual check and top up as required for clear visibility.'
+        }
+    ];
+
+    // Load and prepare questions
+    async function loadQuestions() {
+        try {
+            // Load road signs
+            const signsResponse = await fetch('signs.txt');
+            const signsText = await signsResponse.text();
+            const signNames = signsText.split('\n')
+                .map(line => line.trim().replace(/^\d+\.\s*/, ''))
+                .filter(line => line.length > 0);
+
+            // Generate road sign questions
+            const roadSignQuestions = [];
+            const validSignNumbers = [];
+            for (let i = 1; i <= 141; i++) {
+                if (i !== 69) validSignNumbers.push(i);
+            }
+
+            for (let i = 0; i < 10; i++) {
+                const signNum = validSignNumbers[Math.floor(Math.random() * validSignNumbers.length)];
+                let correctIndex;
+                if (signNum <= 68) {
+                    correctIndex = signNum - 1;
+                } else {
+                    correctIndex = signNum - 2;
+                }
+                const correctName = signNames[correctIndex];
+                
+                // Generate wrong options
+                const wrongOptions = [];
+                while (wrongOptions.length < 3) {
+                    const randomIndex = Math.floor(Math.random() * signNames.length);
+                    if (signNames[randomIndex] !== correctName && !wrongOptions.includes(signNames[randomIndex])) {
+                        wrongOptions.push(signNames[randomIndex]);
+                    }
+                }
+                
+                const allOptions = [correctName, ...wrongOptions];
+                shuffleArray(allOptions);
+                const correctAnswer = allOptions.indexOf(correctName);
+
+                roadSignQuestions.push({
+                    type: 'road-sign',
+                    question: `What is the name of road sign number ${signNum}?`,
+                    signNumber: signNum,
+                    options: allOptions,
+                    correctAnswer: correctAnswer,
+                    explanation: `This is sign number ${signNum}: ${correctName}`
+                });
+            }
+
+            // Select random questions
+            shuffleArray(roadSignQuestions);
+            shuffleArray(handSignalQuestions);
+            shuffleArray(bonnetCheckQuestions);
+
+            // Combine: 4 road signs, 1 hand signal, 1 bonnet check
+            allQuestions = [
+                ...roadSignQuestions.slice(0, 4),
+                handSignalQuestions[0],
+                bonnetCheckQuestions[0]
+            ];
+
+            // Shuffle all questions
+            shuffleArray(allQuestions);
+
+            currentQuestionIndex = 0;
+            userAnswers = {};
+            selectedAnswers = {};
+            updateProgress();
+            renderCurrentQuestion();
+        } catch (error) {
+            console.error('Error loading questions:', error);
+            document.getElementById('questions-container').innerHTML = 
+                '<div class="question-card"><p>Error loading questions. Please ensure all required files exist.</p></div>';
+        }
+    }
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    function updateProgress() {
+        const progress = ((currentQuestionIndex) / allQuestions.length) * 100;
+        document.getElementById('progressFill').style.width = progress + '%';
+    }
+
+    function renderCurrentQuestion() {
+        if (currentQuestionIndex >= allQuestions.length) {
+            showCompletion();
+            return;
+        }
+
+        const q = allQuestions[currentQuestionIndex];
+        const container = document.getElementById('questions-container');
+        const hasSubmitted = userAnswers[currentQuestionIndex] !== undefined;
+        const selectedAnswer = selectedAnswers[currentQuestionIndex];
+        const isCorrect = hasSubmitted && userAnswers[currentQuestionIndex] === q.correctAnswer;
+
+        let imageHtml = '';
+        if (q.type === 'road-sign') {
+            const imagePath = getSignImagePath(q.signNumber);
+            imageHtml = `<img src="${imagePath}" alt="Road sign ${q.signNumber}" class="question-image" onerror="this.style.display='none'">`;
+        }
+
+        const optionsHtml = q.options.map((opt, optIndex) => {
+            let classes = 'option-row';
+            if (hasSubmitted) {
+                if (optIndex === q.correctAnswer) {
+                    classes += ' correct';
+                } else if (optIndex === userAnswers[currentQuestionIndex] && optIndex !== q.correctAnswer) {
+                    classes += ' incorrect';
+                }
+            } else if (optIndex === selectedAnswer) {
+                classes += ' selected';
+            }
+
+            return `
+                <div class="${classes}" 
+                     ${!hasSubmitted ? `onclick="selectAnswer(${optIndex})"` : ''}
+                     ${hasSubmitted ? 'style="cursor: default;"' : ''}>
+                    <div class="option-text">${opt}</div>
+                </div>
+            `;
+        }).join('');
+
+        let feedbackHtml = '';
+        if (hasSubmitted) {
+            const feedbackClass = isCorrect ? 'correct' : 'incorrect';
+            const feedbackIcon = isCorrect ? '✓' : '✗';
+            const feedbackText = isCorrect ? 'Correct!' : 'Incorrect';
+            
+            feedbackHtml = `
+                <div class="feedback-section ${feedbackClass} show">
+                    <div class="feedback-title">
+                        <span>${feedbackIcon}</span>
+                        <span>${feedbackText}</span>
+                    </div>
+                    ${q.explanation ? `<p style="margin: 0; color: var(--text-main); line-height: 1.6;">${q.explanation}</p>` : ''}
+                </div>
+            `;
+        }
+
+        const typeLabels = {
+            'road-sign': 'Road Sign',
+            'hand-signal': 'Hand Signal',
+            'bonnet-check': 'Bonnet Check'
+        };
+
+        container.innerHTML = `
+            <div class="question-card">
+                <div class="question-header">
+                    <div class="question-number">Question ${currentQuestionIndex + 1} of ${allQuestions.length}</div>
+                    <div class="question-type">${typeLabels[q.type]}</div>
+                </div>
+                ${imageHtml}
+                <div class="question-text">${q.question}</div>
+                <div class="options-container">
+                    ${optionsHtml}
+                </div>
+                ${feedbackHtml}
+                ${!hasSubmitted ? `
+                    <button class="btn-submit" onclick="submitAnswer()" ${selectedAnswer === undefined ? 'disabled' : ''}>
+                        Submit Answer
+                    </button>
+                ` : `
+                    <button class="btn-next" onclick="nextQuestion()">
+                        ${currentQuestionIndex < allQuestions.length - 1 ? 'Next Question' : 'View Results'}
+                    </button>
+                `}
+            </div>
+        `;
+    }
+
+    function selectAnswer(index) {
+        if (userAnswers[currentQuestionIndex] !== undefined) return;
+        selectedAnswers[currentQuestionIndex] = index;
+        renderCurrentQuestion();
+    }
+
+    function submitAnswer() {
+        if (selectedAnswers[currentQuestionIndex] === undefined) return;
+        userAnswers[currentQuestionIndex] = selectedAnswers[currentQuestionIndex];
+        renderCurrentQuestion();
+    }
+
+    function nextQuestion() {
+        currentQuestionIndex++;
+        updateProgress();
+        renderCurrentQuestion();
+    }
+
+    function showCompletion() {
+        const correct = Object.keys(userAnswers).filter(i => 
+            userAnswers[i] === allQuestions[i].correctAnswer
+        ).length;
+        const total = allQuestions.length;
+        const percentage = Math.round((correct / total) * 100);
+
+        document.getElementById('questions-container').innerHTML = `
+            <div class="completion-message">
+                <h2>Test Complete!</h2>
+                <p>You got ${correct} out of ${total} questions correct (${percentage}%)</p>
+                <button class="btn-next" onclick="location.reload()">Take Another Test</button>
+            </div>
+        `;
+        document.getElementById('progressFill').style.width = '100%';
+    }
+
+    // Load questions on page load
+    loadQuestions();
+</script>
+
+<script src="chatbot-widget.js"></script>
+
+</body>
+</html>
+

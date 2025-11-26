@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test Routes | DriveFlow</title>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    
+    :root {
+        --bg-main: #0b132b;
+        --bg-elevated: #1c2541;
+        --bg-card: #2d3f5a;
+        --bg-card-soft: #2d3f5a;
+        --bg-card-smaller: #3a506b;
+        --border-subtle: rgba(91, 192, 190, 0.22);
+        --border-strong: rgba(111, 255, 233, 0.7);
+        --primary: #5bc0be;
+        --primary-soft: rgba(91, 192, 190, 0.18);
+        --accent: #6fffe9;
+        --accent-soft: rgba(111, 255, 233, 0.18);
+        --accent-orange: #f97316;
+        --accent-red: #ef4444;
+        --text-main: #e5e7eb;
+        --text-muted: #9ca3af;
+        --text-soft: #6b7280;
+        --shadow-card: 0 18px 60px rgba(0, 0, 0, 0.6);
+        --radius-lg: 22px;
+        --radius-xl: 26px;
+        --blur: 18px;
+        --primary-blue: #5bc0be;
+        --primary-blue-dark: #3a506b;
+        --accent-purple: #6fffe9;
+        --text-dark: #e5e7eb;
+        --text-light: #9ca3af;
+        --button-bg: #6fffe9;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: var(--bg-main);
+        color: var(--text-main);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 96px auto 40px;
+        padding: 0 20px 40px;
+    }
+
+    .page-header {
+        position: relative;
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 40px;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    .page-header h1 {
+        margin: 0 0 12px;
+        color: var(--text-main);
+        font-size: 32px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+    }
+
+    .page-header p {
+        margin: 0;
+        color: var(--text-muted);
+        font-size: 16px;
+    }
+
+    .selection-card {
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 32px;
+        margin-bottom: 24px;
+    }
+
+    .selection-card h2 {
+        margin: 0 0 20px;
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--text-main);
+        letter-spacing: -0.01em;
+    }
+
+    .search-box {
+        margin-bottom: 24px;
+    }
+
+    .search-input {
+        width: 100%;
+        padding: 14px 16px;
+        border-radius: 8px;
+        border: 1px solid var(--border-subtle);
+        background: rgba(15, 23, 42, 0.6);
+        color: var(--text-main);
+        font-size: 15px;
+        font-family: inherit;
+        transition: all 0.2s ease;
+    }
+
+    .search-input:focus {
+        outline: none;
+        border-color: var(--primary);
+        background: rgba(15, 23, 42, 0.8);
+    }
+
+    .search-input::placeholder {
+        color: var(--text-muted);
+    }
+
+    .centres-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+
+    .centre-card {
+        padding: 20px;
+        background: rgba(15, 23, 42, 0.4);
+        border: 1px solid var(--border-subtle);
+        border-radius: 12px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .centre-card:hover {
+        background: var(--primary-soft);
+        border-color: var(--primary);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+    }
+
+    .centre-card.selected {
+        background: var(--primary-soft);
+        border-color: var(--primary);
+        box-shadow: 0 0 0 2px var(--primary);
+    }
+
+    .centre-card h3 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--text-main);
+    }
+
+    .routes-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 16px;
+        margin-top: 24px;
+    }
+
+    .route-card {
+        padding: 20px;
+        background: rgba(15, 23, 42, 0.4);
+        border: 1px solid var(--border-subtle);
+        border-radius: 12px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-decoration: none;
+        color: var(--text-main);
+        display: block;
+    }
+
+    .route-card:hover {
+        background: var(--primary-soft);
+        border-color: var(--primary);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+    }
+
+    .route-card h3 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--text-main);
+    }
+
+    .btn-back {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 18px;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        background: rgba(15, 23, 42, 0.92);
+        color: var(--text-main);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 13px;
+        transition: all 0.18s ease-out;
+    }
+
+    .btn-back:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.9);
+        border-color: rgba(129, 140, 248, 0.8);
+    }
+
+    .no-routes {
+        text-align: center;
+        padding: 40px;
+        color: var(--text-muted);
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="page-header">
+        <h1>Test Routes</h1>
+        <p>Practice the actual routes used in driving tests at each centre</p>
+    </div>
+
+    <div class="selection-card">
+        <h2>Select Test Centre</h2>
+        <div class="search-box">
+            <input type="text" class="search-input" id="centreSearch" placeholder="Search for a test centre..." autocomplete="off">
+        </div>
+        <div class="centres-grid" id="centresGrid"></div>
+        <div id="routesContainer" class="no-routes" style="display: none;">
+            <h2 style="margin: 32px 0 20px; font-size: 20px; font-weight: 700; color: var(--text-main);">Available Routes</h2>
+            <div class="routes-grid" id="routesGrid"></div>
+        </div>
+        <div id="noSelection" class="no-routes">
+            Select a test centre above to view available routes
+        </div>
+    </div>
+
+    <div style="text-align: center;">
+        <a href="main.html" class="btn-back" id="backToHome">← Back to Home</a>
+    </div>
+</div>
+
+<script>
+    // Test centres data
+    const testCentres = [
+        { name: "Naas", routes: 7 }
+    ];
+
+    let selectedCentre = null;
+
+    // Initialize centre cards
+    function initCentres() {
+        const centresGrid = document.getElementById('centresGrid');
+        const searchInput = document.getElementById('centreSearch');
+        
+        // Render all centres
+        renderCentres();
+        
+        // Filter centres on search
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const cards = centresGrid.querySelectorAll('.centre-card');
+            
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                card.style.display = text.includes(searchTerm) ? 'block' : 'none';
+            });
+        });
+    }
+
+    // Render centre cards
+    function renderCentres() {
+        const centresGrid = document.getElementById('centresGrid');
+        centresGrid.innerHTML = '';
+        
+        testCentres.forEach(centre => {
+            const card = document.createElement('div');
+            card.className = 'centre-card';
+            card.innerHTML = `<h3>${centre.name}</h3>`;
+            card.addEventListener('click', () => {
+                selectCentre(centre);
+                // Update selected state
+                document.querySelectorAll('.centre-card').forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+            });
+            centresGrid.appendChild(card);
+        });
+    }
+
+    // Select a test centre
+    function selectCentre(centre) {
+        selectedCentre = centre;
+        renderRoutes(centre);
+    }
+
+    // Render routes for selected centre
+    function renderRoutes(centre) {
+        const routesContainer = document.getElementById('routesContainer');
+        const routesGrid = document.getElementById('routesGrid');
+        const noSelection = document.getElementById('noSelection');
+        
+        routesGrid.innerHTML = '';
+        
+        for (let i = 1; i <= centre.routes; i++) {
+            const routeCard = document.createElement('a');
+            routeCard.className = 'route-card';
+            routeCard.href = `route-detail.html?centre=${encodeURIComponent(centre.name)}&route=${i}`;
+            routeCard.innerHTML = `<h3>Route ${i}</h3>`;
+            routesGrid.appendChild(routeCard);
+        }
+        
+        routesContainer.style.display = 'block';
+        noSelection.style.display = 'none';
+    }
+
+    // Store the current section when navigating to routes.html
+    const urlParams = new URLSearchParams(window.location.search);
+    const fromSection = urlParams.get('from');
+    const fromPage = urlParams.get('page') || (fromSection ? 'main' : null);
+    
+    if (fromSection) {
+        localStorage.setItem('lastMainSection', fromSection);
+    }
+    if (fromPage) {
+        localStorage.setItem('lastPage', fromPage);
+    }
+    
+    // When clicking back to home, restore the section position
+    document.getElementById('backToHome').addEventListener('click', function(e) {
+        e.preventDefault();
+        const lastPage = localStorage.getItem('lastPage') || 'main';
+        const lastSection = localStorage.getItem('lastMainSection') || 'preparing';
+        
+        if (lastPage === 'main') {
+            window.location.href = `main.html?section=${lastSection}`;
+        } else {
+            window.location.href = `${lastPage}.html`;
+        }
+    });
+
+    // Initialize
+    initCentres();
+</script>
+
+<script src="chatbot-widget.js"></script>
+
+</body>
+</html>
+

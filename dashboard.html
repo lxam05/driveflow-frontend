@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | DriveFlow</title>
+
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+    :root {
+      --bg-main: #0b132b;
+      --bg-elevated: #1c2541;
+      --bg-card: #2d3f5a;
+      --bg-card-soft: #2d3f5a;
+      --bg-card-smaller: #3a506b;
+      --border-subtle: rgba(91, 192, 190, 0.22);
+      --border-strong: rgba(111, 255, 233, 0.7);
+      --primary: #5bc0be;
+      --primary-soft: rgba(91, 192, 190, 0.18);
+      --accent: #6fffe9;
+      --accent-soft: rgba(111, 255, 233, 0.18);
+      --accent-orange: #f97316;
+      --accent-red: #ef4444;
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --text-soft: #6b7280;
+      --shadow-card: 0 18px 60px rgba(0, 0, 0, 0.6);
+      --radius-lg: 22px;
+      --radius-xl: 26px;
+      --blur: 18px;
+      --button-bg: #6fffe9;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", Roboto, sans-serif;
+      background: var(--bg-main);
+      color: var(--text-main);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ---------- PAGE LAYOUT ---------- */
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .app-shell {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .content {
+      flex: 1;
+      max-width: 1200px;
+      margin: 96px auto 40px;
+      padding: 0 20px 40px;
+    }
+
+    /* ---------- HEADER / NAV ---------- */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      backdrop-filter: blur(var(--blur)) saturate(160%);
+      -webkit-backdrop-filter: blur(var(--blur)) saturate(160%);
+      background: radial-gradient(circle at top left, rgba(30, 64, 175, 0.28), transparent 55%)
+        , linear-gradient(90deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.96));
+      border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.8);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 20% 20%, #4f46e5, #22c55e);
+      box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.4),
+        0 14px 35px rgba(15, 23, 42, 0.85);
+    }
+
+    .brand-text h1 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      background: linear-gradient(120deg, #e5e7eb, #a5b4fc);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-text span {
+      display: block;
+      font-size: 11px;
+      color: var(--text-soft);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 7px 13px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      background: radial-gradient(circle at top left, rgba(30, 64, 175, 0.18), transparent 60%);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.18s ease-out;
+    }
+
+    .nav-link:hover {
+      color: #e5e7eb;
+      border-color: rgba(129, 140, 248, 0.7);
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.8);
+      transform: translateY(-1px);
+    }
+
+    .user-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 13px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.98));
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7);
+      font-size: 13px;
+    }
+
+    .user-avatar {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 20% 20%, #4f46e5, #22c55e);
+      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.9);
+    }
+
+    .user-name {
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .logout-btn {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(248, 113, 113, 0.7);
+      background: rgba(127, 29, 29, 0.65);
+      color: #fecaca;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.18s ease-out;
+    }
+
+    .logout-btn:hover {
+      background: rgba(220, 38, 38, 0.95);
+      color: #fee2e2;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 30px rgba(127, 29, 29, 0.8);
+    }
+
+    @media (max-width: 640px) {
+      .nav-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-actions {
+        align-self: stretch;
+        justify-content: space-between;
+      }
+    }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 26px;
+      margin-top: 10px;
+    }
+
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-soft);
+    }
+
+    .hero-label-pill {
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.7);
+      color: #bbf7d0;
+      font-weight: 600;
+      font-size: 10px;
+    }
+
+    .hero-title {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: baseline;
+    }
+
+    .hero-title-main {
+      background: linear-gradient(120deg, #e5e7eb, #a5b4fc);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-title-sub {
+      font-size: 24px;
+      color: var(--text-soft);
+      font-weight: 500;
+    }
+
+    .hero-subtext {
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 520px;
+      line-height: 1.6;
+    }
+
+    /* ---------- GRID LAYOUT ---------- */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    /* Big cards section */
+    .card {
+      position: relative;
+      border-radius: var(--radius-xl);
+        background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-card);
+      padding: 22px 22px 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: transform 0.18s ease-out, box-shadow 0.18s ease-out,
+        border-color 0.18s ease-out, background 0.18s ease-out;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.95);
+      border-color: rgba(129, 140, 248, 0.8);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .card-title {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-soft);
+      font-weight: 600;
+    }
+
+    .card-tag {
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: var(--text-muted);
+    }
+
+    .card-main-value {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .card-main-value span.small {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-soft);
+    }
+
+    .card-footnote {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .chip-positive {
+      color: #bbf7d0;
+    }
+
+    .chip-negative {
+      color: #fecaca;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      border-radius: 999px;
+      padding: 3px 9px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: var(--text-muted);
+      background: rgba(15, 23, 42, 0.85);
+    }
+
+    .pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    .pill-dot-orange {
+      background: #f97316;
+    }
+
+    .pill-dot-red {
+      background: #ef4444;
+    }
+
+    /* Large stat cards layout */
+    .card-2x {
+      grid-column: span 6;
+      min-height: 170px;
+    }
+
+    @media (max-width: 900px) {
+      .card-2x {
+        grid-column: span 12;
+      }
+    }
+
+    /* ---------- BIG OVERVIEW CARD ---------- */
+    .card-wide {
+      grid-column: span 12;
+      min-height: 220px;
+      margin-top: 6px;
+      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.25), transparent 60%),
+        radial-gradient(circle at bottom right, rgba(16, 185, 129, 0.35), transparent 70%),
+        var(--bg-card);
+    }
+
+    .card-wide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .card-wide-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .card-wide-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .badge-soft {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-size: 11px;
+      color: var(--text-main);
+      background: rgba(15, 23, 42, 0.85);
+    }
+
+    .overview-grid {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .overview-item {
+      padding: 10px 12px;
+      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      font-size: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .overview-label {
+      color: var(--text-soft);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .overview-value {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .overview-note {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 768px) {
+      .overview-grid {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+      }
+    }
+
+    /* ---------- QUICK ACTIONS ---------- */
+    .card-actions {
+      grid-column: span 12;
+      margin-top: 4px;
+      padding-top: 8px;
+    }
+
+    .actions-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .action-btn {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.92);
+      color: var(--text-main);
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.16s ease-out;
+    }
+
+    .action-btn span.icon {
+      font-size: 14px;
+    }
+
+    .action-btn.primary {
+      border-color: rgba(99, 102, 241, 0.9);
+      background: linear-gradient(
+        120deg,
+        rgba(37, 99, 235, 0.95),
+        rgba(124, 58, 237, 0.95)
+      );
+      box-shadow: 0 16px 40px rgba(30, 64, 175, 0.85);
+    }
+
+    .action-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.9);
+      border-color: rgba(129, 140, 248, 0.8);
+    }
+
+    /* ---------- LOADING / ERROR ---------- */
+    .loading,
+    .error {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-top: 8px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="app-shell">
+      <!-- HEADER -->
+      <header>
+        <div class="nav-inner">
+          <div class="brand">
+            <div class="brand-logo"></div>
+            <div class="brand-text">
+              <h1>DriveFlow</h1>
+              <span>Driver Learning Suite</span>
+            </div>
+          </div>
+          <div class="nav-actions">
+            <a href="main.html" class="nav-link">
+              <span>← Back to Journey Map</span>
+            </a>
+            <div class="user-pill" id="userPill" style="display:none;">
+              <div class="user-avatar"></div>
+              <div class="user-name" id="usernameDisplay">User</div>
+              <button class="logout-btn" id="logoutBtn">
+                <span>Logout</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- MAIN CONTENT -->
+      <main class="content">
+        <section class="hero">
+          <div class="hero-label">
+            <span class="hero-label-pill">Signed in</span>
+            <span>Dashboard · Overview</span>
+          </div>
+          <div class="hero-title">
+            <span class="hero-title-main">Your Driving Journey Progress</span>
+            <span class="hero-title-sub" id="heroUsername"></span>
+          </div>
+          <p class="hero-subtext">
+            Track how your learning is evolving over time. These stats will later be powered
+            by your theory practice, mock tests, and real driving test results.
+          </p>
+          <div id="statusMessage" class="loading">Loading your data…</div>
+        </section>
+
+        <!-- GRID: BIG CARDS -->
+        <section class="grid" aria-label="Key metrics">
+          <!-- CARD: Completed Tests -->
+          <article class="card card-2x">
+            <div class="card-header">
+              <div class="card-title">Completed Tests</div>
+              <div class="card-tag">Last 30 days</div>
+            </div>
+            <div class="card-main-value">
+              <span id="completedTestsValue">0</span>
+              <span class="small">tests</span>
+            </div>
+            <div class="card-footnote">
+              <span class="chip-positive">Practice tests will appear here as you use the app.</span>
+            </div>
+          </article>
+
+          <!-- CARD: Average Score -->
+          <article class="card card-2x">
+            <div class="card-header">
+              <div class="card-title">Average Score</div>
+              <div class="card-tag">Across all mock exams</div>
+            </div>
+            <div class="card-main-value">
+              <span id="averageScoreValue">– –</span>
+              <span class="small">%</span>
+            </div>
+            <div class="card-footnote">
+              <span class="chip-positive">Once you start mock tests, this will show how close you are to a pass.</span>
+            </div>
+          </article>
+
+          <!-- CARD: Learning Streak -->
+          <article class="card card-2x">
+            <div class="card-header">
+              <div class="card-title">Learning Streak</div>
+              <div class="card-tag">Consistency indicator</div>
+            </div>
+            <div class="card-main-value">
+              <span id="streakValue">1</span>
+              <span class="small">days</span>
+            </div>
+            <div class="card-footnote">
+              <span class="pill">
+                <span class="pill-dot"></span> Knock out a quick practice session today to start your streak.
+              </span>
+            </div>
+          </article>
+
+          <!-- CARD: Next Recommended Step -->
+          <article class="card card-2x">
+            <div class="card-header">
+              <div class="card-title">Next Recommended Step</div>
+              <div class="card-tag">Personalised path</div>
+            </div>
+            <div class="card-main-value">
+              <span id="nextStepHeadline">Start a timed mock test</span>
+            </div>
+            <div class="card-footnote">
+              <span class="pill">
+                <span class="pill-dot-orange"></span> Recommendation: Run at least one full mock this week.
+              </span>
+            </div>
+          </article>
+
+          <!-- WIDE OVERVIEW CARD -->
+          <article class="card card-wide">
+            <div class="card-wide-header">
+              <div>
+                <div class="card-wide-title">Journey Overview</div>
+                <div class="card-wide-sub">
+                  As you complete more practice, this area will show trends, weak topics, and how close you are to being test-ready.
+                </div>
+              </div>
+              <div class="badge-soft">
+                Coming soon · Deep analytics
+              </div>
+            </div>
+
+            <div class="overview-grid">
+              <div class="overview-item">
+                <div class="overview-label">Current phase</div>
+                <div class="overview-value" id="currentPhase">
+                  Theory & habits
+                </div>
+                <div class="overview-note">
+                  Build a solid theory foundation before pushing heavy on lessons.
+                </div>
+              </div>
+              <div class="overview-item">
+                <div class="overview-label">Confidence level</div>
+                <div class="overview-value">
+                  Warming up
+                </div>
+                <div class="overview-note">
+                  Every practice set you do pushes this graph towards “Test Ready”.
+                </div>
+              </div>
+              <div class="overview-item">
+                <div class="overview-label">Focus area</div>
+                <div class="overview-value">
+                  Hazard awareness
+                </div>
+                <div class="overview-note">
+                  This will adapt based on which questions you miss during practice.
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- QUICK ACTIONS -->
+          <article class="card card-actions">
+            <div class="card-wide-header">
+              <div class="card-wide-title">Quick Actions</div>
+              <div class="card-wide-sub">
+                Jump straight into the most useful next step for your driving journey.
+              </div>
+            </div>
+            <div class="actions-row">
+              <a href="mock-test.html" class="action-btn primary">
+                <span class="icon">🧠</span>
+                <span>Start a full mock theory test</span>
+              </a>
+              <a href="theory-test.html" class="action-btn">
+                <span class="icon">📚</span>
+                <span>Practice theory questions</span>
+              </a>
+              <a href="preparing-for-test.html#routes" class="action-btn">
+                <span class="icon">🗺️</span>
+                <span>Review test routes & tips</span>
+              </a>
+              <a href="lessons.html#tracker" class="action-btn">
+                <span class="icon">🚗</span>
+                <span>Organise your driving lessons</span>
+              </a>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const API_URL = "https://driving-test-backend-production.up.railway.app";
+
+    const usernameDisplay = document.getElementById("usernameDisplay");
+    const heroUsername = document.getElementById("heroUsername");
+    const userPill = document.getElementById("userPill");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const statusMessage = document.getElementById("statusMessage");
+
+    function logout() {
+      localStorage.removeItem("auth_token");
+      window.location.href = "login.html";
+    }
+
+    logoutBtn.addEventListener("click", logout);
+
+    async function loadUser() {
+      const token = localStorage.getItem("auth_token");
+      if (!token) {
+        window.location.href = "login.html";
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API_URL}/auth/protected`, {
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          // token invalid or expired
+          localStorage.removeItem("auth_token");
+          window.location.href = "login.html";
+          return;
+        }
+
+        const username = data.user.username || data.user.email || "Driver";
+
+        usernameDisplay.textContent = username;
+        heroUsername.textContent = `· Welcome back, ${username}`;
+        userPill.style.display = "inline-flex";
+        statusMessage.textContent = "You're signed in. Data will populate here as features go live.";
+
+        // Load mock test statistics
+        await loadMockTestStats(token);
+
+      } catch (err) {
+        console.error("Error loading user:", err);
+        localStorage.removeItem("auth_token");
+        window.location.href = "login.html";
+      }
+    }
+
+    // Load mock test statistics
+    async function loadMockTestStats(token) {
+      try {
+        const res = await fetch(`${API_URL}/mock-tests/stats`, {
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        });
+
+        if (res.ok) {
+          const stats = await res.json();
+          
+          // Update completed tests count
+          document.getElementById("completedTestsValue").textContent = stats.total_tests || "0";
+          
+          // Update average score
+          if (stats.average_percentage !== null) {
+            document.getElementById("averageScoreValue").textContent = stats.average_percentage;
+          } else {
+            document.getElementById("averageScoreValue").textContent = "– –";
+          }
+          
+          // Update learning streak (for now, just show 0 - can be enhanced later)
+          document.getElementById("streakValue").textContent = "0";
+          
+          // Update status message if there are tests
+          if (stats.total_tests > 0) {
+            const statusMsg = document.getElementById("statusMessage");
+            if (statusMsg) {
+              statusMsg.textContent = `You've completed ${stats.total_tests} mock test${stats.total_tests !== 1 ? 's' : ''}. ${stats.passed_tests > 0 ? `Great job passing ${stats.passed_tests}!` : 'Keep practicing!'}`;
+            }
+          }
+          
+          // Update next step recommendation based on stats
+          const nextStepHeadline = document.getElementById("nextStepHeadline");
+          if (nextStepHeadline) {
+            if (stats.total_tests === 0) {
+              nextStepHeadline.textContent = "Start a timed mock test";
+            } else if (stats.average_percentage < 87.5) {
+              nextStepHeadline.textContent = "Keep practicing to improve your score";
+            } else if (stats.pass_rate < 100) {
+              nextStepHeadline.textContent = "You're doing great! Aim for consistency";
+            } else {
+              nextStepHeadline.textContent = "Excellent! You're test-ready";
+            }
+          }
+          
+        } else {
+          console.error("Failed to load mock test stats:", await res.text());
+          // Keep placeholder values on error
+        }
+      } catch (err) {
+        console.error("Error loading mock test stats:", err);
+        // Keep placeholder values on error
+      }
+    }
+
+    loadUser();
+  </script>
+  <script src="chatbot-widget.js"></script>
+</body>
+</html>

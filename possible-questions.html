@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Possible Questions | DriveFlow</title>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    
+    :root {
+        --bg-main: #0b132b;
+        --bg-elevated: #1c2541;
+        --bg-card: #2d3f5a;
+        --bg-card-soft: #2d3f5a;
+        --bg-card-smaller: #3a506b;
+        --border-subtle: rgba(91, 192, 190, 0.22);
+        --border-strong: rgba(111, 255, 233, 0.7);
+        --primary: #5bc0be;
+        --primary-soft: rgba(91, 192, 190, 0.18);
+        --accent: #6fffe9;
+        --accent-soft: rgba(111, 255, 233, 0.18);
+        --accent-orange: #f97316;
+        --accent-red: #ef4444;
+        --text-main: #e5e7eb;
+        --text-muted: #9ca3af;
+        --text-soft: #6b7280;
+        --shadow-card: 0 18px 60px rgba(0, 0, 0, 0.6);
+        --radius-lg: 22px;
+        --radius-xl: 26px;
+        --blur: 18px;
+        --button-bg: #6fffe9;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: var(--bg-main);
+        color: var(--text-main);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+        max-width: 1400px;
+        margin: 96px auto 40px;
+        padding: 0 20px 40px;
+        display: flex;
+        gap: 24px;
+    }
+
+    .page-header {
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        z-index: 10;
+    }
+
+    .page-header h1 {
+        margin: 0 0 8px;
+        color: var(--text-main);
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+    }
+
+    .page-header p {
+        margin: 0;
+        color: var(--text-muted);
+        font-size: 14px;
+    }
+
+    .sidebar {
+        width: 280px;
+        flex-shrink: 0;
+        position: sticky;
+        top: 120px;
+        height: calc(100vh - 140px);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .sidebar-card {
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .sidebar-card h2 {
+        margin: 0 0 20px;
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--text-main);
+    }
+
+    .question-list {
+        flex: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .question-list-item {
+        padding: 12px 14px;
+        margin-bottom: 8px;
+        background: rgba(15, 23, 42, 0.4);
+        border-radius: 8px;
+        border: 1px solid var(--border-subtle);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-size: 13px;
+        color: var(--text-muted);
+        line-height: 1.4;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .question-list-item:hover {
+        background: rgba(15, 23, 42, 0.6);
+        border-color: var(--primary);
+    }
+
+    .question-list-item.active {
+        background: var(--primary-soft);
+        border-color: var(--primary);
+        color: var(--text-main);
+    }
+
+    .question-number {
+        font-weight: 700;
+        color: var(--primary);
+        min-width: 24px;
+        font-size: 12px;
+    }
+
+    .question-list-item.active .question-number {
+        color: var(--primary);
+    }
+
+    .main-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 600px;
+    }
+
+    .flashcard-container {
+        perspective: 1000px;
+        width: 100%;
+        max-width: 700px;
+        height: 500px;
+    }
+
+    .flashcard {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 0.6s;
+        cursor: pointer;
+    }
+
+    .flashcard.flipped {
+        transform: rotateY(180deg);
+    }
+
+    .flashcard-front,
+    .flashcard-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 48px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .flashcard-back {
+        transform: rotateY(180deg);
+    }
+
+    .flashcard-content {
+        font-size: 20px;
+        line-height: 1.8;
+        color: var(--text-main);
+        font-weight: 500;
+    }
+
+    .flashcard-label {
+        position: absolute;
+        top: 20px;
+        left: 24px;
+        font-size: 12px;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 600;
+    }
+
+    .flashcard-number {
+        position: absolute;
+        top: 20px;
+        right: 24px;
+        font-size: 14px;
+        color: var(--text-muted);
+        font-weight: 600;
+    }
+
+    .flashcard-hint {
+        position: absolute;
+        bottom: 24px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 12px;
+        color: var(--text-muted);
+        font-style: italic;
+    }
+
+    .navigation-controls {
+        display: flex;
+        gap: 16px;
+        margin-top: 32px;
+        align-items: center;
+    }
+
+    .nav-btn {
+        padding: 12px 24px;
+        border-radius: 999px;
+        border: 1px solid var(--border-subtle);
+        background: rgba(15, 23, 42, 0.92);
+        color: var(--text-main);
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.18s ease-out;
+    }
+
+    .nav-btn:hover:not(:disabled) {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.9);
+        border-color: rgba(129, 140, 248, 0.8);
+    }
+
+    .nav-btn:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+
+    .btn-flip {
+        background: var(--primary-soft);
+        border-color: var(--primary);
+        color: var(--primary);
+    }
+
+    .btn-flip:hover {
+        background: var(--primary);
+        color: white;
+    }
+
+    .btn-back {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 18px;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        background: rgba(15, 23, 42, 0.92);
+        color: var(--text-main);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 13px;
+        transition: all 0.18s ease-out;
+    }
+
+    .btn-back:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.9);
+        border-color: rgba(129, 140, 248, 0.8);
+    }
+
+    @media (max-width: 1024px) {
+        .container {
+            flex-direction: column;
+        }
+        
+        .sidebar {
+            width: 100%;
+            position: relative;
+            top: 0;
+            height: auto;
+            max-height: 300px;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+    <h1>Possible Questions</h1>
+    <p>Practice with common theory test questions</p>
+</div>
+
+<div class="container">
+    <!-- Left Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-card">
+            <h2>Questions</h2>
+            <div class="question-list" id="questionList"></div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="flashcard-container">
+            <div class="flashcard" id="flashcard">
+                <div class="flashcard-front">
+                    <div class="flashcard-label">Question</div>
+                    <div class="flashcard-number" id="cardNumber">1 / 0</div>
+                    <div class="flashcard-content" id="questionText">Loading...</div>
+                    <div class="flashcard-hint">Click to reveal answer</div>
+                </div>
+                <div class="flashcard-back">
+                    <div class="flashcard-label">Answer</div>
+                    <div class="flashcard-number" id="cardNumberBack">1 / 0</div>
+                    <div class="flashcard-content" id="answerText">Loading...</div>
+                    <div class="flashcard-hint">Click to see question</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation-controls">
+            <button class="nav-btn" id="prevBtn" onclick="previousCard()">← Previous</button>
+            <button class="nav-btn btn-flip" id="flipBtn" onclick="flipCard()">Flip Card</button>
+            <button class="nav-btn" id="nextBtn" onclick="nextCard()">Next →</button>
+        </div>
+    </div>
+</div>
+
+<div style="text-align: center; margin-top: 40px;">
+    <a href="drivingtest-theory.html" class="btn-back">← Back to Test Theory</a>
+</div>
+
+<script>
+    let questions = [];
+    let currentIndex = 0;
+
+    // Parse the questions from the text file format
+    async function loadQuestions() {
+        try {
+            const response = await fetch('driving test theory.txt');
+            const text = await response.text();
+            const lines = text.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+            
+            questions = [];
+            for (let i = 0; i < lines.length; i += 2) {
+                if (i + 1 < lines.length) {
+                    const question = lines[i];
+                    const answer = lines[i + 1];
+                    if (question && answer) {
+                        questions.push({
+                            question: question,
+                            answer: answer
+                        });
+                    }
+                }
+            }
+            
+            renderQuestionList();
+            renderCurrentCard();
+        } catch (error) {
+            console.error('Error loading questions:', error);
+            document.getElementById('questionText').textContent = 'Error loading questions. Please ensure the file exists.';
+        }
+    }
+
+    function renderQuestionList() {
+        const list = document.getElementById('questionList');
+        list.innerHTML = '';
+        
+        questions.forEach((q, index) => {
+            const item = document.createElement('div');
+            item.className = 'question-list-item';
+            if (index === currentIndex) {
+                item.classList.add('active');
+            }
+            item.innerHTML = `
+                <span class="question-number">${index + 1}</span>
+                <span>${q.question.substring(0, 60)}${q.question.length > 60 ? '...' : ''}</span>
+            `;
+            item.addEventListener('click', () => {
+                currentIndex = index;
+                renderCurrentCard();
+                renderQuestionList();
+                // Reset card to front
+                document.getElementById('flashcard').classList.remove('flipped');
+            });
+            list.appendChild(item);
+        });
+    }
+
+    function renderCurrentCard() {
+        if (questions.length === 0) return;
+        
+        const q = questions[currentIndex];
+        document.getElementById('questionText').textContent = q.question;
+        document.getElementById('answerText').textContent = q.answer;
+        document.getElementById('cardNumber').textContent = `${currentIndex + 1} / ${questions.length}`;
+        document.getElementById('cardNumberBack').textContent = `${currentIndex + 1} / ${questions.length}`;
+        
+        // Update navigation buttons
+        document.getElementById('prevBtn').disabled = currentIndex === 0;
+        document.getElementById('nextBtn').disabled = currentIndex === questions.length - 1;
+        
+        // Scroll active item into view
+        const activeItem = document.querySelector('.question-list-item.active');
+        if (activeItem) {
+            activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    }
+
+    function flipCard() {
+        const card = document.getElementById('flashcard');
+        card.classList.toggle('flipped');
+    }
+
+    function nextCard() {
+        if (currentIndex < questions.length - 1) {
+            currentIndex++;
+            document.getElementById('flashcard').classList.remove('flipped');
+            renderCurrentCard();
+            renderQuestionList();
+        }
+    }
+
+    function previousCard() {
+        if (currentIndex > 0) {
+            currentIndex--;
+            document.getElementById('flashcard').classList.remove('flipped');
+            renderCurrentCard();
+            renderQuestionList();
+        }
+    }
+
+    // Click card to flip
+    document.getElementById('flashcard').addEventListener('click', flipCard);
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') previousCard();
+        if (e.key === 'ArrowRight') nextCard();
+        if (e.key === ' ' || e.key === 'Enter') {
+            e.preventDefault();
+            flipCard();
+        }
+    });
+
+    // Load questions on page load
+    loadQuestions();
+</script>
+
+<script src="chatbot-widget.js"></script>
+
+</body>
+</html>
+

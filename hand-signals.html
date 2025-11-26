@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hand Signals | DriveFlow</title>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    
+    :root {
+        --bg-main: #0b132b;
+        --bg-elevated: #1c2541;
+        --bg-card: #2d3f5a;
+        --bg-card-smaller: #3a506b;
+        --border-subtle: rgba(91, 192, 190, 0.22);
+        --border-strong: rgba(111, 255, 233, 0.7);
+        --primary: #5bc0be;
+        --primary-soft: rgba(91, 192, 190, 0.18);
+        --accent: #6fffe9;
+        --accent-soft: rgba(111, 255, 233, 0.18);
+        --accent-orange: #f97316;
+        --accent-red: #ef4444;
+        --text-main: #e5e7eb;
+        --text-muted: #9ca3af;
+        --text-soft: #6b7280;
+        --shadow-card: 0 18px 60px rgba(0, 0, 0, 0.6);
+        --radius-lg: 22px;
+        --radius-xl: 26px;
+        --button-bg: #6fffe9;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: var(--bg-main);
+        color: var(--text-main);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+        max-width: 1400px;
+        margin: 96px auto 40px;
+        padding: 0 20px 40px;
+    }
+
+    .page-header {
+        position: relative;
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 40px;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    .page-header h1 {
+        margin: 0 0 12px;
+        color: var(--text-main);
+        font-size: 32px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+    }
+
+    .page-header p {
+        margin: 0;
+        color: var(--text-muted);
+        font-size: 16px;
+    }
+
+    .signal-card {
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 32px;
+        margin-bottom: 32px;
+        transition: all 0.3s ease;
+    }
+
+    .signal-card:hover {
+        border-color: var(--border-strong);
+    }
+
+    .signal-card h2 {
+        margin: 0 0 8px;
+        font-size: 24px;
+        font-weight: 800;
+        color: var(--text-main);
+        letter-spacing: -0.01em;
+    }
+
+    .signal-card .meaning {
+        margin: 0 0 24px;
+        color: var(--accent);
+        font-size: 18px;
+        font-weight: 600;
+        font-style: italic;
+    }
+
+    .signal-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+        align-items: center;
+    }
+
+    .signal-image-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .signal-image {
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+        border-radius: var(--radius-lg);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        object-fit: contain;
+        background: rgba(15, 23, 42, 0.3);
+        padding: 20px;
+    }
+
+    .signal-image-label {
+        color: var(--text-muted);
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .signal-instructions {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .instruction-item {
+        padding: 16px 20px;
+        background: rgba(15, 23, 42, 0.4);
+        border-left: 3px solid var(--primary);
+        border-radius: 8px;
+        color: var(--text-main);
+        line-height: 1.7;
+    }
+
+    .instruction-item strong {
+        color: var(--primary);
+        display: block;
+        margin-bottom: 4px;
+    }
+
+    .cyclist-section {
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 32px;
+        margin-bottom: 32px;
+    }
+
+    .cyclist-section h2 {
+        margin: 0 0 16px;
+        font-size: 24px;
+        font-weight: 800;
+        color: var(--text-main);
+        letter-spacing: -0.01em;
+    }
+
+    .cyclist-section p {
+        margin: 0 0 20px;
+        color: var(--text-muted);
+        line-height: 1.7;
+    }
+
+    .cyclist-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .cyclist-list li {
+        padding: 12px 16px;
+        margin-bottom: 8px;
+        background: rgba(15, 23, 42, 0.4);
+        border-left: 3px solid var(--accent);
+        border-radius: 8px;
+        color: var(--text-main);
+    }
+
+    .cyclist-list li strong {
+        color: var(--accent);
+    }
+
+    .tips-section {
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 32px;
+        margin-bottom: 32px;
+    }
+
+    .tips-section h2 {
+        margin: 0 0 24px;
+        font-size: 24px;
+        font-weight: 800;
+        color: var(--text-main);
+        letter-spacing: -0.01em;
+    }
+
+    .tips-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+    }
+
+    .tip-card {
+        padding: 20px;
+        background: rgba(15, 23, 42, 0.4);
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border-subtle);
+    }
+
+    .tip-card h3 {
+        margin: 0 0 12px;
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--accent-orange);
+    }
+
+    .tip-card p {
+        margin: 0;
+        color: var(--text-muted);
+        line-height: 1.6;
+    }
+
+    .quick-tip-box {
+        background: var(--primary-soft);
+        border-left: 4px solid var(--primary);
+        padding: 20px;
+        border-radius: 8px;
+        margin-top: 24px;
+    }
+
+    .quick-tip-box h3 {
+        margin: 0 0 12px;
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--primary);
+    }
+
+    .quick-tip-box ul {
+        margin: 0;
+        padding-left: 20px;
+        color: var(--text-main);
+        line-height: 1.8;
+    }
+
+    .quick-tip-box li {
+        margin-bottom: 8px;
+    }
+
+    .quick-tip-box li strong {
+        color: var(--accent);
+    }
+
+    .btn-back {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 18px;
+        border-radius: 999px;
+        border: 1px solid var(--button-bg);
+        background: var(--button-bg);
+        color: var(--bg-main);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 13px;
+        transition: all 0.18s ease-out;
+    }
+
+    .btn-back:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 35px rgba(111, 255, 233, 0.4);
+        border-color: var(--button-bg);
+        background: var(--primary);
+        color: var(--text-main);
+    }
+
+    @media (max-width: 1024px) {
+        .signal-content {
+            grid-template-columns: 1fr;
+        }
+
+        .signal-image-container {
+            order: -1;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            margin-top: 80px;
+            padding: 0 16px 32px;
+        }
+
+        .signal-card,
+        .cyclist-section,
+        .tips-section {
+            padding: 24px;
+        }
+
+        .tips-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="page-header">
+        <h1>Hand Signals</h1>
+        <p>Master the hand signals required for your driving test</p>
+    </div>
+
+    <!-- Turning Left -->
+    <div class="signal-card">
+        <h2>1. Turning Left</h2>
+        <div class="meaning">"I'm turning left."</div>
+        <div class="signal-content">
+            <div class="signal-image-container">
+                <img src="rightandleftfront.png" alt="Turning left hand signal" class="signal-image">
+                <div class="signal-image-label">Front View</div>
+            </div>
+            <div class="signal-instructions">
+                <div class="instruction-item">
+                    <strong>How to do it:</strong>
+                    Put your left arm straight out horizontally through the window.
+                </div>
+                <div class="instruction-item">
+                    <strong>Position:</strong>
+                    Hand flat, palm facing forward.
+                </div>
+                <div class="instruction-item">
+                    <strong>Remember:</strong>
+                    Easy. Clean. Straight line.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Turning Right -->
+    <div class="signal-card">
+        <h2>2. Turning Right</h2>
+        <div class="meaning">"I'm turning right."</div>
+        <div class="signal-content">
+            <div class="signal-image-container">
+                <img src="rightandleftfront.png" alt="Turning right hand signal" class="signal-image">
+                <div class="signal-image-label">Front View</div>
+            </div>
+            <div class="signal-instructions">
+                <div class="instruction-item">
+                    <strong>Option 1:</strong>
+                    Stick your right arm straight out.
+                </div>
+                <div class="instruction-item">
+                    <strong>Option 2 (RHD cars):</strong>
+                    If you can't use the right arm out the window (Irish cars are RHD), raise your left arm up, elbow bent, palm facing forward.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slowing Down / Stopping -->
+    <div class="signal-card">
+        <h2>3. Slowing Down / Stopping</h2>
+        <div class="meaning">"I'm slowing or stopping."</div>
+        <div class="signal-content">
+            <div class="signal-image-container">
+                <img src="slowdownfront.png" alt="Slowing down hand signal" class="signal-image">
+                <div class="signal-image-label">Front View</div>
+            </div>
+            <div class="signal-instructions">
+                <div class="instruction-item">
+                    <strong>How to do it:</strong>
+                    Put your right arm out and move it up and down like you're patting a big dog.
+                </div>
+                <div class="instruction-item">
+                    <strong>Movement:</strong>
+                    Steady, clear movement — not frantic.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overtaking / Passing -->
+    <div class="signal-card">
+        <h2>4. Overtaking / Passing</h2>
+        <div class="meaning">"I'm letting you know I'm overtaking."</div>
+        <div class="signal-content">
+            <div class="signal-image-container">
+                <img src="straightonfront.png" alt="Overtaking hand signal" class="signal-image">
+                <div class="signal-image-label">Front View</div>
+            </div>
+            <div class="signal-instructions">
+                <div class="instruction-item">
+                    <strong>How to do it:</strong>
+                    Extend your right arm out, make a forward sweeping motion.
+                </div>
+                <div class="instruction-item">
+                    <strong>Note:</strong>
+                    You won't use this often, but you must know it.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back View Reference -->
+    <div class="signal-card">
+        <h2>Back View Reference</h2>
+        <div class="signal-content">
+            <div class="signal-image-container" style="grid-column: 1 / -1;">
+                <img src="back.png" alt="Hand signals back view" class="signal-image">
+                <div class="signal-image-label">Back View - How others see your signals</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cyclist Hand Signals -->
+    <div class="cyclist-section">
+        <h2>5. Cyclist Hand Signals</h2>
+        <p>Testers sometimes mix car + cyclist questions.</p>
+        <ul class="cyclist-list">
+            <li><strong>Left turn:</strong> Left arm straight out.</li>
+            <li><strong>Right turn:</strong> Right arm straight out.</li>
+            <li><strong>Slowing:</strong> One hand out, palm down, moving up and down.</li>
+        </ul>
+        <p style="margin-top: 16px; color: var(--text-muted);">
+            Exact same principles — simpler because cyclists don't use windows.
+        </p>
+    </div>
+
+    <!-- How the Tester Checks You -->
+    <div class="tips-section">
+        <h2>6. How the Tester Checks You</h2>
+        <div class="tips-grid">
+            <div class="tip-card">
+                <h3>Describe the Signal</h3>
+                <p>They'll ask you to describe a signal ("Show me how you'd signal slowing down")</p>
+            </div>
+            <div class="tip-card">
+                <h3>Physically Demonstrate</h3>
+                <p>They'll ask you to physically do them in the seat</p>
+            </div>
+            <div class="tip-card">
+                <h3>Key Point</h3>
+                <p>Do them confidently. Hesitation kills marks.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Tip to Remember -->
+    <div class="signal-card">
+        <div class="quick-tip-box">
+            <h3>7. Quick Tip to Remember Them</h3>
+            <ul>
+                <li><strong>Straight arm = direction.</strong></li>
+                <li><strong>Bent arm up = right turn</strong> (if you can't use the right window).</li>
+                <li><strong>Up-and-down = slowing.</strong></li>
+                <li><strong>Forward sweep = overtaking.</strong></li>
+            </ul>
+            <p style="margin-top: 16px; color: var(--text-main); font-weight: 600;">
+                If you can picture these four moves, you're sorted.
+            </p>
+        </div>
+    </div>
+
+    <div style="text-align: center;">
+        <a href="drivingtest-theory.html" class="btn-back">← Back to Test Theory</a>
+    </div>
+</div>
+
+<script src="chatbot-widget.js"></script>
+
+</body>
+</html>
+

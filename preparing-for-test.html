@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preparing for Test | DriveFlow</title>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    
+    :root {
+        --bg-main: #0b132b;
+        --bg-elevated: #1c2541;
+        --bg-card: #2d3f5a;
+        --bg-card-soft: #2d3f5a;
+        --bg-card-smaller: #3a506b;
+        --border-subtle: rgba(91, 192, 190, 0.22);
+        --border-strong: rgba(111, 255, 233, 0.7);
+        --primary: #5bc0be;
+        --primary-soft: rgba(91, 192, 190, 0.18);
+        --accent: #6fffe9;
+        --accent-soft: rgba(111, 255, 233, 0.18);
+        --accent-orange: #f97316;
+        --accent-red: #ef4444;
+        --text-main: #e5e7eb;
+        --text-muted: #9ca3af;
+        --text-soft: #6b7280;
+        --shadow-card: 0 18px 60px rgba(0, 0, 0, 0.6);
+        --radius-lg: 22px;
+        --radius-xl: 26px;
+        --blur: 18px;
+        --primary-blue: #5bc0be;
+        --primary-blue-dark: #3a506b;
+        --accent-purple: #6fffe9;
+        --text-dark: #e5e7eb;
+        --text-light: #9ca3af;
+        --button-bg: #6fffe9;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: var(--bg-main);
+        color: var(--text-main);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 96px auto 40px;
+        padding: 0 20px 40px;
+    }
+
+    .page-header {
+        position: relative;
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 40px;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    .page-header h1 {
+        margin: 0 0 12px;
+        color: var(--text-main);
+        font-size: 32px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+    }
+
+    .page-header p {
+        margin: 0;
+        color: var(--text-muted);
+        font-size: 16px;
+    }
+
+    .practice-section {
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 32px;
+        margin-bottom: 24px;
+    }
+
+    .practice-section h2 {
+        margin: 0 0 8px;
+        font-size: 24px;
+        font-weight: 800;
+        color: var(--text-main);
+        letter-spacing: -0.01em;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .practice-section .intro {
+        margin: 0 0 32px;
+        color: var(--text-muted);
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    .practice-section .intro strong {
+        color: var(--text-main);
+    }
+
+    .section-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        padding: 20px;
+        background: var(--bg-card-smaller);
+        border-radius: var(--radius-lg);
+        margin-bottom: 16px;
+        transition: all 0.2s ease;
+        border: 1px solid transparent;
+    }
+
+    .section-header:hover {
+        background: var(--bg-card);
+        border-color: var(--border-subtle);
+    }
+
+    .section-header h3 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--text-main);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .section-header .toggle-icon {
+        font-size: 20px;
+        color: var(--primary);
+        transition: transform 0.3s ease;
+    }
+
+    .section-header.expanded .toggle-icon {
+        transform: rotate(180deg);
+    }
+
+    .section-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, padding 0.3s ease;
+        padding: 0 20px;
+    }
+
+    .section-content.expanded {
+        max-height: 2000px;
+        padding: 20px;
+    }
+
+    .section-content p {
+        margin: 0 0 16px;
+        color: var(--text-muted);
+        line-height: 1.7;
+    }
+
+    .section-content p:last-child {
+        margin-bottom: 0;
+    }
+
+    .drill-list {
+        list-style: none;
+        padding: 0;
+        margin: 16px 0;
+    }
+
+    .drill-list li {
+        padding: 12px 16px;
+        margin-bottom: 8px;
+        background: rgba(15, 23, 42, 0.4);
+        border-left: 3px solid var(--primary);
+        border-radius: 8px;
+        color: var(--text-main);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .drill-list li::before {
+        content: "→";
+        color: var(--primary);
+        font-weight: bold;
+    }
+
+    .master-list {
+        list-style: none;
+        padding: 0;
+        margin: 16px 0;
+    }
+
+    .master-list li {
+        padding: 16px;
+        margin-bottom: 12px;
+        background: rgba(15, 23, 42, 0.4);
+        border-radius: 8px;
+        border: 1px solid var(--border-subtle);
+    }
+
+    .master-list li strong {
+        display: block;
+        color: var(--accent);
+        font-size: 16px;
+        margin-bottom: 8px;
+        font-weight: 600;
+    }
+
+    .master-list li p {
+        margin: 8px 0 0;
+        color: var(--text-muted);
+        line-height: 1.6;
+    }
+
+    .checklist-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 12px;
+        margin-bottom: 8px;
+        background: rgba(15, 23, 42, 0.3);
+        border-radius: 8px;
+        transition: all 0.2s ease;
+    }
+
+    .checklist-item:hover {
+        background: rgba(15, 23, 42, 0.5);
+    }
+
+    .checklist-item input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        accent-color: var(--primary);
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    .checklist-item label {
+        flex: 1;
+        color: var(--text-main);
+        cursor: pointer;
+        line-height: 1.5;
+    }
+
+    .checklist-item.completed label {
+        color: var(--text-muted);
+        text-decoration: line-through;
+    }
+
+    .checklist-item label a {
+        color: var(--primary);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        transition: all 0.2s ease;
+    }
+
+    .checklist-item label a:hover {
+        color: var(--accent);
+        text-decoration-color: var(--accent);
+    }
+
+    .checklist-item.completed label a {
+        color: var(--text-muted);
+        text-decoration-color: var(--text-muted);
+    }
+
+    .highlight-box {
+        background: var(--primary-soft);
+        border-left: 4px solid var(--primary);
+        padding: 16px 20px;
+        border-radius: 8px;
+        margin: 16px 0;
+    }
+
+    .highlight-box strong {
+        color: var(--primary);
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    .highlight-box p {
+        margin: 0;
+        color: var(--text-main);
+    }
+
+    .btn-back {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 18px;
+        border-radius: 999px;
+        border: 1px solid var(--button-bg);
+        background: var(--button-bg);
+        color: var(--bg-main);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 13px;
+        transition: all 0.18s ease-out;
+    }
+
+    .btn-back:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 35px rgba(111, 255, 233, 0.4);
+        border-color: var(--button-bg);
+        background: var(--primary);
+        color: var(--text-main);
+    }
+
+    .progress-indicator {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 12px;
+        background: var(--primary-soft);
+        border-radius: 20px;
+        font-size: 12px;
+        color: var(--primary);
+        font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            margin-top: 80px;
+            padding: 0 16px 32px;
+        }
+
+        .practice-section {
+            padding: 24px;
+        }
+
+        .section-header {
+            padding: 16px;
+        }
+
+        .section-header h3 {
+            font-size: 18px;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="page-header">
+        <h1>Preparing for Test Day</h1>
+        <p>Master the skills that matter and get test-ready</p>
+    </div>
+
+    <div id="how-to-practice" class="practice-section">
+        <h2>⭐ THE PLAN THAT GETS YOU TO A PASS</h2>
+        <p class="intro">
+            <strong>Even with 2–3 hours of car time a week.</strong><br>
+            Short. Punchy. Zero bullshit.<br>
+            If you follow this, you will drive test-ready.
+        </p>
+
+        <!-- What Actually Matters Section -->
+        <div class="section-header" onclick="toggleSection(this)">
+            <h3>🔥 WHAT ACTUALLY MATTERS (80% OF THE TEST)</h3>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="section-content">
+            <p>Master these → you pass.</p>
+            <ul class="drill-list">
+                <li>Mirrors (obsessively)</li>
+                <li>Observation at junctions</li>
+                <li>Positioning</li>
+                <li>Indications (on & off)</li>
+                <li>Smooth clutch control</li>
+                <li>Roundabout discipline</li>
+                <li>Not hesitating like a zombie</li>
+            </ul>
+        </div>
+
+        <!-- Weekly Structure Section -->
+        <div class="section-header" onclick="toggleSection(this)">
+            <h3>🚀 WEEKLY STRUCTURE (3–4 HOURS TOTAL)</h3>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="section-content">
+            <!-- Skills Session -->
+            <div class="section-header" onclick="toggleSection(this)">
+                <h3>1️⃣ Skills Session (60–75 min)</h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <p><strong>Where you build the foundations.</strong></p>
+                <p>You drill:</p>
+                <ul class="drill-list">
+                    <li>Mirrors every 8–10 seconds</li>
+                    <li>MSMPSL until automatic</li>
+                    <li>Smooth moving off & stopping</li>
+                    <li>Clutch control for crawling, corners, and junction creep</li>
+                    <li>Hill starts with zero rollback</li>
+                </ul>
+                <div class="highlight-box">
+                    <strong>Goal:</strong>
+                    <p>Everything must look calm and intentional.</p>
+                </div>
+            </div>
+
+            <!-- Manoeuvres Session -->
+            <div class="section-header" onclick="toggleSection(this)">
+                <h3>2️⃣ Manoeuvres Session (60–90 min)</h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <p><strong>Predictable. Easy marks if you practise correctly.</strong></p>
+                <p>You must master:</p>
+                <ul class="master-list">
+                    <li>
+                        <strong>✔ Reverse Around a Corner</strong>
+                        <p>Creep. 1.5–2 ft from kerb. Relentless blind-spot checks. No swinging wide.</p>
+                    </li>
+                    <li>
+                        <strong>✔ Turnabout (3-Point Turn)</strong>
+                        <p>Look both shoulders every time you reverse. Slow steering. Do NOT hit kerb. Do NOT panic-steer.</p>
+                    </li>
+                    <li>
+                        <strong>✔ Hill start </strong>
+                        <p>For Manual Transmissions only. Practice getting your biting point while the handbrake is on, then releasing it.</p>
+                    </li>
+                    <li>Note: Take as much time as you need during these manoeuvres, there is no time limit. Observations are what's really being tested here.</li>
+                </ul>
+            </div>
+
+            <!-- Test Simulation Drive -->
+            <div class="section-header" onclick="toggleSection(this)">
+                <h3>3️⃣ Test Simulation Drive (45–60 min)</h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="section-content">
+                <p><strong>Exactly like the real test. No chatting. No mercy.</strong></p>
+                <ul class="drill-list">
+                    <li>Mirrors like a psycho</li>
+                    <li>Clean junctions</li>
+                    <li>Solid lane discipline</li>
+                    <li>Good roundabout calls</li>
+                    <li>Indicate with purpose</li>
+                    <li>Cancel indicators</li>
+                    <li>Pull in / move off repeatedly</li>
+                    <li>No hesitation unless it's actually dangerous</li>
+                </ul>
+                <div class="highlight-box">
+                    <strong>Goal:</strong>
+                    <p>0 majors, &lt;6 minors every run.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Daily No-Car Training Section -->
+        <div class="section-header" onclick="toggleSection(this)">
+            <h3>🔥 DAILY NO-CAR TRAINING</h3>
+            <span class="toggle-icon">▼</span>
+            <span class="progress-indicator" id="daily-progress">0/4 Complete</span>
+        </div>
+        <div class="section-content">
+            <p><strong>This makes up for limited car time.</strong></p>
+
+            <!-- Mirror/Observation Timing -->
+            <div class="checklist-item">
+                <input type="checkbox" id="check-1" onchange="updateProgress()">
+                <label for="check-1">
+                    <strong>1️⃣ Mirror/Observation Timing (30 sec bursts all day)</strong><br>
+                    Centre → Right → Left. Repeat until it's instinct.
+                </label>
+            </div>
+
+            <!-- Roundabout Judgment Training -->
+            <div class="checklist-item">
+                <input type="checkbox" id="check-2" onchange="updateProgress()">
+                <label for="check-2">
+                    <strong>2️⃣ Roundabout Judgment Training</strong><br>
+                    Watch Irish dashcam videos. Pause → decide your lane + your gap. This builds real test decision-making.
+                </label>
+            </div>
+
+            <!-- Study Test Routes -->
+            <div class="checklist-item">
+                <input type="checkbox" id="check-3" onchange="updateProgress()">
+                <label for="check-3">
+                    <strong>3️⃣ Study Your Test Routes</strong><br>
+                    Our Test Routes = your secret weapon. Know: Roundabout markings, Speed zones, Tight lefts, Dodgy yields. Knowing what's coming saves you nerves.
+                </label>
+            </div>
+
+            <!-- Bonnet Checks + Car Controls -->
+            <div class="checklist-item">
+                <input type="checkbox" id="check-4" onchange="updateProgress()">
+                <label for="check-4">
+                    <strong>4️⃣ Bonnet Checks + Car Controls</strong><br>
+                    You MUST know these instantly: Oil, Coolant, Brake fluid, Washer fluid, Dipstick. Plus: demister, fog lights, hazards, beams. This takes 20 mins and impresses examiners big time. Test yourself using our <a href="bonnet-check.html">Bonnet checks</a> page.
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <a href="main.html" class="btn-back">← Back to Home</a>
+</div>
+
+<script>
+    function toggleSection(header) {
+        const content = header.nextElementSibling;
+        const isExpanded = header.classList.contains('expanded');
+        
+        if (isExpanded) {
+            header.classList.remove('expanded');
+            content.classList.remove('expanded');
+        } else {
+            header.classList.add('expanded');
+            content.classList.add('expanded');
+        }
+    }
+
+    function updateProgress() {
+        const checkboxes = document.querySelectorAll('#how-to-practice input[type="checkbox"]');
+        let completed = 0;
+        
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                completed++;
+                checkbox.closest('.checklist-item').classList.add('completed');
+            } else {
+                checkbox.closest('.checklist-item').classList.remove('completed');
+            }
+        });
+
+        const progressIndicator = document.getElementById('daily-progress');
+        if (progressIndicator) {
+            progressIndicator.textContent = `${completed}/${checkboxes.length} Complete`;
+        }
+
+        // Save to localStorage
+        checkboxes.forEach((checkbox, index) => {
+            localStorage.setItem(`practice-check-${index + 1}`, checkbox.checked);
+        });
+    }
+
+    // Load saved checkboxes on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        const checkboxes = document.querySelectorAll('#how-to-practice input[type="checkbox"]');
+        checkboxes.forEach((checkbox, index) => {
+            const saved = localStorage.getItem(`practice-check-${index + 1}`);
+            if (saved === 'true') {
+                checkbox.checked = true;
+                checkbox.closest('.checklist-item').classList.add('completed');
+            }
+        });
+        updateProgress();
+
+        // Scroll to section if hash is present
+        if (window.location.hash === '#how-to-practice') {
+            document.getElementById('how-to-practice').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+</script>
+
+<script src="chatbot-widget.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Theory Test Pass Checklist | DriveFlow</title>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    
+    :root {
+        --bg-main: #0b132b;
+        --bg-elevated: #1c2541;
+        --bg-card: #2d3f5a;
+        --bg-card-soft: #2d3f5a;
+        --bg-card-smaller: #3a506b;
+        --border-subtle: rgba(91, 192, 190, 0.22);
+        --border-strong: rgba(111, 255, 233, 0.7);
+        --primary: #5bc0be;
+        --primary-soft: rgba(91, 192, 190, 0.18);
+        --accent: #6fffe9;
+        --accent-soft: rgba(111, 255, 233, 0.18);
+        --accent-orange: #f97316;
+        --accent-red: #ef4444;
+        --text-main: #e5e7eb;
+        --text-muted: #9ca3af;
+        --text-soft: #6b7280;
+        --shadow-card: 0 18px 60px rgba(0, 0, 0, 0.6);
+        --radius-lg: 22px;
+        --radius-xl: 26px;
+        --blur: 18px;
+        --primary-blue: #5bc0be;
+        --primary-blue-dark: #3a506b;
+        --accent-purple: #6fffe9;
+        --text-dark: #e5e7eb;
+        --text-light: #9ca3af;
+        --button-bg: #6fffe9;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: var(--bg-main);
+        color: var(--text-main);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 96px auto 40px;
+        padding: 0 20px 40px;
+    }
+
+    .page-header {
+        position: relative;
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 40px;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    .page-header h1 {
+        margin: 0 0 12px;
+        color: var(--text-main);
+        font-size: 32px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+    }
+
+    .page-header p {
+        margin: 0;
+        color: var(--text-muted);
+        font-size: 16px;
+    }
+
+    .checklist-section {
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 32px;
+        margin-bottom: 24px;
+    }
+
+    .checklist-section h2 {
+        margin: 0 0 24px;
+        font-size: 28px;
+        font-weight: 800;
+        color: var(--text-main);
+        letter-spacing: -0.01em;
+    }
+
+    .checklist-item {
+        padding: 16px 0;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        display: flex;
+        align-items: start;
+        gap: 16px;
+    }
+
+    .checklist-item:last-child {
+        border-bottom: none;
+    }
+
+    .checklist-item::before {
+        content: '✓';
+        color: var(--accent);
+        font-weight: 700;
+        font-size: 20px;
+        flex-shrink: 0;
+    }
+
+    .checklist-item strong {
+        color: var(--text-main);
+        font-size: 16px;
+        display: block;
+        margin-bottom: 4px;
+        font-weight: 600;
+    }
+
+    .checklist-item p {
+        margin: 0;
+        color: var(--text-muted);
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    .info-box {
+        background: var(--primary-soft);
+        border-left: 4px solid var(--primary);
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px 0;
+    }
+
+    .info-box h3 {
+        margin: 0 0 12px;
+        color: var(--primary);
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    .info-box p {
+        margin: 0;
+        color: var(--text-main);
+        line-height: 1.6;
+    }
+
+    .btn-back {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 18px;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        background: rgba(15, 23, 42, 0.92);
+        color: var(--text-main);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 13px;
+        transition: all 0.18s ease-out;
+    }
+
+    .btn-back:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.9);
+        border-color: rgba(129, 140, 248, 0.8);
+    }
+
+    .tips-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .tips-list li {
+        padding: 12px 0;
+        padding-left: 32px;
+        position: relative;
+        color: var(--text-muted);
+        line-height: 1.6;
+    }
+
+    .tips-list li::before {
+        content: '💡';
+        position: absolute;
+        left: 0;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="page-header">
+        <h1>Theory Test Pass Checklist</h1>
+        <p>Everything you need to know to pass your Irish theory test</p>
+    </div>
+
+    <div class="checklist-section">
+        <h2>What to Bring</h2>
+        <div class="checklist-item">
+            <div>
+                <strong>Valid ID</strong>
+                <p>Bring a valid form of identification (passport, driving license, or national ID card)</p>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div>
+                <strong>Booking Confirmation</strong>
+                <p>Print or have your booking confirmation email ready on your phone</p>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div>
+                <strong>Arrive Early</strong>
+                <p>Arrive at least 15 minutes before your scheduled test time</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="checklist-section">
+        <h2>Test Requirements</h2>
+        <div class="checklist-item">
+            <div>
+                <strong>Number of Questions</strong>
+                <p>You will answer 40 multiple-choice questions</p>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div>
+                <strong>Passing Score</strong>
+                <p>You need to answer at least 35 questions correctly (87.5%) to pass</p>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div>
+                <strong>Time Allowed</strong>
+                <p>You have 45 minutes to complete the test</p>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div>
+                <strong>Question Navigation</strong>
+                <p>You cannot go back to previous questions once answered (like the real exam)</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="checklist-section">
+        <h2>Tips to Pass First Time</h2>
+        <ul class="tips-list">
+            <li>Practice regularly using our mock tests and topic practice questions</li>
+            <li>Study road signs thoroughly - they appear frequently in the test</li>
+            <li>Understand stopping distances for different speeds and conditions</li>
+            <li>Learn the rules of the road, especially right of way and roundabouts</li>
+            <li>Take multiple mock tests to get familiar with the format and timing</li>
+            <li>Read each question carefully - don't rush</li>
+            <li>If unsure, eliminate obviously wrong answers first</li>
+            <li>Get a good night's sleep before your test</li>
+            <li>Stay calm and manage your time - you have plenty of time for 40 questions</li>
+            <li>Review your weak areas using our topic-specific practice</li>
+        </ul>
+    </div>
+
+    <div class="checklist-section">
+        <h2>Test Day Checklist</h2>
+        <div class="checklist-item">
+            <div>
+                <strong>Before Leaving Home</strong>
+                <p>✓ Check you have your ID and booking confirmation<br>
+                ✓ Plan your route to the test centre<br>
+                ✓ Leave with plenty of time to spare</p>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div>
+                <strong>At the Test Centre</strong>
+                <p>✓ Arrive 15 minutes early<br>
+                ✓ Follow instructions from staff<br>
+                ✓ Use the bathroom before starting<br>
+                ✓ Turn off your phone</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-box">
+        <h3>Remember</h3>
+        <p>You can retake the theory test if you don't pass. Use your results to identify areas for improvement and practice more before booking again.</p>
+    </div>
+
+    <div style="text-align: center;">
+        <a href="main.html" class="btn-back">← Back to Home</a>
+    </div>
+</div>
+
+<script src="chatbot-widget.js"></script>
+
+</body>
+</html>
+

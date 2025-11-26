@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Disclaimer | DriveFlow</title>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    
+    :root {
+        --bg-main: #0b132b;
+        --bg-card: #2d3f5a;
+        --bg-card-smaller: #3a506b;
+        --primary-blue: #5bc0be;
+        --primary-blue-dark: #3a506b;
+        --accent-purple: #6fffe9;
+        --text-dark: #e5e7eb;
+        --text-light: #9ca3af;
+        --bg-glass: rgba(28, 37, 65, 0.95);
+        --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+        --button-bg: #6fffe9;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg-main);
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        min-height: 100vh;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .page-header {
+        background: linear-gradient(135deg, rgba(11, 19, 43, 0.85) 0%, rgba(28, 37, 65, 0.9) 100%);
+        backdrop-filter: blur(20px);
+        border-radius: 16px;
+        padding: 32px;
+        margin-bottom: 40px;
+        text-align: center;
+        box-shadow: var(--shadow-lg);
+    }
+
+    .page-header h1 {
+        margin: 0 0 12px;
+        color: white;
+        font-size: 36px;
+        font-weight: 800;
+    }
+
+    .content-section {
+        background: var(--bg-glass);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 32px;
+        margin-bottom: 24px;
+        box-shadow: var(--shadow-lg);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .content-section h2 {
+        margin: 0 0 20px;
+        font-size: 28px;
+        font-weight: 800;
+        color: var(--text-dark);
+    }
+
+    .content-section p {
+        margin: 0 0 16px;
+        color: var(--text-light);
+        line-height: 1.8;
+        font-size: 16px;
+    }
+
+    .content-section p:last-child {
+        margin-bottom: 0;
+    }
+
+    .btn-back {
+        display: inline-block;
+        margin-top: 20px;
+        background: var(--primary-blue);
+        color: white;
+        padding: 12px 24px;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.2s ease;
+    }
+
+    .btn-back:hover {
+        background: var(--primary-blue-dark);
+        transform: translateY(-2px);
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="page-header">
+        <h1>Disclaimer</h1>
+    </div>
+
+    <div class="content-section">
+        <h2>Educational Purpose</h2>
+        <p>DriveFlow is an educational resource designed to help individuals prepare for the Irish driving theory test. This website is not affiliated with, endorsed by, or connected to the Road Safety Authority (RSA) or any official government body.</p>
+    </div>
+
+    <div class="content-section">
+        <h2>Accuracy of Information</h2>
+        <p>While we strive to provide accurate and up-to-date information, we cannot guarantee that all content is completely accurate or reflects the most current regulations. Official information should always be verified through the RSA website or official sources.</p>
+        <p>Test formats, requirements, and regulations may change. Always check the official RSA website for the most current information before booking or taking your test.</p>
+    </div>
+
+    <div class="content-section">
+        <h2>No Guarantee of Results</h2>
+        <p>Using this website does not guarantee that you will pass the theory test. Success depends on your individual study, understanding, and preparation. We provide tools and resources to help you prepare, but the outcome is your responsibility.</p>
+    </div>
+
+    <div class="content-section">
+        <h2>Practice Questions</h2>
+        <p>Practice questions provided on this website are for educational purposes only. They may not reflect the exact questions you will encounter on the actual test. The actual test questions are the property of the RSA.</p>
+    </div>
+
+    <div class="content-section">
+        <h2>Use at Your Own Risk</h2>
+        <p>This website is provided "as is" without any warranties. We are not responsible for any consequences resulting from the use of this website or reliance on its content.</p>
+    </div>
+
+    <div class="content-section">
+        <h2>Official Resources</h2>
+        <p>For official information about the theory test, booking procedures, test centres, and regulations, please visit the official RSA website at <a href="https://www.rsa.ie" target="_blank" style="color: var(--primary-blue);">www.rsa.ie</a>.</p>
+    </div>
+
+    <div style="text-align: center;">
+        <a href="index.html" class="btn-back">← Back to Home</a>
+    </div>
+</div>
+
+<script src="chatbot-widget.js"></script>
+
+</body>
+</html>
+

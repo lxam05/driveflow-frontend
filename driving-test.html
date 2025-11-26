@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Driving Test Guide | DriveFlow</title>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    
+    :root {
+        --bg-main: #0b132b;
+        --bg-elevated: #1c2541;
+        --bg-card: #2d3f5a;
+        --bg-card-soft: #2d3f5a;
+        --bg-card-smaller: #3a506b;
+        --border-subtle: rgba(91, 192, 190, 0.22);
+        --border-strong: rgba(111, 255, 233, 0.7);
+        --primary: #5bc0be;
+        --primary-soft: rgba(91, 192, 190, 0.18);
+        --accent: #6fffe9;
+        --accent-soft: rgba(111, 255, 233, 0.18);
+        --accent-orange: #f97316;
+        --accent-red: #ef4444;
+        --text-main: #e5e7eb;
+        --text-muted: #9ca3af;
+        --text-soft: #6b7280;
+        --shadow-card: 0 18px 60px rgba(0, 0, 0, 0.6);
+        --radius-lg: 22px;
+        --radius-xl: 26px;
+        --blur: 18px;
+        --primary-blue: #5bc0be;
+        --primary-blue-dark: #3a506b;
+        --accent-purple: #6fffe9;
+        --text-dark: #e5e7eb;
+        --text-light: #9ca3af;
+        --button-bg: #6fffe9;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: var(--bg-main);
+        color: var(--text-main);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 96px auto 40px;
+        padding: 0 20px 40px;
+    }
+
+    .page-header {
+        position: relative;
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 40px;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    .page-header h1 {
+        margin: 0 0 12px;
+        color: var(--text-main);
+        font-size: 32px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+    }
+
+    .page-header p {
+        margin: 0;
+        color: var(--text-muted);
+        font-size: 16px;
+    }
+
+    .collapsible-section {
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        margin-bottom: 20px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .collapsible-header {
+        padding: 24px 32px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        user-select: none;
+        transition: background 0.2s ease;
+    }
+
+    .collapsible-header:hover {
+        background: rgba(99, 102, 241, 0.05);
+    }
+
+    .collapsible-header h2 {
+        margin: 0;
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--text-main);
+        letter-spacing: -0.01em;
+    }
+
+    .collapse-icon {
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary);
+        font-size: 20px;
+        transition: transform 0.3s ease;
+    }
+
+    .collapsible-section.active .collapse-icon {
+        transform: rotate(180deg);
+    }
+
+    .collapsible-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+    }
+
+    .collapsible-section.active .collapsible-content {
+        max-height: 5000px;
+    }
+
+    .collapsible-inner {
+        padding: 0 32px 32px;
+    }
+
+    .checklist-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+    }
+
+    .checklist-item:last-child {
+        border-bottom: none;
+    }
+
+    .checklist-checkbox {
+        width: 20px;
+        height: 20px;
+        min-width: 20px;
+        border: 2px solid var(--border-subtle);
+        border-radius: 4px;
+        background: transparent;
+        cursor: pointer;
+        position: relative;
+        transition: all 0.2s ease;
+        margin-top: 2px;
+    }
+
+    .checklist-checkbox:hover {
+        border-color: var(--primary);
+    }
+
+    .checklist-checkbox:checked {
+        background: var(--accent);
+        border-color: var(--accent);
+    }
+
+    .checklist-checkbox:checked::after {
+        content: '✓';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    .checklist-label {
+        flex: 1;
+        color: var(--text-main);
+        font-size: 15px;
+        line-height: 1.6;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .checklist-item.completed .checklist-label {
+        text-decoration: line-through;
+        color: var(--text-muted);
+        opacity: 0.7;
+    }
+
+    .btn-back {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 18px;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        background: rgba(15, 23, 42, 0.92);
+        color: var(--text-main);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 13px;
+        transition: all 0.18s ease-out;
+    }
+
+    .btn-back:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.9);
+        border-color: rgba(129, 140, 248, 0.8);
+    }
+
+    .btn-select-all {
+        padding: 6px 12px;
+        border-radius: 6px;
+        border: 1px solid var(--border-subtle);
+        background: var(--primary-soft);
+        color: var(--primary);
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.18s ease-out;
+        margin-left: 12px;
+    }
+
+    .btn-select-all:hover {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="page-header">
+        <h1>Driving Test Checklist</h1>
+        <p>Complete guide to preparing for and passing your driving test</p>
+    </div>
+
+    <div class="collapsible-section active" data-section="booking">
+        <div class="collapsible-header" onclick="toggleSection('booking')">
+            <h2>
+                <span>1. Booking the test</span>
+                <button class="btn-select-all" onclick="selectAllInSection('booking')">Select All</button>
+            </h2>
+            <div class="collapse-icon">▼</div>
+        </div>
+        <div class="collapsible-content">
+            <div class="collapsible-inner">
+                <div class="checklist-item" data-id="booking-1">
+                    <input type="checkbox" class="checklist-checkbox" id="booking-1">
+                    <label for="booking-1" class="checklist-label">Confirm your preferred test centre and available dates via the Road Safety Authority (RSA) online system</label>
+                </div>
+                <div class="checklist-item" data-id="booking-2">
+                    <input type="checkbox" class="checklist-checkbox" id="booking-2">
+                    <label for="booking-2" class="checklist-label">Ensure your 12-lesson EDT certificate is logged and visible in your RSA profile</label>
+                </div>
+                <div class="checklist-item" data-id="booking-3">
+                    <input type="checkbox" class="checklist-checkbox" id="booking-3">
+                    <label for="booking-3" class="checklist-label">Check that your learner permit is valid (not expired) and you still meet all eligibility criteria</label>
+                </div>
+                <div class="checklist-item" data-id="booking-4">
+                    <input type="checkbox" class="checklist-checkbox" id="booking-4">
+                    <label for="booking-4" class="checklist-label">Pay the test fee (or have payment method ready) as required by the RSA</label>
+                </div>
+                <div class="checklist-item" data-id="booking-5">
+                    <input type="checkbox" class="checklist-checkbox" id="booking-5">
+                    <label for="booking-5" class="checklist-label">Receive and record your test appointment confirmation (date, time, test centre)</label>
+                </div>
+                <div class="checklist-item" data-id="booking-6">
+                    <input type="checkbox" class="checklist-checkbox" id="booking-6">
+                    <label for="booking-6" class="checklist-label">Check for any specific test centre instructions (arrival time, parking, signage)</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="collapsible-section" data-section="before">
+        <div class="collapsible-header" onclick="toggleSection('before')">
+            <h2>
+                <span>The day(s) before</span>
+                <button class="btn-select-all" onclick="selectAllInSection('before')">Select All</button>
+            </h2>
+            <div class="collapse-icon">▼</div>
+        </div>
+        <div class="collapsible-content">
+            <div class="collapsible-inner">
+                <div class="checklist-item" data-id="before-1">
+                    <input type="checkbox" class="checklist-checkbox" id="before-1">
+                    <label for="before-1" class="checklist-label">Review the driving test marking sheet and familiarise yourself with what the tester will evaluate</label>
+                </div>
+                <div class="checklist-item" data-id="before-2">
+                    <input type="checkbox" class="checklist-checkbox" id="before-2">
+                    <label for="before-2" class="checklist-label">Drive the route area of your test centre at least once, preferably at the same day/time of day</label>
+                </div>
+                <div class="checklist-item" data-id="before-3">
+                    <input type="checkbox" class="checklist-checkbox" id="before-3">
+                    <label for="before-3" class="checklist-label">Ensure your practice driving (in your car or instructor's) is focused on the key fail areas: observation, road position, progress, mirrors/signals, speed, right-of-way</label>
+                </div>
+                <div class="checklist-item" data-id="before-4">
+                    <input type="checkbox" class="checklist-checkbox" id="before-4">
+                    <label for="before-4" class="checklist-label">Do at least one full mock test with your instructor under test-conditions</label>
+                </div>
+                <div class="checklist-item" data-id="before-5">
+                    <input type="checkbox" class="checklist-checkbox" id="before-5">
+                    <label for="before-5" class="checklist-label">Check your vehicle is fully legal: tax, NCT (if required), insurance, all lights working, tyres good tread</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="collapsible-section" data-section="bring">
+        <div class="collapsible-header" onclick="toggleSection('bring')">
+            <h2>
+                <span>Things to bring on test day</span>
+                <button class="btn-select-all" onclick="selectAllInSection('bring')">Select All</button>
+            </h2>
+            <div class="collapse-icon">▼</div>
+        </div>
+        <div class="collapsible-content">
+            <div class="collapsible-inner">
+                <div class="checklist-item" data-id="bring-1">
+                    <input type="checkbox" class="checklist-checkbox" id="bring-1">
+                    <label for="bring-1" class="checklist-label">Your current learner permit (valid and not expired)</label>
+                </div>
+                <div class="checklist-item" data-id="bring-2">
+                    <input type="checkbox" class="checklist-checkbox" id="bring-2">
+                    <label for="bring-2" class="checklist-label">Photographic ID if required by your test centre (passport or driver learner permit)</label>
+                </div>
+                <div class="checklist-item" data-id="bring-3">
+                    <input type="checkbox" class="checklist-checkbox" id="bring-3">
+                    <label for="bring-3" class="checklist-label">Proof of payment of the test fee, or confirmation number if online</label>
+                </div>
+                <div class="checklist-item" data-id="bring-4">
+                    <input type="checkbox" class="checklist-checkbox" id="bring-4">
+                    <label for="bring-4" class="checklist-label">The car's insurance document, tax disc (if applicable), NCT certificate (if applicable)</label>
+                </div>
+                <div class="checklist-item" data-id="bring-5">
+                    <input type="checkbox" class="checklist-checkbox" id="bring-5">
+                    <label for="bring-5" class="checklist-label">The vehicle being used must display L-plates (front and back), in good condition</label>
+                </div>
+                <div class="checklist-item" data-id="bring-6">
+                    <input type="checkbox" class="checklist-checkbox" id="bring-6">
+                    <label for="bring-6" class="checklist-label">Comfortable clothes and shoes (not awkward to drive in)</label>
+                </div>
+                <div class="checklist-item" data-id="bring-7">
+                    <input type="checkbox" class="checklist-checkbox" id="bring-7">
+                    <label for="bring-7" class="checklist-label">Arrive at least 15 minutes early at the test centre</label>
+                </div>
+                <div class="checklist-item" data-id="bring-8">
+                    <input type="checkbox" class="checklist-checkbox" id="bring-8">
+                    <label for="bring-8" class="checklist-label">Make sure you have full view through windscreen/windows, mirrors properly set, seat adjusted, and ready to go</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="collapsible-section" data-section="arrival">
+        <div class="collapsible-header" onclick="toggleSection('arrival')">
+            <h2>
+                <span>On arrival & just before the test starts</span>
+                <button class="btn-select-all" onclick="selectAllInSection('arrival')">Select All</button>
+            </h2>
+            <div class="collapse-icon">▼</div>
+        </div>
+        <div class="collapsible-content">
+            <div class="collapsible-inner">
+                <div class="checklist-item" data-id="arrival-1">
+                    <input type="checkbox" class="checklist-checkbox" id="arrival-1">
+                    <label for="arrival-1" class="checklist-label">Set up your seat, steering wheel and mirrors before the examiner arrives</label>
+                </div>
+                <div class="checklist-item" data-id="arrival-2">
+                    <input type="checkbox" class="checklist-checkbox" id="arrival-2">
+                    <label for="arrival-2" class="checklist-label">Complete the "start-up checklist": seatbelt on, handbrake set, gear in neutral (or park if auto), ensure surrounding traffic is safe</label>
+                </div>
+                <div class="checklist-item" data-id="arrival-3">
+                    <input type="checkbox" class="checklist-checkbox" id="arrival-3">
+                    <label for="arrival-3" class="checklist-label">Take a moment to breathe, focus, and remind yourself you know what you're doing</label>
+                </div>
+                <div class="checklist-item" data-id="arrival-4">
+                    <input type="checkbox" class="checklist-checkbox" id="arrival-4">
+                    <label for="arrival-4" class="checklist-label">The examiner will ask for you to do an eyesight test and maybe show your permit — be ready</label>
+                </div>
+                <div class="checklist-item" data-id="arrival-5">
+                    <input type="checkbox" class="checklist-checkbox" id="arrival-5">
+                    <label for="arrival-5" class="checklist-label">Listen clearly to the examiner's instructions. Ask for clarification if you don't understand something</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="collapsible-section" data-section="during">
+        <div class="collapsible-header" onclick="toggleSection('during')">
+            <h2>
+                <span>During the test</span>
+                <button class="btn-select-all" onclick="selectAllInSection('during')">Select All</button>
+            </h2>
+            <div class="collapse-icon">▼</div>
+        </div>
+        <div class="collapsible-content">
+            <div class="collapsible-inner">
+                <div class="checklist-item" data-id="during-1">
+                    <input type="checkbox" class="checklist-checkbox" id="during-1">
+                    <label for="during-1" class="checklist-label">Remember: safe and consistent driving beats perfect</label>
+                </div>
+                <div class="checklist-item" data-id="during-2">
+                    <input type="checkbox" class="checklist-checkbox" id="during-2">
+                    <label for="during-2" class="checklist-label">Mirror → Signal → Position → Move: make this your automatic sequence</label>
+                </div>
+                <div class="checklist-item" data-id="during-3">
+                    <input type="checkbox" class="checklist-checkbox" id="during-3">
+                    <label for="during-3" class="checklist-label">Don't rush. Make decisions confidently but avoid hesitating too long</label>
+                </div>
+                <div class="checklist-item" data-id="during-4">
+                    <input type="checkbox" class="checklist-checkbox" id="during-4">
+                    <label for="during-4" class="checklist-label">If you make a mistake: keep calm, correct it safely, and move on. One error doesn't mean fail if corrected properly</label>
+                </div>
+                <div class="checklist-item" data-id="during-5">
+                    <input type="checkbox" class="checklist-checkbox" id="during-5">
+                    <label for="during-5" class="checklist-label">Finish every manoeuvre with mirrors and signal where required</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center;">
+        <a href="main.html" class="btn-back" id="backToHome">← Back to Home</a>
+    </div>
+</div>
+
+<script>
+    // Toggle collapsible sections
+    function toggleSection(sectionId) {
+        const section = document.querySelector(`.collapsible-section[data-section="${sectionId}"]`);
+        if (section) {
+            section.classList.toggle('active');
+        }
+    }
+
+    // Load saved checklist state from localStorage
+    function loadChecklistState() {
+        const items = document.querySelectorAll('.checklist-item');
+        items.forEach(item => {
+            const id = item.dataset.id;
+            const checkbox = item.querySelector('.checklist-checkbox');
+            const savedState = localStorage.getItem(`drivingtest_checklist_${id}`);
+            
+            if (savedState === 'true') {
+                checkbox.checked = true;
+                item.classList.add('completed');
+            }
+        });
+    }
+
+    // Save checklist state to localStorage
+    function saveChecklistState(id, checked) {
+        localStorage.setItem(`drivingtest_checklist_${id}`, checked.toString());
+    }
+
+    // Handle checkbox changes
+    document.querySelectorAll('.checklist-checkbox').forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            const item = this.closest('.checklist-item');
+            const id = item.dataset.id;
+            
+            if (this.checked) {
+                item.classList.add('completed');
+            } else {
+                item.classList.remove('completed');
+            }
+            
+            saveChecklistState(id, this.checked);
+        });
+    });
+
+    // Allow clicking the label to toggle checkbox
+    document.querySelectorAll('.checklist-label').forEach(label => {
+        label.addEventListener('click', function(e) {
+            const checkbox = document.getElementById(this.getAttribute('for'));
+            if (checkbox) {
+                checkbox.checked = !checkbox.checked;
+                checkbox.dispatchEvent(new Event('change'));
+            }
+        });
+    });
+
+    // Select all checkboxes in a section
+    function selectAllInSection(sectionId) {
+        const section = document.querySelector(`.collapsible-section[data-section="${sectionId}"]`);
+        if (!section) return;
+        
+        const checkboxes = section.querySelectorAll('.checklist-checkbox');
+        const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+        
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = !allChecked;
+            const item = checkbox.closest('.checklist-item');
+            const id = item.dataset.id;
+            
+            if (checkbox.checked) {
+                item.classList.add('completed');
+            } else {
+                item.classList.remove('completed');
+            }
+            
+            saveChecklistState(id, checkbox.checked);
+        });
+    }
+
+    // Store the current section when navigating to driving-test.html
+    const urlParams = new URLSearchParams(window.location.search);
+    const fromSection = urlParams.get('from');
+    const fromPage = urlParams.get('page') || (fromSection ? 'main' : null);
+    
+    if (fromSection) {
+        localStorage.setItem('lastMainSection', fromSection);
+    }
+    if (fromPage) {
+        localStorage.setItem('lastPage', fromPage);
+    }
+    
+    // When clicking back to home, restore the section position
+    document.getElementById('backToHome').addEventListener('click', function(e) {
+        e.preventDefault();
+        const lastPage = localStorage.getItem('lastPage') || 'main';
+        const lastSection = localStorage.getItem('lastMainSection') || 'booking';
+        
+        if (lastPage === 'main') {
+            window.location.href = `main.html?section=${lastSection}`;
+        } else {
+            window.location.href = `${lastPage}.html`;
+        }
+    });
+
+    // Load state on page load
+    loadChecklistState();
+</script>
+
+<script src="chatbot-widget.js"></script>
+
+</body>
+</html>
+

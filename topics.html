@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Topic Practice | DriveFlow</title>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    
+    :root {
+        --bg-main: #0b132b;
+        --bg-elevated: #1c2541;
+        --bg-card: #2d3f5a;
+        --bg-card-soft: #2d3f5a;
+        --bg-card-smaller: #3a506b;
+        --border-subtle: rgba(91, 192, 190, 0.22);
+        --border-strong: rgba(111, 255, 233, 0.7);
+        --primary: #5bc0be;
+        --primary-soft: rgba(91, 192, 190, 0.18);
+        --accent: #6fffe9;
+        --accent-soft: rgba(111, 255, 233, 0.18);
+        --accent-orange: #f97316;
+        --accent-red: #ef4444;
+        --text-main: #e5e7eb;
+        --text-muted: #9ca3af;
+        --text-soft: #6b7280;
+        --shadow-card: 0 18px 60px rgba(0, 0, 0, 0.6);
+        --radius-lg: 22px;
+        --radius-xl: 26px;
+        --blur: 18px;
+        --primary-blue: #5bc0be;
+        --primary-blue-dark: #3a506b;
+        --accent-purple: #6fffe9;
+        --text-dark: #e5e7eb;
+        --text-light: #9ca3af;
+        --button-bg: #6fffe9;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: var(--bg-main);
+        color: var(--text-main);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+        max-width: 1400px;
+        margin: 96px auto 40px;
+        padding: 0 20px 40px;
+        display: flex;
+        gap: 24px;
+        align-items: flex-start;
+    }
+
+    /* Left Sidebar Card */
+    .sidebar-card {
+        position: sticky;
+        top: 100px;
+        width: 280px;
+        flex-shrink: 0;
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 20px;
+        transition: border-color 0.18s ease-out, background 0.18s ease-out;
+    }
+    
+    .sidebar-card:hover {
+        border-color: var(--border-strong);
+        background: #3a506b;
+    }
+
+    .sidebar-card h2 {
+        margin: 0 0 16px;
+        color: var(--text-main);
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+    }
+
+    .sidebar-card p {
+        margin: 0 0 16px;
+        color: var(--text-muted);
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .sidebar-section {
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .sidebar-section:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .question-select {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 12px;
+        border: 1px solid var(--border-subtle);
+        background: #32445c;
+        color: var(--text-main);
+        font-size: 14px;
+        font-family: 'Inter', sans-serif;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-bottom: 12px;
+    }
+
+    .question-select:focus {
+        outline: none;
+        border-color: var(--border-strong);
+        box-shadow: 0 0 0 3px var(--primary-soft);
+        background: #3a506b;
+    }
+    
+    .question-select:hover {
+        border-color: var(--border-strong);
+        background: #3a506b;
+    }
+
+    .btn-star {
+        width: 100%;
+        padding: 10px;
+        border-radius: 12px;
+        border: 1px solid var(--border-subtle);
+        background: #32445c;
+        color: var(--text-main);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+    }
+
+    .btn-star:hover {
+        border-color: var(--border-strong);
+        background: #3a506b;
+    }
+
+    .btn-star.starred {
+        border-color: var(--accent-orange);
+        background: rgba(249, 115, 22, 0.18);
+        color: var(--accent-orange);
+    }
+
+    /* Main Content Area */
+    .main-content {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .controls {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .toggle-explanations {
+        background: var(--bg-glass);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        padding: 12px 24px;
+        border-radius: 12px;
+        cursor: pointer;
+        font-weight: 600;
+        color: var(--primary-blue);
+        transition: all 0.2s ease;
+    }
+
+    .toggle-explanations:hover {
+        background: white;
+    }
+
+    .btn-back {
+        padding: 10px 18px;
+        border-radius: 999px;
+        border: 1px solid var(--button-bg);
+        background: var(--button-bg);
+        color: var(--bg-main);
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.18s ease-out;
+    }
+
+    .btn-back:hover {
+        box-shadow: 0 12px 35px rgba(111, 255, 233, 0.4);
+        border-color: var(--button-bg);
+        background: var(--primary);
+        color: var(--text-main);
+    }
+
+    /* Question Card */
+    .question-card {
+        position: relative;
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 32px;
+        margin-bottom: 24px;
+        transition: transform 0.18s ease-out, box-shadow 0.18s ease-out,
+                    border-color 0.18s ease-out;
+    }
+
+    .question-card:hover {
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.95);
+        border-color: var(--border-strong);
+        background: #3a506b;
+    }
+
+    .question-image-container {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto 24px;
+        display: none; /* Hidden by default, shown when image loads */
+    }
+
+    .question-image {
+        width: 100%;
+        max-width: 600px;
+        height: auto;
+        border-radius: 12px;
+        display: block;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        border: 1px solid var(--border-subtle);
+    }
+
+    .question-text {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--text-main);
+        margin-bottom: 24px;
+        line-height: 1.6;
+    }
+
+    .options {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-bottom: 20px;
+    }
+
+    .option-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 18px 24px;
+        background: #32445c;
+        border: 1px solid var(--border-subtle);
+        border-radius: 18px;
+        transition: all 0.18s ease-out;
+        cursor: pointer;
+        user-select: none;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .option-row::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, var(--primary-soft), transparent);
+        transition: left 0.3s ease;
+    }
+
+    .option-row:hover {
+        border-color: var(--border-strong);
+        background: #3a506b;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .option-row:hover::before {
+        left: 100%;
+    }
+
+    .option-row:active {
+        transform: translateY(0);
+    }
+
+    .option-row.selected {
+        border-color: var(--border-strong);
+        background: var(--primary-soft);
+        box-shadow: 0 0 0 2px var(--primary-soft);
+    }
+
+    .option-row.correct {
+        border-color: var(--accent);
+        background: var(--accent-soft);
+        box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.18);
+    }
+
+    .option-row.incorrect {
+        border-color: var(--accent-red);
+        background: rgba(239, 68, 68, 0.18);
+        box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.18);
+    }
+
+    .option-text {
+        font-size: 16px;
+        color: var(--text-main);
+        flex: 1;
+        margin-right: 20px;
+        font-weight: 500;
+        line-height: 1.5;
+    }
+
+    /* Modern iOS Style Toggle Switch */
+    .toggle-switch {
+        position: relative;
+        width: 52px;
+        height: 32px;
+        flex-shrink: 0;
+        cursor: pointer;
+    }
+
+    .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+        position: absolute;
+    }
+
+    .toggle-slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #d1d5db;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border-radius: 34px;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .toggle-slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border-radius: 50%;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .toggle-switch:hover .toggle-slider {
+        background-color: #9ca3af;
+    }
+
+    .toggle-switch input:checked + .toggle-slider {
+        background-color: var(--button-bg);
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 0 4px var(--primary-soft);
+    }
+
+    .toggle-switch input:checked + .toggle-slider:before {
+        transform: translateX(20px);
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25), 0 1px 3px rgba(0, 0, 0, 0.15);
+    }
+
+    .toggle-switch:active .toggle-slider:before {
+        width: 30px;
+    }
+
+    .toggle-switch input:focus + .toggle-slider {
+        outline: 2px solid var(--button-bg);
+        outline-offset: 2px;
+    }
+
+    .toggle-switch input:disabled + .toggle-slider {
+        opacity: 0.5;
+        cursor: not-allowed;
+        background-color: #e5e7eb;
+    }
+
+    .option-row.selected .toggle-switch:hover .toggle-slider {
+        background-color: var(--primary);
+    }
+
+    .explanation {
+        display: none;
+        margin-top: 24px;
+        padding: 20px;
+        background: var(--primary-soft);
+        border-left: 4px solid var(--primary);
+        border-radius: 18px;
+    }
+
+    .explanation.show {
+        display: block;
+    }
+
+    .explanation h4 {
+        margin: 0 0 12px;
+        color: var(--primary);
+        font-size: 16px;
+        font-weight: 700;
+    }
+
+    .explanation p {
+        margin: 0;
+        color: var(--text-main);
+        line-height: 1.6;
+    }
+
+    .question-number {
+        color: var(--text-light);
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .feedback-section {
+        display: none;
+        margin-top: 24px;
+        padding: 24px;
+        border-radius: 12px;
+        animation: slideIn 0.3s ease;
+    }
+
+    .feedback-section.show {
+        display: block;
+    }
+
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .feedback-correct {
+        background: var(--accent-soft);
+        border: 1px solid var(--accent);
+    }
+
+    .feedback-incorrect {
+        background: rgba(239, 68, 68, 0.18);
+        border: 1px solid var(--accent-red);
+    }
+
+    .feedback-title {
+        font-size: 20px;
+        font-weight: 700;
+        margin: 0 0 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .feedback-correct .feedback-title {
+        color: var(--accent);
+    }
+
+    .feedback-incorrect .feedback-title {
+        color: var(--accent-red);
+    }
+
+    .correct-answer {
+        margin: 16px 0;
+        padding: 16px;
+        background: #32445c;
+        border-radius: 18px;
+        border-left: 4px solid var(--primary);
+    }
+
+    .correct-answer strong {
+        color: var(--primary);
+        display: block;
+        margin-bottom: 8px;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .correct-answer-text {
+        color: var(--text-main);
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-top: 24px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border-subtle);
+    }
+
+
+    .btn-submit {
+        border: 1px solid var(--button-bg);
+        background: var(--button-bg);
+        color: var(--bg-main);
+        padding: 14px 28px;
+        font-size: 15px;
+        font-weight: 700;
+        border-radius: 999px;
+        cursor: pointer;
+        box-shadow: 0 16px 40px rgba(111, 255, 233, 0.3);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .btn-submit:hover:not(:disabled) {
+        box-shadow: 0 20px 50px rgba(111, 255, 233, 0.4);
+        background: var(--primary);
+        color: var(--text-main);
+    }
+
+    .btn-submit:active:not(:disabled) {
+        transform: translateY(0);
+    }
+
+    .btn-submit:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    .btn-previous {
+        border: 1px solid var(--border-subtle);
+        background: #32445c;
+        color: var(--text-main);
+        padding: 14px 28px;
+        font-size: 15px;
+        font-weight: 700;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .btn-previous:hover {
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.9);
+        border-color: var(--border-strong);
+        background: #3a506b;
+    }
+
+    .btn-previous:active {
+        transform: translateY(0);
+    }
+
+    .btn-continue {
+        border: 1px solid var(--button-bg);
+        background: var(--button-bg);
+        color: var(--bg-main);
+        padding: 14px 28px;
+        font-size: 15px;
+        font-weight: 700;
+        border-radius: 999px;
+        cursor: pointer;
+        box-shadow: 0 16px 40px rgba(111, 255, 233, 0.3);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .btn-continue:hover {
+        box-shadow: 0 20px 50px rgba(111, 255, 233, 0.4);
+        background: var(--primary);
+        color: var(--text-main);
+    }
+
+    .btn-continue:active {
+        transform: translateY(0);
+    }
+
+    .progress-bar {
+        width: 100%;
+        height: 8px;
+        background: #32445c;
+        border-radius: 4px;
+        margin-bottom: 30px;
+        overflow: hidden;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+        border: 1px solid var(--border-subtle);
+    }
+
+    .progress-fill {
+        height: 100%;
+        background: var(--button-bg);
+        transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        border-radius: 4px;
+        box-shadow: 0 2px 8px rgba(111, 255, 233, 0.5);
+    }
+
+    .btn-shuffle {
+        padding: 10px 18px;
+        border-radius: 999px;
+        border: 1px solid var(--border-subtle);
+        background: #32445c;
+        color: var(--text-main);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.18s ease-out;
+        margin-bottom: 20px;
+    }
+
+    .btn-shuffle:hover {
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.9);
+        border-color: var(--border-strong);
+        background: #3a506b;
+    }
+
+    @media (max-width: 1024px) {
+        .container {
+            flex-direction: column;
+        }
+        .sidebar-card {
+            position: relative;
+            top: 0;
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .question-card {
+            padding: 24px;
+        }
+        .question-text {
+            font-size: 18px;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Left Sidebar -->
+    <div class="sidebar-card">
+        <div class="sidebar-section">
+            <h2 id="topicTitle">Topic Practice</h2>
+            <p id="topicDescription">Practice questions for this topic</p>
+        </div>
+        
+        <div class="sidebar-section">
+            <label for="questionSelect" style="display: block; margin-bottom: 8px; font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em;">Jump to Question</label>
+            <select id="questionSelect" class="question-select" onchange="jumpToQuestion()">
+                <option value="">Select a question...</option>
+            </select>
+        </div>
+
+        <div class="sidebar-section">
+            <button id="starButton" class="btn-star" onclick="toggleStar()">
+                <span id="starIcon">☆</span>
+                <span id="starText">Star Question</span>
+            </button>
+        </div>
+
+        <div class="sidebar-section">
+            <a href="index.html" class="btn-back" style="width: 100%; justify-content: center;">← Back to Home</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="controls">
+            <button class="btn-shuffle" onclick="shuffleQuestions()">Shuffle Questions</button>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div id="questions-container">
+            <!-- Questions will be inserted here -->
+        </div>
+    </div>
+</div>
+
+<script>
+    let questions = [];
+    let showExplanations = false;
+    let userAnswers = {}; // Submitted answers
+    let selectedAnswers = {}; // Currently selected (not yet submitted)
+    let currentQuestionIndex = 0;
+
+    const topicNames = {
+        'questions-to-work-on': { title: 'Questions to Work on', desc: 'Review questions you\'ve answered incorrectly' },
+        'starred': { title: 'Starred', desc: 'Your starred questions for quick review' },
+        'controlofthevehicle': { title: 'Control of the Vehicle', desc: 'Master vehicle controls, handling, and technical aspects of driving safely' },
+        'legalmattersrulesoftheroad': { title: 'Legal Matters/Rules of the Road', desc: 'Learn the legal requirements, rules, and regulations for driving in Ireland' },
+        'managingrisk': { title: 'Managing Risk', desc: 'Understand risk assessment, hazard recognition, and defensive driving techniques' },
+        'safeandresponsibledriving': { title: 'Safe and Responsible Driving', desc: 'Practice safe driving behaviors, responsibility, and awareness on the road' }
+    };
+
+    // Storage keys
+    const STORAGE_WRONG_ANSWERS = 'driveflow_wrong_answers';
+    const STORAGE_STARRED = 'driveflow_starred';
+
+    // Get wrong answers and starred questions from localStorage
+    function getWrongAnswers() {
+        const stored = localStorage.getItem(STORAGE_WRONG_ANSWERS);
+        return stored ? JSON.parse(stored) : {};
+    }
+
+    function getStarredQuestions() {
+        const stored = localStorage.getItem(STORAGE_STARRED);
+        return stored ? JSON.parse(stored) : [];
+    }
+
+    function saveWrongAnswer(questionId, questionData) {
+        const wrongAnswers = getWrongAnswers();
+        wrongAnswers[questionId] = questionData;
+        localStorage.setItem(STORAGE_WRONG_ANSWERS, JSON.stringify(wrongAnswers));
+    }
+
+    function toggleStarred(questionId) {
+        const starred = getStarredQuestions();
+        const index = starred.indexOf(questionId);
+        if (index > -1) {
+            starred.splice(index, 1);
+        } else {
+            starred.push(questionId);
+        }
+        localStorage.setItem(STORAGE_STARRED, JSON.stringify(starred));
+        updateStarButton();
+    }
+
+    function isStarred(questionId) {
+        return getStarredQuestions().includes(questionId);
+    }
+
+    // Get topic from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const topic = urlParams.get('topic') || 'controlofthevehicle';
+
+    // Set page title
+    const topicInfo = topicNames[topic] || topicNames['controlofthevehicle'];
+    document.getElementById('topicTitle').textContent = topicInfo.title;
+    document.getElementById('topicDescription').textContent = topicInfo.desc;
+
+    // Map category names to topic slugs
+    const categoryToTopicMap = {
+        'Control of Vehicle': 'controlofthevehicle',
+        'Legal Matters/Rules of the Road': 'legalmattersrulesoftheroad',
+        'Managing Risk': 'managingrisk',
+        'Safe and Responsible Driving': 'safeandresponsibledriving'
+    };
+
+    // Convert question format from JSON to expected format
+    function convertQuestion(q) {
+        // Find the index of the correct answer
+        const correctAnswerIndex = q.options.findIndex(opt => opt === q.correct_answer);
+        
+        if (correctAnswerIndex === -1) {
+            console.warn('Could not find correct answer for question:', q.id);
+            return null;
+        }
+
+        // Map category to topic
+        const questionTopic = categoryToTopicMap[q.category];
+        
+        if (!questionTopic) {
+            console.warn('Unknown category for question:', q.id, q.category);
+            return null;
+        }
+
+        return {
+            id: q.id,
+            question: q.question,
+            options: q.options,
+            correctAnswer: correctAnswerIndex,
+            topic: questionTopic,
+            explanation: q.explanation || '',
+            image: q.image || null
+        };
+    }
+
+    // Load questions
+    async function loadQuestions() {
+        try {
+            const response = await fetch('questions_1_805.json');
+            const data = await response.json();
+            
+            let allQuestions = data
+                .map(convertQuestion)
+                .filter(q => q !== null);
+
+            // Handle special topics
+            if (topic === 'questions-to-work-on') {
+                const wrongAnswers = getWrongAnswers();
+                const wrongQuestionIds = Object.keys(wrongAnswers);
+                questions = allQuestions.filter(q => {
+                    // Create a unique ID for the question
+                    const questionId = `${q.topic}_${q.question.substring(0, 50)}`;
+                    return wrongQuestionIds.includes(questionId);
+                });
+            } else if (topic === 'starred') {
+                const starred = getStarredQuestions();
+                questions = allQuestions.filter(q => {
+                    const questionId = `${q.topic}_${q.question.substring(0, 50)}`;
+                    return starred.includes(questionId);
+                });
+            } else {
+                // Filter by topic
+                questions = allQuestions.filter(q => q.topic === topic);
+            }
+            
+            if (questions.length === 0) {
+                document.getElementById('questions-container').innerHTML = 
+                    '<div class="question-card"><p>No questions available for this topic yet. Questions will be added soon.</p></div>';
+                return;
+            }
+
+            // Shuffle questions
+            shuffleArray(questions);
+            currentQuestionIndex = 0;
+            userAnswers = {};
+            selectedAnswers = {};
+            
+            // Populate question dropdown
+            populateQuestionDropdown();
+            updateStarButton();
+            
+            renderCurrentQuestion();
+        } catch (error) {
+            console.error('Error loading questions:', error);
+            document.getElementById('questions-container').innerHTML = 
+                '<div class="question-card"><p>Error loading questions. Please ensure questions_1_805.json exists.</p></div>';
+        }
+    }
+
+    function populateQuestionDropdown() {
+        const select = document.getElementById('questionSelect');
+        select.innerHTML = '<option value="">Select a question...</option>';
+        questions.forEach((q, index) => {
+            const option = document.createElement('option');
+            option.value = index;
+            option.textContent = `Question ${index + 1}: ${q.question.substring(0, 60)}${q.question.length > 60 ? '...' : ''}`;
+            select.appendChild(option);
+        });
+    }
+
+    function jumpToQuestion() {
+        const select = document.getElementById('questionSelect');
+        const index = parseInt(select.value);
+        if (!isNaN(index) && index >= 0 && index < questions.length) {
+            currentQuestionIndex = index;
+            selectedAnswers[currentQuestionIndex] = undefined;
+            renderCurrentQuestion();
+            updateStarButton();
+        }
+    }
+
+    function getCurrentQuestionId() {
+        if (questions.length === 0 || currentQuestionIndex >= questions.length) return null;
+        const q = questions[currentQuestionIndex];
+        return `${q.topic}_${q.question.substring(0, 50)}`;
+    }
+
+    function updateStarButton() {
+        const questionId = getCurrentQuestionId();
+        const starred = questionId && isStarred(questionId);
+        const starButton = document.getElementById('starButton');
+        const starIcon = document.getElementById('starIcon');
+        const starText = document.getElementById('starText');
+        
+        if (starred) {
+            starButton.classList.add('starred');
+            starIcon.textContent = '★';
+            starText.textContent = 'Starred';
+        } else {
+            starButton.classList.remove('starred');
+            starIcon.textContent = '☆';
+            starText.textContent = 'Star Question';
+        }
+    }
+
+    function toggleStar() {
+        const questionId = getCurrentQuestionId();
+        if (questionId) {
+            toggleStarred(questionId);
+            updateStarButton();
+        }
+    }
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    function updateProgress() {
+        const answeredCount = Object.keys(userAnswers).length;
+        const progress = (answeredCount / questions.length) * 100;
+        document.getElementById('progressFill').style.width = Math.min(progress, 100) + '%';
+    }
+
+    // Helper function to try next image extension
+    function tryNextExtension(img, questionId, extensions, currentIndex) {
+        const nextIndex = currentIndex + 1;
+        if (nextIndex < extensions.length) {
+            img.src = `signs copy/${questionId}.${extensions[nextIndex]}`;
+            img.onerror = function() {
+                tryNextExtension(img, questionId, extensions, nextIndex);
+            };
+        } else {
+            // All extensions tried, hide the container
+            if (img.parentElement) {
+                img.parentElement.style.display = 'none';
+            }
+        }
+    }
+
+    function renderCurrentQuestion() {
+        if (currentQuestionIndex >= questions.length) {
+            // All questions completed
+            showCompletionScreen();
+            return;
+        }
+
+        const container = document.getElementById('questions-container');
+        const q = questions[currentQuestionIndex];
+        const hasSubmitted = userAnswers[currentQuestionIndex] !== undefined;
+        const submittedAnswer = userAnswers[currentQuestionIndex];
+        const selectedAnswer = selectedAnswers[currentQuestionIndex];
+        const isCorrect = hasSubmitted && submittedAnswer === q.correctAnswer;
+
+        // Image if available - check for image in signs copy folder
+        let imageHtml = '';
+        if (q.id) {
+            // Try different extensions - the image will load if it exists
+            // We'll use a simpler approach: try each extension in sequence
+            const extensions = ['png', 'jpg', 'jpeg', 'webp'];
+            let imgSrc = '';
+            for (let i = 0; i < extensions.length; i++) {
+                imgSrc = `signs copy/${q.id}.${extensions[i]}`;
+                if (i === 0) break; // Start with png
+            }
+            
+            imageHtml = `<div class="question-image-container" style="display:none;">
+                <img src="${imgSrc}" alt="Question ${q.id}" class="question-image" 
+                     onerror="tryNextExtension(this, ${q.id}, ${JSON.stringify(extensions)}, 0);"
+                     onload="this.parentElement.style.display='block';">
+            </div>`;
+        }
+        
+        // Options with toggle switches
+        const optionsHtml = q.options.map((opt, optIndex) => {
+            const isChecked = hasSubmitted ? (submittedAnswer === optIndex) : (selectedAnswer === optIndex);
+            let classes = 'option-row';
+            
+            // Add correct/incorrect classes if answer has been submitted
+            if (hasSubmitted) {
+                if (optIndex === q.correctAnswer) {
+                    classes += ' correct';
+                } else if (optIndex === submittedAnswer && optIndex !== q.correctAnswer) {
+                    classes += ' incorrect';
+                }
+            } else if (isChecked) {
+                classes += ' selected';
+            }
+            
+            const isDisabled = hasSubmitted;
+            
+            return `
+                <div class="${classes}" id="opt-${optIndex}" ${!hasSubmitted ? `onclick="selectAnswer(${optIndex})"` : ''}>
+                    <span class="option-text">${opt}</span>
+                    <label class="toggle-switch" onclick="event.stopPropagation()">
+                        <input type="radio" name="question" value="${optIndex}" 
+                               ${isChecked ? 'checked' : ''} 
+                               ${isDisabled ? 'disabled' : ''}
+                               ${!hasSubmitted ? `onclick="event.stopPropagation(); selectAnswer(${optIndex}); return false;"` : ''}
+                               onmousedown="${!hasSubmitted && isChecked ? `event.preventDefault(); selectAnswer(${optIndex}); return false;` : ''}">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            `;
+        }).join('');
+
+        // Button container with Previous and Submit/Continue buttons
+        let buttonContainerHtml = '';
+        let hasPrevious = currentQuestionIndex > 0;
+        
+        if (!hasSubmitted) {
+            // Before submission: show Previous (if available) and Submit
+            buttonContainerHtml = `
+                <div class="button-container">
+                    ${hasPrevious ? `<button class="btn-previous" onclick="previousQuestion()">← Previous</button>` : '<div style="flex: 1;"></div>'}
+                    ${selectedAnswer !== undefined ? `<button class="btn-submit" onclick="submitAnswer()">Submit Answer</button>` : '<div style="flex: 1;"></div>'}
+                </div>
+            `;
+        } else {
+            // After submission: show Previous (if available) and Continue
+            buttonContainerHtml = `
+                <div class="button-container">
+                    ${hasPrevious ? `<button class="btn-previous" onclick="previousQuestion()">← Previous</button>` : '<div style="flex: 1;"></div>'}
+                    <button class="btn-continue" onclick="continueQuestion()">
+                        ${currentQuestionIndex < questions.length - 1 ? 'Continue →' : 'Finish'}
+                    </button>
+                </div>
+            `;
+        }
+
+        // Feedback section (shown after submission, below buttons)
+        let feedbackHtml = '';
+        if (hasSubmitted) {
+            const feedbackClass = isCorrect ? 'feedback-correct' : 'feedback-incorrect';
+            const feedbackIcon = isCorrect ? '✓' : '✗';
+            const feedbackText = isCorrect ? 'Correct!' : 'Incorrect';
+            
+            feedbackHtml = `
+                <div class="feedback-section ${feedbackClass} show">
+                    <div class="feedback-title">
+                        <span>${feedbackIcon}</span>
+                        <span>${feedbackText}</span>
+                    </div>
+                    <div class="correct-answer">
+                        <strong>Correct Answer:</strong>
+                        <div class="correct-answer-text">${q.options[q.correctAnswer]}</div>
+                    </div>
+                    ${q.explanation ? `
+                        <div class="explanation show">
+                            <h4>Explanation</h4>
+                            <p>${q.explanation}</p>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        container.innerHTML = `
+            <div class="question-card">
+                <div class="question-number">Question ${currentQuestionIndex + 1} of ${questions.length}</div>
+                ${imageHtml}
+                <div class="question-text">${q.question}</div>
+                <div class="options">${optionsHtml}</div>
+                ${buttonContainerHtml}
+                ${feedbackHtml}
+            </div>
+        `;
+        
+        updateProgress();
+        updateStarButton();
+        
+        // Update dropdown to show current question
+        const select = document.getElementById('questionSelect');
+        if (select) {
+            select.value = currentQuestionIndex;
+        }
+    }
+
+    function selectAnswer(optionIndex) {
+        // Only allow selection if not already submitted
+        if (userAnswers[currentQuestionIndex] !== undefined) {
+            return;
+        }
+        
+        // Toggle behavior: if clicking the same option, deselect it
+        if (selectedAnswers[currentQuestionIndex] === optionIndex) {
+            selectedAnswers[currentQuestionIndex] = undefined;
+        } else {
+            // Update selected answer (user can change before submitting)
+            selectedAnswers[currentQuestionIndex] = optionIndex;
+        }
+        
+        // Re-render to show/hide submit button and update radio button states
+        renderCurrentQuestion();
+    }
+
+    function submitAnswer() {
+        // Move selected answer to submitted answers
+        if (selectedAnswers[currentQuestionIndex] !== undefined) {
+            userAnswers[currentQuestionIndex] = selectedAnswers[currentQuestionIndex];
+            
+            // Track wrong answers
+            const q = questions[currentQuestionIndex];
+            const isCorrect = userAnswers[currentQuestionIndex] === q.correctAnswer;
+            
+            if (!isCorrect) {
+                const questionId = getCurrentQuestionId();
+                if (questionId) {
+                    saveWrongAnswer(questionId, {
+                        question: q.question,
+                        options: q.options,
+                        correctAnswer: q.correctAnswer,
+                        explanation: q.explanation,
+                        topic: q.topic,
+                        userAnswer: userAnswers[currentQuestionIndex]
+                    });
+                }
+            }
+            
+            // Re-render to show feedback with smooth transition
+            renderCurrentQuestion();
+        }
+    }
+
+    function previousQuestion() {
+        if (currentQuestionIndex > 0) {
+            // Clear selected answer for current question
+            selectedAnswers[currentQuestionIndex] = undefined;
+            currentQuestionIndex--;
+            renderCurrentQuestion();
+        }
+    }
+
+    function continueQuestion() {
+        // Clear selected answer for next question
+        selectedAnswers[currentQuestionIndex] = undefined;
+        currentQuestionIndex++;
+        renderCurrentQuestion();
+    }
+
+    function showCompletionScreen() {
+        const container = document.getElementById('questions-container');
+        const correctCount = Object.keys(userAnswers).filter(index => 
+            userAnswers[index] === questions[index].correctAnswer
+        ).length;
+        const percentage = Math.round((correctCount / questions.length) * 100);
+
+        container.innerHTML = `
+            <div class="question-card" style="text-align: center;">
+                <h2 style="font-size: 32px; margin-bottom: 20px; background: linear-gradient(120deg, #e5e7eb, #a5b4fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                    Practice Complete!
+                </h2>
+                <div style="font-size: 48px; font-weight: 800; margin: 30px 0; color: var(--primary);">
+                    ${correctCount}/${questions.length}
+                </div>
+                <div style="font-size: 24px; color: var(--text-muted); margin-bottom: 30px;">
+                    ${percentage}% Correct
+                </div>
+                <button class="btn-continue" onclick="restartPractice()" style="max-width: 250px;">
+                    Practice Again
+                </button>
+                <a href="index.html" class="btn-back" style="display: inline-block; margin-top: 20px;">← Back to Topics</a>
+            </div>
+        `;
+        document.getElementById('progressFill').style.width = '100%';
+    }
+
+    function restartPractice() {
+        currentQuestionIndex = 0;
+        userAnswers = {};
+        selectedAnswers = {};
+        shuffleArray(questions);
+        renderCurrentQuestion();
+    }
+
+    function shuffleQuestions() {
+        shuffleArray(questions);
+        currentQuestionIndex = 0;
+        userAnswers = {};
+        selectedAnswers = {};
+        populateQuestionDropdown();
+        renderCurrentQuestion();
+    }
+
+    // Load questions when page loads
+    loadQuestions();
+</script>
+
+<script src="chatbot-widget.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,140 @@
+1. No Entry
+2. Maximum Axle Weight 4T
+3. Clearway
+4. No Straight Ahead
+5. No Right Turn
+6. No Left Turn
+7. Overtaking
+8. No Entry For Large Vehicles (3T+)
+9. Max Speed Limit 80km/h
+10. Height Restriction
+11. No U-turn
+12. Parking Permitted
+13. No Parking
+14. Taxi Rank
+15. Pedestrianised Street
+16. Max Speed 50km/h
+17. Max Gross Weight 7.5T
+18. Max Vehicle Length (10.5m)
+19. Max Vehicle Width 2.5m
+20. No Overtaking For 3-Axle Vehicles
+21. No Ridden or Accompanied Horses
+22. No Bicycles
+23. Cul-de-sac
+24. Entry To Motorway
+25. 300m To Next Exit
+26. Motorway Ends 500m Ahead
+27. End Of Motorway
+28. Pedestrians And Bicycles Only
+29. Separate Bicycle & Pedestrian Lanes
+30. Hospital 100m Ahead
+31. Roadworks Ahead
+32. End Of Roadworks
+33. Two-Way Traffic
+34. One-Lane Crossover (Out)
+35. One-Lane Crossover (Back)
+36. End Of Central Reserve/Obstruction
+37. Start Of Central Reserve/Obstruction
+38. Road Narrows From Left
+39. Road Narrows From Right
+40. Road Narrows On Both Sides
+41. Uneven Surface
+42. Loose Chippings
+43. Nearside Lane (Of Two) Closed
+44. Flagman Ahead
+45. Temporary Traffic Signals Ahead
+46. Two Offside Lanes (Of Four) Closed
+47. Move To Right (Two Lanes)
+48. Single Lane (For Shuttle Working)
+49. Move To Right (One Lane)
+50. Site Access On Left
+51. Pedestrians Cross To Left
+52. Lanes Diverge At Crossover
+53. Two-Lanes Crossover (Out)
+54. Lanes Rejoin At Crossover
+55. Two-Lanes Crossover (Back)
+56. Site Access On Right
+57. Queues Likely
+58. Pedestrians Cross To Right
+59. Drivers must keep left of the continuous white line.
+60. Drivers must not cross the broken white lines unless it is safe to do so.
+61. The edge of the carriageway or hard shoulder.
+62. No Entry
+63. Traffic must not enter unless they can clear the box junction without stopping, or when turning right.
+64. Continuous white lines ahead.
+65. Drivers may not cross the lines to overtake.
+66. Parking Prohibited
+67. Parking Prohibited At Times Displayed
+68. Zebra Crossing
+70. Dangerous Left Corner Ahead
+71. Dangerous Left Bend Ahead
+72. Series Of Dangerous Corners Ahead
+73. Series Of Dangerous Bends Ahead
+74. Crossroads Ahead
+75. Side Road On The Left Ahead
+76. Side Road On The Right Ahead
+77. Y-Junction
+78. Crossroads Ahead With Road Of Less Importance
+79. Side Road Of Less Importance On The Left Ahead
+80. T-Junction Ahead With Road Of Less Importance To The Right
+81. Y-Junction Ahead With Road Of Less Importance To The Right
+82. Staggered Crossroads
+83. Traffic Cross-over Ahead
+84. Roundabout Ahead
+85. Crossroads Ahead With Road Of Higher Importance
+86. T-Junction Ahead With Road Of Higher Importance
+87. Crossroads With Dual-Carriageway
+88. T-Junction With Dual-Carriageway
+89. Sharp Rise Ahead
+90. Sharp Dip Ahead
+91. Series Of Bumps Or Hollows Ahead
+92. Steep Descent Ahead
+93. Steep Ascent Ahead
+94. Danger Of Falling Rocks
+95. Low Flying Aircraft
+96. Slippery Road Ahead
+97. School Ahead
+98. Road Divides
+99. Unguarded Level Crossing Ahead
+100. Unprotected Body Of Water Ahead
+101. Traffic Signals Ahead
+102. Beware Of Sheep
+103. Pedestrian Crossing Ahead
+104. Two-Way Traffic
+105. Dual-Carriageway Ends
+106. Level Crossing With Lights & Barriers
+107. Merging Traffic
+108. Merging & Diverging Traffic
+109. Road Narrows From The Left
+110. Road Narrows On Both Sides
+111. Road Narrows From The Right
+112. Overhead Electric Cables
+113. Mini-Roundabout Ahead
+114. Accompanied Horses & Ponies
+115. Beware Of Cattle
+116. Beware Of Deer Or Wild Animals
+117. Guarded Level Crossing Ahead
+118. Children Crossing (Residential)
+119. Tunnel Ahead
+120. Tram Lane Crossing Ahead
+121. Crosswinds
+122. Loop Road Ahead
+123. Lane Loss
+124. Start Of Passing Lane
+125. Start Of Climbing Lane
+126. Sharp Change Of Direction (Left – Chevron Board)
+127. Low Bridge Ahead
+128. Sharp Change Of Direction (Right – Chevron Board)
+129. Keep Left
+130. Keep Right
+131. Pass Either Side
+132. Keep Straight Ahead
+133. Turn Right
+134. Turn Left
+135. Turn Right Ahead
+136. Turn Left Ahead
+137. With Flow Bus Lane On Left
+138. With Flow Bus Lane On Right
+139. Contra-Flow Bus Lane
+140. Tram Lane On Right
+141. Tram Lane On Left

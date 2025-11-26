@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Help With Lessons | DriveFlow</title>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    
+    :root {
+        --bg-main: #0b132b;
+        --bg-elevated: #1c2541;
+        --bg-card: #2d3f5a;
+        --bg-card-soft: #2d3f5a;
+        --bg-card-smaller: #3a506b;
+        --border-subtle: rgba(91, 192, 190, 0.22);
+        --border-strong: rgba(111, 255, 233, 0.7);
+        --primary: #5bc0be;
+        --primary-soft: rgba(91, 192, 190, 0.18);
+        --accent: #6fffe9;
+        --accent-soft: rgba(111, 255, 233, 0.18);
+        --accent-orange: #f97316;
+        --accent-red: #ef4444;
+        --text-main: #e5e7eb;
+        --text-muted: #9ca3af;
+        --text-soft: #6b7280;
+        --shadow-card: 0 18px 60px rgba(0, 0, 0, 0.6);
+        --radius-lg: 22px;
+        --radius-xl: 26px;
+        --blur: 18px;
+        --primary-blue: #5bc0be;
+        --primary-blue-dark: #3a506b;
+        --accent-purple: #6fffe9;
+        --text-dark: #e5e7eb;
+        --text-light: #9ca3af;
+        --button-bg: #6fffe9;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: var(--bg-main);
+        color: var(--text-main);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 96px auto 40px;
+        padding: 0 20px 40px;
+    }
+
+    .page-header {
+        position: relative;
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 40px;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    .page-header h1 {
+        margin: 0 0 12px;
+        color: var(--text-main);
+        font-size: 32px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+    }
+
+    .page-header p {
+        margin: 0;
+        color: var(--text-muted);
+        font-size: 16px;
+    }
+
+    .collapsible-section {
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        margin-bottom: 20px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .collapsible-header {
+        padding: 24px 32px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        user-select: none;
+        transition: background 0.2s ease;
+    }
+
+    .collapsible-header:hover {
+        background: rgba(99, 102, 241, 0.05);
+    }
+
+    .collapsible-header h2 {
+        margin: 0;
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--text-main);
+        letter-spacing: -0.01em;
+    }
+
+    .collapse-icon {
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary);
+        font-size: 20px;
+        transition: transform 0.3s ease;
+    }
+
+    .collapsible-section.active .collapse-icon {
+        transform: rotate(180deg);
+    }
+
+    .collapsible-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+    }
+
+    .collapsible-section.active .collapsible-content {
+        max-height: 5000px;
+    }
+
+    .collapsible-inner {
+        padding: 0 32px 32px;
+    }
+
+    .checklist-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+    }
+
+    .checklist-item:last-child {
+        border-bottom: none;
+    }
+
+    .checklist-checkbox {
+        width: 20px;
+        height: 20px;
+        min-width: 20px;
+        border: 2px solid var(--border-subtle);
+        border-radius: 4px;
+        background: transparent;
+        cursor: pointer;
+        position: relative;
+        transition: all 0.2s ease;
+        margin-top: 2px;
+    }
+
+    .checklist-checkbox:hover {
+        border-color: var(--primary);
+    }
+
+    .checklist-checkbox:checked {
+        background: var(--accent);
+        border-color: var(--accent);
+    }
+
+    .checklist-checkbox:checked::after {
+        content: '✓';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    .checklist-label {
+        flex: 1;
+        color: var(--text-main);
+        font-size: 15px;
+        line-height: 1.6;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .checklist-item.completed .checklist-label {
+        text-decoration: line-through;
+        color: var(--text-muted);
+        opacity: 0.7;
+    }
+
+    .content-text {
+        color: var(--text-muted);
+        font-size: 15px;
+        line-height: 1.7;
+        margin: 12px 0;
+    }
+
+    .content-text strong {
+        color: var(--text-main);
+        font-weight: 600;
+    }
+
+    .sub-list {
+        margin: 12px 0;
+        padding-left: 24px;
+        color: var(--text-muted);
+    }
+
+    .sub-list li {
+        margin-bottom: 8px;
+        line-height: 1.6;
+    }
+
+    .btn-back {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 18px;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        background: rgba(15, 23, 42, 0.92);
+        color: var(--text-main);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 13px;
+        transition: all 0.18s ease-out;
+    }
+
+    .btn-back:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.9);
+        border-color: rgba(129, 140, 248, 0.8);
+    }
+
+    .btn-select-all {
+        padding: 6px 12px;
+        border-radius: 6px;
+        border: 1px solid var(--border-subtle);
+        background: var(--primary-soft);
+        color: var(--primary);
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.18s ease-out;
+        margin-left: 12px;
+    }
+
+    .btn-select-all:hover {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="page-header">
+        <h1>Help With Lessons</h1>
+        <p>Complete guide to getting the most out of your driving lessons and passing your test</p>
+    </div>
+
+    <div class="collapsible-section active" data-section="setup">
+        <div class="collapsible-header" onclick="toggleSection('setup')">
+            <h2>1. Set yourself up properly (before lessons start)</h2>
+            <div class="collapse-icon">▼</div>
+        </div>
+        <div class="collapsible-content">
+            <div class="collapsible-inner">
+                <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                    <button class="btn-select-all" onclick="selectAllInSection('setup')">Select All</button>
+                </div>
+                
+                <div class="checklist-item" data-id="setup-1">
+                    <input type="checkbox" class="checklist-checkbox" id="setup-1">
+                    <label for="setup-1" class="checklist-label"><strong>Pick the right instructor and car</strong></label>
+                </div>
+                <div class="content-text">
+                    <strong>RSA-approved ADI only.</strong> By law, only Approved Driving Instructors can deliver EDT.<br><br>
+                    <strong>Local to your test centre.</strong> Instructors who work that centre every day know the typical routes, awkward junctions and what testers in that centre are picky about.<br><br>
+                    Ask them straight:<br>
+                    <ul class="sub-list">
+                        <li>"What's your pass rate?"</li>
+                        <li>"How do you run mock tests?"</li>
+                        <li>"Will you mark me like the RSA sheet?"</li>
+                    </ul>
+                </div>
+
+                <div class="checklist-item" data-id="setup-2">
+                    <input type="checkbox" class="checklist-checkbox" id="setup-2">
+                    <label for="setup-2" class="checklist-label"><strong>Have a plan, not just random lessons</strong></label>
+                </div>
+                <div class="content-text">
+                    Book lessons fairly close together at the start (e.g. 1–2 per week) so skills stick.<br><br>
+                    From day one, agree:<br>
+                    <ul class="sub-list">
+                        <li>Target test centre</li>
+                        <li>Rough test month</li>
+                        <li>When you'll start doing full mock tests (usually after lesson 8–10)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="collapsible-section" data-section="before">
+        <div class="collapsible-header" onclick="toggleSection('before')">
+            <h2>2. Before you ever sit in the driver's seat</h2>
+            <div class="collapse-icon">▼</div>
+        </div>
+        <div class="collapsible-content">
+            <div class="collapsible-inner">
+                <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                    <button class="btn-select-all" onclick="selectAllInSection('before')">Select All</button>
+                </div>
+                
+                <div class="checklist-item" data-id="before-1">
+                    <input type="checkbox" class="checklist-checkbox" id="before-1">
+                    <label for="before-1" class="checklist-label"><strong>Know the Rules of the Road properly</strong></label>
+                </div>
+                <div class="content-text">
+                    Read the RSA Rules of the Road cover-to-cover at least once; it's literally what both theory and practical are based on.<br><br>
+                    Focus especially on:<br>
+                    <ul class="sub-list">
+                        <li>Yellow warning signs and road markings (hatching, solid vs broken lines, bus lanes) – these get asked at the start of the test</li>
+                        <li>Right-of-way rules at junctions, roundabouts, and pedestrian crossings</li>
+                    </ul>
+                </div>
+
+                <div class="checklist-item" data-id="before-2">
+                    <input type="checkbox" class="checklist-checkbox" id="before-2">
+                    <label for="before-2" class="checklist-label"><strong>Understand how the test is actually marked</strong></label>
+                </div>
+                <div class="content-text">
+                    <strong>RSA marking guidelines:</strong><br>
+                    <ul class="sub-list">
+                        <li>Any Grade 3 fault = instant fail</li>
+                        <li>4 of the same Grade 2 in one area = fail</li>
+                        <li>Too many Grade 2s overall = fail</li>
+                    </ul>
+                    <br>
+                    Common fail reasons straight from the RSA: inadequate observation, poor road position, poor progress, bad mirror/signal use, ignoring signs/markings, wrong speed, right-of-way mistakes, and weak manoeuvres.<br><br>
+                    Build your whole training around not picking up Grade 2s in those areas.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="collapsible-section" data-section="during">
+        <div class="collapsible-header" onclick="toggleSection('during')">
+            <h2>3. How to get the most out of each EDT lesson</h2>
+            <div class="collapse-icon">▼</div>
+        </div>
+        <div class="collapsible-content">
+            <div class="collapsible-inner">
+                <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                    <button class="btn-select-all" onclick="selectAllInSection('during')">Select All</button>
+                </div>
+                
+                <div class="content-text"><strong>Before the lesson</strong></div>
+                
+                <div class="checklist-item" data-id="during-1">
+                    <input type="checkbox" class="checklist-checkbox" id="during-1">
+                    <label for="during-1" class="checklist-label"><strong>Set 1–2 specific goals</strong></label>
+                </div>
+                <div class="content-text">Example: "Today I want to fix lane positioning at roundabouts and my clutch control starting on hills."</div>
+
+                <div class="checklist-item" data-id="during-2">
+                    <input type="checkbox" class="checklist-checkbox" id="during-2">
+                    <label for="during-2" class="checklist-label"><strong>Bring a notes app / notebook</strong></label>
+                </div>
+                <div class="content-text">Jot down faults and fixes immediately after.</div>
+
+                <div class="content-text" style="margin-top: 24px;"><strong>During the lesson</strong></div>
+                <div class="content-text">Tell them to actively use the instructor, not just sit there:</div>
+
+                <div class="checklist-item" data-id="during-3">
+                    <input type="checkbox" class="checklist-checkbox" id="during-3">
+                    <label for="during-3" class="checklist-label"><strong>Ask the instructor to talk like a tester at least some of the time:</strong> minimal talking, just directions and marking faults</label>
+                </div>
+
+                <div class="checklist-item" data-id="during-4">
+                    <input type="checkbox" class="checklist-checkbox" id="during-4">
+                    <label for="during-4" class="checklist-label"><strong>Ask "why?" constantly.</strong> "Why was that a Grade 2?", "What would have made that perfect?"</label>
+                </div>
+                <div class="content-text">They need to understand the reason behind every correction – that's how they stop repeating it.</div>
+
+                <div class="checklist-item" data-id="during-5">
+                    <input type="checkbox" class="checklist-checkbox" id="during-5">
+                    <label for="during-5" class="checklist-label"><strong>Practice decision-making, not just steering.</strong> Spend time on judging gaps at junctions/roundabouts, not just doing endless laps</label>
+                </div>
+
+                <div class="content-text" style="margin-top: 24px;"><strong>After the lesson</strong></div>
+
+                <div class="checklist-item" data-id="during-6">
+                    <input type="checkbox" class="checklist-checkbox" id="during-6">
+                    <label for="during-6" class="checklist-label"><strong>Log 3 things done well + 3 things to fix next time</strong></label>
+                </div>
+
+                <div class="checklist-item" data-id="during-7">
+                    <input type="checkbox" class="checklist-checkbox" id="during-7">
+                    <label for="during-7" class="checklist-label"><strong>Write a one-line rule for each mistake.</strong> e.g. "Every time before braking, mirror first", "Always check blind spot before moving off"</label>
+                </div>
+                <div class="content-text">If an instructor isn't happy to do this kind of structured review, they're not great.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="collapsible-section" data-section="between">
+        <div class="collapsible-header" onclick="toggleSection('between')">
+            <h2>4. Driving between lessons (this is where people actually pass or fail)</h2>
+            <div class="collapse-icon">▼</div>
+        </div>
+        <div class="collapsible-content">
+            <div class="collapsible-inner">
+                <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                    <button class="btn-select-all" onclick="selectAllInSection('between')">Select All</button>
+                </div>
+                
+                <div class="content-text">Almost every experienced instructor / Irish Reddit thread says the same: lessons alone aren't enough. You need real miles.</div>
+
+                <div class="checklist-item" data-id="between-1">
+                    <input type="checkbox" class="checklist-checkbox" id="between-1">
+                    <label for="between-1" class="checklist-label"><strong>Aim for at least 3–5 hours driving a week total, not just the 1 hour with the ADI</strong></label>
+                </div>
+
+                <div class="checklist-item" data-id="between-2">
+                    <input type="checkbox" class="checklist-checkbox" id="between-2">
+                    <label for="between-2" class="checklist-label"><strong>Practise in your own car (if possible)</strong></label>
+                </div>
+                <div class="content-text">Always with a fully licensed driver over 2 years, insured, L-plates, etc. Try to replicate lesson topics in your own car: same junctions, same roundabouts.</div>
+
+                <div class="checklist-item" data-id="between-3">
+                    <input type="checkbox" class="checklist-checkbox" id="between-3">
+                    <label for="between-3" class="checklist-label"><strong>Focus practice on what people actually fail on</strong></label>
+                </div>
+                <div class="content-text">Use the RSA fail list like a training menu:</div>
+                
+                <div class="content-text" style="margin-top: 16px;">
+                    <strong>Observation:</strong><br>
+                    Look: mirrors → signal → blind spot check → move, every time. Practise big head movements when checking mirrors and blind spots – testers need to see it.<br><br>
+                    
+                    <strong>Road position:</strong><br>
+                    Centre of lane, correct lane on roundabouts, correct position on left/right turns.<br><br>
+                    
+                    <strong>Progress:</strong><br>
+                    Not crawling everywhere. Irish testers will fail you for being too slow and holding up traffic if it's safe to go.<br><br>
+                    
+                    <strong>Mirrors/signals:</strong><br>
+                    Before: changing speed, changing direction, changing position.<br><br>
+                    
+                    <strong>Speed control:</strong><br>
+                    Practice holding 48–52 in 50 zones, 58–62 in 60 zones where safe – not 40 everywhere.<br><br>
+                    
+                    <strong>Right of way & traffic controls:</strong><br>
+                    Signs, markings, yellow boxes, pedestrian crossings, filter lanes.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="collapsible-section" data-section="mock">
+        <div class="collapsible-header" onclick="toggleSection('mock')">
+            <h2>5. 4–2 weeks before the test: go into "test mode"</h2>
+            <div class="collapse-icon">▼</div>
+        </div>
+        <div class="collapsible-content">
+            <div class="collapsible-inner">
+                <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                    <button class="btn-select-all" onclick="selectAllInSection('mock')">Select All</button>
+                </div>
+                
+                <div class="checklist-item" data-id="mock-1">
+                    <input type="checkbox" class="checklist-checkbox" id="mock-1">
+                    <label for="mock-1" class="checklist-label"><strong>Do at least one full mock test with an instructor</strong></label>
+                </div>
+                <div class="content-text">Same length, same centre, minimal talking, full marking sheet. Learners on r/ireland and r/Dublin say this is one of the biggest game-changers.<br><br>
+                After the mock, go through:<br>
+                <ul class="sub-list">
+                    <li>Every Grade 2: what, where, why</li>
+                    <li>Whether any pattern would cause a fail (e.g. 4 x "progress" Grade 2)</li>
+                </ul>
+                </div>
+
+                <div class="checklist-item" data-id="mock-2">
+                    <input type="checkbox" class="checklist-checkbox" id="mock-2">
+                    <label for="mock-2" class="checklist-label"><strong>Drive the test area at the same time of day</strong></label>
+                </div>
+                <div class="content-text">Traffic behaves differently at 8:30 vs 14:00. Practise the awkward spots your instructor knows are often used in tests.</div>
+
+                <div class="checklist-item" data-id="mock-3">
+                    <input type="checkbox" class="checklist-checkbox" id="mock-3">
+                    <label for="mock-3" class="checklist-label"><strong>Tighten up manoeuvres</strong></label>
+                </div>
+                <div class="content-text">Typical Irish car test manoeuvres (check current RSA list, but usually): moving off safely, hill start, reversing, turnabout/U-turn, parking. Weak manoeuvres are called out as a major fail reason.<br><br>
+                For each one, your checklist can have:<br>
+                <ul class="sub-list">
+                    <li>I can do it without a single prompt from the instructor</li>
+                    <li>I always check mirrors and blind spots visibly</li>
+                    <li>I keep good control (slow, steady, no rushing)</li>
+                </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="collapsible-section" data-section="testday">
+        <div class="collapsible-header" onclick="toggleSection('testday')">
+            <h2>6. Test-day paperwork & car checklist</h2>
+            <div class="collapse-icon">▼</div>
+        </div>
+        <div class="collapsible-content">
+            <div class="collapsible-inner">
+                <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                    <button class="btn-select-all" onclick="selectAllInSection('testday')">Select All</button>
+                </div>
+                
+                <div class="content-text"><strong>Documents</strong></div>
+                
+                <div class="checklist-item" data-id="testday-1">
+                    <input type="checkbox" class="checklist-checkbox" id="testday-1">
+                    <label for="testday-1" class="checklist-label">Learner permit (valid, not expired)</label>
+                </div>
+                
+                <div class="checklist-item" data-id="testday-2">
+                    <input type="checkbox" class="checklist-checkbox" id="testday-2">
+                    <label for="testday-2" class="checklist-label">Insurance disc, tax disc, NCT if required (car over 4 years)</label>
+                </div>
+                
+                <div class="checklist-item" data-id="testday-3">
+                    <input type="checkbox" class="checklist-checkbox" id="testday-3">
+                    <label for="testday-3" class="checklist-label">EDT logbook / MyEDT record up to date</label>
+                </div>
+
+                <div class="content-text" style="margin-top: 24px;"><strong>Car condition</strong></div>
+                
+                <div class="checklist-item" data-id="testday-4">
+                    <input type="checkbox" class="checklist-checkbox" id="testday-4">
+                    <label for="testday-4" class="checklist-label">L-plates front and rear, not faded or missing – people have had tests cancelled over this</label>
+                </div>
+                
+                <div class="checklist-item" data-id="testday-5">
+                    <input type="checkbox" class="checklist-checkbox" id="testday-5">
+                    <label for="testday-5" class="checklist-label">All lights, indicators, horn, wipers working</label>
+                </div>
+                
+                <div class="checklist-item" data-id="testday-6">
+                    <input type="checkbox" class="checklist-checkbox" id="testday-6">
+                    <label for="testday-6" class="checklist-label">Tyres legal (tread, no bulges)</label>
+                </div>
+                
+                <div class="checklist-item" data-id="testday-7">
+                    <input type="checkbox" class="checklist-checkbox" id="testday-7">
+                    <label for="testday-7" class="checklist-label">No warning lights on the dash</label>
+                </div>
+                
+                <div class="checklist-item" data-id="testday-8">
+                    <input type="checkbox" class="checklist-checkbox" id="testday-8">
+                    <label for="testday-8" class="checklist-label">Windows clear, car reasonably clean inside and out</label>
+                </div>
+                
+                <div class="content-text">If the car is a mess or not roadworthy, the tester can flat-out refuse to take you.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="collapsible-section" data-section="headspace">
+        <div class="collapsible-header" onclick="toggleSection('headspace')">
+            <h2>7. Headspace / nerves (what actual learners say helped)</h2>
+            <div class="collapse-icon">▼</div>
+        </div>
+        <div class="collapsible-content">
+            <div class="collapsible-inner">
+                <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                    <button class="btn-select-all" onclick="selectAllInSection('headspace')">Select All</button>
+                </div>
+                
+                <div class="content-text">Pulled from multiple Irish Reddit threads:</div>
+
+                <div class="checklist-item" data-id="headspace-1">
+                    <input type="checkbox" class="checklist-checkbox" id="headspace-1">
+                    <label for="headspace-1" class="checklist-label"><strong>Treat it like "just another drive"</strong></label>
+                </div>
+                <div class="content-text">It's 30–40 minutes of the driving you should already be doing. Expect to make tiny mistakes; testers aren't looking for perfection, they're looking for safe and consistent.</div>
+
+                <div class="checklist-item" data-id="headspace-2">
+                    <input type="checkbox" class="checklist-checkbox" id="headspace-2">
+                    <label for="headspace-2" class="checklist-label"><strong>Be predictable, not heroic</strong></label>
+                </div>
+                <div class="content-text">No sudden lane changes, no panic braking. Indicate, then follow through smoothly – don't bottle it halfway through a manoeuvre.</div>
+
+                <div class="checklist-item" data-id="headspace-3">
+                    <input type="checkbox" class="checklist-checkbox" id="headspace-3">
+                    <label for="headspace-3" class="checklist-label"><strong>Mirrors, mirrors, mirrors</strong></label>
+                </div>
+                <div class="content-text">People who passed often say: "I just kept checking mirrors and doing the basics." Build a habit of a quick mirror scan every 5–10 seconds and before any change.</div>
+
+                <div class="checklist-item" data-id="headspace-4">
+                    <input type="checkbox" class="checklist-checkbox" id="headspace-4">
+                    <label for="headspace-4" class="checklist-label"><strong>Hesitation vs rushing</strong></label>
+                </div>
+                <div class="content-text">It's better to wait a bit longer at a tricky roundabout than to launch yourself into a dodgy gap. But if there's a clear safe gap and you sit there forever, that's a "lack of progress" mark – hence the practice on judging gaps beforehand.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="collapsible-section" data-section="hacks">
+        <div class="collapsible-header" onclick="toggleSection('hacks')">
+            <h2>8. Small "cheat codes" (all legal)</h2>
+            <div class="collapse-icon">▼</div>
+        </div>
+        <div class="collapsible-content">
+            <div class="collapsible-inner">
+                <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                    <button class="btn-select-all" onclick="selectAllInSection('hacks')">Select All</button>
+                </div>
+                
+                <div class="checklist-item" data-id="hacks-1">
+                    <input type="checkbox" class="checklist-checkbox" id="hacks-1">
+                    <label for="hacks-1" class="checklist-label"><strong>Cheap blind-spot mirrors</strong></label>
+                </div>
+                <div class="content-text">Irish instructors have pushed those little convex blind-spot mirrors (the €2 ones from Lidl/Aldi) as a huge help – wider field of view, better awareness when changing lanes/merging. Still must do proper shoulder checks – but they reduce surprises.</div>
+
+                <div class="checklist-item" data-id="hacks-2">
+                    <input type="checkbox" class="checklist-checkbox" id="hacks-2">
+                    <label for="hacks-2" class="checklist-label"><strong>Drive in the test car as much as possible</strong></label>
+                </div>
+                <div class="content-text">If you'll test in the instructor's car, try to do the majority of your lessons in it. If you're using your own car, practise only in that car for at least a week before test: pedals, bite point, indicator feel, everything.</div>
+
+                <div class="checklist-item" data-id="hacks-3">
+                    <input type="checkbox" class="checklist-checkbox" id="hacks-3">
+                    <label for="hacks-3" class="checklist-label"><strong>Have a "pre-drive ritual"</strong></label>
+                </div>
+                <div class="content-text">Quick mental checklist: Mirrors set → Seat & steering → Seatbelt → Handbrake → Clutch test → Breathe. Repeating the same start-up routine kills nerves and prevents stupid early mistakes.</div>
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center;">
+        <a href="main.html" class="btn-back" id="backToHome">← Back to Home</a>
+    </div>
+</div>
+
+<script>
+    // Toggle collapsible sections
+    function toggleSection(sectionId) {
+        const section = document.querySelector(`.collapsible-section[data-section="${sectionId}"]`);
+        if (section) {
+            section.classList.toggle('active');
+        }
+    }
+
+    // Load saved checklist state from localStorage
+    function loadChecklistState() {
+        const items = document.querySelectorAll('.checklist-item');
+        items.forEach(item => {
+            const id = item.dataset.id;
+            const checkbox = item.querySelector('.checklist-checkbox');
+            const savedState = localStorage.getItem(`lessons_checklist_${id}`);
+            
+            if (savedState === 'true') {
+                checkbox.checked = true;
+                item.classList.add('completed');
+            }
+        });
+    }
+
+    // Save checklist state to localStorage
+    function saveChecklistState(id, checked) {
+        localStorage.setItem(`lessons_checklist_${id}`, checked.toString());
+    }
+
+    // Handle checkbox changes
+    document.querySelectorAll('.checklist-checkbox').forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            const item = this.closest('.checklist-item');
+            const id = item.dataset.id;
+            
+            if (this.checked) {
+                item.classList.add('completed');
+            } else {
+                item.classList.remove('completed');
+            }
+            
+            saveChecklistState(id, this.checked);
+        });
+    });
+
+    // Allow clicking the label to toggle checkbox
+    document.querySelectorAll('.checklist-label').forEach(label => {
+        label.addEventListener('click', function(e) {
+            const checkbox = document.getElementById(this.getAttribute('for'));
+            if (checkbox) {
+                checkbox.checked = !checkbox.checked;
+                checkbox.dispatchEvent(new Event('change'));
+            }
+        });
+    });
+
+    // Select all checkboxes in a section
+    function selectAllInSection(sectionId) {
+        const section = document.querySelector(`.collapsible-section[data-section="${sectionId}"]`);
+        if (!section) return;
+        
+        const checkboxes = section.querySelectorAll('.checklist-checkbox');
+        const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+        
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = !allChecked;
+            const item = checkbox.closest('.checklist-item');
+            const id = item.dataset.id;
+            
+            if (checkbox.checked) {
+                item.classList.add('completed');
+            } else {
+                item.classList.remove('completed');
+            }
+            
+            saveChecklistState(id, checkbox.checked);
+        });
+    }
+
+    // Store the current section when navigating to help-with-lessons.html
+    const urlParams = new URLSearchParams(window.location.search);
+    const fromSection = urlParams.get('from');
+    const fromPage = urlParams.get('page') || (fromSection ? 'main' : null);
+    
+    if (fromSection) {
+        localStorage.setItem('lastMainSection', fromSection);
+    }
+    if (fromPage) {
+        localStorage.setItem('lastPage', fromPage);
+    }
+    
+    // When clicking back to home, restore the section position
+    document.getElementById('backToHome').addEventListener('click', function(e) {
+        e.preventDefault();
+        const lastPage = localStorage.getItem('lastPage') || 'main';
+        const lastSection = localStorage.getItem('lastMainSection') || 'lessons';
+        
+        if (lastPage === 'main') {
+            window.location.href = `main.html?section=${lastSection}`;
+        } else {
+            window.location.href = `${lastPage}.html`;
+        }
+    });
+
+    // Load state on page load
+    loadChecklistState();
+</script>
+
+<script src="chatbot-widget.js"></script>
+
+</body>
+</html>
+
