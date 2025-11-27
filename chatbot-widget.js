@@ -342,15 +342,32 @@
         }
 
         // Send message to backend
-        async function sendMessage(message, conversationHistory = []) {
+        async function sendMessage() {
+            const message = input.value.trim();
+            if (!message) return;
+
+            // Disable input and send button
+            input.disabled = true;
+            sendBtn.disabled = true;
+
+            // Add user message to UI
+            addMessage(message, true);
+            
+            // Add to conversation history
+            conversationHistory.push({ role: 'user', content: message });
+
+            // Clear input
+            input.value = '';
+
+            // Show loading indicator
+            const loadingMessage = addMessage('', false, true);
+
             try {
                 const token = localStorage.getItem('auth_token');
-        
                 if (!token) {
-                    alert("❗ You must be logged in to use the chatbot.");
-                    return;
+                    throw new Error('Not authenticated');
                 }
-        
+
                 const response = await fetch(`${API_URL}/chatbot/message`, {
                     method: 'POST',
                     headers: {
@@ -359,27 +376,84 @@
                     },
                     body: JSON.stringify({
                         message: message,
-                        conversationHistory: conversationHistory.slice(-10) // Keep last 10 for context
+                        conversationHistory: conversationHistory.slice(-10) // Keep last 10 messages for context
                     })
                 });
-        
+
+                // Remove loading indicator
+                loadingMessage.remove();
+
                 if (!response.ok) {
-                    const error = await response.json().catch(() => ({}));
-                    console.error("Chatbot API Error:", error);
-                    alert("Chatbot error: " + (error.error || "Unknown server error"));
-                    return;
+                    // Try to get error message from response
+                    let errorMessage = 'Failed to get response';
+                    try {
+                        const errorData = await response.json();
+                        errorMessage = errorData.error || errorData.details || errorMessage;
+                        console.error('Backend error:', errorData);
+                    } catch (e) {
+                        // If response isn't JSON, use status text
+                        errorMessage = response.statusText || `Server error (${response.status})`;
+                        console.error('Non-JSON error response:', response.status, response.statusText);
+                    }
+                    throw new Error(errorMessage);
                 }
-        
+
                 const data = await response.json();
-                console.log("AI Response:", data.response);
-                return data.response;
-            }
-            catch (err) {
-                console.error("SendMessage Error:", err);
-                alert("Connection failed — are you logged in?");
+                
+                // Check if response has the expected structure
+                if (!data.response) {
+                    console.error('Invalid response structure:', data);
+                    throw new Error('Invalid response format from server');
+                }
+                
+                const aiResponse = data.response;
+
+                // Add AI response to UI
+                addMessage(aiResponse, false);
+
+                // Add to conversation history
+                conversationHistory.push({ role: 'assistant', content: aiResponse });
+
+            } catch (error) {
+                console.error('Chatbot error:', error);
+                console.error('Error details:', {
+                    message: error.message,
+                    stack: error.stack,
+                    name: error.name
+                });
+                
+                // Remove loading indicator
+                loadingMessage.remove();
+                
+                // Show error message with more details
+                let errorMsg = 'Sorry, I encountered an error. Please try again.';
+                
+                if (error.message.includes('Not authenticated')) {
+                    errorMsg = 'Your session has expired. Please log in again.';
+                    setTimeout(() => {
+                        window.location.href = 'login.html';
+                    }, 2000);
+                } else if (error.message.includes('Rate limit')) {
+                    errorMsg = 'Too many requests. Please wait a moment and try again.';
+                } else if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError') || error.name === 'TypeError') {
+                    errorMsg = 'Network error. Please check your connection and try again.';
+                } else if (error.message.includes('Invalid API key') || error.message.includes('API key')) {
+                    errorMsg = 'Chatbot service configuration error. Please contact support.';
+                } else if (error.message.includes('Chatbot service is not configured')) {
+                    errorMsg = 'Chatbot service is temporarily unavailable. Please try again later.';
+                } else if (error.message && error.message !== 'Failed to get response' && error.message !== 'Invalid response format from server') {
+                    // Show the actual error message from the server if available
+                    errorMsg = error.message;
+                }
+                
+                addMessage(errorMsg, false);
+            } finally {
+                // Re-enable input and send button
+                input.disabled = false;
+                sendBtn.disabled = false;
+                input.focus();
             }
         }
-        
 
         // Send on button click
         sendBtn.addEventListener('click', sendMessage);
