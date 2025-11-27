@@ -270,20 +270,6 @@
         z-index: 0;
     }
 
-    /* clouds */
-    #clouds {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 200%;
-        height: 40vh;
-        background: url("https://i.imgur.com/xIkQFNd.png");
-        background-size: cover;
-        opacity: 0.45;
-        animation: cloudDrift 60s linear infinite;
-        pointer-events: none;
-        z-index: 1;
-    }
     @keyframes cloudDrift {
         from { transform: translateX(0); }
         to   { transform: translateX(-50%); }
@@ -494,7 +480,6 @@
     </div>
 </header>
 
-<div id="clouds"></div>
 <div id="world"></div>
 
 <!-- SELECTOR -->
