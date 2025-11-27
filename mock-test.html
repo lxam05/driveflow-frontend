@@ -820,20 +820,37 @@
         document.getElementById('progressFill').style.width = Math.min(progress, 100) + '%';
     }
 
-    // Helper function to try next image extension
-    function tryNextExtension(img, questionId, extensions, currentIndex) {
-        const nextIndex = currentIndex + 1;
-        if (nextIndex < extensions.length) {
-            img.src = `signs copy/${questionId}.${extensions[nextIndex]}`;
-            img.onerror = function() {
-                tryNextExtension(img, questionId, extensions, nextIndex);
-            };
-        } else {
-            // All extensions tried, hide the container
-            if (img.parentElement) {
-                img.parentElement.style.display = 'none';
+    // Helper function to safely load image with fallback extensions
+    function setupImageLoading(imgElement, questionId) {
+        const extensions = ['png', 'jpg', 'jpeg', 'webp'];
+        let currentIndex = 0;
+        
+        function tryNextExtension() {
+            if (currentIndex < extensions.length) {
+                imgElement.src = `signs copy/${questionId}.${extensions[currentIndex]}`;
+                currentIndex++;
+            } else {
+                // All extensions tried, hide the container
+                if (imgElement.parentElement) {
+                    imgElement.parentElement.style.display = 'none';
+                }
             }
         }
+        
+        // Set up error handler
+        imgElement.onerror = function() {
+            tryNextExtension();
+        };
+        
+        // Set up load handler
+        imgElement.onload = function() {
+            if (imgElement.parentElement) {
+                imgElement.parentElement.style.display = 'block';
+            }
+        };
+        
+        // Start with first extension
+        tryNextExtension();
     }
 
     function renderCurrentQuestion() {
@@ -853,14 +870,9 @@
         // Image if available - check for image in signs copy folder
         let imageHtml = '';
         if (q.id) {
-            // Try different extensions - the image will load if it exists
-            const extensions = ['png', 'jpg', 'jpeg', 'webp'];
-            const imgSrc = `signs copy/${q.id}.png`; // Start with png
-            
+            // Create image container (hidden by default, will show if image loads)
             imageHtml = `<div class="question-image-container" style="display:none;">
-                <img src="${imgSrc}" alt="Question ${q.id}" class="question-image" 
-                     onerror="tryNextExtension(this, ${q.id}, ${JSON.stringify(extensions)}, 0);"
-                     onload="this.parentElement.style.display='block';">
+                <img src="" alt="Question ${q.id}" class="question-image" data-question-id="${q.id}">
             </div>`;
         }
         
@@ -958,6 +970,14 @@
                 ${feedbackHtml}
             </div>
         `;
+        
+        // Setup image loading safely after DOM is updated
+        if (q.id) {
+            const imgElement = container.querySelector('.question-image[data-question-id="' + q.id + '"]');
+            if (imgElement) {
+                setupImageLoading(imgElement, q.id);
+            }
+        }
         
         updateProgress();
     }
