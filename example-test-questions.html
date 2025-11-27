@@ -138,7 +138,8 @@
         max-width: 100%;
         height: auto;
         border-radius: var(--radius-lg);
-        margin-bottom: 24px;
+        margin: 0 auto 24px;
+        display: block;
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
     }
 
@@ -498,7 +499,7 @@
 
                 roadSignQuestions.push({
                     type: 'road-sign',
-                    question: `What is the name of road sign number ${signNum}?`,
+                    question: 'What is the name of this road sign?',
                     signNumber: signNum,
                     options: allOptions,
                     correctAnswer: correctAnswer,
@@ -560,7 +561,9 @@
         let imageHtml = '';
         if (q.type === 'road-sign') {
             const imagePath = getSignImagePath(q.signNumber);
-            imageHtml = `<img src="${imagePath}" alt="Road sign ${q.signNumber}" class="question-image" onerror="this.style.display='none'">`;
+            imageHtml = `<div style="text-align: center; margin-bottom: 24px;">
+                <img src="${imagePath}" alt="Road sign ${q.signNumber}" class="question-image" onerror="this.style.display='none'">
+            </div>`;
         }
 
         const optionsHtml = q.options.map((opt, optIndex) => {
