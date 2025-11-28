@@ -26,6 +26,37 @@
         --shadow-xl: 0 12px 48px rgba(0, 0, 0, 0.2);
     }
 
+    /* Back to top button */
+    #backToTopButton {
+        position: fixed;
+        left: 24px;
+        bottom: 24px;
+        z-index: 2100;
+        padding: 10px 16px;
+        border-radius: 999px;
+        border: 1px solid rgba(111, 255, 233, 0.4);
+        background: rgba(11, 19, 43, 0.92);
+        color: var(--text-dark);
+        font-size: 13px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+        transition: opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        opacity: 1;
+    }
+    #backToTopButton span.arrow {
+        font-size: 14px;
+    }
+    #backToTopButton.hidden {
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(8px);
+        box-shadow: none;
+    }
+
     * {
         box-sizing: border-box;
     }
@@ -578,6 +609,10 @@
 
 <div id="fog"></div>
 <div id="car"></div>
+<button id="backToTopButton">
+    <span class="arrow">↑</span>
+    <span>Back to top</span>
+</button>
 <script>
     const API_URL =
     location.hostname === "localhost" || location.hostname === "127.0.0.1"
@@ -648,6 +683,7 @@ const car           = document.getElementById("car");
 const fog           = document.getElementById("fog");
 const levelSelector = document.getElementById("levelSelector");
 const footer        = document.getElementById("footer");
+const backToTopBtn  = document.getElementById("backToTopButton");
 
 const MIN_WORLD_HEIGHT = 8000;
 const sectionOrder = ["getting","theory","lessons","booking","preparing","newdriver"];
@@ -716,6 +752,13 @@ function updateEverything(){
 
     /* fog intensity */
     fog.style.opacity = ratio * 0.5;
+
+    /* show back-to-top only when not at very top */
+    if (scrollPos > 50) {
+        backToTopBtn.classList.remove("hidden");
+    } else {
+        backToTopBtn.classList.add("hidden");
+    }
 }
 
 /* wheel scrolling */
@@ -725,6 +768,21 @@ function handleWheel(e){
     updateEverything();
 }
 window.addEventListener("wheel", handleWheel, { passive: false });
+
+/* hide back-to-top while user is actively scrolling, show again after short pause */
+let scrollIdleTimeout = null;
+function handleScrollActivity() {
+    backToTopBtn.classList.add("hidden");
+    if (scrollIdleTimeout) {
+        clearTimeout(scrollIdleTimeout);
+    }
+    scrollIdleTimeout = setTimeout(() => {
+        if (scrollPos > 50) {
+            backToTopBtn.classList.remove("hidden");
+        }
+    }, 600);
+}
+window.addEventListener("wheel", handleScrollActivity, { passive: false });
 
 /* smooth scroll to position */
 function scrollToPosition(targetY){
@@ -746,6 +804,11 @@ function scrollToPosition(targetY){
     }
     requestAnimationFrame(anim);
 }
+
+/* back-to-top button click */
+backToTopBtn.addEventListener("click", () => {
+    scrollToPosition(0);
+});
 
 /* click handler for selector */
 function goTo(sectionName){
