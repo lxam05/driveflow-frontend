@@ -88,6 +88,19 @@
         margin: 0 auto;
     }
 
+    .question-sign-container {
+        text-align: center;
+        margin-bottom: 24px;
+    }
+
+    .question-sign-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: var(--radius-lg);
+        display: inline-block;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+
 
     .quiz-question {
         font-size: 24px;
@@ -235,11 +248,11 @@
     </div>
 
     <!-- Quiz Section -->
-    <div class="quiz-section">
+        <div class="quiz-section">
         <div class="quiz-question" id="questionText">
-            What is the name of sign <span id="signNumber">1</span>?
+            What is the name of this road sign?
         </div>
-
+        
         <div class="question-sign-container">
             <img id="questionSignImage" class="question-sign-image" src="" alt="Road Sign">
         </div>
