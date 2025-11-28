@@ -361,7 +361,6 @@
         // Pick a random sign number from valid ones
         const randomIndex = Math.floor(Math.random() * validSignNumbers.length);
         currentSignNumber = validSignNumbers[randomIndex];
-        document.getElementById('signNumber').textContent = currentSignNumber;
         
         // Get the correct answer - sign number maps directly to txt file line
         // The txt file already accounts for missing 69, so:
@@ -375,9 +374,6 @@
             correctIndex = currentSignNumber - 2;
         }
         currentCorrectAnswer = allSignNames[correctIndex];
-        
-        // Display the sign number in the question
-        document.getElementById('signNumber').textContent = currentSignNumber;
         
         // Get the question sign image
         loadImageWithFallback(currentSignNumber, (imagePath) => {
