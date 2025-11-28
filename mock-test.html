@@ -177,12 +177,15 @@
     #questions-container {
         flex: 1;
         display: flex;
+        width: 100%;
     }
 
     .question-card-wrapper {
         flex: 1;
         display: flex;
         flex-direction: column;
+        align-items: stretch;
+        width: 100%;
     }
 
     .question-card {
@@ -194,10 +197,11 @@
         padding: 32px;
         margin-bottom: 24px;
         transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        min-height: 420px;              /* base consistent card height */
+        min-height: 620px;              /* taller base height so pre/ post-submit match */
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
+        width: 100%;
     }
 
     .question-image-container {
@@ -556,7 +560,7 @@
     @media (max-width: 768px) {
         .question-card {
             padding: 24px;
-            min-height: 480px; /* a bit taller on small screens */
+            min-height: 720px; /* ensure full height on smaller screens */
         }
         .question-text {
             font-size: 18px;
