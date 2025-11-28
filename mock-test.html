@@ -685,6 +685,25 @@
         padding: 40px;
         font-size: 14px;
     }
+    /* ================= MOBILE FIX – FULL WIDTH QUESTION CARD ================= */
+@media (max-width: 768px) {
+    #questions-container,
+    .question-card-wrapper,
+    .question-card {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+}
+
+/* OPTIONAL UX IMPROVEMENT (remove unnecessary tall spacing) */
+@media (max-width: 768px) {
+    .question-card {
+        min-height: auto;
+        padding: 20px;
+        border-radius: 14px;
+    }
+}
+
 </style>
 </head>
 <body>
