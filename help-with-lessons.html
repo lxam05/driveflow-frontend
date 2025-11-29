@@ -747,18 +747,6 @@
         localStorage.setItem('lastPage', fromPage);
     }
     
-    // When clicking back to home, restore the section position
-    document.getElementById('backToHome').addEventListener('click', function(e) {
-        e.preventDefault();
-        const lastPage = localStorage.getItem('lastPage') || 'main';
-        const lastSection = localStorage.getItem('lastMainSection') || 'lessons';
-        
-        if (lastPage === 'main') {
-            window.location.href = `main.html?section=${lastSection}`;
-        } else {
-            window.location.href = `${lastPage}.html`;
-        }
-    });
 
     // Load state on page load
     loadChecklistState();

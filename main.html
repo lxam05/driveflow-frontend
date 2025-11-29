@@ -835,16 +835,10 @@ window.addEventListener("resize", recalcLayout);
 
 recalcLayout();
 
-// Check for section parameter in URL and scroll to that section
+// Always start at the top of the page
 window.addEventListener("load", function() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const sectionParam = urlParams.get("section");
-    if (sectionParam && sectionOffsets[sectionParam] !== undefined) {
-        // Wait a bit for layout to be calculated
-        setTimeout(() => {
-            goTo(sectionParam);
-        }, 100);
-    }
+    scrollPos = 0;
+    updateEverything();
 });
 </script>
 

@@ -1346,31 +1346,8 @@
         localStorage.setItem('lastPage', fromPage);
     }
     
-    // Function to handle back to home navigation
-    function handleBackToHome(e) {
-        e.preventDefault();
-        const lastPage = localStorage.getItem('lastPage') || 'main';
-        const lastSection = localStorage.getItem('lastMainSection') || 'theory';
-        
-        if (lastPage === 'main') {
-            window.location.href = `main.html?section=${lastSection}`;
-        } else {
-            window.location.href = `${lastPage}.html`;
-        }
-    }
-    
     // Add event listeners for back buttons
     const backToHomeBtn = document.getElementById('backToHome');
-    if (backToHomeBtn) {
-        backToHomeBtn.addEventListener('click', handleBackToHome);
-    }
-    
-    // Handle back button in completion screen (will be added dynamically)
-    document.addEventListener('click', function(e) {
-        if (e.target && e.target.id === 'backToHomeComplete') {
-            handleBackToHome(e);
-        }
-    });
 
     // Load questions when page loads
     loadQuestions();
