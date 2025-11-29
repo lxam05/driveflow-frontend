@@ -299,8 +299,30 @@
         padding: 40px;
         max-width: 500px;
         width: 100%;
+        max-height: 90vh;
+        overflow-y: auto;
         text-align: center;
         box-shadow: var(--shadow-card);
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .paywall-content::-webkit-scrollbar {
+        width: 8px;
+    }
+    
+    .paywall-content::-webkit-scrollbar-track {
+        background: rgba(15, 23, 42, 0.3);
+        border-radius: 4px;
+    }
+    
+    .paywall-content::-webkit-scrollbar-thumb {
+        background: var(--primary);
+        border-radius: 4px;
+    }
+    
+    .paywall-content::-webkit-scrollbar-thumb:hover {
+        background: var(--accent);
     }
 
     .paywall-content h2 {
@@ -363,6 +385,25 @@
         border: 1px solid var(--border-subtle);
         border-radius: 12px;
         margin-bottom: 20px;
+        min-height: 0;
+        flex-shrink: 0;
+    }
+    
+    #paymentForm {
+        flex-shrink: 0;
+        margin-top: 24px;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    #submitPaymentBtn {
+        margin-top: 20px;
+        flex-shrink: 0;
+    }
+    
+    #payment-element {
+        flex: 1;
+        min-height: 0;
     }
 
     #payment-errors {
