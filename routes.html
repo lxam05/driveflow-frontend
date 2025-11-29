@@ -652,10 +652,12 @@
                             borderRadius: '12px',
                         },
                     },
+                    locale: 'en',
                 });
                 console.log('Stripe Elements created successfully');
             } catch (elementsErr) {
                 console.error('Error creating Stripe Elements:', elementsErr);
+                console.error('Error details:', JSON.stringify(elementsErr, null, 2));
                 throw new Error('Failed to create payment form: ' + elementsErr.message);
             }
 
