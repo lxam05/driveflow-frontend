@@ -355,6 +355,32 @@
         border-color: rgba(239, 68, 68, 0.3);
         color: #fecaca;
     }
+
+    /* Payment Form Styling */
+    #payment-element {
+        padding: 20px;
+        background: rgba(15, 23, 42, 0.6);
+        border: 1px solid var(--border-subtle);
+        border-radius: 12px;
+        margin-bottom: 20px;
+    }
+
+    #payment-errors {
+        padding: 12px;
+        background: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        border-radius: 8px;
+        margin-bottom: 16px;
+    }
+
+    #submitPaymentBtn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    #purchaseButtonContainer {
+        display: block;
+    }
 </style>
 </head>
 <body>
@@ -394,10 +420,30 @@
         <h2>Access Required</h2>
         <p>You need a 3-month license to access route details. Purchase access to view all driving test routes.</p>
         <div id="licenseStatus"></div>
-        <button id="purchaseBtn" class="btn-purchase">Buy 3-Month Access</button>
-        <button id="closePaywallBtn" style="margin-top: 12px; background: transparent; border: 1px solid var(--border-subtle); color: var(--text-muted); padding: 8px 20px; border-radius: 999px; cursor: pointer;">Cancel</button>
+        
+        <!-- Payment Form (hidden initially) -->
+        <div id="paymentForm" style="display: none; margin-top: 24px;">
+            <div id="payment-element" style="margin-bottom: 20px;">
+                <!-- Stripe Elements will mount here -->
+            </div>
+            <div id="payment-errors" role="alert" style="color: var(--accent-red); font-size: 14px; margin-bottom: 16px; display: none;"></div>
+            <button id="submitPaymentBtn" class="btn-purchase" style="width: 100%;">
+                <span id="submitPaymentText">Pay Now</span>
+                <span id="submitPaymentSpinner" style="display: none;">Processing...</span>
+            </button>
+            <button id="backToPurchaseBtn" style="margin-top: 12px; background: transparent; border: 1px solid var(--border-subtle); color: var(--text-muted); padding: 8px 20px; border-radius: 999px; cursor: pointer; width: 100%;">Back</button>
+        </div>
+        
+        <!-- Initial Purchase Button -->
+        <div id="purchaseButtonContainer">
+            <button id="purchaseBtn" class="btn-purchase">Buy 3-Month Access</button>
+            <button id="closePaywallBtn" style="margin-top: 12px; background: transparent; border: 1px solid var(--border-subtle); color: var(--text-muted); padding: 8px 20px; border-radius: 999px; cursor: pointer;">Cancel</button>
+        </div>
     </div>
 </div>
+
+<!-- Load Stripe.js -->
+<script src="https://js.stripe.com/v3/"></script>
 
 <script>
     const API_URL = location.hostname === "localhost" || location.hostname === "127.0.0.1"
@@ -450,7 +496,9 @@
 
     // Handle route click
     async function handleRouteClick(centre, routeNumber, e) {
-        e.preventDefault();
+        if (e && e.preventDefault) {
+            e.preventDefault();
+        }
         const token = localStorage.getItem('auth_token');
         
         if (!token) {
@@ -507,6 +555,133 @@
         document.getElementById('paywallModal').classList.remove('show');
     }
 
+    let stripe = null;
+    let elements = null;
+    let paymentElement = null;
+    let currentPaymentIntentId = null;
+
+    // Initialize Stripe
+    async function initializeStripe() {
+        try {
+            // Get publishable key
+            const keyResponse = await fetch(`${API_URL}/routes/publishable-key`);
+            if (!keyResponse.ok) {
+                throw new Error('Failed to get Stripe publishable key');
+            }
+            const { publishableKey } = await keyResponse.json();
+            
+            stripe = Stripe(publishableKey);
+            return true;
+        } catch (err) {
+            console.error('Error initializing Stripe:', err);
+            return false;
+        }
+    }
+
+    // Setup payment form
+    async function setupPaymentForm(clientSecret) {
+        if (!stripe) {
+            const initialized = await initializeStripe();
+            if (!initialized) {
+                throw new Error('Failed to initialize Stripe');
+            }
+        }
+
+        // Create Elements
+        elements = stripe.elements({
+            clientSecret: clientSecret,
+            appearance: {
+                theme: 'night',
+                variables: {
+                    colorPrimary: '#5bc0be',
+                    colorBackground: '#2d3f5a',
+                    colorText: '#e5e7eb',
+                    colorDanger: '#ef4444',
+                    fontFamily: 'Inter, system-ui, sans-serif',
+                    spacingUnit: '4px',
+                    borderRadius: '12px',
+                },
+            },
+        });
+
+        // Create and mount Payment Element
+        paymentElement = elements.create('payment');
+        paymentElement.mount('#payment-element');
+
+        // Show payment form
+        document.getElementById('paymentForm').style.display = 'block';
+        document.getElementById('purchaseButtonContainer').style.display = 'none';
+    }
+
+    // Handle payment submission
+    async function handlePaymentSubmit() {
+        const submitBtn = document.getElementById('submitPaymentBtn');
+        const submitText = document.getElementById('submitPaymentText');
+        const submitSpinner = document.getElementById('submitPaymentSpinner');
+        const errorDiv = document.getElementById('payment-errors');
+
+        submitBtn.disabled = true;
+        submitText.style.display = 'none';
+        submitSpinner.style.display = 'inline';
+        errorDiv.style.display = 'none';
+        errorDiv.textContent = '';
+
+        try {
+            const { error: submitError } = await stripe.confirmPayment({
+                elements,
+                confirmParams: {
+                    return_url: window.location.href,
+                },
+                redirect: 'if_required',
+            });
+
+            if (submitError) {
+                errorDiv.textContent = submitError.message;
+                errorDiv.style.display = 'block';
+                submitBtn.disabled = false;
+                submitText.style.display = 'inline';
+                submitSpinner.style.display = 'none';
+                return;
+            }
+
+            // Payment succeeded, confirm with backend
+            const token = localStorage.getItem('auth_token');
+            const confirmResponse = await fetch(`${API_URL}/routes/confirm-payment`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    paymentIntentId: currentPaymentIntentId
+                })
+            });
+
+            if (confirmResponse.ok) {
+                const data = await confirmResponse.json();
+                alert('Payment successful! Your license is now active.');
+                hidePaywall();
+                await checkLicenseStatus();
+                
+                // If there was a pending route, navigate to it
+                if (pendingRoute) {
+                    await handleRouteClick(pendingRoute.centre, pendingRoute.routeNumber, { preventDefault: () => {} });
+                    pendingRoute = null;
+                }
+            } else {
+                const error = await confirmResponse.json();
+                throw new Error(error.error || 'Failed to confirm payment');
+            }
+        } catch (err) {
+            console.error('Payment error:', err);
+            errorDiv.textContent = err.message || 'Payment failed. Please try again.';
+            errorDiv.style.display = 'block';
+            submitBtn.disabled = false;
+            submitText.style.display = 'inline';
+            submitSpinner.style.display = 'none';
+        }
+    }
+
     async function initiatePurchase() {
         const token = localStorage.getItem('auth_token');
         if (!token) {
@@ -517,10 +692,11 @@
 
         const btn = document.getElementById('purchaseBtn');
         btn.disabled = true;
-        btn.textContent = 'Processing...';
+        btn.textContent = 'Loading...';
 
         try {
-            const response = await fetch(`${API_URL}/routes/checkout`, {
+            // Create PaymentIntent
+            const response = await fetch(`${API_URL}/routes/create-payment-intent`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -529,44 +705,43 @@
 
             if (response.ok) {
                 const data = await response.json();
-                if (data.url) {
-                    // Redirect to Stripe Checkout
-                    window.location.href = data.url;
-                } else {
-                    throw new Error('No checkout URL received from server');
-                }
+                currentPaymentIntentId = data.paymentIntentId;
+                
+                // Setup payment form with client secret
+                await setupPaymentForm(data.clientSecret);
+                btn.disabled = false;
+                btn.textContent = 'Buy 3-Month Access';
             } else {
                 const error = await response.json().catch(() => ({ error: 'Unknown error' }));
-                console.error('Checkout error:', error);
-                const errorMsg = error.details || error.error || 'Failed to start checkout';
+                console.error('Payment intent error:', error);
+                const errorMsg = error.details || error.error || 'Failed to start payment';
                 alert(`Payment Error: ${errorMsg}\n\nPlease check:\n1. Stripe is configured in Railway\n2. STRIPE_SECRET_KEY is set correctly`);
                 btn.disabled = false;
                 btn.textContent = 'Buy 3-Month Access';
             }
         } catch (err) {
             console.error('Error initiating purchase:', err);
-            alert(`Failed to start checkout: ${err.message}\n\nPlease check your connection and try again.`);
+            alert(`Failed to start payment: ${err.message}\n\nPlease check your connection and try again.`);
             btn.disabled = false;
             btn.textContent = 'Buy 3-Month Access';
         }
     }
 
-    // Check for payment success
-    window.addEventListener('DOMContentLoaded', async () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('payment') === 'success') {
-            // Wait a moment for webhook to process
-            await new Promise(resolve => setTimeout(resolve, 2000));
-            await checkLicenseStatus();
-            alert('Payment successful! Your license is now active. You can now access route details.');
-            // Clean URL
-            window.history.replaceState({}, document.title, window.location.pathname);
-        } else if (urlParams.get('payment') === 'cancelled') {
-            alert('Payment was cancelled.');
-            window.history.replaceState({}, document.title, window.location.pathname);
-        } else {
-            checkLicenseStatus();
+    function resetPaymentForm() {
+        if (paymentElement) {
+            paymentElement.unmount();
+            paymentElement = null;
         }
+        elements = null;
+        currentPaymentIntentId = null;
+        document.getElementById('paymentForm').style.display = 'none';
+        document.getElementById('purchaseButtonContainer').style.display = 'block';
+        document.getElementById('payment-errors').style.display = 'none';
+    }
+
+    // Initialize on page load
+    window.addEventListener('DOMContentLoaded', async () => {
+        await checkLicenseStatus();
     });
 
     // Test centres data - sorted alphabetically
@@ -709,9 +884,17 @@
 
     // Paywall modal handlers
     document.getElementById('purchaseBtn').addEventListener('click', initiatePurchase);
-    document.getElementById('closePaywallBtn').addEventListener('click', hidePaywall);
+    document.getElementById('closePaywallBtn').addEventListener('click', () => {
+        resetPaymentForm();
+        hidePaywall();
+    });
+    document.getElementById('backToPurchaseBtn').addEventListener('click', () => {
+        resetPaymentForm();
+    });
+    document.getElementById('submitPaymentBtn').addEventListener('click', handlePaymentSubmit);
     document.getElementById('paywallModal').addEventListener('click', (e) => {
         if (e.target.id === 'paywallModal') {
+            resetPaymentForm();
             hidePaywall();
         }
     });
