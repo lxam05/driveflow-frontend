@@ -623,26 +623,49 @@
         paymentElementContainer.innerHTML = '';
 
         try {
+            // Validate client secret format
+            if (!clientSecret) {
+                throw new Error('No client secret provided');
+            }
+            
+            // Client secret format: pi_xxx_secret_xxx
+            if (!clientSecret.includes('_secret_')) {
+                throw new Error('Invalid client secret format - must include _secret_');
+            }
+
+            console.log('Creating Stripe Elements with client secret...');
+            console.log('Client secret preview:', clientSecret.substring(0, 20) + '...' + clientSecret.substring(clientSecret.length - 10));
+            
             // Create Elements
-            elements = stripe.elements({
-                clientSecret: clientSecret,
-                appearance: {
-                    theme: 'night',
-                    variables: {
-                        colorPrimary: '#5bc0be',
-                        colorBackground: '#2d3f5a',
-                        colorText: '#e5e7eb',
-                        colorDanger: '#ef4444',
-                        fontFamily: 'Inter, system-ui, sans-serif',
-                        spacingUnit: '4px',
-                        borderRadius: '12px',
+            try {
+                elements = stripe.elements({
+                    clientSecret: clientSecret,
+                    appearance: {
+                        theme: 'night',
+                        variables: {
+                            colorPrimary: '#5bc0be',
+                            colorBackground: '#2d3f5a',
+                            colorText: '#e5e7eb',
+                            colorDanger: '#ef4444',
+                            fontFamily: 'Inter, system-ui, sans-serif',
+                            spacingUnit: '4px',
+                            borderRadius: '12px',
+                        },
                     },
-                },
-            });
+                });
+                console.log('Stripe Elements created successfully');
+            } catch (elementsErr) {
+                console.error('Error creating Stripe Elements:', elementsErr);
+                throw new Error('Failed to create payment form: ' + elementsErr.message);
+            }
 
             // Create and mount Payment Element
-            paymentElement = elements.create('payment');
+            console.log('Creating payment element...');
+            paymentElement = elements.create('payment', {
+                layout: 'tabs'
+            });
             
+            console.log('Mounting payment element...');
             // Mount the element (mount is synchronous, not async)
             paymentElement.mount('#payment-element');
             
@@ -653,10 +676,12 @@
                 
                 const checkMount = setInterval(() => {
                     attempts++;
-                    // Check if Stripe has rendered the element
+                    // Check if Stripe has rendered the element - look for various possible selectors
                     const stripeElement = paymentElementContainer.querySelector('.StripeElement') || 
                                         paymentElementContainer.querySelector('[data-testid="payment-element"]') ||
-                                        paymentElementContainer.querySelector('iframe');
+                                        paymentElementContainer.querySelector('iframe') ||
+                                        paymentElementContainer.querySelector('[class*="Stripe"]') ||
+                                        paymentElementContainer.querySelector('div[role="group"]');
                     
                     if (stripeElement) {
                         clearInterval(checkMount);
@@ -664,7 +689,8 @@
                         resolve();
                     } else if (attempts >= maxAttempts) {
                         clearInterval(checkMount);
-                        reject(new Error('Payment element mount timeout - element not rendered'));
+                        console.error('Mount timeout - container content:', paymentElementContainer.innerHTML.substring(0, 200));
+                        reject(new Error('Payment element mount timeout - element not rendered. Please check browser console for Stripe errors.'));
                     }
                 }, 100);
             });
@@ -794,12 +820,24 @@
 
             if (response.ok) {
                 const data = await response.json();
+                
+                if (!data.clientSecret) {
+                    throw new Error('No client secret received from server');
+                }
+                
                 currentPaymentIntentId = data.paymentIntentId;
+                console.log('PaymentIntent created:', currentPaymentIntentId);
+                console.log('Client secret received:', data.clientSecret.substring(0, 20) + '...');
                 
                 // Setup payment form with client secret
-                await setupPaymentForm(data.clientSecret);
-                btn.disabled = false;
-                btn.textContent = 'Buy 3-Month Access';
+                try {
+                    await setupPaymentForm(data.clientSecret);
+                    btn.disabled = false;
+                    btn.textContent = 'Buy 3-Month Access';
+                } catch (setupErr) {
+                    console.error('Error setting up payment form:', setupErr);
+                    throw new Error('Failed to load payment form: ' + setupErr.message);
+                }
             } else {
                 const error = await response.json().catch(() => ({ error: 'Unknown error' }));
                 console.error('Payment intent error:', error);
