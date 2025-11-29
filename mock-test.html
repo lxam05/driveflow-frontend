@@ -137,8 +137,6 @@
     .main-content {
         flex: 1;
         min-width: 0;
-        display: flex;
-        flex-direction: column;
     }
 
     .controls {
@@ -174,17 +172,6 @@
     }
 
     /* Question Card - NO hover transform */
-    #questions-container {
-        flex: 1;
-        display: flex;
-    }
-
-    .question-card-wrapper {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-    }
-
     .question-card {
         position: relative;
         border-radius: var(--radius-xl);
@@ -194,10 +181,6 @@
         padding: 32px;
         margin-bottom: 24px;
         transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        min-height: 420px;              /* base consistent card height */
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
     }
 
     .question-image-container {
@@ -230,7 +213,6 @@
         flex-direction: column;
         gap: 16px;
         margin-bottom: 20px;
-        flex: 1; /* let options area expand so card fills its height */
     }
 
     .option-row {
@@ -556,7 +538,6 @@
     @media (max-width: 768px) {
         .question-card {
             padding: 24px;
-            min-height: 480px; /* a bit taller on small screens */
         }
         .question-text {
             font-size: 18px;
@@ -685,35 +666,6 @@
         padding: 40px;
         font-size: 14px;
     }
-
-    @media (max-width: 900px) {
-    #questions-container,
-    .question-card-wrapper,
-    .question-card {
-        width: 100% !important;
-        max-width: 100% !important;
-    }
-}
-
-
-@media (max-width: 900px) {
-    .question-card {
-        min-height: auto;
-        padding: 20px;
-        border-radius: 14px;
-    }
-}
-
-/* Force full-width uniform card size ALWAYS */
-#questions-container,
-.question-card-wrapper,
-.question-card {
-    width: 100%;
-    max-width: 100%;
-    flex: 1 0 100%;
-}
-
-
 </style>
 </head>
 <body>
@@ -877,12 +829,12 @@
             if (currentIndex < extensions.length) {
                 imgElement.src = `signs copy/${questionId}.${extensions[currentIndex]}`;
                 currentIndex++;
-            } else {
-                // All extensions tried, hide the container
+        } else {
+            // All extensions tried, hide the container
                 if (imgElement.parentElement) {
                     imgElement.parentElement.style.display = 'none';
-                }
             }
+        }
         }
         
         // Set up error handler
@@ -1009,15 +961,13 @@
         }
 
         container.innerHTML = `
-            <div class="question-card-wrapper">
-                ${imageHtml}
-                <div class="question-card">
-                    <div class="question-number">Question ${currentQuestionIndex + 1} of ${questions.length}</div>
-                    <div class="question-text">${q.question}</div>
-                    <div class="options">${optionsHtml}</div>
-                    ${buttonContainerHtml}
-                    ${feedbackHtml}
-                </div>
+            ${imageHtml}
+            <div class="question-card">
+                <div class="question-number">Question ${currentQuestionIndex + 1} of ${questions.length}</div>
+                <div class="question-text">${q.question}</div>
+                <div class="options">${optionsHtml}</div>
+                ${buttonContainerHtml}
+                ${feedbackHtml}
             </div>
         `;
         

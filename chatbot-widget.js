@@ -367,7 +367,7 @@
                 if (!token) {
                     throw new Error('Not authenticated');
                 }
-
+        
                 const response = await fetch(`${API_URL}/chatbot/message`, {
                     method: 'POST',
                     headers: {
@@ -382,7 +382,7 @@
 
                 // Remove loading indicator
                 loadingMessage.remove();
-
+        
                 if (!response.ok) {
                     // Try to get error message from response
                     let errorMessage = 'Failed to get response';
@@ -397,7 +397,7 @@
                     }
                     throw new Error(errorMessage);
                 }
-
+        
                 const data = await response.json();
                 
                 // Check if response has the expected structure
