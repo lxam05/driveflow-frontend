@@ -459,6 +459,50 @@
         opacity: 0.7;
         font-weight: 400;
     }
+
+    /* Back to Top Button */
+    #back-to-top {
+        position: fixed;
+        bottom: 30px;
+        left: 30px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: var(--primary-blue, #5bc0be);
+        border: 2px solid var(--accent-purple, #6fffe9);
+        color: var(--bg-main, #0b132b);
+        cursor: pointer;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 8px 24px rgba(91, 192, 190, 0.4);
+        z-index: 9997;
+        transition: all 0.3s ease;
+        font-size: 24px;
+        font-weight: bold;
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    #back-to-top.show {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    #back-to-top:hover {
+        transform: scale(1.1) translateY(0);
+        box-shadow: 0 12px 32px rgba(91, 192, 190, 0.6);
+        background: var(--accent-purple, #6fffe9);
+    }
+
+    #back-to-top svg {
+        width: 24px;
+        height: 24px;
+        stroke: currentColor;
+        stroke-width: 2.5;
+        fill: none;
+    }
 </style>
 </head>
 
@@ -803,6 +847,89 @@ window.addEventListener("load", function() {
 </script>
 
 <script src="chatbot-widget.js"></script>
+
+<!-- Back to Top Button -->
+<button id="back-to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M18 15l-6-6-6 6"/>
+    </svg>
+</button>
+
+<script>
+    // Back to Top Button Functionality
+    (function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        let scrollTimeout = null;
+        let isScrolling = false;
+        let lastScrollPos = 0;
+
+        // Function to check scroll position and show/hide button
+        function checkScrollPosition() {
+            // Use the custom scrollPos variable from the page's scroll system
+            if (typeof scrollPos !== 'undefined') {
+                if (scrollPos > 100) {
+                    backToTopButton.classList.add('show');
+                } else {
+                    backToTopButton.classList.remove('show');
+                }
+                lastScrollPos = scrollPos;
+            }
+        }
+
+        // Function to handle scroll detection
+        function handleScroll() {
+            // Hide button immediately when scrolling starts
+            if (!isScrolling) {
+                isScrolling = true;
+                backToTopButton.classList.remove('show');
+            }
+
+            // Clear existing timeout
+            if (scrollTimeout) {
+                clearTimeout(scrollTimeout);
+            }
+
+            // Set new timeout to show button after 0.2 seconds of no scrolling
+            scrollTimeout = setTimeout(() => {
+                isScrolling = false;
+                checkScrollPosition();
+            }, 200); // 0.2 seconds
+        }
+
+        // Listen to wheel events (this page uses custom wheel scrolling)
+        window.addEventListener('wheel', handleScroll, { passive: true });
+        
+        // Listen to touch events for mobile
+        window.addEventListener('touchmove', handleScroll, { passive: true });
+
+        // Monitor scrollPos changes by checking periodically
+        setInterval(() => {
+            if (typeof scrollPos !== 'undefined' && scrollPos !== lastScrollPos) {
+                handleScroll();
+            }
+        }, 50);
+
+        // Click handler to scroll to top using the page's custom scroll function
+        backToTopButton.addEventListener('click', () => {
+            if (typeof scrollToPosition !== 'undefined') {
+                scrollToPosition(0);
+            } else {
+                // Fallback if scrollToPosition is not available
+                scrollPos = 0;
+                if (typeof updateEverything !== 'undefined') {
+                    updateEverything();
+                }
+            }
+            // Hide button immediately when clicked
+            backToTopButton.classList.remove('show');
+        });
+
+        // Initial check on page load
+        setTimeout(() => {
+            checkScrollPosition();
+        }, 500);
+    })();
+</script>
 
 </body>
 </html>
