@@ -465,9 +465,8 @@
         position: fixed;
         bottom: 30px;
         left: 30px;
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
+        padding: 12px 20px;
+        border-radius: 999px;
         background: var(--primary-blue, #5bc0be);
         border: 2px solid var(--accent-purple, #6fffe9);
         color: var(--bg-main, #0b132b);
@@ -475,13 +474,15 @@
         display: none;
         align-items: center;
         justify-content: center;
+        gap: 8px;
         box-shadow: 0 8px 24px rgba(91, 192, 190, 0.4);
         z-index: 9997;
         transition: all 0.3s ease;
-        font-size: 24px;
-        font-weight: bold;
+        font-size: 14px;
+        font-weight: 600;
         opacity: 0;
         transform: translateY(20px);
+        white-space: nowrap;
     }
 
     #back-to-top.show {
@@ -491,17 +492,18 @@
     }
 
     #back-to-top:hover {
-        transform: scale(1.1) translateY(0);
+        transform: scale(1.05) translateY(0);
         box-shadow: 0 12px 32px rgba(91, 192, 190, 0.6);
         background: var(--accent-purple, #6fffe9);
     }
 
     #back-to-top svg {
-        width: 24px;
-        height: 24px;
+        width: 16px;
+        height: 16px;
         stroke: currentColor;
         stroke-width: 2.5;
         fill: none;
+        flex-shrink: 0;
     }
 </style>
 </head>
@@ -850,6 +852,7 @@ window.addEventListener("load", function() {
 
 <!-- Back to Top Button -->
 <button id="back-to-top" aria-label="Back to top">
+    <span>Back to Top</span>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
         <path d="M18 15l-6-6-6 6"/>
     </svg>
@@ -905,6 +908,7 @@ window.addEventListener("load", function() {
         // Monitor scrollPos changes by checking periodically
         setInterval(() => {
             if (typeof scrollPos !== 'undefined' && scrollPos !== lastScrollPos) {
+                lastScrollPos = scrollPos;
                 handleScroll();
             }
         }, 50);
@@ -920,8 +924,13 @@ window.addEventListener("load", function() {
                     updateEverything();
                 }
             }
-            // Hide button immediately when clicked
+            // Hide button immediately when clicked, but reset isScrolling so it can reappear
             backToTopButton.classList.remove('show');
+            isScrolling = false;
+            // Clear any pending timeout
+            if (scrollTimeout) {
+                clearTimeout(scrollTimeout);
+            }
         });
 
         // Initial check on page load
