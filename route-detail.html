@@ -127,6 +127,69 @@
         box-shadow: 0 12px 35px rgba(0, 0, 0, 0.9);
         border-color: rgba(129, 140, 248, 0.8);
     }
+
+    /* Paywall Modal */
+    .paywall-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 10000;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .paywall-overlay.show {
+        display: flex;
+    }
+
+    .paywall-content {
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-xl);
+        padding: 40px;
+        max-width: 500px;
+        width: 100%;
+        text-align: center;
+        box-shadow: var(--shadow-card);
+    }
+
+    .paywall-content h2 {
+        margin: 0 0 16px;
+        color: var(--text-main);
+        font-size: 24px;
+        font-weight: 700;
+    }
+
+    .paywall-content p {
+        margin: 0 0 24px;
+        color: var(--text-muted);
+        line-height: 1.6;
+    }
+
+    .btn-upgrade {
+        padding: 14px 32px;
+        border-radius: 999px;
+        border: none;
+        background: linear-gradient(120deg, rgba(37, 99, 235, 0.95), rgba(124, 58, 237, 0.95));
+        color: white;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 8px 24px rgba(30, 64, 175, 0.4);
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .btn-upgrade:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px rgba(30, 64, 175, 0.6);
+    }
 </style>
 </head>
 <body>
@@ -147,6 +210,85 @@
         <a href="routes.html" class="btn-back">← Back to Routes</a>
     </div>
 </div>
+
+<!-- Paywall Overlay -->
+<div id="paywallOverlay" class="paywall-overlay">
+    <div class="paywall-content">
+        <h2>Access Required</h2>
+        <p id="paywallMessage">This link is invalid or has expired. Please purchase access to view route details.</p>
+        <a href="routes.html" class="btn-upgrade">Go to Routes</a>
+    </div>
+</div>
+
+<script>
+    const API_URL = location.hostname === "localhost" || location.hostname === "127.0.0.1"
+        ? "http://localhost:8080"
+        : "https://driving-test-backend-production.up.railway.app";
+
+    // Validate link token on page load
+    async function validateLink() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token');
+        const tokenParam = urlParams.get('token');
+        
+        if (!tokenParam) {
+            showPaywall('No access token provided');
+            return false;
+        }
+
+        const authToken = localStorage.getItem('auth_token');
+        if (!authToken) {
+            showPaywall('Please log in to access routes');
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 2000);
+            return false;
+        }
+
+        try {
+            const response = await fetch(`${API_URL}/routes/validate-link/${tokenParam}`, {
+                headers: {
+                    'Authorization': `Bearer ${authToken}`
+                }
+            });
+
+            const data = await response.json();
+
+            if (!data.valid) {
+                showPaywall(data.error || 'Link is invalid or expired');
+                setTimeout(() => {
+                    window.location.href = 'routes.html';
+                }, 3000);
+                return false;
+            }
+
+            return true;
+        } catch (err) {
+            console.error('Error validating link:', err);
+            showPaywall('Failed to validate link. Please try again.');
+            return false;
+        }
+    }
+
+    function showPaywall(message) {
+        const overlay = document.getElementById('paywallOverlay');
+        const messageEl = document.getElementById('paywallMessage');
+        if (message) {
+            messageEl.textContent = message;
+        }
+        overlay.classList.add('show');
+        // Hide main content
+        document.querySelector('.container').style.display = 'none';
+    }
+
+    // Validate on page load
+    validateLink().then(isValid => {
+        if (!isValid) {
+            return; // Don't load route content
+        }
+        // Continue with existing route loading logic
+    });
+</script>
 
 <script>
     // Route map data - Naas Route 1

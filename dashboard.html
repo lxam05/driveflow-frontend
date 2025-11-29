@@ -623,6 +623,26 @@
             </div>
           </article>
 
+          <!-- CARD: Test Routes Access -->
+          <article class="card card-2x">
+            <div class="card-header">
+              <div class="card-title">Test Routes Access</div>
+              <div class="card-tag" id="routesLicenseTag">Status</div>
+            </div>
+            <div class="card-main-value">
+              <span id="routesStatusValue">Loading...</span>
+            </div>
+            <div class="card-footnote">
+              <span id="routesStatusNote">Check your license status and access test routes</span>
+            </div>
+            <div style="margin-top: 12px;">
+              <a href="routes.html" class="action-btn" style="display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; font-size: 13px;">
+                <span class="icon">🗺️</span>
+                <span>View Routes</span>
+              </a>
+            </div>
+          </article>
+
           <!-- CARD: Next Recommended Step -->
           <article class="card card-2x">
             <div class="card-header">
@@ -766,10 +786,61 @@
         // Load mock test statistics
         await loadMockTestStats(token);
 
+        // Load routes access status
+        await loadRoutesStatus(token);
+
       } catch (err) {
         console.error("Error loading user:", err);
         localStorage.removeItem("auth_token");
         window.location.href = "login.html";
+      }
+    }
+
+    // Load routes access status
+    async function loadRoutesStatus(token) {
+      try {
+        const res = await fetch(`${API_URL}/routes/license-status`, {
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          const statusValue = document.getElementById("routesStatusValue");
+          const statusNote = document.getElementById("routesStatusNote");
+          const licenseTag = document.getElementById("routesLicenseTag");
+
+          if (data.hasLicense && data.expiresAt) {
+            const expiryDate = new Date(data.expiresAt);
+            const isExpired = expiryDate < new Date();
+            
+            if (isExpired) {
+              statusValue.textContent = "Expired";
+              statusNote.textContent = `Your license expired on ${expiryDate.toLocaleDateString()}`;
+              licenseTag.textContent = "Expired";
+              licenseTag.style.borderColor = "rgba(239, 68, 68, 0.7)";
+              licenseTag.style.color = "#fecaca";
+            } else {
+              statusValue.textContent = "Active";
+              statusNote.textContent = `License expires ${expiryDate.toLocaleDateString()}`;
+              licenseTag.textContent = "Active";
+              licenseTag.style.borderColor = "rgba(34, 197, 94, 0.7)";
+              licenseTag.style.color = "#bbf7d0";
+            }
+          } else {
+            statusValue.textContent = "No License";
+            statusNote.textContent = "Purchase a 3-month license to access all test routes";
+            licenseTag.textContent = "No Access";
+            licenseTag.style.borderColor = "rgba(148, 163, 184, 0.5)";
+            licenseTag.style.color = "var(--text-muted)";
+          }
+        }
+      } catch (err) {
+        console.error("Error loading routes status:", err);
+        document.getElementById("routesStatusValue").textContent = "Error";
+        document.getElementById("routesStatusNote").textContent = "Failed to load license status";
       }
     }
 

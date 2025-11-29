@@ -272,6 +272,89 @@
             margin-top: 40px;
         }
     }
+
+    /* Paywall Modal */
+    .paywall-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 10000;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .paywall-modal.show {
+        display: flex;
+    }
+
+    .paywall-content {
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-xl);
+        padding: 40px;
+        max-width: 500px;
+        width: 100%;
+        text-align: center;
+        box-shadow: var(--shadow-card);
+    }
+
+    .paywall-content h2 {
+        margin: 0 0 16px;
+        color: var(--text-main);
+        font-size: 24px;
+        font-weight: 700;
+    }
+
+    .paywall-content p {
+        margin: 0 0 24px;
+        color: var(--text-muted);
+        line-height: 1.6;
+    }
+
+    .btn-purchase {
+        padding: 14px 32px;
+        border-radius: 999px;
+        border: none;
+        background: linear-gradient(120deg, rgba(37, 99, 235, 0.95), rgba(124, 58, 237, 0.95));
+        color: white;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 8px 24px rgba(30, 64, 175, 0.4);
+    }
+
+    .btn-purchase:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px rgba(30, 64, 175, 0.6);
+    }
+
+    .btn-purchase:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .license-status {
+        padding: 12px 20px;
+        background: rgba(34, 197, 94, 0.1);
+        border: 1px solid rgba(34, 197, 94, 0.3);
+        border-radius: 12px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        color: #bbf7d0;
+    }
+
+    .license-status.expired {
+        background: rgba(239, 68, 68, 0.1);
+        border-color: rgba(239, 68, 68, 0.3);
+        color: #fecaca;
+    }
 </style>
 </head>
 <body>
@@ -305,7 +388,181 @@
     </div>
 </div>
 
+<!-- Paywall Modal -->
+<div id="paywallModal" class="paywall-modal">
+    <div class="paywall-content">
+        <h2>Access Required</h2>
+        <p>You need a 3-month license to access route details. Purchase access to view all driving test routes.</p>
+        <div id="licenseStatus"></div>
+        <button id="purchaseBtn" class="btn-purchase">Buy 3-Month Access</button>
+        <button id="closePaywallBtn" style="margin-top: 12px; background: transparent; border: 1px solid var(--border-subtle); color: var(--text-muted); padding: 8px 20px; border-radius: 999px; cursor: pointer;">Cancel</button>
+    </div>
+</div>
+
 <script>
+    const API_URL = location.hostname === "localhost" || location.hostname === "127.0.0.1"
+        ? "http://localhost:8080"
+        : "https://driving-test-backend-production.up.railway.app";
+
+    let hasLicense = false;
+    let licenseExpiresAt = null;
+    let pendingRoute = null;
+
+    // Check license status on page load
+    async function checkLicenseStatus() {
+        const token = localStorage.getItem('auth_token');
+        if (!token) {
+            return;
+        }
+
+        try {
+            const response = await fetch(`${API_URL}/routes/license-status`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                hasLicense = data.hasLicense;
+                licenseExpiresAt = data.expiresAt;
+                updateLicenseUI();
+            }
+        } catch (err) {
+            console.error('Error checking license:', err);
+        }
+    }
+
+    function updateLicenseUI() {
+        const statusDiv = document.getElementById('licenseStatus');
+        if (hasLicense && licenseExpiresAt) {
+            const expiryDate = new Date(licenseExpiresAt);
+            const isExpired = expiryDate < new Date();
+            statusDiv.innerHTML = isExpired 
+                ? `<div class="license-status expired">Your license expired on ${expiryDate.toLocaleDateString()}</div>`
+                : `<div class="license-status">✓ Active license expires ${expiryDate.toLocaleDateString()}</div>`;
+            statusDiv.style.display = 'block';
+            hasLicense = !isExpired;
+        } else {
+            statusDiv.style.display = 'none';
+        }
+    }
+
+    // Handle route click
+    async function handleRouteClick(centre, routeNumber, e) {
+        e.preventDefault();
+        const token = localStorage.getItem('auth_token');
+        
+        if (!token) {
+            alert('Please log in to access routes');
+            window.location.href = 'login.html';
+            return;
+        }
+
+        // Check license status
+        if (!hasLicense) {
+            pendingRoute = { centre, routeNumber };
+            showPaywall();
+            return;
+        }
+
+        // Generate link and navigate
+        try {
+            const response = await fetch(`${API_URL}/routes/generate-link`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    centreName: centre.name,
+                    routeNumber: routeNumber
+                })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                window.location.href = `route-detail.html?centre=${encodeURIComponent(centre.name)}&route=${routeNumber}&token=${data.linkToken}`;
+            } else {
+                const error = await response.json();
+                if (error.error && error.error.includes('license')) {
+                    hasLicense = false;
+                    pendingRoute = { centre, routeNumber };
+                    showPaywall();
+                } else {
+                    alert('Failed to generate link. Please try again.');
+                }
+            }
+        } catch (err) {
+            console.error('Error generating link:', err);
+            alert('Failed to generate link. Please try again.');
+        }
+    }
+
+    function showPaywall() {
+        document.getElementById('paywallModal').classList.add('show');
+    }
+
+    function hidePaywall() {
+        document.getElementById('paywallModal').classList.remove('show');
+    }
+
+    async function initiatePurchase() {
+        const token = localStorage.getItem('auth_token');
+        if (!token) {
+            alert('Please log in to purchase');
+            window.location.href = 'login.html';
+            return;
+        }
+
+        const btn = document.getElementById('purchaseBtn');
+        btn.disabled = true;
+        btn.textContent = 'Processing...';
+
+        try {
+            const response = await fetch(`${API_URL}/routes/checkout`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                // Redirect to Stripe Checkout
+                window.location.href = data.url;
+            } else {
+                const error = await response.json();
+                alert(error.error || 'Failed to start checkout');
+                btn.disabled = false;
+                btn.textContent = 'Buy 3-Month Access';
+            }
+        } catch (err) {
+            console.error('Error initiating purchase:', err);
+            alert('Failed to start checkout. Please try again.');
+            btn.disabled = false;
+            btn.textContent = 'Buy 3-Month Access';
+        }
+    }
+
+    // Check for payment success
+    window.addEventListener('DOMContentLoaded', async () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('payment') === 'success') {
+            // Wait a moment for webhook to process
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            await checkLicenseStatus();
+            alert('Payment successful! Your license is now active. You can now access route details.');
+            // Clean URL
+            window.history.replaceState({}, document.title, window.location.pathname);
+        } else if (urlParams.get('payment') === 'cancelled') {
+            alert('Payment was cancelled.');
+            window.history.replaceState({}, document.title, window.location.pathname);
+        } else {
+            checkLicenseStatus();
+        }
+    });
+
     // Test centres data - sorted alphabetically
     const testCentres = [
         { name: "Athlone", routes: 7 },
@@ -428,10 +685,10 @@
         routesGrid.innerHTML = '';
         
         for (let i = 1; i <= centre.routes; i++) {
-            const routeCard = document.createElement('a');
+            const routeCard = document.createElement('div');
             routeCard.className = 'route-card';
-            routeCard.href = `route-detail.html?centre=${encodeURIComponent(centre.name)}&route=${i}`;
             routeCard.innerHTML = `<h3>Route ${i}</h3>`;
+            routeCard.addEventListener('click', (e) => handleRouteClick(centre, i, e));
             routesGrid.appendChild(routeCard);
         }
         
@@ -443,6 +700,15 @@
 
     // Initialize
     initCentres();
+
+    // Paywall modal handlers
+    document.getElementById('purchaseBtn').addEventListener('click', initiatePurchase);
+    document.getElementById('closePaywallBtn').addEventListener('click', hidePaywall);
+    document.getElementById('paywallModal').addEventListener('click', (e) => {
+        if (e.target.id === 'paywallModal') {
+            hidePaywall();
+        }
+    });
 </script>
 
 <script src="chatbot-widget.js"></script>
