@@ -529,17 +529,23 @@
 
             if (response.ok) {
                 const data = await response.json();
-                // Redirect to Stripe Checkout
-                window.location.href = data.url;
+                if (data.url) {
+                    // Redirect to Stripe Checkout
+                    window.location.href = data.url;
+                } else {
+                    throw new Error('No checkout URL received from server');
+                }
             } else {
-                const error = await response.json();
-                alert(error.error || 'Failed to start checkout');
+                const error = await response.json().catch(() => ({ error: 'Unknown error' }));
+                console.error('Checkout error:', error);
+                const errorMsg = error.details || error.error || 'Failed to start checkout';
+                alert(`Payment Error: ${errorMsg}\n\nPlease check:\n1. Stripe is configured in Railway\n2. STRIPE_SECRET_KEY is set correctly`);
                 btn.disabled = false;
                 btn.textContent = 'Buy 3-Month Access';
             }
         } catch (err) {
             console.error('Error initiating purchase:', err);
-            alert('Failed to start checkout. Please try again.');
+            alert(`Failed to start checkout: ${err.message}\n\nPlease check your connection and try again.`);
             btn.disabled = false;
             btn.textContent = 'Buy 3-Month Access';
         }
