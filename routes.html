@@ -595,30 +595,45 @@
             }
         }
 
-        // Create Elements
-        elements = stripe.elements({
-            clientSecret: clientSecret,
-            appearance: {
-                theme: 'night',
-                variables: {
-                    colorPrimary: '#5bc0be',
-                    colorBackground: '#2d3f5a',
-                    colorText: '#e5e7eb',
-                    colorDanger: '#ef4444',
-                    fontFamily: 'Inter, system-ui, sans-serif',
-                    spacingUnit: '4px',
-                    borderRadius: '12px',
-                },
-            },
-        });
-
-        // Create and mount Payment Element
-        paymentElement = elements.create('payment');
-        paymentElement.mount('#payment-element');
-
-        // Show payment form
+        // Show payment form FIRST (needs to be visible for Stripe to mount)
         document.getElementById('paymentForm').style.display = 'block';
         document.getElementById('purchaseButtonContainer').style.display = 'none';
+
+        // Wait a moment for DOM to update
+        await new Promise(resolve => setTimeout(resolve, 100));
+
+        // Check if element exists
+        const paymentElementContainer = document.getElementById('payment-element');
+        if (!paymentElementContainer) {
+            throw new Error('Payment element container not found');
+        }
+
+        try {
+            // Create Elements
+            elements = stripe.elements({
+                clientSecret: clientSecret,
+                appearance: {
+                    theme: 'night',
+                    variables: {
+                        colorPrimary: '#5bc0be',
+                        colorBackground: '#2d3f5a',
+                        colorText: '#e5e7eb',
+                        colorDanger: '#ef4444',
+                        fontFamily: 'Inter, system-ui, sans-serif',
+                        spacingUnit: '4px',
+                        borderRadius: '12px',
+                    },
+                },
+            });
+
+            // Create and mount Payment Element
+            paymentElement = elements.create('payment');
+            await paymentElement.mount('#payment-element');
+            console.log('Payment element mounted successfully');
+        } catch (err) {
+            console.error('Error mounting payment element:', err);
+            throw new Error('Failed to load payment form: ' + err.message);
+        }
     }
 
     // Handle payment submission
