@@ -566,24 +566,32 @@
             // Get publishable key
             const keyResponse = await fetch(`${API_URL}/routes/publishable-key`);
             if (!keyResponse.ok) {
-                throw new Error('Failed to get Stripe publishable key');
+                const error = await keyResponse.json().catch(() => ({ error: 'Unknown error' }));
+                console.error('Publishable key error:', error);
+                throw new Error(error.details || error.error || 'Failed to get Stripe publishable key');
             }
-            const { publishableKey } = await keyResponse.json();
+            const data = await keyResponse.json();
             
-            stripe = Stripe(publishableKey);
+            if (!data.publishableKey) {
+                throw new Error('No publishable key in response');
+            }
+            
+            stripe = Stripe(data.publishableKey);
+            console.log('Stripe initialized successfully');
             return true;
         } catch (err) {
             console.error('Error initializing Stripe:', err);
-            return false;
+            throw err;
         }
     }
 
     // Setup payment form
     async function setupPaymentForm(clientSecret) {
         if (!stripe) {
-            const initialized = await initializeStripe();
-            if (!initialized) {
-                throw new Error('Failed to initialize Stripe');
+            try {
+                await initializeStripe();
+            } catch (err) {
+                throw new Error(err.message || 'Failed to initialize Stripe');
             }
         }
 
@@ -715,13 +723,25 @@
                 const error = await response.json().catch(() => ({ error: 'Unknown error' }));
                 console.error('Payment intent error:', error);
                 const errorMsg = error.details || error.error || 'Failed to start payment';
-                alert(`Payment Error: ${errorMsg}\n\nPlease check:\n1. Stripe is configured in Railway\n2. STRIPE_SECRET_KEY is set correctly`);
+                let alertMsg = `Payment Error: ${errorMsg}`;
+                if (errorMsg.includes('publishable key') || errorMsg.includes('STRIPE_PUBLISHABLE_KEY')) {
+                    alertMsg += '\n\nPlease add STRIPE_PUBLISHABLE_KEY to Railway environment variables.';
+                } else {
+                    alertMsg += '\n\nPlease check:\n1. Stripe is configured in Railway\n2. STRIPE_SECRET_KEY is set correctly';
+                }
+                alert(alertMsg);
                 btn.disabled = false;
                 btn.textContent = 'Buy 3-Month Access';
             }
         } catch (err) {
             console.error('Error initiating purchase:', err);
-            alert(`Failed to start payment: ${err.message}\n\nPlease check your connection and try again.`);
+            let errorMsg = err.message || 'Failed to start payment';
+            if (errorMsg.includes('publishable key') || errorMsg.includes('STRIPE_PUBLISHABLE_KEY')) {
+                errorMsg += '\n\nPlease add STRIPE_PUBLISHABLE_KEY to Railway environment variables.';
+            } else {
+                errorMsg += '\n\nPlease check your connection and try again.';
+            }
+            alert(errorMsg);
             btn.disabled = false;
             btn.textContent = 'Buy 3-Month Access';
         }
