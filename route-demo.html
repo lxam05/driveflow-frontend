@@ -16,19 +16,21 @@
 
 <script>
 // ===== ROUTE TRIGGERS ===== 53.376527871857206, -6.581745871946112
+//markers.forEach(m => m.triggered = false);
+
 const markers = [
   {
     name: "Left onto main road",
     lat: 53.376527871857206,
     lng: -6.581745871946112,
-    radius: 70,
+    radius: 500,
     message: "Turn left onto the main road. Check mirrors and blind spot."
   },
   {
     name: "Right turn off main road",
     lat: 53.21574,
     lng: -6.67442,
-    radius: 70,
+    radius: 10000,
     message: "Turn right off the main road. Watch for oncoming traffic."
   }
 ];

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Route</name>
+    <Style id="icon-1899-0288D1-normal">
+      <IconStyle>
+        <color>ffd18802</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-1899-0288D1-highlight">
+      <IconStyle>
+        <color>ffd18802</color>
+        <scale>1</scale>
+        <Icon>
+          <href>https://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-1899-0288D1">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1899-0288D1-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1899-0288D1-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="line-000000-1200-nodesc-normal">
+      <LineStyle>
+        <color>ff000000</color>
+        <width>1.2</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="line-000000-1200-nodesc-highlight">
+      <LineStyle>
+        <color>ff000000</color>
+        <width>1.8</width>
+      </LineStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="line-000000-1200-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#line-000000-1200-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#line-000000-1200-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Placemark>
+      <name>route 1</name>
+      <styleUrl>#line-000000-1200-nodesc</styleUrl>
+      <LineString>
+        <tessellate>1</tessellate>
+        <coordinates>
+          -6.6700897,53.2140693,0
+          -6.6703714,53.2139183,0
+          -6.6708703,53.2138396,0
+          -6.6712645,53.2139263,0
+          -6.6713423,53.2140147,0
+          -6.6712297,53.214148,0
+          -6.6712082,53.2143632,0
+          -6.6713692,53.216032,0
+          -6.6728551,53.2159838,0
+          -6.6744242,53.2157573,0
+          -6.6755051,53.2168334,0
+          -6.6742874,53.2173329,0
+          -6.6753871,53.2182451,0
+          -6.6746763,53.2186033,0
+          -6.6737188,53.2179271,0
+          -6.6712082,53.2171771,0
+          -6.6711183,53.2171487,0
+          -6.6710217,53.2160823,0
+          -6.6713221,53.2160309,0
+          -6.6711076,53.2141678,0
+          -6.6709895,53.2141164,0
+          -6.6709574,53.2140586,0
+          -6.6709574,53.2139236,0
+          -6.6708782,53.2138722,0
+          -6.6703431,53.2139967,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+    <Placemark>
+      <name>Turn 1</name>
+      <description>turn left onto main road</description>
+      <styleUrl>#icon-1899-0288D1</styleUrl>
+      <Point>
+        <coordinates>
+          -6.6713693,53.2159796,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>turn 2</name>
+      <description>Turn right onto smaller road</description>
+      <styleUrl>#icon-1899-0288D1</styleUrl>
+      <Point>
+        <coordinates>
+          -6.6744232,53.2157624,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>turn 3</name>
+      <description>turn left at stop sign</description>
+      <styleUrl>#icon-1899-0288D1</styleUrl>
+      <Point>
+        <coordinates>
+          -6.6743723,53.217307,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>turn 4</name>
+      <description>this is where you can do your turn about</description>
+      <styleUrl>#icon-1899-0288D1</styleUrl>
+      <Point>
+        <coordinates>
+          -6.6753871,53.2182451,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Turn 5</name>
+      <description>turn right onto small street</description>
+      <styleUrl>#icon-1899-0288D1</styleUrl>
+      <Point>
+        <coordinates>
+          -6.674693,53.2185923,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>turn 6</name>
+      <description>turn right again </description>
+      <styleUrl>#icon-1899-0288D1</styleUrl>
+      <Point>
+        <coordinates>
+          -6.6711581,53.217136,0
+        </coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>turn 7</name>
+      <description>turn right and then left again quickly</description>
+      <styleUrl>#icon-1899-0288D1</styleUrl>
+      <Point>
+        <coordinates>
+          -6.6710217,53.2160823,0
+        </coordinates>
+      </Point>
+    </Placemark>
+  </Document>
+</kml>
