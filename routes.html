@@ -976,6 +976,12 @@
 
     // Select a test centre
     function selectCentre(centre) {
+        // Special handling for Naas - redirect to dedicated page
+        if (centre.name === "Naas") {
+            window.location.href = 'naas-routes.html';
+            return;
+        }
+        
         selectedCentre = centre;
         renderRoutes(centre);
     }
