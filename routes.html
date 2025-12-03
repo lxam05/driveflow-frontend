@@ -297,7 +297,7 @@
         border: 1px solid var(--border-subtle);
         border-radius: var(--radius-xl);
         padding: 40px;
-        max-width: 500px;
+        max-width: 600px;
         width: 100%;
         max-height: 90vh;
         overflow-y: auto;
@@ -380,12 +380,12 @@
 
     /* Payment Form Styling */
     #payment-element {
-        padding: 20px;
+        padding: 24px;
         background: rgba(15, 23, 42, 0.6);
         border: 1px solid var(--border-subtle);
         border-radius: 12px;
         margin-bottom: 20px;
-        min-height: 0;
+        min-height: 400px;
         flex-shrink: 0;
     }
     
@@ -400,10 +400,31 @@
         margin-top: 20px;
         flex-shrink: 0;
     }
-    
-    #payment-element {
-        flex: 1;
-        min-height: 0;
+
+    .price-display {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--primary);
+        margin: 16px 0;
+    }
+
+    .btn-cancel {
+        margin-top: 12px;
+        background: transparent;
+        border: 1px solid var(--border-subtle);
+        color: var(--text-muted);
+        padding: 10px 20px;
+        border-radius: 999px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 14px;
+        transition: all 0.2s ease;
+    }
+
+    .btn-cancel:hover {
+        background: rgba(239, 68, 68, 0.1);
+        border-color: rgba(239, 68, 68, 0.3);
+        color: #ef4444;
     }
 
     #payment-errors {
@@ -460,6 +481,7 @@
     <div class="paywall-content">
         <h2>Access Required</h2>
         <p>You need a 3-month license to access route details. Purchase access to view all driving test routes.</p>
+        <div class="price-display">€13.99</div>
         <div id="licenseStatus"></div>
         
         <!-- Payment Form (hidden initially) -->
@@ -469,16 +491,16 @@
             </div>
             <div id="payment-errors" role="alert" style="color: var(--accent-red); font-size: 14px; margin-bottom: 16px; display: none;"></div>
             <button id="submitPaymentBtn" class="btn-purchase" style="width: 100%;">
-                <span id="submitPaymentText">Pay Now</span>
+                <span id="submitPaymentText">Pay €13.99</span>
                 <span id="submitPaymentSpinner" style="display: none;">Processing...</span>
             </button>
-            <button id="backToPurchaseBtn" style="margin-top: 12px; background: transparent; border: 1px solid var(--border-subtle); color: var(--text-muted); padding: 8px 20px; border-radius: 999px; cursor: pointer; width: 100%;">Back</button>
+            <button class="btn-cancel" onclick="resetPaymentForm()" style="width: 100%;">Cancel</button>
         </div>
         
         <!-- Initial Purchase Button -->
         <div id="purchaseButtonContainer">
-            <button id="purchaseBtn" class="btn-purchase">Buy 3-Month Access</button>
-            <button id="closePaywallBtn" style="margin-top: 12px; background: transparent; border: 1px solid var(--border-subtle); color: var(--text-muted); padding: 8px 20px; border-radius: 999px; cursor: pointer;">Cancel</button>
+            <button id="purchaseBtn" class="btn-purchase">Buy 3-Month Access - €13.99</button>
+            <button class="btn-cancel" onclick="hidePaywall()" style="width: 100%;">Cancel</button>
         </div>
     </div>
 </div>
@@ -1018,13 +1040,7 @@
 
     // Paywall modal handlers
     document.getElementById('purchaseBtn').addEventListener('click', initiatePurchase);
-    document.getElementById('closePaywallBtn').addEventListener('click', () => {
-        resetPaymentForm();
-        hidePaywall();
-    });
-    document.getElementById('backToPurchaseBtn').addEventListener('click', () => {
-        resetPaymentForm();
-    });
+    // Cancel buttons now use onclick handlers directly in HTML
     document.getElementById('submitPaymentBtn').addEventListener('click', handlePaymentSubmit);
     document.getElementById('paywallModal').addEventListener('click', (e) => {
         if (e.target.id === 'paywallModal') {
