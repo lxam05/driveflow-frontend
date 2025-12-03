@@ -97,6 +97,20 @@
         text-align: center;
     }
 
+    .question-sign-container {
+        text-align: center;
+        margin-bottom: 32px;
+    }
+
+    .question-sign-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: var(--radius-lg);
+        margin: 0 auto;
+        display: block;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+
     .options-container {
         display: flex;
         flex-direction: column;
@@ -237,7 +251,7 @@
     <!-- Quiz Section -->
     <div class="quiz-section">
         <div class="quiz-question" id="questionText">
-            What is the name of sign <span id="signNumber">1</span>?
+            What is the name of this sign?
         </div>
 
         <div class="question-sign-container">
@@ -348,7 +362,6 @@
         // Pick a random sign number from valid ones
         const randomIndex = Math.floor(Math.random() * validSignNumbers.length);
         currentSignNumber = validSignNumbers[randomIndex];
-        document.getElementById('signNumber').textContent = currentSignNumber;
         
         // Get the correct answer - sign number maps directly to txt file line
         // The txt file already accounts for missing 69, so:
@@ -363,8 +376,7 @@
         }
         currentCorrectAnswer = allSignNames[correctIndex];
         
-        // Display the sign number in the question
-        document.getElementById('signNumber').textContent = currentSignNumber;
+        // Question text is now "What is the name of this sign?" - no need to update sign number
         
         // Get the question sign image
         loadImageWithFallback(currentSignNumber, (imagePath) => {

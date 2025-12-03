@@ -1,0 +1,23 @@
+1. Cyclist turning to their right (your right)
+
+2. Cyclist slowing down or stopping 
+
+3.Cycling turning to their left (your left)
+
+4.Cyclist turning to their right (your left)
+
+5. Cyclist going straight On
+
+6. Cyclist turning to their left (your right)
+
+7. Driver going straight On
+
+8. Driver turning to his left (your right)
+
+9. Driver turning to his right (your left)
+
+10. Driver slowing or stopping
+
+11. Driver turning to his left (your left)
+
+12. Driver turning to his right (your right)

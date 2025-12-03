@@ -353,57 +353,83 @@
         return `All signs test day/${signNumber}.${extension}`;
     }
 
-    // Hand signal questions
-    const handSignalQuestions = [
-        {
-            type: 'hand-signal',
-            question: 'How do you signal that you are turning left?',
-            options: [
-                'Put your left arm straight out horizontally through the window',
-                'Raise your left arm up with elbow bent',
-                'Put your right arm out and move it up and down',
-                'Extend your right arm out with a forward sweeping motion'
-            ],
-            correctAnswer: 0,
-            explanation: 'For turning left, put your left arm straight out horizontally through the window. Hand flat, palm facing forward.'
-        },
-        {
-            type: 'hand-signal',
-            question: 'How do you signal that you are turning right in a right-hand drive car?',
-            options: [
-                'Put your left arm straight out horizontally',
-                'Raise your left arm up, elbow bent, palm facing forward',
-                'Put your right arm out and move it up and down',
-                'Extend your right arm straight out'
-            ],
-            correctAnswer: 1,
-            explanation: 'In Irish RHD cars, if you can\'t use the right arm out the window, raise your left arm up, elbow bent, palm facing forward.'
-        },
-        {
-            type: 'hand-signal',
-            question: 'How do you signal that you are slowing down or stopping?',
-            options: [
-                'Put your left arm straight out horizontally',
-                'Raise your left arm up with elbow bent',
-                'Put your right arm out and move it up and down like patting a big dog',
-                'Extend your right arm out with a forward sweeping motion'
-            ],
-            correctAnswer: 2,
-            explanation: 'Put your right arm out and move it up and down like you\'re patting a big dog. Steady, clear movement — not frantic.'
-        },
-        {
-            type: 'hand-signal',
-            question: 'How do you signal that you are overtaking?',
-            options: [
-                'Put your left arm straight out horizontally',
-                'Raise your left arm up with elbow bent',
-                'Put your right arm out and move it up and down',
-                'Extend your right arm out, make a forward sweeping motion'
-            ],
-            correctAnswer: 3,
-            explanation: 'Extend your right arm out, make a forward sweeping motion. You won\'t use this often, but you must know it.'
+    // Hand signal questions - will be loaded from roadSignsDescription.txt
+    let handSignalQuestions = [];
+    let allHandSignalDescriptions = [];
+
+    // Load hand signal descriptions from file
+    async function loadHandSignalDescriptions() {
+        try {
+            const response = await fetch('roadSignsDescription.txt');
+            if (!response.ok) {
+                throw new Error('Failed to fetch roadSignsDescription.txt');
+            }
+            const text = await response.text();
+            const lines = text.split('\n');
+            
+            allHandSignalDescriptions = [];
+            for (let i = 0; i < lines.length; i++) {
+                const trimmed = lines[i].trim();
+                if (trimmed.length > 0) {
+                    // Remove line numbers if present (e.g., "1. Cyclist turning..." -> "Cyclist turning...")
+                    const cleaned = trimmed.replace(/^\d+\.\s*/, '');
+                    if (cleaned.length > 0) {
+                        allHandSignalDescriptions.push(cleaned);
+                    }
+                }
+            }
+            
+            // Generate hand signal questions
+            generateHandSignalQuestions();
+        } catch (error) {
+            console.error('Error loading hand signal descriptions:', error);
+            // Fallback to empty array
+            handSignalQuestions = [];
         }
-    ];
+    }
+
+    // Generate hand signal questions from descriptions
+    function generateHandSignalQuestions() {
+        handSignalQuestions = [];
+        
+        for (let i = 0; i < allHandSignalDescriptions.length; i++) {
+            const signalNumber = i + 1;
+            const correctDescription = allHandSignalDescriptions[i];
+            
+            // Get 3 wrong answers (randomly selected from other descriptions)
+            const wrongDescriptions = [];
+            const usedIndices = new Set([i]);
+            
+            while (wrongDescriptions.length < 3) {
+                const randomIndex = Math.floor(Math.random() * allHandSignalDescriptions.length);
+                if (!usedIndices.has(randomIndex)) {
+                    wrongDescriptions.push(allHandSignalDescriptions[randomIndex]);
+                    usedIndices.add(randomIndex);
+                }
+            }
+            
+            // Create options array
+            const options = [correctDescription, ...wrongDescriptions];
+            shuffleArray(options);
+            
+            // Find correct answer index
+            const correctAnswer = options.indexOf(correctDescription);
+            
+            handSignalQuestions.push({
+                type: 'hand-signal',
+                question: 'What does this hand signal mean?',
+                signalNumber: signalNumber,
+                options: options,
+                correctAnswer: correctAnswer,
+                explanation: `This hand signal means: ${correctDescription}`
+            });
+        }
+    }
+
+    // Get the image path for a hand signal
+    function getHandSignalImagePath(signalNumber) {
+        return `handSignals/${signalNumber}.png`;
+    }
 
     // Bonnet check questions
     const bonnetCheckQuestions = [
@@ -460,6 +486,9 @@
     // Load and prepare questions
     async function loadQuestions() {
         try {
+            // Load hand signal descriptions first
+            await loadHandSignalDescriptions();
+            
             // Load road signs
             const signsResponse = await fetch('signs.txt');
             const signsText = await signsResponse.text();
@@ -515,7 +544,7 @@
             // Combine: 4 road signs, 1 hand signal, 1 bonnet check
             allQuestions = [
                 ...roadSignQuestions.slice(0, 4),
-                handSignalQuestions[0],
+                ...(handSignalQuestions.length > 0 ? [handSignalQuestions[0]] : []),
                 bonnetCheckQuestions[0]
             ];
 
@@ -563,6 +592,11 @@
             const imagePath = getSignImagePath(q.signNumber);
             imageHtml = `<div style="text-align: center; margin-bottom: 24px;">
                 <img src="${imagePath}" alt="Road sign ${q.signNumber}" class="question-image" onerror="this.style.display='none'">
+            </div>`;
+        } else if (q.type === 'hand-signal') {
+            const imagePath = getHandSignalImagePath(q.signalNumber);
+            imageHtml = `<div style="text-align: center; margin-bottom: 24px;">
+                <img src="${imagePath}" alt="Hand signal ${q.signalNumber}" class="question-image" onerror="this.style.display='none'">
             </div>`;
         }
 
