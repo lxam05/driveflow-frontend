@@ -976,9 +976,13 @@
 
     // Select a test centre
     function selectCentre(centre) {
-        // Special handling for Naas - redirect to dedicated page
+        // Special handling for Naas and Tallaght - redirect to dedicated pages
         if (centre.name === "Naas") {
             window.location.href = 'naas-routes.html';
+            return;
+        }
+        if (centre.name === "Tallaght") {
+            window.location.href = 'tallaght-routes.html';
             return;
         }
         
