@@ -283,66 +283,68 @@
         transition: color 0.3s ease;
     }
 
-    /* Modern iOS Style Toggle Switch */
-    .toggle-switch {
+    /* Radio Button Style */
+    .radio-button {
         position: relative;
-        width: 52px;
-        height: 32px;
+        width: 24px;
+        height: 24px;
         flex-shrink: 0;
         cursor: pointer;
     }
 
-    .toggle-switch input {
-        opacity: 0;
-        width: 0;
-        height: 0;
+    .radio-button input[type="radio"] {
         position: absolute;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        cursor: pointer;
     }
 
-    .toggle-slider {
+    .radio-button-custom {
         position: absolute;
-        cursor: pointer;
         top: 0;
         left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #475569;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        border-radius: 34px;
-        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
-
-    .toggle-slider:before {
-        position: absolute;
-        content: "";
-        height: 26px;
-        width: 26px;
-        left: 3px;
-        bottom: 3px;
-        background-color: white;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        width: 24px;
+        height: 24px;
+        border: 2px solid #64748b;
         border-radius: 50%;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.1);
+        background-color: transparent;
+        transition: all 0.2s ease;
+        pointer-events: none;
     }
 
-    .toggle-switch:hover .toggle-slider {
-        background-color: #64748b;
+    .radio-button:hover .radio-button-custom {
+        border-color: var(--primary);
+        background-color: rgba(99, 102, 241, 0.1);
     }
 
-    .toggle-switch input:checked + .toggle-slider {
+    .radio-button input[type="radio"]:checked + .radio-button-custom {
+        border-color: var(--primary);
         background-color: var(--primary);
-        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 0 4px rgba(99, 102, 241, 0.18);
     }
 
-    .toggle-switch input:checked + .toggle-slider:before {
-        transform: translateX(20px);
-        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25), 0 1px 3px rgba(0, 0, 0, 0.15);
+    .radio-button input[type="radio"]:checked + .radio-button-custom::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: white;
     }
 
-    .toggle-switch input:disabled + .toggle-slider {
+    .radio-button input[type="radio"]:disabled + .radio-button-custom {
         opacity: 0.5;
         cursor: not-allowed;
-        background-color: #334155;
+        border-color: #475569;
+    }
+
+    .radio-button input[type="radio"]:focus + .radio-button-custom {
+        outline: 2px solid var(--primary);
+        outline-offset: 2px;
     }
 
     .question-number {
@@ -916,13 +918,13 @@
             return `
                 <div class="${classes}" id="opt-${optIndex}" ${!hasSubmitted ? `onclick="selectAnswer(${optIndex})"` : ''}>
                     <span class="option-text">${opt}</span>
-                    <label class="toggle-switch" onclick="event.stopPropagation()">
+                    <label class="radio-button" onclick="event.stopPropagation()">
                         <input type="radio" name="question" value="${optIndex}" 
                                ${isChecked ? 'checked' : ''} 
                                ${isDisabled ? 'disabled' : ''}
                                ${!hasSubmitted ? `onclick="event.stopPropagation(); selectAnswer(${optIndex}); return false;"` : ''}
-                               onmousedown="${!hasSubmitted && isChecked ? `event.preventDefault(); selectAnswer(${optIndex}); return false;` : ''}">
-                        <span class="toggle-slider"></span>
+                               onmousedown="${!hasSubmitted && isChecked ? `event.preventDefault(); selectAnswer(${optIndex}); return false;` : ''}>
+                        <span class="radio-button-custom"></span>
                     </label>
                 </div>
             `;
@@ -979,8 +981,13 @@
             `;
         }
 
-        container.innerHTML = `
-            ${imageHtml}
+        // Preserve image container if it exists and is for the same question
+        const existingImageContainer = container.querySelector('.question-image-container');
+        const existingImg = existingImageContainer?.querySelector(`.question-image[data-question-id="${q.id}"]`);
+        const isSameQuestion = existingImg !== null;
+        
+        // Only update the question card, preserve image if it's the same question
+        const questionCardHtml = `
             <div class="question-card">
                 <div class="question-number">Question ${currentQuestionIndex + 1} of ${questions.length}</div>
                 <div class="question-text">${q.question}</div>
@@ -990,11 +997,25 @@
             </div>
         `;
         
-        // Setup image loading safely after DOM is updated
-        if (q.id) {
-            const imgElement = container.querySelector('.question-image[data-question-id="' + q.id + '"]');
-            if (imgElement) {
-                setupImageLoading(imgElement, q.id);
+        if (isSameQuestion) {
+            // Same question - only update the question card, keep image
+            const questionCard = container.querySelector('.question-card');
+            if (questionCard) {
+                questionCard.outerHTML = questionCardHtml;
+            }
+        } else {
+            // Different question or no image - replace everything
+            container.innerHTML = `
+                ${imageHtml}
+                ${questionCardHtml}
+            `;
+            
+            // Setup image loading safely after DOM is updated
+            if (q.id) {
+                const imgElement = container.querySelector('.question-image[data-question-id="' + q.id + '"]');
+                if (imgElement) {
+                    setupImageLoading(imgElement, q.id);
+                }
             }
         }
         
