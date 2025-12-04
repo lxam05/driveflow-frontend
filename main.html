@@ -824,12 +824,26 @@
         
         userGreeting.textContent = `Hi, ${username}`;
         userGreeting.style.display = "block";
-        // Only show logout button, no login/signup buttons
+        // Show Contact Us, Dashboard, and Logout buttons
         headerNav.innerHTML = `
-            <a class="btn-login" style="cursor:pointer">Logout</a>
+            <a href="#" id="contactUsLink">Contact Us</a>
+            <a href="dashboard.html" class="btn-login">Dashboard</a>
+            <a id="logoutBtn" class="btn-login" style="cursor:pointer">Logout</a>
         `;
 
-        const logoutBtn = headerNav.querySelector(".btn-login");
+        // Re-attach Contact Us event listener
+        const contactUsLink = headerNav.querySelector("#contactUsLink");
+        if (contactUsLink) {
+            contactUsLink.addEventListener("click", (e) => {
+                e.preventDefault();
+                const modal = document.getElementById("contactModal");
+                if (modal) {
+                    modal.classList.add("show");
+                }
+            });
+        }
+
+        const logoutBtn = headerNav.querySelector("#logoutBtn");
         logoutBtn.addEventListener("click", () => {
             localStorage.removeItem("auth_token");
             window.location.href = "login.html";
