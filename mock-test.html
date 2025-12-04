@@ -988,8 +988,14 @@
             `;
         }
 
-        container.innerHTML = `
-            ${imageHtml}
+        // Preserve image container if it exists and is for the same question
+        const existingImageContainer = container.querySelector('.question-image-container');
+        const existingImg = existingImageContainer?.querySelector(`.question-image[data-question-id="${q.id}"]`);
+        const isSameQuestion = existingImg !== null && q.id;
+        const questionCard = container.querySelector('.question-card');
+        
+        // Only update the question card, preserve image if it's the same question
+        const questionCardHtml = `
             <div class="question-card">
                 <div class="question-number">Question ${currentQuestionIndex + 1} of ${questions.length}</div>
                 <div class="question-text">${q.question}</div>
@@ -999,11 +1005,22 @@
             </div>
         `;
         
-        // Setup image loading safely after DOM is updated
-        if (q.id) {
-            const imgElement = container.querySelector('.question-image[data-question-id="' + q.id + '"]');
-            if (imgElement) {
-                setupImageLoading(imgElement, q.id);
+        if (isSameQuestion && questionCard) {
+            // Same question - only update the question card, keep image
+            questionCard.outerHTML = questionCardHtml;
+        } else {
+            // Different question, no image, or no question card yet - replace everything
+            container.innerHTML = `
+                ${imageHtml}
+                ${questionCardHtml}
+            `;
+            
+            // Setup image loading safely after DOM is updated
+            if (q.id) {
+                const imgElement = container.querySelector('.question-image[data-question-id="' + q.id + '"]');
+                if (imgElement) {
+                    setupImageLoading(imgElement, q.id);
+                }
             }
         }
         

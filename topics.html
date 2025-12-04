@@ -1052,7 +1052,14 @@
             `;
         }
 
-        container.innerHTML = `
+        // Preserve image container if it exists and is for the same question
+        const existingImageContainer = container.querySelector('.question-image-container');
+        const existingImg = existingImageContainer?.querySelector(`.question-image[alt*="${q.id}"]`);
+        const isSameQuestion = existingImg !== null && q.id;
+        const questionCard = container.querySelector('.question-card');
+        
+        // Only update the question card, preserve image if it's the same question
+        const questionCardHtml = `
             <div class="question-card">
                 <div class="question-number">Question ${currentQuestionIndex + 1} of ${questions.length}</div>
                 ${imageHtml}
@@ -1062,6 +1069,22 @@
                 ${feedbackHtml}
             </div>
         `;
+        
+        if (isSameQuestion && questionCard) {
+            // Same question - only update the question card content, preserve image
+            const existingImage = questionCard.querySelector('.question-image-container');
+            questionCard.innerHTML = `
+                <div class="question-number">Question ${currentQuestionIndex + 1} of ${questions.length}</div>
+                ${existingImage ? existingImage.outerHTML : imageHtml}
+                <div class="question-text">${q.question}</div>
+                <div class="options">${optionsHtml}</div>
+                ${buttonContainerHtml}
+                ${feedbackHtml}
+            `;
+        } else {
+            // Different question or no image - replace everything
+            container.innerHTML = questionCardHtml;
+        }
         
         updateProgress();
         updateStarButton();
