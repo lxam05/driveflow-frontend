@@ -526,6 +526,189 @@
       margin-top: 8px;
     }
 
+    /* ---------- CONTACT MODAL ---------- */
+    .contact-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .contact-modal.show {
+      display: flex;
+    }
+
+    .contact-content {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      max-width: 600px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .contact-content::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .contact-content::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.3);
+      border-radius: 4px;
+    }
+
+    .contact-content::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 4px;
+    }
+
+    .contact-content::-webkit-scrollbar-thumb:hover {
+      background: var(--accent);
+    }
+
+    .contact-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .contact-title {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-main);
+    }
+
+    .contact-close {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 24px;
+      cursor: pointer;
+      padding: 0;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      transition: all 0.18s ease-out;
+    }
+
+    .contact-close:hover {
+      background: rgba(148, 163, 184, 0.1);
+      color: var(--text-main);
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .contact-form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .contact-form-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .contact-form-input,
+    .contact-form-textarea {
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(15, 23, 42, 0.6);
+      color: var(--text-main);
+      font-size: 14px;
+      font-family: inherit;
+      transition: all 0.18s ease-out;
+    }
+
+    .contact-form-input:focus,
+    .contact-form-textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: rgba(15, 23, 42, 0.8);
+      box-shadow: 0 0 0 3px rgba(91, 192, 190, 0.1);
+    }
+
+    .contact-form-textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .contact-submit-btn {
+      padding: 12px 24px;
+      border-radius: 999px;
+      border: 1px solid rgba(99, 102, 241, 0.9);
+      background: linear-gradient(
+        120deg,
+        rgba(37, 99, 235, 0.95),
+        rgba(124, 58, 237, 0.95)
+      );
+      color: #e5e7eb;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.18s ease-out;
+      box-shadow: 0 16px 40px rgba(30, 64, 175, 0.85);
+      margin-top: 8px;
+    }
+
+    .contact-submit-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 20px 50px rgba(30, 64, 175, 0.95);
+    }
+
+    .contact-submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .contact-message {
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 13px;
+      margin-top: 8px;
+      display: none;
+    }
+
+    .contact-message.success {
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      color: #bbf7d0;
+      display: block;
+    }
+
+    .contact-message.error {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #fecaca;
+      display: block;
+    }
+
   </style>
 </head>
 <body>
@@ -544,6 +727,9 @@
           <div class="nav-actions">
             <a href="main.html" class="nav-link">
               <span>← Back to Journey Map</span>
+            </a>
+            <a href="#" class="nav-link" id="contactUsLink">
+              <span>Contact Us</span>
             </a>
             <div class="user-pill" id="userPill" style="display:none;">
               <div class="user-avatar"></div>
@@ -729,6 +915,34 @@
           </article>
         </section>
       </main>
+    </div>
+  </div>
+
+  <!-- Contact Modal -->
+  <div id="contactModal" class="contact-modal">
+    <div class="contact-content">
+      <div class="contact-header">
+        <h2 class="contact-title">Contact Us</h2>
+        <button class="contact-close" id="contactClose" aria-label="Close">×</button>
+      </div>
+      <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 8px;">
+        Have a question or feedback? Send us a message and we'll get back to you as soon as possible.
+      </p>
+      <form id="contactForm" class="contact-form">
+        <div class="contact-form-group">
+          <label for="contactMessageText" class="contact-form-label">Your Message</label>
+          <textarea
+            id="contactMessageText"
+            class="contact-form-textarea"
+            placeholder="Type your message here..."
+            required
+          ></textarea>
+        </div>
+        <div id="contactMessage" class="contact-message"></div>
+        <button type="submit" class="contact-submit-btn">
+          Send Message
+        </button>
+      </form>
     </div>
   </div>
 
@@ -919,6 +1133,95 @@
     }
 
     loadUser();
+
+    // Contact modal handlers
+    const contactUsLink = document.getElementById("contactUsLink");
+    const contactModal = document.getElementById("contactModal");
+    const contactClose = document.getElementById("contactClose");
+    const contactForm = document.getElementById("contactForm");
+    const contactMessage = document.getElementById("contactMessage");
+
+    function showContactModal() {
+      contactModal.classList.add("show");
+    }
+
+    function hideContactModal() {
+      contactModal.classList.remove("show");
+      contactForm.reset();
+      contactMessage.className = "contact-message";
+      contactMessage.style.display = "none";
+    }
+
+    contactUsLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      showContactModal();
+    });
+
+    contactClose.addEventListener("click", hideContactModal);
+
+    contactModal.addEventListener("click", (e) => {
+      if (e.target === contactModal) {
+        hideContactModal();
+      }
+    });
+
+    contactForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending...";
+
+      const message = document.getElementById("contactMessageText").value.trim();
+
+      if (!message) {
+        contactMessage.className = "contact-message error";
+        contactMessage.textContent = "Please enter a message";
+        contactMessage.style.display = "block";
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+        return;
+      }
+
+      try {
+        const token = localStorage.getItem("auth_token");
+        const res = await fetch(`${API_URL}/contact/send`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            ...(token && { Authorization: `Bearer ${token}` }),
+          },
+          body: JSON.stringify({ message }),
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          contactMessage.className = "contact-message success";
+          contactMessage.textContent = "Message sent successfully! We'll get back to you soon.";
+          contactMessage.style.display = "block";
+          contactForm.reset();
+          
+          // Hide modal after 2 seconds
+          setTimeout(() => {
+            hideContactModal();
+          }, 2000);
+        } else {
+          contactMessage.className = "contact-message error";
+          contactMessage.textContent = data.error || "Failed to send message. Please try again.";
+          contactMessage.style.display = "block";
+        }
+      } catch (err) {
+        console.error("Error sending contact message:", err);
+        contactMessage.className = "contact-message error";
+        contactMessage.textContent = "An error occurred. Please try again later.";
+        contactMessage.style.display = "block";
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      }
+    });
   </script>
   <script src="chatbot-widget.js"></script>
 </body>
