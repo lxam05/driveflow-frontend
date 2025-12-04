@@ -491,8 +491,7 @@
         font-weight: 600;
     }
 
-    .waitlist-input-group input,
-    .waitlist-input-group select {
+    .waitlist-input-group input {
         padding: 14px 16px;
         border-radius: 8px;
         border: 1px solid var(--border-subtle);
@@ -503,8 +502,7 @@
         transition: all 0.2s ease;
     }
 
-    .waitlist-input-group input:focus,
-    .waitlist-input-group select:focus {
+    .waitlist-input-group input:focus {
         outline: none;
         border-color: var(--accent);
         background: rgba(15, 23, 42, 0.8);
@@ -660,52 +658,6 @@
         </p>
     </div>
 
-    <div class="waitlist-section">
-        <h2>🚀 Want a Specific Test Route?</h2>
-        <p class="subtitle">Join the waitlist and get an exclusive discount when it's released!</p>
-        <div class="discount-badge">🎁 Early Signup Discount Available</div>
-        
-        <form class="waitlist-form" id="waitlistForm">
-            <div class="waitlist-input-group">
-                <label for="waitlistEmail">Your Email</label>
-                <input 
-                    type="email" 
-                    id="waitlistEmail" 
-                    placeholder="your.email@example.com" 
-                    required
-                    autocomplete="email"
-                >
-            </div>
-            
-            <div class="waitlist-input-group">
-                <label for="waitlistCentre">Test Centre</label>
-                <select id="waitlistCentre" required>
-                    <option value="">Select a test centre...</option>
-                    <option value="Naas">Naas</option>
-                    <option value="Tallaght">Tallaght</option>
-                    <option value="Other">Other (specify in notes)</option>
-                </select>
-            </div>
-            
-            <div class="waitlist-input-group">
-                <label for="waitlistRoute">Route Number (Optional)</label>
-                <input 
-                    type="number" 
-                    id="waitlistRoute" 
-                    placeholder="e.g., 1, 2, 3..." 
-                    min="1"
-                >
-                <small style="color: var(--text-muted); font-size: 12px; margin-top: 4px;" id="waitlistRouteHint"></small>
-            </div>
-            
-            <button type="submit" class="btn-waitlist" id="waitlistSubmit">
-                Join Waitlist & Get Discount
-            </button>
-            
-            <div id="waitlistMessage" class="waitlist-message" style="display: none;"></div>
-        </form>
-    </div>
-
     <div class="selection-card">
         <h2>Select Test Centre</h2>
         <div class="search-box">
@@ -726,6 +678,47 @@
 
     <div style="text-align: center; grid-column: 1 / -1; margin-top: 20px;">
         <a href="main.html" class="btn-back" id="backToHome">← Back to Home</a>
+    </div>
+
+    <div class="waitlist-section">
+        <h2>🚀 Want a Specific Test Route?</h2>
+        <p class="subtitle">Join the waitlist and get an exclusive discount when it's released!</p>
+        <div class="discount-badge">🎁 Early Signup Discount Available</div>
+        
+        <form class="waitlist-form" id="waitlistForm">
+            <div class="waitlist-input-group">
+                <label for="waitlistEmail">Your Email</label>
+                <input 
+                    type="email" 
+                    id="waitlistEmail" 
+                    placeholder="your.email@example.com" 
+                    required
+                    autocomplete="email"
+                >
+            </div>
+            
+            <div class="waitlist-input-group">
+                <label for="waitlistCentre">Test Centre Name</label>
+                <input 
+                    type="text" 
+                    id="waitlistCentre" 
+                    placeholder="e.g., Naas, Tallaght, Cork..." 
+                    required
+                    maxlength="100"
+                    pattern="[A-Za-z0-9\s\-']+"
+                    title="Only letters, numbers, spaces, hyphens, and apostrophes are allowed"
+                >
+                <small style="color: var(--text-muted); font-size: 12px; margin-top: 4px;">
+                    Enter the name of the test centre you're waiting for
+                </small>
+            </div>
+            
+            <button type="submit" class="btn-waitlist" id="waitlistSubmit">
+                Join Waitlist & Get Discount
+            </button>
+            
+            <div id="waitlistMessage" class="waitlist-message" style="display: none;"></div>
+        </form>
     </div>
 </div>
 
@@ -1209,39 +1202,6 @@
         { name: "Tallaght", routes: 7 },
     ];
 
-    // Populate waitlist test centre dropdown
-    function populateWaitlistDropdown() {
-        const waitlistCentreSelect = document.getElementById('waitlistCentre');
-        if (!waitlistCentreSelect) return;
-
-        // Clear existing options except the first one
-        waitlistCentreSelect.innerHTML = '<option value="">Select a test centre...</option>';
-        
-        // Add all test centres
-        testCentres.forEach(centre => {
-            const option = document.createElement('option');
-            option.value = centre.name;
-            option.textContent = centre.name;
-            waitlistCentreSelect.appendChild(option);
-        });
-        
-        // Add "Other" option
-        const otherOption = document.createElement('option');
-        otherOption.value = 'Other';
-        otherOption.textContent = 'Other (specify in notes)';
-        waitlistCentreSelect.appendChild(otherOption);
-
-        // Update route hint when centre is selected
-        waitlistCentreSelect.addEventListener('change', (e) => {
-            const selectedCentre = testCentres.find(c => c.name === e.target.value);
-            const routeHint = document.getElementById('waitlistRouteHint');
-            if (selectedCentre && routeHint) {
-                routeHint.textContent = `${selectedCentre.name} has ${selectedCentre.routes} routes available`;
-            } else {
-                routeHint.textContent = '';
-            }
-        });
-    }
 
     let selectedCentre = null;
 
@@ -1325,7 +1285,6 @@
 
     // Initialize
     initCentres();
-    populateWaitlistDropdown();
 
     // Paywall modal handlers
     document.getElementById('purchaseBtn').addEventListener('click', initiatePurchase);
@@ -1347,14 +1306,26 @@
         e.preventDefault();
         
         const email = document.getElementById('waitlistEmail').value.trim();
-        const testCentre = document.getElementById('waitlistCentre').value;
-        const routeNumber = document.getElementById('waitlistRoute').value 
-            ? parseInt(document.getElementById('waitlistRoute').value) 
-            : null;
+        let testCentre = document.getElementById('waitlistCentre').value.trim();
 
         // Validate
         if (!email || !testCentre) {
             showWaitlistMessage('Please fill in all required fields.', 'error');
+            return;
+        }
+
+        // Sanitize test centre input - remove any potentially dangerous characters
+        // Only allow letters, numbers, spaces, hyphens, apostrophes, and common punctuation
+        testCentre = testCentre.replace(/[^A-Za-z0-9\s\-'.,()]/g, '');
+        
+        // Limit length
+        if (testCentre.length > 100) {
+            testCentre = testCentre.substring(0, 100);
+        }
+
+        // Additional validation - ensure it's not empty after sanitization
+        if (!testCentre || testCentre.length < 2) {
+            showWaitlistMessage('Please enter a valid test centre name (at least 2 characters).', 'error');
             return;
         }
 
@@ -1371,8 +1342,7 @@
                 },
                 body: JSON.stringify({
                     email: email,
-                    testCentre: testCentre,
-                    routeNumber: routeNumber
+                    testCentre: testCentre
                 })
             });
 
@@ -1380,10 +1350,10 @@
 
             if (response.ok) {
                 if (data.alreadyExists) {
-                    showWaitlistMessage('You are already on the waitlist for this route! We\'ll notify you when it\'s available.', 'success');
+                    showWaitlistMessage('You are already on the waitlist for this test centre! We\'ll notify you when it\'s available.', 'success');
                 } else {
                     showWaitlistMessage(
-                        `Successfully joined the waitlist! You'll receive an email with your discount code when ${testCentre}${routeNumber ? ` Route ${routeNumber}` : ''} is released.`,
+                        `Successfully joined the waitlist! You'll receive an email with your discount code when ${testCentre} routes are released.`,
                         'success'
                     );
                     // Reset form
