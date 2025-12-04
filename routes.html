@@ -572,8 +572,8 @@
 
         // Check license status
         if (!hasLicense) {
-            // Redirect to preview page
-            window.location.href = `route-preview.html?centre=${encodeURIComponent(centre.name)}&route=${routeNumber}&name=${encodeURIComponent(`Route ${routeNumber}`)}`;
+            pendingRoute = { centre, routeNumber };
+            showPaywall();
             return;
         }
 
@@ -598,8 +598,8 @@
                 const error = await response.json();
                 if (error.error && error.error.includes('license')) {
                     hasLicense = false;
-                    // Redirect to preview page
-                    window.location.href = `route-preview.html?centre=${encodeURIComponent(centre.name)}&route=${routeNumber}&name=${encodeURIComponent(`Route ${routeNumber}`)}`;
+                    pendingRoute = { centre, routeNumber };
+                    showPaywall();
                 } else {
                     alert('Failed to generate link. Please try again.');
                 }
@@ -611,11 +611,12 @@
     }
 
     function showPaywall() {
-        document.getElementById('paywallModal').classList.add('show');
+        // Redirect to dedicated payment page
+        window.location.href = 'payment.html?type=bundle';
     }
 
     function hidePaywall() {
-        document.getElementById('paywallModal').classList.remove('show');
+        // No longer needed - payment is on separate page
     }
 
     let stripe = null;
@@ -862,7 +863,8 @@
         }
     }
 
-    async function initiatePurchase() {
+    async function initiatePurchaseOld() {
+        // This function is no longer used - redirects to payment page instead
         const token = localStorage.getItem('auth_token');
         if (!token) {
             alert('Please log in to purchase');

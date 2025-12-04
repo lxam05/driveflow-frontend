@@ -497,43 +497,19 @@
         }
 
         function openRoute(routeId) {
-            // Check license first
-            const token = localStorage.getItem('auth_token');
-            if (!token) {
-                showPaywall();
+            if (!accessToken) {
+                alert('Access token not available. Please refresh the page.');
                 return;
             }
 
-            // Check license status
-            fetch(`${API_URL}/routes/license-status`, {
-                headers: { 'Authorization': `Bearer ${token}` }
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.hasLicense && new Date(data.expiresAt) > new Date()) {
-                    // Has active license - go directly to route
-                    if (!accessToken) {
-                        alert('Access token not available. Please refresh the page.');
-                        return;
-                    }
-                    if (new Date() > tokenExpiresAt) {
-                        alert('Your access has expired. Please refresh the page to get a new token.');
-                        return;
-                    }
-                    window.location.href = `${API_URL}/routes/naas-route/${accessToken}/${routeId}`;
-                } else {
-                    // No license - show preview
-                    const route = routesData.find(r => r.id === routeId);
-                    const routeName = route ? route.name : `Route ${routeId}`;
-                    window.location.href = `route-preview.html?routeId=${routeId}&name=${encodeURIComponent(routeName)}&centre=Naas&redirect=${encodeURIComponent(`${API_URL}/routes/naas-route/${accessToken}/${routeId}`)}`;
-                }
-            })
-            .catch(() => {
-                // On error, show preview
-                const route = routesData.find(r => r.id === routeId);
-                const routeName = route ? route.name : `Route ${routeId}`;
-                window.location.href = `route-preview.html?routeId=${routeId}&name=${encodeURIComponent(routeName)}&centre=Naas&redirect=${encodeURIComponent(`${API_URL}/routes/naas-route/${accessToken}/${routeId}`)}`;
-            });
+            // Check if token is still valid
+            if (new Date() > tokenExpiresAt) {
+                alert('Your access has expired. Please refresh the page to get a new token.');
+                return;
+            }
+
+            // Redirect through proxy endpoint - link never exposed in frontend
+            window.location.href = `${API_URL}/routes/naas-route/${accessToken}/${routeId}`;
         }
 
         // Update expiry countdown
@@ -548,8 +524,8 @@
 
         // Paywall Modal Functions
         function showPaywall() {
-            document.getElementById('paywallModal').classList.add('show');
-            checkLicenseStatus();
+            // Redirect to dedicated payment page
+            window.location.href = 'payment.html?type=bundle';
         }
 
         function hidePaywall() {
