@@ -256,9 +256,9 @@
     }
 
     .option-row.selected {
-        border-color: var(--primary);
-        background: rgba(255, 255, 255, 0.08);
-        box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+        border-color: rgba(129, 140, 248, 0.7);
+        background: rgba(99, 102, 241, 0.18);
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
     }
 
     .option-row.correct {
@@ -283,75 +283,66 @@
         transition: color 0.3s ease;
     }
 
-    /* Radio Button Style - Circular Design */
-    .radio-button {
+    /* Modern iOS Style Toggle Switch */
+    .toggle-switch {
         position: relative;
-        width: 24px;
-        height: 24px;
+        width: 52px;
+        height: 32px;
         flex-shrink: 0;
         cursor: pointer;
     }
 
-    .radio-button input[type="radio"] {
-        position: absolute;
+    .toggle-switch input {
         opacity: 0;
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        cursor: pointer;
+        width: 0;
+        height: 0;
+        position: absolute;
     }
 
-    .radio-button-custom {
+    .toggle-slider {
         position: absolute;
+        cursor: pointer;
         top: 0;
         left: 0;
-        width: 24px;
-        height: 24px;
-        border: 2px solid #64748b;
-        border-radius: 50%;
-        background-color: transparent;
-        transition: all 0.2s ease;
-        pointer-events: none;
+        right: 0;
+        bottom: 0;
+        background-color: #475569;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border-radius: 34px;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
     }
 
-    .radio-button:hover .radio-button-custom {
-        border-color: var(--primary);
-        background-color: rgba(99, 102, 241, 0.1);
-    }
-
-    .radio-button input[type="radio"]:checked + .radio-button-custom {
-        border-color: var(--primary);
-        background-color: var(--primary);
-        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
-    }
-
-    .radio-button input[type="radio"]:checked + .radio-button-custom::after {
-        content: "";
+    .toggle-slider:before {
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 3px;
+        bottom: 3px;
         background-color: white;
-        box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.3);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border-radius: 50%;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.1);
     }
 
-    .radio-button input[type="radio"]:disabled + .radio-button-custom {
+    .toggle-switch:hover .toggle-slider {
+        background-color: #64748b;
+    }
+
+    .toggle-switch input:checked + .toggle-slider {
+        background-color: var(--primary);
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 0 4px rgba(99, 102, 241, 0.18);
+    }
+
+    .toggle-switch input:checked + .toggle-slider:before {
+        transform: translateX(20px);
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25), 0 1px 3px rgba(0, 0, 0, 0.15);
+    }
+
+    .toggle-switch input:disabled + .toggle-slider {
         opacity: 0.5;
         cursor: not-allowed;
-        border-color: #475569;
-    }
-
-    .radio-button input[type="radio"]:focus + .radio-button-custom {
-        outline: 2px solid var(--primary);
-        outline-offset: 2px;
-    }
-
-    .option-row.selected .radio-button:hover .radio-button-custom {
-        border-color: var(--primary);
-        background-color: var(--primary);
+        background-color: #334155;
     }
 
     .question-number {
@@ -904,7 +895,7 @@
             </div>`;
         }
         
-        // Options with radio buttons
+        // Options with toggle switches
         const optionsHtml = q.options.map((opt, optIndex) => {
             const isChecked = hasSubmitted ? (submittedAnswer === optIndex) : (selectedAnswer === optIndex);
             let classes = 'option-row';
@@ -925,13 +916,13 @@
             return `
                 <div class="${classes}" id="opt-${optIndex}" ${!hasSubmitted ? `onclick="selectAnswer(${optIndex})"` : ''}>
                     <span class="option-text">${opt}</span>
-                    <label class="radio-button" onclick="event.stopPropagation()">
+                    <label class="toggle-switch" onclick="event.stopPropagation()">
                         <input type="radio" name="question" value="${optIndex}" 
                                ${isChecked ? 'checked' : ''} 
                                ${isDisabled ? 'disabled' : ''}
                                ${!hasSubmitted ? `onclick="event.stopPropagation(); selectAnswer(${optIndex}); return false;"` : ''}
-                               onmousedown="${!hasSubmitted && isChecked ? `event.preventDefault(); selectAnswer(${optIndex}); return false;` : ''}>
-                        <span class="radio-button-custom"></span>
+                               onmousedown="${!hasSubmitted && isChecked ? `event.preventDefault(); selectAnswer(${optIndex}); return false;` : ''}">
+                        <span class="toggle-slider"></span>
                     </label>
                 </div>
             `;
@@ -988,14 +979,8 @@
             `;
         }
 
-        // Preserve image container if it exists and is for the same question
-        const existingImageContainer = container.querySelector('.question-image-container');
-        const existingImg = existingImageContainer?.querySelector(`.question-image[data-question-id="${q.id}"]`);
-        const isSameQuestion = existingImg !== null && q.id;
-        const questionCard = container.querySelector('.question-card');
-        
-        // Only update the question card, preserve image if it's the same question
-        const questionCardHtml = `
+        container.innerHTML = `
+            ${imageHtml}
             <div class="question-card">
                 <div class="question-number">Question ${currentQuestionIndex + 1} of ${questions.length}</div>
                 <div class="question-text">${q.question}</div>
@@ -1005,22 +990,11 @@
             </div>
         `;
         
-        if (isSameQuestion && questionCard) {
-            // Same question - only update the question card, keep image
-            questionCard.outerHTML = questionCardHtml;
-        } else {
-            // Different question, no image, or no question card yet - replace everything
-            container.innerHTML = `
-                ${imageHtml}
-                ${questionCardHtml}
-            `;
-            
-            // Setup image loading safely after DOM is updated
-            if (q.id) {
-                const imgElement = container.querySelector('.question-image[data-question-id="' + q.id + '"]');
-                if (imgElement) {
-                    setupImageLoading(imgElement, q.id);
-                }
+        // Setup image loading safely after DOM is updated
+        if (q.id) {
+            const imgElement = container.querySelector('.question-image[data-question-id="' + q.id + '"]');
+            if (imgElement) {
+                setupImageLoading(imgElement, q.id);
             }
         }
         

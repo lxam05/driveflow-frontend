@@ -333,9 +333,121 @@
         <p>Master the hand signals required for your driving test</p>
     </div>
 
-    <!-- Hand Signals will be loaded dynamically -->
-    <div id="handSignalsContainer">
-        <!-- Signals will be inserted here by JavaScript -->
+    <!-- Turning Left -->
+    <div class="signal-card">
+        <h2>1. Turning Left</h2>
+        <div class="meaning">"I'm turning left."</div>
+        <div class="signal-content">
+            <div class="signal-image-container">
+                <img src="rightandleftfront.png" alt="Turning left hand signal" class="signal-image">
+                <div class="signal-image-label">Front View</div>
+            </div>
+            <div class="signal-instructions">
+                <div class="instruction-item">
+                    <strong>How to do it:</strong>
+                    Put your left arm straight out horizontally through the window.
+                </div>
+                <div class="instruction-item">
+                    <strong>Position:</strong>
+                    Hand flat, palm facing forward.
+                </div>
+                <div class="instruction-item">
+                    <strong>Remember:</strong>
+                    Easy. Clean. Straight line.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Turning Right -->
+    <div class="signal-card">
+        <h2>2. Turning Right</h2>
+        <div class="meaning">"I'm turning right."</div>
+        <div class="signal-content">
+            <div class="signal-image-container">
+                <img src="rightandleftfront.png" alt="Turning right hand signal" class="signal-image">
+                <div class="signal-image-label">Front View</div>
+            </div>
+            <div class="signal-instructions">
+                <div class="instruction-item">
+                    <strong>Option 1:</strong>
+                    Stick your right arm straight out.
+                </div>
+                <div class="instruction-item">
+                    <strong>Option 2 (RHD cars):</strong>
+                    If you can't use the right arm out the window (Irish cars are RHD), raise your left arm up, elbow bent, palm facing forward.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slowing Down / Stopping -->
+    <div class="signal-card">
+        <h2>3. Slowing Down / Stopping</h2>
+        <div class="meaning">"I'm slowing or stopping."</div>
+        <div class="signal-content">
+            <div class="signal-image-container">
+                <img src="slowdownfront.png" alt="Slowing down hand signal" class="signal-image">
+                <div class="signal-image-label">Front View</div>
+            </div>
+            <div class="signal-instructions">
+                <div class="instruction-item">
+                    <strong>How to do it:</strong>
+                    Put your right arm out and move it up and down like you're patting a big dog.
+                </div>
+                <div class="instruction-item">
+                    <strong>Movement:</strong>
+                    Steady, clear movement — not frantic.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overtaking / Passing -->
+    <div class="signal-card">
+        <h2>4. Overtaking / Passing</h2>
+        <div class="meaning">"I'm letting you know I'm overtaking."</div>
+        <div class="signal-content">
+            <div class="signal-image-container">
+                <img src="straightonfront.png" alt="Overtaking hand signal" class="signal-image">
+                <div class="signal-image-label">Front View</div>
+            </div>
+            <div class="signal-instructions">
+                <div class="instruction-item">
+                    <strong>How to do it:</strong>
+                    Extend your right arm out, make a forward sweeping motion.
+                </div>
+                <div class="instruction-item">
+                    <strong>Note:</strong>
+                    You won't use this often, but you must know it.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back View Reference -->
+    <div class="signal-card">
+        <h2>Back View Reference</h2>
+        <div class="signal-content">
+            <div class="signal-image-container" style="grid-column: 1 / -1;">
+                <img src="back.png" alt="Hand signals back view" class="signal-image">
+                <div class="signal-image-label">Back View - How others see your signals</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cyclist Hand Signals -->
+    <div class="cyclist-section">
+        <h2>5. Cyclist Hand Signals</h2>
+        <p>Testers sometimes mix car + cyclist questions.</p>
+        <ul class="cyclist-list">
+            <li><strong>Left turn:</strong> Left arm straight out.</li>
+            <li><strong>Right turn:</strong> Right arm straight out.</li>
+            <li><strong>Slowing:</strong> One hand out, palm down, moving up and down.</li>
+        </ul>
+        <p style="margin-top: 16px; color: var(--text-muted);">
+            Exact same principles — simpler because cyclists don't use windows.
+        </p>
     </div>
 
     <!-- How the Tester Checks You -->
@@ -377,80 +489,6 @@
         <a href="drivingtest-theory.html" class="btn-back">← Back to Test Theory</a>
     </div>
 </div>
-
-<script>
-    // Load hand signal descriptions and display them
-    async function loadAndDisplayHandSignals() {
-        try {
-            const response = await fetch('roadSignsDescription.txt');
-            if (!response.ok) {
-                throw new Error('Failed to fetch roadSignsDescription.txt');
-            }
-            const text = await response.text();
-            const lines = text.split('\n');
-            
-            const descriptions = [];
-            for (let i = 0; i < lines.length; i++) {
-                const trimmed = lines[i].trim();
-                if (trimmed.length > 0) {
-                    // Remove line numbers if present
-                    const cleaned = trimmed.replace(/^\d+\.\s*/, '');
-                    if (cleaned.length > 0) {
-                        descriptions.push(cleaned);
-                    }
-                }
-            }
-            
-            const container = document.getElementById('handSignalsContainer');
-            container.innerHTML = '';
-            
-            // Separate cyclist (1-6) and driver (7-12) signals
-            const cyclistSignals = descriptions.slice(0, 6);
-            const driverSignals = descriptions.slice(6, 12);
-            
-            // Display Driver Signals (7-12)
-            driverSignals.forEach((desc, index) => {
-                const signalNumber = index + 7;
-                const card = document.createElement('div');
-                card.className = 'signal-card';
-                card.innerHTML = `
-                    <h2>${signalNumber - 6}. ${desc}</h2>
-                    <div class="meaning">"${desc}"</div>
-                    <div class="signal-content">
-                        <div class="signal-image-container">
-                            <img src="handSignals/${signalNumber}.png" alt="${desc}" class="signal-image" onerror="this.style.display='none'">
-                            <div class="signal-image-label">Hand Signal ${signalNumber}</div>
-                        </div>
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-            
-            // Display Cyclist Signals (1-6)
-            const cyclistSection = document.createElement('div');
-            cyclistSection.className = 'cyclist-section';
-            cyclistSection.innerHTML = '<h2>Cyclist Hand Signals</h2><p>Cyclists use similar hand signals:</p><ul class="cyclist-list">';
-            
-            cyclistSignals.forEach((desc, index) => {
-                const signalNumber = index + 1;
-                const listItem = document.createElement('li');
-                listItem.innerHTML = `<strong>Signal ${signalNumber}:</strong> ${desc}`;
-                cyclistSection.querySelector('ul').appendChild(listItem);
-            });
-            
-            cyclistSection.innerHTML += '</ul>';
-            container.appendChild(cyclistSection);
-            
-        } catch (error) {
-            console.error('Error loading hand signals:', error);
-            document.getElementById('handSignalsContainer').innerHTML = 
-                '<div class="signal-card"><p>Error loading hand signals. Please ensure roadSignsDescription.txt exists.</p></div>';
-        }
-    }
-    
-    // Load on page load
-    loadAndDisplayHandSignals();
-</script>
 
 <script src="chatbot-widget.js"></script>
 

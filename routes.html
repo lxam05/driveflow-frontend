@@ -262,11 +262,13 @@
     }
 
     .routes-sidebar {
-        position: static;
+        position: sticky;
+        top: 120px;
     }
 
     @media (max-width: 1024px) {
         .routes-sidebar {
+            position: static;
             margin-top: 40px;
         }
     }
@@ -295,7 +297,7 @@
         border: 1px solid var(--border-subtle);
         border-radius: var(--radius-xl);
         padding: 40px;
-        max-width: 600px;
+        max-width: 500px;
         width: 100%;
         max-height: 90vh;
         overflow-y: auto;
@@ -378,12 +380,12 @@
 
     /* Payment Form Styling */
     #payment-element {
-        padding: 24px;
+        padding: 20px;
         background: rgba(15, 23, 42, 0.6);
         border: 1px solid var(--border-subtle);
         border-radius: 12px;
         margin-bottom: 20px;
-        min-height: 400px;
+        min-height: 0;
         flex-shrink: 0;
     }
     
@@ -398,31 +400,10 @@
         margin-top: 20px;
         flex-shrink: 0;
     }
-
-    .price-display {
-        font-size: 28px;
-        font-weight: 700;
-        color: var(--primary);
-        margin: 16px 0;
-    }
-
-    .btn-cancel {
-        margin-top: 12px;
-        background: transparent;
-        border: 1px solid var(--border-subtle);
-        color: var(--text-muted);
-        padding: 10px 20px;
-        border-radius: 999px;
-        cursor: pointer;
-        font-weight: 600;
-        font-size: 14px;
-        transition: all 0.2s ease;
-    }
-
-    .btn-cancel:hover {
-        background: rgba(239, 68, 68, 0.1);
-        border-color: rgba(239, 68, 68, 0.3);
-        color: #ef4444;
+    
+    #payment-element {
+        flex: 1;
+        min-height: 0;
     }
 
     #payment-errors {
@@ -441,196 +422,6 @@
     #purchaseButtonContainer {
         display: block;
     }
-
-    /* Waitlist Section */
-    .waitlist-section {
-        grid-column: 1 / -1;
-        background: linear-gradient(135deg, rgba(111, 255, 233, 0.1) 0%, rgba(91, 192, 190, 0.15) 100%);
-        border: 2px solid var(--accent);
-        border-radius: var(--radius-xl);
-        padding: 40px;
-        margin-bottom: 40px;
-        text-align: center;
-        box-shadow: 0 8px 32px rgba(111, 255, 233, 0.2);
-    }
-
-    .waitlist-section h2 {
-        margin: 0 0 12px;
-        color: var(--accent);
-        font-size: 28px;
-        font-weight: 800;
-        letter-spacing: -0.02em;
-    }
-
-    .waitlist-section .subtitle {
-        margin: 0 0 24px;
-        color: var(--text-muted);
-        font-size: 16px;
-    }
-
-    .waitlist-form {
-        max-width: 500px;
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-    }
-
-    .waitlist-input-group {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        text-align: left;
-    }
-
-    .waitlist-input-group label {
-        color: var(--text-main);
-        font-size: 14px;
-        font-weight: 600;
-    }
-
-    .waitlist-input-group input {
-        padding: 14px 16px;
-        border-radius: 8px;
-        border: 1px solid var(--border-subtle);
-        background: rgba(15, 23, 42, 0.6);
-        color: var(--text-main);
-        font-size: 15px;
-        font-family: inherit;
-        transition: all 0.2s ease;
-    }
-
-    .waitlist-input-group input:focus {
-        outline: none;
-        border-color: var(--accent);
-        background: rgba(15, 23, 42, 0.8);
-    }
-
-    .waitlist-input-group input::placeholder {
-        color: var(--text-muted);
-    }
-
-    .btn-waitlist {
-        padding: 14px 32px;
-        border-radius: 999px;
-        border: none;
-        background: linear-gradient(120deg, rgba(37, 99, 235, 0.95), rgba(124, 58, 237, 0.95));
-        color: white;
-        font-size: 16px;
-        font-weight: 700;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        box-shadow: 0 8px 24px rgba(30, 64, 175, 0.4);
-        margin-top: 8px;
-    }
-
-    .btn-waitlist:hover:not(:disabled) {
-        transform: translateY(-2px);
-        box-shadow: 0 12px 32px rgba(30, 64, 175, 0.6);
-    }
-
-    .btn-waitlist:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-    }
-
-    .waitlist-message {
-        margin-top: 16px;
-        padding: 12px 20px;
-        border-radius: 8px;
-        font-size: 14px;
-        font-weight: 500;
-    }
-
-    .waitlist-message.success {
-        background: rgba(34, 197, 94, 0.1);
-        border: 1px solid rgba(34, 197, 94, 0.3);
-        color: #bbf7d0;
-    }
-
-    .waitlist-message.error {
-        background: rgba(239, 68, 68, 0.1);
-        border: 1px solid rgba(239, 68, 68, 0.3);
-        color: #fecaca;
-    }
-
-    .discount-badge {
-        display: inline-block;
-        margin-top: 16px;
-        padding: 8px 16px;
-        background: rgba(34, 197, 94, 0.2);
-        border: 1px solid rgba(34, 197, 94, 0.4);
-        border-radius: 8px;
-        color: #bbf7d0;
-        font-size: 14px;
-        font-weight: 600;
-    }
-
-    @media (max-width: 768px) {
-        .waitlist-section {
-            padding: 28px 20px;
-        }
-        
-        .waitlist-section h2 {
-            font-size: 24px;
-        }
-    }
-
-    /* Value Proposition Section */
-    .value-proposition {
-        grid-column: 1 / -1;
-        background: linear-gradient(135deg, rgba(91, 192, 190, 0.15) 0%, rgba(111, 255, 233, 0.1) 100%);
-        border: 2px solid var(--primary);
-        border-radius: var(--radius-xl);
-        padding: 40px;
-        margin-bottom: 40px;
-        text-align: center;
-        box-shadow: 0 8px 32px rgba(91, 192, 190, 0.2);
-    }
-
-    .value-proposition h2 {
-        margin: 0 0 20px;
-        color: var(--primary);
-        font-size: 28px;
-        font-weight: 800;
-        letter-spacing: -0.02em;
-    }
-
-    .value-proposition p {
-        margin: 0 0 16px;
-        color: var(--text-main);
-        font-size: 17px;
-        line-height: 1.7;
-        max-width: 900px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .value-proposition p:last-child {
-        margin-bottom: 0;
-        font-weight: 600;
-        color: var(--accent);
-        font-size: 18px;
-    }
-
-    .value-proposition .highlight {
-        color: var(--primary);
-        font-weight: 700;
-    }
-
-    @media (max-width: 768px) {
-        .value-proposition {
-            padding: 28px 20px;
-        }
-        
-        .value-proposition h2 {
-            font-size: 24px;
-        }
-        
-        .value-proposition p {
-            font-size: 15px;
-        }
-    }
 </style>
 </head>
 <body>
@@ -639,21 +430,6 @@
     <div class="page-header">
         <h1>Test Routes</h1>
         <p>Practice the actual routes used in driving tests at each centre</p>
-    </div>
-
-    <div class="value-proposition">
-        <h2>Why These Routes Matter</h2>
-        <p>
-            These routes are the <span class="highlight">closest thing to doing your test before the real day</span>.
-        </p>
-        <p>
-            Built from real Irish test-centre patterns and recreated turn-for-turn with seamless Google Maps integration, 
-            you won't find this anywhere else. Skip the extra lessons and guesswork — drive the exact roads examiners use 
-            and know every tricky spot before it counts.
-        </p>
-        <p>
-            If you want the highest chance of passing first time, this is the smartest money you'll spend.
-        </p>
     </div>
 
     <div class="selection-card">
@@ -677,47 +453,6 @@
     <div style="text-align: center; grid-column: 1 / -1; margin-top: 20px;">
         <a href="main.html" class="btn-back" id="backToHome">← Back to Home</a>
     </div>
-
-    <div class="waitlist-section">
-        <h2>🚀 Want a Specific Test Route?</h2>
-        <p class="subtitle">Join the waitlist and get an exclusive discount when it's released!</p>
-        <div class="discount-badge">🎁 Early Signup Discount Available</div>
-        
-        <form class="waitlist-form" id="waitlistForm">
-            <div class="waitlist-input-group">
-                <label for="waitlistEmail">Your Email</label>
-                <input 
-                    type="email" 
-                    id="waitlistEmail" 
-                    placeholder="your.email@example.com" 
-                    required
-                    autocomplete="email"
-                >
-</div>
-            
-            <div class="waitlist-input-group">
-                <label for="waitlistCentre">Test Centre Name</label>
-                <input 
-                    type="text" 
-                    id="waitlistCentre" 
-                    placeholder="e.g., Naas, Tallaght, Cork..." 
-                    required
-                    maxlength="100"
-                    pattern="[A-Za-z0-9\s\-']+"
-                    title="Only letters, numbers, spaces, hyphens, and apostrophes are allowed"
-                >
-                <small style="color: var(--text-muted); font-size: 12px; margin-top: 4px;">
-                    Enter the name of the test centre you're waiting for
-                </small>
-            </div>
-            
-            <button type="submit" class="btn-waitlist" id="waitlistSubmit">
-                Join Waitlist & Get Discount
-            </button>
-            
-            <div id="waitlistMessage" class="waitlist-message" style="display: none;"></div>
-        </form>
-    </div>
 </div>
 
 <!-- Paywall Modal -->
@@ -725,7 +460,6 @@
     <div class="paywall-content">
         <h2>Access Required</h2>
         <p>You need a 3-month license to access route details. Purchase access to view all driving test routes.</p>
-        <div class="price-display">€13.99</div>
         <div id="licenseStatus"></div>
         
         <!-- Payment Form (hidden initially) -->
@@ -735,16 +469,16 @@
             </div>
             <div id="payment-errors" role="alert" style="color: var(--accent-red); font-size: 14px; margin-bottom: 16px; display: none;"></div>
             <button id="submitPaymentBtn" class="btn-purchase" style="width: 100%;">
-                <span id="submitPaymentText">Pay €13.99</span>
+                <span id="submitPaymentText">Pay Now</span>
                 <span id="submitPaymentSpinner" style="display: none;">Processing...</span>
             </button>
-            <button class="btn-cancel" onclick="resetPaymentForm()" style="width: 100%;">Cancel</button>
+            <button id="backToPurchaseBtn" style="margin-top: 12px; background: transparent; border: 1px solid var(--border-subtle); color: var(--text-muted); padding: 8px 20px; border-radius: 999px; cursor: pointer; width: 100%;">Back</button>
         </div>
         
         <!-- Initial Purchase Button -->
         <div id="purchaseButtonContainer">
-            <button id="purchaseBtn" class="btn-purchase">Buy 3-Month Access - €13.99</button>
-            <button class="btn-cancel" onclick="hidePaywall()" style="width: 100%;">Cancel</button>
+            <button id="purchaseBtn" class="btn-purchase">Buy 3-Month Access</button>
+            <button id="closePaywallBtn" style="margin-top: 12px; background: transparent; border: 1px solid var(--border-subtle); color: var(--text-muted); padding: 8px 20px; border-radius: 999px; cursor: pointer;">Cancel</button>
         </div>
     </div>
 </div>
@@ -855,12 +589,11 @@
     }
 
     function showPaywall() {
-        // Redirect to dedicated payment page
-        window.location.href = 'payment.html?type=bundle';
+        document.getElementById('paywallModal').classList.add('show');
     }
 
     function hidePaywall() {
-        // No longer needed - payment is on separate page
+        document.getElementById('paywallModal').classList.remove('show');
     }
 
     let stripe = null;
@@ -1107,8 +840,7 @@
         }
     }
 
-    async function initiatePurchaseOld() {
-        // This function is no longer used - redirects to payment page instead
+    async function initiatePurchase() {
         const token = localStorage.getItem('auth_token');
         if (!token) {
             alert('Please log in to purchase');
@@ -1198,8 +930,8 @@
     const testCentres = [
         { name: "Naas", routes: 7 },
         { name: "Tallaght", routes: 7 },
-    ];
 
+    ];
 
     let selectedCentre = null;
 
@@ -1244,13 +976,9 @@
 
     // Select a test centre
     function selectCentre(centre) {
-        // Special handling for Naas and Tallaght - redirect to dedicated pages
+        // Special handling for Naas - redirect to dedicated page
         if (centre.name === "Naas") {
             window.location.href = 'naas-routes.html';
-            return;
-        }
-        if (centre.name === "Tallaght") {
-            window.location.href = 'tallaght-routes.html';
             return;
         }
         
@@ -1286,7 +1014,13 @@
 
     // Paywall modal handlers
     document.getElementById('purchaseBtn').addEventListener('click', initiatePurchase);
-    // Cancel buttons now use onclick handlers directly in HTML
+    document.getElementById('closePaywallBtn').addEventListener('click', () => {
+        resetPaymentForm();
+        hidePaywall();
+    });
+    document.getElementById('backToPurchaseBtn').addEventListener('click', () => {
+        resetPaymentForm();
+    });
     document.getElementById('submitPaymentBtn').addEventListener('click', handlePaymentSubmit);
     document.getElementById('paywallModal').addEventListener('click', (e) => {
         if (e.target.id === 'paywallModal') {
@@ -1294,89 +1028,6 @@
             hidePaywall();
         }
     });
-
-    // Waitlist form handler
-    const waitlistForm = document.getElementById('waitlistForm');
-    const waitlistMessage = document.getElementById('waitlistMessage');
-    const waitlistSubmit = document.getElementById('waitlistSubmit');
-
-    waitlistForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const email = document.getElementById('waitlistEmail').value.trim();
-        let testCentre = document.getElementById('waitlistCentre').value.trim();
-
-        // Validate
-        if (!email || !testCentre) {
-            showWaitlistMessage('Please fill in all required fields.', 'error');
-            return;
-        }
-
-        // Sanitize test centre input - remove any potentially dangerous characters
-        // Only allow letters, numbers, spaces, hyphens, apostrophes, and common punctuation
-        testCentre = testCentre.replace(/[^A-Za-z0-9\s\-'.,()]/g, '');
-        
-        // Limit length
-        if (testCentre.length > 100) {
-            testCentre = testCentre.substring(0, 100);
-        }
-
-        // Additional validation - ensure it's not empty after sanitization
-        if (!testCentre || testCentre.length < 2) {
-            showWaitlistMessage('Please enter a valid test centre name (at least 2 characters).', 'error');
-            return;
-        }
-
-        // Disable submit button
-        waitlistSubmit.disabled = true;
-        waitlistSubmit.textContent = 'Joining Waitlist...';
-        waitlistMessage.style.display = 'none';
-
-        try {
-            const response = await fetch(`${API_URL}/routes/waitlist`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email: email,
-                    testCentre: testCentre
-                })
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                if (data.alreadyExists) {
-                    showWaitlistMessage('You are already on the waitlist for this test centre! We\'ll notify you when it\'s available.', 'success');
-        } else {
-                    showWaitlistMessage(
-                        `Successfully joined the waitlist! You'll receive an email with your discount code when ${testCentre} routes are released.`,
-                        'success'
-                    );
-                    // Reset form
-                    waitlistForm.reset();
-                }
-            } else {
-                showWaitlistMessage(data.error || 'Failed to join waitlist. Please try again.', 'error');
-            }
-        } catch (err) {
-            console.error('Waitlist error:', err);
-            showWaitlistMessage('Network error. Please check your connection and try again.', 'error');
-        } finally {
-            waitlistSubmit.disabled = false;
-            waitlistSubmit.textContent = 'Join Waitlist & Get Discount';
-        }
-    });
-
-    function showWaitlistMessage(message, type) {
-        waitlistMessage.textContent = message;
-        waitlistMessage.className = `waitlist-message ${type}`;
-        waitlistMessage.style.display = 'block';
-        
-        // Scroll to message
-        waitlistMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
 </script>
 
 <script src="chatbot-widget.js"></script>

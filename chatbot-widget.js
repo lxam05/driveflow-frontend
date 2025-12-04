@@ -11,10 +11,7 @@
         <div id="chatbot-container" style="display: none;">
             <div id="chatbot-window">
                 <div id="chatbot-header">
-                    <div>
-                        <h3>Driving Test Assistant</h3>
-                        <div id="chatbot-usage">Loading...</div>
-                    </div>
+                    <h3>Driving Test Assistant</h3>
                     <button id="chatbot-close" aria-label="Close chatbot">×</button>
                 </div>
                 <div id="chatbot-messages"></div>
@@ -105,17 +102,6 @@
                 font-weight: 700;
                 color: var(--text-dark, #e5e7eb);
                 font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            }
-
-            #chatbot-usage {
-                font-size: 12px;
-                color: var(--text-light, #9ca3af);
-                margin-top: 4px;
-                font-weight: 500;
-            }
-
-            #chatbot-usage.limit-reached {
-                color: #ef4444;
             }
 
             #chatbot-close {
@@ -326,68 +312,18 @@
 
         // Conversation history
         let conversationHistory = [];
-        let remainingQuestions = 8;
-        let totalQuestions = 8;
 
         // Toggle chatbot visibility
         function toggleChatbot() {
             const isVisible = container.style.display !== 'none';
             container.style.display = isVisible ? 'none' : 'flex';
             if (!isVisible) {
-                // Refresh usage status when opening
-                fetchUsageStatus();
                 input.focus();
             }
         }
 
         toggle.addEventListener('click', toggleChatbot);
         closeBtn.addEventListener('click', toggleChatbot);
-
-        // Function to update usage display
-        function updateUsageDisplay() {
-            const usageDiv = document.getElementById('chatbot-usage');
-            if (usageDiv) {
-                if (remainingQuestions <= 0) {
-                    usageDiv.textContent = 'Daily limit reached (8/8)';
-                    usageDiv.className = 'limit-reached';
-                    input.disabled = true;
-                    sendBtn.disabled = true;
-                    input.placeholder = 'Daily limit reached. Try again tomorrow.';
-                } else {
-                    usageDiv.textContent = `${remainingQuestions} of ${totalQuestions} questions remaining today`;
-                    usageDiv.className = '';
-                    input.disabled = false;
-                    sendBtn.disabled = false;
-                    input.placeholder = 'Ask me about driving test questions...';
-                }
-            }
-        }
-
-        // Function to fetch usage status
-        async function fetchUsageStatus() {
-            try {
-                const token = localStorage.getItem('auth_token');
-                if (!token) return;
-
-                const response = await fetch(`${API_URL}/chatbot/usage`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-
-                if (response.ok) {
-                    const data = await response.json();
-                    remainingQuestions = data.remaining;
-                    totalQuestions = data.total;
-                    updateUsageDisplay();
-                }
-            } catch (err) {
-                console.error('Error fetching usage status:', err);
-            }
-        }
-
-        // Fetch usage status on init
-        fetchUsageStatus();
 
         // Add message to chat
         function addMessage(text, isUser = false, isLoading = false) {
@@ -409,12 +345,6 @@
         async function sendMessage() {
             const message = input.value.trim();
             if (!message) return;
-
-            // Check if limit reached before sending
-            if (remainingQuestions <= 0) {
-                addMessage('You have reached your daily limit of 8 questions. Please try again tomorrow.', false);
-                return;
-            }
 
             // Disable input and send button
             input.disabled = true;
@@ -456,17 +386,10 @@
                 if (!response.ok) {
                     // Try to get error message from response
                     let errorMessage = 'Failed to get response';
-                    let errorData = {};
                     try {
-                        errorData = await response.json();
+                        const errorData = await response.json();
                         errorMessage = errorData.error || errorData.details || errorMessage;
                         console.error('Backend error:', errorData);
-                        
-                        // Handle daily limit reached
-                        if (response.status === 429 && errorData.details && errorData.details.includes('maximum')) {
-                            remainingQuestions = 0;
-                            updateUsageDisplay();
-                        }
                     } catch (e) {
                         // If response isn't JSON, use status text
                         errorMessage = response.statusText || `Server error (${response.status})`;
@@ -484,17 +407,6 @@
                 }
                 
                 const aiResponse = data.response;
-
-                // Update usage if provided
-                if (data.usage) {
-                    remainingQuestions = data.usage.remaining;
-                    totalQuestions = data.usage.total;
-                    updateUsageDisplay();
-                } else {
-                    // Fallback: decrement remaining if not provided
-                    remainingQuestions = Math.max(0, remainingQuestions - 1);
-                    updateUsageDisplay();
-                }
 
                 // Add AI response to UI
                 addMessage(aiResponse, false);
@@ -521,10 +433,6 @@
                     setTimeout(() => {
                         window.location.href = 'login.html';
                     }, 2000);
-                } else if (error.message.includes('Daily question limit reached') || error.message.includes('maximum')) {
-                    errorMsg = `You've reached your daily limit of ${totalQuestions} questions. Please try again tomorrow.`;
-                    remainingQuestions = 0;
-                    updateUsageDisplay();
                 } else if (error.message.includes('Rate limit')) {
                     errorMsg = 'Too many requests. Please wait a moment and try again.';
                 } else if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError') || error.name === 'TypeError') {

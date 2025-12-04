@@ -4,7 +4,7 @@
 4. No Straight Ahead
 5. No Right Turn
 6. No Left Turn
-7. No Overtaking
+7. Overtaking
 8. No Entry For Large Vehicles (3T+)
 9. Max Speed Limit 80km/h
 10. Height Restriction

@@ -78,69 +78,23 @@
         font-size: 16px;
     }
 
-    .progress-bar {
-        width: 100%;
-        height: 8px;
-        background: #32445c;
-        border-radius: 4px;
-        margin-bottom: 30px;
-        overflow: hidden;
-        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
-        border: 1px solid var(--border-subtle);
-        max-width: 900px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .progress-fill {
-        height: 100%;
-        background: var(--button-bg);
-        transition: width 0.4s ease;
-        border-radius: 4px;
-    }
-
-    .question-card {
-        position: relative;
+    .quiz-section {
         border-radius: var(--radius-xl);
         background: var(--bg-card);
         border: 1px solid var(--border-subtle);
         box-shadow: var(--shadow-card);
         padding: 32px;
-        margin-bottom: 24px;
         max-width: 900px;
-        margin-left: auto;
-        margin-right: auto;
+        margin: 0 auto;
     }
 
-    .question-number {
-        color: var(--text-muted);
-        font-size: 14px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        margin-bottom: 16px;
-    }
 
     .quiz-question {
-        font-size: 20px;
-        font-weight: 600;
+        font-size: 24px;
+        font-weight: 700;
         color: var(--text-main);
-        margin-bottom: 24px;
-        line-height: 1.6;
-    }
-
-    .question-sign-container {
-        text-align: center;
         margin-bottom: 32px;
-    }
-
-    .question-sign-image {
-        max-width: 100%;
-        height: auto;
-        border-radius: var(--radius-lg);
-        margin: 0 auto;
-        display: block;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        text-align: center;
     }
 
     .options-container {
@@ -216,73 +170,29 @@
         margin-bottom: 8px;
     }
 
-    .button-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 12px;
+    .next-button {
+        width: 100%;
+        padding: 14px;
+        border-radius: 999px;
+        border: 1px solid var(--primary);
+        background: var(--primary);
+        color: white;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
         margin-top: 24px;
-        padding-top: 24px;
-        border-top: 1px solid var(--border-subtle);
     }
 
-    .btn-previous {
-        border: 1px solid rgba(148, 163, 184, 0.4);
-        background: rgba(15, 23, 42, 0.92);
-        color: var(--text-main);
-        padding: 14px 28px;
-        font-size: 15px;
-        font-weight: 700;
-        border-radius: 999px;
-        cursor: pointer;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .btn-previous:hover {
+    .next-button:hover {
+        background: var(--primary-blue-dark);
         transform: translateY(-1px);
-        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.9);
-        border-color: rgba(129, 140, 248, 0.8);
+        box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
     }
 
-    .btn-submit {
-        border: 1px solid rgba(99, 102, 241, 0.9);
-        background: linear-gradient(120deg, rgba(37, 99, 235, 0.95), rgba(124, 58, 237, 0.95));
-        color: white;
-        padding: 14px 28px;
-        font-size: 15px;
-        font-weight: 700;
-        border-radius: 999px;
-        cursor: pointer;
-        box-shadow: 0 16px 40px rgba(30, 64, 175, 0.85);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .btn-submit:hover:not(:disabled) {
-        transform: translateY(-1px);
-        box-shadow: 0 20px 50px rgba(30, 64, 175, 0.95);
-    }
-
-    .btn-submit:disabled {
-        opacity: 0.6;
+    .next-button:disabled {
+        opacity: 0.5;
         cursor: not-allowed;
-    }
-
-    .btn-continue {
-        border: 1px solid rgba(99, 102, 241, 0.9);
-        background: linear-gradient(120deg, rgba(37, 99, 235, 0.95), rgba(124, 58, 237, 0.95));
-        color: white;
-        padding: 14px 28px;
-        font-size: 15px;
-        font-weight: 700;
-        border-radius: 999px;
-        cursor: pointer;
-        box-shadow: 0 16px 40px rgba(30, 64, 175, 0.85);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .btn-continue:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 20px 50px rgba(30, 64, 175, 0.95);
     }
 
     .btn-back {
@@ -324,14 +234,25 @@
         <p>Test your knowledge of Irish road signs</p>
     </div>
 
-    <!-- Progress Bar -->
-    <div class="progress-bar">
-        <div class="progress-fill" id="progressFill"></div>
-    </div>
+    <!-- Quiz Section -->
+    <div class="quiz-section">
+        <div class="quiz-question" id="questionText">
+            What is the name of sign <span id="signNumber">1</span>?
+        </div>
 
-    <!-- Questions Container -->
-    <div id="questions-container">
-        <!-- Questions will be inserted here -->
+        <div class="question-sign-container">
+            <img id="questionSignImage" class="question-sign-image" src="" alt="Road Sign">
+        </div>
+        
+        <div class="options-container" id="optionsContainer">
+            <!-- Options will be inserted here -->
+        </div>
+
+            <div class="feedback" id="feedback">
+                <div class="feedback-text" id="feedbackText"></div>
+            </div>
+
+            <button class="next-button" id="nextButton" onclick="nextQuestion()" disabled>Next Question</button>
     </div>
 
     <div style="text-align: center;">
@@ -341,13 +262,14 @@
 
 <script>
     let allSignNames = [];
-    let questions = [];
-    let currentQuestionIndex = 0;
-    let selectedAnswers = {}; // Currently selected (not yet submitted)
-    let userAnswers = {}; // Submitted answers
-    const TOTAL_QUESTIONS = 10; // Number of questions to show
+    let currentSignNumber = 1;
+    let currentCorrectAnswer = '';
+    let selectedAnswer = null;
+    let questionAnswered = false;
 
     // Load sign names from signs.txt
+    // Signs are ordered 1-141, where sign number N corresponds to line N
+    // Line 69 contains sign 70 (accounting for missing sign 69)
     async function loadSignNames() {
         try {
             const response = await fetch('signs.txt');
@@ -355,299 +277,199 @@
                 throw new Error('Failed to fetch signs.txt');
             }
             const text = await response.text();
+            // Split by newlines - each line corresponds to a sign
+            // Line 1 = Sign 1, Line 2 = Sign 2, ..., Line 68 = Sign 68, Line 69 = Sign 70, etc.
             const lines = text.split('\n');
             allSignNames = [];
             
             for (let i = 0; i < lines.length; i++) {
                 const trimmed = lines[i].trim();
+                // Remove line numbers if present (e.g., "1. No Entry" -> "No Entry")
                 const cleaned = trimmed.replace(/^\d+\.\s*/, '');
                 if (cleaned.length > 0) {
                     allSignNames.push(cleaned);
                 }
             }
             
-            // Generate questions
-            generateQuestions();
+            // Generate first question
+            generateQuestion();
         } catch (error) {
             console.error('Error loading signs:', error);
-            document.getElementById('questions-container').innerHTML = '<div class="question-card">Error loading sign names. Please ensure signs.txt exists.</div>';
+            document.getElementById('questionText').innerHTML = 'Error loading sign names. Please ensure signs.txt exists.';
         }
     }
 
-    // Get valid sign numbers (excluding 69)
-    function getValidSignNumbers() {
-        const validSignNumbers = [];
-        for (let i = 1; i <= 141; i++) {
-            if (i !== 69) {
-                validSignNumbers.push(i);
-            }
-        }
-        return validSignNumbers;
-    }
-
-    // Get sign name index from sign number
-    function getSignNameIndex(signNumber) {
-        if (signNumber <= 68) {
-            return signNumber - 1;
-        } else {
-            return signNumber - 2;
-        }
-    }
-
-    // Generate questions
-    function generateQuestions() {
-        const validSignNumbers = getValidSignNumbers();
-        const usedSigns = new Set();
-        
-        questions = [];
-        for (let i = 0; i < TOTAL_QUESTIONS; i++) {
-            // Pick a random sign number
-            let signNumber;
-            do {
-                signNumber = validSignNumbers[Math.floor(Math.random() * validSignNumbers.length)];
-            } while (usedSigns.has(signNumber));
-            usedSigns.add(signNumber);
-            
-            const correctIndex = getSignNameIndex(signNumber);
-            const correctAnswer = allSignNames[correctIndex];
-            
-            // Get 3 wrong answers
-            const wrongSignNumbers = [];
-            while (wrongSignNumbers.length < 3) {
-                const randomNum = validSignNumbers[Math.floor(Math.random() * validSignNumbers.length)];
-                if (!usedSigns.has(randomNum) && randomNum !== signNumber) {
-                    wrongSignNumbers.push(randomNum);
-                }
-            }
-            
-            const wrongAnswers = wrongSignNumbers.map(num => allSignNames[getSignNameIndex(num)]);
-            const options = [correctAnswer, ...wrongAnswers];
-            
-            // Shuffle options
-            for (let j = options.length - 1; j > 0; j--) {
-                const k = Math.floor(Math.random() * (j + 1));
-                [options[j], options[k]] = [options[k], options[j]];
-            }
-            
-            const correctAnswerIndex = options.indexOf(correctAnswer);
-            
-            questions.push({
-                id: i + 1,
-                signNumber: signNumber,
-                question: 'What is the name of this sign?',
-                options: options,
-                correctAnswer: correctAnswerIndex,
-                correctAnswerText: correctAnswer
-            });
-        }
-        
-        renderCurrentQuestion();
-        updateProgress();
+    // Get image path for a sign number (handles missing sign 69)
+    function getSignImagePath(signNumber) {
+        const basePath = `All signs test day/${signNumber}`;
+        return basePath;
     }
 
     // Load image with fallback extensions
-    function loadImageWithFallback(signNumber, imgElement) {
+    function loadImageWithFallback(signNumber, callback) {
         const extensions = ['png', 'jpeg', 'jpg', 'webp'];
         let tried = 0;
         
         const tryNext = () => {
             if (tried >= extensions.length) {
-                if (imgElement.parentElement) {
-                    imgElement.parentElement.style.display = 'none';
-                }
+                callback(null);
                 return;
             }
             const path = `All signs test day/${signNumber}.${extensions[tried]}`;
-            imgElement.src = path;
-            tried++;
+            const img = new Image();
+            img.onload = () => callback(path);
+            img.onerror = () => {
+                tried++;
+                tryNext();
+            };
+            img.src = path;
         };
-        
-        imgElement.onerror = tryNext;
-        imgElement.onload = () => {
-            if (imgElement.parentElement) {
-                imgElement.parentElement.style.display = 'block';
-            }
-        };
-        
         tryNext();
     }
 
-    function renderCurrentQuestion() {
-        if (currentQuestionIndex >= questions.length) {
-            showCompletion();
-            return;
-        }
-
-        const container = document.getElementById('questions-container');
-        const q = questions[currentQuestionIndex];
-        const hasSubmitted = userAnswers[currentQuestionIndex] !== undefined;
-        const submittedAnswer = userAnswers[currentQuestionIndex];
-        const selectedAnswer = selectedAnswers[currentQuestionIndex];
-        const isCorrect = hasSubmitted && submittedAnswer === q.correctAnswer;
-
-        // Image
-        const imageHtml = `<div class="question-sign-container" style="display:none;">
-            <img src="" alt="Road Sign" class="question-sign-image" data-sign-number="${q.signNumber}">
-        </div>`;
-
-        // Options
-        const optionsHtml = q.options.map((opt, optIndex) => {
-            const isChecked = hasSubmitted ? (submittedAnswer === optIndex) : (selectedAnswer === optIndex);
-            let classes = 'option-button';
-            
-            if (hasSubmitted) {
-                if (optIndex === q.correctAnswer) {
-                    classes += ' correct';
-                } else if (optIndex === submittedAnswer && optIndex !== q.correctAnswer) {
-                    classes += ' incorrect';
-                }
-            }
-            
-            const isDisabled = hasSubmitted;
-            
-            return `
-                <button class="${classes}" 
-                        ${!hasSubmitted ? `onclick="selectAnswer(${optIndex})"` : ''}
-                        ${isDisabled ? 'disabled' : ''}>
-                    ${opt}
-                </button>
-            `;
-        }).join('');
-
-        // Button container
-        let buttonContainerHtml = '';
-        let hasPrevious = currentQuestionIndex > 0;
+    // Generate a random question
+    function generateQuestion() {
+        // Reset state
+        selectedAnswer = null;
+        questionAnswered = false;
+        document.getElementById('feedback').classList.remove('show', 'correct', 'incorrect');
+        document.getElementById('nextButton').disabled = true;
         
-        if (!hasSubmitted) {
-            buttonContainerHtml = `
-                <div class="button-container">
-                    ${hasPrevious ? `<button class="btn-previous" onclick="previousQuestion()">← Previous</button>` : '<div style="flex: 1;"></div>'}
-                    ${selectedAnswer !== undefined ? `<button class="btn-submit" onclick="submitAnswer()">Submit Answer</button>` : '<div style="flex: 1;"></div>'}
-                </div>
-            `;
-        } else {
-            buttonContainerHtml = `
-                <div class="button-container">
-                    ${hasPrevious ? `<button class="btn-previous" onclick="previousQuestion()">← Previous</button>` : '<div style="flex: 1;"></div>'}
-                    <button class="btn-continue" onclick="continueQuestion()">
-                        ${currentQuestionIndex < questions.length - 1 ? 'Continue →' : 'Finish Quiz'}
-                    </button>
-                </div>
-            `;
-        }
-
-        // Feedback
-        let feedbackHtml = '';
-        if (hasSubmitted) {
-            const feedbackClass = isCorrect ? 'correct' : 'incorrect';
-            const feedbackIcon = isCorrect ? '✓' : '✗';
-            const feedbackText = isCorrect ? 'Correct!' : 'Incorrect';
-            
-            feedbackHtml = `
-                <div class="feedback ${feedbackClass} show">
-                    <div class="feedback-text">${feedbackIcon} ${feedbackText}</div>
-                    ${!isCorrect ? `<div class="feedback-text" style="margin-top: 8px;">The correct answer is: ${q.correctAnswerText}</div>` : ''}
-                </div>
-            `;
-        }
-
-        // Preserve image container if it exists and is for the same question
-        const existingImageContainer = container.querySelector('.question-sign-container');
-        const existingImg = existingImageContainer?.querySelector(`img[data-sign-number="${q.signNumber}"]`);
-        const isSameQuestion = existingImg !== null;
-        const questionCard = container.querySelector('.question-card');
-        
-        // Only update the question card, preserve image if it's the same question
-        const questionCardHtml = `
-            <div class="question-card">
-                <div class="question-number">Question ${currentQuestionIndex + 1} of ${questions.length}</div>
-                <div class="quiz-question">${q.question}</div>
-                <div class="options-container">${optionsHtml}</div>
-                ${buttonContainerHtml}
-                ${feedbackHtml}
-            </div>
-        `;
-        
-        if (isSameQuestion && questionCard) {
-            // Same question - only update the question card, keep image
-            questionCard.outerHTML = questionCardHtml;
-        } else {
-            // Different question, no image, or no question card yet - replace everything
-            container.innerHTML = `
-                ${imageHtml}
-                ${questionCardHtml}
-            `;
-            
-            // Setup image loading safely after DOM is updated
-            const imgElement = container.querySelector(`img[data-sign-number="${q.signNumber}"]`);
-            if (imgElement) {
-                loadImageWithFallback(q.signNumber, imgElement);
+        // Get valid sign numbers (excluding 69)
+        // The txt file has 140 lines, but we need to account for missing sign 69
+        // So valid signs are 1-68 and 70-141 (141 total signs, but 69 is missing)
+        const validSignNumbers = [];
+        for (let i = 1; i <= 141; i++) {
+            if (i !== 69) { // Skip sign 69
+                validSignNumbers.push(i);
             }
         }
-    }
-
-    function selectAnswer(optionIndex) {
-        if (userAnswers[currentQuestionIndex] !== undefined) return;
         
-        // Toggle behavior: if clicking the same option, deselect it
-        if (selectedAnswers[currentQuestionIndex] === optionIndex) {
-            selectedAnswers[currentQuestionIndex] = undefined;
+        // Pick a random sign number from valid ones
+        const randomIndex = Math.floor(Math.random() * validSignNumbers.length);
+        currentSignNumber = validSignNumbers[randomIndex];
+        document.getElementById('signNumber').textContent = currentSignNumber;
+        
+        // Get the correct answer - sign number maps directly to txt file line
+        // The txt file already accounts for missing 69, so:
+        // Sign 1-68 map to lines 1-68 (indices 0-67)
+        // Sign 70+ map to lines 69+ (indices 68+)
+        let correctIndex;
+        if (currentSignNumber <= 68) {
+            correctIndex = currentSignNumber - 1;
         } else {
-            selectedAnswers[currentQuestionIndex] = optionIndex;
+            // Sign 70 = line 69 in txt (index 68), Sign 71 = line 70 (index 69), etc.
+            correctIndex = currentSignNumber - 2;
+        }
+        currentCorrectAnswer = allSignNames[correctIndex];
+        
+        // Display the sign number in the question
+        document.getElementById('signNumber').textContent = currentSignNumber;
+        
+        // Get the question sign image
+        loadImageWithFallback(currentSignNumber, (imagePath) => {
+            if (imagePath) {
+                document.getElementById('questionSignImage').src = imagePath;
+            }
+        });
+        
+        // Get 3 wrong answer sign numbers (excluding the correct one and 69)
+        const wrongSignNumbers = [];
+        const usedNumbers = new Set([currentSignNumber]);
+        
+        while (wrongSignNumbers.length < 3) {
+            const randomNum = validSignNumbers[Math.floor(Math.random() * validSignNumbers.length)];
+            if (!usedNumbers.has(randomNum)) {
+                wrongSignNumbers.push(randomNum);
+                usedNumbers.add(randomNum);
+            }
         }
         
-        renderCurrentQuestion();
+        // Render options with images
+        renderOptionsWithImages(currentSignNumber, wrongSignNumbers);
     }
 
-    function submitAnswer() {
-        if (selectedAnswers[currentQuestionIndex] === undefined) return;
-        userAnswers[currentQuestionIndex] = selectedAnswers[currentQuestionIndex];
-        renderCurrentQuestion();
-    }
-
-    function previousQuestion() {
-        if (currentQuestionIndex > 0) {
-            currentQuestionIndex--;
-            renderCurrentQuestion();
-            updateProgress();
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
         }
     }
 
-    function continueQuestion() {
-        if (currentQuestionIndex < questions.length - 1) {
-            currentQuestionIndex++;
-            renderCurrentQuestion();
-            updateProgress();
+    function renderOptionsWithImages(correctSignNum, wrongSignNums) {
+        const container = document.getElementById('optionsContainer');
+        container.innerHTML = '';
+        
+        // Get sign names for all options
+        let correctIndex = correctSignNum <= 68 ? correctSignNum - 1 : correctSignNum - 2;
+        const correctName = allSignNames[correctIndex];
+        
+        const wrongNames = wrongSignNums.map(signNum => {
+            let index = signNum <= 68 ? signNum - 1 : signNum - 2;
+            return allSignNames[index];
+        });
+        
+        // Create options array with sign names
+        const options = [
+            { name: correctName, isCorrect: true, signNum: correctSignNum },
+            ...wrongNames.map((name, idx) => ({ name: name, isCorrect: false, signNum: wrongSignNums[idx] }))
+        ];
+        
+        // Shuffle options
+        shuffleArray(options);
+        
+        options.forEach((option) => {
+            const button = document.createElement('button');
+            button.className = 'option-button';
+            button.textContent = option.name;
+            button.onclick = () => selectAnswerBySignNum(option.signNum, option.isCorrect, button);
+            button.dataset.signNum = option.signNum;
+            
+            container.appendChild(button);
+        });
+    }
+
+    function selectAnswerBySignNum(signNum, isCorrect, buttonElement) {
+        if (questionAnswered) return;
+        
+        selectedAnswer = signNum;
+        questionAnswered = true;
+        
+        // Disable all buttons
+        document.querySelectorAll('.option-button').forEach(btn => {
+            btn.disabled = true;
+            // Find the correct answer button
+            const btnSignNum = getSignNumFromButton(btn);
+            if (btnSignNum === currentSignNumber) {
+                btn.classList.add('correct');
+            } else if (btn === buttonElement && !isCorrect) {
+                btn.classList.add('incorrect');
+            }
+        });
+        
+        // Show feedback
+        const feedback = document.getElementById('feedback');
+        const feedbackText = document.getElementById('feedbackText');
+        
+        if (isCorrect) {
+            feedback.classList.add('show', 'correct');
+            feedbackText.textContent = '✓ Correct! Well done.';
         } else {
-            showCompletion();
+            feedback.classList.add('show', 'incorrect');
+            feedbackText.textContent = `✗ Incorrect. The correct answer is: ${currentCorrectAnswer}`;
         }
+        
+        // Enable next button
+        document.getElementById('nextButton').disabled = false;
     }
 
-    function updateProgress() {
-        const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
-        document.getElementById('progressFill').style.width = progress + '%';
+    function getSignNumFromButton(button) {
+        // Get sign number from data attribute
+        return parseInt(button.dataset.signNum) || null;
     }
 
-    function showCompletion() {
-        const correct = Object.keys(userAnswers).filter(i => 
-            userAnswers[i] === questions[i].correctAnswer
-        ).length;
-        const total = questions.length;
-        const percentage = Math.round((correct / total) * 100);
-
-        document.getElementById('questions-container').innerHTML = `
-            <div class="question-card">
-                <h2 style="text-align: center; margin-bottom: 16px;">Quiz Complete!</h2>
-                <p style="text-align: center; font-size: 18px; margin-bottom: 24px;">
-                    You got ${correct} out of ${total} questions correct (${percentage}%)
-                </p>
-                <div class="button-container">
-                    <div style="flex: 1;"></div>
-                    <button class="btn-continue" onclick="location.reload()">Take Another Quiz</button>
-                </div>
-            </div>
-        `;
-        document.getElementById('progressFill').style.width = '100%';
+    function nextQuestion() {
+        generateQuestion();
     }
 
     // Load on page load

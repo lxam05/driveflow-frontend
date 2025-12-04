@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cinematic Scroll With Sections</title>
 
 <style>
@@ -38,8 +38,6 @@
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        -webkit-overflow-scrolling: touch;
-        touch-action: pan-y;
     }
 
     /* ---------------- HEADER ---------------- */
@@ -539,7 +537,7 @@
         <li><a onclick="goTo('lessons')">Lessons</a></li>
         <li><a onclick="goTo('booking')">Booking Test</a></li>
         <li><a onclick="goTo('preparing')">Preparing for Test</a></li>
-        <li><a onclick="goTo('newdriver')">New Driver - Coming Soon!</a></li>
+        <li><a onclick="goTo('newdriver')">New Driver</a></li>
     </ul>
 </nav>
 
@@ -551,7 +549,7 @@
         <h3>Getting Started</h3>
         <p>Kick off your driving journey with the essentials.</p>
         <ul>
-            <li><a href="how-to-book-theory-test.html?from=getting&page=main">How to Book Your Theory Test</a></li>
+            <li><a href="booking.html?from=getting&page=main">How to Book Your Theory Test</a></li>
             <li><a href="getting-started.html?from=getting&page=main">Getting Started Checklist</a></li>
         </ul>
     </div>
@@ -608,12 +606,12 @@
 <!-- New Driver — RIGHT -->
 <div id="section-newdriver" class="section" data-section="newdriver">
     <div class="infoCard rightCard">
-        <h3>New Driver Life - Coming Soon!</h3>
+        <h3>New Driver Life</h3>
         <p>Staying safe and confident after you pass.</p>
         <ul>
-            <li>Insurance Tips</li>
-            <li>Choosing Your First Car</li>
-            <li>Motorway Confidence</li>
+            <li><a href="new-driver.html#insurance">Insurance Tips</a></li>
+            <li><a href="new-driver.html#first-car">Choosing Your First Car</a></li>
+            <li><a href="new-driver.html#motorway">Motorway Confidence</a></li>
         </ul>
     </div>
 </div>
@@ -773,34 +771,6 @@ function handleWheel(e){
     updateEverything();
 }
 window.addEventListener("wheel", handleWheel, { passive: false });
-
-/* touch scrolling for mobile devices */
-let touchStartY = 0;
-let touchStartScrollPos = 0;
-let isTouching = false;
-
-function handleTouchStart(e) {
-    touchStartY = e.touches[0].clientY;
-    touchStartScrollPos = scrollPos;
-    isTouching = true;
-}
-
-function handleTouchMove(e) {
-    if (!isTouching) return;
-    e.preventDefault();
-    const touchY = e.touches[0].clientY;
-    const deltaY = touchStartY - touchY; // Inverted because we want to scroll up when swiping up
-    scrollPos = touchStartScrollPos + deltaY;
-    updateEverything();
-}
-
-function handleTouchEnd(e) {
-    isTouching = false;
-}
-
-window.addEventListener("touchstart", handleTouchStart, { passive: false });
-window.addEventListener("touchmove", handleTouchMove, { passive: false });
-window.addEventListener("touchend", handleTouchEnd, { passive: true });
 
 /* smooth scroll to position */
 function scrollToPosition(targetY){
