@@ -444,6 +444,142 @@
         display: block;
     }
 
+    /* Waitlist Section */
+    .waitlist-section {
+        grid-column: 1 / -1;
+        background: linear-gradient(135deg, rgba(111, 255, 233, 0.1) 0%, rgba(91, 192, 190, 0.15) 100%);
+        border: 2px solid var(--accent);
+        border-radius: var(--radius-xl);
+        padding: 40px;
+        margin-bottom: 40px;
+        text-align: center;
+        box-shadow: 0 8px 32px rgba(111, 255, 233, 0.2);
+    }
+
+    .waitlist-section h2 {
+        margin: 0 0 12px;
+        color: var(--accent);
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+    }
+
+    .waitlist-section .subtitle {
+        margin: 0 0 24px;
+        color: var(--text-muted);
+        font-size: 16px;
+    }
+
+    .waitlist-form {
+        max-width: 500px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .waitlist-input-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        text-align: left;
+    }
+
+    .waitlist-input-group label {
+        color: var(--text-main);
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .waitlist-input-group input,
+    .waitlist-input-group select {
+        padding: 14px 16px;
+        border-radius: 8px;
+        border: 1px solid var(--border-subtle);
+        background: rgba(15, 23, 42, 0.6);
+        color: var(--text-main);
+        font-size: 15px;
+        font-family: inherit;
+        transition: all 0.2s ease;
+    }
+
+    .waitlist-input-group input:focus,
+    .waitlist-input-group select:focus {
+        outline: none;
+        border-color: var(--accent);
+        background: rgba(15, 23, 42, 0.8);
+    }
+
+    .waitlist-input-group input::placeholder {
+        color: var(--text-muted);
+    }
+
+    .btn-waitlist {
+        padding: 14px 32px;
+        border-radius: 999px;
+        border: none;
+        background: linear-gradient(120deg, rgba(37, 99, 235, 0.95), rgba(124, 58, 237, 0.95));
+        color: white;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 8px 24px rgba(30, 64, 175, 0.4);
+        margin-top: 8px;
+    }
+
+    .btn-waitlist:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px rgba(30, 64, 175, 0.6);
+    }
+
+    .btn-waitlist:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    .waitlist-message {
+        margin-top: 16px;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .waitlist-message.success {
+        background: rgba(34, 197, 94, 0.1);
+        border: 1px solid rgba(34, 197, 94, 0.3);
+        color: #bbf7d0;
+    }
+
+    .waitlist-message.error {
+        background: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        color: #fecaca;
+    }
+
+    .discount-badge {
+        display: inline-block;
+        margin-top: 16px;
+        padding: 8px 16px;
+        background: rgba(34, 197, 94, 0.2);
+        border: 1px solid rgba(34, 197, 94, 0.4);
+        border-radius: 8px;
+        color: #bbf7d0;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+        .waitlist-section {
+            padding: 28px 20px;
+        }
+        
+        .waitlist-section h2 {
+            font-size: 24px;
+        }
+    }
+
     /* Value Proposition Section */
     .value-proposition {
         grid-column: 1 / -1;
@@ -522,6 +658,52 @@
         <p>
             If you want the highest chance of passing first time, this is the smartest money you'll spend.
         </p>
+    </div>
+
+    <div class="waitlist-section">
+        <h2>🚀 Want a Specific Test Route?</h2>
+        <p class="subtitle">Join the waitlist and get an exclusive discount when it's released!</p>
+        <div class="discount-badge">🎁 Early Signup Discount Available</div>
+        
+        <form class="waitlist-form" id="waitlistForm">
+            <div class="waitlist-input-group">
+                <label for="waitlistEmail">Your Email</label>
+                <input 
+                    type="email" 
+                    id="waitlistEmail" 
+                    placeholder="your.email@example.com" 
+                    required
+                    autocomplete="email"
+                >
+            </div>
+            
+            <div class="waitlist-input-group">
+                <label for="waitlistCentre">Test Centre</label>
+                <select id="waitlistCentre" required>
+                    <option value="">Select a test centre...</option>
+                    <option value="Naas">Naas</option>
+                    <option value="Tallaght">Tallaght</option>
+                    <option value="Other">Other (specify in notes)</option>
+                </select>
+            </div>
+            
+            <div class="waitlist-input-group">
+                <label for="waitlistRoute">Route Number (Optional)</label>
+                <input 
+                    type="number" 
+                    id="waitlistRoute" 
+                    placeholder="e.g., 1, 2, 3..." 
+                    min="1"
+                >
+                <small style="color: var(--text-muted); font-size: 12px; margin-top: 4px;" id="waitlistRouteHint"></small>
+            </div>
+            
+            <button type="submit" class="btn-waitlist" id="waitlistSubmit">
+                Join Waitlist & Get Discount
+            </button>
+            
+            <div id="waitlistMessage" class="waitlist-message" style="display: none;"></div>
+        </form>
     </div>
 
     <div class="selection-card">
@@ -1025,8 +1207,41 @@
     const testCentres = [
         { name: "Naas", routes: 7 },
         { name: "Tallaght", routes: 7 },
-
     ];
+
+    // Populate waitlist test centre dropdown
+    function populateWaitlistDropdown() {
+        const waitlistCentreSelect = document.getElementById('waitlistCentre');
+        if (!waitlistCentreSelect) return;
+
+        // Clear existing options except the first one
+        waitlistCentreSelect.innerHTML = '<option value="">Select a test centre...</option>';
+        
+        // Add all test centres
+        testCentres.forEach(centre => {
+            const option = document.createElement('option');
+            option.value = centre.name;
+            option.textContent = centre.name;
+            waitlistCentreSelect.appendChild(option);
+        });
+        
+        // Add "Other" option
+        const otherOption = document.createElement('option');
+        otherOption.value = 'Other';
+        otherOption.textContent = 'Other (specify in notes)';
+        waitlistCentreSelect.appendChild(otherOption);
+
+        // Update route hint when centre is selected
+        waitlistCentreSelect.addEventListener('change', (e) => {
+            const selectedCentre = testCentres.find(c => c.name === e.target.value);
+            const routeHint = document.getElementById('waitlistRouteHint');
+            if (selectedCentre && routeHint) {
+                routeHint.textContent = `${selectedCentre.name} has ${selectedCentre.routes} routes available`;
+            } else {
+                routeHint.textContent = '';
+            }
+        });
+    }
 
     let selectedCentre = null;
 
@@ -1110,6 +1325,7 @@
 
     // Initialize
     initCentres();
+    populateWaitlistDropdown();
 
     // Paywall modal handlers
     document.getElementById('purchaseBtn').addEventListener('click', initiatePurchase);
@@ -1121,6 +1337,78 @@
             hidePaywall();
         }
     });
+
+    // Waitlist form handler
+    const waitlistForm = document.getElementById('waitlistForm');
+    const waitlistMessage = document.getElementById('waitlistMessage');
+    const waitlistSubmit = document.getElementById('waitlistSubmit');
+
+    waitlistForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const email = document.getElementById('waitlistEmail').value.trim();
+        const testCentre = document.getElementById('waitlistCentre').value;
+        const routeNumber = document.getElementById('waitlistRoute').value 
+            ? parseInt(document.getElementById('waitlistRoute').value) 
+            : null;
+
+        // Validate
+        if (!email || !testCentre) {
+            showWaitlistMessage('Please fill in all required fields.', 'error');
+            return;
+        }
+
+        // Disable submit button
+        waitlistSubmit.disabled = true;
+        waitlistSubmit.textContent = 'Joining Waitlist...';
+        waitlistMessage.style.display = 'none';
+
+        try {
+            const response = await fetch(`${API_URL}/routes/waitlist`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email,
+                    testCentre: testCentre,
+                    routeNumber: routeNumber
+                })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                if (data.alreadyExists) {
+                    showWaitlistMessage('You are already on the waitlist for this route! We\'ll notify you when it\'s available.', 'success');
+                } else {
+                    showWaitlistMessage(
+                        `Successfully joined the waitlist! You'll receive an email with your discount code when ${testCentre}${routeNumber ? ` Route ${routeNumber}` : ''} is released.`,
+                        'success'
+                    );
+                    // Reset form
+                    waitlistForm.reset();
+                }
+            } else {
+                showWaitlistMessage(data.error || 'Failed to join waitlist. Please try again.', 'error');
+            }
+        } catch (err) {
+            console.error('Waitlist error:', err);
+            showWaitlistMessage('Network error. Please check your connection and try again.', 'error');
+        } finally {
+            waitlistSubmit.disabled = false;
+            waitlistSubmit.textContent = 'Join Waitlist & Get Discount';
+        }
+    });
+
+    function showWaitlistMessage(message, type) {
+        waitlistMessage.textContent = message;
+        waitlistMessage.className = `waitlist-message ${type}`;
+        waitlistMessage.style.display = 'block';
+        
+        // Scroll to message
+        waitlistMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
 </script>
 
 <script src="chatbot-widget.js"></script>
