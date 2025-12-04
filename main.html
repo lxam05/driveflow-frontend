@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>Cinematic Scroll With Sections</title>
 
 <style>
@@ -38,6 +38,8 @@
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-y;
     }
 
     /* ---------------- HEADER ---------------- */
@@ -771,6 +773,34 @@ function handleWheel(e){
     updateEverything();
 }
 window.addEventListener("wheel", handleWheel, { passive: false });
+
+/* touch scrolling for mobile devices */
+let touchStartY = 0;
+let touchStartScrollPos = 0;
+let isTouching = false;
+
+function handleTouchStart(e) {
+    touchStartY = e.touches[0].clientY;
+    touchStartScrollPos = scrollPos;
+    isTouching = true;
+}
+
+function handleTouchMove(e) {
+    if (!isTouching) return;
+    e.preventDefault();
+    const touchY = e.touches[0].clientY;
+    const deltaY = touchStartY - touchY; // Inverted because we want to scroll up when swiping up
+    scrollPos = touchStartScrollPos + deltaY;
+    updateEverything();
+}
+
+function handleTouchEnd(e) {
+    isTouching = false;
+}
+
+window.addEventListener("touchstart", handleTouchStart, { passive: false });
+window.addEventListener("touchmove", handleTouchMove, { passive: false });
+window.addEventListener("touchend", handleTouchEnd, { passive: true });
 
 /* smooth scroll to position */
 function scrollToPosition(targetY){
