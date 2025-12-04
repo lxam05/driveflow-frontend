@@ -555,6 +555,7 @@
         const existingImageContainer = container.querySelector('.question-sign-container');
         const existingImg = existingImageContainer?.querySelector(`img[data-sign-number="${q.signNumber}"]`);
         const isSameQuestion = existingImg !== null;
+        const questionCard = container.querySelector('.question-card');
         
         // Only update the question card, preserve image if it's the same question
         const questionCardHtml = `
@@ -567,14 +568,11 @@
             </div>
         `;
         
-        if (isSameQuestion) {
+        if (isSameQuestion && questionCard) {
             // Same question - only update the question card, keep image
-            const questionCard = container.querySelector('.question-card');
-            if (questionCard) {
-                questionCard.outerHTML = questionCardHtml;
-            }
+            questionCard.outerHTML = questionCardHtml;
         } else {
-            // Different question or no image - replace everything
+            // Different question, no image, or no question card yet - replace everything
             container.innerHTML = `
                 ${imageHtml}
                 ${questionCardHtml}
