@@ -572,8 +572,8 @@
 
         // Check license status
         if (!hasLicense) {
-            pendingRoute = { centre, routeNumber };
-            showPaywall();
+            // Redirect to preview page
+            window.location.href = `route-preview.html?centre=${encodeURIComponent(centre.name)}&route=${routeNumber}&name=${encodeURIComponent(`Route ${routeNumber}`)}`;
             return;
         }
 
@@ -598,8 +598,8 @@
                 const error = await response.json();
                 if (error.error && error.error.includes('license')) {
                     hasLicense = false;
-                    pendingRoute = { centre, routeNumber };
-                    showPaywall();
+                    // Redirect to preview page
+                    window.location.href = `route-preview.html?centre=${encodeURIComponent(centre.name)}&route=${routeNumber}&name=${encodeURIComponent(`Route ${routeNumber}`)}`;
                 } else {
                     alert('Failed to generate link. Please try again.');
                 }
