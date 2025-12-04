@@ -443,6 +443,62 @@
     #purchaseButtonContainer {
         display: block;
     }
+
+    /* Value Proposition Section */
+    .value-proposition {
+        grid-column: 1 / -1;
+        background: linear-gradient(135deg, rgba(91, 192, 190, 0.15) 0%, rgba(111, 255, 233, 0.1) 100%);
+        border: 2px solid var(--primary);
+        border-radius: var(--radius-xl);
+        padding: 40px;
+        margin-bottom: 40px;
+        text-align: center;
+        box-shadow: 0 8px 32px rgba(91, 192, 190, 0.2);
+    }
+
+    .value-proposition h2 {
+        margin: 0 0 20px;
+        color: var(--primary);
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+    }
+
+    .value-proposition p {
+        margin: 0 0 16px;
+        color: var(--text-main);
+        font-size: 17px;
+        line-height: 1.7;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .value-proposition p:last-child {
+        margin-bottom: 0;
+        font-weight: 600;
+        color: var(--accent);
+        font-size: 18px;
+    }
+
+    .value-proposition .highlight {
+        color: var(--primary);
+        font-weight: 700;
+    }
+
+    @media (max-width: 768px) {
+        .value-proposition {
+            padding: 28px 20px;
+        }
+        
+        .value-proposition h2 {
+            font-size: 24px;
+        }
+        
+        .value-proposition p {
+            font-size: 15px;
+        }
+    }
 </style>
 </head>
 <body>
@@ -451,6 +507,21 @@
     <div class="page-header">
         <h1>Test Routes</h1>
         <p>Practice the actual routes used in driving tests at each centre</p>
+    </div>
+
+    <div class="value-proposition">
+        <h2>Why These Routes Matter</h2>
+        <p>
+            These routes are the <span class="highlight">closest thing to doing your test before the real day</span>.
+        </p>
+        <p>
+            Built from real Irish test-centre patterns and recreated turn-for-turn with seamless Google Maps integration, 
+            you won't find this anywhere else. Skip the extra lessons and guesswork — drive the exact roads examiners use 
+            and know every tricky spot before it counts.
+        </p>
+        <p>
+            If you want the highest chance of passing first time, this is the smartest money you'll spend.
+        </p>
     </div>
 
     <div class="selection-card">
