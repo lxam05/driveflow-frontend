@@ -573,9 +573,15 @@
                 body: JSON.stringify({ amount: price })
             });
 
-            if (!response.ok) throw new Error('Failed to create payment');
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+                throw new Error(errorData.error || errorData.details || 'Failed to create payment');
+            }
 
             const data = await response.json();
+            if (!data.clientSecret || !data.paymentIntentId) {
+                throw new Error('Invalid response from server');
+            }
             currentPaymentIntentId = data.paymentIntentId;
 
             // Show payment form
@@ -597,7 +603,10 @@
 
         } catch (err) {
             console.error('Payment error:', err);
-            alert('Failed to start payment. Please try again.');
+            const errorMsg = err.message || 'Failed to start payment. Please try again.';
+            alert(errorMsg);
+            document.getElementById('unlockButtons').style.display = 'block';
+            document.getElementById('paymentForm').classList.remove('show');
         }
     }
 
@@ -623,29 +632,11 @@
                 if (selectedOption === 'bundle') {
                     window.location.href = '/routes.html?payment=success';
                 } else {
-                    // Single route purchase - redirect to route
-                    if (redirectUrl) {
-                        window.location.href = redirectUrl;
-                    } else if (routeId && (centreName === 'Naas' || centreName === 'Tallaght')) {
-                        // Generate token and redirect
-                        const token = localStorage.getItem('auth_token');
-                        const endpoint = centreName === 'Naas' 
-                            ? '/routes/generate-naas-token'
-                            : '/routes/generate-tallaght-token';
-                        const routeEndpoint = centreName === 'Naas'
-                            ? '/routes/naas-route'
-                            : '/routes/tallaght-route';
-                        
-                        fetch(`${API_URL}${endpoint}`, {
-                            headers: { 'Authorization': `Bearer ${token}` }
-                        })
-                        .then(res => res.json())
-                        .then(data => {
-                            window.location.href = `${API_URL}${routeEndpoint}/${data.token}/${routeId}`;
-                        });
-                    } else {
-                        window.location.href = '/routes.html?payment=success';
-                    }
+                    // Single route purchase - redirect to routes page
+                    // Note: Single route access will be granted after webhook processes payment
+                    setTimeout(() => {
+                        window.location.href = '/routes.html?payment=success&single=true';
+                    }, 2000);
                 }
                 return;
             }
