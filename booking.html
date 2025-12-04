@@ -92,7 +92,6 @@
         grid-template-rows: auto auto;
         gap: 24px;
         margin-bottom: 40px;
-        align-items: start;
     }
 
     .dashboard-card {
@@ -111,7 +110,7 @@
 
     .card-large {
         grid-column: 1;
-        grid-row: 1;
+        grid-row: 1 / 2;
     }
 
     .card-medium {
@@ -139,7 +138,7 @@
 
     .map-container {
         width: 100%;
-        height: 580px;
+        height: 500px;
         border-radius: var(--radius-lg);
         overflow: hidden;
         background: var(--bg-card);
@@ -249,15 +248,6 @@
         overflow-y: auto;
     }
 
-    /* Adjust heights for specific cards */
-    .card-medium .centre-list {
-        max-height: 420px;
-    }
-
-    .card-wait-times .centre-list {
-        max-height: 240px;
-    }
-
     .centre-item {
         padding: 16px;
         margin-bottom: 12px;
@@ -305,7 +295,7 @@
     }
 
     .reviews-container {
-        max-height: 420px;
+        max-height: 500px;
         overflow-y: auto;
     }
 
