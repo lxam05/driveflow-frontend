@@ -99,7 +99,7 @@
     #mainHeader .header-left {
         grid-column: 1;
         justify-self: start;
-        display: flex;
+        display: none; /* Hidden - no content needed */
         align-items: center;
     }
     #mainHeader .header-left a {
@@ -349,6 +349,7 @@
         #mainHeader .header-left {
             grid-column: 1;
             justify-self: start;
+            display: none; /* Hidden on mobile too */
         }
         #mainHeader .header-left a {
             font-size: 12px;
@@ -697,7 +698,6 @@
 <header id="mainHeader">
     <div class="header-content">
         <div class="header-left">
-            <a href="dashboard.html">Dashboard</a>
         </div>
         <h1>Welcome to DriveFlow</h1>
         <div class="header-right">
