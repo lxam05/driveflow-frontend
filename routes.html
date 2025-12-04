@@ -262,13 +262,11 @@
     }
 
     .routes-sidebar {
-        position: sticky;
-        top: 120px;
+        position: static;
     }
 
     @media (max-width: 1024px) {
         .routes-sidebar {
-            position: static;
             margin-top: 40px;
         }
     }
@@ -695,7 +693,7 @@
                     required
                     autocomplete="email"
                 >
-            </div>
+</div>
             
             <div class="waitlist-input-group">
                 <label for="waitlistCentre">Test Centre Name</label>
@@ -1351,7 +1349,7 @@
             if (response.ok) {
                 if (data.alreadyExists) {
                     showWaitlistMessage('You are already on the waitlist for this test centre! We\'ll notify you when it\'s available.', 'success');
-                } else {
+        } else {
                     showWaitlistMessage(
                         `Successfully joined the waitlist! You'll receive an email with your discount code when ${testCentre} routes are released.`,
                         'success'
