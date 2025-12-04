@@ -574,8 +574,14 @@
             });
 
             if (!response.ok) {
-                const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
-                throw new Error(errorData.error || errorData.details || 'Failed to create payment');
+                let errorData;
+                try {
+                    errorData = await response.json();
+                } catch (e) {
+                    errorData = { error: `Server error: ${response.status} ${response.statusText}` };
+                }
+                const errorMsg = errorData.error || errorData.details || `Failed to create payment (${response.status})`;
+                throw new Error(errorMsg);
             }
 
             const data = await response.json();
@@ -589,22 +595,45 @@
             document.getElementById('paymentForm').classList.add('show');
 
             // Create payment element
+            if (!data.clientSecret) {
+                throw new Error('No client secret received from server');
+            }
+
             if (!elements) {
-                elements = stripe.elements({
-                    clientSecret: data.clientSecret,
-                    appearance: { theme: 'night' }
-                });
+                try {
+                    elements = stripe.elements({
+                        clientSecret: data.clientSecret,
+                        appearance: { theme: 'night' }
+                    });
+                } catch (stripeErr) {
+                    console.error('Stripe elements error:', stripeErr);
+                    throw new Error('Failed to initialize payment form. Please try again.');
+                }
             }
 
             if (!paymentElement) {
-                paymentElement = elements.create('payment');
-                paymentElement.mount('#payment-element');
+                try {
+                    paymentElement = elements.create('payment');
+                    paymentElement.mount('#payment-element');
+                } catch (mountErr) {
+                    console.error('Payment element mount error:', mountErr);
+                    throw new Error('Failed to load payment form. Please refresh and try again.');
+                }
             }
 
         } catch (err) {
             console.error('Payment error:', err);
-            const errorMsg = err.message || 'Failed to start payment. Please try again.';
-            alert(errorMsg);
+            let errorMsg = 'Failed to start payment. Please try again.';
+            if (err && typeof err === 'object') {
+                if (err.message) {
+                    errorMsg = err.message;
+                } else if (err.error) {
+                    errorMsg = err.error;
+                } else if (typeof err === 'string') {
+                    errorMsg = err;
+                }
+            }
+            alert(`Payment Error: ${errorMsg}`);
             document.getElementById('unlockButtons').style.display = 'block';
             document.getElementById('paymentForm').classList.remove('show');
         }
@@ -650,7 +679,17 @@
             }
         } catch (err) {
             console.error('Payment error:', err);
-            alert('Payment failed. Please try again.');
+            let errorMsg = 'Payment failed. Please try again.';
+            if (err && typeof err === 'object') {
+                if (err.message) {
+                    errorMsg = err.message;
+                } else if (err.error) {
+                    errorMsg = err.error;
+                }
+            } else if (typeof err === 'string') {
+                errorMsg = err;
+            }
+            alert(`Payment Error: ${errorMsg}`);
             submitBtn.disabled = false;
             document.getElementById('submitPaymentText').style.display = 'inline';
             document.getElementById('submitPaymentSpinner').style.display = 'none';
