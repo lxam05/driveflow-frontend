@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Complete Your Purchase | DriveFlow</title>
+<title>Unlock Driving Test Routes | DriveFlow</title>
 
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
@@ -73,25 +73,149 @@
         box-shadow: var(--shadow-card);
     }
 
-    .payment-section h1 {
+    /* Pre-checkout Screen */
+    .pre-checkout-screen {
+        display: block;
+    }
+
+    .pre-checkout-screen.hidden {
+        display: none;
+    }
+
+    .pre-checkout-screen h1 {
+        margin: 0 0 16px;
+        font-size: 32px;
+        font-weight: 800;
+        color: var(--text-main);
+        line-height: 1.2;
+    }
+
+    .pre-checkout-screen .subtitle {
+        margin: 0 0 32px;
+        color: var(--text-muted);
+        font-size: 18px;
+        line-height: 1.6;
+    }
+
+    .includes-list {
+        list-style: none;
+        padding: 0;
+        margin: 24px 0;
+    }
+
+    .includes-list li {
+        padding: 12px 0;
+        color: var(--text-main);
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .includes-list li::before {
+        content: '✓';
+        color: var(--accent);
+        font-weight: 700;
+        font-size: 20px;
+        flex-shrink: 0;
+    }
+
+    .price-info {
+        background: var(--primary-soft);
+        border: 1px solid var(--primary);
+        border-radius: 12px;
+        padding: 20px;
+        margin: 32px 0;
+        text-align: center;
+    }
+
+    .price-info .price {
+        font-size: 36px;
+        font-weight: 800;
+        color: var(--primary);
         margin: 0 0 8px;
-        font-size: 28px;
+    }
+
+    .price-info .price-label {
+        color: var(--text-muted);
+        font-size: 14px;
+        margin: 0;
+    }
+
+    .trust-badge {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--text-muted);
+        font-size: 14px;
+        margin-top: 16px;
+        justify-content: center;
+    }
+
+    .trust-badge svg {
+        width: 18px;
+        height: 18px;
+        fill: var(--accent);
+    }
+
+    .btn-unlock {
+        width: 100%;
+        padding: 18px 32px;
+        border-radius: 999px;
+        border: none;
+        background: linear-gradient(120deg, rgba(37, 99, 235, 0.95), rgba(124, 58, 237, 0.95));
+        color: white;
+        font-size: 18px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 24px;
+        box-shadow: 0 8px 24px rgba(30, 64, 175, 0.4);
+    }
+
+    .btn-unlock:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px rgba(30, 64, 175, 0.6);
+    }
+
+    .scarcity-trust {
+        margin-top: 24px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border-subtle);
+    }
+
+    .scarcity-trust p {
+        margin: 8px 0;
+        color: var(--text-muted);
+        font-size: 14px;
+        text-align: center;
+        line-height: 1.6;
+    }
+
+    .scarcity-trust p strong {
+        color: var(--text-main);
+    }
+
+    /* Payment Form Screen */
+    .payment-form-screen {
+        display: none;
+    }
+
+    .payment-form-screen.show {
+        display: block;
+    }
+
+    .payment-form-screen h2 {
+        margin: 0 0 8px;
+        font-size: 24px;
         font-weight: 800;
         color: var(--text-main);
     }
 
-    .payment-section .subtitle {
+    .payment-form-screen .subtitle {
         margin: 0 0 32px;
         color: var(--text-muted);
         font-size: 16px;
-    }
-
-    .price-display {
-        font-size: 36px;
-        font-weight: 800;
-        color: var(--primary);
-        margin: 24px 0;
-        text-align: center;
     }
 
     #payment-element {
@@ -161,6 +285,7 @@
         color: #ef4444;
     }
 
+    /* Benefits Section */
     .benefits-section h2 {
         margin: 0 0 24px;
         font-size: 24px;
@@ -168,14 +293,93 @@
         color: var(--text-main);
     }
 
-    .benefits-content {
-        color: var(--text-muted);
-        font-size: 16px;
-        line-height: 1.7;
+    .what-you-get {
+        margin-bottom: 32px;
     }
 
-    .benefits-content p {
-        margin: 0 0 16px;
+    .what-you-get h3 {
+        margin: 0 0 20px;
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--text-main);
+    }
+
+    .benefits-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .benefits-list li {
+        padding: 12px 0;
+        color: var(--text-main);
+        font-size: 16px;
+        line-height: 1.6;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .benefits-list li::before {
+        content: '•';
+        color: var(--accent);
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 1;
+        flex-shrink: 0;
+        margin-top: -2px;
+    }
+
+    .visual-preview {
+        margin: 32px 0;
+        padding: 40px;
+        background: rgba(15, 23, 42, 0.4);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-lg);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .visual-preview::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: 
+            repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(91, 192, 190, 0.05) 10px,
+                rgba(91, 192, 190, 0.05) 20px
+            );
+        filter: blur(8px);
+    }
+
+    .map-icon {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 20px;
+        position: relative;
+        z-index: 1;
+        opacity: 0.7;
+    }
+
+    .map-icon svg {
+        width: 100%;
+        height: 100%;
+        fill: var(--primary);
+    }
+
+    .visual-preview-text {
+        position: relative;
+        z-index: 1;
+        color: var(--text-muted);
+        font-size: 14px;
+        margin: 0;
     }
 
     .loading-state {
@@ -205,36 +409,93 @@
 
 <div class="payment-container">
     <div class="payment-layout">
-        <!-- Payment Form Section (Left) -->
+        <!-- Payment Section (Left) -->
         <div class="payment-section">
-            <h1>Complete Your Purchase</h1>
-            <p class="subtitle">Secure payment powered by Stripe</p>
-            
-            <div class="price-display" id="priceDisplay">€13.99</div>
+            <!-- Pre-checkout Screen -->
+            <div class="pre-checkout-screen" id="preCheckoutScreen">
+                <h1>Pass the Driving Test With Confidence</h1>
+                <p class="subtitle">Unlock the full suite of routes used by instructors and examiners.</p>
 
-            <div id="loadingState" class="loading-state" style="display: none;">
-                <div class="spinner"></div>
-                <p>Loading payment form...</p>
-            </div>
+                <ul class="includes-list">
+                    <li>7 hand-mapped routes</li>
+                    <li>Safe turn-by-turn order</li>
+                    <li>Test-style maneuvers</li>
+                    <li>No ads, no subscriptions</li>
+                    <li>Instant access after payment</li>
+                </ul>
 
-            <div id="paymentFormContainer" style="display: none;">
-                <div id="payment-element"></div>
-                <div id="payment-errors" role="alert"></div>
-                <button id="submitPaymentBtn" class="btn-submit">
-                    <span id="submitPaymentText">Pay Now</span>
-                    <span id="submitPaymentSpinner" style="display: none;">Processing...</span>
+                <div class="price-info">
+                    <div class="price">€13.99</div>
+                    <p class="price-label">One-time payment</p>
+                </div>
+
+                <div class="trust-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        <path d="M9 12l2 2 4-4"/>
+                    </svg>
+                    <span>Trusted, secure payment by Stripe</span>
+                </div>
+
+                <button class="btn-unlock" id="unlockBtn" onclick="showPaymentForm()">
+                    Unlock Routes (€13.99)
                 </button>
+
+                <div class="scarcity-trust">
+                    <p><strong>Used by 1,200+ learner drivers</strong></p>
+                    <p>Failing the test costs €85 — get the routes for less</p>
+                    <p><strong>1-time purchase. Lifetime access.</strong></p>
+                </div>
+
+                <a href="routes.html" class="btn-back">← Back to Routes</a>
             </div>
 
-            <a href="routes.html" class="btn-back">← Back to Routes</a>
+            <!-- Payment Form Screen -->
+            <div class="payment-form-screen" id="paymentFormScreen">
+                <h2>Complete Your Purchase</h2>
+                <p class="subtitle">Enter your payment details below</p>
+
+                <div id="loadingState" class="loading-state" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Loading payment form...</p>
+                </div>
+
+                <div id="paymentFormContainer" style="display: none;">
+                    <div id="payment-element"></div>
+                    <div id="payment-errors" role="alert"></div>
+                    <button id="submitPaymentBtn" class="btn-submit">
+                        <span id="submitPaymentText">Complete Payment</span>
+                        <span id="submitPaymentSpinner" style="display: none;">Processing...</span>
+                    </button>
+                </div>
+
+                <button class="btn-back" onclick="showPreCheckout()" style="background: transparent; border: 1px solid var(--border-subtle); color: var(--text-muted); padding: 10px 20px; border-radius: 999px; cursor: pointer; width: 100%; margin-top: 20px;">← Back</button>
+            </div>
         </div>
 
-        <!-- Why Buy Section (Right) -->
+        <!-- What You'll Get Section (Right) -->
         <div class="benefits-section">
-            <h2>Why Buy This?</h2>
-            <div class="benefits-content" id="benefitsContent">
-                <!-- Content will be added here by user -->
-                <p>Your content will appear here.</p>
+            <h2>What You'll Get</h2>
+            
+            <div class="what-you-get">
+                <h3>Driving Test Routes (Full Access)</h3>
+                <ul class="benefits-list">
+                    <li>7 routes used by real examiners</li>
+                    <li>Includes roundabouts, speed zones, tricky turns</li>
+                    <li>Each route 100% accurate</li>
+                    <li>Updated regularly</li>
+                    <li>Pass-focused structure</li>
+                </ul>
+            </div>
+
+            <div class="visual-preview">
+                <div class="map-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                </div>
+                <p class="visual-preview-text">Route preview (visual representation)</p>
             </div>
         </div>
     </div>
@@ -246,14 +507,23 @@
     let elements = null;
     let paymentElement = null;
     let currentPaymentIntentId = null;
+    let paymentInitialized = false;
 
-    // Get purchase info from URL params (currently only bundle is supported)
-    const urlParams = new URLSearchParams(window.location.search);
-    const purchaseType = urlParams.get('type') || 'bundle';
-    const price = 1399; // €13.99 - Full bundle only for now
+    function showPreCheckout() {
+        document.getElementById('preCheckoutScreen').classList.remove('hidden');
+        document.getElementById('paymentFormScreen').classList.remove('show');
+    }
 
-    // Update price display
-    document.getElementById('priceDisplay').textContent = `€${(price / 100).toFixed(2)}`;
+    async function showPaymentForm() {
+        // Hide pre-checkout, show payment form
+        document.getElementById('preCheckoutScreen').classList.add('hidden');
+        document.getElementById('paymentFormScreen').classList.add('show');
+
+        // Initialize payment if not already done
+        if (!paymentInitialized) {
+            await initializePayment();
+        }
+    }
 
     // Initialize payment
     async function initializePayment() {
@@ -266,6 +536,7 @@
         }
 
         document.getElementById('loadingState').style.display = 'block';
+        document.getElementById('paymentFormContainer').style.display = 'none';
 
         try {
             // Initialize Stripe
@@ -276,7 +547,7 @@
             const keyData = await keyResponse.json();
             stripe = Stripe(keyData.publishableKey);
 
-            // Create payment intent (backend uses default price from env var)
+            // Create payment intent
             const response = await fetch(`${API_URL}/routes/create-payment-intent`, {
                 method: 'POST',
                 headers: {
@@ -315,6 +586,7 @@
             // Show payment form
             document.getElementById('loadingState').style.display = 'none';
             document.getElementById('paymentFormContainer').style.display = 'block';
+            paymentInitialized = true;
 
         } catch (err) {
             console.error('Payment initialization error:', err);
@@ -372,11 +644,6 @@
         }
     }
 
-    // Initialize on page load
-    document.addEventListener('DOMContentLoaded', () => {
-        initializePayment();
-    });
-
     // Submit button handler
     document.getElementById('submitPaymentBtn').addEventListener('click', handlePaymentSubmit);
 </script>
@@ -385,4 +652,3 @@
 
 </body>
 </html>
-
