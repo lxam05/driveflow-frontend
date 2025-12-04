@@ -551,8 +551,13 @@
             `;
         }
 
-        container.innerHTML = `
-            ${imageHtml}
+        // Preserve image container if it exists and is for the same question
+        const existingImageContainer = container.querySelector('.question-sign-container');
+        const existingImg = existingImageContainer?.querySelector(`img[data-sign-number="${q.signNumber}"]`);
+        const isSameQuestion = existingImg !== null;
+        
+        // Only update the question card, preserve image if it's the same question
+        const questionCardHtml = `
             <div class="question-card">
                 <div class="question-number">Question ${currentQuestionIndex + 1} of ${questions.length}</div>
                 <div class="quiz-question">${q.question}</div>
@@ -562,10 +567,24 @@
             </div>
         `;
         
-        // Setup image loading
-        const imgElement = container.querySelector(`img[data-sign-number="${q.signNumber}"]`);
-        if (imgElement) {
-            loadImageWithFallback(q.signNumber, imgElement);
+        if (isSameQuestion) {
+            // Same question - only update the question card, keep image
+            const questionCard = container.querySelector('.question-card');
+            if (questionCard) {
+                questionCard.outerHTML = questionCardHtml;
+            }
+        } else {
+            // Different question or no image - replace everything
+            container.innerHTML = `
+                ${imageHtml}
+                ${questionCardHtml}
+            `;
+            
+            // Setup image loading safely after DOM is updated
+            const imgElement = container.querySelector(`img[data-sign-number="${q.signNumber}"]`);
+            if (imgElement) {
+                loadImageWithFallback(q.signNumber, imgElement);
+            }
         }
     }
 
