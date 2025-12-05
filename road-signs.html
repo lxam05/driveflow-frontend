@@ -98,8 +98,11 @@
     }
 
     .question-sign-container {
-        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         margin-bottom: 24px;
+        width: 100%;
     }
 
     .question-sign-container.has-image {
@@ -114,8 +117,11 @@
 
     .question-sign-image {
         max-width: 100%;
+        max-height: 400px;
         height: auto;
         border-radius: 12px;
+        display: block;
+        margin: 0 auto;
     }
 
     .options-container {
@@ -221,8 +227,7 @@
     }
 
     .next-button {
-        width: 100%;
-        padding: 14px;
+        padding: 12px 24px;
         border-radius: 999px;
         border: 1px solid var(--primary);
         background: var(--primary);
@@ -232,6 +237,8 @@
         cursor: pointer;
         transition: all 0.3s ease;
         margin-top: 24px;
+        margin-left: auto;
+        display: block;
     }
 
     .next-button:hover {
@@ -287,7 +294,7 @@
     <!-- Quiz Section -->
     <div class="quiz-section">
         <div class="quiz-question" id="questionText">
-            What is the name of sign <span id="signNumber">1</span>?
+            What is the name of this flag?
         </div>
 
         <div class="question-sign-container">
@@ -400,7 +407,6 @@
         // Pick a random sign number from valid ones
         const randomIndex = Math.floor(Math.random() * validSignNumbers.length);
         currentSignNumber = validSignNumbers[randomIndex];
-        document.getElementById('signNumber').textContent = currentSignNumber;
         
         // Get the correct answer - sign number maps directly to txt file line
         // The txt file already accounts for missing 69, so:
@@ -414,9 +420,6 @@
             correctIndex = currentSignNumber - 2;
         }
         currentCorrectAnswer = allSignNames[correctIndex];
-        
-        // Display the sign number in the question
-        document.getElementById('signNumber').textContent = currentSignNumber;
         
         // Get the question sign image - only set src if image exists (prevents flicker)
         const imgElement = document.getElementById('questionSignImage');
