@@ -923,41 +923,6 @@
         document.getElementById('progressFill').style.width = Math.min(progress, 100) + '%';
     }
 
-    // Map of question IDs to their actual file extensions (prevents failed requests)
-    const signImageExtensions = {
-        10: 'jpeg', 32: 'jpeg', 59: 'jpeg', 60: 'jpeg', 61: 'jpeg', 62: 'jpeg', 65: 'jpeg', 68: 'jpeg',
-        71: 'webp', 72: 'webp', 73: 'webp', 74: 'jpeg', 77: 'jpg', 78: 'svg.png', 80: 'jpeg',
-        129: 'webp', 130: 'webp', 131: 'webp', 132: 'webp', 133: 'webp', 134: 'webp', 135: 'webp', 136: 'webp'
-    };
-
-    // Try loading image with fallback extensions
-    function loadImageWithFallback(imgElement, questionId) {
-        const extensions = ['png', 'jpg', 'jpeg', 'webp'];
-        let currentIndex = 0;
-        
-        // If we know the extension, use it first
-        if (signImageExtensions[questionId]) {
-            imgElement.src = `signs copy/${questionId}.${signImageExtensions[questionId]}`;
-            return;
-        }
-        
-        function tryNext() {
-            if (currentIndex < extensions.length) {
-                imgElement.src = `signs copy/${questionId}.${extensions[currentIndex]}`;
-                currentIndex++;
-            } else {
-                // All extensions tried, hide the image
-                imgElement.style.display = 'none';
-            }
-        }
-        
-        imgElement.onerror = function() {
-            tryNext();
-        };
-        
-        // Start with first extension
-        tryNext();
-    }
 
     function renderCurrentQuestion() {
         if (currentQuestionIndex >= questions.length) {
@@ -976,8 +941,10 @@
         // Image if available - check for image in signs copy folder
         let imageHtml = '';
         if (q.id) {
-            imageHtml = `<div class="question-image-container" style="text-align: center; margin-bottom: 24px;">
-                <img src="" alt="Question ${q.id}" class="question-image" data-question-id="${q.id}">
+            imageHtml = `<div class="question-image-container" style="display:none;">
+                <img src="signs copy/${q.id}.png" alt="Question ${q.id}" class="question-image" 
+                     onerror="this.parentElement.style.display='none';"
+                     onload="this.parentElement.style.display='block';">
             </div>`;
         }
         
@@ -1075,14 +1042,6 @@
                 ${feedbackHtml}
             </div>
         `;
-        
-        // Load image with fallback after DOM is updated
-        if (q.id) {
-            const imgElement = container.querySelector('.question-image[data-question-id="' + q.id + '"]');
-            if (imgElement) {
-                loadImageWithFallback(imgElement, q.id);
-            }
-        }
         
         updateProgress();
         updateStarButton();
