@@ -273,9 +273,9 @@
         }
     }
 
-    /* Paywall Modal */
+    /* Paywall Modal - Hidden, redirects to payment.html instead */
     .paywall-modal {
-        display: none;
+        display: none !important;
         position: fixed;
         top: 0;
         left: 0;
@@ -286,10 +286,14 @@
         align-items: center;
         justify-content: center;
         padding: 20px;
+        visibility: hidden;
+        opacity: 0;
     }
 
     .paywall-modal.show {
-        display: flex;
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
     }
 
     .paywall-content {
@@ -607,12 +611,16 @@
     }
 
     function showPaywall() {
-        // Redirect to payment page instead of showing modal
+        // Immediately redirect to payment page - never show modal
         window.location.href = 'payment.html';
     }
 
     function hidePaywall() {
-        document.getElementById('paywallModal').classList.remove('show');
+        // Modal should never be shown, but if it is, hide it
+        const modal = document.getElementById('paywallModal');
+        if (modal) {
+            modal.classList.remove('show');
+        }
     }
 
     let stripe = null;
@@ -998,20 +1006,10 @@
         // Check license status first
         await checkLicenseStatus();
         
-        // If no license, ask if they want to upgrade
+        // If no license, immediately redirect to payment (no confirm dialog)
         if (!hasLicense) {
-            const wantsUpgrade = confirm(
-                'You need a 3-month license to access route details.\n\n' +
-                'Would you like to upgrade to unlock all driving test routes?'
-            );
-            
-            if (wantsUpgrade) {
-                window.location.href = 'payment.html';
-                return;
-            } else {
-                // User chose not to upgrade, don't proceed
-                return;
-            }
+            window.location.href = 'payment.html';
+            return;
         }
         
         // User has premium access - proceed to show routes
@@ -1052,10 +1050,12 @@
     // Initialize
     initCentres();
 
-    // Paywall modal handlers
-    document.getElementById('purchaseBtn').addEventListener('click', initiatePurchase);
+    // Paywall modal handlers - all redirect to payment.html now
+    document.getElementById('purchaseBtn').addEventListener('click', () => {
+        window.location.href = 'payment.html';
+    });
     document.getElementById('closePaywallBtn').addEventListener('click', () => {
-        resetPaymentForm();
+        // Just hide modal, don't redirect
         hidePaywall();
     });
     document.getElementById('backToPurchaseBtn').addEventListener('click', () => {
