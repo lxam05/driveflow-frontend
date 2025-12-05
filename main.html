@@ -40,6 +40,14 @@
         -moz-osx-font-smoothing: grayscale;
     }
 
+    /* Enable scrolling on mobile devices */
+    @media (max-width: 768px) {
+        body {
+            overflow: auto;
+            overscroll-behavior: auto;
+        }
+    }
+
     /* ---------------- HEADER ---------------- */
     #mainHeader {
         position: fixed;
@@ -334,6 +342,16 @@
     }
 
     @media (max-width: 768px) {
+        /* Enable scrolling on mobile devices */
+        body {
+            overflow: auto !important;
+            overscroll-behavior: auto !important;
+        }
+        
+        html {
+            overflow: auto !important;
+        }
+        
         #mainHeader .header-content {
             grid-template-columns: 1fr;
             gap: 8px;
