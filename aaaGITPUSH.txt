@@ -1,3 +1,93 @@
-git add .
-git commit -m "location"
-git push
+I found the cause.
+Your cards “jump” only when the question has no image AND you change your answer after the first submit because of this:
+
+🔥 The root problem
+
+You're rendering the HTML like this:
+
+${imageHtml}
+<div class="question-card">
+   ...
+</div>
+
+
+That means the image (or empty image container) is OUTSIDE the question card, above it.
+
+So when:
+
+A question with an image → the image container has height (big)
+
+A question without an image → the container is tiny (or collapses to ~0 height)
+
+AND you re-render the question every time you change your answer
+
+… the vertical height above the card changes, causing the card to “shift” slightly up/down.
+
+Even worse:
+You hide missing images using:
+
+onerror="this.style.display='none'"
+
+
+So the image container collapses entirely on the questions with no image → height jump.
+
+✔️ Why it only happens on the second change
+
+You store selected answers and re-render every time.
+
+Initial selection → container height = consistent
+After submit → card grows (feedback section added)
+Change answer afterwards → whole HTML re-renders, but the question-image-container collapses on “no image” questions → slight shift.
+
+That’s exactly the behaviour you describe.
+
+💀 The REAL cause
+
+This line:
+
+<div class="question-image-container">
+    <img ... onerror="this.style.display='none'">
+</div>
+
+
+Since the <img> disappears, the .question-image-container height becomes 0px, so the card jumps upward.
+
+There is no fixed height, no min-height, no placeholder, nothing.
+
+✅ Fix (simple & correct)
+
+Give the image container a fixed reserved space so cards NEVER move, even if no image exists.
+
+Add this to CSS:
+
+.question-image-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 24px;
+    min-height: 180px;   /* <-- ADD THIS */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+Then, instead of hiding the image entirely, fade it out:
+
+onerror="this.style.opacity='0';"
+
+
+Or even better, remove that onerror completely — your fixed container prevents all movement anyway.
+
+⚡ The guaranteed fix you must apply
+
+Add a min-height.
+That’s it. That’s what stops the jump.
+
+Like:
+
+.question-image-container {
+    min-height: 200px;
+}
+
+
+Pick whatever height looks right on your site.

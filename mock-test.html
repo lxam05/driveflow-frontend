@@ -190,7 +190,10 @@
         max-width: 600px;
         margin: 0 auto 24px;
         text-align: center;
-        min-height: 0;
+        min-height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .question-image {
@@ -818,7 +821,7 @@
         if (q.id) {
             const imagePath = `signs copy/${q.id}.png`;
             imageHtml = `<div class="question-image-container">
-                <img src="${imagePath}" alt="Question ${q.id}" class="question-image" onerror="this.style.display='none'">
+                <img src="${imagePath}" alt="Question ${q.id}" class="question-image" onerror="this.style.opacity='0';">
             </div>`;
         } else {
             // Always create empty container to reserve space and prevent card movement
@@ -907,18 +910,6 @@
             `;
         }
 
-        // Preserve existing image if it's already loaded to prevent re-render glitch
-        let existingImg = null;
-        if (q.id) {
-            const existingContainer = container.querySelector('.question-image-container');
-            if (existingContainer) {
-                const existingImage = existingContainer.querySelector('img');
-                if (existingImage && existingImage.complete && existingImage.naturalHeight > 0) {
-                    existingImg = existingImage;
-                }
-            }
-        }
-        
         container.innerHTML = `
             ${imageHtml}
             <div class="question-card">
@@ -929,16 +920,6 @@
                 ${feedbackHtml}
             </div>
         `;
-        
-        // If we had a loaded image, preserve it to prevent re-render
-        if (existingImg && q.id) {
-            const newContainer = container.querySelector('.question-image-container');
-            const newImg = newContainer ? newContainer.querySelector('img') : null;
-            if (newImg && newImg.src === existingImg.src) {
-                // Replace with existing loaded image to prevent re-render
-                newImg.replaceWith(existingImg);
-            }
-        }
         
         updateProgress();
     }
