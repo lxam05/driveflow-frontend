@@ -940,9 +940,9 @@
         // Image if available - check for image in signs copy folder
         let imageHtml = '';
         if (q.id) {
-            // Create image container (always visible, image hides if it fails to load)
+            const imagePath = `signs copy/${q.id}.png`;
             imageHtml = `<div class="question-image-container">
-                <img src="" alt="Question ${q.id}" class="question-image" data-question-id="${q.id}" style="display:none;">
+                <img src="${imagePath}" alt="Question ${q.id}" class="question-image" onerror="this.style.display='none'">
             </div>`;
         }
         
@@ -1040,40 +1040,6 @@
                 ${feedbackHtml}
             </div>
         `;
-        
-        // Setup image loading safely after DOM is updated
-        if (q.id) {
-            const imgElement = container.querySelector('.question-image[data-question-id="' + q.id + '"]');
-            if (imgElement) {
-                const containerElement = imgElement.parentElement;
-                if (containerElement) {
-                    containerElement.style.display = 'block';
-                }
-                // Only set up loading if image hasn't loaded yet
-                if (!imgElement.complete || imgElement.naturalHeight === 0) {
-                    // Image not loaded yet - start hidden
-                    imgElement.style.display = 'none';
-                    // Set up load/error handlers
-                    imgElement.onerror = function() {
-                        this.style.display = 'none';
-                        if (containerElement) {
-                            containerElement.style.display = 'none';
-                        }
-                    };
-                    imgElement.onload = function() {
-                        this.style.display = 'block';
-                        if (containerElement) {
-                            containerElement.style.display = 'block';
-                        }
-                    };
-                    // Trigger load by setting src
-                    imgElement.src = `signs copy/${q.id}.png`;
-                } else {
-                    // Image already loaded - keep it visible
-                    imgElement.style.display = 'block';
-                }
-            }
-        }
         
         updateProgress();
         updateStarButton();

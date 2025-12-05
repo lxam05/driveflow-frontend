@@ -797,24 +797,6 @@
         document.getElementById('progressFill').style.width = Math.min(progress, 100) + '%';
     }
 
-    // Load image - all images are .png
-    function setupImageLoading(imgElement, questionId) {
-        imgElement.src = `signs copy/${questionId}.png`;
-        imgElement.onerror = function() {
-            // Hide both image and container if image fails to load
-            this.style.display = 'none';
-            if (this.parentElement) {
-                this.parentElement.style.display = 'none';
-            }
-        };
-        imgElement.onload = function() {
-            this.style.display = 'block';
-            // Ensure container is visible when image loads
-            if (this.parentElement) {
-                this.parentElement.style.display = 'block';
-            }
-        };
-    }
 
     function renderCurrentQuestion() {
         if (currentQuestionIndex >= questions.length) {
@@ -833,9 +815,9 @@
         // Image if available - check for image in signs copy folder
         let imageHtml = '';
         if (q.id) {
-            // Create image container (always visible, image hides if it fails to load)
+            const imagePath = `signs copy/${q.id}.png`;
             imageHtml = `<div class="question-image-container">
-                <img src="" alt="Question ${q.id}" class="question-image" data-question-id="${q.id}" style="display:none;">
+                <img src="${imagePath}" alt="Question ${q.id}" class="question-image" onerror="this.style.display='none'">
             </div>`;
         }
         
@@ -931,26 +913,6 @@
                 ${feedbackHtml}
             </div>
         `;
-        
-        // Setup image loading safely after DOM is updated
-        if (q.id) {
-            const imgElement = container.querySelector('.question-image[data-question-id="' + q.id + '"]');
-            if (imgElement) {
-                const containerElement = imgElement.parentElement;
-                if (containerElement) {
-                    containerElement.style.display = 'block';
-                }
-                // Only set up loading if image hasn't loaded yet
-                if (!imgElement.complete || imgElement.naturalHeight === 0) {
-                    // Image not loaded yet - start hidden
-                    imgElement.style.display = 'none';
-                    setupImageLoading(imgElement, q.id);
-                } else {
-                    // Image already loaded - keep it visible
-                    imgElement.style.display = 'block';
-                }
-            }
-        }
         
         updateProgress();
     }
