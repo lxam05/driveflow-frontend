@@ -97,6 +97,27 @@
         text-align: center;
     }
 
+    .question-sign-container {
+        text-align: center;
+        margin-bottom: 24px;
+    }
+
+    .question-sign-container.has-image {
+        margin-bottom: 24px;
+    }
+
+    .question-sign-container.no-image {
+        height: 0;
+        overflow: hidden;
+        margin-bottom: 0;
+    }
+
+    .question-sign-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: 12px;
+    }
+
     .options-container {
         display: flex;
         flex-direction: column;
@@ -266,6 +287,9 @@
     let currentCorrectAnswer = '';
     let selectedAnswer = null;
     let questionAnswered = false;
+    
+    // Image existence cache to prevent flicker
+    const imageExistsCache = new Map();
 
     // Load sign names from signs.txt
     // Signs are ordered 1-141, where sign number N corresponds to line N
@@ -303,6 +327,26 @@
     function getSignImagePath(signNumber) {
         const basePath = `All signs test day/${signNumber}`;
         return basePath;
+    }
+
+    // Check if image exists (with caching)
+    function checkImageExists(src) {
+        if (imageExistsCache.has(src)) {
+            return Promise.resolve(imageExistsCache.get(src));
+        }
+        
+        return new Promise((resolve) => {
+            const img = new Image();
+            img.onload = () => {
+                imageExistsCache.set(src, true);
+                resolve(true);
+            };
+            img.onerror = () => {
+                imageExistsCache.set(src, false);
+                resolve(false);
+            };
+            img.src = src;
+        });
     }
 
 
@@ -345,31 +389,30 @@
         // Display the sign number in the question
         document.getElementById('signNumber').textContent = currentSignNumber;
         
-        // Get the question sign image - all images are .png
+        // Get the question sign image - only set src if image exists (prevents flicker)
         const imgElement = document.getElementById('questionSignImage');
         const containerElement = imgElement.parentElement;
+        const imagePath = `All signs test day/${currentSignNumber}.png`;
         
-        // Start with image hidden, container visible (to reserve space)
-        imgElement.style.display = 'none';
-        if (containerElement) {
-            containerElement.style.display = 'block';
-        }
-        
-        imgElement.src = `All signs test day/${currentSignNumber}.png`;
-        imgElement.onerror = function() {
-            // Hide both image and container if image fails to load
-            this.style.display = 'none';
-            if (containerElement) {
-                containerElement.style.display = 'none';
+        // Check if image exists before setting src
+        checkImageExists(imagePath).then((exists) => {
+            if (exists) {
+                // Image exists - show it
+                imgElement.src = imagePath;
+                imgElement.style.display = 'block';
+                if (containerElement) {
+                    containerElement.classList.add('has-image');
+                    containerElement.classList.remove('no-image');
+                }
+            } else {
+                // Image doesn't exist - hide everything
+                imgElement.style.display = 'none';
+                if (containerElement) {
+                    containerElement.classList.add('no-image');
+                    containerElement.classList.remove('has-image');
+                }
             }
-        };
-        imgElement.onload = function() {
-            this.style.display = 'block';
-            // Ensure container is visible when image loads
-            if (containerElement) {
-                containerElement.style.display = 'block';
-            }
-        };
+        });
         
         // Get 3 wrong answer sign numbers (excluding the correct one and 69)
         const wrongSignNumbers = [];
