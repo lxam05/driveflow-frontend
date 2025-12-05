@@ -682,13 +682,13 @@
         background: var(--accent-purple, #6fffe9);
     }
 
-    #back-to-top svg {
-        width: 16px;
-        height: 16px;
-        stroke: currentColor;
-        stroke-width: 2.5;
-        fill: none;
-        flex-shrink: 0;
+    #back-to-top .arrow {
+        font-size: 16px;
+        transition: transform 0.2s ease;
+    }
+
+    #back-to-top:hover .arrow {
+        transform: translateY(-2px);
     }
 </style>
 </head>
@@ -1043,10 +1043,8 @@ window.addEventListener("load", function() {
 
 <!-- Back to Top Button -->
 <button id="back-to-top" aria-label="Back to top">
-    <span>Back to Top</span>
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <path d="M18 15l-6-6-6 6"/>
-    </svg>
+    <span class="arrow">↑</span>
+    <span>Back To Top</span>
 </button>
 
 <script>
@@ -1083,11 +1081,11 @@ window.addEventListener("load", function() {
                 clearTimeout(scrollTimeout);
             }
 
-            // Set new timeout to show button after 0.2 seconds of no scrolling
+            // Set new timeout to show button after 0.3 seconds of no scrolling
             scrollTimeout = setTimeout(() => {
                 isScrolling = false;
                 checkScrollPosition();
-            }, 200); // 0.2 seconds
+            }, 300); // 0.3 seconds
         }
 
         // Listen to wheel events (this page uses custom wheel scrolling)
@@ -1256,6 +1254,7 @@ window.addEventListener("load", function() {
         </form>
     </div>
 </div>
+
 
 </body>
 </html>

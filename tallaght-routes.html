@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>Tallaght Test Routes | DriveFlow</title>
 
 <style>
@@ -341,7 +344,7 @@
         display: block;
     }
 </style>
-<script src="https://js.stripe.com/v3/"></script>
+<!-- Stripe.js removed - payment functionality moved to payment.html -->
 </head>
 <body>
     <div class="container">
@@ -358,43 +361,18 @@
         <a href="routes.html" class="btn-back">← Back to All Routes</a>
     </div>
 
-    <!-- Paywall Modal -->
-    <div id="paywallModal" class="paywall-modal">
-        <div class="paywall-content">
-            <h2>Access Required</h2>
-            <p>You need a 3-month license to access route details. Purchase access to view all driving test routes.</p>
-            <div class="price-display">€13.99</div>
-            <div id="licenseStatus"></div>
-            
-            <!-- Payment Form (hidden initially) -->
-            <div id="paymentForm" style="display: none; margin-top: 24px;">
-                <div id="payment-element" style="margin-bottom: 20px;">
-                    <!-- Stripe Elements will mount here -->
-                </div>
-                <div id="payment-errors" role="alert" style="color: #ef4444; font-size: 14px; margin-bottom: 16px; display: none;"></div>
-                <button id="submitPaymentBtn" class="btn-purchase" style="width: 100%;">
-                    <span id="submitPaymentText">Pay €13.99</span>
-                    <span id="submitPaymentSpinner" style="display: none;">Processing...</span>
-                </button>
-                <button class="btn-cancel" onclick="resetPaymentForm()" style="width: 100%;">Cancel</button>
-            </div>
-            
-            <!-- Purchase Button (shown initially) -->
-            <div id="purchaseButtonContainer">
-                <button id="purchaseBtn" class="btn-purchase" onclick="initiatePurchase()">
-                    Buy 3-Month Access - €13.99
-                </button>
-                <button class="btn-cancel" onclick="hidePaywall()" style="width: 100%;">Cancel</button>
-            </div>
-        </div>
-    </div>
+    <!-- Paywall Modal removed - all payment functionality moved to payment.html -->
 
     <script>
-        const API_URL = 'https://driving-test-backend-production.up.railway.app';
+        const API_URL = location.hostname === "localhost" || location.hostname === "127.0.0.1"
+            ? "http://localhost:8080"
+            : "https://driving-test-backend-production.up.railway.app";
         
         let accessToken = null;
         let routesData = null;
         let tokenExpiresAt = null;
+        let hasLicense = false;
+        let licenseExpiresAt = null;
 
         // Get token from localStorage
         const token = localStorage.getItem('auth_token');
@@ -402,8 +380,55 @@
             window.location.href = 'login.html';
         }
 
+        // Check license status on page load
+        async function checkLicenseStatus() {
+            const token = localStorage.getItem('auth_token');
+            if (!token) {
+                hasLicense = false;
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/routes/license-status`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    hasLicense = data.hasLicense || false;
+                    licenseExpiresAt = data.expiresAt;
+                    
+                    // Double-check expiry even if API says hasLicense is true
+                    if (hasLicense && licenseExpiresAt) {
+                        const expiryDate = new Date(licenseExpiresAt);
+                        if (expiryDate < new Date()) {
+                            hasLicense = false;
+                        }
+                    }
+                } else {
+                    // If API call fails, assume no license
+                    hasLicense = false;
+                }
+            } catch (err) {
+                console.error('Error checking license:', err);
+                // On error, assume no license to be safe
+                hasLicense = false;
+            }
+        }
+
         // Initialize on page load
         window.addEventListener('DOMContentLoaded', async () => {
+            await checkLicenseStatus();
+            
+            // If no license, immediately redirect to payment (no confirm dialog)
+            if (!hasLicense) {
+                window.location.href = 'payment.html';
+                return;
+            }
+            
+            // User has premium access - load routes
             await loadRoutes();
         });
 
@@ -425,10 +450,12 @@
                 if (!tokenResponse.ok) {
                     const error = await tokenResponse.json();
                     if (error.error && error.error.includes('license')) {
-                        // Show paywall modal instead of error message
-                        loadingContainer.style.display = 'none';
-                        showPaywall();
-                        return;
+                        // Check license status and redirect to payment
+                        await checkLicenseStatus();
+                        if (!hasLicense) {
+                            window.location.href = 'payment.html';
+                            return;
+                        }
                     } else {
                         errorContainer.innerHTML = `
                             <div class="error">
@@ -522,303 +549,7 @@
             }
         }, 1000);
 
-        // Paywall Modal Functions
-        function showPaywall() {
-            // Redirect to dedicated payment page
-            window.location.href = 'payment.html?type=bundle';
-        }
-
-        function hidePaywall() {
-            document.getElementById('paywallModal').classList.remove('show');
-            resetPaymentForm();
-        }
-
-        async function checkLicenseStatus() {
-            const token = localStorage.getItem('auth_token');
-            if (!token) {
-                return;
-            }
-
-            try {
-                const response = await fetch(`${API_URL}/routes/license-status`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-
-                if (response.ok) {
-                    const data = await response.json();
-                    updateLicenseUI(data.hasLicense, data.expiresAt);
-                }
-            } catch (err) {
-                console.error('Error checking license:', err);
-            }
-        }
-
-        function updateLicenseUI(hasLicense, expiresAt) {
-            const statusDiv = document.getElementById('licenseStatus');
-            if (hasLicense && expiresAt) {
-                const expiryDate = new Date(expiresAt);
-                const isExpired = expiryDate < new Date();
-                statusDiv.innerHTML = isExpired 
-                    ? `<div class="license-status expired">Your license expired on ${expiryDate.toLocaleDateString()}</div>`
-                    : `<div class="license-status">✓ Active license expires ${expiryDate.toLocaleDateString()}</div>`;
-                statusDiv.style.display = 'block';
-            } else {
-                statusDiv.style.display = 'none';
-            }
-        }
-
-        // Stripe Payment Integration
-        let stripe = null;
-        let elements = null;
-        let paymentElement = null;
-        let currentPaymentIntentId = null;
-
-        // Initialize Stripe
-        async function initializeStripe() {
-            try {
-                const keyResponse = await fetch(`${API_URL}/routes/publishable-key`);
-                if (!keyResponse.ok) {
-                    const error = await keyResponse.json().catch(() => ({ error: 'Unknown error' }));
-                    throw new Error(error.details || error.error || 'Failed to get Stripe publishable key');
-                }
-                const data = await keyResponse.json();
-                
-                if (!data.publishableKey) {
-                    throw new Error('No publishable key in response');
-                }
-                
-                stripe = Stripe(data.publishableKey);
-                console.log('Stripe initialized successfully');
-                return true;
-            } catch (err) {
-                console.error('Error initializing Stripe:', err);
-                throw err;
-            }
-        }
-
-        // Setup payment form
-        async function setupPaymentForm(clientSecret) {
-            if (!stripe) {
-                try {
-                    await initializeStripe();
-                } catch (err) {
-                    throw new Error(err.message || 'Failed to initialize Stripe');
-                }
-            }
-
-            if (paymentElement) {
-                try {
-                    paymentElement.unmount();
-                } catch (e) {}
-                paymentElement = null;
-            }
-            elements = null;
-
-            document.getElementById('paymentForm').style.display = 'block';
-            document.getElementById('purchaseButtonContainer').style.display = 'none';
-
-            await new Promise(resolve => setTimeout(resolve, 200));
-
-            const paymentElementContainer = document.getElementById('payment-element');
-            if (!paymentElementContainer) {
-                throw new Error('Payment element container not found');
-            }
-
-            paymentElementContainer.innerHTML = '';
-
-            try {
-                if (!clientSecret || !clientSecret.includes('_secret_')) {
-                    throw new Error('Invalid client secret format');
-                }
-
-                elements = stripe.elements({
-                    clientSecret: clientSecret,
-                    appearance: {
-                        theme: 'night',
-                        variables: {
-                            colorPrimary: '#5bc0be',
-                            colorBackground: '#2d3f5a',
-                            colorText: '#e5e7eb',
-                            colorDanger: '#ef4444',
-                            fontFamily: 'Inter, system-ui, sans-serif',
-                            spacingUnit: '4px',
-                            borderRadius: '12px',
-                        },
-                    },
-                    locale: 'en',
-                });
-
-                paymentElement = elements.create('payment', {
-                    layout: 'tabs'
-                });
-                
-                paymentElement.mount('#payment-element');
-                
-                await new Promise((resolve, reject) => {
-                    let attempts = 0;
-                    const maxAttempts = 50;
-                    
-                    const checkMount = setInterval(() => {
-                        attempts++;
-                        const stripeElement = paymentElementContainer.querySelector('.StripeElement') || 
-                                            paymentElementContainer.querySelector('[data-testid="payment-element"]') ||
-                                            paymentElementContainer.querySelector('iframe') ||
-                                            paymentElementContainer.querySelector('[class*="Stripe"]') ||
-                                            paymentElementContainer.querySelector('div[role="group"]');
-                        
-                        if (stripeElement) {
-                            clearInterval(checkMount);
-                            resolve();
-                        } else if (attempts >= maxAttempts) {
-                            clearInterval(checkMount);
-                            reject(new Error('Payment element mount timeout'));
-                        }
-                    }, 100);
-                });
-            } catch (err) {
-                console.error('Error mounting payment element:', err);
-                throw new Error('Failed to load payment form: ' + err.message);
-            }
-        }
-
-        // Handle payment submission
-        async function handlePaymentSubmit() {
-            const submitBtn = document.getElementById('submitPaymentBtn');
-            const submitText = document.getElementById('submitPaymentText');
-            const submitSpinner = document.getElementById('submitPaymentSpinner');
-            const errorDiv = document.getElementById('payment-errors');
-
-            submitBtn.disabled = true;
-            submitText.style.display = 'none';
-            submitSpinner.style.display = 'inline';
-            errorDiv.style.display = 'none';
-            errorDiv.textContent = '';
-
-            if (!stripe || !elements || !paymentElement) {
-                errorDiv.textContent = 'Payment form not ready. Please refresh and try again.';
-                errorDiv.style.display = 'block';
-                submitBtn.disabled = false;
-                submitText.style.display = 'inline';
-                submitSpinner.style.display = 'none';
-                return;
-            }
-
-            try {
-                const { error: submitError } = await stripe.confirmPayment({
-                    elements,
-                    confirmParams: {
-                        return_url: window.location.href,
-                    },
-                    redirect: 'if_required',
-                });
-
-                if (submitError) {
-                    errorDiv.textContent = submitError.message;
-                    errorDiv.style.display = 'block';
-                    submitBtn.disabled = false;
-                    submitText.style.display = 'inline';
-                    submitSpinner.style.display = 'none';
-                    return;
-                }
-
-                // Payment succeeded, confirm with backend
-                const token = localStorage.getItem('auth_token');
-                const confirmResponse = await fetch(`${API_URL}/routes/confirm-payment`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: JSON.stringify({
-                        paymentIntentId: currentPaymentIntentId
-                    })
-                });
-
-                if (confirmResponse.ok) {
-                    const data = await confirmResponse.json();
-                    alert('Payment successful! Your license is now active.');
-                    hidePaywall();
-                    // Reload routes
-                    await loadRoutes();
-                } else {
-                    const error = await confirmResponse.json();
-                    throw new Error(error.error || 'Failed to confirm payment');
-                }
-            } catch (err) {
-                console.error('Payment error:', err);
-                errorDiv.textContent = err.message || 'Payment failed. Please try again.';
-                errorDiv.style.display = 'block';
-                submitBtn.disabled = false;
-                submitText.style.display = 'inline';
-                submitSpinner.style.display = 'none';
-            }
-        }
-
-        async function initiatePurchase() {
-            const token = localStorage.getItem('auth_token');
-            if (!token) {
-                alert('Please log in to purchase');
-                window.location.href = 'login.html';
-                return;
-            }
-
-            const btn = document.getElementById('purchaseBtn');
-            btn.disabled = true;
-            btn.textContent = 'Loading...';
-
-            try {
-                const response = await fetch(`${API_URL}/routes/create-payment-intent`, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-
-                if (response.ok) {
-                    const data = await response.json();
-                    
-                    if (!data.clientSecret) {
-                        throw new Error('No client secret received from server');
-                    }
-                    
-                    currentPaymentIntentId = data.paymentIntentId;
-                    
-                    try {
-                        await setupPaymentForm(data.clientSecret);
-                        btn.disabled = false;
-                        btn.textContent = 'Buy 3-Month Access';
-                    } catch (setupErr) {
-                        console.error('Error setting up payment form:', setupErr);
-                        throw new Error('Failed to load payment form: ' + setupErr.message);
-                    }
-                } else {
-                    const error = await response.json().catch(() => ({ error: 'Unknown error' }));
-                    const errorMsg = error.details || error.error || 'Failed to start payment';
-                    alert(`Payment Error: ${errorMsg}`);
-                    btn.disabled = false;
-                    btn.textContent = 'Buy 3-Month Access';
-                }
-            } catch (err) {
-                console.error('Error initiating purchase:', err);
-                alert(err.message || 'Failed to start payment. Please check your connection and try again.');
-                btn.disabled = false;
-                btn.textContent = 'Buy 3-Month Access';
-            }
-        }
-
-        function resetPaymentForm() {
-            if (paymentElement) {
-                paymentElement.unmount();
-                paymentElement = null;
-            }
-            elements = null;
-            currentPaymentIntentId = null;
-            document.getElementById('paymentForm').style.display = 'none';
-            document.getElementById('purchaseButtonContainer').style.display = 'block';
-            document.getElementById('payment-errors').style.display = 'none';
-        }
+        // All payment functionality removed - moved to payment.html
 
         // Attach payment submit handler
         document.addEventListener('DOMContentLoaded', () => {
