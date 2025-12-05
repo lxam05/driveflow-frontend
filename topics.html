@@ -942,11 +942,7 @@
         if (q.id) {
             // Create image container (always visible, image hides if it fails to load)
             imageHtml = `<div class="question-image-container">
-                <img src="signs copy/${q.id}.png" alt="Question ${q.id}" class="question-image" 
-                     data-question-id="${q.id}"
-                     style="display:none;"
-                     onerror="this.style.display='none'; if(this.parentElement) this.parentElement.style.display='none';"
-                     onload="this.style.display='block'; if(this.parentElement) this.parentElement.style.display='block';">
+                <img src="" alt="Question ${q.id}" class="question-image" data-question-id="${q.id}" style="display:none;">
             </div>`;
         }
         
@@ -1055,7 +1051,21 @@
                 if (containerElement) {
                     containerElement.style.display = 'block';
                 }
-                // Trigger load by setting src (onload/onerror handlers in HTML will handle it)
+                // Set up load/error handlers
+                imgElement.onerror = function() {
+                    this.style.display = 'none';
+                    if (containerElement) {
+                        containerElement.style.display = 'none';
+                    }
+                };
+                imgElement.onload = function() {
+                    this.style.display = 'block';
+                    if (containerElement) {
+                        containerElement.style.display = 'block';
+                    }
+                };
+                // Trigger load by setting src
+                imgElement.src = `signs copy/${q.id}.png`;
             }
         }
         
