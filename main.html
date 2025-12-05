@@ -332,9 +332,7 @@
         color: #fecaca;
         display: block;
     }
-        color: white;
-        transform: none;
-    }
+
     @media (max-width: 768px) {
         #mainHeader .header-content {
             grid-template-columns: 1fr;
@@ -1129,7 +1127,7 @@ window.addEventListener("load", function() {
     })();
 
     // Contact modal handlers
-    const API_URL = "https://driving-test-backend-production.up.railway.app";
+    // API_URL already declared above, reusing it
     const contactUsLink = document.getElementById("contactUsLink");
     const contactModal = document.getElementById("contactModal");
     const contactClose = document.getElementById("contactClose");
