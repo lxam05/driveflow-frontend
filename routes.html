@@ -1014,12 +1014,14 @@
             }
         }
         
-        // Special handling for Naas - redirect to dedicated page
+        // User has premium access - proceed to show routes
+        // Special handling for Naas - redirect to dedicated page (they have access)
         if (centre.name === "Naas") {
             window.location.href = 'naas-routes.html';
             return;
         }
         
+        // For other centres, show routes directly
         selectedCentre = centre;
         renderRoutes(centre);
     }

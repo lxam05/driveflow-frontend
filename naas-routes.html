@@ -678,6 +678,24 @@
         // Initialize on page load
         window.addEventListener('DOMContentLoaded', async () => {
             await checkLicenseStatus();
+            
+            // If no license, redirect to payment
+            if (!hasLicense) {
+                const wantsUpgrade = confirm(
+                    'You need a 3-month license to access Naas route details.\n\n' +
+                    'Would you like to upgrade to unlock all driving test routes?'
+                );
+                
+                if (wantsUpgrade) {
+                    window.location.href = 'payment.html';
+                    return;
+                } else {
+                    window.location.href = 'routes.html';
+                    return;
+                }
+            }
+            
+            // User has premium access - load routes
             await loadRoutes();
         });
 
