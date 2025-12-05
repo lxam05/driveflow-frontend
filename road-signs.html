@@ -125,40 +125,69 @@
         margin-bottom: 24px;
     }
 
-    .option-button {
-        padding: 16px 24px;
-        border-radius: 12px;
+    .option-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 18px 24px;
+        background: rgba(15, 23, 42, 0.9);
         border: 1px solid var(--border-subtle);
-        background: rgba(15, 23, 42, 0.4);
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .option-row:hover:not(.correct):not(.incorrect) {
+        border-color: rgba(129, 140, 248, 0.7);
+        background: rgba(15, 23, 42, 0.95);
+    }
+
+    .option-row.selected {
+        border-color: rgba(129, 140, 248, 0.7);
+        background: rgba(99, 102, 241, 0.18);
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
+    }
+
+    .option-row.correct {
+        border-color: var(--accent);
+        background: var(--accent-soft);
+        box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.18);
+    }
+
+    .option-row.incorrect {
+        border-color: var(--accent-red);
+        background: rgba(239, 68, 68, 0.18);
+        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.18);
+    }
+
+    .option-text {
+        flex: 1;
         color: var(--text-main);
         font-size: 16px;
         font-weight: 500;
+    }
+
+    /* Radio Button Styles */
+    .radio-button {
+        position: relative;
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
         cursor: pointer;
-        transition: all 0.2s ease;
-        text-align: left;
     }
 
-    .option-button:hover:not(:disabled) {
-        background: var(--primary-soft);
-        border-color: var(--primary);
-        transform: translateX(4px);
+    .radio-button input[type="radio"] {
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+        accent-color: var(--primary);
     }
 
-    .option-button:disabled {
+    .radio-button input[type="radio"]:disabled {
         cursor: not-allowed;
-        opacity: 0.7;
-    }
-
-    .option-button.correct {
-        background: var(--accent-soft);
-        border-color: var(--accent);
-        color: var(--accent);
-    }
-
-    .option-button.incorrect {
-        background: rgba(239, 68, 68, 0.18);
-        border-color: var(--accent-red);
-        color: var(--accent-red);
+        opacity: 0.5;
     }
 
 
@@ -459,32 +488,81 @@
         // Shuffle options
         shuffleArray(options);
         
-        options.forEach((option) => {
-            const button = document.createElement('button');
-            button.className = 'option-button';
-            button.textContent = option.name;
-            button.onclick = () => selectAnswerBySignNum(option.signNum, option.isCorrect, button);
-            button.dataset.signNum = option.signNum;
+        options.forEach((option, optIndex) => {
+            const optionRow = document.createElement('div');
+            optionRow.className = 'option-row';
+            optionRow.dataset.signNum = option.signNum;
+            optionRow.onclick = () => {
+                if (!questionAnswered) {
+                    const radioInput = optionRow.querySelector('input[type="radio"]');
+                    if (radioInput) {
+                        radioInput.checked = true;
+                    }
+                    selectAnswerBySignNum(option.signNum, option.isCorrect, optionRow);
+                }
+            };
             
-            container.appendChild(button);
+            const optionText = document.createElement('span');
+            optionText.className = 'option-text';
+            optionText.textContent = option.name;
+            
+            const radioLabel = document.createElement('label');
+            radioLabel.className = 'radio-button';
+            radioLabel.onclick = (e) => {
+                e.stopPropagation();
+                if (!questionAnswered) {
+                    const radioInput = radioLabel.querySelector('input[type="radio"]');
+                    if (radioInput) {
+                        radioInput.checked = true;
+                    }
+                    selectAnswerBySignNum(option.signNum, option.isCorrect, optionRow);
+                }
+            };
+            
+            const radioInput = document.createElement('input');
+            radioInput.type = 'radio';
+            radioInput.name = 'question';
+            radioInput.value = optIndex;
+            radioInput.disabled = questionAnswered;
+            radioInput.onchange = () => {
+                if (!questionAnswered) {
+                    selectAnswerBySignNum(option.signNum, option.isCorrect, optionRow);
+                }
+            };
+            
+            radioLabel.appendChild(radioInput);
+            optionRow.appendChild(optionText);
+            optionRow.appendChild(radioLabel);
+            
+            container.appendChild(optionRow);
         });
     }
 
-    function selectAnswerBySignNum(signNum, isCorrect, buttonElement) {
+    function selectAnswerBySignNum(signNum, isCorrect, optionRowElement) {
         if (questionAnswered) return;
         
         selectedAnswer = signNum;
         questionAnswered = true;
         
-        // Disable all buttons
-        document.querySelectorAll('.option-button').forEach(btn => {
-            btn.disabled = true;
-            // Find the correct answer button
-            const btnSignNum = getSignNumFromButton(btn);
-            if (btnSignNum === currentSignNumber) {
-                btn.classList.add('correct');
-            } else if (btn === buttonElement && !isCorrect) {
-                btn.classList.add('incorrect');
+        // Check the selected radio button
+        const selectedRadio = optionRowElement.querySelector('input[type="radio"]');
+        if (selectedRadio) {
+            selectedRadio.checked = true;
+        }
+        
+        // Disable all radio buttons and mark correct/incorrect
+        document.querySelectorAll('.option-row').forEach(row => {
+            const radioInput = row.querySelector('input[type="radio"]');
+            if (radioInput) {
+                radioInput.disabled = true;
+            }
+            
+            // Find the correct answer row
+            const rowSignNum = parseInt(row.dataset.signNum);
+            if (rowSignNum === currentSignNumber) {
+                row.classList.add('correct');
+            } else if (row === optionRowElement && !isCorrect) {
+                row.classList.add('incorrect');
             }
         });
         

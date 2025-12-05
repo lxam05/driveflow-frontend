@@ -883,7 +883,7 @@
         // Image container - only create img tag if image exists (prevents flicker)
         const imageHtml = createImageHtml(q);
         
-        // Options with toggle switches
+        // Options with radio buttons
         const optionsHtml = q.options.map((opt, optIndex) => {
             const isChecked = hasSubmitted ? (submittedAnswer === optIndex) : (selectedAnswer === optIndex);
             let classes = 'option-row';
