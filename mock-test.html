@@ -936,13 +936,19 @@
         if (q.id) {
             const imgElement = container.querySelector('.question-image[data-question-id="' + q.id + '"]');
             if (imgElement) {
-                // Start with image hidden, container visible (to reserve space)
-                imgElement.style.display = 'none';
                 const containerElement = imgElement.parentElement;
                 if (containerElement) {
                     containerElement.style.display = 'block';
                 }
-                setupImageLoading(imgElement, q.id);
+                // Only set up loading if image hasn't loaded yet
+                if (!imgElement.complete || imgElement.naturalHeight === 0) {
+                    // Image not loaded yet - start hidden
+                    imgElement.style.display = 'none';
+                    setupImageLoading(imgElement, q.id);
+                } else {
+                    // Image already loaded - keep it visible
+                    imgElement.style.display = 'block';
+                }
             }
         }
         

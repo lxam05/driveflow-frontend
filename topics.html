@@ -1045,27 +1045,33 @@
         if (q.id) {
             const imgElement = container.querySelector('.question-image[data-question-id="' + q.id + '"]');
             if (imgElement) {
-                // Start with image hidden, container visible (to reserve space)
-                imgElement.style.display = 'none';
                 const containerElement = imgElement.parentElement;
                 if (containerElement) {
                     containerElement.style.display = 'block';
                 }
-                // Set up load/error handlers
-                imgElement.onerror = function() {
-                    this.style.display = 'none';
-                    if (containerElement) {
-                        containerElement.style.display = 'none';
-                    }
-                };
-                imgElement.onload = function() {
-                    this.style.display = 'block';
-                    if (containerElement) {
-                        containerElement.style.display = 'block';
-                    }
-                };
-                // Trigger load by setting src
-                imgElement.src = `signs copy/${q.id}.png`;
+                // Only set up loading if image hasn't loaded yet
+                if (!imgElement.complete || imgElement.naturalHeight === 0) {
+                    // Image not loaded yet - start hidden
+                    imgElement.style.display = 'none';
+                    // Set up load/error handlers
+                    imgElement.onerror = function() {
+                        this.style.display = 'none';
+                        if (containerElement) {
+                            containerElement.style.display = 'none';
+                        }
+                    };
+                    imgElement.onload = function() {
+                        this.style.display = 'block';
+                        if (containerElement) {
+                            containerElement.style.display = 'block';
+                        }
+                    };
+                    // Trigger load by setting src
+                    imgElement.src = `signs copy/${q.id}.png`;
+                } else {
+                    // Image already loaded - keep it visible
+                    imgElement.style.display = 'block';
+                }
             }
         }
         
