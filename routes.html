@@ -499,6 +499,7 @@
     async function checkLicenseStatus() {
         const token = localStorage.getItem('auth_token');
         if (!token) {
+            hasLicense = false;
             return;
         }
 
@@ -511,12 +512,26 @@
 
             if (response.ok) {
                 const data = await response.json();
-                hasLicense = data.hasLicense;
+                hasLicense = data.hasLicense || false;
                 licenseExpiresAt = data.expiresAt;
+                
+                // Double-check expiry even if API says hasLicense is true
+                if (hasLicense && licenseExpiresAt) {
+                    const expiryDate = new Date(licenseExpiresAt);
+                    if (expiryDate < new Date()) {
+                        hasLicense = false;
+                    }
+                }
+                
                 updateLicenseUI();
+            } else {
+                // If API call fails, assume no license
+                hasLicense = false;
             }
         } catch (err) {
             console.error('Error checking license:', err);
+            // On error, assume no license to be safe
+            hasLicense = false;
         }
     }
 
@@ -548,7 +563,10 @@
             return;
         }
 
-        // Check license status
+        // Always check license status first before allowing access
+        await checkLicenseStatus();
+
+        // Check license status - if no license, show paywall
         if (!hasLicense) {
             pendingRoute = { centre, routeNumber };
             showPaywall();
