@@ -306,10 +306,39 @@
         129: 'webp', 130: 'webp', 131: 'webp', 132: 'webp', 133: 'webp', 134: 'webp', 135: 'webp', 136: 'webp'
     };
 
-    // Get the correct image path for a sign number
-    function getSignImagePath(signNumber) {
-        const extension = signImageExtensions[signNumber] || 'png';
-        return `All signs test day/${signNumber}.${extension}`;
+    // Try loading image with fallback extensions
+    function loadImageWithFallback(signNumber) {
+        const imgElement = document.getElementById('questionSignImage');
+        const extensions = ['png', 'jpeg', 'jpg', 'webp'];
+        let currentIndex = 0;
+        
+        // If we know the extension, use it first
+        if (signImageExtensions[signNumber]) {
+            imgElement.src = `All signs test day/${signNumber}.${signImageExtensions[signNumber]}`;
+            imgElement.onerror = function() {
+                this.style.display = 'none';
+            };
+            imgElement.style.display = '';
+            return;
+        }
+        
+        function tryNext() {
+            if (currentIndex < extensions.length) {
+                imgElement.src = `All signs test day/${signNumber}.${extensions[currentIndex]}`;
+                currentIndex++;
+            } else {
+                // All extensions tried, hide the image
+                imgElement.style.display = 'none';
+            }
+        }
+        
+        imgElement.onerror = function() {
+            tryNext();
+        };
+        
+        // Start with first extension
+        tryNext();
+        imgElement.style.display = '';
     }
 
     // Generate a random question
@@ -351,14 +380,8 @@
         // Display the sign number in the question
         document.getElementById('signNumber').textContent = currentSignNumber;
         
-        // Get the question sign image
-        const imagePath = getSignImagePath(currentSignNumber);
-        const imgElement = document.getElementById('questionSignImage');
-        imgElement.src = imagePath;
-        imgElement.onerror = function() {
-            this.style.display = 'none';
-        };
-        imgElement.style.display = '';
+        // Get the question sign image with fallback
+        loadImageWithFallback(currentSignNumber);
         
         // Get 3 wrong answer sign numbers (excluding the correct one and 69)
         const wrongSignNumbers = [];
