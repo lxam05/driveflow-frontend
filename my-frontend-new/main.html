@@ -682,13 +682,13 @@
         background: var(--accent-purple, #6fffe9);
     }
 
-    #back-to-top svg {
-        width: 16px;
-        height: 16px;
-        stroke: currentColor;
-        stroke-width: 2.5;
-        fill: none;
-        flex-shrink: 0;
+    #back-to-top .arrow {
+        font-size: 16px;
+        transition: transform 0.2s ease;
+    }
+
+    #back-to-top:hover .arrow {
+        transform: translateY(-2px);
     }
 </style>
 </head>
@@ -1043,10 +1043,8 @@ window.addEventListener("load", function() {
 
 <!-- Back to Top Button -->
 <button id="back-to-top" aria-label="Back to top">
-    <span>Back to Top</span>
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <path d="M18 15l-6-6-6 6"/>
-    </svg>
+    <span class="arrow">↑</span>
+    <span>Back To Top</span>
 </button>
 
 <script>
@@ -1083,11 +1081,11 @@ window.addEventListener("load", function() {
                 clearTimeout(scrollTimeout);
             }
 
-            // Set new timeout to show button after 0.2 seconds of no scrolling
+            // Set new timeout to show button after 0.3 seconds of no scrolling
             scrollTimeout = setTimeout(() => {
                 isScrolling = false;
                 checkScrollPosition();
-            }, 200); // 0.2 seconds
+            }, 300); // 0.3 seconds
         }
 
         // Listen to wheel events (this page uses custom wheel scrolling)
@@ -1257,101 +1255,6 @@ window.addEventListener("load", function() {
     </div>
 </div>
 
-<!-- Back To Top Button -->
-<button id="backToTopBtn" aria-label="Back to top">
-    <span class="arrow">↑</span>
-    <span>Back To Top</span>
-</button>
-
-<script>
-    // Back To Top Button Functionality (works with custom scroll system)
-    (function() {
-        const backToTopBtn = document.getElementById('backToTopBtn');
-        const scrollThreshold = 400; // Show button after scrolling 400px
-        let scrollTimer = null;
-        let isScrolling = false;
-        let lastScrollPos = 0;
-
-        function handleBackToTopScroll() {
-            // Clear existing timer
-            if (scrollTimer) {
-                clearTimeout(scrollTimer);
-            }
-
-            // Get scroll position from the custom scroll system
-            const currentScrollPos = typeof scrollPos !== 'undefined' ? scrollPos : 0;
-            
-            // Check if scrolled past threshold
-            if (currentScrollPos > scrollThreshold) {
-                // If scroll position changed, reset timer
-                if (currentScrollPos !== lastScrollPos) {
-                    lastScrollPos = currentScrollPos;
-                    // Hide button while scrolling
-                    backToTopBtn.classList.remove('show');
-                    isScrolling = true;
-                    
-                    // Show button 0.3s after scrolling stops
-                    scrollTimer = setTimeout(() => {
-                        backToTopBtn.classList.add('show');
-                        isScrolling = false;
-                    }, 300);
-                }
-            } else {
-                // Hide immediately if scrolled back to top
-                backToTopBtn.classList.remove('show');
-                isScrolling = false;
-                lastScrollPos = currentScrollPos;
-            }
-        }
-
-        // Monitor scrollPos changes (this page uses custom scroll system)
-        setInterval(() => {
-            if (typeof scrollPos !== 'undefined') {
-                handleBackToTopScroll();
-            }
-        }, 50);
-
-        // Also listen to wheel and touch events for immediate response
-        window.addEventListener('wheel', () => {
-            if (typeof scrollPos !== 'undefined' && scrollPos > scrollThreshold) {
-                backToTopBtn.classList.remove('show');
-                isScrolling = true;
-                if (scrollTimer) clearTimeout(scrollTimer);
-                scrollTimer = setTimeout(() => {
-                    backToTopBtn.classList.add('show');
-                    isScrolling = false;
-                }, 300);
-            }
-        }, { passive: true });
-
-        window.addEventListener('touchmove', () => {
-            if (typeof scrollPos !== 'undefined' && scrollPos > scrollThreshold) {
-                backToTopBtn.classList.remove('show');
-                isScrolling = true;
-                if (scrollTimer) clearTimeout(scrollTimer);
-                scrollTimer = setTimeout(() => {
-                    backToTopBtn.classList.add('show');
-                    isScrolling = false;
-                }, 300);
-            }
-        }, { passive: true });
-
-        // Click handler to scroll to top using the page's custom scroll function
-        backToTopBtn.addEventListener('click', () => {
-            if (typeof scrollToPosition !== 'undefined') {
-                scrollToPosition(0);
-            } else if (typeof scrollPos !== 'undefined') {
-                // Fallback if scrollToPosition is not available
-                scrollPos = 0;
-                if (typeof updateEverything !== 'undefined') {
-                    updateEverything();
-                }
-            }
-            // Hide button immediately when clicked
-            backToTopBtn.classList.remove('show');
-        });
-    })();
-</script>
 
 </body>
 </html>
