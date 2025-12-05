@@ -189,7 +189,6 @@
         width: 100%;
         max-width: 600px;
         margin: 0 auto 24px;
-        display: none; /* Hidden by default, shown when image loads */
         text-align: center;
     }
 
@@ -805,9 +804,7 @@
             this.style.display = 'none';
         };
         imgElement.onload = function() {
-            if (imgElement.parentElement) {
-                imgElement.parentElement.style.display = 'block';
-            }
+            this.style.display = 'block';
         };
     }
 
@@ -828,9 +825,9 @@
         // Image if available - check for image in signs copy folder
         let imageHtml = '';
         if (q.id) {
-            // Create image container (hidden by default, will show if image loads)
-            imageHtml = `<div class="question-image-container" style="display:none;">
-                <img src="" alt="Question ${q.id}" class="question-image" data-question-id="${q.id}">
+            // Create image container (always visible, image hides if it fails to load)
+            imageHtml = `<div class="question-image-container">
+                <img src="" alt="Question ${q.id}" class="question-image" data-question-id="${q.id}" style="display:none;">
             </div>`;
         }
         
@@ -931,6 +928,8 @@
         if (q.id) {
             const imgElement = container.querySelector('.question-image[data-question-id="' + q.id + '"]');
             if (imgElement) {
+                // Reset display before loading
+                imgElement.style.display = 'block';
                 setupImageLoading(imgElement, q.id);
             }
         }
