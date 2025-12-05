@@ -188,8 +188,7 @@
     .question-image-container {
         width: 100%;
         max-width: 600px;
-        margin: 0 auto 0px;
-        text-align: center;
+        margin: 0 auto;
     }
 
     .question-image-container.has-image {
@@ -197,7 +196,7 @@
     }
 
     .question-image-container.no-image {
-        height: 0px;
+        height: 0;
         overflow: hidden;
     }
 
@@ -695,6 +694,9 @@
     let currentQuestionIndex = 0;
     let timeRemaining = TOTAL_TEST_TIME; // 45 minutes in seconds
     let timerInterval = null;
+    
+    // Image existence cache to prevent flicker
+    const imageExistsCache = new Map();
 
     // Map category names to topic slugs (for reference, but we'll use all categories)
     const categoryToTopicMap = {
@@ -758,10 +760,18 @@
             userAnswers = {};
             selectedAnswers = {};
             
-            // Start timer
-            startTimer();
+            // Pre-check images for all questions
+            const imageCheckPromises = questions
+                .filter(q => q.id)
+                .map(q => checkImageExists(`signs copy/${q.id}.png`));
             
-            renderCurrentQuestion();
+            // Wait for all image checks, then render
+            Promise.all(imageCheckPromises).then(() => {
+                // Start timer
+                startTimer();
+                
+                renderCurrentQuestion();
+            });
         } catch (error) {
             console.error('Error loading questions:', error);
             document.getElementById('questions-container').innerHTML = 
@@ -773,6 +783,55 @@
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    // Check if image exists (with caching)
+    function checkImageExists(src) {
+        if (imageExistsCache.has(src)) {
+            return Promise.resolve(imageExistsCache.get(src));
+        }
+        
+        return new Promise((resolve) => {
+            const img = new Image();
+            img.onload = () => {
+                imageExistsCache.set(src, true);
+                resolve(true);
+            };
+            img.onerror = () => {
+                imageExistsCache.set(src, false);
+                resolve(false);
+            };
+            img.src = src;
+        });
+    }
+
+    // Create image HTML only if image exists
+    function createImageHtml(q) {
+        if (!q.id) {
+            return `<div class="question-image-container no-image"></div>`;
+        }
+        
+        const imagePath = `signs copy/${q.id}.png`;
+        const exists = imageExistsCache.get(imagePath);
+        
+        if (exists === true) {
+            return `
+                <div class="question-image-container has-image">
+                    <img src="${imagePath}" alt="Question ${q.id}" class="question-image">
+                </div>
+            `;
+        } else if (exists === false) {
+            return `<div class="question-image-container no-image"></div>`;
+        } else {
+            // Not checked yet - check now (async, but render without image first)
+            checkImageExists(imagePath).then(() => {
+                // Re-render if we're still on this question
+                if (currentQuestionIndex < questions.length && questions[currentQuestionIndex].id === q.id) {
+                    renderCurrentQuestion();
+                }
+            });
+            return `<div class="question-image-container no-image"></div>`;
         }
     }
 
@@ -821,16 +880,8 @@
         const selectedAnswer = selectedAnswers[currentQuestionIndex];
         const isCorrect = hasSubmitted && submittedAnswer === q.correctAnswer;
 
-        // Image container - always create to prevent card movement
-        let imageHtml = '';
-        if (q.id) {
-            const imagePath = `signs copy/${q.id}.png`;
-            imageHtml = `<div class="question-image-container has-image">
-                <img src="${imagePath}" alt="Question ${q.id}" class="question-image" onerror="this.parentElement.classList.remove('has-image')">
-            </div>`;
-        } else {
-            imageHtml = `<div class="question-image-container no-image"></div>`;
-        }
+        // Image container - only create img tag if image exists (prevents flicker)
+        const imageHtml = createImageHtml(q);
         
         // Options with toggle switches
         const optionsHtml = q.options.map((opt, optIndex) => {
