@@ -188,12 +188,17 @@
     .question-image-container {
         width: 100%;
         max-width: 600px;
-        margin: 0 auto 24px;
+        margin: 0 auto 0px;
         text-align: center;
-        min-height: 200px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    }
+
+    .question-image-container.has-image {
+        margin-bottom: 24px;
+    }
+
+    .question-image-container.no-image {
+        height: 0px;
+        overflow: hidden;
     }
 
     .question-image {
@@ -816,16 +821,15 @@
         const selectedAnswer = selectedAnswers[currentQuestionIndex];
         const isCorrect = hasSubmitted && submittedAnswer === q.correctAnswer;
 
-        // Image container - always create to reserve space (prevents card movement)
+        // Image container - always create to prevent card movement
         let imageHtml = '';
         if (q.id) {
             const imagePath = `signs copy/${q.id}.png`;
-            imageHtml = `<div class="question-image-container">
-                <img src="${imagePath}" alt="Question ${q.id}" class="question-image" onerror="this.style.opacity='0';">
+            imageHtml = `<div class="question-image-container has-image">
+                <img src="${imagePath}" alt="Question ${q.id}" class="question-image" onerror="this.parentElement.classList.remove('has-image')">
             </div>`;
         } else {
-            // Always create empty container to reserve space and prevent card movement
-            imageHtml = `<div class="question-image-container"></div>`;
+            imageHtml = `<div class="question-image-container no-image"></div>`;
         }
         
         // Options with toggle switches
