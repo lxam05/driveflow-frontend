@@ -299,32 +299,17 @@
         }
     }
 
-    // Get image path for a sign number (handles missing sign 69)
-    function getSignImagePath(signNumber) {
-        const basePath = `All signs test day/${signNumber}`;
-        return basePath;
-    }
+    // Map of sign numbers to their actual file extensions (prevents failed requests)
+    const signImageExtensions = {
+        10: 'jpeg', 32: 'jpeg', 59: 'jpeg', 60: 'jpeg', 61: 'jpeg', 62: 'jpeg', 65: 'jpeg', 68: 'jpeg',
+        71: 'webp', 72: 'webp', 73: 'webp', 74: 'jpeg', 77: 'jpg', 78: 'svg.png', 80: 'jpeg',
+        129: 'webp', 130: 'webp', 131: 'webp', 132: 'webp', 133: 'webp', 134: 'webp', 135: 'webp', 136: 'webp'
+    };
 
-    // Load image with fallback extensions
-    function loadImageWithFallback(signNumber, callback) {
-        const extensions = ['png', 'jpeg', 'jpg', 'webp'];
-        let tried = 0;
-        
-        const tryNext = () => {
-            if (tried >= extensions.length) {
-                callback(null);
-                return;
-            }
-            const path = `All signs test day/${signNumber}.${extensions[tried]}`;
-            const img = new Image();
-            img.onload = () => callback(path);
-            img.onerror = () => {
-                tried++;
-                tryNext();
-            };
-            img.src = path;
-        };
-        tryNext();
+    // Get the correct image path for a sign number
+    function getSignImagePath(signNumber) {
+        const extension = signImageExtensions[signNumber] || 'png';
+        return `All signs test day/${signNumber}.${extension}`;
     }
 
     // Generate a random question
@@ -367,11 +352,13 @@
         document.getElementById('signNumber').textContent = currentSignNumber;
         
         // Get the question sign image
-        loadImageWithFallback(currentSignNumber, (imagePath) => {
-            if (imagePath) {
-                document.getElementById('questionSignImage').src = imagePath;
-            }
-        });
+        const imagePath = getSignImagePath(currentSignNumber);
+        const imgElement = document.getElementById('questionSignImage');
+        imgElement.src = imagePath;
+        imgElement.onerror = function() {
+            this.style.display = 'none';
+        };
+        imgElement.style.display = '';
         
         // Get 3 wrong answer sign numbers (excluding the correct one and 69)
         const wrongSignNumbers = [];

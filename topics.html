@@ -923,20 +923,17 @@
         document.getElementById('progressFill').style.width = Math.min(progress, 100) + '%';
     }
 
-    // Helper function to try next image extension
-    function tryNextExtension(img, questionId, extensions, currentIndex) {
-        const nextIndex = currentIndex + 1;
-        if (nextIndex < extensions.length) {
-            img.src = `signs copy/${questionId}.${extensions[nextIndex]}`;
-            img.onerror = function() {
-                tryNextExtension(img, questionId, extensions, nextIndex);
-            };
-        } else {
-            // All extensions tried, hide the container
-            if (img.parentElement) {
-                img.parentElement.style.display = 'none';
-            }
-        }
+    // Map of question IDs to their actual file extensions (prevents failed requests)
+    const signImageExtensions = {
+        10: 'jpeg', 32: 'jpeg', 59: 'jpeg', 60: 'jpeg', 61: 'jpeg', 62: 'jpeg', 65: 'jpeg', 68: 'jpeg',
+        71: 'webp', 72: 'webp', 73: 'webp', 74: 'jpeg', 77: 'jpg', 78: 'svg.png', 80: 'jpeg',
+        129: 'webp', 130: 'webp', 131: 'webp', 132: 'webp', 133: 'webp', 134: 'webp', 135: 'webp', 136: 'webp'
+    };
+
+    // Get the correct image path for a question ID
+    function getQuestionImagePath(questionId) {
+        const extension = signImageExtensions[questionId] || 'png';
+        return `signs copy/${questionId}.${extension}`;
     }
 
     function renderCurrentQuestion() {
@@ -956,19 +953,9 @@
         // Image if available - check for image in signs copy folder
         let imageHtml = '';
         if (q.id) {
-            // Try different extensions - the image will load if it exists
-            // We'll use a simpler approach: try each extension in sequence
-            const extensions = ['png', 'jpg', 'jpeg', 'webp'];
-            let imgSrc = '';
-            for (let i = 0; i < extensions.length; i++) {
-                imgSrc = `signs copy/${q.id}.${extensions[i]}`;
-                if (i === 0) break; // Start with png
-            }
-            
-            imageHtml = `<div class="question-image-container" style="display:none;">
-                <img src="${imgSrc}" alt="Question ${q.id}" class="question-image" 
-                     onerror="tryNextExtension(this, ${q.id}, ${JSON.stringify(extensions)}, 0);"
-                     onload="this.parentElement.style.display='block';">
+            const imagePath = getQuestionImagePath(q.id);
+            imageHtml = `<div class="question-image-container" style="text-align: center; margin-bottom: 24px;">
+                <img src="${imagePath}" alt="Question ${q.id}" class="question-image" onerror="this.style.display='none'">
             </div>`;
         }
         

@@ -798,37 +798,17 @@
         document.getElementById('progressFill').style.width = Math.min(progress, 100) + '%';
     }
 
-    // Helper function to safely load image with fallback extensions
-    function setupImageLoading(imgElement, questionId) {
-        const extensions = ['png', 'jpg', 'jpeg', 'webp'];
-        let currentIndex = 0;
-        
-        function tryNextExtension() {
-            if (currentIndex < extensions.length) {
-                imgElement.src = `signs copy/${questionId}.${extensions[currentIndex]}`;
-                currentIndex++;
-        } else {
-            // All extensions tried, hide the container
-                if (imgElement.parentElement) {
-                    imgElement.parentElement.style.display = 'none';
-            }
-        }
-        }
-        
-        // Set up error handler
-        imgElement.onerror = function() {
-            tryNextExtension();
-        };
-        
-        // Set up load handler
-        imgElement.onload = function() {
-            if (imgElement.parentElement) {
-                imgElement.parentElement.style.display = 'block';
-            }
-        };
-        
-        // Start with first extension
-        tryNextExtension();
+    // Map of question IDs to their actual file extensions (prevents failed requests)
+    const signImageExtensions = {
+        10: 'jpeg', 32: 'jpeg', 59: 'jpeg', 60: 'jpeg', 61: 'jpeg', 62: 'jpeg', 65: 'jpeg', 68: 'jpeg',
+        71: 'webp', 72: 'webp', 73: 'webp', 74: 'jpeg', 77: 'jpg', 78: 'svg.png', 80: 'jpeg',
+        129: 'webp', 130: 'webp', 131: 'webp', 132: 'webp', 133: 'webp', 134: 'webp', 135: 'webp', 136: 'webp'
+    };
+
+    // Get the correct image path for a question ID
+    function getQuestionImagePath(questionId) {
+        const extension = signImageExtensions[questionId] || 'png';
+        return `signs copy/${questionId}.${extension}`;
     }
 
     function renderCurrentQuestion() {
@@ -848,9 +828,9 @@
         // Image if available - check for image in signs copy folder
         let imageHtml = '';
         if (q.id) {
-            // Create image container (hidden by default, will show if image loads)
-            imageHtml = `<div class="question-image-container" style="display:none;">
-                <img src="" alt="Question ${q.id}" class="question-image" data-question-id="${q.id}">
+            const imagePath = getQuestionImagePath(q.id);
+            imageHtml = `<div class="question-image-container" style="text-align: center; margin-bottom: 24px;">
+                <img src="${imagePath}" alt="Question ${q.id}" class="question-image" onerror="this.style.display='none'">
             </div>`;
         }
         
@@ -946,14 +926,6 @@
                 ${feedbackHtml}
             </div>
         `;
-        
-        // Setup image loading safely after DOM is updated
-        if (q.id) {
-            const imgElement = container.querySelector('.question-image[data-question-id="' + q.id + '"]');
-            if (imgElement) {
-                setupImageLoading(imgElement, q.id);
-            }
-        }
         
         updateProgress();
     }
