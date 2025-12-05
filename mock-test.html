@@ -801,10 +801,18 @@
     function setupImageLoading(imgElement, questionId) {
         imgElement.src = `signs copy/${questionId}.png`;
         imgElement.onerror = function() {
+            // Hide both image and container if image fails to load
             this.style.display = 'none';
+            if (this.parentElement) {
+                this.parentElement.style.display = 'none';
+            }
         };
         imgElement.onload = function() {
             this.style.display = 'block';
+            // Ensure container is visible when image loads
+            if (this.parentElement) {
+                this.parentElement.style.display = 'block';
+            }
         };
     }
 
@@ -928,8 +936,12 @@
         if (q.id) {
             const imgElement = container.querySelector('.question-image[data-question-id="' + q.id + '"]');
             if (imgElement) {
-                // Reset display before loading
-                imgElement.style.display = 'block';
+                // Start with image hidden, container visible (to reserve space)
+                imgElement.style.display = 'none';
+                const containerElement = imgElement.parentElement;
+                if (containerElement) {
+                    containerElement.style.display = 'block';
+                }
                 setupImageLoading(imgElement, q.id);
             }
         }
