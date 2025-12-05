@@ -435,7 +435,8 @@
         }
 
         function showPaywall() {
-            document.getElementById('paywallModal').classList.add('show');
+            // Redirect to payment page instead of showing modal
+            window.location.href = 'payment.html';
         }
 
         function hidePaywall() {

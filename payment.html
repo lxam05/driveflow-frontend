@@ -40,37 +40,111 @@
     }
 
     .payment-container {
-        max-width: 1400px;
-        margin: 0 auto;
-        padding: 40px 20px;
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
         min-height: 100vh;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .payment-layout {
+        display: flex;
+        width: 100%;
+        min-height: 100vh;
+        position: relative;
+    }
+
+    .main-content {
+        width: 100%;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        padding: 40px;
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
-    .payment-layout {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 40px;
-        width: 100%;
-        max-width: 1200px;
+    .main-content.slide-left {
+        transform: translateX(-50%);
+    }
+
+    .payment-form-panel {
+        position: fixed;
+        top: 0;
+        left: 100%;
+        width: 50%;
+        height: 100vh;
+        background: var(--bg-card);
+        border-left: 1px solid var(--border-subtle);
+        box-shadow: -4px 0 24px rgba(0, 0, 0, 0.3);
+        transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1000;
+        overflow-y: auto;
+        padding: 40px;
+    }
+
+    .payment-form-panel.show {
+        left: 50%;
+    }
+
+    .payment-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .payment-backdrop.show {
+        opacity: 1;
+        pointer-events: all;
     }
 
     @media (max-width: 1024px) {
-        .payment-layout {
-            grid-template-columns: 1fr;
-            gap: 32px;
+        .payment-form-panel {
+            width: 100%;
+        }
+        
+        .main-content.slide-left {
+            transform: translateX(-100%);
+        }
+        
+        .payment-form-panel.show {
+            left: 0;
         }
     }
 
-    .payment-section,
+    .payment-section {
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-xl);
+        padding: 40px;
+        box-shadow: var(--shadow-card);
+        max-width: 600px;
+        width: 100%;
+    }
+
     .benefits-section {
         background: var(--bg-card);
         border: 1px solid var(--border-subtle);
         border-radius: var(--radius-xl);
         padding: 40px;
         box-shadow: var(--shadow-card);
+        max-width: 600px;
+        width: 100%;
+        margin-left: 40px;
+    }
+
+    @media (max-width: 1024px) {
+        .benefits-section {
+            margin-left: 0;
+            margin-top: 40px;
+        }
     }
 
     /* Pre-checkout Screen */
@@ -196,12 +270,8 @@
         color: var(--text-main);
     }
 
-    /* Payment Form Screen */
+    /* Payment Form Screen - now in sliding panel */
     .payment-form-screen {
-        display: none;
-    }
-
-    .payment-form-screen.show {
         display: block;
     }
 
@@ -409,49 +479,85 @@
 
 <div class="payment-container">
     <div class="payment-layout">
-        <!-- Payment Section (Left) -->
-        <div class="payment-section">
-            <!-- Pre-checkout Screen -->
-            <div class="pre-checkout-screen" id="preCheckoutScreen">
-                <h1>Pass the Driving Test With Confidence</h1>
-                <p class="subtitle">Unlock the full suite of routes used by instructors and examiners.</p>
+        <!-- Main Content -->
+        <div class="main-content" id="mainContent">
+            <div style="display: flex; gap: 40px; width: 100%; max-width: 1400px; justify-content: center; flex-wrap: wrap;">
+                <!-- Payment Section (Left) -->
+                <div class="payment-section">
+                    <!-- Pre-checkout Screen -->
+                    <div class="pre-checkout-screen" id="preCheckoutScreen">
+                        <h1>Pass the Driving Test With Confidence</h1>
+                        <p class="subtitle">Unlock the full suite of routes used by instructors and examiners.</p>
 
-                <ul class="includes-list">
-                    <li>Seamless integration into GoogleMaps</li>
-                    <li>7 hand-mapped routes</li>
-                    <li>Safe turn-by-turn order</li>
-                    <li>Test-style maneuvers</li>
-                    <li>No ads</li>
-                    <li>Instant access after payment</li>
-                </ul>
+                        <ul class="includes-list">
+                            <li>Seamless integration into GoogleMaps</li>
+                            <li>7 hand-mapped routes</li>
+                            <li>Safe turn-by-turn order</li>
+                            <li>Test-style maneuvers</li>
+                            <li>No ads</li>
+                            <li>Instant access after payment</li>
+                        </ul>
 
-                <div class="price-info">
-                    <div class="price">€13.99</div>
+                        <div class="price-info">
+                            <div class="price">€13.99</div>
+                        </div>
+
+                        <div class="trust-badge">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                <path d="M9 12l2 2 4-4"/>
+                            </svg>
+                            <span>Trusted, secure payment by Stripe</span>
+                        </div>
+
+                        <button class="btn-unlock" id="unlockBtn" onclick="showPaymentForm()">
+                            Unlock Routes (€13.99)
+                        </button>
+
+                        <div class="scarcity-trust">
+                            <p><strong>Used by 1,200+ learner drivers</strong></p>
+                            <p>Failing the test costs €85 — get the routes for less</p>
+                            <p><strong>3 month access.</strong></p>
+                        </div>
+
+                        <a href="routes.html" class="btn-back">← Back to Routes</a>
+                    </div>
                 </div>
 
-                <div class="trust-badge">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                        <path d="M9 12l2 2 4-4"/>
-                    </svg>
-                    <span>Trusted, secure payment by Stripe</span>
+                <!-- What You'll Get Section (Right) -->
+                <div class="benefits-section">
+                    <h2>What You'll Get</h2>
+                    
+                    <div class="what-you-get">
+                        <h3>Driving Test Routes (Full Access)</h3>
+                        <ul class="benefits-list">
+                            <li>7 routes used by real examiners</li>
+                            <li>Includes roundabouts, speed zones, tricky turns</li>
+                            <li>Each route 100% accurate</li>
+                            <li>Updated regularly</li>
+                            <li>Pass-focused structure</li>
+                        </ul>
+                    </div>
+
+                    <div class="visual-preview">
+                        <div class="map-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                        </div>
+                        <p class="visual-preview-text">Route preview (visual representation)</p>
+                    </div>
                 </div>
-
-                <button class="btn-unlock" id="unlockBtn" onclick="showPaymentForm()">
-                    Unlock Routes (€13.99)
-                </button>
-
-                <div class="scarcity-trust">
-                    <p><strong>Used by 1,200+ learner drivers</strong></p>
-                    <p>Failing the test costs €85 — get the routes for less</p>
-                    <p><strong>3 month access.</strong></p>
-                </div>
-
-                <a href="routes.html" class="btn-back">← Back to Routes</a>
             </div>
+        </div>
 
-            <!-- Payment Form Screen -->
-            <div class="payment-form-screen" id="paymentFormScreen">
+        <!-- Backdrop -->
+        <div class="payment-backdrop" id="paymentBackdrop" onclick="hidePaymentForm()"></div>
+
+        <!-- Sliding Payment Form Panel -->
+        <div class="payment-form-panel" id="paymentFormPanel">
+            <div class="payment-form-screen">
                 <h2>Complete Your Purchase</h2>
                 <p class="subtitle">Enter your payment details below</p>
 
@@ -469,33 +575,7 @@
                     </button>
                 </div>
 
-                <button class="btn-back" onclick="showPreCheckout()" style="background: transparent; border: 1px solid var(--border-subtle); color: var(--text-muted); padding: 10px 20px; border-radius: 999px; cursor: pointer; width: 100%; margin-top: 20px;">← Back</button>
-            </div>
-        </div>
-
-        <!-- What You'll Get Section (Right) -->
-        <div class="benefits-section">
-            <h2>What You'll Get</h2>
-            
-            <div class="what-you-get">
-                <h3>Driving Test Routes (Full Access)</h3>
-                <ul class="benefits-list">
-                    <li>7 routes used by real examiners</li>
-                    <li>Includes roundabouts, speed zones, tricky turns</li>
-                    <li>Each route 100% accurate</li>
-                    <li>Updated regularly</li>
-                    <li>Pass-focused structure</li>
-                </ul>
-            </div>
-
-            <div class="visual-preview">
-                <div class="map-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                        <circle cx="12" cy="10" r="3"/>
-                    </svg>
-                </div>
-                <p class="visual-preview-text">Route preview (visual representation)</p>
+                <button class="btn-back" onclick="hidePaymentForm()" style="background: transparent; border: 1px solid var(--border-subtle); color: var(--text-muted); padding: 10px 20px; border-radius: 999px; cursor: pointer; width: 100%; margin-top: 20px;">← Back</button>
             </div>
         </div>
     </div>
@@ -509,15 +589,18 @@
     let currentPaymentIntentId = null;
     let paymentInitialized = false;
 
-    function showPreCheckout() {
-        document.getElementById('preCheckoutScreen').classList.remove('hidden');
-        document.getElementById('paymentFormScreen').classList.remove('show');
+    function hidePaymentForm() {
+        // Slide payment panel out and main content back
+        document.getElementById('paymentFormPanel').classList.remove('show');
+        document.getElementById('mainContent').classList.remove('slide-left');
+        document.getElementById('paymentBackdrop').classList.remove('show');
     }
 
     async function showPaymentForm() {
-        // Hide pre-checkout, show payment form
-        document.getElementById('preCheckoutScreen').classList.add('hidden');
-        document.getElementById('paymentFormScreen').classList.add('show');
+        // Slide main content left and payment panel in
+        document.getElementById('mainContent').classList.add('slide-left');
+        document.getElementById('paymentFormPanel').classList.add('show');
+        document.getElementById('paymentBackdrop').classList.add('show');
 
         // Initialize payment if not already done
         if (!paymentInitialized) {
@@ -628,11 +711,28 @@
                 document.getElementById('submitPaymentText').style.display = 'inline';
                 document.getElementById('submitPaymentSpinner').style.display = 'none';
             } else {
-                // Payment succeeded
-                alert('Payment successful! Redirecting...');
-                setTimeout(() => {
-                    window.location.href = '/routes.html?payment=success';
-                }, 1000);
+                // Payment succeeded - confirm with backend
+                const token = localStorage.getItem('auth_token');
+                const confirmResponse = await fetch(`${API_URL}/routes/confirm-payment`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        paymentIntentId: currentPaymentIntentId
+                    })
+                });
+
+                if (confirmResponse.ok) {
+                    alert('Payment successful! Redirecting...');
+                    setTimeout(() => {
+                        window.location.href = 'routes.html?payment=success';
+                    }, 1000);
+                } else {
+                    const error = await confirmResponse.json();
+                    throw new Error(error.error || 'Failed to confirm payment');
+                }
             }
         } catch (err) {
             console.error('Payment error:', err);
