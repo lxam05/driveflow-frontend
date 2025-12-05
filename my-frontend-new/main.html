@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cinematic Scroll With Sections</title>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    
+    :root {
+        --world-height: 8000px;
+        --bg-main: #0b132b;
+        --bg-card: #2d3f5a;
+        --bg-card-smaller: #3a506b;
+        --primary-blue: #5bc0be;
+        --primary-blue-dark: #3a506b;
+        --accent-purple: #6fffe9;
+        --text-dark: #e5e7eb;
+        --text-light: #9ca3af;
+        --bg-glass: rgba(28, 37, 65, 0.95);
+        --button-bg: #6fffe9;
+        --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+        --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+        --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+        --shadow-xl: 0 12px 48px rgba(0, 0, 0, 0.2);
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        overflow: hidden;
+        overscroll-behavior: none;
+        background: var(--bg-main);
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ---------------- HEADER ---------------- */
+    #mainHeader {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 16px 0;
+        text-align: center;
+        background: linear-gradient(135deg, rgba(11, 19, 43, 0.85) 0%, rgba(28, 37, 65, 0.9) 100%);
+        color: white;
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border-bottom: 1px solid rgba(111, 255, 233, 0.1);
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+        z-index: 2000;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        transform: translateY(0);
+        opacity: 1;
+    }
+    #mainHeader.hidden {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    #mainHeader .header-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 24px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 16px;
+    }
+    #mainHeader h1 {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-align: center;
+        grid-column: 1;
+    }
+    #mainHeader .user-greeting {
+        position: static;
+        color: white;
+        font-size: 14px;
+        font-weight: 600;
+        margin-right: 16px;
+    }
+    #mainHeader .header-nav {
+        position: static;
+        display: flex;
+        gap: 20px;
+        align-items: center;
+    }
+    #mainHeader .header-left {
+        grid-column: 1;
+        justify-self: start;
+        display: none; /* Hidden - no content needed */
+        align-items: center;
+    }
+    #mainHeader .header-left a {
+        color: white;
+        text-decoration: underline;
+        text-underline-offset: 4px;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 0;
+        border: none;
+        background: none;
+        transition: opacity 0.2s ease;
+    }
+    #mainHeader .header-left a:hover {
+        opacity: 0.7;
+    }
+    #mainHeader .header-right {
+        grid-column: 2;
+        justify-self: end;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+    #mainHeader .header-nav a {
+        color: white;
+        text-decoration: underline;
+        text-underline-offset: 4px;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 0;
+        border: none;
+        background: none;
+        transition: opacity 0.2s ease;
+    }
+    #mainHeader .header-nav a:hover {
+        opacity: 0.7;
+    }
+    #mainHeader .header-nav .btn-login {
+        background: none;
+        border: none;
+    }
+    #mainHeader .header-nav .btn-signup {
+        background: none;
+        border: none;
+        color: white;
+    }
+    #mainHeader .header-nav .btn-signup:hover {
+        background: none;
+    }
+
+    /* ---------- CONTACT MODAL ---------- */
+    .contact-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 3000;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .contact-modal.show {
+        display: flex;
+    }
+
+    .contact-content {
+        background: var(--bg-card);
+        border: 1px solid rgba(111, 255, 233, 0.2);
+        border-radius: 22px;
+        padding: 40px;
+        max-width: 600px;
+        width: 100%;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: var(--shadow-xl);
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .contact-content::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .contact-content::-webkit-scrollbar-track {
+        background: rgba(15, 23, 42, 0.3);
+        border-radius: 4px;
+    }
+
+    .contact-content::-webkit-scrollbar-thumb {
+        background: var(--primary-blue);
+        border-radius: 4px;
+    }
+
+    .contact-content::-webkit-scrollbar-thumb:hover {
+        background: var(--accent-purple);
+    }
+
+    .contact-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .contact-title {
+        font-size: 24px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: var(--text-dark);
+    }
+
+    .contact-close {
+        background: none;
+        border: none;
+        color: var(--text-light);
+        font-size: 24px;
+        cursor: pointer;
+        padding: 0;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        transition: all 0.18s ease-out;
+    }
+
+    .contact-close:hover {
+        background: rgba(148, 163, 184, 0.1);
+        color: var(--text-dark);
+    }
+
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .contact-form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .contact-form-label {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-light);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+    }
+
+    .contact-form-input,
+    .contact-form-textarea {
+        padding: 12px 16px;
+        border-radius: 12px;
+        border: 1px solid rgba(111, 255, 233, 0.2);
+        background: var(--bg-glass);
+        color: var(--text-dark);
+        font-size: 14px;
+        font-family: inherit;
+        transition: all 0.18s ease-out;
+    }
+
+    .contact-form-input:focus,
+    .contact-form-textarea:focus {
+        outline: none;
+        border-color: var(--primary-blue);
+        background: rgba(28, 37, 65, 0.98);
+        box-shadow: 0 0 0 3px rgba(91, 192, 190, 0.1);
+    }
+
+    .contact-form-textarea {
+        min-height: 150px;
+        resize: vertical;
+    }
+
+    .contact-submit-btn {
+        padding: 12px 24px;
+        border-radius: 999px;
+        border: 1px solid rgba(99, 102, 241, 0.9);
+        background: linear-gradient(
+            120deg,
+            rgba(37, 99, 235, 0.95),
+            rgba(124, 58, 237, 0.95)
+        );
+        color: #e5e7eb;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.18s ease-out;
+        box-shadow: 0 16px 40px rgba(30, 64, 175, 0.85);
+        margin-top: 8px;
+    }
+
+    .contact-submit-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 20px 50px rgba(30, 64, 175, 0.95);
+    }
+
+    .contact-submit-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .contact-message {
+        padding: 12px 16px;
+        border-radius: 12px;
+        font-size: 13px;
+        margin-top: 8px;
+        display: none;
+    }
+
+    .contact-message.success {
+        background: rgba(34, 197, 94, 0.1);
+        border: 1px solid rgba(34, 197, 94, 0.3);
+        color: #bbf7d0;
+        display: block;
+    }
+
+    .contact-message.error {
+        background: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        color: #fecaca;
+        display: block;
+    }
+        color: white;
+        transform: none;
+    }
+    @media (max-width: 768px) {
+        #mainHeader .header-content {
+            grid-template-columns: 1fr;
+            gap: 8px;
+            padding: 12px 16px;
+        }
+        #mainHeader h1 {
+            font-size: 18px;
+            grid-column: 1;
+            text-align: center;
+        }
+        #mainHeader .header-left {
+            grid-column: 1;
+            justify-self: start;
+            display: none; /* Hidden on mobile too */
+        }
+        #mainHeader .header-left a {
+            font-size: 12px;
+        }
+        #mainHeader .header-right {
+            grid-column: 1;
+            justify-self: end;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        #mainHeader .user-greeting {
+            font-size: 12px;
+            margin-right: 0;
+        }
+        #mainHeader .header-nav {
+            gap: 12px;
+        }
+        #mainHeader .header-nav a {
+            font-size: 12px;
+            padding: 0;
+        }
+    }
+
+    /* ---------------- LEVEL SELECTOR ---------------- */
+    #levelSelector {
+        position: absolute;
+        top: 100px;
+        left: 24px;
+        width: 260px;
+        padding: 20px;
+        background: var(--bg-card);
+        border-radius: 20px;
+        box-shadow: var(--shadow-xl);
+        z-index: 100;
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border: 1px solid rgba(111, 255, 233, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    #levelSelector:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.24);
+    }
+    #levelSelector h3 {
+        margin: 0 0 16px 0;
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--text-dark);
+        letter-spacing: -0.3px;
+    }
+    #levelSelector ul { 
+        list-style: none; 
+        margin: 0; 
+        padding: 0; 
+    }
+    #levelSelector li { 
+        margin-bottom: 8px; 
+    }
+    #levelSelector a {
+        color: var(--button-bg);
+        cursor: pointer; 
+        font-weight: 600;
+        font-size: 14px;
+        display: block;
+        padding: 10px 14px;
+        border-radius: 10px;
+        transition: all 0.2s ease;
+        text-decoration: none;
+        position: relative;
+        overflow: hidden;
+    }
+    #levelSelector a::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.1), transparent);
+        transition: left 0.5s ease;
+    }
+    #levelSelector a:hover::before {
+        left: 100%;
+    }
+    #levelSelector a:hover {
+        background: var(--bg-card-smaller);
+        color: var(--button-bg);
+        transform: translateX(4px);
+    }
+
+    /* ---------------- WORLD IMAGE (8000px) ---------------- */
+    #world {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: var(--world-height, 8000px);
+        background-image: url("backgroundForWeb.png");
+        background-size: auto 100%;
+        background-position: center top;
+        background-repeat: no-repeat;
+        will-change: transform;
+        z-index: 0;
+    }
+
+    @keyframes cloudDrift {
+        from { transform: translateX(0); }
+        to   { transform: translateX(-50%); }
+    }
+
+    /* fog */
+    #fog {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        background: radial-gradient(
+            circle at center,
+            rgba(255,255,255,0.0) 0%,
+            rgba(255,255,255,0.15) 50%,
+            rgba(255,255,255,0.35) 100%
+        );
+        opacity: 0;
+        z-index: 2;
+        transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* car */
+    #car {
+        position: fixed;
+        left: 50%;
+        top: 25vh;
+        transform: translate(-50%, -50%);
+        width: 30px;
+        height: 50px;
+        background-image: url("car.jpg");
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        z-index: 10;
+        filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3)) drop-shadow(0 8px 24px rgba(0, 0, 0, 0.2));
+        transition: filter 0.3s ease, transform 0.1s linear;
+        will-change: transform, filter;
+    }
+
+    /* ---------------- SECTIONS ---------------- */
+    .section {
+        position: absolute;
+        width: 100%;
+        padding-top: 20px;
+    }
+
+    .infoCard {
+        width: 360px;
+        background: var(--bg-card);
+        padding: 28px;
+        border-radius: 24px;
+        box-shadow: var(--shadow-lg);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        border: 1px solid rgba(111, 255, 233, 0.2);
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    .infoCard.visible {
+        opacity: 1;
+        transform: translateY(0);
+        animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    .infoCard.visible:hover {
+        transform: translateY(-8px) scale(1.02) !important;
+        box-shadow: var(--shadow-xl);
+        border-color: rgba(111, 255, 233, 0.4);
+        background: #3a506b;
+    }
+    .leftCard  { left: 40px; }
+    .rightCard { right: 40px; }
+
+    .infoCard h3 {
+        margin: 0;
+        font-size: 22px;
+        font-weight: 800;
+        color: var(--text-dark);
+        letter-spacing: -0.5px;
+        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--button-bg) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .infoCard p {
+        margin: 0;
+        font-size: 15px;
+        color: var(--text-light);
+        line-height: 1.6;
+        font-weight: 400;
+    }
+
+    .infoCard ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .infoCard li {
+        font-size: 15px;
+        position: relative;
+        padding-left: 24px;
+    }
+    .infoCard li::before {
+        content: '→';
+        position: absolute;
+        left: 0;
+        color: var(--button-bg);
+        font-weight: 700;
+        transition: transform 0.2s ease;
+    }
+    .infoCard li:hover::before {
+        transform: translateX(4px);
+    }
+
+    .infoCard a {
+        color: var(--button-bg);
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.2s ease;
+        display: inline-block;
+        position: relative;
+    }
+    .infoCard a::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--primary-blue), var(--button-bg));
+        transition: width 0.3s ease;
+    }
+    .infoCard a:hover {
+        color: var(--primary-blue);
+        transform: translateX(4px);
+    }
+    .infoCard a:hover::after {
+        width: 100%;
+    }
+
+    /* ---------------- FOOTER (BOTTOM OF WORLD) ---------------- */
+    #footer {
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        padding: 32px 0;
+        background: linear-gradient(135deg, var(--bg-main) 0%, var(--bg-card) 50%, var(--bg-card-smaller) 100%);
+        color: white;
+        font-size: 14px;
+        z-index: 150;
+        border-top: 1px solid rgba(111, 255, 233, 0.1);
+        box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    #footer p {
+        margin: 0;
+        letter-spacing: 0.5px;
+        font-weight: 500;
+        font-size: 15px;
+    }
+    #footer small {
+        display: block;
+        margin-top: 8px;
+        font-size: 13px;
+        opacity: 0.7;
+        font-weight: 400;
+    }
+
+    /* Back to Top Button */
+    #back-to-top {
+        position: fixed;
+        bottom: 30px;
+        left: 30px;
+        padding: 12px 20px;
+        border-radius: 999px;
+        background: var(--primary-blue, #5bc0be);
+        border: 2px solid var(--accent-purple, #6fffe9);
+        color: var(--bg-main, #0b132b);
+        cursor: pointer;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        box-shadow: 0 8px 24px rgba(91, 192, 190, 0.4);
+        z-index: 9997;
+        transition: all 0.3s ease;
+        font-size: 14px;
+        font-weight: 600;
+        opacity: 0;
+        transform: translateY(20px);
+        white-space: nowrap;
+    }
+
+    #back-to-top.show {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    #back-to-top:hover {
+        transform: scale(1.05) translateY(0);
+        box-shadow: 0 12px 32px rgba(91, 192, 190, 0.6);
+        background: var(--accent-purple, #6fffe9);
+    }
+
+    #back-to-top svg {
+        width: 16px;
+        height: 16px;
+        stroke: currentColor;
+        stroke-width: 2.5;
+        fill: none;
+        flex-shrink: 0;
+    }
+</style>
+</head>
+
+<body>
+
+<header id="mainHeader">
+    <div class="header-content">
+        <h1>Welcome to DriveFlow</h1>
+        <div class="header-right">
+            <div class="user-greeting" id="userGreeting" style="display: none;"></div>
+            <nav class="header-nav" id="headerNav">
+                <a href="#" id="contactUsLink">Contact Us</a>
+                <a href="login.html" class="btn-login">Login</a>
+                <a href="signup.html" class="btn-signup">Sign Up</a>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div id="world"></div>
+
+<!-- SELECTOR -->
+<nav id="levelSelector">
+    <h3>What level are you at?</h3>
+    <ul>
+        <li><a onclick="goTo('getting')">Getting Started</a></li>
+        <li><a onclick="goTo('theory')">Theory Test</a></li>
+        <li><a onclick="goTo('lessons')">Lessons</a></li>
+        <li><a onclick="goTo('booking')">Booking Test</a></li>
+        <li><a onclick="goTo('preparing')">Preparing for Test</a></li>
+        <li><a onclick="goTo('newdriver')">New Driver</a></li>
+    </ul>
+</nav>
+
+<!-- ========= SECTIONS ========= -->
+
+<!-- Getting Started — LEFT -->
+<div id="section-getting" class="section" data-section="getting">
+    <div class="infoCard leftCard">
+        <h3>Getting Started</h3>
+        <p>Kick off your driving journey with the essentials.</p>
+        <ul>
+            <li><a href="booking.html?from=getting&page=main">How to Book Your Theory Test</a></li>
+            <li><a href="getting-started.html?from=getting&page=main">Getting Started Checklist</a></li>
+        </ul>
+    </div>
+</div>
+
+<!-- Theory Test — RIGHT -->
+<div id="section-theory" class="section" data-section="theory">
+    <div class="infoCard rightCard">
+        <h3>Theory Test</h3>
+        <p>Pass the theory with practice and mock exams.</p>
+        <ul>
+            <li><a href="theory-test.html?from=theory&page=main">Practice Theory Questions</a></li>
+            <li><a href="mock-test.html?from=theory&page=main">Take a Mock Exam</a></li>
+        </ul>
+    </div>
+</div>
+
+<!-- Lessons — LEFT -->
+<div id="section-lessons" class="section" data-section="lessons">
+    <div class="infoCard leftCard">
+        <h3>Driving Lessons</h3>
+        <p>Choose the right instructor and stay motivated.</p>
+        <ul>
+            <li><a href="help-with-lessons.html?from=lessons&page=main">Help With Lessons</a></li>
+        </ul>
+    </div>
+</div>
+
+<!-- Booking Test — RIGHT -->
+<div id="section-booking" class="section" data-section="booking">
+    <div class="infoCard rightCard">
+        <h3>Booking the Test</h3>
+        <p>Timing, locations, and what to expect on booking day.</p>
+        <ul>
+            <li><a href="booking.html?from=booking&page=main">Book Your Test</a></li>
+            <li><a href="driving-test.html?from=booking&page=main">Driving Test Checklist</a></li>
+        </ul>
+    </div>
+</div>
+
+<!-- Preparing for Test — LEFT -->
+<div id="section-preparing" class="section" data-section="preparing">
+    <div class="infoCard leftCard">
+        <h3>Preparing for Test Day</h3>
+        <p>Refine your skills and learn the local routes.</p>
+        <ul>
+            <li><a href="preparing-for-test.html#how-to-practice">How to Practice</a></li>
+            <li><a href="routes.html?from=preparing&page=main">Routes</a></li>
+            <li><a href="drivingtest-theory.html?from=preparing&page=main">Test Theory</a></li>
+        </ul>
+    </div>
+</div>
+
+<!-- New Driver — RIGHT -->
+<div id="section-newdriver" class="section" data-section="newdriver">
+    <div class="infoCard rightCard">
+        <h3>New Driver Life</h3>
+        <p>Staying safe and confident after you pass.</p>
+        <ul>
+            <li><a href="new-driver.html#insurance">Insurance Tips</a></li>
+            <li><a href="new-driver.html#first-car">Choosing Your First Car</a></li>
+            <li><a href="new-driver.html#motorway">Motorway Confidence</a></li>
+        </ul>
+    </div>
+</div>
+
+<!-- Footer at bottom of 8000px world -->
+<footer id="footer">
+    <p>© 2025 DriveFlow — Helping Ireland learn to drive</p>
+    <small>Developed by learners, for learners.</small>
+</footer>
+
+<div id="fog"></div>
+<div id="car"></div>
+<script>
+    const API_URL =
+    location.hostname === "localhost" || location.hostname === "127.0.0.1"
+        ? "http://localhost:8080"   // ← backend when running locally
+        : "https://driving-test-backend-production.up.railway.app"; // ← built site
+
+
+    // Replace login/signup buttons with logout + username
+    function showUserUI(userData) {
+        const username = userData.username || userData.email?.split('@')[0] || 'User';
+        const userGreeting = document.getElementById("userGreeting");
+        const headerNav = document.getElementById("headerNav");
+        
+        userGreeting.textContent = `Hi, ${username}`;
+        userGreeting.style.display = "block";
+        // Show Contact Us, Dashboard, and Logout buttons
+        headerNav.innerHTML = `
+            <a href="#" id="contactUsLink">Contact Us</a>
+            <a href="dashboard.html" class="btn-login">Dashboard</a>
+            <a id="logoutBtn" class="btn-login" style="cursor:pointer">Logout</a>
+        `;
+
+        // Re-attach Contact Us event listener
+        const contactUsLink = headerNav.querySelector("#contactUsLink");
+        if (contactUsLink) {
+            contactUsLink.addEventListener("click", (e) => {
+                e.preventDefault();
+                const modal = document.getElementById("contactModal");
+                if (modal) {
+                    modal.classList.add("show");
+                }
+            });
+        }
+
+        const logoutBtn = headerNav.querySelector("#logoutBtn");
+        logoutBtn.addEventListener("click", () => {
+            localStorage.removeItem("auth_token");
+            window.location.href = "login.html";
+        });
+    }
+
+    async function checkUser() {
+        const token = localStorage.getItem("auth_token");
+        if (!token) {
+            // user not logged in → leave login/signup buttons
+            return;
+        }
+
+        try {
+            const res = await fetch(`${API_URL}/auth/protected`, {
+                method: "GET",
+                headers: {
+                    "Authorization": "Bearer " + token
+                }
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
+                // user is valid → update header UI
+                showUserUI(data.user);
+            } else {
+                // token invalid → clear and send to login
+                localStorage.removeItem("auth_token");
+            }
+        } catch (err) {
+            console.error("Auth check failed:", err);
+            localStorage.removeItem("auth_token");
+        }
+    }
+
+    // run on page load
+    checkUser();
+</script>
+
+<script>
+/* === SCROLL ENGINE === */
+let scrollPos = 0;
+
+const world         = document.getElementById("world");
+const car           = document.getElementById("car");
+const fog           = document.getElementById("fog");
+const levelSelector = document.getElementById("levelSelector");
+const footer        = document.getElementById("footer");
+
+const MIN_WORLD_HEIGHT = 8000;
+const sectionOrder = ["getting","theory","lessons","booking","preparing","newdriver"];
+const sectionSpacingMultiplier = 1.35;
+
+let worldHeight = MIN_WORLD_HEIGHT;
+let viewportHeight = window.innerHeight;
+let maxScroll = Math.max(0, worldHeight - viewportHeight);
+let sectionOffsets = {};
+
+function updateEverything(){
+    // clamp scrollPos just in case
+    if (scrollPos < 0) scrollPos = 0;
+    if (scrollPos > maxScroll) scrollPos = maxScroll;
+
+    const ratio = maxScroll > 0 ? (scrollPos / maxScroll) : 0;
+
+    /* Header scroll behavior - hide on scroll */
+    const header = document.getElementById("mainHeader");
+    if (scrollPos > 100) {
+        header.classList.add("hidden");
+    } else {
+        header.classList.remove("hidden");
+    }
+
+    /* world background */
+    world.style.transform = `translateY(${-scrollPos}px)`;
+
+    /* selector */
+    levelSelector.style.transform = `translateY(${-scrollPos}px)`;
+
+    /* sections (move with world, spaced by viewport multiples) */
+    document.querySelectorAll(".section").forEach(sec => {
+        const id = sec.dataset.section || sec.id.replace("section-", "");
+        const yOffset = sectionOffsets[id] || 0;
+        sec.style.transform = `translateY(${-scrollPos + yOffset}px)`;
+        
+        // Animate cards when they come into view
+        const card = sec.querySelector(".infoCard");
+        if (card) {
+            const cardTop = yOffset - scrollPos;
+            const cardBottom = cardTop + card.offsetHeight;
+            const isVisible = cardBottom > 0 && cardTop < viewportHeight;
+            
+            if (isVisible && !card.classList.contains("visible")) {
+                card.classList.add("visible");
+                card.style.opacity = "1";
+            } else if (!isVisible && card.classList.contains("visible")) {
+                card.classList.remove("visible");
+            }
+        }
+    });
+
+    /* footer moves same as world (glued to bottom of 8000px world) */
+    footer.style.transform = `translateY(${-scrollPos}px)`;
+
+    /* car vertical movement */
+    const carMin = viewportHeight * 0.25;
+    const carMax = viewportHeight * 0.70;
+    car.style.top = carMin + (carMax - carMin) * ratio + "px";
+
+    /* car growth */
+    const size = 40 + ratio * (260 - 40);
+    car.style.width  = (size * 0.65) + "px";
+    car.style.height = size + "px";
+
+    /* fog intensity */
+    fog.style.opacity = ratio * 0.5;
+}
+
+/* wheel scrolling */
+function handleWheel(e){
+    e.preventDefault();
+    scrollPos += e.deltaY * 0.35;
+    updateEverything();
+}
+window.addEventListener("wheel", handleWheel, { passive: false });
+
+/* smooth scroll to position */
+function scrollToPosition(targetY){
+    // clamp targetY to maxScroll to avoid going past world bottom
+    targetY = Math.max(0, Math.min(targetY, maxScroll));
+
+    let start = scrollPos;
+    let dist = targetY - start;
+    let duration = 900;
+    let startTime = performance.now();
+
+    function anim(t){
+        let p = (t - startTime) / duration;
+        if(p > 1) p = 1;
+        let eased = 1 - Math.pow(1 - p, 3);
+        scrollPos = start + dist * eased;
+        updateEverything();
+        if(p < 1) requestAnimationFrame(anim);
+    }
+    requestAnimationFrame(anim);
+}
+
+/* click handler for selector */
+function goTo(sectionName){
+    const yOffset = sectionOffsets[sectionName];
+    if (typeof yOffset !== "number") return;
+    const targetY = Math.max(0, Math.min(yOffset - viewportHeight * 0.2, maxScroll));
+    scrollToPosition(targetY);
+}
+
+function recalcLayout(){
+    viewportHeight = window.innerHeight;
+    const spacing = viewportHeight * sectionSpacingMultiplier;
+
+    sectionOrder.forEach((id, index) => {
+        if (index === 0) {
+            // First section starts lower to give space from header
+            sectionOffsets[id] = spacing * 1.2;
+        } else {
+            // Subsequent sections maintain consistent spacing from first section
+            sectionOffsets[id] = spacing * 1.2 + spacing * index;
+        }
+    });
+
+    const lastOffset = sectionOffsets[sectionOrder[sectionOrder.length - 1]] || 0;
+    const neededWorldHeight = lastOffset + viewportHeight * 0.8;
+    worldHeight = Math.max(MIN_WORLD_HEIGHT, neededWorldHeight);
+    document.documentElement.style.setProperty("--world-height", `${worldHeight}px`);
+    world.style.height = `${worldHeight}px`;
+
+    maxScroll = Math.max(0, worldHeight - viewportHeight);
+
+    // Position footer at the bottom of the world
+    const footerHeight = footer.offsetHeight || 80;
+    footer.style.top = `${worldHeight - footerHeight}px`;
+
+    updateEverything();
+}
+
+/* handle resize so maxScroll updates correctly */
+window.addEventListener("resize", recalcLayout);
+
+recalcLayout();
+
+// Always start at the top of the page
+window.addEventListener("load", function() {
+    scrollPos = 0;
+    updateEverything();
+});
+</script>
+
+<script src="chatbot-widget.js"></script>
+
+<!-- Back to Top Button -->
+<button id="back-to-top" aria-label="Back to top">
+    <span>Back to Top</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M18 15l-6-6-6 6"/>
+    </svg>
+</button>
+
+<script>
+    // Back to Top Button Functionality
+    (function() {
+        const backToTopButton = document.getElementById('back-to-top');
+        let scrollTimeout = null;
+        let isScrolling = false;
+        let lastScrollPos = 0;
+
+        // Function to check scroll position and show/hide button
+        function checkScrollPosition() {
+            // Use the custom scrollPos variable from the page's scroll system
+            if (typeof scrollPos !== 'undefined') {
+                if (scrollPos > 100) {
+                    backToTopButton.classList.add('show');
+                } else {
+                    backToTopButton.classList.remove('show');
+                }
+                lastScrollPos = scrollPos;
+            }
+        }
+
+        // Function to handle scroll detection
+        function handleScroll() {
+            // Hide button immediately when scrolling starts
+            if (!isScrolling) {
+                isScrolling = true;
+                backToTopButton.classList.remove('show');
+            }
+
+            // Clear existing timeout
+            if (scrollTimeout) {
+                clearTimeout(scrollTimeout);
+            }
+
+            // Set new timeout to show button after 0.2 seconds of no scrolling
+            scrollTimeout = setTimeout(() => {
+                isScrolling = false;
+                checkScrollPosition();
+            }, 200); // 0.2 seconds
+        }
+
+        // Listen to wheel events (this page uses custom wheel scrolling)
+        window.addEventListener('wheel', handleScroll, { passive: true });
+        
+        // Listen to touch events for mobile
+        window.addEventListener('touchmove', handleScroll, { passive: true });
+
+        // Monitor scrollPos changes by checking periodically
+        setInterval(() => {
+            if (typeof scrollPos !== 'undefined' && scrollPos !== lastScrollPos) {
+                lastScrollPos = scrollPos;
+                handleScroll();
+            }
+        }, 50);
+
+        // Click handler to scroll to top using the page's custom scroll function
+        backToTopButton.addEventListener('click', () => {
+            if (typeof scrollToPosition !== 'undefined') {
+                scrollToPosition(0);
+            } else {
+                // Fallback if scrollToPosition is not available
+                scrollPos = 0;
+                if (typeof updateEverything !== 'undefined') {
+                    updateEverything();
+                }
+            }
+            // Hide button immediately when clicked, but reset isScrolling so it can reappear
+            backToTopButton.classList.remove('show');
+            isScrolling = false;
+            // Clear any pending timeout
+            if (scrollTimeout) {
+                clearTimeout(scrollTimeout);
+            }
+        });
+
+        // Initial check on page load
+        setTimeout(() => {
+            checkScrollPosition();
+        }, 500);
+    })();
+
+    // Contact modal handlers
+    const API_URL = "https://driving-test-backend-production.up.railway.app";
+    const contactUsLink = document.getElementById("contactUsLink");
+    const contactModal = document.getElementById("contactModal");
+    const contactClose = document.getElementById("contactClose");
+    const contactForm = document.getElementById("contactForm");
+    const contactMessage = document.getElementById("contactMessage");
+
+    function showContactModal() {
+        contactModal.classList.add("show");
+    }
+
+    function hideContactModal() {
+        contactModal.classList.remove("show");
+        contactForm.reset();
+        contactMessage.className = "contact-message";
+        contactMessage.style.display = "none";
+    }
+
+    if (contactUsLink) {
+        contactUsLink.addEventListener("click", (e) => {
+            e.preventDefault();
+            showContactModal();
+        });
+    }
+
+    if (contactClose) {
+        contactClose.addEventListener("click", hideContactModal);
+    }
+
+    if (contactModal) {
+        contactModal.addEventListener("click", (e) => {
+            if (e.target === contactModal) {
+                hideContactModal();
+            }
+        });
+    }
+
+    if (contactForm) {
+        contactForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Sending...";
+
+            const message = document.getElementById("contactMessageText").value.trim();
+
+            if (!message) {
+                contactMessage.className = "contact-message error";
+                contactMessage.textContent = "Please enter a message";
+                contactMessage.style.display = "block";
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+                return;
+            }
+
+            try {
+                const token = localStorage.getItem("auth_token");
+                const res = await fetch(`${API_URL}/contact/send`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        ...(token && { Authorization: `Bearer ${token}` }),
+                    },
+                    body: JSON.stringify({ message }),
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    contactMessage.className = "contact-message success";
+                    contactMessage.textContent = "Message sent successfully! We'll get back to you soon.";
+                    contactMessage.style.display = "block";
+                    contactForm.reset();
+                    
+                    // Hide modal after 2 seconds
+                    setTimeout(() => {
+                        hideContactModal();
+                    }, 2000);
+                } else {
+                    contactMessage.className = "contact-message error";
+                    contactMessage.textContent = data.error || "Failed to send message. Please try again.";
+                    contactMessage.style.display = "block";
+                }
+            } catch (err) {
+                console.error("Error sending contact message:", err);
+                contactMessage.className = "contact-message error";
+                contactMessage.textContent = "An error occurred. Please try again later.";
+                contactMessage.style.display = "block";
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
+        });
+    }
+</script>
+
+<!-- Contact Modal -->
+<div id="contactModal" class="contact-modal">
+    <div class="contact-content">
+        <div class="contact-header">
+            <h2 class="contact-title">Contact Us</h2>
+            <button class="contact-close" id="contactClose" aria-label="Close">×</button>
+        </div>
+        <p style="color: var(--text-light); font-size: 14px; margin-bottom: 8px;">
+            Have a question or feedback? Send us a message and we'll get back to you as soon as possible.
+        </p>
+        <form id="contactForm" class="contact-form">
+            <div class="contact-form-group">
+                <label for="contactMessageText" class="contact-form-label">Your Message</label>
+                <textarea
+                    id="contactMessageText"
+                    class="contact-form-textarea"
+                    placeholder="Type your message here..."
+                    required
+                ></textarea>
+            </div>
+            <div id="contactMessage" class="contact-message"></div>
+            <button type="submit" class="contact-submit-btn">
+                Send Message
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- Back To Top Button -->
+<button id="backToTopBtn" aria-label="Back to top">
+    <span class="arrow">↑</span>
+    <span>Back To Top</span>
+</button>
+
+<script>
+    // Back To Top Button Functionality (works with custom scroll system)
+    (function() {
+        const backToTopBtn = document.getElementById('backToTopBtn');
+        const scrollThreshold = 400; // Show button after scrolling 400px
+        let scrollTimer = null;
+        let isScrolling = false;
+        let lastScrollPos = 0;
+
+        function handleBackToTopScroll() {
+            // Clear existing timer
+            if (scrollTimer) {
+                clearTimeout(scrollTimer);
+            }
+
+            // Get scroll position from the custom scroll system
+            const currentScrollPos = typeof scrollPos !== 'undefined' ? scrollPos : 0;
+            
+            // Check if scrolled past threshold
+            if (currentScrollPos > scrollThreshold) {
+                // If scroll position changed, reset timer
+                if (currentScrollPos !== lastScrollPos) {
+                    lastScrollPos = currentScrollPos;
+                    // Hide button while scrolling
+                    backToTopBtn.classList.remove('show');
+                    isScrolling = true;
+                    
+                    // Show button 0.3s after scrolling stops
+                    scrollTimer = setTimeout(() => {
+                        backToTopBtn.classList.add('show');
+                        isScrolling = false;
+                    }, 300);
+                }
+            } else {
+                // Hide immediately if scrolled back to top
+                backToTopBtn.classList.remove('show');
+                isScrolling = false;
+                lastScrollPos = currentScrollPos;
+            }
+        }
+
+        // Monitor scrollPos changes (this page uses custom scroll system)
+        setInterval(() => {
+            if (typeof scrollPos !== 'undefined') {
+                handleBackToTopScroll();
+            }
+        }, 50);
+
+        // Also listen to wheel and touch events for immediate response
+        window.addEventListener('wheel', () => {
+            if (typeof scrollPos !== 'undefined' && scrollPos > scrollThreshold) {
+                backToTopBtn.classList.remove('show');
+                isScrolling = true;
+                if (scrollTimer) clearTimeout(scrollTimer);
+                scrollTimer = setTimeout(() => {
+                    backToTopBtn.classList.add('show');
+                    isScrolling = false;
+                }, 300);
+            }
+        }, { passive: true });
+
+        window.addEventListener('touchmove', () => {
+            if (typeof scrollPos !== 'undefined' && scrollPos > scrollThreshold) {
+                backToTopBtn.classList.remove('show');
+                isScrolling = true;
+                if (scrollTimer) clearTimeout(scrollTimer);
+                scrollTimer = setTimeout(() => {
+                    backToTopBtn.classList.add('show');
+                    isScrolling = false;
+                }, 300);
+            }
+        }, { passive: true });
+
+        // Click handler to scroll to top using the page's custom scroll function
+        backToTopBtn.addEventListener('click', () => {
+            if (typeof scrollToPosition !== 'undefined') {
+                scrollToPosition(0);
+            } else if (typeof scrollPos !== 'undefined') {
+                // Fallback if scrollToPosition is not available
+                scrollPos = 0;
+                if (typeof updateEverything !== 'undefined') {
+                    updateEverything();
+                }
+            }
+            // Hide button immediately when clicked
+            backToTopBtn.classList.remove('show');
+        });
+    })();
+</script>
+
+</body>
+</html>
