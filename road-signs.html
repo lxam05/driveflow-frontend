@@ -226,6 +226,29 @@
         margin-bottom: 8px;
     }
 
+    .submit-button {
+        padding: 12px 24px;
+        border-radius: 999px;
+        border: 1px solid var(--primary);
+        background: var(--primary);
+        color: white;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .submit-button:hover:not(:disabled) {
+        background: var(--primary-blue-dark);
+        transform: translateY(-1px);
+        box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
+    }
+
+    .submit-button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
     .next-button {
         padding: 12px 24px;
         border-radius: 999px;
@@ -236,9 +259,6 @@
         font-weight: 700;
         cursor: pointer;
         transition: all 0.3s ease;
-        margin-top: 24px;
-        margin-left: auto;
-        display: block;
     }
 
     .next-button:hover {
@@ -294,7 +314,7 @@
     <!-- Quiz Section -->
     <div class="quiz-section">
         <div class="quiz-question" id="questionText">
-            What is the name of this flag?
+            What is the name of this sign?
         </div>
 
         <div class="question-sign-container">
@@ -309,7 +329,10 @@
                 <div class="feedback-text" id="feedbackText"></div>
             </div>
 
-            <button class="next-button" id="nextButton" onclick="nextQuestion()" disabled>Next Question</button>
+            <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
+                <button class="submit-button" id="submitButton" onclick="submitAnswer()" disabled>Submit</button>
+                <button class="next-button" id="nextButton" onclick="nextQuestion()" disabled>Next Question</button>
+            </div>
     </div>
 
     <div style="text-align: center;">
@@ -392,6 +415,7 @@
         selectedAnswer = null;
         questionAnswered = false;
         document.getElementById('feedback').classList.remove('show', 'correct', 'incorrect');
+        document.getElementById('submitButton').disabled = true;
         document.getElementById('nextButton').disabled = true;
         
         // Get valid sign numbers (excluding 69)
@@ -501,7 +525,7 @@
                     if (radioInput) {
                         radioInput.checked = true;
                     }
-                    selectAnswerBySignNum(option.signNum, option.isCorrect, optionRow);
+                    selectAnswerBySignNum(option.signNum, optionRow);
                 }
             };
             
@@ -518,7 +542,7 @@
                     if (radioInput) {
                         radioInput.checked = true;
                     }
-                    selectAnswerBySignNum(option.signNum, option.isCorrect, optionRow);
+                    selectAnswerBySignNum(option.signNum, optionRow);
                 }
             };
             
@@ -529,7 +553,7 @@
             radioInput.disabled = questionAnswered;
             radioInput.onchange = () => {
                 if (!questionAnswered) {
-                    selectAnswerBySignNum(option.signNum, option.isCorrect, optionRow);
+                    selectAnswerBySignNum(option.signNum, optionRow);
                 }
             };
             
@@ -541,17 +565,50 @@
         });
     }
 
-    function selectAnswerBySignNum(signNum, isCorrect, optionRowElement) {
+    function selectAnswerBySignNum(signNum, optionRowElement) {
         if (questionAnswered) return;
         
+        // Just select the answer, don't submit yet
         selectedAnswer = signNum;
-        questionAnswered = true;
         
         // Check the selected radio button
         const selectedRadio = optionRowElement.querySelector('input[type="radio"]');
         if (selectedRadio) {
             selectedRadio.checked = true;
         }
+        
+        // Uncheck other radio buttons and update selected state
+        document.querySelectorAll('.option-row').forEach(row => {
+            if (row !== optionRowElement) {
+                const radioInput = row.querySelector('input[type="radio"]');
+                if (radioInput) {
+                    radioInput.checked = false;
+                }
+                row.classList.remove('selected');
+            } else {
+                row.classList.add('selected');
+            }
+        });
+        
+        // Enable submit button
+        document.getElementById('submitButton').disabled = false;
+    }
+
+    function submitAnswer() {
+        if (questionAnswered || selectedAnswer === null) return;
+        
+        questionAnswered = true;
+        
+        // Find the selected option row
+        let selectedRow = null;
+        let isCorrect = false;
+        document.querySelectorAll('.option-row').forEach(row => {
+            const rowSignNum = parseInt(row.dataset.signNum);
+            if (rowSignNum === selectedAnswer) {
+                selectedRow = row;
+                isCorrect = (rowSignNum === currentSignNumber);
+            }
+        });
         
         // Disable all radio buttons and mark correct/incorrect
         document.querySelectorAll('.option-row').forEach(row => {
@@ -564,8 +621,12 @@
             const rowSignNum = parseInt(row.dataset.signNum);
             if (rowSignNum === currentSignNumber) {
                 row.classList.add('correct');
-            } else if (row === optionRowElement && !isCorrect) {
+                row.classList.remove('selected');
+            } else if (row === selectedRow && !isCorrect) {
                 row.classList.add('incorrect');
+                row.classList.remove('selected');
+            } else {
+                row.classList.remove('selected');
             }
         });
         
@@ -581,7 +642,8 @@
             feedbackText.textContent = `✗ Incorrect. The correct answer is: ${currentCorrectAnswer}`;
         }
         
-        // Enable next button
+        // Disable submit button and enable next button
+        document.getElementById('submitButton').disabled = true;
         document.getElementById('nextButton').disabled = false;
     }
 
