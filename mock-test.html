@@ -190,6 +190,7 @@
         max-width: 600px;
         margin: 0 auto 24px;
         text-align: center;
+        min-height: 0;
     }
 
     .question-image {
@@ -812,13 +813,16 @@
         const selectedAnswer = selectedAnswers[currentQuestionIndex];
         const isCorrect = hasSubmitted && submittedAnswer === q.correctAnswer;
 
-        // Image if available - check for image in signs copy folder
+        // Image container - always create to reserve space (prevents card movement)
         let imageHtml = '';
         if (q.id) {
             const imagePath = `signs copy/${q.id}.png`;
             imageHtml = `<div class="question-image-container">
                 <img src="${imagePath}" alt="Question ${q.id}" class="question-image" onerror="this.style.display='none'">
             </div>`;
+        } else {
+            // Always create empty container to reserve space and prevent card movement
+            imageHtml = `<div class="question-image-container"></div>`;
         }
         
         // Options with toggle switches
@@ -903,6 +907,18 @@
             `;
         }
 
+        // Preserve existing image if it's already loaded to prevent re-render glitch
+        let existingImg = null;
+        if (q.id) {
+            const existingContainer = container.querySelector('.question-image-container');
+            if (existingContainer) {
+                const existingImage = existingContainer.querySelector('img');
+                if (existingImage && existingImage.complete && existingImage.naturalHeight > 0) {
+                    existingImg = existingImage;
+                }
+            }
+        }
+        
         container.innerHTML = `
             ${imageHtml}
             <div class="question-card">
@@ -913,6 +929,16 @@
                 ${feedbackHtml}
             </div>
         `;
+        
+        // If we had a loaded image, preserve it to prevent re-render
+        if (existingImg && q.id) {
+            const newContainer = container.querySelector('.question-image-container');
+            const newImg = newContainer ? newContainer.querySelector('img') : null;
+            if (newImg && newImg.src === existingImg.src) {
+                // Replace with existing loaded image to prevent re-render
+                newImg.replaceWith(existingImg);
+            }
+        }
         
         updateProgress();
     }
