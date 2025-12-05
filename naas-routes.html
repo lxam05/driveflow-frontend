@@ -169,6 +169,151 @@
         box-shadow: 0 12px 35px rgba(0, 0, 0, 0.9);
         border-color: rgba(129, 140, 248, 0.8);
     }
+
+    /* Paywall Modal */
+    .paywall-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 10000;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .paywall-modal.show {
+        display: flex;
+    }
+
+    .paywall-content {
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-xl);
+        padding: 40px;
+        max-width: 500px;
+        width: 100%;
+        max-height: 90vh;
+        overflow-y: auto;
+        text-align: center;
+        box-shadow: 0 18px 60px rgba(0, 0, 0, 0.6);
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .paywall-content::-webkit-scrollbar {
+        width: 8px;
+    }
+    
+    .paywall-content::-webkit-scrollbar-track {
+        background: rgba(15, 23, 42, 0.3);
+        border-radius: 4px;
+    }
+    
+    .paywall-content::-webkit-scrollbar-thumb {
+        background: var(--primary);
+        border-radius: 4px;
+    }
+    
+    .paywall-content::-webkit-scrollbar-thumb:hover {
+        background: var(--accent);
+    }
+
+    .paywall-content h2 {
+        margin: 0 0 16px;
+        color: var(--text-main);
+        font-size: 24px;
+        font-weight: 700;
+    }
+
+    .paywall-content p {
+        margin: 0 0 24px;
+        color: var(--text-muted);
+        line-height: 1.6;
+    }
+
+    .btn-purchase {
+        padding: 14px 32px;
+        border-radius: 999px;
+        border: none;
+        background: linear-gradient(120deg, rgba(37, 99, 235, 0.95), rgba(124, 58, 237, 0.95));
+        color: white;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 8px 24px rgba(30, 64, 175, 0.4);
+    }
+
+    .btn-purchase:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 32px rgba(30, 64, 175, 0.6);
+    }
+
+    .btn-purchase:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .license-status {
+        padding: 12px 20px;
+        background: rgba(34, 197, 94, 0.1);
+        border: 1px solid rgba(34, 197, 94, 0.3);
+        border-radius: 12px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        color: #bbf7d0;
+    }
+
+    .license-status.expired {
+        background: rgba(239, 68, 68, 0.1);
+        border-color: rgba(239, 68, 68, 0.3);
+        color: #fecaca;
+    }
+
+    /* Payment Form Styling */
+    #payment-element {
+        padding: 20px;
+        background: rgba(15, 23, 42, 0.6);
+        border: 1px solid var(--border-subtle);
+        border-radius: 12px;
+        margin-bottom: 20px;
+        min-height: 0;
+        flex-shrink: 0;
+    }
+    
+    #paymentForm {
+        flex-shrink: 0;
+        margin-top: 24px;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    #submitPaymentBtn {
+        margin-top: 20px;
+        flex-shrink: 0;
+    }
+
+    #payment-errors {
+        padding: 12px;
+        background: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        border-radius: 8px;
+        margin-bottom: 16px;
+    }
+
+    #submitPaymentBtn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    #purchaseButtonContainer {
+        display: block;
+    }
 </style>
 </head>
 <body>
@@ -186,12 +331,47 @@
         <a href="routes.html" class="btn-back">← Back to All Routes</a>
     </div>
 
+<!-- Paywall Modal -->
+<div id="paywallModal" class="paywall-modal">
+    <div class="paywall-content">
+        <h2>Access Required</h2>
+        <p>You need a 3-month license to access route details. Purchase access to view all driving test routes.</p>
+        <div id="licenseStatus"></div>
+        
+        <!-- Payment Form (hidden initially) -->
+        <div id="paymentForm" style="display: none; margin-top: 24px;">
+            <div id="payment-element" style="margin-bottom: 20px;">
+                <!-- Stripe Elements will mount here -->
+            </div>
+            <div id="payment-errors" role="alert" style="color: #ef4444; font-size: 14px; margin-bottom: 16px; display: none;"></div>
+            <button id="submitPaymentBtn" class="btn-purchase" style="width: 100%;">
+                <span id="submitPaymentText">Pay Now</span>
+                <span id="submitPaymentSpinner" style="display: none;">Processing...</span>
+            </button>
+            <button id="backToPurchaseBtn" style="margin-top: 12px; background: transparent; border: 1px solid var(--border-subtle); color: var(--text-muted); padding: 8px 20px; border-radius: 999px; cursor: pointer; width: 100%;">Back</button>
+        </div>
+        
+        <!-- Initial Purchase Button -->
+        <div id="purchaseButtonContainer">
+            <button id="purchaseBtn" class="btn-purchase">Buy 3-Month Access</button>
+            <button id="closePaywallBtn" style="margin-top: 12px; background: transparent; border: 1px solid var(--border-subtle); color: var(--text-muted); padding: 8px 20px; border-radius: 999px; cursor: pointer;">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<!-- Load Stripe.js -->
+<script src="https://js.stripe.com/v3/"></script>
+
     <script>
-        const API_URL = 'https://driving-test-backend-production.up.railway.app';
+        const API_URL = location.hostname === "localhost" || location.hostname === "127.0.0.1"
+            ? "http://localhost:8080"
+            : "https://driving-test-backend-production.up.railway.app";
         
         let accessToken = null;
         let routesData = null;
         let tokenExpiresAt = null;
+        let hasLicense = false;
+        let licenseExpiresAt = null;
 
         // Get token from localStorage
         const token = localStorage.getItem('auth_token');
@@ -199,8 +379,304 @@
             window.location.href = 'login.html';
         }
 
+        // Check license status on page load
+        async function checkLicenseStatus() {
+            const token = localStorage.getItem('auth_token');
+            if (!token) {
+                hasLicense = false;
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/routes/license-status`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    hasLicense = data.hasLicense || false;
+                    licenseExpiresAt = data.expiresAt;
+                    
+                    // Double-check expiry even if API says hasLicense is true
+                    if (hasLicense && licenseExpiresAt) {
+                        const expiryDate = new Date(licenseExpiresAt);
+                        if (expiryDate < new Date()) {
+                            hasLicense = false;
+                        }
+                    }
+                    
+                    updateLicenseUI();
+                } else {
+                    // If API call fails, assume no license
+                    hasLicense = false;
+                }
+            } catch (err) {
+                console.error('Error checking license:', err);
+                // On error, assume no license to be safe
+                hasLicense = false;
+            }
+        }
+
+        function updateLicenseUI() {
+            const statusDiv = document.getElementById('licenseStatus');
+            if (hasLicense && licenseExpiresAt) {
+                const expiryDate = new Date(licenseExpiresAt);
+                const isExpired = expiryDate < new Date();
+                statusDiv.innerHTML = isExpired 
+                    ? `<div class="license-status expired">Your license expired on ${expiryDate.toLocaleDateString()}</div>`
+                    : `<div class="license-status">✓ Active license expires ${expiryDate.toLocaleDateString()}</div>`;
+                statusDiv.style.display = 'block';
+                hasLicense = !isExpired;
+            } else {
+                statusDiv.style.display = 'none';
+            }
+        }
+
+        function showPaywall() {
+            document.getElementById('paywallModal').classList.add('show');
+        }
+
+        function hidePaywall() {
+            document.getElementById('paywallModal').classList.remove('show');
+        }
+
+        let stripe = null;
+        let elements = null;
+        let paymentElement = null;
+        let currentPaymentIntentId = null;
+
+        // Initialize Stripe
+        async function initializeStripe() {
+            try {
+                const keyResponse = await fetch(`${API_URL}/routes/publishable-key`);
+                if (!keyResponse.ok) {
+                    const error = await keyResponse.json().catch(() => ({ error: 'Unknown error' }));
+                    throw new Error(error.details || error.error || 'Failed to get Stripe publishable key');
+                }
+                const data = await keyResponse.json();
+                
+                if (!data.publishableKey) {
+                    throw new Error('No publishable key in response');
+                }
+                
+                stripe = Stripe(data.publishableKey);
+                return true;
+            } catch (err) {
+                console.error('Error initializing Stripe:', err);
+                throw err;
+            }
+        }
+
+        // Setup payment form
+        async function setupPaymentForm(clientSecret) {
+            if (!stripe) {
+                await initializeStripe();
+            }
+
+            if (paymentElement) {
+                try {
+                    paymentElement.unmount();
+                } catch (e) {}
+                paymentElement = null;
+            }
+            elements = null;
+
+            document.getElementById('paymentForm').style.display = 'block';
+            document.getElementById('purchaseButtonContainer').style.display = 'none';
+
+            await new Promise(resolve => setTimeout(resolve, 200));
+
+            const paymentElementContainer = document.getElementById('payment-element');
+            if (!paymentElementContainer) {
+                throw new Error('Payment element container not found');
+            }
+
+            paymentElementContainer.innerHTML = '';
+
+            if (!clientSecret || !clientSecret.includes('_secret_')) {
+                throw new Error('Invalid client secret format');
+            }
+
+            elements = stripe.elements({
+                clientSecret: clientSecret,
+                appearance: {
+                    theme: 'night',
+                    variables: {
+                        colorPrimary: '#5bc0be',
+                        colorBackground: '#2d3f5a',
+                        colorText: '#e5e7eb',
+                        colorDanger: '#ef4444',
+                        fontFamily: 'Inter, system-ui, sans-serif',
+                        spacingUnit: '4px',
+                        borderRadius: '12px',
+                    },
+                },
+                locale: 'en',
+            });
+
+            paymentElement = elements.create('payment', {
+                layout: 'tabs'
+            });
+            
+            paymentElement.mount('#payment-element');
+
+            await new Promise((resolve, reject) => {
+                let attempts = 0;
+                const maxAttempts = 50;
+                
+                const checkMount = setInterval(() => {
+                    attempts++;
+                    const stripeElement = paymentElementContainer.querySelector('.StripeElement') || 
+                                        paymentElementContainer.querySelector('[data-testid="payment-element"]') ||
+                                        paymentElementContainer.querySelector('iframe') ||
+                                        paymentElementContainer.querySelector('[class*="Stripe"]');
+                    
+                    if (stripeElement) {
+                        clearInterval(checkMount);
+                        resolve();
+                    } else if (attempts >= maxAttempts) {
+                        clearInterval(checkMount);
+                        reject(new Error('Payment element mount timeout'));
+                    }
+                }, 100);
+            });
+        }
+
+        // Handle payment submission
+        async function handlePaymentSubmit() {
+            const submitBtn = document.getElementById('submitPaymentBtn');
+            const submitText = document.getElementById('submitPaymentText');
+            const submitSpinner = document.getElementById('submitPaymentSpinner');
+            const errorDiv = document.getElementById('payment-errors');
+
+            submitBtn.disabled = true;
+            submitText.style.display = 'none';
+            submitSpinner.style.display = 'inline';
+            errorDiv.style.display = 'none';
+            errorDiv.textContent = '';
+
+            if (!stripe || !elements || !paymentElement) {
+                errorDiv.textContent = 'Payment form not ready. Please refresh and try again.';
+                errorDiv.style.display = 'block';
+                submitBtn.disabled = false;
+                submitText.style.display = 'inline';
+                submitSpinner.style.display = 'none';
+                return;
+            }
+
+            try {
+                const { error: submitError } = await stripe.confirmPayment({
+                    elements,
+                    confirmParams: {
+                        return_url: window.location.href,
+                    },
+                    redirect: 'if_required',
+                });
+
+                if (submitError) {
+                    errorDiv.textContent = submitError.message;
+                    errorDiv.style.display = 'block';
+                    submitBtn.disabled = false;
+                    submitText.style.display = 'inline';
+                    submitSpinner.style.display = 'none';
+                    return;
+                }
+
+                const token = localStorage.getItem('auth_token');
+                const confirmResponse = await fetch(`${API_URL}/routes/confirm-payment`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        paymentIntentId: currentPaymentIntentId
+                    })
+                });
+
+                if (confirmResponse.ok) {
+                    alert('Payment successful! Your license is now active.');
+                    hidePaywall();
+                    await checkLicenseStatus();
+                    await loadRoutes();
+                } else {
+                    const error = await confirmResponse.json();
+                    throw new Error(error.error || 'Failed to confirm payment');
+                }
+            } catch (err) {
+                console.error('Payment error:', err);
+                errorDiv.textContent = err.message || 'Payment failed. Please try again.';
+                errorDiv.style.display = 'block';
+                submitBtn.disabled = false;
+                submitText.style.display = 'inline';
+                submitSpinner.style.display = 'none';
+            }
+        }
+
+        async function initiatePurchase() {
+            const token = localStorage.getItem('auth_token');
+            if (!token) {
+                alert('Please log in to purchase');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const btn = document.getElementById('purchaseBtn');
+            btn.disabled = true;
+            btn.textContent = 'Loading...';
+
+            try {
+                const response = await fetch(`${API_URL}/routes/create-payment-intent`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    if (!data.clientSecret) {
+                        throw new Error('No client secret received from server');
+                    }
+                    
+                    currentPaymentIntentId = data.paymentIntentId;
+                    await setupPaymentForm(data.clientSecret);
+                    btn.disabled = false;
+                    btn.textContent = 'Buy 3-Month Access';
+                } else {
+                    const error = await response.json().catch(() => ({ error: 'Unknown error' }));
+                    alert(`Payment Error: ${error.details || error.error || 'Failed to start payment'}`);
+                    btn.disabled = false;
+                    btn.textContent = 'Buy 3-Month Access';
+                }
+            } catch (err) {
+                console.error('Error initiating purchase:', err);
+                alert(err.message || 'Failed to start payment. Please try again.');
+                btn.disabled = false;
+                btn.textContent = 'Buy 3-Month Access';
+            }
+        }
+
+        function resetPaymentForm() {
+            if (paymentElement) {
+                try {
+                    paymentElement.unmount();
+                } catch (e) {}
+                paymentElement = null;
+            }
+            elements = null;
+            currentPaymentIntentId = null;
+            document.getElementById('paymentForm').style.display = 'none';
+            document.getElementById('purchaseButtonContainer').style.display = 'block';
+            document.getElementById('payment-errors').style.display = 'none';
+        }
+
         // Initialize on page load
         window.addEventListener('DOMContentLoaded', async () => {
+            await checkLicenseStatus();
             await loadRoutes();
         });
 
@@ -222,11 +698,15 @@
                 if (!tokenResponse.ok) {
                     const error = await tokenResponse.json();
                     if (error.error && error.error.includes('license')) {
+                        // Check license status and show paywall
+                        await checkLicenseStatus();
+                        if (!hasLicense) {
+                            showPaywall();
+                        }
                         errorContainer.innerHTML = `
                             <div class="error">
                                 <strong>Access Required</strong><br>
-                                You need an active license to view Naas routes. 
-                                <a href="routes.html" style="color: var(--primary); text-decoration: underline;">Purchase access here</a>
+                                You need an active license to view Naas routes.
                             </div>
                         `;
                     } else {
@@ -321,6 +801,23 @@
                 expiryInfo.style.borderColor = 'rgba(239, 68, 68, 0.3)';
             }
         }, 1000);
+
+        // Paywall modal handlers
+        document.getElementById('purchaseBtn').addEventListener('click', initiatePurchase);
+        document.getElementById('closePaywallBtn').addEventListener('click', () => {
+            resetPaymentForm();
+            hidePaywall();
+        });
+        document.getElementById('backToPurchaseBtn').addEventListener('click', () => {
+            resetPaymentForm();
+        });
+        document.getElementById('submitPaymentBtn').addEventListener('click', handlePaymentSubmit);
+        document.getElementById('paywallModal').addEventListener('click', (e) => {
+            if (e.target.id === 'paywallModal') {
+                resetPaymentForm();
+                hidePaywall();
+            }
+        });
     </script>
 </body>
 </html>
