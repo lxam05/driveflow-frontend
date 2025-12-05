@@ -237,7 +237,6 @@
         width: 100%;
         max-width: 600px;
         margin: 0 auto 24px;
-        display: none; /* Hidden by default, shown when image loads */
     }
 
     .question-image {
@@ -941,10 +940,13 @@
         // Image if available - check for image in signs copy folder
         let imageHtml = '';
         if (q.id) {
-            imageHtml = `<div class="question-image-container" style="display:none;">
+            // Create image container (always visible, image hides if it fails to load)
+            imageHtml = `<div class="question-image-container">
                 <img src="signs copy/${q.id}.png" alt="Question ${q.id}" class="question-image" 
-                     onerror="this.parentElement.style.display='none';"
-                     onload="this.parentElement.style.display='block';">
+                     data-question-id="${q.id}"
+                     style="display:none;"
+                     onerror="this.style.display='none'; if(this.parentElement) this.parentElement.style.display='none';"
+                     onload="this.style.display='block'; if(this.parentElement) this.parentElement.style.display='block';">
             </div>`;
         }
         
@@ -1042,6 +1044,20 @@
                 ${feedbackHtml}
             </div>
         `;
+        
+        // Setup image loading safely after DOM is updated
+        if (q.id) {
+            const imgElement = container.querySelector('.question-image[data-question-id="' + q.id + '"]');
+            if (imgElement) {
+                // Start with image hidden, container visible (to reserve space)
+                imgElement.style.display = 'none';
+                const containerElement = imgElement.parentElement;
+                if (containerElement) {
+                    containerElement.style.display = 'block';
+                }
+                // Trigger load by setting src (onload/onerror handlers in HTML will handle it)
+            }
+        }
         
         updateProgress();
         updateStarButton();

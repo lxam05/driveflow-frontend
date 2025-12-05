@@ -347,11 +347,29 @@
         
         // Get the question sign image - all images are .png
         const imgElement = document.getElementById('questionSignImage');
+        const containerElement = imgElement.parentElement;
+        
+        // Start with image hidden, container visible (to reserve space)
+        imgElement.style.display = 'none';
+        if (containerElement) {
+            containerElement.style.display = 'block';
+        }
+        
         imgElement.src = `All signs test day/${currentSignNumber}.png`;
         imgElement.onerror = function() {
+            // Hide both image and container if image fails to load
             this.style.display = 'none';
+            if (containerElement) {
+                containerElement.style.display = 'none';
+            }
         };
-        imgElement.style.display = '';
+        imgElement.onload = function() {
+            this.style.display = 'block';
+            // Ensure container is visible when image loads
+            if (containerElement) {
+                containerElement.style.display = 'block';
+            }
+        };
         
         // Get 3 wrong answer sign numbers (excluding the correct one and 69)
         const wrongSignNumbers = [];
