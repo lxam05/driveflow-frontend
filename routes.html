@@ -994,7 +994,26 @@
     }
 
     // Select a test centre
-    function selectCentre(centre) {
+    async function selectCentre(centre) {
+        // Check license status first
+        await checkLicenseStatus();
+        
+        // If no license, ask if they want to upgrade
+        if (!hasLicense) {
+            const wantsUpgrade = confirm(
+                'You need a 3-month license to access route details.\n\n' +
+                'Would you like to upgrade to unlock all driving test routes?'
+            );
+            
+            if (wantsUpgrade) {
+                window.location.href = 'payment.html';
+                return;
+            } else {
+                // User chose not to upgrade, don't proceed
+                return;
+            }
+        }
+        
         // Special handling for Naas - redirect to dedicated page
         if (centre.name === "Naas") {
             window.location.href = 'naas-routes.html';
