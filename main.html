@@ -1233,7 +1233,11 @@ window.addEventListener("load", function() {
     }
 
     if (contactClose) {
-        contactClose.addEventListener("click", hideContactModal);
+        contactClose.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            hideContactModal();
+        });
     }
 
     if (contactModal) {
