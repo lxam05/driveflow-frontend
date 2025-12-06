@@ -226,7 +226,7 @@
         margin-bottom: 8px;
     }
 
-    .submit-button {
+    .action-button {
         padding: 12px 24px;
         border-radius: 999px;
         border: 1px solid var(--primary);
@@ -238,38 +238,46 @@
         transition: all 0.3s ease;
     }
 
-    .submit-button:hover:not(:disabled) {
+    .action-button:hover:not(:disabled) {
         background: var(--primary-blue-dark);
         transform: translateY(-1px);
         box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
     }
 
-    .submit-button:disabled {
+    .action-button:disabled {
         opacity: 0.5;
         cursor: not-allowed;
     }
 
-    .next-button {
+    .previous-button {
         padding: 12px 24px;
         border-radius: 999px;
-        border: 1px solid var(--primary);
-        background: var(--primary);
-        color: white;
+        border: 1px solid var(--border-subtle);
+        background: rgba(15, 23, 42, 0.9);
+        color: var(--text-main);
         font-size: 16px;
         font-weight: 700;
         cursor: pointer;
         transition: all 0.3s ease;
     }
 
-    .next-button:hover {
-        background: var(--primary-blue-dark);
+    .previous-button:hover:not(:disabled) {
+        border-color: var(--primary);
+        background: var(--primary-soft);
         transform: translateY(-1px);
-        box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
     }
 
-    .next-button:disabled {
-        opacity: 0.5;
+    .previous-button:disabled {
+        opacity: 0.3;
         cursor: not-allowed;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-top: 24px;
     }
 
     .btn-back {
@@ -329,9 +337,9 @@
                 <div class="feedback-text" id="feedbackText"></div>
             </div>
 
-            <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
-                <button class="submit-button" id="submitButton" onclick="submitAnswer()" disabled>Submit</button>
-                <button class="next-button" id="nextButton" onclick="nextQuestion()" disabled>Next Question</button>
+            <div class="button-container">
+                <button class="previous-button" id="previousButton" onclick="previousQuestion()" disabled>Previous</button>
+                <button class="action-button" id="actionButton" onclick="handleActionButton()" disabled>Submit</button>
             </div>
     </div>
 
@@ -346,6 +354,8 @@
     let currentCorrectAnswer = '';
     let selectedAnswer = null;
     let questionAnswered = false;
+    let questionHistory = []; // Track question history for previous button
+    let currentQuestionIndex = 0; // Track position in history
     
     // Image existence cache to prevent flicker
     const imageExistsCache = new Map();
@@ -410,13 +420,20 @@
 
 
     // Generate a random question
-    function generateQuestion() {
+    function generateQuestion(isPrevious = false) {
         // Reset state
         selectedAnswer = null;
         questionAnswered = false;
         document.getElementById('feedback').classList.remove('show', 'correct', 'incorrect');
-        document.getElementById('submitButton').disabled = true;
-        document.getElementById('nextButton').disabled = true;
+        
+        const actionButton = document.getElementById('actionButton');
+        const previousButton = document.getElementById('previousButton');
+        
+        actionButton.disabled = true;
+        actionButton.textContent = 'Submit';
+        
+        // Enable previous button if we have history
+        previousButton.disabled = currentQuestionIndex === 0;
         
         // Get valid sign numbers (excluding 69)
         // The txt file has 140 lines, but we need to account for missing sign 69
@@ -428,9 +445,29 @@
             }
         }
         
-        // Pick a random sign number from valid ones
-        const randomIndex = Math.floor(Math.random() * validSignNumbers.length);
-        currentSignNumber = validSignNumbers[randomIndex];
+        // Pick a random sign number from valid ones (or use previous if going back)
+        if (isPrevious && currentQuestionIndex > 0) {
+            // Restore from history
+            const previousQuestion = questionHistory[currentQuestionIndex - 1];
+            currentSignNumber = previousQuestion.signNumber;
+            selectedAnswer = previousQuestion.selectedAnswer;
+            questionAnswered = previousQuestion.answered;
+            currentQuestionIndex--;
+        } else {
+            // Generate new question
+            const randomIndex = Math.floor(Math.random() * validSignNumbers.length);
+            currentSignNumber = validSignNumbers[randomIndex];
+            
+            // Add to history if it's a new question
+            if (!isPrevious) {
+                questionHistory.push({
+                    signNumber: currentSignNumber,
+                    selectedAnswer: null,
+                    answered: false
+                });
+                currentQuestionIndex = questionHistory.length - 1;
+            }
+        }
         
         // Get the correct answer - sign number maps directly to txt file line
         // The txt file already accounts for missing 69, so:
@@ -591,13 +628,32 @@
         });
         
         // Enable submit button
-        document.getElementById('submitButton').disabled = false;
+        document.getElementById('actionButton').disabled = false;
+        
+        // Update history
+        if (questionHistory[currentQuestionIndex]) {
+            questionHistory[currentQuestionIndex].selectedAnswer = signNum;
+        }
+    }
+
+    function handleActionButton() {
+        if (questionAnswered) {
+            nextQuestion();
+        } else {
+            submitAnswer();
+        }
     }
 
     function submitAnswer() {
         if (questionAnswered || selectedAnswer === null) return;
         
         questionAnswered = true;
+        
+        // Update history
+        if (questionHistory[currentQuestionIndex]) {
+            questionHistory[currentQuestionIndex].answered = true;
+            questionHistory[currentQuestionIndex].selectedAnswer = selectedAnswer;
+        }
         
         // Find the selected option row
         let selectedRow = null;
@@ -642,9 +698,10 @@
             feedbackText.textContent = `✗ Incorrect. The correct answer is: ${currentCorrectAnswer}`;
         }
         
-        // Disable submit button and enable next button
-        document.getElementById('submitButton').disabled = true;
-        document.getElementById('nextButton').disabled = false;
+        // Change button to "Next"
+        const actionButton = document.getElementById('actionButton');
+        actionButton.disabled = false;
+        actionButton.textContent = 'Next';
     }
 
     function getSignNumFromButton(button) {
@@ -653,7 +710,124 @@
     }
 
     function nextQuestion() {
-        generateQuestion();
+        generateQuestion(false);
+    }
+
+    function previousQuestion() {
+        if (currentQuestionIndex > 0 && questionHistory.length > 0) {
+            currentQuestionIndex--;
+            const previousQuestion = questionHistory[currentQuestionIndex];
+            
+            // Restore question state
+            currentSignNumber = previousQuestion.signNumber;
+            selectedAnswer = previousQuestion.selectedAnswer;
+            questionAnswered = previousQuestion.answered;
+            
+            // Get correct answer
+            let correctIndex;
+            if (currentSignNumber <= 68) {
+                correctIndex = currentSignNumber - 1;
+            } else {
+                correctIndex = currentSignNumber - 2;
+            }
+            currentCorrectAnswer = allSignNames[correctIndex];
+            
+            // Re-render image
+            const imgElement = document.getElementById('questionSignImage');
+            const containerElement = imgElement.parentElement;
+            const imagePath = `All signs test day/${currentSignNumber}.png`;
+            
+            checkImageExists(imagePath).then((exists) => {
+                if (exists) {
+                    imgElement.src = imagePath;
+                    imgElement.style.display = 'block';
+                    if (containerElement) {
+                        containerElement.classList.add('has-image');
+                        containerElement.classList.remove('no-image');
+                    }
+                } else {
+                    imgElement.style.display = 'none';
+                    if (containerElement) {
+                        containerElement.classList.add('no-image');
+                        containerElement.classList.remove('has-image');
+                    }
+                }
+            });
+            
+            // Generate wrong options (they'll be different but that's okay)
+            const validSignNumbers = [];
+            for (let i = 1; i <= 141; i++) {
+                if (i !== 69) validSignNumbers.push(i);
+            }
+            const wrongSignNumbers = [];
+            const usedNumbers = new Set([currentSignNumber]);
+            while (wrongSignNumbers.length < 3) {
+                const randomNum = validSignNumbers[Math.floor(Math.random() * validSignNumbers.length)];
+                if (!usedNumbers.has(randomNum)) {
+                    wrongSignNumbers.push(randomNum);
+                    usedNumbers.add(randomNum);
+                }
+            }
+            
+            renderOptionsWithImages(currentSignNumber, wrongSignNumbers);
+            
+            // Restore UI state after rendering
+            setTimeout(() => {
+                const actionButton = document.getElementById('actionButton');
+                const previousButton = document.getElementById('previousButton');
+                const feedback = document.getElementById('feedback');
+                const feedbackText = document.getElementById('feedbackText');
+                
+                // Restore selection
+                if (selectedAnswer !== null) {
+                    const selectedRow = document.querySelector(`[data-sign-num="${selectedAnswer}"]`);
+                    if (selectedRow) {
+                        const radioInput = selectedRow.querySelector('input[type="radio"]');
+                        if (radioInput) {
+                            radioInput.checked = true;
+                        }
+                        selectedRow.classList.add('selected');
+                    }
+                }
+                
+                // Restore feedback if answered
+                if (questionAnswered) {
+                    const isCorrect = (selectedAnswer === currentSignNumber);
+                    
+                    if (isCorrect) {
+                        feedback.classList.add('show', 'correct');
+                        feedbackText.textContent = '✓ Correct! Well done.';
+                    } else {
+                        feedback.classList.add('show', 'incorrect');
+                        feedbackText.textContent = `✗ Incorrect. The correct answer is: ${currentCorrectAnswer}`;
+                    }
+                    
+                    // Mark correct/incorrect options
+                    document.querySelectorAll('.option-row').forEach(row => {
+                        const radioInput = row.querySelector('input[type="radio"]');
+                        if (radioInput) {
+                            radioInput.disabled = true;
+                        }
+                        
+                        const rowSignNum = parseInt(row.dataset.signNum);
+                        if (rowSignNum === currentSignNumber) {
+                            row.classList.add('correct');
+                        } else if (rowSignNum === selectedAnswer && !isCorrect) {
+                            row.classList.add('incorrect');
+                        }
+                    });
+                    
+                    actionButton.disabled = false;
+                    actionButton.textContent = 'Next';
+                } else {
+                    feedback.classList.remove('show', 'correct', 'incorrect');
+                    actionButton.disabled = selectedAnswer === null;
+                    actionButton.textContent = 'Submit';
+                }
+                
+                previousButton.disabled = currentQuestionIndex === 0;
+            }, 100);
+        }
     }
 
     // Load on page load

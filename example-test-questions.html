@@ -244,7 +244,7 @@
         color: var(--accent-red);
     }
 
-    .btn-submit {
+    .action-button {
         border: 1px solid var(--button-bg);
         background: var(--button-bg);
         color: var(--bg-main);
@@ -254,35 +254,47 @@
         border-radius: 999px;
         cursor: pointer;
         transition: all 0.3s ease;
-        margin-top: 20px;
     }
 
-    .btn-submit:hover:not(:disabled) {
+    .action-button:hover:not(:disabled) {
         background: var(--primary);
         color: var(--text-main);
     }
 
-    .btn-submit:disabled {
+    .action-button:disabled {
         opacity: 0.5;
         cursor: not-allowed;
     }
 
-    .btn-next {
-        border: 1px solid var(--button-bg);
-        background: var(--button-bg);
-        color: var(--bg-main);
+    .previous-button {
+        border: 1px solid var(--border-subtle);
+        background: rgba(15, 23, 42, 0.9);
+        color: var(--text-main);
         padding: 14px 28px;
         font-size: 15px;
         font-weight: 700;
         border-radius: 999px;
         cursor: pointer;
         transition: all 0.3s ease;
-        margin-top: 20px;
     }
 
-    .btn-next:hover {
-        background: var(--primary);
-        color: var(--text-main);
+    .previous-button:hover:not(:disabled) {
+        border-color: var(--primary);
+        background: var(--primary-soft);
+        transform: translateY(-1px);
+    }
+
+    .previous-button:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-top: 20px;
     }
 
     .btn-back {
@@ -696,15 +708,14 @@
                     ${optionsHtml}
                 </div>
                 ${feedbackHtml}
-                ${!hasSubmitted ? `
-                    <button class="btn-submit" onclick="submitAnswer()" ${selectedAnswer === undefined ? 'disabled' : ''}>
-                        Submit Answer
+                <div class="button-container">
+                    <button class="previous-button" onclick="previousQuestion()" ${currentQuestionIndex === 0 ? 'disabled' : ''}>
+                        Previous
                     </button>
-                ` : `
-                    <button class="btn-next" onclick="nextQuestion()">
-                        ${currentQuestionIndex < allQuestions.length - 1 ? 'Next Question' : 'View Results'}
+                    <button class="action-button" onclick="handleActionButton()" ${!hasSubmitted && selectedAnswer === undefined ? 'disabled' : ''}>
+                        ${!hasSubmitted ? 'Submit' : (currentQuestionIndex < allQuestions.length - 1 ? 'Next' : 'View Results')}
                     </button>
-                `}
+                </div>
             </div>
         `;
     }
@@ -713,6 +724,14 @@
         if (userAnswers[currentQuestionIndex] !== undefined) return;
         selectedAnswers[currentQuestionIndex] = index;
         renderCurrentQuestion();
+    }
+
+    function handleActionButton() {
+        if (userAnswers[currentQuestionIndex] !== undefined) {
+            nextQuestion();
+        } else {
+            submitAnswer();
+        }
     }
 
     function submitAnswer() {
@@ -725,6 +744,14 @@
         currentQuestionIndex++;
         updateProgress();
         renderCurrentQuestion();
+    }
+
+    function previousQuestion() {
+        if (currentQuestionIndex > 0) {
+            currentQuestionIndex--;
+            updateProgress();
+            renderCurrentQuestion();
+        }
     }
 
     function showCompletion() {
