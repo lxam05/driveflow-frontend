@@ -918,6 +918,20 @@ let maxScroll = Math.max(0, worldHeight - viewportHeight);
 let sectionOffsets = {};
 
 function updateEverything(){
+    // On tablets/mobile, use native scrolling - don't update transforms
+    if (window.innerWidth <= 1024) {
+        // Only update header visibility based on native scroll
+        const header = document.getElementById("mainHeader");
+        const nativeScrollPos = window.pageYOffset || document.documentElement.scrollTop;
+        if (nativeScrollPos > 100) {
+            header.classList.add("hidden");
+        } else {
+            header.classList.remove("hidden");
+        }
+        return; // Skip all transform-based positioning
+    }
+    
+    // Desktop: use custom scroll system
     // clamp scrollPos just in case
     if (scrollPos < 0) scrollPos = 0;
     if (scrollPos > maxScroll) scrollPos = maxScroll;
@@ -979,6 +993,10 @@ function updateEverything(){
 
 /* wheel scrolling */
 function handleWheel(e){
+    // Disable custom scroll on tablets/mobile (use native scrolling instead)
+    if (window.innerWidth <= 1024) {
+        return; // Let native scrolling handle it
+    }
     e.preventDefault();
     scrollPos += e.deltaY * 0.35;
     updateEverything();
@@ -1008,6 +1026,15 @@ function scrollToPosition(targetY){
 
 /* click handler for selector */
 function goTo(sectionName){
+    // Use native scrolling on tablets/mobile
+    if (window.innerWidth <= 1024) {
+        const section = document.getElementById(`section-${sectionName}`);
+        if (section) {
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        return;
+    }
+    // Use custom scroll on desktop
     const yOffset = sectionOffsets[sectionName];
     if (typeof yOffset !== "number") return;
     const targetY = Math.max(0, Math.min(yOffset - viewportHeight * 0.2, maxScroll));
@@ -1052,6 +1079,19 @@ recalcLayout();
 window.addEventListener("load", function() {
     scrollPos = 0;
     updateEverything();
+    
+    // On tablets/mobile, listen to native scroll for header visibility
+    if (window.innerWidth <= 1024) {
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById("mainHeader");
+            const scrollPos = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollPos > 100) {
+                header.classList.add("hidden");
+            } else {
+                header.classList.remove("hidden");
+            }
+        }, { passive: true });
+    }
 });
 </script>
 
@@ -1073,8 +1113,17 @@ window.addEventListener("load", function() {
 
         // Function to check scroll position and show/hide button
         function checkScrollPosition() {
-            // Use the custom scrollPos variable from the page's scroll system
-            if (typeof scrollPos !== 'undefined') {
+            // On tablets/mobile, use native scroll position
+            if (window.innerWidth <= 1024) {
+                const nativeScrollPos = window.pageYOffset || document.documentElement.scrollTop;
+                if (nativeScrollPos > 100) {
+                    backToTopButton.classList.add('show');
+                } else {
+                    backToTopButton.classList.remove('show');
+                }
+                lastScrollPos = nativeScrollPos;
+            } else if (typeof scrollPos !== 'undefined') {
+                // Desktop: use the custom scrollPos variable from the page's scroll system
                 if (scrollPos > 100) {
                     backToTopButton.classList.add('show');
                 } else {
@@ -1110,17 +1159,29 @@ window.addEventListener("load", function() {
         // Listen to touch events for mobile
         window.addEventListener('touchmove', handleScroll, { passive: true });
 
-        // Monitor scrollPos changes by checking periodically
+        // Monitor scroll changes by checking periodically
         setInterval(() => {
-            if (typeof scrollPos !== 'undefined' && scrollPos !== lastScrollPos) {
+            if (window.innerWidth <= 1024) {
+                // On tablets/mobile, monitor native scroll
+                const nativeScrollPos = window.pageYOffset || document.documentElement.scrollTop;
+                if (nativeScrollPos !== lastScrollPos) {
+                    lastScrollPos = nativeScrollPos;
+                    handleScroll();
+                }
+            } else if (typeof scrollPos !== 'undefined' && scrollPos !== lastScrollPos) {
+                // Desktop: monitor custom scrollPos
                 lastScrollPos = scrollPos;
                 handleScroll();
             }
         }, 50);
 
-        // Click handler to scroll to top using the page's custom scroll function
+        // Click handler to scroll to top
         backToTopButton.addEventListener('click', () => {
-            if (typeof scrollToPosition !== 'undefined') {
+            // Use native scrolling on tablets/mobile
+            if (window.innerWidth <= 1024) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (typeof scrollToPosition !== 'undefined') {
+                // Use custom scroll on desktop
                 scrollToPosition(0);
             } else {
                 // Fallback if scrollToPosition is not available
