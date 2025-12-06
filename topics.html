@@ -276,90 +276,53 @@
     .option-row {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        padding: 18px 24px;
+        padding: 16px 20px;
+        margin-bottom: 12px;
         background: #32445c;
         border: 1px solid var(--border-subtle);
-        border-radius: 18px;
-        transition: all 0.18s ease-out;
+        border-radius: 12px;
+        transition: all 0.2s ease;
         cursor: pointer;
         user-select: none;
         position: relative;
         overflow: hidden;
     }
 
-    .option-row::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, var(--primary-soft), transparent);
-        transition: left 0.3s ease;
-    }
-
-    .option-row:hover {
-        border-color: var(--border-strong);
-        background: #3a506b;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    }
-
-    .option-row:hover::before {
-        left: 100%;
-    }
-
-    .option-row:active {
-        transform: translateY(0);
+    .option-row:hover:not(.selected):not(.correct):not(.incorrect) {
+        background: var(--bg-card-smaller);
+        border-color: var(--primary);
     }
 
     .option-row.selected {
-        border-color: var(--border-strong);
         background: var(--primary-soft);
+        border-color: var(--primary);
+        box-shadow: 0 0 0 2px var(--primary-soft);
         box-shadow: 0 0 0 2px var(--primary-soft);
     }
 
     .option-row.correct {
-        border-color: var(--accent);
         background: var(--accent-soft);
-        box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.18);
+        border-color: var(--accent);
+        box-shadow: 0 0 0 2px var(--accent-soft);
     }
 
     .option-row.incorrect {
-        border-color: var(--accent-red);
         background: rgba(239, 68, 68, 0.18);
+        border-color: var(--accent-red);
         box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.18);
     }
 
+    .option-row:disabled {
+        cursor: not-allowed;
+    }
+
     .option-text {
-        font-size: 16px;
-        color: var(--text-main);
         flex: 1;
-        margin-right: 20px;
-        font-weight: 500;
+        color: var(--text-main);
+        font-size: 16px;
         line-height: 1.5;
     }
 
-    /* Radio Button Styles */
-    .radio-button {
-        position: relative;
-        width: 24px;
-        height: 24px;
-        flex-shrink: 0;
-        cursor: pointer;
-    }
-
-    .radio-button input[type="radio"] {
-        width: 24px;
-        height: 24px;
-        cursor: pointer;
-        accent-color: var(--primary);
-    }
-
-    .radio-button input[type="radio"]:disabled {
-        cursor: not-allowed;
-        opacity: 0.5;
-    }
 
     .explanation {
         display: none;
@@ -979,14 +942,8 @@
             const isDisabled = hasSubmitted;
             
             return `
-                <div class="${classes}" id="opt-${optIndex}" ${!hasSubmitted ? `onclick="selectAnswer(${optIndex})"` : ''}>
-                    <span class="option-text">${opt}</span>
-                    <label class="radio-button" onclick="event.stopPropagation()">
-                        <input type="radio" name="question" value="${optIndex}" 
-                               ${isChecked ? 'checked' : ''} 
-                               ${isDisabled ? 'disabled' : ''}
-                               ${!hasSubmitted ? `onchange="selectAnswer(${optIndex})"` : ''}>
-                    </label>
+                <div class="${classes}" id="opt-${optIndex}" ${!hasSubmitted ? `onclick="selectAnswer(${optIndex})"` : hasSubmitted ? 'style="cursor: default;"' : ''}>
+                    <div class="option-text">${opt}</div>
                 </div>
             `;
         }).join('');
