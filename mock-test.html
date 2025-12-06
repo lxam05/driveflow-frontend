@@ -404,7 +404,7 @@
     }
 
 
-    .btn-submit {
+    .action-button {
         border: 1px solid rgba(99, 102, 241, 0.9);
         background: linear-gradient(120deg, rgba(37, 99, 235, 0.95), rgba(124, 58, 237, 0.95));
         color: white;
@@ -417,16 +417,16 @@
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .btn-submit:hover:not(:disabled) {
+    .action-button:hover:not(:disabled) {
         transform: translateY(-1px);
         box-shadow: 0 20px 50px rgba(30, 64, 175, 0.95);
     }
 
-    .btn-submit:active:not(:disabled) {
+    .action-button:active:not(:disabled) {
         transform: translateY(0);
     }
 
-    .btn-submit:disabled {
+    .action-button:disabled {
         opacity: 0.6;
         cursor: not-allowed;
     }
@@ -443,14 +443,19 @@
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    .btn-previous:hover {
+    .btn-previous:hover:not(:disabled) {
         transform: translateY(-1px);
         box-shadow: 0 12px 35px rgba(0, 0, 0, 0.9);
         border-color: rgba(129, 140, 248, 0.8);
     }
 
-    .btn-previous:active {
+    .btn-previous:active:not(:disabled) {
         transform: translateY(0);
+    }
+
+    .btn-previous:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
     }
 
     .btn-continue {
@@ -918,25 +923,20 @@
         let buttonContainerHtml = '';
         let hasPrevious = currentQuestionIndex > 0;
         
-        if (!hasSubmitted) {
-            // Before submission: show Previous (if available) and Submit
-            buttonContainerHtml = `
-                <div class="button-container">
-                    ${hasPrevious ? `<button class="btn-previous" onclick="previousQuestion()">← Previous</button>` : '<div style="flex: 1;"></div>'}
-                    ${selectedAnswer !== undefined ? `<button class="btn-submit" onclick="submitAnswer()">Submit Answer</button>` : '<div style="flex: 1;"></div>'}
-                </div>
-            `;
-        } else {
-            // After submission: show Previous (if available) and Continue
-            buttonContainerHtml = `
-                <div class="button-container">
-                    ${hasPrevious ? `<button class="btn-previous" onclick="previousQuestion()">← Previous</button>` : '<div style="flex: 1;"></div>'}
-                    <button class="btn-continue" onclick="continueQuestion()">
-                        ${currentQuestionIndex < questions.length - 1 ? 'Continue →' : 'Finish Test'}
-                    </button>
-                </div>
-            `;
+        // Single action button that changes from Submit to Next
+        let actionButtonText = 'Submit';
+        let actionButtonDisabled = selectedAnswer === undefined;
+        if (hasSubmitted) {
+            actionButtonText = currentQuestionIndex < questions.length - 1 ? 'Next' : 'Finish Test';
+            actionButtonDisabled = false;
         }
+        
+        buttonContainerHtml = `
+            <div class="button-container">
+                <button class="btn-previous" onclick="previousQuestion()" ${!hasPrevious ? 'disabled' : ''}>Previous</button>
+                <button class="action-button" onclick="handleActionButton()" ${actionButtonDisabled ? 'disabled' : ''}>${actionButtonText}</button>
+            </div>
+        `;
 
         // Feedback section (shown after submission, below buttons)
         let feedbackHtml = '';
@@ -995,6 +995,15 @@
         
         // Re-render to show/hide submit button and update radio button states with smooth transition
         renderCurrentQuestion();
+    }
+
+    function handleActionButton() {
+        const hasSubmitted = userAnswers[currentQuestionIndex] !== undefined;
+        if (hasSubmitted) {
+            continueQuestion();
+        } else {
+            submitAnswer();
+        }
     }
 
     function submitAnswer() {
