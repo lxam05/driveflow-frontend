@@ -11,7 +11,10 @@
         <div id="chatbot-container" style="display: none;">
             <div id="chatbot-window">
                 <div id="chatbot-header">
-                    <h3>Driving Test Assistant</h3>
+                    <div>
+                        <h3>Driving Test Assistant</h3>
+                        <div id="chatbot-usage"></div>
+                    </div>
                     <button id="chatbot-close" aria-label="Close chatbot">×</button>
                 </div>
                 <div id="chatbot-messages"></div>
@@ -96,12 +99,23 @@
                 align-items: center;
             }
 
+            #chatbot-header > div {
+                flex: 1;
+            }
+
             #chatbot-header h3 {
                 margin: 0;
                 font-size: 18px;
                 font-weight: 700;
                 color: var(--text-dark, #e5e7eb);
                 font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            }
+
+            #chatbot-usage {
+                font-size: 11px;
+                color: var(--text-light, #9ca3af);
+                margin-top: 2px;
+                font-weight: 500;
             }
 
             #chatbot-close {
@@ -309,9 +323,11 @@
         const messagesContainer = document.getElementById('chatbot-messages');
         const input = document.getElementById('chatbot-input');
         const sendBtn = document.getElementById('chatbot-send');
+        const usageDisplay = document.getElementById('chatbot-usage');
 
         // Conversation history
         let conversationHistory = [];
+        let remainingQuestions = 4; // Default, will be updated from server
 
         // Toggle chatbot visibility
         function toggleChatbot() {
@@ -341,10 +357,53 @@
             return messageDiv;
         }
 
+        // Fetch and update usage status
+        async function updateUsage() {
+            try {
+                const token = localStorage.getItem('auth_token');
+                if (!token) return;
+
+                const response = await fetch(`${API_URL}/chatbot/usage`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    remainingQuestions = data.remaining;
+                    if (usageDisplay) {
+                        if (data.limitReached) {
+                            usageDisplay.textContent = 'Daily limit reached (4/4 questions used)';
+                            usageDisplay.style.color = '#ef4444';
+                            input.disabled = true;
+                            input.placeholder = 'Daily limit reached. Try again tomorrow.';
+                            sendBtn.disabled = true;
+                        } else {
+                            usageDisplay.textContent = `${data.remaining} of ${data.total} questions remaining today`;
+                            usageDisplay.style.color = 'var(--text-light, #9ca3af)';
+                            input.disabled = false;
+                            input.placeholder = 'Ask me about driving test questions...';
+                            sendBtn.disabled = false;
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error('Error fetching usage:', error);
+            }
+        }
+
         // Send message to backend
         async function sendMessage() {
             const message = input.value.trim();
             if (!message) return;
+
+            // Check if limit reached before sending
+            if (remainingQuestions <= 0) {
+                addMessage('You have reached your daily limit of 4 questions. Please try again tomorrow.', false);
+                return;
+            }
 
             // Disable input and send button
             input.disabled = true;
@@ -384,6 +443,20 @@
                 loadingMessage.remove();
         
                 if (!response.ok) {
+                    // Handle 429 (limit reached) specially
+                    if (response.status === 429) {
+                        try {
+                            const errorData = await response.json();
+                            remainingQuestions = 0;
+                            await updateUsage();
+                            throw new Error(errorData.details || errorData.error || 'Daily question limit reached');
+                        } catch (e) {
+                            if (e.message.includes('limit')) {
+                                throw e;
+                            }
+                        }
+                    }
+                    
                     // Try to get error message from response
                     let errorMessage = 'Failed to get response';
                     try {
@@ -414,6 +487,12 @@
                 // Add to conversation history
                 conversationHistory.push({ role: 'assistant', content: aiResponse });
 
+                // Update usage display
+                if (data.usage) {
+                    remainingQuestions = data.usage.remaining;
+                    await updateUsage();
+                }
+
             } catch (error) {
                 console.error('Chatbot error:', error);
                 console.error('Error details:', {
@@ -433,8 +512,10 @@
                     setTimeout(() => {
                         window.location.href = 'login.html';
                     }, 2000);
-                } else if (error.message.includes('Rate limit')) {
-                    errorMsg = 'Too many requests. Please wait a moment and try again.';
+                } else if (error.message.includes('Daily question limit') || error.message.includes('limit reached')) {
+                    errorMsg = error.message;
+                    remainingQuestions = 0;
+                    await updateUsage();
                 } else if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError') || error.name === 'TypeError') {
                     errorMsg = 'Network error. Please check your connection and try again.';
                 } else if (error.message.includes('Invalid API key') || error.message.includes('API key')) {
@@ -448,10 +529,12 @@
                 
                 addMessage(errorMsg, false);
             } finally {
-                // Re-enable input and send button
-                input.disabled = false;
-                sendBtn.disabled = false;
-                input.focus();
+                // Re-enable input and send button only if limit not reached
+                if (remainingQuestions > 0) {
+                    input.disabled = false;
+                    sendBtn.disabled = false;
+                    input.focus();
+                }
             }
         }
 
@@ -465,6 +548,9 @@
                 sendMessage();
             }
         });
+
+        // Load initial usage status
+        updateUsage();
 
         // Add welcome message
         addMessage('Hello! I\'m your driving test assistant. Ask me anything about Irish driving test rules, road signs, theory questions, or test preparation!', false);
