@@ -112,11 +112,12 @@
             }
 
             #chatbot-usage {
-                font-size: 9px;
+                font-size: 10px;
                 color: var(--text-light, #9ca3af);
-                margin-top: 2px;
+                margin-top: 4px;
                 font-weight: 400;
-                opacity: 0.7;
+                opacity: 0.8;
+                line-height: 1.2;
             }
 
             #chatbot-close {
@@ -360,9 +361,20 @@
 
         // Fetch and update usage status
         async function updateUsage() {
+            if (!usageDisplay) {
+                console.warn('Usage display element not found');
+                return;
+            }
+            
+            // Show default text immediately
+            usageDisplay.textContent = '4 questions per day';
+            usageDisplay.style.color = 'var(--text-light, #9ca3af)';
+            
             try {
                 const token = localStorage.getItem('auth_token');
-                if (!token) return;
+                if (!token) {
+                    return;
+                }
 
                 const response = await fetch(`${API_URL}/chatbot/usage`, {
                     method: 'GET',
@@ -374,24 +386,31 @@
                 if (response.ok) {
                     const data = await response.json();
                     remainingQuestions = data.remaining;
-                    if (usageDisplay) {
-                        if (data.limitReached) {
-                            usageDisplay.textContent = 'Daily limit reached (4/4 questions used)';
-                            usageDisplay.style.color = '#ef4444';
-                            input.disabled = true;
-                            input.placeholder = 'Daily limit reached. Try again tomorrow.';
-                            sendBtn.disabled = true;
-                        } else {
-                            usageDisplay.textContent = `${data.remaining} of ${data.total} questions remaining today`;
-                            usageDisplay.style.color = 'var(--text-light, #9ca3af)';
-                            input.disabled = false;
-                            input.placeholder = 'Ask me about driving test questions...';
-                            sendBtn.disabled = false;
-                        }
+                    if (data.limitReached) {
+                        usageDisplay.textContent = 'Daily limit reached (4/4 questions used)';
+                        usageDisplay.style.color = '#ef4444';
+                        input.disabled = true;
+                        input.placeholder = 'Daily limit reached. Try again tomorrow.';
+                        sendBtn.disabled = true;
+                    } else {
+                        usageDisplay.textContent = `${data.remaining} of ${data.total} questions remaining today`;
+                        usageDisplay.style.color = 'var(--text-light, #9ca3af)';
+                        input.disabled = false;
+                        input.placeholder = 'Ask me about driving test questions...';
+                        sendBtn.disabled = false;
                     }
+                } else {
+                    // Show default if API fails
+                    usageDisplay.textContent = '4 questions per day';
+                    usageDisplay.style.color = 'var(--text-light, #9ca3af)';
                 }
             } catch (error) {
                 console.error('Error fetching usage:', error);
+                // Show default on error
+                if (usageDisplay) {
+                    usageDisplay.textContent = '4 questions per day';
+                    usageDisplay.style.color = 'var(--text-light, #9ca3af)';
+                }
             }
         }
 
@@ -550,8 +569,10 @@
             }
         });
 
-        // Load initial usage status
-        updateUsage();
+        // Load initial usage status after a short delay to ensure DOM is ready
+        setTimeout(() => {
+            updateUsage();
+        }, 100);
 
         // Add welcome message
         addMessage('Hello! I\'m your driving test assistant. Ask me anything about Irish driving test rules, road signs, theory questions, or test preparation!', false);
