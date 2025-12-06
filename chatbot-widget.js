@@ -112,10 +112,11 @@
             }
 
             #chatbot-usage {
-                font-size: 11px;
+                font-size: 9px;
                 color: var(--text-light, #9ca3af);
                 margin-top: 2px;
-                font-weight: 500;
+                font-weight: 400;
+                opacity: 0.7;
             }
 
             #chatbot-close {
