@@ -267,6 +267,7 @@
     .routes-sidebar {
         position: sticky;
         top: 120px;
+        align-self: start;
     }
 
     @media (max-width: 1024px) {
@@ -536,11 +537,7 @@
             </div>
             <div class="notification-form-group">
                 <label for="notificationCentre">Test Centre</label>
-                <select id="notificationCentre" class="notification-input" required>
-                    <option value="">Select a test centre...</option>
-                    <option value="Naas">Naas</option>
-                    <option value="Tallaght">Tallaght</option>
-                </select>
+                <input type="text" id="notificationCentre" class="notification-input" placeholder="e.g., Naas, Tallaght" required>
             </div>
             <button type="submit" class="notification-submit-btn">Notify Me</button>
         </form>
