@@ -289,6 +289,83 @@
         color: #fecaca;
     }
 
+    /* Promotional card for premium routes */
+    .promo-card {
+        grid-column: 1 / -1;
+        border-radius: var(--radius-xl);
+        background: linear-gradient(135deg, rgba(91, 192, 190, 0.15), rgba(111, 255, 233, 0.1));
+        border: 2px solid var(--primary);
+        box-shadow: var(--shadow-card);
+        padding: 32px 40px;
+        margin-bottom: 32px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .promo-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+
+    .promo-card h2 {
+        margin: 0 0 12px;
+        font-size: 24px;
+        font-weight: 800;
+        color: var(--accent);
+        letter-spacing: -0.02em;
+    }
+
+    .promo-card p {
+        margin: 0 0 20px;
+        font-size: 16px;
+        line-height: 1.6;
+        color: var(--text-main);
+    }
+
+    .promo-card .promo-highlight {
+        color: var(--accent);
+        font-weight: 600;
+    }
+
+    .promo-card .btn-get-access {
+        display: inline-block;
+        padding: 14px 32px;
+        background: linear-gradient(120deg, var(--primary), var(--accent));
+        color: var(--bg-main);
+        border: none;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 15px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 16px rgba(91, 192, 190, 0.4);
+        text-decoration: none;
+    }
+
+    .promo-card .btn-get-access:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(91, 192, 190, 0.6);
+    }
+
+    @media (max-width: 768px) {
+        .promo-card {
+            padding: 24px;
+        }
+
+        .promo-card h2 {
+            font-size: 20px;
+        }
+
+        .promo-card p {
+            font-size: 14px;
+        }
+    }
+
     /* All payment form CSS removed - payment functionality moved to payment.html */
 </style>
 </head>
@@ -298,6 +375,14 @@
     <div class="page-header">
         <h1>Test Routes</h1>
         <p>Practice the actual routes used in driving tests at each centre</p>
+    </div>
+
+    <div class="promo-card">
+        <h2>🚗 Pass Your Test First Time</h2>
+        <p>
+            Most people fail because they don't know the real route. These <span class="promo-highlight">premium routes</span> show the exact paths examiners use, highlighting every tricky turn and hidden sign. Practise these and you <span class="promo-highlight">massively boost your chances of passing first time</span>.
+        </p>
+        <a href="payment.html" class="btn-get-access">Get Premium Access →</a>
     </div>
 
     <div class="selection-card">
