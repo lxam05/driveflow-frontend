@@ -518,10 +518,10 @@
 
     // Select a test centre
     async function selectCentre(centre) {
-        // Check license status first
+        // Always check license status first
         await checkLicenseStatus();
         
-        // If no license, immediately redirect to payment (no confirm dialog)
+        // If no license, redirect to payment page
         if (!hasLicense) {
             window.location.href = 'payment.html';
             return;
@@ -539,7 +539,7 @@
             return;
         }
         
-        // For other centres, show routes directly
+        // For other centres, show routes directly on this page
         selectedCentre = centre;
         renderRoutes(centre);
     }
