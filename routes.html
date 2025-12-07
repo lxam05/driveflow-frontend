@@ -351,20 +351,29 @@
 
             if (response.ok) {
                 const data = await response.json();
+                console.log('License API response:', data);
                 hasLicense = data.hasLicense || false;
                 licenseExpiresAt = data.expiresAt;
                 
                 // Double-check expiry even if API says hasLicense is true
                 if (hasLicense && licenseExpiresAt) {
                     const expiryDate = new Date(licenseExpiresAt);
-                    if (expiryDate < new Date()) {
+                    const now = new Date();
+                    if (expiryDate < now) {
+                        console.log('License expired:', expiryDate, 'Current:', now);
                         hasLicense = false;
+                    } else {
+                        console.log('License valid until:', expiryDate);
                     }
                 }
                 
+                console.log('Final hasLicense value:', hasLicense);
+                
+                // Update UI (but don't let it modify hasLicense)
                 updateLicenseUI();
             } else {
                 // If API call fails, assume no license
+                console.log('License API call failed with status:', response.status);
                 hasLicense = false;
             }
         } catch (err) {
@@ -376,6 +385,11 @@
 
     function updateLicenseUI() {
         const statusDiv = document.getElementById('licenseStatus');
+        if (!statusDiv) {
+            // Element doesn't exist, skip UI update
+            return;
+        }
+        
         if (hasLicense && licenseExpiresAt) {
             const expiryDate = new Date(licenseExpiresAt);
             const isExpired = expiryDate < new Date();
@@ -383,9 +397,11 @@
                 ? `<div class="license-status expired">Your license expired on ${expiryDate.toLocaleDateString()}</div>`
                 : `<div class="license-status">✓ Active license expires ${expiryDate.toLocaleDateString()}</div>`;
             statusDiv.style.display = 'block';
-            hasLicense = !isExpired;
+            // Don't modify hasLicense here - it's already set correctly in checkLicenseStatus
         } else {
-            statusDiv.style.display = 'none';
+            if (statusDiv) {
+                statusDiv.style.display = 'none';
+            }
         }
     }
 
@@ -521,13 +537,19 @@
         // Always check license status first
         await checkLicenseStatus();
         
+        // Debug: log the license status
+        console.log('selectCentre - hasLicense:', hasLicense, 'centre:', centre.name);
+        
         // If no license, redirect to payment page
         if (!hasLicense) {
+            console.log('No license - redirecting to payment.html');
             window.location.href = 'payment.html';
             return;
         }
         
         // User has premium access - proceed to show routes
+        console.log('Has license - proceeding to routes');
+        
         // Special handling for Naas and Tallaght - redirect to dedicated pages
         if (centre.name === "Naas") {
             window.location.href = 'naas-routes.html';
