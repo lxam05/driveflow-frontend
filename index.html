@@ -1299,8 +1299,9 @@ window.addEventListener("load", function() {
             } catch (err) {
                 console.error("Error sending contact message:", err);
                 contactMessage.className = "contact-message error";
-                contactMessage.textContent = "An error occurred. Please try again later.";
+                contactMessage.textContent = "An error occurred. Please check your connection and try again.";
                 contactMessage.style.display = "block";
+                console.error("Full error details:", err);
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.textContent = originalText;
