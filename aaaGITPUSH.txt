@@ -1,4 +1,4 @@
 git add .
-git commit -m "contactus"
+git commit -m "changenametoindexfrommain"
 git push
  

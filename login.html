@@ -326,7 +326,7 @@
 </header>
 
 <div class="auth-container">
-    <a href="main.html" class="back-link">← Back to Home</a>
+    <a href="index.html" class="back-link">← Back to Home</a>
     
     <div class="auth-card">
         <h2>Welcome Back</h2>
@@ -379,7 +379,7 @@
 
     // if logged in already, go to main
     if (localStorage.getItem('auth_token')) {
-        window.location.href = 'main.html';
+        window.location.href = 'index.html';
     }
 
     const loginForm = document.getElementById('loginForm');
@@ -432,7 +432,7 @@
             showSuccess('Login successful! Redirecting...');
 
             setTimeout(() => {
-                window.location.href = 'main.html';
+                window.location.href = 'index.html';
             }, 1000);
 
         } catch (err) {

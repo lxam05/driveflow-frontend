@@ -191,7 +191,7 @@
             <span class="resource-link">Start Mock Test</span>
         </a>
 
-        <a href="index.html#topics" class="resource-card">
+        <a href="pracitce-theory-questions.html#topics" class="resource-card">
             <h3>Practice Questions</h3>
             <p>Practice by topic with unlimited questions. Get instant feedback and explanations.</p>
             <span class="resource-link">View Topics</span>
@@ -205,12 +205,12 @@
     </div>
 
     <div style="text-align: center;">
-        <a href="main.html" class="btn-back" id="backToHome">← Back to Home</a>
+        <a href="index.html" class="btn-back" id="backToHome">← Back to Home</a>
     </div>
 
 <script>
     // Store the current section when navigating to theory-test.html
-    // Check if we came from main.html and store the section
+    // Check if we came from index.html and store the section
     const urlParams = new URLSearchParams(window.location.search);
     const fromSection = urlParams.get('from');
     const fromPage = urlParams.get('page') || (fromSection ? 'main' : null);
@@ -229,7 +229,7 @@
         const lastSection = localStorage.getItem('lastMainSection') || 'theory';
         
         if (lastPage === 'main') {
-            window.location.href = `main.html?section=${lastSection}`;
+            window.location.href = `index.html?section=${lastSection}`;
         } else {
             window.location.href = `${lastPage}.html`;
         }

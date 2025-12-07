@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Irish Theory Test Practice 2025 | DriveFlow</title>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    
+    :root {
+        --bg-main: #0b132b;
+        --bg-elevated: #1c2541;
+        --bg-card: #2d3f5a;
+        --bg-card-soft: #2d3f5a;
+        --bg-card-smaller: #3a506b;
+        --border-subtle: rgba(91, 192, 190, 0.22);
+        --border-strong: rgba(111, 255, 233, 0.7);
+        --primary: #5bc0be;
+        --primary-soft: rgba(91, 192, 190, 0.18);
+        --accent: #6fffe9;
+        --accent-soft: rgba(111, 255, 233, 0.18);
+        --accent-orange: #f97316;
+        --accent-red: #ef4444;
+        --text-main: #e5e7eb;
+        --text-muted: #9ca3af;
+        --text-soft: #6b7280;
+        --shadow-card: 0 18px 60px rgba(0, 0, 0, 0.6);
+        --radius-lg: 22px;
+        --radius-xl: 26px;
+        --blur: 18px;
+        --button-bg: #6fffe9;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: var(--bg-main);
+        color: var(--text-main);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .btn-back {
+        padding: 10px 18px;
+        border-radius: 999px;
+        border: 1px solid var(--button-bg);
+        background: var(--button-bg);
+        color: var(--bg-main);
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.18s ease-out;
+        cursor: pointer;
+    }
+
+    .btn-back:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 35px rgba(111, 255, 233, 0.4);
+        border-color: var(--button-bg);
+        background: var(--primary);
+        color: var(--text-main);
+    }
+
+    /* Container */
+    .container {
+        max-width: 1200px;
+        margin: 40px auto 0;
+        padding: 0 20px 60px;
+    }
+
+    /* Topics Section */
+    .topics-section {
+        padding: 0;
+    }
+
+    .section-title {
+        font-size: 32px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        text-align: center;
+        margin: 0 0 40px;
+        background: linear-gradient(120deg, #e5e7eb, #a5b4fc);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .topics-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 18px;
+        margin-bottom: 60px;
+    }
+
+    .topic-card {
+        position: relative;
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 22px 22px 20px;
+        transition: transform 0.18s ease-out, box-shadow 0.18s ease-out,
+                    border-color 0.18s ease-out;
+        text-decoration: none;
+        color: var(--text-main);
+        display: block;
+    }
+
+    .topic-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.95);
+        border-color: var(--border-strong);
+        background: #3a506b;
+    }
+
+    .topic-card h3 {
+        font-size: 18px;
+        font-weight: 700;
+        margin: 0 0 10px;
+        color: var(--text-main);
+        letter-spacing: -0.01em;
+    }
+
+    .topic-card p {
+        margin: 0;
+        color: var(--text-muted);
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    /* Why Section */
+    .why-section {
+        padding: 50px 0;
+        margin-top: 40px;
+    }
+
+    .why-section h3 {
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        text-align: center;
+        margin: 0 0 30px;
+        background: linear-gradient(120deg, #e5e7eb, #a5b4fc);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .why-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .why-list li {
+        padding: 16px 0;
+        color: var(--text-main);
+        font-size: 16px;
+        border-bottom: 1px solid var(--border-subtle);
+        position: relative;
+        padding-left: 32px;
+    }
+
+    .why-list li:last-child {
+        border-bottom: none;
+    }
+
+    .why-list li::before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        color: var(--accent);
+        font-weight: 700;
+        font-size: 18px;
+    }
+
+    /* Footer */
+    footer {
+        background: var(--bg-card);
+        border-top: 1px solid rgba(111, 255, 233, 0.2);
+        color: var(--text-main);
+        padding: 40px 20px;
+        text-align: center;
+        margin-top: 80px;
+    }
+
+    .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 32px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+    }
+
+    .footer-links a {
+        color: var(--text-muted);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+        color: var(--text-main);
+    }
+
+    footer p {
+        margin: 20px 0 0;
+        color: var(--text-soft);
+        font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+        .hero h2 {
+            font-size: 32px;
+        }
+        .hero p {
+            font-size: 16px;
+        }
+        .button-group {
+            flex-direction: column;
+        }
+        .btn {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div style="margin-bottom: 30px;">
+        <button onclick="window.location.href = 'theory-test.html'" class="btn-back">
+            ← Back
+        </button>
+    </div>
+    
+    <h2 class="section-title">Practice by Topic</h2>
+    <div class="topics-grid">
+        <a href="topics.html?topic=controlofthevehicle" class="topic-card">
+            <h3>Control of the Vehicle</h3>
+            <p>Master vehicle controls, handling, and technical aspects of driving safely.</p>
+        </a>
+        <a href="topics.html?topic=legalmattersrulesoftheroad" class="topic-card">
+            <h3>Legal Matters/Rules of the Road</h3>
+            <p>Learn the legal requirements, rules, and regulations for driving in Ireland.</p>
+        </a>
+        <a href="topics.html?topic=managingrisk" class="topic-card">
+            <h3>Managing Risk</h3>
+            <p>Understand risk assessment, hazard recognition, and defensive driving techniques.</p>
+        </a>
+        <a href="topics.html?topic=safeandresponsibledriving" class="topic-card">
+            <h3>Safe and Responsible Driving</h3>
+            <p>Practice safe driving behaviors, responsibility, and awareness on the road.</p>
+        </a>
+        <a href="topics.html?topic=questions-to-work-on" class="topic-card">
+            <h3>Questions to Work on</h3>
+            <p>Review questions you've answered incorrectly to improve your understanding.</p>
+        </a>
+        <a href="topics.html?topic=starred" class="topic-card">
+            <h3>Starred</h3>
+            <p>Access your starred questions for quick review and practice.</p>
+        </a>
+    </div>
+</div>
+
+<section class="why-section">
+    <div class="container">
+        <h3>Why This Site Helps You Pass</h3>
+        <ul class="why-list">
+            <li>Unlimited practice questions with instant feedback</li>
+            <li>Realistic mock tests that mirror the actual exam</li>
+            <li>Detailed explanations for every answer</li>
+            <li>Track your progress and identify weak areas</li>
+            <li>Updated for 2025 Irish driving theory test</li>
+            <li>Free access, no registration required</li>
+        </ul>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="disclaimer.html">Disclaimer</a>
+        <a href="contact.html">Contact</a>
+    </div>
+    <p>© 2025 DriveFlow — Helping Ireland learn to drive</p>
+</footer>
+
+<script>
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+</script>
+
+<script src="chatbot-widget.js"></script>
+
+</body>
+</html>

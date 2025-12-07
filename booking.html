@@ -450,7 +450,7 @@
     </div>
 
     <div style="text-align: center;">
-        <a href="main.html" class="btn-back" id="backToHome">← Back to Home</a>
+        <a href="index.html" class="btn-back" id="backToHome">← Back to Home</a>
     </div>
 </div>
 
@@ -873,7 +873,7 @@
         const lastSection = localStorage.getItem('lastMainSection') || 'getting';
         
         if (lastPage === 'main') {
-            window.location.href = `main.html?section=${lastSection}`;
+            window.location.href = `index.html?section=${lastSection}`;
         } else {
             window.location.href = `${lastPage}.html`;
         }
