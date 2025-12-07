@@ -265,9 +265,20 @@
     }
 
     .routes-sidebar {
+        position: -webkit-sticky;
         position: sticky;
         top: 120px;
         align-self: start;
+        height: fit-content;
+        max-height: calc(100vh - 140px);
+        overflow-y: auto;
+        will-change: transform;
+    }
+    
+    /* Ensure the selection-card inside routes-sidebar doesn't interfere */
+    .routes-sidebar .selection-card {
+        margin-bottom: 0;
+        position: relative;
     }
 
     @media (max-width: 1024px) {
@@ -525,9 +536,11 @@
             Select a test centre to view available routes
         </div>
     </div>
+</div>
 
-    <!-- Route Notification Signup Card -->
-    <div class="notification-signup-card" style="grid-column: 1 / -1; margin-top: 40px;">
+<!-- Route Notification Signup Card - Outside grid container to prevent sticky issues -->
+<div class="container" style="margin-top: 0; padding-top: 0;">
+    <div class="notification-signup-card" style="margin-top: 40px;">
         <h2>🔔 Get Notified When Routes Are Available</h2>
         <p>Enter your email and select a test centre to be notified when routes become available for that location.</p>
         <form id="notificationSignupForm" class="notification-form">
