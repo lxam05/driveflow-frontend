@@ -1306,10 +1306,8 @@ window.addEventListener("load", function() {
                     contactMessage.style.display = "block";
                     contactForm.reset();
                     
-                    // Hide modal after 2 seconds
-                    setTimeout(() => {
-                        hideContactModal();
-                    }, 2000);
+                    // Close modal immediately
+                    hideContactModal();
                 } else {
                     contactMessage.className = "contact-message error";
                     contactMessage.textContent = data.error || "Failed to send message. Please try again.";

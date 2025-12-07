@@ -289,6 +289,128 @@
         color: #fecaca;
     }
 
+    /* Notification Signup Card */
+    .notification-signup-card {
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 40px;
+        text-align: center;
+    }
+
+    .notification-signup-card h2 {
+        margin: 0 0 12px;
+        font-size: 24px;
+        font-weight: 800;
+        color: var(--text-main);
+        letter-spacing: -0.02em;
+    }
+
+    .notification-signup-card p {
+        margin: 0 0 32px;
+        color: var(--text-muted);
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    .notification-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .notification-form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        text-align: left;
+    }
+
+    .notification-form-group label {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text-main);
+    }
+
+    .notification-input {
+        width: 100%;
+        padding: 14px 16px;
+        border-radius: 8px;
+        border: 1px solid var(--border-subtle);
+        background: rgba(15, 23, 42, 0.6);
+        color: var(--text-main);
+        font-size: 15px;
+        font-family: inherit;
+        transition: all 0.2s ease;
+    }
+
+    .notification-input:focus {
+        outline: none;
+        border-color: var(--primary);
+        background: rgba(15, 23, 42, 0.8);
+    }
+
+    .notification-input::placeholder {
+        color: var(--text-muted);
+    }
+
+    .notification-submit-btn {
+        padding: 14px 32px;
+        background: linear-gradient(120deg, var(--primary), var(--accent));
+        color: var(--bg-main);
+        border: none;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 15px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 16px rgba(91, 192, 190, 0.4);
+        margin-top: 8px;
+    }
+
+    .notification-submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(91, 192, 190, 0.6);
+    }
+
+    .notification-submit-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .notification-message {
+        margin-top: 20px;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-size: 14px;
+    }
+
+    .notification-message.success {
+        background: rgba(34, 197, 94, 0.1);
+        border: 1px solid rgba(34, 197, 94, 0.3);
+        color: #bbf7d0;
+    }
+
+    .notification-message.error {
+        background: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        color: #fecaca;
+    }
+
+    @media (max-width: 768px) {
+        .notification-signup-card {
+            padding: 24px;
+        }
+
+        .notification-signup-card h2 {
+            font-size: 20px;
+        }
+    }
+
     /* Promotional card for premium routes */
     .promo-card {
         grid-column: 1 / -1;
@@ -401,6 +523,28 @@
         <div id="noSelection" class="no-routes">
             Select a test centre to view available routes
         </div>
+    </div>
+
+    <!-- Route Notification Signup Card -->
+    <div class="notification-signup-card" style="grid-column: 1 / -1; margin-top: 40px;">
+        <h2>🔔 Get Notified When Routes Are Available</h2>
+        <p>Enter your email and select a test centre to be notified when routes become available for that location.</p>
+        <form id="notificationSignupForm" class="notification-form">
+            <div class="notification-form-group">
+                <label for="notificationEmail">Your Email</label>
+                <input type="email" id="notificationEmail" class="notification-input" placeholder="your.email@example.com" required>
+            </div>
+            <div class="notification-form-group">
+                <label for="notificationCentre">Test Centre</label>
+                <select id="notificationCentre" class="notification-input" required>
+                    <option value="">Select a test centre...</option>
+                    <option value="Naas">Naas</option>
+                    <option value="Tallaght">Tallaght</option>
+                </select>
+            </div>
+            <button type="submit" class="notification-submit-btn">Notify Me</button>
+        </form>
+        <div id="notificationMessage" class="notification-message" style="display: none;"></div>
     </div>
 
     <div style="text-align: center; grid-column: 1 / -1; margin-top: 20px;">
@@ -676,6 +820,67 @@
 
     // Initialize
     initCentres();
+
+    // Route notification signup form
+    const notificationForm = document.getElementById("notificationSignupForm");
+    const notificationMessage = document.getElementById("notificationMessage");
+
+    if (notificationForm) {
+        notificationForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById("notificationEmail").value.trim();
+            const centre = document.getElementById("notificationCentre").value;
+            const submitBtn = notificationForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            
+            if (!email || !centre) {
+                showNotificationMessage("Please fill in all fields", "error");
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Submitting...";
+
+            try {
+                const res = await fetch(`${API_URL}/routes/notify-signup`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ email, testCentre: centre }),
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    showNotificationMessage("Success! We'll notify you when routes become available for " + centre + ".", "success");
+                    notificationForm.reset();
+                } else {
+                    showNotificationMessage(data.error || "Failed to sign up. Please try again.", "error");
+                }
+            } catch (err) {
+                console.error("Error signing up for notifications:", err);
+                showNotificationMessage("An error occurred. Please try again later.", "error");
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
+        });
+    }
+
+    function showNotificationMessage(message, type) {
+        if (notificationMessage) {
+            notificationMessage.textContent = message;
+            notificationMessage.className = `notification-message ${type}`;
+            notificationMessage.style.display = "block";
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                notificationMessage.style.display = "none";
+            }, 5000);
+        }
+    }
 
     // All payment-related actions now redirect to payment.html
     // Modal handlers removed since modal HTML is removed
