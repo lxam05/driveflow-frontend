@@ -1208,48 +1208,67 @@ window.addEventListener("load", function() {
 
     // Contact modal handlers
     // API_URL already declared above, reusing it
-    const contactUsLink = document.getElementById("contactUsLink");
-    const contactModal = document.getElementById("contactModal");
-    const contactClose = document.getElementById("contactClose");
-    const contactForm = document.getElementById("contactForm");
-    const contactMessage = document.getElementById("contactMessage");
+    function initContactModal() {
+        const contactUsLink = document.getElementById("contactUsLink");
+        const contactModal = document.getElementById("contactModal");
+        const contactClose = document.getElementById("contactClose");
+        const contactForm = document.getElementById("contactForm");
+        const contactMessage = document.getElementById("contactMessage");
 
-    function showContactModal() {
-        contactModal.classList.add("show");
-    }
+        if (!contactModal) {
+            console.warn("Contact modal not found in DOM");
+            return;
+        }
 
-    function hideContactModal() {
-        contactModal.classList.remove("show");
-        contactForm.reset();
-        contactMessage.className = "contact-message";
-        contactMessage.style.display = "none";
-    }
-
-    if (contactUsLink) {
-        contactUsLink.addEventListener("click", (e) => {
-            e.preventDefault();
-            showContactModal();
-        });
-    }
-
-    if (contactClose) {
-        contactClose.addEventListener("click", (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            hideContactModal();
-        });
-    }
-
-    if (contactModal) {
-        contactModal.addEventListener("click", (e) => {
-            if (e.target === contactModal) {
-                hideContactModal();
+        function showContactModal() {
+            if (contactModal) {
+                contactModal.classList.add("show");
             }
-        });
-    }
+        }
 
-    if (contactForm) {
-        contactForm.addEventListener("submit", async (e) => {
+        function hideContactModal() {
+            if (contactModal) {
+                contactModal.classList.remove("show");
+            }
+            if (contactForm) {
+                contactForm.reset();
+            }
+            if (contactMessage) {
+                contactMessage.className = "contact-message";
+                contactMessage.style.display = "none";
+            }
+        }
+
+        if (contactUsLink) {
+            contactUsLink.addEventListener("click", (e) => {
+                e.preventDefault();
+                showContactModal();
+            });
+        } else {
+            console.warn("Contact Us link not found");
+        }
+
+        if (contactClose) {
+            contactClose.addEventListener("click", (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                hideContactModal();
+            });
+        } else {
+            console.warn("Contact close button not found");
+        }
+
+        if (contactModal) {
+            contactModal.addEventListener("click", (e) => {
+                if (e.target === contactModal) {
+                    hideContactModal();
+                }
+            });
+        }
+
+        // Contact form submission handler
+        if (contactForm) {
+            contactForm.addEventListener("submit", async (e) => {
             e.preventDefault();
             
             const submitBtn = contactForm.querySelector('button[type="submit"]');
@@ -1307,6 +1326,14 @@ window.addEventListener("load", function() {
                 submitBtn.textContent = originalText;
             }
         });
+        }
+    }
+
+    // Initialize contact modal when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initContactModal);
+    } else {
+        initContactModal();
     }
 </script>
 
