@@ -371,17 +371,10 @@
     // Image existence cache to prevent flicker
     const imageExistsCache = new Map();
 
-    // Map of sign numbers to their actual file extensions (prevents failed requests)
-    const signImageExtensions = {
-        10: 'jpeg', 32: 'jpeg', 59: 'jpeg', 60: 'jpeg', 61: 'jpeg', 62: 'jpeg', 65: 'jpeg', 68: 'jpeg',
-        71: 'webp', 72: 'webp', 73: 'webp', 74: 'jpeg', 77: 'jpg', 78: 'svg.png', 80: 'jpeg',
-        129: 'webp', 130: 'webp', 131: 'webp', 132: 'webp', 133: 'webp', 134: 'webp', 135: 'webp', 136: 'webp'
-    };
-
+    // All signs now use .png extension
     // Get the correct image path for a sign number
     function getSignImagePath(signNumber) {
-        const extension = signImageExtensions[signNumber] || 'png';
-        return `All signs test day/${signNumber}.${extension}`;
+        return `All signs test day/${signNumber}.png`;
     }
 
     // Hand signal questions
