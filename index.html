@@ -412,10 +412,10 @@
         box-shadow: 0 16px 48px rgba(0, 0, 0, 0.24);
     }
     #levelSelector.hidden {
-        transform: translateX(-240px);
+        transform: translateX(-250px);
     }
     #levelSelector.hidden:hover {
-        transform: translateX(-235px);
+        transform: translateX(-245px);
     }
     #levelSelector h3 {
         margin: 0 0 16px 0;
@@ -462,6 +462,15 @@
         background: var(--bg-card-smaller);
         color: var(--button-bg);
         transform: translateX(4px);
+    }
+    #levelSelector a.active {
+        background: var(--primary-soft);
+        color: var(--accent-purple);
+        border-left: 3px solid var(--accent-purple);
+        padding-left: 11px;
+    }
+    #levelSelector a.active::before {
+        display: none;
     }
 
     /* ---------------- WORLD IMAGE (8000px) ---------------- */
@@ -739,12 +748,12 @@
 <nav id="levelSelector">
     <h3>What level are you at?</h3>
     <ul>
-        <li><a onclick="goTo('getting')">Getting Started</a></li>
-        <li><a onclick="goTo('theory')">Theory Test</a></li>
-        <li><a onclick="goTo('lessons')">Lessons</a></li>
-        <li><a onclick="goTo('booking')">Booking Test</a></li>
-        <li><a onclick="goTo('preparing')">Preparing for Test</a></li>
-        <li><a onclick="goTo('newdriver')">New Driver - Coming Soon!</a></li>
+        <li><a onclick="goTo('getting')" data-section="getting">Getting Started</a></li>
+        <li><a onclick="goTo('theory')" data-section="theory">Theory Test</a></li>
+        <li><a onclick="goTo('lessons')" data-section="lessons">Lessons</a></li>
+        <li><a onclick="goTo('booking')" data-section="booking">Booking Test</a></li>
+        <li><a onclick="goTo('preparing')" data-section="preparing">Preparing for Test</a></li>
+        <li><a onclick="goTo('newdriver')" data-section="newdriver">New Driver - Coming Soon!</a></li>
     </ul>
 </nav>
 
@@ -960,6 +969,8 @@ function updateEverything(){
     /* selector - now fixed, no transform needed for Y position */
     // Check if any left card is overlapping with levelSelector position
     checkLevelSelectorCollision();
+    // Update active section highlighting
+    updateActiveSectionHighlight();
 
     /* sections (move with world, spaced by viewport multiples) */
     document.querySelectorAll(".section").forEach(sec => {
@@ -1084,6 +1095,41 @@ function checkLevelSelectorCollision(){
     } else {
         levelSelector.classList.remove("hidden");
     }
+}
+
+function updateActiveSectionHighlight(){
+    // Only check on desktop (not mobile/tablet)
+    if (window.innerWidth <= 1024) {
+        return;
+    }
+    
+    const viewportCenter = viewportHeight * 0.5; // Center of viewport
+    const threshold = viewportHeight * 0.3; // Distance threshold for highlighting
+    
+    let activeSection = null;
+    let closestDistance = Infinity;
+    
+    // Check all sections to find which one is closest to viewport center
+    sectionOrder.forEach(sectionId => {
+        const yOffset = sectionOffsets[sectionId] || 0;
+        const sectionCenter = yOffset - scrollPos;
+        const distance = Math.abs(sectionCenter - viewportCenter);
+        
+        // If section is within threshold and closer than previous closest
+        if (distance < threshold && distance < closestDistance) {
+            closestDistance = distance;
+            activeSection = sectionId;
+        }
+    });
+    
+    // Update active state on all links
+    levelSelector.querySelectorAll('a[data-section]').forEach(link => {
+        if (link.dataset.section === activeSection) {
+            link.classList.add('active');
+        } else {
+            link.classList.remove('active');
+        }
+    });
 }
 
 function recalcLayout(){
