@@ -464,10 +464,11 @@
         transform: translateX(4px);
     }
     #levelSelector a.active {
-        background: var(--primary-soft);
+        background: var(--bg-card-smaller);
         color: var(--accent-purple);
-        border-left: 3px solid var(--accent-purple);
-        padding-left: 11px;
+        transform: translateX(6px) scale(1.02);
+        box-shadow: 0 4px 12px rgba(111, 255, 233, 0.3);
+        border: 1px solid rgba(111, 255, 233, 0.4);
     }
     #levelSelector a.active::before {
         display: none;
@@ -1104,7 +1105,7 @@ function updateActiveSectionHighlight(){
     }
     
     const viewportCenter = viewportHeight * 0.5; // Center of viewport
-    const threshold = viewportHeight * 0.3; // Distance threshold for highlighting
+    const threshold = viewportHeight * 0.4; // Distance threshold for highlighting
     
     let activeSection = null;
     let closestDistance = Infinity;
@@ -1115,12 +1116,15 @@ function updateActiveSectionHighlight(){
         const sectionCenter = yOffset - scrollPos;
         const distance = Math.abs(sectionCenter - viewportCenter);
         
-        // If section is within threshold and closer than previous closest
-        if (distance < threshold && distance < closestDistance) {
+        // Track the closest section regardless of threshold
+        if (distance < closestDistance) {
             closestDistance = distance;
             activeSection = sectionId;
         }
     });
+    
+    // If no section is within threshold, use the closest one anyway (ensures always highlighted)
+    // This ensures there's always something highlighted
     
     // Update active state on all links
     levelSelector.querySelectorAll('a[data-section]').forEach(link => {
