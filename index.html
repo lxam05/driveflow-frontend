@@ -394,7 +394,7 @@
 
     /* ---------------- LEVEL SELECTOR ---------------- */
     #levelSelector {
-        position: absolute;
+        position: fixed;
         top: 100px;
         left: 24px;
         width: 260px;
@@ -406,11 +406,16 @@
         backdrop-filter: blur(20px) saturate(180%);
         -webkit-backdrop-filter: blur(20px) saturate(180%);
         border: 1px solid rgba(111, 255, 233, 0.2);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
     }
     #levelSelector:hover {
-        transform: translateY(-2px);
         box-shadow: 0 16px 48px rgba(0, 0, 0, 0.24);
+    }
+    #levelSelector.hidden {
+        transform: translateX(-240px);
+    }
+    #levelSelector.hidden:hover {
+        transform: translateX(-235px);
     }
     #levelSelector h3 {
         margin: 0 0 16px 0;
@@ -952,8 +957,9 @@ function updateEverything(){
     /* world background */
     world.style.transform = `translateY(${-scrollPos}px)`;
 
-    /* selector */
-    levelSelector.style.transform = `translateY(${-scrollPos}px)`;
+    /* selector - now fixed, no transform needed for Y position */
+    // Check if any left card is overlapping with levelSelector position
+    checkLevelSelectorCollision();
 
     /* sections (move with world, spaced by viewport multiples) */
     document.querySelectorAll(".section").forEach(sec => {
@@ -1042,6 +1048,42 @@ function goTo(sectionName){
     if (typeof yOffset !== "number") return;
     const targetY = Math.max(0, Math.min(yOffset - viewportHeight * 0.2, maxScroll));
     scrollToPosition(targetY);
+}
+
+function checkLevelSelectorCollision(){
+    // Only check on desktop (not mobile/tablet)
+    if (window.innerWidth <= 1024) {
+        levelSelector.classList.remove("hidden");
+        return;
+    }
+    
+    const levelSelectorTop = 100; // Fixed top position
+    const levelSelectorBottom = levelSelectorTop + levelSelector.offsetHeight;
+    let shouldHide = false;
+    
+    // Check all left cards (cards with class "leftCard")
+    document.querySelectorAll(".leftCard").forEach(card => {
+        const section = card.closest(".section");
+        if (!section) return;
+        
+        const id = section.dataset.section || section.id.replace("section-", "");
+        const yOffset = sectionOffsets[id] || 0;
+        const cardTop = yOffset - scrollPos;
+        const cardBottom = cardTop + card.offsetHeight;
+        
+        // Check if card is overlapping with levelSelector's vertical position
+        // Add some threshold (20px) to trigger slightly before exact overlap
+        if (cardTop < levelSelectorBottom + 20 && cardBottom > levelSelectorTop - 20) {
+            shouldHide = true;
+        }
+    });
+    
+    // Toggle hidden class based on collision
+    if (shouldHide) {
+        levelSelector.classList.add("hidden");
+    } else {
+        levelSelector.classList.remove("hidden");
+    }
 }
 
 function recalcLayout(){
