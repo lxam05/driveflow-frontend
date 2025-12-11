@@ -218,6 +218,43 @@
         margin: 0;
     }
 
+    .form-group {
+        margin-bottom: 24px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 12px;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text-main);
+    }
+
+    .test-centre-select {
+        width: 100%;
+        padding: 14px 16px;
+        border-radius: 12px;
+        border: 1px solid var(--border-subtle);
+        background: rgba(15, 23, 42, 0.6);
+        color: var(--text-main);
+        font-size: 15px;
+        font-family: inherit;
+        transition: all 0.2s ease;
+        cursor: pointer;
+    }
+
+    .test-centre-select:focus {
+        outline: none;
+        border-color: var(--primary);
+        background: rgba(15, 23, 42, 0.8);
+        box-shadow: 0 0 0 3px rgba(91, 192, 190, 0.1);
+    }
+
+    .test-centre-select option {
+        background: var(--bg-card);
+        color: var(--text-main);
+    }
+
     .trust-badge {
         display: flex;
         align-items: center;
@@ -500,8 +537,16 @@
                             <li>Instant access after payment</li>
                         </ul>
 
+                        <div class="form-group">
+                            <label for="testCentreSelect">Select Test Centre</label>
+                            <select id="testCentreSelect" class="test-centre-select" required>
+                                <option value="">-- Choose a test centre --</option>
+                            </select>
+                        </div>
+
                         <div class="price-info">
-                            <div class="price">€1.00</div>
+                            <div class="price">€13.99</div>
+                            <div class="price-label">per test centre</div>
                         </div>
 
                         <div class="trust-badge">
@@ -513,7 +558,7 @@
                         </div>
 
                         <button class="btn-unlock" id="unlockBtn" onclick="showPaymentForm()">
-                            Unlock Routes (€1.00)
+                            Unlock Routes (€13.99)
                         </button>
 
                         <div class="scarcity-trust">
@@ -590,6 +635,56 @@
     let paymentElement = null;
     let currentPaymentIntentId = null;
     let paymentInitialized = false;
+    let selectedCentre = null;
+
+    // Load test centres on page load
+    async function loadTestCentres() {
+        try {
+            const response = await fetch(`${API_URL}/routes/centres-list`);
+            if (response.ok) {
+                const data = await response.json();
+                const select = document.getElementById('testCentreSelect');
+                data.centres.forEach(centre => {
+                    const option = document.createElement('option');
+                    option.value = centre;
+                    option.textContent = centre;
+                    select.appendChild(option);
+                });
+            } else {
+                console.error('Failed to load test centres');
+                // Fallback to hardcoded list
+                const fallbackCentres = [
+                    "Naas", "Tallaght", "Athlone", "Ballina", "Birr", "Buncrana",
+                    "Carlow (Talbot Hotel)", "Carrick-on-Shannon", "Castlebar", "Cavan",
+                    "Charlestown (Dublin)", "Clifden", "Clonmel", "Cork (Ballincollig)",
+                    "Cork (St. Finbarr's GAA Club, Togher)", "Cork (Wilton)", "Donegal",
+                    "Drogheda", "Dundalk", "Dungarvan", "Dún Laoghaire / Deansgrange",
+                    "Ennis", "Finglas", "Galway (Carnmore)", "Galway (Westside)", "Gorey",
+                    "Killarney", "Kilkenny (Government Buildings)", "Kilkenny (O'Loughlin Gaels)",
+                    "Killester", "Kilrush", "Letterkenny", "Limerick (Castlemungret)",
+                    "Limerick (Woodview)", "Longford", "Loughrea", "Loughrea (Lough Rea Hotel & Spa)",
+                    "Mallow (Cork Racecourse, Mallow)", "Monaghan", "Mulhuddart",
+                    "Mulhuddart (Carlton Hotel)", "Mullingar", "Navan", "Nenagh",
+                    "Newcastle West", "Newcastle West (Longcourt House Hotel)", "Portlaoise",
+                    "Raheny", "Roscommon", "Shannon", "Skibbereen", "Sligo", "Thurles",
+                    "Tipperary", "Tralee", "Tuam", "Tullamore", "Waterford",
+                    "Wexford", "Wicklow"
+                ];
+                const select = document.getElementById('testCentreSelect');
+                fallbackCentres.forEach(centre => {
+                    const option = document.createElement('option');
+                    option.value = centre;
+                    option.textContent = centre;
+                    select.appendChild(option);
+                });
+            }
+        } catch (err) {
+            console.error('Error loading test centres:', err);
+        }
+    }
+
+    // Load centres when page loads
+    window.addEventListener('DOMContentLoaded', loadTestCentres);
 
     function hidePaymentForm() {
         // Slide payment panel out and main content back
@@ -599,6 +694,16 @@
     }
 
     async function showPaymentForm() {
+        // Get selected test centre
+        const select = document.getElementById('testCentreSelect');
+        selectedCentre = select.value;
+        
+        if (!selectedCentre) {
+            alert('Please select a test centre first');
+            select.focus();
+            return;
+        }
+
         // Slide main content left and payment panel in
         document.getElementById('mainContent').classList.add('slide-left');
         document.getElementById('paymentFormPanel').classList.add('show');
@@ -632,13 +737,16 @@
             const keyData = await keyResponse.json();
             stripe = Stripe(keyData.publishableKey);
 
-            // Create payment intent
+            // Create payment intent with selected centre
             const response = await fetch(`${API_URL}/routes/create-payment-intent`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
-                }
+                },
+                body: JSON.stringify({
+                    centreName: selectedCentre
+                })
             });
 
             if (!response.ok) {
