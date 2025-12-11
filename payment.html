@@ -675,10 +675,19 @@
 
         } catch (err) {
             console.error('Payment initialization error:', err);
+            let errorMessage = err.message || 'Failed to initialize payment';
+            let helpText = 'Please try refreshing the page or contact support.';
+            
+            // Check for ad blocker / network issues
+            if (err.message && (err.message.includes('Failed to fetch') || err.message.includes('ERR_BLOCKED_BY_CLIENT'))) {
+                errorMessage = 'Payment form blocked by browser extension';
+                helpText = 'Please disable ad blockers or privacy extensions (like uBlock Origin, Privacy Badger, etc.) and try again. Stripe requires network access to process payments securely.';
+            }
+            
             document.getElementById('loadingState').innerHTML = `
                 <div style="color: #ef4444;">
-                    <p><strong>Error:</strong> ${err.message || 'Failed to initialize payment'}</p>
-                    <p style="margin-top: 16px; font-size: 14px;">Please try refreshing the page or contact support.</p>
+                    <p><strong>Error:</strong> ${errorMessage}</p>
+                    <p style="margin-top: 16px; font-size: 14px;">${helpText}</p>
                 </div>
             `;
         }
