@@ -306,7 +306,7 @@
         </div>
 
         <div class="question-sign-container">
-            <img id="questionSignImage" class="question-sign-image" src="" alt="Road Sign">
+            <img id="questionSignImage" class="question-sign-image" src="" alt="Irish road sign for quiz question">
         </div>
         
         <div class="options-container" id="optionsContainer">
@@ -472,6 +472,8 @@
             if (exists) {
                 // Image exists - show it
                 imgElement.src = imagePath;
+                const signName = allSignNames[correctIndex] || `Sign ${currentSignNumber}`;
+                imgElement.alt = `Irish road sign: ${signName}`;
                 imgElement.style.display = 'block';
                 if (containerElement) {
                     containerElement.classList.add('has-image');
@@ -680,6 +682,8 @@
             checkImageExists(imagePath).then((exists) => {
                 if (exists) {
                     imgElement.src = imagePath;
+                    const signName = allSignNames[correctIndex] || `Sign ${currentSignNumber}`;
+                    imgElement.alt = `Irish road sign: ${signName}`;
                     imgElement.style.display = 'block';
                     if (containerElement) {
                         containerElement.classList.add('has-image');

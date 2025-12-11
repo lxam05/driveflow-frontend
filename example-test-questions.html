@@ -529,6 +529,7 @@
                     type: 'road-sign',
                     question: 'What is the name of this road sign?',
                     signNumber: signNum,
+                    signName: correctName,
                     options: allOptions,
                     correctAnswer: correctAnswer,
                     explanation: `This is sign number ${signNum}: ${correctName}`
@@ -608,9 +609,10 @@
         const exists = imageExistsCache.get(imagePath);
         
         if (exists === true) {
+            const signName = q.signName || `Sign ${q.signNumber}`;
             return `
                 <div class="question-image-container has-image">
-                    <img src="${imagePath}" alt="Road sign ${q.signNumber}" class="question-image">
+                    <img src="${imagePath}" alt="Irish road sign: ${signName}" class="question-image">
                 </div>
             `;
         } else if (exists === false) {
