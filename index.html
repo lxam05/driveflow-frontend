@@ -215,6 +215,271 @@
         background: none;
     }
 
+    /* ---------- INFO BUTTON & CARD ---------- */
+    .info-button {
+        position: fixed;
+        top: 80px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        background: var(--bg-card);
+        border: 2px solid var(--accent-purple);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 2000;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .info-button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(111, 255, 233, 0.4);
+        background: var(--bg-card-smaller);
+    }
+
+    .info-button svg {
+        width: 24px;
+        height: 24px;
+        stroke: var(--accent-purple);
+        fill: none;
+        stroke-width: 2.5;
+        transition: transform 0.3s ease;
+    }
+
+    .info-button.active svg {
+        transform: rotate(180deg);
+    }
+
+    .info-card {
+        position: fixed;
+        top: 0;
+        right: -500px;
+        width: 500px;
+        max-width: 90vw;
+        height: 100vh;
+        background: var(--bg-card);
+        border-left: 2px solid var(--accent-purple);
+        box-shadow: -4px 0 24px rgba(0, 0, 0, 0.5);
+        z-index: 1999;
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .info-card.open {
+        right: 0;
+    }
+
+    .info-card-header {
+        padding: 24px;
+        border-bottom: 1px solid rgba(111, 255, 233, 0.2);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--bg-card-smaller);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+
+    .info-card-title {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin: 0;
+    }
+
+    .info-card-close {
+        background: none;
+        border: none;
+        color: var(--text-light);
+        font-size: 24px;
+        cursor: pointer;
+        padding: 4px;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+    }
+
+    .info-card-close:hover {
+        background: rgba(111, 255, 233, 0.1);
+        color: var(--accent-purple);
+    }
+
+    .info-card-nav {
+        display: flex;
+        gap: 8px;
+        padding: 16px 24px;
+        border-bottom: 1px solid rgba(111, 255, 233, 0.2);
+        background: var(--bg-card-smaller);
+        position: sticky;
+        top: 73px;
+        z-index: 9;
+    }
+
+    .info-nav-button {
+        flex: 1;
+        padding: 10px 16px;
+        background: transparent;
+        border: 1px solid rgba(111, 255, 233, 0.3);
+        border-radius: 8px;
+        color: var(--text-light);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-align: center;
+    }
+
+    .info-nav-button:hover {
+        background: rgba(111, 255, 233, 0.1);
+        border-color: var(--accent-purple);
+        color: var(--accent-purple);
+    }
+
+    .info-nav-button.active {
+        background: rgba(111, 255, 233, 0.2);
+        border-color: var(--accent-purple);
+        color: var(--accent-purple);
+    }
+
+    .info-card-content {
+        flex: 1;
+        padding: 24px;
+    }
+
+    .info-section {
+        display: none;
+    }
+
+    .info-section.active {
+        display: block;
+        animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .info-section h2 {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--accent-purple);
+        margin: 0 0 20px 0;
+    }
+
+    .info-section p {
+        font-size: 15px;
+        line-height: 1.7;
+        color: var(--text-dark);
+        margin: 0 0 16px 0;
+    }
+
+    .info-section ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .info-section li {
+        margin-bottom: 20px;
+        padding-left: 0;
+    }
+
+    .info-section li strong {
+        display: block;
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--accent-purple);
+        margin-bottom: 8px;
+    }
+
+    .info-section li p {
+        margin: 0;
+        font-size: 14px;
+        color: var(--text-light);
+        line-height: 1.6;
+    }
+
+    .info-section ol {
+        padding-left: 20px;
+        margin: 0;
+    }
+
+    .info-section ol li {
+        margin-bottom: 24px;
+        padding-left: 8px;
+        color: var(--text-dark);
+        line-height: 1.7;
+    }
+
+    .info-section ol li strong {
+        display: inline;
+        color: var(--accent-purple);
+        font-weight: 600;
+    }
+
+    .info-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1998;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .info-overlay.show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    @media (max-width: 768px) {
+        .info-button {
+            top: 70px;
+            right: 15px;
+            width: 45px;
+            height: 45px;
+        }
+
+        .info-card {
+            width: 100vw;
+            right: -100vw;
+        }
+
+        .info-card-header {
+            padding: 20px;
+        }
+
+        .info-card-nav {
+            padding: 12px 20px;
+            flex-wrap: wrap;
+        }
+
+        .info-nav-button {
+            font-size: 12px;
+            padding: 8px 12px;
+        }
+    }
+
     /* ---------- CONTACT MODAL ---------- */
     .contact-modal {
         display: none;
@@ -856,6 +1121,100 @@
         </div>
     </div>
 </header>
+
+<!-- Info Button -->
+<button class="info-button" id="infoButton" aria-label="Open information">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9 18l6-6-6-6"/>
+    </svg>
+</button>
+
+<!-- Info Overlay -->
+<div class="info-overlay" id="infoOverlay"></div>
+
+<!-- Info Card -->
+<div class="info-card" id="infoCard">
+    <div class="info-card-header">
+        <h2 class="info-card-title" id="infoCardTitle">Why DriveFlow Works</h2>
+        <button class="info-card-close" id="infoCardClose" aria-label="Close">×</button>
+    </div>
+    
+    <div class="info-card-nav">
+        <button class="info-nav-button active" data-section="why">Why It Works</button>
+        <button class="info-nav-button" data-section="faq">FAQ</button>
+        <button class="info-nav-button" data-section="how">How It Works</button>
+    </div>
+    
+    <div class="info-card-content">
+        <!-- Why DriveFlow Works Section -->
+        <div class="info-section active" id="whySection">
+            <h2>Why DriveFlow Works</h2>
+            <p>Most learners fail because they don't know the roads they're being tested on — not because they're bad drivers. DriveFlow fixes that. Every route is built directly on Google Maps using the same areas examiners use, so you can practise the real thing instead of guessing. It couldn't be easier: you open a single link, press start, and the route follows you exactly like any normal Google Maps journey. You learn the exact turns, roundabouts, speed changes, and hidden problem spots that catch people out every day. Combined with focused mock questions and a dashboard that tracks your progress, DriveFlow gives you a structured, realistic way to prepare. No fluff, no surprises — just the fastest, smartest way to get test-ready.</p>
+        </div>
+        
+        <!-- FAQ Section -->
+        <div class="info-section" id="faqSection">
+            <h2>FAQ — Everything You Need to Know</h2>
+            <ul>
+                <li>
+                    <strong>What makes DriveFlow different from other driving test resources?</strong>
+                    <p>DriveFlow gives you real test routes, built directly on Google Maps. You're not looking at a PDF or guessing where to go — the route literally follows you in real time as you drive, exactly like normal navigation.</p>
+                </li>
+                <li>
+                    <strong>How accurate are the routes?</strong>
+                    <p>They're built around the same roads, junctions, roundabouts, and trouble-spots used by examiners in the busiest Irish test centres. Every route has been mapped carefully so you practise what actually appears on the test, not random roads.</p>
+                </li>
+                <li>
+                    <strong>Do the routes track my position while I drive?</strong>
+                    <p>Yes. Because everything runs through Google Maps, the route follows your location perfectly on your phone. You're never confused about where to turn or where the route goes next.</p>
+                </li>
+                <li>
+                    <strong>Do I need to download an app?</strong>
+                    <p>No downloads — no hassle. Just open the link, and the route loads instantly in Google Maps. It works on any device.</p>
+                </li>
+                <li>
+                    <strong>Will this actually help me pass faster?</strong>
+                    <p>Yes. When you already know the tricky parts of the test centre area, you remove the biggest cause of failure: unfamiliar roads. You practise smarter, not longer.</p>
+                </li>
+                <li>
+                    <strong>Are the routes updated?</strong>
+                    <p>Absolutely. If test centres change their layout or introduce new patterns, the route links get updated so learners always have the most accurate version.</p>
+                </li>
+                <li>
+                    <strong>Is this a replacement for driving lessons?</strong>
+                    <p>No — but it massively boosts the value of your lessons. Instead of wasting time learning the test area from scratch, you walk in already familiar with it.</p>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- How It Works Section -->
+        <div class="info-section" id="howSection">
+            <h2>How It Works</h2>
+            <ol>
+                <li>
+                    <strong>Practise the real test questions</strong><br>
+                    Start with short, focused mock questions designed around what examiners actually ask on test day — road signs, hand signals, right-of-way rules, and the tricky scenarios most learners get wrong. No fluff. Just the stuff you need to know cold before you walk into the test centre.
+                </li>
+                <li>
+                    <strong>Track your progress on your personal dashboard</strong><br>
+                    Every answer updates your dashboard automatically. You'll see your scores, your weak areas, and how you're improving over time. No guessing. You know exactly what to revise, and you can repeat mock tests until you're confident.
+                </li>
+                <li>
+                    <strong>Unlock the official test-area routes</strong><br>
+                    When you're ready to practise on the road, you choose the test centre you want (e.g., Tallaght, Naas) and unlock its route pack. Each pack includes multiple real driving-test routes, mapped directly onto Google Maps. You open the link, hit start, and the route follows your car perfectly — just like normal navigation. Every turn, roundabout, and examiner hotspot is laid out for you.
+                </li>
+                <li>
+                    <strong>Practise smarter, not longer</strong><br>
+                    Because you study the exact theory questions and drive the exact test routes, your prep is laser-focused. No wasted lessons. No surprises on the day. You show up knowing the area, knowing the questions, and knowing what to expect.
+                </li>
+                <li>
+                    <strong>Pass with confidence</strong><br>
+                    DriveFlow's entire system is built to remove guesswork. You train the same way you'll be tested — with the real questions, real routes, and real examiner patterns. It's the closest you can get to doing the actual test without being in the car with the tester.
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>
 
 <div id="world"></div>
 
@@ -1591,6 +1950,92 @@ window.addEventListener("resize", function() {
     </div>
 </div>
 
+<script>
+    // Info Card Functionality
+    const infoButton = document.getElementById('infoButton');
+    const infoCard = document.getElementById('infoCard');
+    const infoOverlay = document.getElementById('infoOverlay');
+    const infoCardClose = document.getElementById('infoCardClose');
+    const infoNavButtons = document.querySelectorAll('.info-nav-button');
+    const infoSections = document.querySelectorAll('.info-section');
+    const infoCardTitle = document.getElementById('infoCardTitle');
+
+    const sectionTitles = {
+        'why': 'Why DriveFlow Works',
+        'faq': 'FAQ — Everything You Need to Know',
+        'how': 'How It Works'
+    };
+
+    // Open/Close Info Card
+    function toggleInfoCard() {
+        const isOpen = infoCard.classList.contains('open');
+        if (isOpen) {
+            closeInfoCard();
+        } else {
+            openInfoCard();
+        }
+    }
+
+    function openInfoCard() {
+        infoCard.classList.add('open');
+        infoOverlay.classList.add('show');
+        infoButton.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeInfoCard() {
+        infoCard.classList.remove('open');
+        infoOverlay.classList.remove('show');
+        infoButton.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // Switch between sections
+    function switchSection(sectionId) {
+        // Update nav buttons
+        infoNavButtons.forEach(btn => {
+            if (btn.dataset.section === sectionId) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+
+        // Update sections
+        infoSections.forEach(section => {
+            if (section.id === sectionId + 'Section') {
+                section.classList.add('active');
+            } else {
+                section.classList.remove('active');
+            }
+        });
+
+        // Update title
+        if (sectionTitles[sectionId]) {
+            infoCardTitle.textContent = sectionTitles[sectionId];
+        }
+    }
+
+    // Event Listeners
+    infoButton.addEventListener('click', toggleInfoCard);
+    infoCardClose.addEventListener('click', closeInfoCard);
+    infoOverlay.addEventListener('click', closeInfoCard);
+
+    // Nav button clicks
+    infoNavButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const sectionId = btn.dataset.section;
+            switchSection(sectionId);
+        });
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && infoCard.classList.contains('open')) {
+            closeInfoCard();
+        }
+    });
+</script>
 
 </body>
 </html>
