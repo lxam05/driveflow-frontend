@@ -48,6 +48,58 @@
             overflow: auto;
             overscroll-behavior: auto;
         }
+        
+        /* Make sections use normal flow on mobile */
+        .section {
+            position: relative !important;
+            transform: none !important;
+            margin-bottom: 60px;
+            padding-top: 80px;
+        }
+        
+        .infoCard {
+            position: relative !important;
+            width: calc(100% - 40px) !important;
+            max-width: 500px;
+            margin: 0 auto;
+            opacity: 1 !important;
+            transform: none !important;
+            left: auto !important;
+            right: auto !important;
+        }
+        
+        .leftCard, .rightCard {
+            left: auto !important;
+            right: auto !important;
+        }
+        
+        #world {
+            position: relative !important;
+            height: auto !important;
+            transform: none !important;
+            background-attachment: fixed;
+        }
+        
+        #car, #fog {
+            display: none;
+        }
+        
+        #levelSelector {
+            position: relative !important;
+            top: auto !important;
+            left: auto !important;
+            width: calc(100% - 40px) !important;
+            max-width: 500px;
+            margin: 20px auto;
+            transform: none !important;
+        }
+        
+        #footer {
+            position: relative !important;
+            transform: none !important;
+            top: auto !important;
+            margin-top: 60px;
+        }
     }
 
     /* ---------------- HEADER ---------------- */
@@ -353,6 +405,65 @@
         
         html {
             overflow: auto !important;
+        }
+        
+        /* Make sections use normal flow on mobile */
+        .section {
+            position: relative !important;
+            transform: none !important;
+            margin-bottom: 80px;
+            padding-top: 100px;
+            min-height: auto;
+        }
+        
+        .infoCard {
+            position: relative !important;
+            width: calc(100% - 40px) !important;
+            max-width: 500px;
+            margin: 0 auto;
+            opacity: 1 !important;
+            transform: none !important;
+            left: auto !important;
+            right: auto !important;
+        }
+        
+        .leftCard, .rightCard {
+            left: auto !important;
+            right: auto !important;
+        }
+        
+        #world {
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            height: 100vh !important;
+            transform: none !important;
+            background-attachment: fixed;
+            background-size: cover;
+            z-index: 0;
+        }
+        
+        #car, #fog {
+            display: none;
+        }
+        
+        #levelSelector {
+            position: relative !important;
+            top: auto !important;
+            left: auto !important;
+            width: calc(100% - 40px) !important;
+            max-width: 500px;
+            margin: 20px auto 40px;
+            transform: none !important;
+            z-index: 10;
+        }
+        
+        #footer {
+            position: relative !important;
+            transform: none !important;
+            top: auto !important;
+            margin-top: 60px;
+            z-index: 10;
         }
         
         #mainHeader .header-content {
@@ -1176,8 +1287,16 @@ window.addEventListener("load", function() {
     scrollPos = 0;
     updateEverything();
     
-    // On tablets/mobile, listen to native scroll for header visibility
+    // On tablets/mobile, make sure all cards are visible and positioned
     if (window.innerWidth <= 1024) {
+        // Make all cards visible on mobile
+        document.querySelectorAll(".infoCard").forEach(card => {
+            card.classList.add("visible");
+            card.style.opacity = "1";
+            card.style.transform = "none";
+        });
+        
+        // Listen to native scroll for header visibility
         window.addEventListener('scroll', function() {
             const header = document.getElementById("mainHeader");
             const scrollPos = window.pageYOffset || document.documentElement.scrollTop;
@@ -1187,6 +1306,18 @@ window.addEventListener("load", function() {
                 header.classList.remove("hidden");
             }
         }, { passive: true });
+    }
+});
+
+// Also handle resize to ensure mobile layout is correct
+window.addEventListener("resize", function() {
+    if (window.innerWidth <= 1024) {
+        // Make all cards visible on mobile after resize
+        document.querySelectorAll(".infoCard").forEach(card => {
+            card.classList.add("visible");
+            card.style.opacity = "1";
+            card.style.transform = "none";
+        });
     }
 });
 </script>
