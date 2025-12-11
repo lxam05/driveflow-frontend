@@ -354,6 +354,8 @@
     .info-card-content {
         flex: 1;
         padding: 24px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
     .info-section {
@@ -1500,6 +1502,14 @@ function handleWheel(e){
     if (window.innerWidth <= 1024) {
         return; // Let native scrolling handle it
     }
+    // Don't scroll background if info card is open and user is scrolling inside it
+    const infoCard = document.getElementById('infoCard');
+    if (infoCard && infoCard.classList.contains('open')) {
+        // Check if the scroll event is inside the info card
+        if (infoCard.contains(e.target)) {
+            return; // Let the card handle its own scrolling
+        }
+    }
     e.preventDefault();
     scrollPos += e.deltaY * 0.35;
     updateEverything();
@@ -1999,6 +2009,7 @@ window.addEventListener("resize", function() {
         infoButton.classList.remove('active');
         document.body.style.overflow = '';
     }
+
 
     // Switch between sections
     function switchSection(sectionId) {
