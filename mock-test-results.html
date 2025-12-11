@@ -96,127 +96,11 @@
         letter-spacing: -0.01em;
     }
 
-    .chart-wrapper {
+    #chartContainer {
         width: 100%;
-        margin: 32px 0;
-    }
-
-    .chart-container {
-        display: flex;
-        width: 100%;
-        max-width: 900px;
+        max-width: 800px;
         margin: 0 auto;
-    }
-
-    .chart-y-axis {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        padding-right: 15px;
-        text-align: right;
-        font-weight: bold;
-        color: var(--text-muted);
-        font-size: 14px;
-    }
-
-    .chart-y-label {
-        color: var(--text-muted);
-    }
-
-    .chart-grid {
-        flex: 1;
-        border-left: 1px solid var(--border-subtle);
-        background: repeating-linear-gradient(
-            to bottom,
-            transparent 0px,
-            transparent 45px,
-            rgba(91, 192, 190, 0.1) 45px,
-            rgba(91, 192, 190, 0.1) 46px
-        );
-        position: relative;
-    }
-
-    .bars {
-        display: flex;
-        justify-content: space-around;
-        align-items: flex-end;
-        height: 500px;
-        padding-top: 20px;
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-
-    .bar-item {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        flex: 1;
-        max-width: 80px;
-    }
-
-    .bar-item:hover .tooltip {
-        opacity: 1;
-    }
-
-    .chart-bar {
-        width: 60px;
-        border-radius: 4px;
-        box-shadow: 0px 5px 5px rgba(0,0,0,0.2);
-        transition: all 0.3s ease;
-        cursor: pointer;
-    }
-
-    .chart-bar:hover {
-        transform: scaleY(1.05);
-        filter: brightness(1.1);
-    }
-
-    .chart-bar.pass {
-        background: var(--accent);
-    }
-
-    .chart-bar.almost {
-        background: var(--accent-orange);
-    }
-
-    .chart-bar.fail {
-        background: var(--accent-red);
-    }
-
-    .tooltip {
-        position: absolute;
-        top: -40px;
-        background: rgba(15, 23, 42, 0.95);
-        color: white;
-        padding: 6px 12px;
-        border-radius: 8px;
-        font-size: 13px;
-        opacity: 0;
-        white-space: nowrap;
-        z-index: 10;
-        transition: opacity 0.2s ease;
-        border: 1px solid var(--border-subtle);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
-
-    .tooltip::after {
-        content: "";
-        position: absolute;
-        bottom: -7px;
-        left: 50%;
-        transform: translateX(-50%);
-        border-width: 7px;
-        border-style: solid;
-        border-color: rgba(15, 23, 42, 0.95) transparent transparent transparent;
-    }
-
-    .chart-bar-label {
-        margin-top: 10px;
-        font-size: 14px;
-        color: var(--text-main);
-        text-align: center;
-        font-weight: 500;
+        padding: 20px;
     }
 
     .no-scores {
@@ -228,41 +112,6 @@
 
     .no-scores p {
         margin: 0 0 12px;
-    }
-
-    .legend {
-        display: flex;
-        justify-content: center;
-        gap: 24px;
-        margin-top: 32px;
-        font-size: 14px;
-        color: var(--text-muted);
-        flex-wrap: wrap;
-    }
-
-    .legend-item {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .legend-color {
-        width: 16px;
-        height: 16px;
-        border-radius: 4px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
-
-    .legend-color.pass {
-        background: var(--accent);
-    }
-
-    .legend-color.almost {
-        background: var(--accent-orange);
-    }
-
-    .legend-color.fail {
-        background: var(--accent-red);
     }
 
     .btn-back {
@@ -325,7 +174,9 @@
 
     <div class="results-card">
         <h2>Your Test Scores</h2>
-        <div id="chart-container" class="loading">Loading your results...</div>
+        <div id="chartContainer">
+            <canvas id="myChart"></canvas>
+        </div>
     </div>
 
     <div style="text-align: center;">
@@ -333,10 +184,60 @@
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     const API_URL = location.hostname === "localhost" || location.hostname === "127.0.0.1"
         ? "http://localhost:8080"
         : "https://driving-test-backend-production.up.railway.app";
+
+    const ctx = document.getElementById('myChart');
+
+    let chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'Scores',
+                data: [],
+                backgroundColor: []
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 40,
+                    ticks: {
+                        color: 'var(--text-muted)',
+                        font: {
+                            family: 'Inter'
+                        }
+                    },
+                    grid: {
+                        color: 'var(--border-subtle)'
+                    }
+                },
+                x: {
+                    ticks: {
+                        color: 'var(--text-muted)',
+                        font: {
+                            family: 'Inter'
+                        }
+                    },
+                    grid: {
+                        color: 'var(--border-subtle)'
+                    }
+                }
+            }
+        }
+    });
 
     async function getTestScores() {
         const token = localStorage.getItem('auth_token');
@@ -344,7 +245,7 @@
         // Try to fetch from backend if logged in
         if (token) {
             try {
-                const response = await fetch(`${API_URL}/mock-tests/results?limit=10`, {
+                const response = await fetch(`${API_URL}/mock-tests/results?limit=7`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${token}`
@@ -386,93 +287,40 @@
         return JSON.parse(localStorage.getItem(storageKey) || '[]');
     }
 
-    // Render bar chart of recent scores
-    function renderScoresChart(scores) {
-        if (scores.length === 0) {
-            return `
-                <div class="no-scores">
-                    <p>No test scores yet</p>
-                    <p style="font-size: 14px; margin-top: 16px;">Complete a mock test to see your results here!</p>
-                    <a href="mock-test.html" class="btn-back" style="margin-top: 24px; display: inline-block;">Take a Mock Test</a>
-                </div>
-            `;
-        }
-
-        // Use fixed max of 40 for scaling
-        const maxScore = 40;
-        const chartHeight = 460; // Height available for bars (500px total - 40px padding)
-        
-        // Determine color class for each score
-        function getScoreClass(score) {
-            if (score.correct >= 35) return 'pass'; // Green
-            if (score.correct >= 30) return 'almost'; // Orange
-            return 'fail'; // Red
-        }
-
-        // Generate y-axis labels (0 to 40 in steps of 2)
-        const yAxisLabels = [];
-        for (let i = 40; i >= 0; i -= 2) {
-            yAxisLabels.push(i);
-        }
-        const yAxisHtml = yAxisLabels.map(val => 
-            `<div class="chart-y-label">${val}</div>`
-        ).join('');
-
-        const barsHtml = scores.map((score, index) => {
-            // Calculate height in pixels based on score (0-40 scale)
-            const heightPx = (score.correct / maxScore) * chartHeight;
-            const minHeightPx = 10; // Minimum visible height
-            const finalHeight = Math.max(heightPx, minHeightPx);
-            const scoreClass = getScoreClass(score);
-            
-            // Format tooltip text
-            const tooltipText = `${score.correct}/${score.total} (${score.percentage}%)`;
-            
-            return `
-                <div class="bar-item">
-                    <div class="tooltip">${tooltipText}</div>
-                    <div class="chart-bar ${scoreClass}" style="height: ${finalHeight}px;"></div>
-                    <div class="chart-bar-label">Test ${index + 1}</div>
-                </div>
-            `;
-        }).join('');
-
-        return `
-            <div class="chart-wrapper">
-                <div class="chart-container">
-                    <div class="chart-y-axis">${yAxisHtml}</div>
-                    <div class="chart-grid">
-                        <div class="bars">
-                            ${barsHtml}
-                        </div>
-                    </div>
-                </div>
-                <div class="legend">
-                    <div class="legend-item">
-                        <span class="legend-color pass"></span>
-                        <span>Pass (35+)</span>
-                    </div>
-                    <div class="legend-item">
-                        <span class="legend-color almost"></span>
-                        <span>Almost (30-34)</span>
-                    </div>
-                    <div class="legend-item">
-                        <span class="legend-color fail"></span>
-                        <span>Fail (&lt;30)</span>
-                    </div>
-                </div>
-            </div>
-        `;
+    function getScoreColor(score) {
+        if (score >= 35) return '#6fffe9'; // Pass - accent (teal/cyan)
+        if (score >= 30) return '#f97316'; // Almost - orange
+        return '#ef4444'; // Fail - red
     }
 
     // Load and display chart on page load
     async function loadChart() {
-        const chartContainer = document.getElementById('chart-container');
+        const chartContainer = document.getElementById('chartContainer');
         
         try {
             const scores = await getTestScores();
-            const chartHtml = renderScoresChart(scores);
-            chartContainer.innerHTML = chartHtml;
+            
+            if (scores.length === 0) {
+                chartContainer.innerHTML = `
+                    <div class="no-scores">
+                        <p>No test scores yet</p>
+                        <p style="font-size: 14px; margin-top: 16px;">Complete a mock test to see your results here!</p>
+                        <a href="mock-test.html" class="btn-back" style="margin-top: 24px; display: inline-block;">Take a Mock Test</a>
+                    </div>
+                `;
+                return;
+            }
+
+            // Limit to 7 most recent scores
+            const recentScores = scores.slice(0, 7);
+            const labels = recentScores.map((score, index) => `Score ${index + 1}`);
+            const data = recentScores.map(score => score.correct);
+            const colors = recentScores.map(score => getScoreColor(score.correct));
+
+            chart.data.labels = labels;
+            chart.data.datasets[0].data = data;
+            chart.data.datasets[0].backgroundColor = colors;
+            chart.update();
         } catch (err) {
             console.error('Error loading test results:', err);
             chartContainer.innerHTML = '<div class="no-scores">Error loading results. Please try again later.</div>';
