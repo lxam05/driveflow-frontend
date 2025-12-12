@@ -233,9 +233,8 @@
     async function validateLink() {
         const urlParams = new URLSearchParams(window.location.search);
         const token = urlParams.get('token');
-        const tokenParam = urlParams.get('token');
         
-        if (!tokenParam) {
+        if (!token) {
             showPaywall('No access token provided');
             return false;
         }
@@ -250,7 +249,7 @@
         }
 
         try {
-            const response = await fetch(`${API_URL}/routes/validate-link/${tokenParam}`, {
+            const response = await fetch(`${API_URL}/routes/validate-link/${token}`, {
                 headers: {
                     'Authorization': `Bearer ${authToken}`
                 }
