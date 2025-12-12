@@ -417,6 +417,135 @@
         color: #fecaca;
     }
 
+    /* New Routes Coming Card */
+    .new-routes-card {
+        border-radius: var(--radius-xl);
+        background: linear-gradient(135deg, rgba(249, 115, 22, 0.15), rgba(251, 146, 60, 0.1));
+        border: 2px solid var(--accent-orange);
+        box-shadow: var(--shadow-card);
+        padding: 32px;
+        margin-bottom: 24px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .new-routes-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--accent-orange), #fb923c);
+    }
+
+    .new-routes-card h2 {
+        margin: 0 0 12px;
+        font-size: 22px;
+        font-weight: 800;
+        color: var(--accent-orange);
+        letter-spacing: -0.02em;
+    }
+
+    .new-routes-card p {
+        margin: 0 0 24px;
+        color: var(--text-main);
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    .new-routes-card .highlight {
+        color: var(--accent-orange);
+        font-weight: 600;
+    }
+
+    .route-request-form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .route-request-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .route-request-group label {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text-main);
+    }
+
+    .route-request-input {
+        width: 100%;
+        padding: 12px 16px;
+        border-radius: 8px;
+        border: 1px solid var(--border-subtle);
+        background: rgba(15, 23, 42, 0.6);
+        color: var(--text-main);
+        font-size: 15px;
+        font-family: inherit;
+        transition: all 0.2s ease;
+    }
+
+    .route-request-input:focus {
+        outline: none;
+        border-color: var(--accent-orange);
+        background: rgba(15, 23, 42, 0.8);
+        box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+    }
+
+    .route-request-input::placeholder {
+        color: var(--text-muted);
+    }
+
+    .route-request-submit {
+        padding: 12px 24px;
+        background: linear-gradient(120deg, var(--accent-orange), #fb923c);
+        color: white;
+        border: none;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 15px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 16px rgba(249, 115, 22, 0.4);
+    }
+
+    .route-request-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(249, 115, 22, 0.6);
+    }
+
+    .route-request-submit:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .route-request-message {
+        margin-top: 16px;
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-size: 14px;
+        display: none;
+    }
+
+    .route-request-message.success {
+        background: rgba(34, 197, 94, 0.1);
+        border: 1px solid rgba(34, 197, 94, 0.3);
+        color: #bbf7d0;
+        display: block;
+    }
+
+    .route-request-message.error {
+        background: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        color: #fecaca;
+        display: block;
+    }
+
     @media (max-width: 768px) {
         .notification-signup-card {
             padding: 24px;
@@ -536,6 +665,23 @@
             <h2 id="selectedCentreTitle" style="margin: 0 0 20px; font-size: 20px; font-weight: 700; color: var(--text-main);">Available Routes</h2>
             <div class="routes-grid" id="routesGrid"></div>
         </div>
+        <div class="new-routes-card">
+            <h2>🚀 New Routes Coming Next Week!</h2>
+            <p>We're adding <span class="highlight">new test centre routes</span> next week. Tell us which routes you want to see first!</p>
+            <form id="routeRequestForm" class="route-request-form">
+                <div class="route-request-group">
+                    <label for="routeRequestCentre">Which test centre route would you like?</label>
+                    <input type="text" id="routeRequestCentre" class="route-request-input" placeholder="e.g., Cork, Galway, Limerick" required>
+                </div>
+                <div class="route-request-group">
+                    <label for="routeRequestEmail">Your Email (optional)</label>
+                    <input type="email" id="routeRequestEmail" class="route-request-input" placeholder="your.email@example.com">
+                </div>
+                <button type="submit" class="route-request-submit">Submit Request</button>
+            </form>
+            <div id="routeRequestMessage" class="route-request-message"></div>
+        </div>
+
         <div class="notification-signup-card" style="margin-top: 0;">
             <h2>🔔 Get Notified When Routes Are Available</h2>
             <p>Enter your email and select a test centre to be notified when routes become available for that location.</p>
@@ -888,6 +1034,71 @@
             setTimeout(() => {
                 notificationMessage.style.display = "none";
             }, 5000);
+        }
+    }
+
+    // Route request form handler
+    const routeRequestForm = document.getElementById("routeRequestForm");
+    const routeRequestMessage = document.getElementById("routeRequestMessage");
+
+    if (routeRequestForm) {
+        routeRequestForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            
+            const centre = document.getElementById("routeRequestCentre").value.trim();
+            const email = document.getElementById("routeRequestEmail").value.trim();
+            const submitBtn = routeRequestForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            
+            if (!centre) {
+                showRouteRequestMessage("Please enter a test centre name", "error");
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Submitting...";
+
+            try {
+                // Send route request to backend
+                const res = await fetch(`${API_URL}/routes/route-request`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ 
+                        testCentre: centre,
+                        email: email || null
+                    }),
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    showRouteRequestMessage(`Thanks! We've noted your request for ${centre} routes. We'll prioritize popular requests!`, "success");
+                    routeRequestForm.reset();
+                } else {
+                    showRouteRequestMessage(data.error || "Failed to submit request. Please try again.", "error");
+                }
+            } catch (err) {
+                console.error("Error submitting route request:", err);
+                showRouteRequestMessage("An error occurred. Please try again later.", "error");
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
+        });
+    }
+
+    function showRouteRequestMessage(message, type) {
+        if (routeRequestMessage) {
+            routeRequestMessage.textContent = message;
+            routeRequestMessage.className = `route-request-message ${type}`;
+            
+            // Auto-hide after 8 seconds
+            setTimeout(() => {
+                routeRequestMessage.className = "route-request-message";
+                routeRequestMessage.style.display = "none";
+            }, 8000);
         }
     }
 
