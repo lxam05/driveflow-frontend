@@ -654,23 +654,10 @@
                 });
             } else {
                 console.error('Failed to load test centres');
-                // Fallback to hardcoded list
+                // Fallback to only centres with actual routes available
                 const fallbackCentres = [
-                    "Naas", "Tallaght", "Athlone", "Ballina", "Birr", "Buncrana",
-                    "Carlow (Talbot Hotel)", "Carrick-on-Shannon", "Castlebar", "Cavan",
-                    "Charlestown (Dublin)", "Clifden", "Clonmel", "Cork (Ballincollig)",
-                    "Cork (St. Finbarr's GAA Club, Togher)", "Cork (Wilton)", "Donegal",
-                    "Drogheda", "Dundalk", "Dungarvan", "Dún Laoghaire / Deansgrange",
-                    "Ennis", "Finglas", "Galway (Carnmore)", "Galway (Westside)", "Gorey",
-                    "Killarney", "Kilkenny (Government Buildings)", "Kilkenny (O'Loughlin Gaels)",
-                    "Killester", "Kilrush", "Letterkenny", "Limerick (Castlemungret)",
-                    "Limerick (Woodview)", "Longford", "Loughrea", "Loughrea (Lough Rea Hotel & Spa)",
-                    "Mallow (Cork Racecourse, Mallow)", "Monaghan", "Mulhuddart",
-                    "Mulhuddart (Carlton Hotel)", "Mullingar", "Navan", "Nenagh",
-                    "Newcastle West", "Newcastle West (Longcourt House Hotel)", "Portlaoise",
-                    "Raheny", "Roscommon", "Shannon", "Skibbereen", "Sligo", "Thurles",
-                    "Tipperary", "Tralee", "Tuam", "Tullamore", "Waterford",
-                    "Wexford", "Wicklow"
+                    "Naas",
+                    "Tallaght"
                 ];
                 const select = document.getElementById('testCentreSelect');
                 fallbackCentres.forEach(centre => {
