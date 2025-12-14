@@ -674,8 +674,8 @@
                     <input type="text" id="routeRequestCentre" class="route-request-input" placeholder="e.g., Cork, Galway, Limerick" required>
                 </div>
                 <div class="route-request-group">
-                    <label for="routeRequestEmail">Your Email (optional)</label>
-                    <input type="email" id="routeRequestEmail" class="route-request-input" placeholder="your.email@example.com">
+                    <label for="routeRequestEmail">Your Email</label>
+                    <input type="email" id="routeRequestEmail" class="route-request-input" placeholder="your.email@example.com" required>
                 </div>
                 <button type="submit" class="route-request-submit">Submit Request</button>
             </form>
@@ -977,6 +977,11 @@
                 showRouteRequestMessage("Please enter a test centre name", "error");
                 return;
             }
+            
+            if (!email) {
+                showRouteRequestMessage("Please enter your email address", "error");
+                return;
+            }
 
             submitBtn.disabled = true;
             submitBtn.textContent = "Submitting...";
@@ -990,7 +995,7 @@
                     },
                     body: JSON.stringify({ 
                         testCentre: centre,
-                        email: email || null
+                        email: email
                     }),
                 });
 
