@@ -853,9 +853,9 @@
 
     // Test centres data - sorted alphabetically
     const testCentres = [
+        { name: "Dun Laoghaire", routes: 7 },
         { name: "Naas", routes: 7 },
         { name: "Tallaght", routes: 7 },
-
     ];
 
     let selectedCentre = null;
@@ -917,7 +917,7 @@
         // User has premium access - proceed to show routes
         console.log('Has license - proceeding to routes');
         
-        // Special handling for Naas and Tallaght - redirect to dedicated pages
+        // Special handling for Naas, Tallaght, and Dun Laoghaire - redirect to dedicated pages
         if (centre.name === "Naas") {
             window.location.href = 'naas-routes.html';
             return;
@@ -925,6 +925,11 @@
         
         if (centre.name === "Tallaght") {
             window.location.href = 'tallaght-routes.html';
+            return;
+        }
+        
+        if (centre.name === "Dun Laoghaire") {
+            window.location.href = 'dun-laoghaire-routes.html';
             return;
         }
         
