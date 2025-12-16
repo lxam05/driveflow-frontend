@@ -856,6 +856,7 @@
         { name: "Dun Laoghaire", routes: 7 },
         { name: "Naas", routes: 7 },
         { name: "Tallaght", routes: 7 },
+        { name: "Wilton", routes: 6 },
     ];
 
     let selectedCentre = null;
@@ -930,6 +931,11 @@
         
         if (centre.name === "Dun Laoghaire") {
             window.location.href = 'dun-laoghaire-routes.html';
+            return;
+        }
+        
+        if (centre.name === "Wilton") {
+            window.location.href = 'wilton-routes.html';
             return;
         }
         

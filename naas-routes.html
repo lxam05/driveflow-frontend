@@ -331,7 +331,6 @@
         </div>
 
         <div id="errorContainer"></div>
-        <div id="expiryInfo" class="expiry-info" style="display: none;"></div>
         <div id="routesContainer" class="routes-container"></div>
         <div id="loadingContainer" class="loading">Loading routes...</div>
 
@@ -447,7 +446,6 @@
             const loadingContainer = document.getElementById('loadingContainer');
             const routesContainer = document.getElementById('routesContainer');
             const errorContainer = document.getElementById('errorContainer');
-            const expiryInfo = document.getElementById('expiryInfo');
 
             try {
                 // Generate access token
@@ -488,11 +486,6 @@
                 const tokenData = await tokenResponse.json();
                 accessToken = tokenData.accessToken;
                 tokenExpiresAt = new Date(tokenData.expiresAt);
-
-                // Update expiry info
-                const expiryTime = new Date(tokenExpiresAt).toLocaleTimeString();
-                expiryInfo.textContent = `Access expires at ${expiryTime}`;
-                expiryInfo.style.display = 'block';
 
                 // Fetch route data
                 const dataResponse = await fetch(`${API_URL}/routes/naas-data/${accessToken}`, {
@@ -556,15 +549,7 @@
             window.location.href = `${API_URL}/routes/naas-route/${accessToken}/${routeId}`;
         }
 
-        // Update expiry countdown
-        setInterval(() => {
-            if (tokenExpiresAt && new Date() > tokenExpiresAt) {
-                const expiryInfo = document.getElementById('expiryInfo');
-                expiryInfo.innerHTML = '<strong>Access expired</strong> - Please refresh the page';
-                expiryInfo.style.background = 'rgba(239, 68, 68, 0.1)';
-                expiryInfo.style.borderColor = 'rgba(239, 68, 68, 0.3)';
-            }
-        }, 1000);
+        // No expiry text/countdown shown on this page; token expiry is enforced by the backend
 
         // Paywall modal handlers
         // All payment event listeners removed - payment functionality moved to payment.html

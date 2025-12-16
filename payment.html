@@ -657,7 +657,9 @@
                 // Fallback to only centres with actual routes available
                 const fallbackCentres = [
                     "Naas",
-                    "Tallaght"
+                    "Tallaght",
+                    "Dun Laoghaire",
+                    "Wilton"
                 ];
                 const select = document.getElementById('testCentreSelect');
                 fallbackCentres.forEach(centre => {
@@ -669,6 +671,21 @@
             }
         } catch (err) {
             console.error('Error loading test centres:', err);
+            // Fallback to only centres with actual routes available
+            const fallbackCentres = [
+                "Naas",
+                "Tallaght",
+                "Dun Laoghaire",
+                "Wilton"
+            ];
+            const select = document.getElementById('testCentreSelect');
+            select.innerHTML = '<option value="">-- Choose a test centre --</option>';
+            fallbackCentres.forEach(centre => {
+                const option = document.createElement('option');
+                option.value = centre;
+                option.textContent = centre;
+                select.appendChild(option);
+            });
         }
     }
 

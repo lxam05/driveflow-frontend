@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Download the real Tallaght driving test routes. Navigate the exact roads used by testers and increase your pass chances.">
-<link rel="canonical" href="https://www.driveflow.ie/tallaght-routes.html">
+<meta name="description" content="Real Wilton driving test routes mapped for Google Maps. Learn the actual test course before your exam.">
+<link rel="canonical" href="https://www.driveflow.ie/wilton-routes.html">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="icon" type="image/png" href="favicon.png">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>Tallaght Routes — DriveFlow | Real Driving Test Routes</title>
+<title>Wilton Routes — DriveFlow | Real Driving Test Routes</title>
 
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
@@ -146,17 +146,6 @@
         color: #ef4444;
     }
 
-    .expiry-info {
-        background: var(--primary-soft);
-        border: 1px solid var(--primary);
-        border-radius: var(--radius-lg);
-        padding: 16px;
-        margin-bottom: 24px;
-        text-align: center;
-        color: var(--text-main);
-        font-size: 14px;
-    }
-
     .btn-back {
         display: inline-block;
         margin-top: 20px;
@@ -176,185 +165,13 @@
         box-shadow: 0 12px 35px rgba(0, 0, 0, 0.9);
         border-color: rgba(129, 140, 248, 0.8);
     }
-
-    /* Paywall Modal */
-    .paywall-modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.8);
-        z-index: 10000;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-    }
-
-    .paywall-modal.show {
-        display: flex;
-    }
-
-    .paywall-content {
-        background: var(--bg-card);
-        border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-xl);
-        padding: 40px;
-        max-width: 600px;
-        width: 100%;
-        max-height: 90vh;
-        overflow-y: auto;
-        text-align: center;
-        box-shadow: var(--shadow-card);
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .paywall-content::-webkit-scrollbar {
-        width: 8px;
-    }
-    
-    .paywall-content::-webkit-scrollbar-track {
-        background: rgba(15, 23, 42, 0.3);
-        border-radius: 4px;
-    }
-    
-    .paywall-content::-webkit-scrollbar-thumb {
-        background: var(--primary);
-        border-radius: 4px;
-    }
-    
-    .paywall-content::-webkit-scrollbar-thumb:hover {
-        background: var(--accent);
-    }
-
-    .paywall-content h2 {
-        margin: 0 0 16px;
-        color: var(--text-main);
-        font-size: 24px;
-        font-weight: 700;
-    }
-
-    .paywall-content p {
-        margin: 0 0 24px;
-        color: var(--text-muted);
-        line-height: 1.6;
-    }
-
-    .btn-purchase {
-        padding: 14px 32px;
-        border-radius: 999px;
-        border: none;
-        background: linear-gradient(120deg, rgba(37, 99, 235, 0.95), rgba(124, 58, 237, 0.95));
-        color: white;
-        font-size: 16px;
-        font-weight: 700;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        box-shadow: 0 8px 24px rgba(30, 64, 175, 0.4);
-    }
-
-    .btn-purchase:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 12px 32px rgba(30, 64, 175, 0.6);
-    }
-
-    .btn-purchase:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-        transform: none;
-    }
-
-    .license-status {
-        padding: 12px 20px;
-        background: rgba(34, 197, 94, 0.1);
-        border: 1px solid rgba(34, 197, 94, 0.3);
-        border-radius: 12px;
-        margin-bottom: 20px;
-        font-size: 14px;
-        color: #bbf7d0;
-    }
-
-    .license-status.expired {
-        background: rgba(239, 68, 68, 0.1);
-        border-color: rgba(239, 68, 68, 0.3);
-        color: #fecaca;
-    }
-
-    /* Payment Form Styling */
-    #payment-element {
-        padding: 24px;
-        background: rgba(15, 23, 42, 0.6);
-        border: 1px solid var(--border-subtle);
-        border-radius: 12px;
-        margin-bottom: 20px;
-        min-height: 400px;
-        flex-shrink: 0;
-    }
-    
-    #paymentForm {
-        flex-shrink: 0;
-        margin-top: 24px;
-        display: flex;
-        flex-direction: column;
-    }
-    
-    #submitPaymentBtn {
-        margin-top: 20px;
-        flex-shrink: 0;
-    }
-
-    .price-display {
-        font-size: 28px;
-        font-weight: 700;
-        color: var(--primary);
-        margin: 16px 0;
-    }
-
-    .btn-cancel {
-        margin-top: 12px;
-        background: transparent;
-        border: 1px solid var(--border-subtle);
-        color: var(--text-muted);
-        padding: 10px 20px;
-        border-radius: 999px;
-        cursor: pointer;
-        font-weight: 600;
-        font-size: 14px;
-        transition: all 0.2s ease;
-    }
-
-    .btn-cancel:hover {
-        background: rgba(239, 68, 68, 0.1);
-        border-color: rgba(239, 68, 68, 0.3);
-        color: #ef4444;
-    }
-
-    #payment-errors {
-        padding: 12px;
-        background: rgba(239, 68, 68, 0.1);
-        border: 1px solid rgba(239, 68, 68, 0.3);
-        border-radius: 8px;
-        margin-bottom: 16px;
-    }
-
-    #submitPaymentBtn:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-    }
-
-    #purchaseButtonContainer {
-        display: block;
-    }
 </style>
-<!-- Stripe.js removed - payment functionality moved to payment.html -->
 </head>
 <body>
     <div class="container">
         <div class="page-header">
-            <h1>Tallaght Test Routes</h1>
-            <p>Access detailed route information for the Tallaght test centre</p>
+            <h1>Wilton Test Routes</h1>
+            <p>Access detailed route information for the Wilton test centre</p>
         </div>
 
         <div id="errorContainer"></div>
@@ -363,8 +180,6 @@
 
         <a href="routes.html" class="btn-back">← Back to All Routes</a>
     </div>
-
-    <!-- Paywall Modal removed - all payment functionality moved to payment.html -->
 
     <script>
         const API_URL = location.hostname === "localhost" || location.hostname === "127.0.0.1"
@@ -406,19 +221,23 @@
                     // Double-check expiry even if API says hasLicense is true
                     if (hasLicense && licenseExpiresAt) {
                         const expiryDate = new Date(licenseExpiresAt);
-                        if (expiryDate < new Date()) {
+                        const now = new Date();
+                        if (expiryDate < now) {
                             hasLicense = false;
                         }
                     }
                 } else {
-                    // If API call fails, assume no license
                     hasLicense = false;
                 }
             } catch (err) {
                 console.error('Error checking license:', err);
-                // On error, assume no license to be safe
                 hasLicense = false;
             }
+        }
+
+        // All payment functionality moved to payment.html - redirect immediately
+        function showPaywall() {
+            window.location.href = 'payment.html';
         }
 
         // Initialize on page load
@@ -442,7 +261,7 @@
 
             try {
                 // Generate access token
-                const tokenResponse = await fetch(`${API_URL}/routes/generate-tallaght-token`, {
+                const tokenResponse = await fetch(`${API_URL}/routes/generate-wilton-token`, {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${token}`
@@ -452,12 +271,17 @@
                 if (!tokenResponse.ok) {
                     const error = await tokenResponse.json();
                     if (error.error && error.error.includes('license')) {
-                        // Check license status and redirect to payment
                         await checkLicenseStatus();
                         if (!hasLicense) {
                             window.location.href = 'payment.html';
                             return;
                         }
+                        errorContainer.innerHTML = `
+                            <div class="error">
+                                <strong>Access Required</strong><br>
+                                You need an active license to view Wilton routes.
+                            </div>
+                        `;
                     } else {
                         errorContainer.innerHTML = `
                             <div class="error">
@@ -465,9 +289,9 @@
                                 ${error.error || 'Failed to generate access token'}
                             </div>
                         `;
-                        loadingContainer.style.display = 'none';
-                        return;
                     }
+                    loadingContainer.style.display = 'none';
+                    return;
                 }
 
                 const tokenData = await tokenResponse.json();
@@ -475,7 +299,7 @@
                 tokenExpiresAt = new Date(tokenData.expiresAt);
 
                 // Fetch route data
-                const dataResponse = await fetch(`${API_URL}/routes/tallaght-data/${accessToken}`, {
+                const dataResponse = await fetch(`${API_URL}/routes/wilton-data/${accessToken}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -528,37 +352,25 @@
 
             // Check if token is still valid
             if (new Date() > tokenExpiresAt) {
-                alert('Your access has expired. Please refresh the page to get a new token.');
+                alert('Your access for this session has expired. Please refresh the page to get a new token.');
                 return;
             }
 
             // Redirect through proxy endpoint - link never exposed in frontend
-            window.location.href = `${API_URL}/routes/tallaght-route/${accessToken}/${routeId}`;
+            window.location.href = `${API_URL}/routes/wilton-route/${accessToken}/${routeId}`;
         }
-
-        // No expiry text/countdown shown on this page; token expiry is enforced by the backend
-
-        // All payment functionality removed - moved to payment.html
-
-        // Attach payment submit handler
-        document.addEventListener('DOMContentLoaded', () => {
-            const submitBtn = document.getElementById('submitPaymentBtn');
-            if (submitBtn) {
-                submitBtn.addEventListener('click', handlePaymentSubmit);
-            }
-        });
     </script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "HowTo",
-      "name": "How to Pass the Driving Test in Tallaght",
-      "description": "Learn the real Tallaght driving test routes and increase your chances of passing the Irish driving test.",
+      "name": "How to Pass the Driving Test in Wilton",
+      "description": "Learn the real Wilton driving test routes and increase your chances of passing the Irish driving test.",
       "step": [
         {
           "@type": "HowToStep",
           "name": "Follow the official driving test route",
-          "text": "Study the exact routes used by driving test examiners in Tallaght test centre."
+          "text": "Study the exact routes used by driving test examiners in Wilton test centre."
         },
         {
           "@type": "HowToStep",
@@ -568,7 +380,7 @@
         {
           "@type": "HowToStep",
           "name": "Practice reversing around the corner",
-          "text": "Master the reversing maneuvers required on the Tallaght test routes."
+          "text": "Master the reversing maneuvers required on the Wilton test routes."
         },
         {
           "@type": "HowToStep",
@@ -578,6 +390,7 @@
       ]
     }
     </script>
+    <script src="chatbot-widget.js"></script>
 </body>
 </html>
 
