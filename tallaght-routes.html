@@ -517,11 +517,11 @@
                 return;
             }
 
-            routesContainer.innerHTML = data.routes.map(route => `
+            routesContainer.innerHTML = data.routes.map((route, index) => `
                 <div class="route-card">
-                    <h3>${route.name}</h3>
+                    <h3>Route ${index + 1}</h3>
                     <button class="route-btn" onclick="openRoute(${route.id})">
-                        View Route on Google Maps
+                        View Route ${index + 1} on Google Maps
                     </button>
                 </div>
             `).join('');
