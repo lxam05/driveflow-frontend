@@ -982,7 +982,9 @@
     const testCentres = [
         { name: "Dun Laoghaire", routes: 7 },
         { name: "Finglas", routes: 7 },
+        { name: "Mulhuddart", routes: 5 },
         { name: "Naas", routes: 7 },
+        { name: "Raheny", routes: 5 },
         { name: "Tallaght", routes: 7 },
         { name: "Test", routes: 1 },
         { name: "Wilton", routes: 6 },
@@ -1070,6 +1072,16 @@
         
         if (centre.name === "Finglas") {
             window.location.href = 'finglas-routes.html';
+            return;
+        }
+        
+        if (centre.name === "Raheny") {
+            window.location.href = 'raheny-routes.html';
+            return;
+        }
+        
+        if (centre.name === "Mulhuddart") {
+            window.location.href = 'mulhuddart-routes.html';
             return;
         }
         
