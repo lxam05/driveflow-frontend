@@ -634,6 +634,91 @@
     }
 
     /* All payment form CSS removed - payment functionality moved to payment.html */
+
+    /* Why Our Routes Work Section */
+    .why-our-routes {
+        grid-column: 1 / -1;
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 40px;
+        margin-top: 40px;
+    }
+
+    .why-our-routes h2 {
+        margin: 0 0 24px;
+        font-size: 28px;
+        font-weight: 800;
+        color: var(--text-main);
+        letter-spacing: -0.02em;
+    }
+
+    .why-our-routes h3 {
+        margin: 32px 0 16px;
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--accent);
+        letter-spacing: -0.01em;
+    }
+
+    .why-our-routes h3:first-of-type {
+        margin-top: 0;
+    }
+
+    .why-our-routes p {
+        margin: 0 0 16px;
+        font-size: 16px;
+        line-height: 1.7;
+        color: var(--text-main);
+    }
+
+    .why-our-routes p:last-child {
+        margin-bottom: 0;
+    }
+
+    .why-our-routes .route-steps {
+        margin-top: 24px;
+        padding-left: 0;
+        list-style: none;
+    }
+
+    .why-our-routes .route-steps li {
+        margin: 16px 0;
+        padding-left: 32px;
+        position: relative;
+        font-size: 16px;
+        line-height: 1.7;
+        color: var(--text-main);
+    }
+
+    .why-our-routes .route-steps li::before {
+        content: '→';
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+        font-weight: 700;
+        font-size: 18px;
+    }
+
+    @media (max-width: 768px) {
+        .why-our-routes {
+            padding: 24px;
+        }
+
+        .why-our-routes h2 {
+            font-size: 24px;
+        }
+
+        .why-our-routes h3 {
+            font-size: 18px;
+        }
+
+        .why-our-routes p,
+        .why-our-routes .route-steps li {
+            font-size: 15px;
+        }
+    }
 </style>
 </head>
 <body>
@@ -644,13 +729,6 @@
         <p>Practice the actual routes used in driving tests at each centre</p>
     </div>
 
-    <div class="promo-card">
-        <h2>🚗 Pass Your Test First Time</h2>
-        <p>
-            Most people fail because they don't know the real route. These <span class="promo-highlight">premium routes</span> show the exact paths examiners use, highlighting every tricky turn and hidden sign. Practise these and you <span class="promo-highlight">massively boost your chances of passing first time</span>.
-        </p>
-        <a href="payment.html" class="btn-get-access">Get Premium Access →</a>
-    </div>
 
     <div class="selection-card">
         <h2>Select Test Centre</h2>
@@ -681,6 +759,46 @@
             </form>
             <div id="routeRequestMessage" class="route-request-message"></div>
         </div>
+    </div>
+
+    <!-- Why Our Routes Work Section -->
+    <div class="why-our-routes">
+        <h2>Why Our Routes Work</h2>
+        
+        <p>
+            Most driving test routes online are gimmicks — rough lines on a map that don't actually follow you when you drive.
+            Our routes are different. Every route is fully integrated with Google Maps, so turn-by-turn navigation tracks you perfectly in real time, just like normal GPS. No guessing. No drifting off route.
+        </p>
+        
+        <p>
+            There's no app to download. Just log in on your phone, tap the route, and drive.
+        </p>
+        
+        <p>
+            The platform is cheap, regularly updated, and designed for real learners who want to practice properly — not flashy features that don't help you pass.
+        </p>
+
+        <h3>How the Routes Work</h3>
+        
+        <ul class="route-steps">
+            <li>
+                <strong>Purchase a route</strong><br>
+                Once you buy a route, you get access for over 90 days — plenty of time to practice properly.
+            </li>
+            <li>
+                <strong>Start a route anytime</strong><br>
+                On your phone, open our website, log in, and tap the route you want to practice.<br>
+                It opens instantly in Google Maps with full turn-by-turn navigation.
+            </li>
+            <li>
+                <strong>Repeat until it's automatic</strong><br>
+                Drive the routes as many times as you want until every junction, roundabout, and tricky section feels familiar.
+            </li>
+        </ul>
+        
+        <p style="margin-top: 24px; font-weight: 600; color: var(--accent);">
+            That's it. Simple, effective, and built to actually help you pass.
+        </p>
     </div>
 </div>
 
