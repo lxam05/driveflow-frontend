@@ -443,7 +443,7 @@
 
     .visual-preview {
         margin: 32px 0;
-        padding: 40px;
+        padding: 0;
         background: rgba(15, 23, 42, 0.4);
         border: 1px solid var(--border-subtle);
         border-radius: var(--radius-lg);
@@ -452,45 +452,11 @@
         overflow: hidden;
     }
 
-    .visual-preview::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: 
-            repeating-linear-gradient(
-                45deg,
-                transparent,
-                transparent 10px,
-                rgba(91, 192, 190, 0.05) 10px,
-                rgba(91, 192, 190, 0.05) 20px
-            );
-        filter: blur(8px);
-    }
-
-    .map-icon {
-        width: 120px;
-        height: 120px;
-        margin: 0 auto 20px;
-        position: relative;
-        z-index: 1;
-        opacity: 0.7;
-    }
-
-    .map-icon svg {
+    .route-preview-video {
         width: 100%;
-        height: 100%;
-        fill: var(--primary);
-    }
-
-    .visual-preview-text {
-        position: relative;
-        z-index: 1;
-        color: var(--text-muted);
-        font-size: 14px;
-        margin: 0;
+        height: auto;
+        display: block;
+        border-radius: var(--radius-lg);
     }
 
     .loading-state {
@@ -547,8 +513,14 @@
                         </div>
 
                         <div class="price-info">
-                            <div class="price">€13.99</div>
+                            <div style="display: flex; align-items: baseline; justify-content: center; gap: 12px; margin-bottom: 8px;">
+                                <div class="price" style="margin: 0;">€9.99</div>
+                                <div style="color: var(--text-muted); font-size: 20px; text-decoration: line-through; opacity: 0.6;">€14.00</div>
+                            </div>
                             <div class="price-label">per test centre</div>
+                            <div style="color: var(--accent); font-size: 14px; font-weight: 600; margin-top: 8px;">
+                                🎄 Christmas Special - Save 29%
+                            </div>
                         </div>
 
                         <div class="trust-badge">
@@ -560,7 +532,7 @@
                         </div>
 
                         <button class="btn-unlock" id="unlockBtn" onclick="showPaymentForm()">
-                            Unlock Routes (€13.99)
+                            Unlock Routes (€9.99)
                         </button>
 
                         <div class="scarcity-trust">
@@ -589,13 +561,10 @@
                     </div>
 
                     <div class="visual-preview">
-                        <div class="map-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                                <circle cx="12" cy="10" r="3"/>
-                            </svg>
-                        </div>
-                        <p class="visual-preview-text">Route preview (visual representation)</p>
+                        <video controls autoplay muted loop class="route-preview-video">
+                            <source src="test.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
                 </div>
             </div>
