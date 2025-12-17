@@ -857,6 +857,7 @@
         { name: "Finglas", routes: 7 },
         { name: "Naas", routes: 7 },
         { name: "Tallaght", routes: 7 },
+        { name: "Test", routes: 1 },
         { name: "Wilton", routes: 6 },
     ];
 
@@ -903,7 +904,13 @@
 
     // Select a test centre
     async function selectCentre(centre) {
-        // Always check license status first
+        // Special handling for Test - NO LICENSE REQUIRED
+        if (centre.name === "Test") {
+            window.location.href = 'test-routes.html';
+            return;
+        }
+        
+        // Always check license status first for paid routes
         await checkLicenseStatus();
         
         // Debug: log the license status
