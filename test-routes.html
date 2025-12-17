@@ -189,9 +189,68 @@
         let accessToken = null;
         let routesData = null;
         let tokenExpiresAt = null;
+        let hasLicense = false;
+        let licenseExpiresAt = null;
 
-        // Initialize on page load - NO AUTHENTICATION OR LICENSE REQUIRED
+        // Get token from localStorage
+        const token = localStorage.getItem('auth_token');
+        if (!token) {
+            window.location.href = 'login.html';
+        }
+
+        // Check license status on page load
+        async function checkLicenseStatus() {
+            const token = localStorage.getItem('auth_token');
+            if (!token) {
+                hasLicense = false;
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/routes/license-status`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    hasLicense = data.hasLicense || false;
+                    licenseExpiresAt = data.expiresAt;
+                    
+                    // Double-check expiry even if API says hasLicense is true
+                    if (hasLicense && licenseExpiresAt) {
+                        const expiryDate = new Date(licenseExpiresAt);
+                        const now = new Date();
+                        if (expiryDate < now) {
+                            hasLicense = false;
+                        }
+                    }
+                } else {
+                    hasLicense = false;
+                }
+            } catch (err) {
+                console.error('Error checking license:', err);
+                hasLicense = false;
+            }
+        }
+
+        // All payment functionality moved to payment.html - redirect immediately
+        function showPaywall() {
+            window.location.href = 'payment.html';
+        }
+
+        // Initialize on page load
         window.addEventListener('DOMContentLoaded', async () => {
+            await checkLicenseStatus();
+            
+            // If no license, immediately redirect to payment (no confirm dialog)
+            if (!hasLicense) {
+                window.location.href = 'payment.html';
+                return;
+            }
+            
+            // User has premium access - load routes
             await loadRoutes();
         });
 
@@ -201,19 +260,36 @@
             const errorContainer = document.getElementById('errorContainer');
 
             try {
-                // Generate access token - NO AUTH REQUIRED
+                // Generate access token
                 const tokenResponse = await fetch(`${API_URL}/routes/generate-test-token`, {
-                    method: 'POST'
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
                 });
 
                 if (!tokenResponse.ok) {
                     const error = await tokenResponse.json();
-                    errorContainer.innerHTML = `
-                        <div class="error">
-                            <strong>Error</strong><br>
-                            ${error.error || 'Failed to generate access token'}
-                        </div>
-                    `;
+                    if (error.error && error.error.includes('license')) {
+                        await checkLicenseStatus();
+                        if (!hasLicense) {
+                            window.location.href = 'payment.html';
+                            return;
+                        }
+                        errorContainer.innerHTML = `
+                            <div class="error">
+                                <strong>Access Required</strong><br>
+                                You need an active license to view Test routes.
+                            </div>
+                        `;
+                    } else {
+                        errorContainer.innerHTML = `
+                            <div class="error">
+                                <strong>Error</strong><br>
+                                ${error.error || 'Failed to generate access token'}
+                            </div>
+                        `;
+                    }
                     loadingContainer.style.display = 'none';
                     return;
                 }
@@ -222,8 +298,12 @@
                 accessToken = tokenData.accessToken;
                 tokenExpiresAt = new Date(tokenData.expiresAt);
 
-                // Fetch route data - NO AUTH REQUIRED
-                const dataResponse = await fetch(`${API_URL}/routes/test-data/${accessToken}`);
+                // Fetch route data
+                const dataResponse = await fetch(`${API_URL}/routes/test-data/${accessToken}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
 
                 if (!dataResponse.ok) {
                     const error = await dataResponse.json();

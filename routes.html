@@ -904,13 +904,7 @@
 
     // Select a test centre
     async function selectCentre(centre) {
-        // Special handling for Test - NO LICENSE REQUIRED
-        if (centre.name === "Test") {
-            window.location.href = 'test-routes.html';
-            return;
-        }
-        
-        // Always check license status first for paid routes
+        // Always check license status first
         await checkLicenseStatus();
         
         // Debug: log the license status
@@ -949,6 +943,11 @@
         
         if (centre.name === "Finglas") {
             window.location.href = 'finglas-routes.html';
+            return;
+        }
+        
+        if (centre.name === "Test") {
+            window.location.href = 'test-routes.html';
             return;
         }
         
