@@ -854,6 +854,7 @@
     // Test centres data - sorted alphabetically
     const testCentres = [
         { name: "Dun Laoghaire", routes: 7 },
+        { name: "Finglas", routes: 7 },
         { name: "Naas", routes: 7 },
         { name: "Tallaght", routes: 7 },
         { name: "Wilton", routes: 6 },
@@ -936,6 +937,11 @@
         
         if (centre.name === "Wilton") {
             window.location.href = 'wilton-routes.html';
+            return;
+        }
+        
+        if (centre.name === "Finglas") {
+            window.location.href = 'finglas-routes.html';
             return;
         }
         
