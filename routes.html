@@ -814,15 +814,6 @@
                 <div class="centres-list" id="centresGrid"></div>
             </div>
 
-            <div class="selection-card routes-sidebar" style="margin-top: 24px;">
-                <div id="routesContainer" class="no-routes" style="display: none;">
-                    <h2 id="selectedCentreTitle" style="margin: 0 0 20px; font-size: 20px; font-weight: 700; color: var(--text-main);">Available Routes</h2>
-                    <div class="routes-grid" id="routesGrid"></div>
-                </div>
-                <div id="noSelection" style="text-align: center; padding: 40px; color: var(--text-muted);">
-                    <p style="margin: 0; font-size: 15px;">Select a test centre above to view available routes</p>
-                </div>
-            </div>
         </div>
 
         <!-- Right Column: New Routes Coming Card -->
@@ -1118,33 +1109,8 @@
             return;
         }
         
-        // For other centres, show routes directly on this page
-        selectedCentre = centre;
-        renderRoutes(centre);
-    }
-
-    // Render routes for selected centre
-    function renderRoutes(centre) {
-        const routesContainer = document.getElementById('routesContainer');
-        const routesGrid = document.getElementById('routesGrid');
-        const noSelection = document.getElementById('noSelection');
-        const selectedCentreTitle = document.getElementById('selectedCentreTitle');
-        
-        routesGrid.innerHTML = '';
-        
-        for (let i = 1; i <= centre.routes; i++) {
-            const routeCard = document.createElement('div');
-            routeCard.className = 'route-card';
-            routeCard.innerHTML = `<h3>Click a route</h3>`;
-            routeCard.addEventListener('click', (e) => handleRouteClick(centre, i, e));
-            routesGrid.appendChild(routeCard);
-        }
-        
-        selectedCentreTitle.textContent = `Routes for ${centre.name}`;
-        routesContainer.style.display = 'block';
-        if (noSelection) {
-            noSelection.style.display = 'none';
-        }
+        // All centres redirect to their dedicated pages
+        // If a centre doesn't have a redirect, it means it's not available yet
     }
 
 
