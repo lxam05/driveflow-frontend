@@ -674,6 +674,30 @@
         margin-top: 0;
         position: static;
         width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 300px;
+        gap: 40px;
+        align-items: start;
+    }
+
+    .why-our-routes-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .why-our-routes-video {
+        position: sticky;
+        top: 120px;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .why-our-routes-video video {
+        width: 100%;
+        height: auto;
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border-subtle);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
     }
 
     .why-our-routes h2 {
@@ -731,9 +755,24 @@
         font-size: 18px;
     }
 
+    @media (max-width: 1024px) {
+        .why-our-routes {
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        .why-our-routes-video {
+            position: static;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+    }
+
     @media (max-width: 768px) {
         .why-our-routes {
             padding: 24px;
+            grid-template-columns: 1fr;
+            gap: 20px;
         }
 
         .why-our-routes h2 {
@@ -747,6 +786,11 @@
         .why-our-routes p,
         .why-our-routes .route-steps li {
             font-size: 15px;
+        }
+
+        .why-our-routes-video {
+            position: static;
+            max-width: 100%;
         }
     }
 </style>
@@ -763,42 +807,51 @@
     <!-- Why Our Routes Work Section -->
     <div class="container-bottom">
         <div class="why-our-routes">
-            <h2>Why Our Routes Work</h2>
-            
-            <p>
-                Most driving test routes online are gimmicks — rough lines on a map that don't actually follow you when you drive.
-                Our routes are different. Every route is fully integrated with Google Maps, so turn-by-turn navigation tracks you perfectly in real time, just like normal GPS. No guessing. No drifting off route.
-            </p>
-            
-            <p>
-                There's no app to download. Just log in on your phone, tap the route, and drive.
-            </p>
-            
-            <p>
-                The platform is cheap, regularly updated, and designed for real learners who want to practice properly — not flashy features that don't help you pass.
-            </p>
+            <div class="why-our-routes-content">
+                <h2>Why Our Routes Work</h2>
+                
+                <p>
+                    Most driving test routes online are gimmicks — rough lines on a map that don't actually follow you when you drive.
+                    Our routes are different. Every route is fully integrated with Google Maps, so turn-by-turn navigation tracks you perfectly in real time, just like normal GPS. No guessing. No drifting off route.
+                </p>
+                
+                <p>
+                    There's no app to download. Just log in on your phone, tap the route, and drive.
+                </p>
+                
+                <p>
+                    The platform is cheap, regularly updated, and designed for real learners who want to practice properly — not flashy features that don't help you pass.
+                </p>
 
-            <h3>How the Routes Work</h3>
+                <h3>How the Routes Work</h3>
+                
+                <ul class="route-steps">
+                    <li>
+                        <strong>Purchase a route</strong><br>
+                        Once you buy a route, you get access for over 90 days — plenty of time to practice properly.
+                    </li>
+                    <li>
+                        <strong>Start a route anytime</strong><br>
+                        On your phone, open our website, log in, and tap the route you want to practice.<br>
+                        It opens instantly in Google Maps with full turn-by-turn navigation.
+                    </li>
+                    <li>
+                        <strong>Repeat until it's automatic</strong><br>
+                        Drive the routes as many times as you want until every junction, roundabout, and tricky section feels familiar.
+                    </li>
+                </ul>
+                
+                <p style="margin-top: 24px; font-weight: 600; color: var(--accent);">
+                    That's it. Simple, effective, and built to actually help you pass.
+                </p>
+            </div>
             
-            <ul class="route-steps">
-                <li>
-                    <strong>Purchase a route</strong><br>
-                    Once you buy a route, you get access for over 90 days — plenty of time to practice properly.
-                </li>
-                <li>
-                    <strong>Start a route anytime</strong><br>
-                    On your phone, open our website, log in, and tap the route you want to practice.<br>
-                    It opens instantly in Google Maps with full turn-by-turn navigation.
-                </li>
-                <li>
-                    <strong>Repeat until it's automatic</strong><br>
-                    Drive the routes as many times as you want until every junction, roundabout, and tricky section feels familiar.
-                </li>
-            </ul>
-            
-            <p style="margin-top: 24px; font-weight: 600; color: var(--accent);">
-                That's it. Simple, effective, and built to actually help you pass.
-            </p>
+            <div class="why-our-routes-video">
+                <video controls autoplay muted loop playsinline class="route-video">
+                    <source src="test.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
         </div>
     </div>
 
