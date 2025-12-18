@@ -819,6 +819,9 @@
                     <h2 id="selectedCentreTitle" style="margin: 0 0 20px; font-size: 20px; font-weight: 700; color: var(--text-main);">Available Routes</h2>
                     <div class="routes-grid" id="routesGrid"></div>
                 </div>
+                <div id="noSelection" style="text-align: center; padding: 40px; color: var(--text-muted);">
+                    <p style="margin: 0; font-size: 15px;">Select a test centre above to view available routes</p>
+                </div>
             </div>
         </div>
 
@@ -1139,7 +1142,9 @@
         
         selectedCentreTitle.textContent = `Routes for ${centre.name}`;
         routesContainer.style.display = 'block';
-        noSelection.style.display = 'none';
+        if (noSelection) {
+            noSelection.style.display = 'none';
+        }
     }
 
 
