@@ -431,8 +431,9 @@
         box-shadow: var(--shadow-card);
         padding: 32px;
         margin-bottom: 24px;
-        position: relative;
+        position: static;
         overflow: hidden;
+        width: 100%;
     }
 
     .new-routes-card::before {
@@ -730,47 +731,8 @@
 </head>
 <body>
 
-<div class="container">
-    <div class="page-header">
-        <h1>Test Routes</h1>
-        <p>Practice the actual routes used in driving tests at each centre</p>
-    </div>
-
-
-    <div class="selection-card">
-        <h2>Select Test Centre</h2>
-        <div class="search-box">
-            <input type="text" class="search-input" id="centreSearch" placeholder="Search for a test centre..." autocomplete="off">
-        </div>
-        <div class="centres-list" id="centresGrid"></div>
-    </div>
-
-    <div class="selection-card routes-sidebar">
-        <div id="routesContainer" class="no-routes" style="display: none;">
-            <h2 id="selectedCentreTitle" style="margin: 0 0 20px; font-size: 20px; font-weight: 700; color: var(--text-main);">Available Routes</h2>
-            <div class="routes-grid" id="routesGrid"></div>
-        </div>
-        <div class="new-routes-card">
-            <h2>🚀 New Routes Coming Next Week!</h2>
-            <p>We're adding <span class="highlight">new test centre routes</span> next week. Tell us which routes you want to see first!</p>
-            <form id="routeRequestForm" class="route-request-form">
-                <div class="route-request-group">
-                    <label for="routeRequestCentre">Which test centre route would you like?</label>
-                    <input type="text" id="routeRequestCentre" class="route-request-input" placeholder="e.g., Cork, Galway, Limerick" required>
-                </div>
-                <div class="route-request-group">
-                    <label for="routeRequestEmail">Your Email</label>
-                    <input type="email" id="routeRequestEmail" class="route-request-input" placeholder="your.email@example.com" required>
-                </div>
-                <button type="submit" class="route-request-submit">Submit Request</button>
-            </form>
-            <div id="routeRequestMessage" class="route-request-message"></div>
-        </div>
-    </div>
-</div>
-
     <!-- Why Our Routes Work Section -->
-    <div class="container-bottom">
+    <div class="container-bottom" style="margin-top: 96px;">
         <div class="why-our-routes">
             <h2>Why Our Routes Work</h2>
             
@@ -808,6 +770,49 @@
             <p style="margin-top: 24px; font-weight: 600; color: var(--accent);">
                 That's it. Simple, effective, and built to actually help you pass.
             </p>
+        </div>
+    </div>
+
+<div class="container">
+    <div class="page-header">
+        <h1>Test Routes</h1>
+        <p>Practice the actual routes used in driving tests at each centre</p>
+    </div>
+
+
+    <div class="selection-card">
+        <h2>Select Test Centre</h2>
+        <div class="search-box">
+            <input type="text" class="search-input" id="centreSearch" placeholder="Search for a test centre..." autocomplete="off">
+        </div>
+        <div class="centres-list" id="centresGrid"></div>
+    </div>
+
+    <div class="selection-card routes-sidebar">
+        <div id="routesContainer" class="no-routes" style="display: none;">
+            <h2 id="selectedCentreTitle" style="margin: 0 0 20px; font-size: 20px; font-weight: 700; color: var(--text-main);">Available Routes</h2>
+            <div class="routes-grid" id="routesGrid"></div>
+        </div>
+    </div>
+</div>
+
+    <!-- New Routes Coming Card -->
+    <div class="container-bottom">
+        <div class="new-routes-card">
+            <h2>🚀 New Routes Coming Next Week!</h2>
+            <p>We're adding <span class="highlight">new test centre routes</span> next week. Tell us which routes you want to see first!</p>
+            <form id="routeRequestForm" class="route-request-form">
+                <div class="route-request-group">
+                    <label for="routeRequestCentre">Which test centre route would you like?</label>
+                    <input type="text" id="routeRequestCentre" class="route-request-input" placeholder="e.g., Cork, Galway, Limerick" required>
+                </div>
+                <div class="route-request-group">
+                    <label for="routeRequestEmail">Your Email</label>
+                    <input type="email" id="routeRequestEmail" class="route-request-input" placeholder="your.email@example.com" required>
+                </div>
+                <button type="submit" class="route-request-submit">Submit Request</button>
+            </form>
+            <div id="routeRequestMessage" class="route-request-message"></div>
         </div>
     </div>
 
