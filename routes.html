@@ -75,6 +75,22 @@
         padding: 0 20px 40px;
     }
 
+    .two-column-container {
+        max-width: 1400px;
+        margin: 0 auto 40px;
+        padding: 0 20px 40px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        align-items: start;
+    }
+
+    @media (max-width: 1024px) {
+        .two-column-container {
+            grid-template-columns: 1fr;
+        }
+    }
+
     @media (max-width: 1024px) {
         .container {
             grid-template-columns: 1fr;
@@ -283,6 +299,12 @@
         max-height: calc(100vh - 140px);
         overflow-y: auto;
         will-change: transform;
+    }
+
+    .two-column-container .routes-sidebar {
+        position: static;
+        max-height: none;
+        overflow-y: visible;
     }
     
     /* Ensure the selection-card inside routes-sidebar doesn't interfere */
@@ -731,8 +753,15 @@
 </head>
 <body>
 
+<div class="container-bottom" style="margin-top: 96px;">
+    <div class="page-header">
+        <h1>Test Routes</h1>
+        <p>Practice the actual routes used in driving tests at each centre</p>
+    </div>
+</div>
+
     <!-- Why Our Routes Work Section -->
-    <div class="container-bottom" style="margin-top: 96px;">
+    <div class="container-bottom">
         <div class="why-our-routes">
             <h2>Why Our Routes Work</h2>
             
@@ -773,54 +802,51 @@
         </div>
     </div>
 
-<div class="container">
-    <div class="page-header">
-        <h1>Test Routes</h1>
-        <p>Practice the actual routes used in driving tests at each centre</p>
-    </div>
-
-
-    <div class="selection-card">
-        <h2>Select Test Centre</h2>
-        <div class="search-box">
-            <input type="text" class="search-input" id="centreSearch" placeholder="Search for a test centre..." autocomplete="off">
-        </div>
-        <div class="centres-list" id="centresGrid"></div>
-    </div>
-
-    <div class="selection-card routes-sidebar">
-        <div id="routesContainer" class="no-routes" style="display: none;">
-            <h2 id="selectedCentreTitle" style="margin: 0 0 20px; font-size: 20px; font-weight: 700; color: var(--text-main);">Available Routes</h2>
-            <div class="routes-grid" id="routesGrid"></div>
-        </div>
-    </div>
-</div>
-
-    <!-- New Routes Coming Card -->
-    <div class="container-bottom">
-        <div class="new-routes-card">
-            <h2>🚀 New Routes Coming Next Week!</h2>
-            <p>We're adding <span class="highlight">new test centre routes</span> next week. Tell us which routes you want to see first!</p>
-            <form id="routeRequestForm" class="route-request-form">
-                <div class="route-request-group">
-                    <label for="routeRequestCentre">Which test centre route would you like?</label>
-                    <input type="text" id="routeRequestCentre" class="route-request-input" placeholder="e.g., Cork, Galway, Limerick" required>
+    <!-- Two Column Layout: Routes on Left, New Routes Card on Right -->
+    <div class="two-column-container">
+        <!-- Left Column: Routes -->
+        <div>
+            <div class="selection-card">
+                <h2>Select Test Centre</h2>
+                <div class="search-box">
+                    <input type="text" class="search-input" id="centreSearch" placeholder="Search for a test centre..." autocomplete="off">
                 </div>
-                <div class="route-request-group">
-                    <label for="routeRequestEmail">Your Email</label>
-                    <input type="email" id="routeRequestEmail" class="route-request-input" placeholder="your.email@example.com" required>
+                <div class="centres-list" id="centresGrid"></div>
+            </div>
+
+            <div class="selection-card routes-sidebar" style="margin-top: 24px;">
+                <div id="routesContainer" class="no-routes" style="display: none;">
+                    <h2 id="selectedCentreTitle" style="margin: 0 0 20px; font-size: 20px; font-weight: 700; color: var(--text-main);">Available Routes</h2>
+                    <div class="routes-grid" id="routesGrid"></div>
                 </div>
-                <button type="submit" class="route-request-submit">Submit Request</button>
-            </form>
-            <div id="routeRequestMessage" class="route-request-message"></div>
+            </div>
+        </div>
+
+        <!-- Right Column: New Routes Coming Card -->
+        <div>
+            <div class="new-routes-card">
+                <h2>🚀 New Routes Coming Next Week!</h2>
+                <p>We're adding <span class="highlight">new test centre routes</span> next week. Tell us which routes you want to see first!</p>
+                <form id="routeRequestForm" class="route-request-form">
+                    <div class="route-request-group">
+                        <label for="routeRequestCentre">Which test centre route would you like?</label>
+                        <input type="text" id="routeRequestCentre" class="route-request-input" placeholder="e.g., Cork, Galway, Limerick" required>
+                    </div>
+                    <div class="route-request-group">
+                        <label for="routeRequestEmail">Your Email</label>
+                        <input type="email" id="routeRequestEmail" class="route-request-input" placeholder="your.email@example.com" required>
+                    </div>
+                    <button type="submit" class="route-request-submit">Submit Request</button>
+                </form>
+                <div id="routeRequestMessage" class="route-request-message"></div>
+            </div>
         </div>
     </div>
 
-<div class="container" style="margin-top: 0; padding-top: 0;">
-    <div style="text-align: center; grid-column: 1 / -1; margin-top: 20px;">
+    <!-- Back to Home Button -->
+    <div class="container-bottom" style="text-align: center; padding-top: 0;">
         <a href="index.html" class="btn-back" id="backToHome">← Back to Home</a>
     </div>
-</div>
 
 <!-- Paywall Modal - REMOVED: All payment functionality moved to payment.html -->
 
