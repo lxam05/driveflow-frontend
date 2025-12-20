@@ -677,9 +677,15 @@
         position: static;
         width: 100%;
         display: grid;
-        grid-template-columns: 1fr 300px;
+        grid-template-columns: 1fr;
         gap: 40px;
         align-items: start;
+    }
+    
+    @media (min-width: 1025px) {
+        .why-our-routes {
+            padding-right: 340px; /* Add padding to prevent content from going under fixed video */
+        }
     }
 
     .why-our-routes-content {
@@ -688,10 +694,25 @@
     }
 
     .why-our-routes-video {
-        position: sticky;
+        position: fixed;
         top: 120px;
-        width: 100%;
+        right: 20px;
+        width: 300px;
         max-width: 300px;
+        z-index: 10;
+    }
+    
+    @media (max-width: 1024px) {
+        .why-our-routes-video {
+            position: static;
+            width: 100%;
+            max-width: 100%;
+            margin: 24px auto 0;
+        }
+        
+        .why-our-routes {
+            padding-right: 40px; /* Reset padding on mobile */
+        }
     }
 
     .why-our-routes-video video {
@@ -757,18 +778,6 @@
         font-size: 18px;
     }
 
-    @media (max-width: 1024px) {
-        .why-our-routes {
-            grid-template-columns: 1fr;
-            gap: 24px;
-        }
-
-        .why-our-routes-video {
-            position: static;
-            max-width: 100%;
-            margin: 0 auto;
-        }
-    }
 
     @media (max-width: 768px) {
         .why-our-routes {
