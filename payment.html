@@ -515,13 +515,16 @@
                             </select>
                         </div>
 
-                        <div class="price-info">
+                        <div class="price-info" id="priceInfo">
                             <div style="display: flex; align-items: baseline; justify-content: center; gap: 12px; margin-bottom: 8px;">
-                                <div class="price" style="margin: 0;">€9.99</div>
-                                <div style="color: var(--text-muted); font-size: 20px; text-decoration: line-through; opacity: 0.6;">€14.00</div>
+                                <div class="price" id="currentPrice" style="margin: 0;">€9.99</div>
+                                <div id="originalPrice" style="color: var(--text-muted); font-size: 20px; text-decoration: line-through; opacity: 0.6; display: none;">€14.00</div>
                             </div>
                             <div class="price-label">per test centre</div>
-                            <div style="color: var(--accent); font-size: 14px; font-weight: 600; margin-top: 8px;">
+                            <div id="discountMessage" style="color: var(--accent); font-size: 14px; font-weight: 600; margin-top: 8px; display: none;">
+                                🎉 50% Off - Returning Customer Discount!
+                            </div>
+                            <div id="christmasMessage" style="color: var(--accent); font-size: 14px; font-weight: 600; margin-top: 8px;">
                                 🎄 Christmas Special - Save 29%
                             </div>
                         </div>
@@ -670,7 +673,86 @@
     }
 
     // Load centres when page loads
-    window.addEventListener('DOMContentLoaded', loadTestCentres);
+    window.addEventListener('DOMContentLoaded', () => {
+        loadTestCentres();
+        
+        // Add event listener to check discount when centre is selected
+        const select = document.getElementById('testCentreSelect');
+        if (select) {
+            select.addEventListener('change', checkDiscount);
+        }
+    });
+    
+    // Check discount eligibility when centre is selected
+    async function checkDiscount() {
+        const select = document.getElementById('testCentreSelect');
+        const centreName = select.value;
+        
+        if (!centreName) {
+            // Reset to default price
+            updatePriceDisplay(999, false);
+            return;
+        }
+        
+        const token = localStorage.getItem('auth_token');
+        if (!token) {
+            return;
+        }
+        
+        try {
+            const response = await fetch(`${API_URL}/routes/check-discount/${encodeURIComponent(centreName)}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            
+            if (response.ok) {
+                const data = await response.json();
+                if (data.eligible) {
+                    updatePriceDisplay(data.discountedPrice, true, data.originalPrice);
+                } else {
+                    updatePriceDisplay(data.originalPrice || 999, false);
+                }
+            } else {
+                // Default to regular price on error
+                updatePriceDisplay(999, false);
+            }
+        } catch (err) {
+            console.error('Error checking discount:', err);
+            updatePriceDisplay(999, false);
+        }
+    }
+    
+    // Update price display
+    function updatePriceDisplay(priceInCents, hasDiscount, originalPriceInCents = null) {
+        const priceElement = document.getElementById('currentPrice');
+        const originalPriceElement = document.getElementById('originalPrice');
+        const discountMessage = document.getElementById('discountMessage');
+        const christmasMessage = document.getElementById('christmasMessage');
+        const unlockBtn = document.getElementById('unlockBtn');
+        
+        if (!priceElement) return;
+        
+        const price = (priceInCents / 100).toFixed(2);
+        priceElement.textContent = `€${price}`;
+        
+        if (hasDiscount && originalPriceInCents) {
+            const originalPrice = (originalPriceInCents / 100).toFixed(2);
+            originalPriceElement.textContent = `€${originalPrice}`;
+            originalPriceElement.style.display = 'block';
+            if (discountMessage) discountMessage.style.display = 'block';
+            if (christmasMessage) christmasMessage.style.display = 'none';
+        } else {
+            if (originalPriceElement) originalPriceElement.style.display = 'none';
+            if (discountMessage) discountMessage.style.display = 'none';
+            if (christmasMessage) christmasMessage.style.display = 'block';
+        }
+        
+        // Update button text
+        if (unlockBtn) {
+            unlockBtn.textContent = `Unlock Routes (€${price})`;
+        }
+    }
 
     function hidePaymentForm() {
         // Slide payment panel out and main content back
@@ -752,6 +834,16 @@
             }
 
             currentPaymentIntentId = data.paymentIntentId;
+            
+            // Update price display if discount was applied
+            if (data.discountApplied && data.finalPrice) {
+                updatePriceDisplay(data.finalPrice, true, data.originalPrice);
+            }
+            
+            // Update price display if discount was applied
+            if (data.discountApplied && data.finalPrice) {
+                updatePriceDisplay(data.finalPrice, true, data.originalPrice);
+            }
 
             // Create payment element
             elements = stripe.elements({
