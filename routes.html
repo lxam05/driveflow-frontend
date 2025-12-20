@@ -1066,6 +1066,7 @@
         { name: "Naas", routes: 7 },
         { name: "Raheny", routes: 5 },
         { name: "Tallaght", routes: 7 },
+        { name: "Westside", routes: 7 },
         { name: "Wilton", routes: 6 },
     ];
 
@@ -1161,6 +1162,11 @@
         
         if (centre.name === "Mulhuddart") {
             window.location.href = 'mulhuddart-routes.html';
+            return;
+        }
+        
+        if (centre.name === "Westside") {
+            window.location.href = 'westside-routes.html';
             return;
         }
         
