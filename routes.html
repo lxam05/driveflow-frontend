@@ -1079,6 +1079,7 @@
     const testCentres = [
         { name: "Dun Laoghaire", routes: 7 },
         { name: "Finglas", routes: 7 },
+        { name: "Loughrea", routes: 5 },
         { name: "Mulhuddart", routes: 5 },
         { name: "Naas", routes: 7 },
         { name: "Raheny", routes: 5 },
@@ -1184,6 +1185,11 @@
         
         if (centre.name === "Westside") {
             window.location.href = 'westside-routes.html';
+            return;
+        }
+        
+        if (centre.name === "Loughrea") {
+            window.location.href = 'loughrea-routes.html';
             return;
         }
         
