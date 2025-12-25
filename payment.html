@@ -260,6 +260,30 @@
         color: var(--text-main);
     }
 
+    .package-btn {
+        flex: 1;
+        padding: 20px;
+        border-radius: 12px;
+        border: 2px solid var(--border-subtle);
+        background: rgba(15, 23, 42, 0.4);
+        color: var(--text-main);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-align: center;
+    }
+
+    .package-btn:hover {
+        border-color: var(--primary);
+        background: var(--primary-soft);
+        transform: translateY(-2px);
+    }
+
+    .package-btn.active {
+        border-color: var(--accent);
+        background: var(--accent-soft);
+        box-shadow: 0 0 0 3px rgba(111, 255, 233, 0.2);
+    }
+
     .trust-badge {
         display: flex;
         align-items: center;
@@ -509,10 +533,41 @@
                         </ul>
 
                         <div class="form-group">
+                            <label>Choose Your Package</label>
+                            <div style="display: flex; gap: 12px; margin-bottom: 20px;">
+                                <button type="button" id="singlePackageBtn" class="package-btn active" onclick="selectPackage('single')">
+                                    <div style="font-weight: 700; font-size: 18px;">Single Centre</div>
+                                    <div style="font-size: 24px; font-weight: 800; color: var(--accent); margin: 8px 0;">€9.99</div>
+                                    <div style="font-size: 13px; color: var(--text-muted);">1 test centre</div>
+                                </button>
+                                <button type="button" id="bundlePackageBtn" class="package-btn" onclick="selectPackage('bundle')">
+                                    <div style="font-weight: 700; font-size: 18px;">Bundle Deal</div>
+                                    <div style="font-size: 24px; font-weight: 800; color: var(--accent); margin: 8px 0;">€18.99</div>
+                                    <div style="font-size: 13px; color: var(--text-muted);">3 test centres</div>
+                                    <div style="font-size: 12px; color: var(--accent); margin-top: 4px; font-weight: 600;">Save €10.98</div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="singleCentreGroup">
                             <label for="testCentreSelect">Select Test Centre</label>
-                            <select id="testCentreSelect" class="test-centre-select" required>
+                            <select id="testCentreSelect" class="test-centre-select">
                                 <option value="">-- Choose a test centre --</option>
                             </select>
+                        </div>
+
+                        <div class="form-group" id="bundleCentresGroup" style="display: none;">
+                            <label>Select 3 Test Centres</label>
+                            <select id="bundleCentre1" class="test-centre-select" style="margin-bottom: 12px;">
+                                <option value="">-- Choose first centre --</option>
+                            </select>
+                            <select id="bundleCentre2" class="test-centre-select" style="margin-bottom: 12px;">
+                                <option value="">-- Choose second centre --</option>
+                            </select>
+                            <select id="bundleCentre3" class="test-centre-select">
+                                <option value="">-- Choose third centre --</option>
+                            </select>
+                            <p id="bundleError" style="color: #ef4444; font-size: 13px; margin-top: 8px; display: none;">Please select 3 different test centres</p>
                         </div>
 
                         <div class="price-info" id="priceInfo">
@@ -520,11 +575,11 @@
                                 <div class="price" id="currentPrice" style="margin: 0;">€9.99</div>
                                 <div id="originalPrice" style="color: var(--text-muted); font-size: 20px; text-decoration: line-through; opacity: 0.6; display: none;">€14.00</div>
                             </div>
-                            <div class="price-label">per test centre</div>
+                            <div class="price-label" id="priceLabel">per test centre</div>
                             <div id="discountMessage" style="color: var(--accent); font-size: 14px; font-weight: 600; margin-top: 8px; display: none;">
                                 🎉 50% Off - Returning Customer Discount!
                             </div>
-                            <div id="christmasMessage" style="color: var(--accent); font-size: 14px; font-weight: 600; margin-top: 8px;">
+                            <div id="christmasMessage" style="color: var(--accent); font-size: 14px; font-weight: 600; margin-top: 8px; display: none;">
                                 🎄 Christmas Special - Save 29%
                             </div>
                         </div>
@@ -623,6 +678,42 @@
     let currentPaymentIntentId = null;
     let paymentInitialized = false;
     let selectedCentre = null;
+    let selectedCentres = [];
+    let currentPackage = 'single'; // 'single' or 'bundle'
+
+    // Package selection
+    function selectPackage(packageType) {
+        currentPackage = packageType;
+        const singleBtn = document.getElementById('singlePackageBtn');
+        const bundleBtn = document.getElementById('bundlePackageBtn');
+        const singleGroup = document.getElementById('singleCentreGroup');
+        const bundleGroup = document.getElementById('bundleCentresGroup');
+        const priceInfo = document.getElementById('priceInfo');
+        const priceLabel = document.getElementById('priceLabel');
+        const unlockBtn = document.getElementById('unlockBtn');
+
+        if (packageType === 'single') {
+            singleBtn.classList.add('active');
+            bundleBtn.classList.remove('active');
+            singleGroup.style.display = 'block';
+            bundleGroup.style.display = 'none';
+            document.getElementById('currentPrice').textContent = '€9.99';
+            priceLabel.textContent = 'per test centre';
+            unlockBtn.textContent = 'Unlock Routes (€9.99)';
+        } else {
+            bundleBtn.classList.add('active');
+            singleBtn.classList.remove('active');
+            singleGroup.style.display = 'none';
+            bundleGroup.style.display = 'block';
+            document.getElementById('currentPrice').textContent = '€18.99';
+            priceLabel.textContent = 'for 3 test centres';
+            unlockBtn.textContent = 'Unlock Bundle (€18.99)';
+        }
+        
+        // Hide discount messages when switching packages
+        document.getElementById('discountMessage').style.display = 'none';
+        document.getElementById('christmasMessage').style.display = 'none';
+    }
 
     // Load test centres on page load
     async function loadTestCentres() {
@@ -631,11 +722,24 @@
             if (response.ok) {
                 const data = await response.json();
                 const select = document.getElementById('testCentreSelect');
+                const bundle1 = document.getElementById('bundleCentre1');
+                const bundle2 = document.getElementById('bundleCentre2');
+                const bundle3 = document.getElementById('bundleCentre3');
+                
                 data.centres.forEach(centre => {
+                    // Add to single select
                     const option = document.createElement('option');
                     option.value = centre;
                     option.textContent = centre;
                     select.appendChild(option);
+                    
+                    // Add to bundle selects
+                    [bundle1, bundle2, bundle3].forEach(bundleSelect => {
+                        const bundleOption = document.createElement('option');
+                        bundleOption.value = centre;
+                        bundleOption.textContent = centre;
+                        bundleSelect.appendChild(bundleOption);
+                    });
                 });
             } else {
                 console.error('Failed to load test centres');
@@ -653,11 +757,27 @@
                     "Ballincollig"
                 ];
                 const select = document.getElementById('testCentreSelect');
+                const bundle1 = document.getElementById('bundleCentre1');
+                const bundle2 = document.getElementById('bundleCentre2');
+                const bundle3 = document.getElementById('bundleCentre3');
+                
+                [select, bundle1, bundle2, bundle3].forEach(sel => {
+                    sel.innerHTML = sel === select 
+                        ? '<option value="">-- Choose a test centre --</option>'
+                        : sel === bundle1 
+                            ? '<option value="">-- Choose first centre --</option>'
+                            : sel === bundle2
+                                ? '<option value="">-- Choose second centre --</option>'
+                                : '<option value="">-- Choose third centre --</option>';
+                });
+                
                 fallbackCentres.forEach(centre => {
-                    const option = document.createElement('option');
-                    option.value = centre;
-                    option.textContent = centre;
-                    select.appendChild(option);
+                    [select, bundle1, bundle2, bundle3].forEach(sel => {
+                        const option = document.createElement('option');
+                        option.value = centre;
+                        option.textContent = centre;
+                        sel.appendChild(option);
+                    });
                 });
             }
         } catch (err) {
@@ -676,12 +796,27 @@
                 "Ballincollig"
             ];
             const select = document.getElementById('testCentreSelect');
-            select.innerHTML = '<option value="">-- Choose a test centre --</option>';
+            const bundle1 = document.getElementById('bundleCentre1');
+            const bundle2 = document.getElementById('bundleCentre2');
+            const bundle3 = document.getElementById('bundleCentre3');
+            
+            [select, bundle1, bundle2, bundle3].forEach(sel => {
+                sel.innerHTML = sel === select 
+                    ? '<option value="">-- Choose a test centre --</option>'
+                    : sel === bundle1 
+                        ? '<option value="">-- Choose first centre --</option>'
+                        : sel === bundle2
+                            ? '<option value="">-- Choose second centre --</option>'
+                            : '<option value="">-- Choose third centre --</option>';
+            });
+            
             fallbackCentres.forEach(centre => {
-                const option = document.createElement('option');
-                option.value = centre;
-                option.textContent = centre;
-                select.appendChild(option);
+                [select, bundle1, bundle2, bundle3].forEach(sel => {
+                    const option = document.createElement('option');
+                    option.value = centre;
+                    option.textContent = centre;
+                    sel.appendChild(option);
+                });
             });
         }
     }
@@ -690,15 +825,34 @@
     window.addEventListener('DOMContentLoaded', () => {
         loadTestCentres();
         
-        // Add event listener to check discount when centre is selected
+        // Add event listener to check discount when centre is selected (single only)
         const select = document.getElementById('testCentreSelect');
         if (select) {
             select.addEventListener('change', checkDiscount);
         }
+        
+        // Clear bundle errors when centres are selected
+        const bundle1 = document.getElementById('bundleCentre1');
+        const bundle2 = document.getElementById('bundleCentre2');
+        const bundle3 = document.getElementById('bundleCentre3');
+        const bundleError = document.getElementById('bundleError');
+        
+        [bundle1, bundle2, bundle3].forEach(sel => {
+            if (sel) {
+                sel.addEventListener('change', () => {
+                    if (bundleError) bundleError.style.display = 'none';
+                });
+            }
+        });
     });
     
-    // Check discount eligibility when centre is selected
+    // Check discount eligibility when centre is selected (only for single purchases)
     async function checkDiscount() {
+        // Don't check discount for bundle packages
+        if (currentPackage === 'bundle') {
+            return;
+        }
+        
         const select = document.getElementById('testCentreSelect');
         const centreName = select.value;
         
@@ -744,27 +898,34 @@
         const discountMessage = document.getElementById('discountMessage');
         const christmasMessage = document.getElementById('christmasMessage');
         const unlockBtn = document.getElementById('unlockBtn');
+        const priceLabel = document.getElementById('priceLabel');
         
         if (!priceElement) return;
         
         const price = (priceInCents / 100).toFixed(2);
         priceElement.textContent = `€${price}`;
         
-        if (hasDiscount && originalPriceInCents) {
-            const originalPrice = (originalPriceInCents / 100).toFixed(2);
-            originalPriceElement.textContent = `€${originalPrice}`;
-            originalPriceElement.style.display = 'block';
-            if (discountMessage) discountMessage.style.display = 'block';
-            if (christmasMessage) christmasMessage.style.display = 'none';
-        } else {
+        // Update based on package type
+        if (currentPackage === 'bundle') {
+            if (priceLabel) priceLabel.textContent = 'for 3 test centres';
+            if (unlockBtn) unlockBtn.textContent = `Unlock Bundle (€${price})`;
             if (originalPriceElement) originalPriceElement.style.display = 'none';
             if (discountMessage) discountMessage.style.display = 'none';
-            if (christmasMessage) christmasMessage.style.display = 'block';
-        }
-        
-        // Update button text
-        if (unlockBtn) {
-            unlockBtn.textContent = `Unlock Routes (€${price})`;
+            if (christmasMessage) christmasMessage.style.display = 'none';
+        } else {
+            if (priceLabel) priceLabel.textContent = 'per test centre';
+            if (hasDiscount && originalPriceInCents) {
+                const originalPrice = (originalPriceInCents / 100).toFixed(2);
+                originalPriceElement.textContent = `€${originalPrice}`;
+                originalPriceElement.style.display = 'block';
+                if (discountMessage) discountMessage.style.display = 'block';
+                if (christmasMessage) christmasMessage.style.display = 'none';
+            } else {
+                if (originalPriceElement) originalPriceElement.style.display = 'none';
+                if (discountMessage) discountMessage.style.display = 'none';
+                if (christmasMessage) christmasMessage.style.display = 'block';
+            }
+            if (unlockBtn) unlockBtn.textContent = `Unlock Routes (€${price})`;
         }
     }
 
@@ -776,14 +937,40 @@
     }
 
     async function showPaymentForm() {
-        // Get selected test centre
-        const select = document.getElementById('testCentreSelect');
-        selectedCentre = select.value;
-        
-        if (!selectedCentre) {
-            alert('Please select a test centre first');
-            select.focus();
-            return;
+        // Validate selection based on package type
+        if (currentPackage === 'single') {
+            const select = document.getElementById('testCentreSelect');
+            selectedCentre = select.value;
+            selectedCentres = [];
+            
+            if (!selectedCentre) {
+                alert('Please select a test centre first');
+                select.focus();
+                return;
+            }
+        } else {
+            // Bundle package
+            const centre1 = document.getElementById('bundleCentre1').value;
+            const centre2 = document.getElementById('bundleCentre2').value;
+            const centre3 = document.getElementById('bundleCentre3').value;
+            const bundleError = document.getElementById('bundleError');
+            
+            if (!centre1 || !centre2 || !centre3) {
+                bundleError.textContent = 'Please select all 3 test centres';
+                bundleError.style.display = 'block';
+                return;
+            }
+            
+            // Check for duplicates
+            if (centre1 === centre2 || centre1 === centre3 || centre2 === centre3) {
+                bundleError.textContent = 'Please select 3 different test centres';
+                bundleError.style.display = 'block';
+                return;
+            }
+            
+            bundleError.style.display = 'none';
+            selectedCentres = [centre1, centre2, centre3];
+            selectedCentre = null;
         }
 
         // Slide main content left and payment panel in
@@ -819,16 +1006,18 @@
             const keyData = await keyResponse.json();
             stripe = Stripe(keyData.publishableKey);
 
-            // Create payment intent with selected centre
+            // Create payment intent with selected centre(s)
+            const requestBody = currentPackage === 'single' 
+                ? { centreName: selectedCentre, packageType: 'single' }
+                : { centreNames: selectedCentres, packageType: 'bundle' };
+            
             const response = await fetch(`${API_URL}/routes/create-payment-intent`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify({
-                    centreName: selectedCentre
-                })
+                body: JSON.stringify(requestBody)
             });
 
             if (!response.ok) {
@@ -849,13 +1038,10 @@
 
             currentPaymentIntentId = data.paymentIntentId;
             
-            // Update price display if discount was applied
-            if (data.discountApplied && data.finalPrice) {
-                updatePriceDisplay(data.finalPrice, true, data.originalPrice);
-            }
-            
-            // Update price display if discount was applied
-            if (data.discountApplied && data.finalPrice) {
+            // Update price display if discount was applied (only for single purchases)
+            if (data.packageType === 'bundle') {
+                updatePriceDisplay(1899, false);
+            } else if (data.discountApplied && data.finalPrice) {
                 updatePriceDisplay(data.finalPrice, true, data.originalPrice);
             }
 
