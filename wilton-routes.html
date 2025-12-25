@@ -85,6 +85,74 @@
         font-size: 16px;
     }
 
+    .info-section {
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 40px;
+        margin-bottom: 40px;
+    }
+
+    .info-section h2 {
+        margin: 0 0 24px;
+        color: var(--accent);
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+    }
+
+    .info-section h3 {
+        margin: 32px 0 16px;
+        color: var(--text-main);
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .info-section h3:first-of-type {
+        margin-top: 0;
+    }
+
+    .info-section p {
+        margin: 0 0 16px;
+        color: var(--text-main);
+        font-size: 16px;
+        line-height: 1.7;
+    }
+
+    .info-section p:last-child {
+        margin-bottom: 0;
+    }
+
+    .info-section .bottom-line {
+        margin-top: 32px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border-subtle);
+    }
+
+    .info-section .bottom-line p {
+        font-weight: 600;
+        color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+        .info-section {
+            padding: 24px;
+        }
+
+        .info-section h2 {
+            font-size: 24px;
+        }
+
+        .info-section h3 {
+            font-size: 18px;
+        }
+
+        .info-section p {
+            font-size: 15px;
+        }
+    }
+
     .routes-container {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -215,6 +283,33 @@
         <div class="page-header">
             <h1>Wilton Test Routes</h1>
             <p>Access detailed route information for the Wilton test centre</p>
+        </div>
+
+        <div class="info-section">
+            <h2>What to Watch Out For in the Wilton Driving Test</h2>
+            
+            <h3>1. Heavy traffic & pressure driving</h3>
+            <p>Wilton is busy. Hospital traffic, buses, pedestrians, and constant movement mean you're tested on decision-making under pressure. Hesitation or blocking traffic gets marked.</p>
+            
+            <h3>2. Big junctions & lane discipline</h3>
+            <p>Multi-lane junctions and roundabouts are common. Late lane choice, drifting lanes, or weak positioning shows immediately.</p>
+            
+            <h3>3. Speed control (very easy to slip)</h3>
+            <p>Speed limits change quickly between residential roads and main routes. Creeping over — especially downhill or after junctions — racks up faults fast.</p>
+            
+            <h3>4. Observation at junctions</h3>
+            <p>There are several awkward or busy junctions. Full stops where required, clear head movement, and clean pull-outs matter. Guessing gets punished.</p>
+            
+            <h3>5. Manoeuvres in real traffic</h3>
+            <p>Reverse around a corner or turnabout is likely and often done where traffic is nearby. Poor observation or kerbing stands out fast.</p>
+            
+            <h3>6. Pedestrians & cyclists</h3>
+            <p>Between the hospital and nearby estates, vulnerable road users are everywhere. Missing one is a serious fault.</p>
+            
+            <div class="bottom-line">
+                <p>Bottom line</p>
+                <p>Wilton fails people on traffic management, lane discipline, and observation under pressure. You don't pass by being slow — you pass by being calm, decisive, and precise.</p>
+            </div>
         </div>
 
         <div id="errorContainer"></div>

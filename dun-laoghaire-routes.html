@@ -85,6 +85,74 @@
         font-size: 16px;
     }
 
+    .info-section {
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 40px;
+        margin-bottom: 40px;
+    }
+
+    .info-section h2 {
+        margin: 0 0 24px;
+        color: var(--accent);
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+    }
+
+    .info-section h3 {
+        margin: 32px 0 16px;
+        color: var(--text-main);
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .info-section h3:first-of-type {
+        margin-top: 0;
+    }
+
+    .info-section p {
+        margin: 0 0 16px;
+        color: var(--text-main);
+        font-size: 16px;
+        line-height: 1.7;
+    }
+
+    .info-section p:last-child {
+        margin-bottom: 0;
+    }
+
+    .info-section .bottom-line {
+        margin-top: 32px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border-subtle);
+    }
+
+    .info-section .bottom-line p {
+        font-weight: 600;
+        color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+        .info-section {
+            padding: 24px;
+        }
+
+        .info-section h2 {
+            font-size: 24px;
+        }
+
+        .info-section h3 {
+            font-size: 18px;
+        }
+
+        .info-section p {
+            font-size: 15px;
+        }
+    }
+
     .routes-container {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -226,6 +294,33 @@
         <div class="page-header">
             <h1>Dun Laoghaire Test Routes</h1>
             <p>Access detailed route information for the Dun Laoghaire test centre</p>
+        </div>
+
+        <div class="info-section">
+            <h2>What to Watch Out For in the Dún Laoghaire Driving Test</h2>
+            
+            <h3>1. Hills & clutch control</h3>
+            <p>This area is not flat. You'll deal with uphill starts and downhill control. Rolling back, stalling, or riding the clutch gets noticed immediately.</p>
+            
+            <h3>2. Tight residential roads</h3>
+            <p>Many streets are narrow with cars parked on both sides. You're constantly negotiating priority. Go too fast or fail to yield properly and you'll lose marks.</p>
+            
+            <h3>3. Junctions with poor visibility</h3>
+            <p>There are several blind or partially obscured junctions. You must stop properly, edge out cautiously, and show obvious head movement. Guessing is punished.</p>
+            
+            <h3>4. Speed control (especially downhill)</h3>
+            <p>Downhill sections tempt people to creep over the limit. Examiners watch speed discipline closely here. Over-speeding is a fast way to rack up serious faults.</p>
+            
+            <h3>5. Manoeuvres in cramped spaces</h3>
+            <p>Reverse around a corner or turnabout is very likely, often on sloped or narrow roads. Kerbing, poor observation, or weak steering control shows immediately.</p>
+            
+            <h3>6. Mixed traffic near the seafront</h3>
+            <p>You may encounter buses, cyclists, pedestrians, and tourists. Observation and anticipation matter more than confidence. Rushing gaps or hesitating awkwardly costs marks.</p>
+            
+            <div class="bottom-line">
+                <p>Bottom line</p>
+                <p>Dún Laoghaire fails people on control and judgment, not aggression. If your clutch control, observation, and patience aren't solid, the hills and narrow roads will expose you fast.</p>
+            </div>
         </div>
 
         <div id="errorContainer"></div>

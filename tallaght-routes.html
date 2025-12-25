@@ -85,6 +85,74 @@
         font-size: 16px;
     }
 
+    .info-section {
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 40px;
+        margin-bottom: 40px;
+    }
+
+    .info-section h2 {
+        margin: 0 0 24px;
+        color: var(--accent);
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+    }
+
+    .info-section h3 {
+        margin: 32px 0 16px;
+        color: var(--text-main);
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .info-section h3:first-of-type {
+        margin-top: 0;
+    }
+
+    .info-section p {
+        margin: 0 0 16px;
+        color: var(--text-main);
+        font-size: 16px;
+        line-height: 1.7;
+    }
+
+    .info-section p:last-child {
+        margin-bottom: 0;
+    }
+
+    .info-section .bottom-line {
+        margin-top: 32px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border-subtle);
+    }
+
+    .info-section .bottom-line p {
+        font-weight: 600;
+        color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+        .info-section {
+            padding: 24px;
+        }
+
+        .info-section h2 {
+            font-size: 24px;
+        }
+
+        .info-section h3 {
+            font-size: 18px;
+        }
+
+        .info-section p {
+            font-size: 15px;
+        }
+    }
+
     .routes-container {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -398,6 +466,33 @@
         <div class="page-header">
             <h1>Tallaght Test Routes</h1>
             <p>Access detailed route information for the Tallaght test centre</p>
+        </div>
+
+        <div class="info-section">
+            <h2>What to Watch Out For in the Tallaght Driving Test</h2>
+            
+            <h3>1. Roundabouts & big junctions</h3>
+            <p>Tallaght has a lot of multi-lane roundabouts and busy light-controlled junctions. Most faults come from poor lane choice, hesitation, or weak observation. You need to commit confidently when a safe gap appears.</p>
+            
+            <h3>2. Stop lines (easy fail)</h3>
+            <p>Failing to stop fully at a stop line — especially early in the test — is a common instant fail. Stop at the line, then observe. No rolling, no creeping.</p>
+            
+            <h3>3. Speed control & speed bumps</h3>
+            <p>You're constantly changing speed limits. You must check mirrors before slowing for speed bumps and come off them smoothly. Late braking or harsh acceleration costs marks.</p>
+            
+            <h3>4. Manoeuvres in estates</h3>
+            <p>Reverse around a corner and turnabout are very likely. Estates are tight. Poor observation, kerbing, or weak clutch control is where people lose it.</p>
+            
+            <h3>5. Busy traffic & flow</h3>
+            <p>Tallaght roads are rarely quiet. Hesitating too much, misjudging gaps, or slowing traffic unnecessarily gets marked down.</p>
+            
+            <h3>6. Lane discipline</h3>
+            <p>Incorrect positioning on wide roads and before junctions is a big issue. Signal early, position early, and stay in lane until it's time to move.</p>
+            
+            <div class="bottom-line">
+                <p>Bottom line</p>
+                <p>Tallaght doesn't fail people with one brutal road — it fails them through observation errors, hesitation, poor positioning, and sloppy stops. If those basics aren't automatic, the area will expose it fast.</p>
+            </div>
         </div>
 
         <div id="errorContainer"></div>

@@ -85,6 +85,74 @@
         font-size: 16px;
     }
 
+    .info-section {
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 40px;
+        margin-bottom: 40px;
+    }
+
+    .info-section h2 {
+        margin: 0 0 24px;
+        color: var(--accent);
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+    }
+
+    .info-section h3 {
+        margin: 32px 0 16px;
+        color: var(--text-main);
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .info-section h3:first-of-type {
+        margin-top: 0;
+    }
+
+    .info-section p {
+        margin: 0 0 16px;
+        color: var(--text-main);
+        font-size: 16px;
+        line-height: 1.7;
+    }
+
+    .info-section p:last-child {
+        margin-bottom: 0;
+    }
+
+    .info-section .bottom-line {
+        margin-top: 32px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border-subtle);
+    }
+
+    .info-section .bottom-line p {
+        font-weight: 600;
+        color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+        .info-section {
+            padding: 24px;
+        }
+
+        .info-section h2 {
+            font-size: 24px;
+        }
+
+        .info-section h3 {
+            font-size: 18px;
+        }
+
+        .info-section p {
+            font-size: 15px;
+        }
+    }
+
     .routes-container {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -215,6 +283,33 @@
         <div class="page-header">
             <h1>Loughrea Test Routes</h1>
             <p>Access detailed route information for the Loughrea test centre</p>
+        </div>
+
+        <div class="info-section">
+            <h2>What to Watch Out For in the Loughrea Driving Test</h2>
+            
+            <h3>1. Country roads (big separator)</h3>
+            <p>Loughrea routes often leave town quickly. Narrow roads, poor edges, bends, and oncoming traffic mean you must control speed and position precisely. Driving too fast or too cautiously both get marked.</p>
+            
+            <h3>2. Junctions with limited visibility</h3>
+            <p>Expect stop and yield junctions where you can't see clearly. You must stop properly, edge out slowly, and show clear head movement. Guessing or rolling is punished.</p>
+            
+            <h3>3. Speed-limit changes</h3>
+            <p>Limits change fast between town, approach roads, and rural stretches. Missing a change or reacting late racks up faults quickly.</p>
+            
+            <h3>4. Meeting traffic & priority</h3>
+            <p>You'll meet tractors, vans, and oncoming cars on narrow roads. Reading priority correctly and slowing early is critical. Forcing gaps or hesitating awkwardly loses marks.</p>
+            
+            <h3>5. Manoeuvres in quiet areas</h3>
+            <p>Reverse around a corner or turnabout is likely on quieter roads. Because it feels "easy," people relax — that's when observation faults and kerbing happen.</p>
+            
+            <h3>6. Town driving & pedestrians</h3>
+            <p>Back in town, watch crossings, parked cars, and emerging traffic. Observation and anticipation matter more than speed.</p>
+            
+            <div class="bottom-line">
+                <p>Bottom line</p>
+                <p>Loughrea doesn't fail people with traffic pressure — it fails them on judgment, speed control, and rural road discipline. If you can't read roads and adapt smoothly, it shows fast.</p>
+            </div>
         </div>
 
         <div id="errorContainer"></div>

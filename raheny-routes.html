@@ -85,6 +85,74 @@
         font-size: 16px;
     }
 
+    .info-section {
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 40px;
+        margin-bottom: 40px;
+    }
+
+    .info-section h2 {
+        margin: 0 0 24px;
+        color: var(--accent);
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+    }
+
+    .info-section h3 {
+        margin: 32px 0 16px;
+        color: var(--text-main);
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .info-section h3:first-of-type {
+        margin-top: 0;
+    }
+
+    .info-section p {
+        margin: 0 0 16px;
+        color: var(--text-main);
+        font-size: 16px;
+        line-height: 1.7;
+    }
+
+    .info-section p:last-child {
+        margin-bottom: 0;
+    }
+
+    .info-section .bottom-line {
+        margin-top: 32px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border-subtle);
+    }
+
+    .info-section .bottom-line p {
+        font-weight: 600;
+        color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+        .info-section {
+            padding: 24px;
+        }
+
+        .info-section h2 {
+            font-size: 24px;
+        }
+
+        .info-section h3 {
+            font-size: 18px;
+        }
+
+        .info-section p {
+            font-size: 15px;
+        }
+    }
+
     .routes-container {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -215,6 +283,33 @@
         <div class="page-header">
             <h1>Raheny Test Routes</h1>
             <p>Access detailed route information for the Raheny test centre</p>
+        </div>
+
+        <div class="info-section">
+            <h2>What to Watch Out For in the Raheny Driving Test</h2>
+            
+            <h3>1. Narrow residential roads & parked cars</h3>
+            <p>Raheny has lots of tight streets with cars parked on both sides. You're constantly judging priority. Failing to yield properly or squeezing through when you shouldn't costs marks.</p>
+            
+            <h3>2. Observation at junctions</h3>
+            <p>Many minor junctions have limited visibility. Full stop where required, edge out slowly, and make your head movement obvious. Rolling or guessing is a common fail.</p>
+            
+            <h3>3. Speed control (very easy to drift)</h3>
+            <p>Low limits dominate, and the roads feel wider than they are. Drifting over the limit, especially after turns, racks up faults quickly.</p>
+            
+            <h3>4. Manoeuvres in cramped areas</h3>
+            <p>Reverse around a corner or turnabout is very likely and often done where space is tight. Kerbing, poor steering, or missed blind-spot checks show immediately.</p>
+            
+            <h3>5. Traffic flow & hesitation</h3>
+            <p>Traffic can be stop-start. Over-hesitating at junctions or blocking traffic unnecessarily gets marked down. You need to be calm and decisive.</p>
+            
+            <h3>6. Positioning on busier roads</h3>
+            <p>Some routes briefly hit wider or busier roads. Late lane choice or drifting within the lane stands out fast.</p>
+            
+            <div class="bottom-line">
+                <p>Bottom line</p>
+                <p>Raheny fails people on observation, priority judgment, and speed discipline. It's subtle, not dramatic. If your scanning and positioning aren't automatic, the area exposes it quickly.</p>
+            </div>
         </div>
 
         <div id="errorContainer"></div>

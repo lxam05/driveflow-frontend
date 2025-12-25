@@ -85,6 +85,74 @@
         font-size: 16px;
     }
 
+    .info-section {
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 40px;
+        margin-bottom: 40px;
+    }
+
+    .info-section h2 {
+        margin: 0 0 24px;
+        color: var(--accent);
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+    }
+
+    .info-section h3 {
+        margin: 32px 0 16px;
+        color: var(--text-main);
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .info-section h3:first-of-type {
+        margin-top: 0;
+    }
+
+    .info-section p {
+        margin: 0 0 16px;
+        color: var(--text-main);
+        font-size: 16px;
+        line-height: 1.7;
+    }
+
+    .info-section p:last-child {
+        margin-bottom: 0;
+    }
+
+    .info-section .bottom-line {
+        margin-top: 32px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border-subtle);
+    }
+
+    .info-section .bottom-line p {
+        font-weight: 600;
+        color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+        .info-section {
+            padding: 24px;
+        }
+
+        .info-section h2 {
+            font-size: 24px;
+        }
+
+        .info-section h3 {
+            font-size: 18px;
+        }
+
+        .info-section p {
+            font-size: 15px;
+        }
+    }
+
     .routes-container {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -215,6 +283,33 @@
         <div class="page-header">
             <h1>Finglas Test Routes</h1>
             <p>Access detailed route information for the Finglas test centre</p>
+        </div>
+
+        <div class="info-section">
+            <h2>What to Watch Out For in the Finglas Driving Test</h2>
+            
+            <h3>1. Tight estates & constant hazards</h3>
+            <p>Finglas is heavy on narrow residential roads with parked cars, bends, and kids crossing. You're expected to read priority correctly and slow early. Charging on or being unsure gets marked.</p>
+            
+            <h3>2. Observation at junctions (big fail area)</h3>
+            <p>There are loads of minor junctions with limited visibility. Full stop, clear head movement, edge out only when safe. Rolling stops and lazy checks are common fail reasons.</p>
+            
+            <h3>3. Speed control on residential roads</h3>
+            <p>Speed limits are low and unforgiving. Creeping above the limit — especially downhill or after turns — racks up faults quickly.</p>
+            
+            <h3>4. Manoeuvres in awkward spaces</h3>
+            <p>Reverse around a corner and turnabout are very likely and often tighter than you expect. Kerbing, poor steering control, or missing blind-spot checks will cost you.</p>
+            
+            <h3>5. Traffic flow & hesitation</h3>
+            <p>Traffic can be stop-start. Over-hesitating at junctions or roundabouts, or blocking traffic unnecessarily, gets marked down. You need to be safe and decisive.</p>
+            
+            <h3>6. Lane positioning on wider roads</h3>
+            <p>Some routes move briefly onto wider roads where poor lane discipline shows immediately. Signal early, position early, and don't drift.</p>
+            
+            <div class="bottom-line">
+                <p>Bottom line</p>
+                <p>Finglas catches people out on observation, speed discipline, and estate driving. It's not about confidence — it's about calm control and constant scanning. Sloppy habits get exposed fast.</p>
+            </div>
         </div>
 
         <div id="errorContainer"></div>
