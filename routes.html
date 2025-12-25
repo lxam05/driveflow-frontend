@@ -1077,6 +1077,7 @@
 
     // Test centres data - sorted alphabetically
     const testCentres = [
+        { name: "Ballincollig", routes: 7 },
         { name: "Dun Laoghaire", routes: 7 },
         { name: "Finglas", routes: 7 },
         { name: "Loughrea", routes: 5 },
@@ -1190,6 +1191,11 @@
         
         if (centre.name === "Loughrea") {
             window.location.href = 'loughrea-routes.html';
+            return;
+        }
+        
+        if (centre.name === "Ballincollig") {
+            window.location.href = 'ballincollig-routes.html';
             return;
         }
         
