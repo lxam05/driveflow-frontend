@@ -95,8 +95,8 @@ File Number | Description
 89.png      | 89. Sharp Rise Ahead
 90.png      | 90. Sharp Dip Ahead
 91.png      | 91. Series Of Bumps Or Hollows Ahead
-92.png      | 92. Steep Descent Ahead
-93.png      | 93. Steep Ascent Ahead
+92.png      | 92. Steep Ascent Ahead
+93.png      | 93. Steep Descent Ahead
 94.png      | 94. Danger Of Falling Rocks
 95.png      | 95. Low Flying Aircraft
 96.png      | 96. Slippery Road Ahead

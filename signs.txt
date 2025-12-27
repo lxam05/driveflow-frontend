@@ -88,8 +88,8 @@
 89. Sharp Rise Ahead
 90. Sharp Dip Ahead
 91. Series Of Bumps Or Hollows Ahead
-92. Steep Descent Ahead
-93. Steep Ascent Ahead
+92. Steep Ascent Ahead
+93. Steep Descent Ahead
 94. Danger Of Falling Rocks
 95. Low Flying Aircraft
 96. Slippery Road Ahead
