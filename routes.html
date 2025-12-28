@@ -674,18 +674,12 @@
         box-shadow: var(--shadow-card);
         padding: 40px;
         margin-top: 0;
-        position: static;
+        position: relative;
         width: 100%;
         display: grid;
         grid-template-columns: 1fr;
         gap: 40px;
         align-items: start;
-    }
-    
-    @media (min-width: 1025px) {
-        .why-our-routes {
-            padding-right: 340px; /* Add padding to prevent content from going under fixed video */
-        }
     }
 
     .why-our-routes-content {
@@ -694,12 +688,18 @@
     }
 
     .why-our-routes-video {
-        position: fixed;
-        top: 120px;
-        right: 20px;
+        position: absolute;
+        top: 40px;
+        right: 40px;
         width: 300px;
         max-width: 300px;
         z-index: 10;
+    }
+    
+    @media (min-width: 1025px) {
+        .why-our-routes-content {
+            padding-right: 340px; /* Add padding to prevent content from going under video */
+        }
     }
     
     @media (max-width: 1024px) {
@@ -710,8 +710,8 @@
             margin: 24px auto 0;
         }
         
-        .why-our-routes {
-            padding-right: 40px; /* Reset padding on mobile */
+        .why-our-routes-content {
+            padding-right: 0; /* Reset padding on mobile */
         }
     }
 
@@ -1089,6 +1089,7 @@
         { name: "Loughrea", routes: 5 },
         { name: "Mulhuddart", routes: 5 },
         { name: "Naas", routes: 7 },
+        { name: "Nenagh", routes: 7 },
         { name: "Raheny", routes: 5 },
         { name: "Tallaght", routes: 7 },
         { name: "Westside", routes: 7 },
@@ -1157,6 +1158,11 @@
         // Special handling for Naas, Tallaght, and Dun Laoghaire - redirect to dedicated pages
         if (centre.name === "Naas") {
             window.location.href = 'naas-routes.html';
+            return;
+        }
+        
+        if (centre.name === "Nenagh") {
+            window.location.href = 'nenagh-routes.html';
             return;
         }
         
