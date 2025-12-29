@@ -842,6 +842,20 @@
             </div>
           </article>
 
+          <!-- CARD: My Purchased Routes -->
+          <article class="card card-2x">
+            <div class="card-header">
+              <div class="card-title">My Purchased Routes</div>
+              <div class="card-tag" id="purchasedRoutesCount">0 centres</div>
+            </div>
+            <div id="purchasedRoutesList" style="margin-top: 8px; display: flex; flex-direction: column; gap: 8px; max-height: 200px; overflow-y: auto;">
+              <div style="color: var(--text-muted); font-size: 13px;">Loading your routes...</div>
+            </div>
+            <div class="card-footnote" style="margin-top: 8px;">
+              <span>Click on a centre to view its routes</span>
+            </div>
+          </article>
+
           <!-- CARD: Next Recommended Step -->
           <article class="card card-2x">
             <div class="card-header">
@@ -1012,6 +1026,9 @@
         // Load routes access status
         await loadRoutesStatus(token);
 
+        // Load purchased routes
+        await loadPurchasedRoutes(token);
+
       } catch (err) {
         console.error("Error loading user:", err);
         localStorage.removeItem("auth_token");
@@ -1083,6 +1100,115 @@
           if (viewRoutesBtnText) {
             viewRoutesBtnText.textContent = "Buy Access";
           }
+        }
+      }
+    }
+
+    // Load purchased routes
+    async function loadPurchasedRoutes(token) {
+      try {
+        const res = await fetch(`${API_URL}/routes/my-centres`, {
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          const purchasedRoutesList = document.getElementById("purchasedRoutesList");
+          const purchasedRoutesCount = document.getElementById("purchasedRoutesCount");
+          
+          if (data.centres && data.centres.length > 0) {
+            purchasedRoutesCount.textContent = `${data.centres.length} centre${data.centres.length !== 1 ? 's' : ''}`;
+            
+            // Clear loading message
+            purchasedRoutesList.innerHTML = '';
+            
+            // Create a mapping of centre names to their route page URLs
+            const centreToPage = {
+              "Naas": "naas-routes.html",
+              "Tallaght": "tallaght-routes.html",
+              "Dun Laoghaire": "dun-laoghaire-routes.html",
+              "Wilton": "wilton-routes.html",
+              "Finglas": "finglas-routes.html",
+              "Raheny": "raheny-routes.html",
+              "Mulhuddart": "mulhuddart-routes.html",
+              "Westside": "westside-routes.html",
+              "Loughrea": "loughrea-routes.html",
+              "Ballincollig": "ballincollig-routes.html",
+              "Nenagh": "nenagh-routes.html"
+            };
+            
+            data.centres.forEach(centre => {
+              const routeItem = document.createElement('div');
+              routeItem.style.cssText = 'padding: 10px 12px; border-radius: 12px; background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(148, 163, 184, 0.25); display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: all 0.18s ease-out;';
+              
+              routeItem.addEventListener('mouseenter', () => {
+                routeItem.style.borderColor = 'rgba(129, 140, 248, 0.6)';
+                routeItem.style.transform = 'translateY(-1px)';
+              });
+              
+              routeItem.addEventListener('mouseleave', () => {
+                routeItem.style.borderColor = 'rgba(148, 163, 184, 0.25)';
+                routeItem.style.transform = 'translateY(0)';
+              });
+              
+              const expiryDate = new Date(centre.expiresAt);
+              const isExpired = expiryDate < new Date();
+              
+              const centreNameDiv = document.createElement('div');
+              centreNameDiv.style.cssText = 'display: flex; flex-direction: column; gap: 4px;';
+              
+              const nameSpan = document.createElement('span');
+              nameSpan.textContent = centre.name;
+              nameSpan.style.cssText = 'font-weight: 600; font-size: 13px; color: var(--text-main);';
+              
+              const expirySpan = document.createElement('span');
+              expirySpan.textContent = isExpired 
+                ? `Expired ${expiryDate.toLocaleDateString()}`
+                : `Expires ${expiryDate.toLocaleDateString()}`;
+              expirySpan.style.cssText = `font-size: 11px; color: ${isExpired ? '#fecaca' : 'var(--text-muted)'};`;
+              
+              centreNameDiv.appendChild(nameSpan);
+              centreNameDiv.appendChild(expirySpan);
+              
+              const arrowSpan = document.createElement('span');
+              arrowSpan.textContent = '→';
+              arrowSpan.style.cssText = 'font-size: 16px; color: var(--text-muted);';
+              
+              routeItem.appendChild(centreNameDiv);
+              routeItem.appendChild(arrowSpan);
+              
+              // Make it clickable - navigate to the route page
+              const routePage = centreToPage[centre.name];
+              if (routePage) {
+                routeItem.addEventListener('click', () => {
+                  window.location.href = routePage;
+                });
+              } else {
+                // Fallback to routes.html if no specific page
+                routeItem.addEventListener('click', () => {
+                  window.location.href = 'routes.html';
+                });
+              }
+              
+              purchasedRoutesList.appendChild(routeItem);
+            });
+          } else {
+            purchasedRoutesCount.textContent = "0 centres";
+            purchasedRoutesList.innerHTML = '<div style="color: var(--text-muted); font-size: 13px;">You haven\'t purchased any routes yet. <a href="payment.html" style="color: var(--primary); text-decoration: none;">Buy access →</a></div>';
+          }
+        } else {
+          console.error("Failed to load purchased routes:", await res.text());
+          const purchasedRoutesList = document.getElementById("purchasedRoutesList");
+          purchasedRoutesList.innerHTML = '<div style="color: var(--text-muted); font-size: 13px;">Error loading routes</div>';
+        }
+      } catch (err) {
+        console.error("Error loading purchased routes:", err);
+        const purchasedRoutesList = document.getElementById("purchasedRoutesList");
+        if (purchasedRoutesList) {
+          purchasedRoutesList.innerHTML = '<div style="color: var(--text-muted); font-size: 13px;">Error loading routes</div>';
         }
       }
     }
