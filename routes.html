@@ -1094,6 +1094,7 @@
         { name: "Tallaght", routes: 7 },
         { name: "Westside", routes: 7 },
         { name: "Wexford", routes: 7 },
+        { name: "Wicklow", routes: 7 },
         { name: "Wilton", routes: 6 },
     ];
 
@@ -1179,6 +1180,11 @@
         
         if (centre.name === "Wexford") {
             window.location.href = 'wexford-routes.html';
+            return;
+        }
+        
+        if (centre.name === "Wicklow") {
+            window.location.href = 'wicklow-routes.html';
             return;
         }
         

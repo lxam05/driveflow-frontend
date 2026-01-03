@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<meta name="description" content="Practice the Wicklow driving test routes using real Google Maps directions. Learn tricky junctions, test areas, and common mistakes before your exam.">
+<link rel="canonical" href="https://www.driveflow.ie/wicklow-routes.html">
+<link rel="icon" href="https://www.driveflow.ie/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.driveflow.ie/favicon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://www.driveflow.ie/favicon.png">
+<link rel="apple-touch-icon" href="https://www.driveflow.ie/favicon.png">
+<meta property="og:title" content="Wicklow Driving Test Routes – Google Maps Practice">
+<meta property="og:description" content="Practice the real Wicklow driving test routes using Google Maps. Learn tricky areas, junctions, and common test mistakes.">
+<meta property="og:url" content="https://www.driveflow.ie/wicklow-routes.html">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://www.driveflow.ie/og-wicklow.png">
+<title>Wicklow Driving Test Routes (Google Maps Practice) | DriveFlow</title>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    
+    :root {
+        --bg-main: #0b132b;
+        --bg-elevated: #1c2541;
+        --bg-card: #2d3f5a;
+        --bg-card-soft: #2d3f5a;
+        --border-subtle: rgba(91, 192, 190, 0.22);
+        --border-strong: rgba(111, 255, 233, 0.7);
+        --primary: #5bc0be;
+        --primary-soft: rgba(91, 192, 190, 0.18);
+        --accent: #6fffe9;
+        --accent-soft: rgba(111, 255, 233, 0.18);
+        --text-main: #e5e7eb;
+        --text-muted: #9ca3af;
+        --shadow-card: 0 18px 60px rgba(0, 0, 0, 0.6);
+        --radius-lg: 22px;
+        --radius-xl: 26px;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html, body {
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: var(--bg-main);
+        color: var(--text-main);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 96px auto 40px;
+        padding: 0 20px 40px;
+    }
+
+    .page-header {
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 40px;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    .page-header h1 {
+        margin: 0 0 12px;
+        color: var(--text-main);
+        font-size: 32px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+    }
+
+    .page-header p {
+        margin: 0;
+        color: var(--text-muted);
+        font-size: 16px;
+    }
+
+    .info-section {
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 40px;
+        margin-bottom: 40px;
+    }
+
+    .info-section h2 {
+        margin: 0 0 24px;
+        color: var(--accent);
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+    }
+
+    .info-section h3 {
+        margin: 32px 0 16px;
+        color: var(--text-main);
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .info-section h3:first-of-type {
+        margin-top: 0;
+    }
+
+    .info-section p {
+        margin: 0 0 16px;
+        color: var(--text-main);
+        font-size: 16px;
+        line-height: 1.7;
+    }
+
+    .info-section p:last-child {
+        margin-bottom: 0;
+    }
+
+    .info-section .bottom-line {
+        margin-top: 32px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border-subtle);
+    }
+
+    .info-section .bottom-line p {
+        font-weight: 600;
+        color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+        .info-section {
+            padding: 24px;
+        }
+
+        .info-section h2 {
+            font-size: 24px;
+        }
+
+        .info-section h3 {
+            font-size: 18px;
+        }
+
+        .info-section p {
+            font-size: 15px;
+        }
+    }
+
+    .routes-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 24px;
+        margin-top: 24px;
+    }
+
+    .route-card {
+        padding: 24px;
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-lg);
+        transition: all 0.2s ease;
+    }
+
+    .route-card:hover {
+        background: var(--primary-soft);
+        border-color: var(--primary);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(91, 192, 190, 0.3);
+    }
+
+    .route-card h3 {
+        margin: 0 0 16px;
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--text-main);
+    }
+
+    .route-btn {
+        width: 100%;
+        padding: 12px 24px;
+        background: var(--primary);
+        color: var(--bg-main);
+        border: none;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .route-btn:hover {
+        background: var(--accent);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(111, 255, 233, 0.4);
+    }
+
+    .route-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .loading {
+        text-align: center;
+        padding: 40px;
+        color: var(--text-muted);
+    }
+
+    .error {
+        background: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        border-radius: var(--radius-lg);
+        padding: 20px;
+        margin: 20px 0;
+        color: #ef4444;
+    }
+
+    .btn-back {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 18px;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        background: rgba(15, 23, 42, 0.92);
+        color: var(--text-main);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 13px;
+        transition: all 0.18s ease-out;
+    }
+
+    .btn-back:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.9);
+        border-color: rgba(129, 140, 248, 0.8);
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            margin: 20px auto 20px;
+            padding: 0 16px 20px;
+        }
+
+        .page-header {
+            padding: 24px 20px;
+            margin-bottom: 24px;
+        }
+
+        .page-header h1 {
+            font-size: 24px;
+        }
+
+        .page-header p {
+            font-size: 14px;
+        }
+
+        .routes-container {
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .route-card {
+            padding: 20px;
+        }
+
+        .btn-back {
+            margin-top: 16px;
+            padding: 8px 16px;
+            font-size: 12px;
+        }
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1>Wicklow Driving Test Routes</h1>
+            <p>Access detailed route information for the Wicklow test centre</p>
+            <p style="margin-top: 16px; color: var(--accent); font-weight: 600; font-size: 16px;">Used by thousands of learners around Ireland to pass their test first try</p>
+        </div>
+
+        <div class="info-section">
+            <h2>What to Watch Out For in the Wicklow Driving Test</h2>
+            
+            <h3>1. Town centre navigation</h3>
+            <p>Wicklow's town centre has busy junctions and roundabouts that require careful observation and positioning. Watch for pedestrians, parked cars, and emerging traffic.</p>
+            
+            <h3>2. Roundabouts and lane discipline</h3>
+            <p>Multi-lane roundabouts are common in Wicklow. You must choose the correct lane early, signal properly, and maintain lane discipline throughout.</p>
+            
+            <h3>3. Speed limit transitions</h3>
+            <p>Speed limits change frequently between town, approach roads, and rural areas. Missing a speed change or reacting late will result in faults.</p>
+            
+            <h3>4. Residential estates</h3>
+            <p>Expect to drive through residential areas with narrow roads, speed bumps, and limited visibility. Observation and speed control are critical.</p>
+            
+            <h3>5. Junction observation</h3>
+            <p>Many junctions in Wicklow have limited visibility. You must stop properly, edge out slowly, and show clear head movement when checking for traffic.</p>
+            
+            <h3>6. Manoeuvres</h3>
+            <p>Reverse around a corner or turnabout is likely. Practice these manoeuvres in similar conditions to avoid observation faults and kerbing.</p>
+            
+            <div class="bottom-line">
+                <p>Bottom line</p>
+                <p>Wicklow tests your ability to navigate a mix of town and rural driving. Focus on observation, lane discipline, and smooth speed control to pass successfully.</p>
+            </div>
+        </div>
+
+        <div id="errorContainer"></div>
+        <div id="routesContainer" class="routes-container"></div>
+        <div id="loadingContainer" class="loading">Loading routes...</div>
+
+        <a href="routes.html" class="btn-back">← Back to All Routes</a>
+    </div>
+
+    <script>
+        const API_URL = location.hostname === "localhost" || location.hostname === "127.0.0.1"
+            ? "http://localhost:8080"
+            : "https://driving-test-backend-production.up.railway.app";
+        
+        let accessToken = null;
+        let routesData = null;
+        let tokenExpiresAt = null;
+        let hasLicense = false;
+        let licenseExpiresAt = null;
+
+        // Get token from localStorage
+        const token = localStorage.getItem('auth_token');
+        if (!token) {
+            window.location.href = 'login.html';
+        }
+
+        // Check license status on page load
+        async function checkLicenseStatus() {
+            const token = localStorage.getItem('auth_token');
+            if (!token) {
+                hasLicense = false;
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/routes/license-status`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    hasLicense = data.hasLicense || false;
+                    licenseExpiresAt = data.expiresAt;
+                    
+                    // Double-check expiry even if API says hasLicense is true
+                    if (hasLicense && licenseExpiresAt) {
+                        const expiryDate = new Date(licenseExpiresAt);
+                        const now = new Date();
+                        if (expiryDate < now) {
+                            hasLicense = false;
+                        }
+                    }
+                } else {
+                    hasLicense = false;
+                }
+            } catch (err) {
+                console.error('Error checking license:', err);
+                hasLicense = false;
+            }
+        }
+
+        // All payment functionality moved to payment.html - redirect immediately
+        function showPaywall() {
+            window.location.href = 'payment.html';
+        }
+
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', async () => {
+            await checkLicenseStatus();
+            
+            // If no license, immediately redirect to payment (no confirm dialog)
+            if (!hasLicense) {
+                window.location.href = 'payment.html';
+                return;
+            }
+            
+            // User has premium access - load routes
+            await loadRoutes();
+        });
+
+        async function loadRoutes() {
+            const loadingContainer = document.getElementById('loadingContainer');
+            const routesContainer = document.getElementById('routesContainer');
+            const errorContainer = document.getElementById('errorContainer');
+
+            try {
+                // Generate access token
+                const tokenResponse = await fetch(`${API_URL}/routes/generate-wicklow-token`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!tokenResponse.ok) {
+                    const error = await tokenResponse.json();
+                    if (error.error && error.error.includes('license')) {
+                        await checkLicenseStatus();
+                        if (!hasLicense) {
+                            window.location.href = 'payment.html';
+                            return;
+                        }
+                        errorContainer.innerHTML = `
+                            <div class="error">
+                                <strong>Access Required</strong><br>
+                                You need an active license to view Wicklow routes.
+                            </div>
+                        `;
+                    } else {
+                        errorContainer.innerHTML = `
+                            <div class="error">
+                                <strong>Error</strong><br>
+                                ${error.error || 'Failed to generate access token'}
+                            </div>
+                        `;
+                    }
+                    loadingContainer.style.display = 'none';
+                    return;
+                }
+
+                const tokenData = await tokenResponse.json();
+                accessToken = tokenData.accessToken;
+                tokenExpiresAt = new Date(tokenData.expiresAt);
+
+                // Fetch route data
+                const dataResponse = await fetch(`${API_URL}/routes/wicklow-data/${accessToken}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!dataResponse.ok) {
+                    const error = await dataResponse.json();
+                    throw new Error(error.error || 'Failed to load routes');
+                }
+
+                routesData = await dataResponse.json();
+                displayRoutes(routesData);
+
+                loadingContainer.style.display = 'none';
+            } catch (err) {
+                console.error('Error loading routes:', err);
+                errorContainer.innerHTML = `
+                    <div class="error">
+                        <strong>Error</strong><br>
+                        ${err.message || 'Failed to load routes. Please try again.'}
+                    </div>
+                `;
+                loadingContainer.style.display = 'none';
+            }
+        }
+
+        function displayRoutes(data) {
+            const routesContainer = document.getElementById('routesContainer');
+            
+            if (!data.routes || data.routes.length === 0) {
+                routesContainer.innerHTML = '<div class="loading">No routes available</div>';
+                return;
+            }
+
+            routesContainer.innerHTML = data.routes.map((route, index) => `
+                <div class="route-card">
+                    <h3>${route.name || `Route ${index + 1}`}</h3>
+                    <button class="route-btn" onclick="openRoute(${route.id})">
+                        View ${route.name || `Route ${index + 1}`} on Google Maps
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function openRoute(routeId) {
+            if (!accessToken) {
+                alert('Access token not available. Please refresh the page.');
+                return;
+            }
+
+            // Check if token is still valid
+            if (new Date() > tokenExpiresAt) {
+                alert('Your access for this session has expired. Please refresh the page to get a new token.');
+                return;
+            }
+
+            // Redirect through proxy endpoint - link never exposed in frontend
+            window.location.href = `${API_URL}/routes/wicklow-route/${accessToken}/${routeId}`;
+        }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How to Pass the Driving Test in Wicklow",
+      "description": "Learn the real Wicklow driving test routes and increase your chances of passing the Irish driving test.",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Follow the official driving test route",
+          "text": "Study the exact routes used by driving test examiners in Wicklow test centre."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Review the junctions and roundabouts",
+          "text": "Practice navigating the specific junctions and roundabouts on the test routes."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Practice reversing around the corner",
+          "text": "Master the reversing maneuvers required on the Wicklow test routes."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Observe speed limit transitions",
+          "text": "Learn where speed limits change on the test routes and practice smooth transitions."
+        }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Are these official RSA driving test routes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. These routes are unofficial practice routes designed to help learners become familiar with the Wicklow test area."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use these routes on my phone?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. You can open the routes directly in Google Maps on your phone and follow them while practicing."
+          }
+        }
+      ]
+    }
+    </script>
+    <script src="chatbot-widget.js"></script>
+</body>
+</html>
+
