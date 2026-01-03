@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Take an example Irish driving theory test with 20 questions. Practice under timed conditions and see your results instantly.">
+<link rel="canonical" href="https://www.driveflow.ie/example-test.html">
+<link rel="icon" href="https://www.driveflow.ie/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.driveflow.ie/favicon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://www.driveflow.ie/favicon.png">
+<link rel="apple-touch-icon" href="https://www.driveflow.ie/favicon.png">
+<title>Example Test — DriveFlow | Irish Theory Test Practice</title>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    
+    :root {
+        --bg-main: #0b132b;
+        --bg-elevated: #1c2541;
+        --bg-card: #2d3f5a;
+        --bg-card-soft: #2d3f5a;
+        --bg-card-smaller: #3a506b;
+        --border-subtle: rgba(91, 192, 190, 0.22);
+        --border-strong: rgba(111, 255, 233, 0.7);
+        --primary: #5bc0be;
+        --primary-soft: rgba(91, 192, 190, 0.18);
+        --accent: #6fffe9;
+        --accent-soft: rgba(111, 255, 233, 0.18);
+        --accent-orange: #f97316;
+        --accent-red: #ef4444;
+        --text-main: #e5e7eb;
+        --text-muted: #9ca3af;
+        --text-soft: #6b7280;
+        --shadow-card: 0 18px 60px rgba(0, 0, 0, 0.6);
+        --radius-lg: 22px;
+        --radius-xl: 26px;
+        --blur: 18px;
+        --primary-blue: #5bc0be;
+        --primary-blue-dark: #3a506b;
+        --accent-purple: #6fffe9;
+        --text-dark: #e5e7eb;
+        --text-light: #9ca3af;
+        --button-bg: #6fffe9;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: var(--bg-main);
+        color: var(--text-main);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+        max-width: 1400px;
+        margin: 96px auto 40px;
+        padding: 0 20px 40px;
+        display: flex;
+        gap: 24px;
+        align-items: flex-start;
+    }
+
+    /* Left Sidebar Card */
+    .sidebar-card {
+        position: sticky;
+        top: 100px;
+        width: 280px;
+        flex-shrink: 0;
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 20px;
+    }
+
+    .sidebar-card h2 {
+        margin: 0 0 16px;
+        color: var(--text-main);
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+    }
+
+    .sidebar-section {
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .sidebar-section:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .timer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 16px;
+        border-radius: 12px;
+        border: 1px solid var(--border-subtle);
+        background: rgba(15, 23, 42, 0.9);
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--text-main);
+        font-variant-numeric: tabular-nums;
+    }
+
+    .timer-label {
+        font-size: 12px;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 8px;
+    }
+
+    .timer.warning {
+        border-color: var(--accent-orange);
+        color: var(--accent-orange);
+    }
+
+    .timer.danger {
+        border-color: var(--accent-red);
+        color: var(--accent-red);
+        animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.7; }
+    }
+
+    /* Main Content Area */
+    .main-content {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .controls {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .btn-back {
+        padding: 10px 18px;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        background: rgba(15, 23, 42, 0.92);
+        color: var(--text-main);
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.18s ease-out;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .btn-back:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.9);
+        border-color: rgba(129, 140, 248, 0.8);
+    }
+
+    /* Question Card - NO hover transform */
+    .question-card {
+        position: relative;
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 32px;
+        margin-bottom: 24px;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .question-image-container {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .question-image-container.has-image {
+        margin-bottom: 24px;
+    }
+
+    .question-image-container.no-image {
+        height: 0;
+        overflow: hidden;
+    }
+
+    .question-image {
+        width: 100%;
+        max-width: 600px;
+        height: auto;
+        border-radius: 12px;
+        display: block;
+        margin: 0 auto;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        border: 1px solid var(--border-subtle);
+    }
+
+    .question-text {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--text-main);
+        margin-bottom: 24px;
+        line-height: 1.6;
+    }
+
+    .options {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-bottom: 20px;
+    }
+
+    .option-row {
+        display: flex;
+        align-items: center;
+        padding: 16px 20px;
+        margin-bottom: 12px;
+        background: #32445c;
+        border: 1px solid var(--border-subtle);
+        border-radius: 12px;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        user-select: none;
+        position: relative;
+        overflow: hidden;
+    }
+
+
+    .option-row:hover:not(.selected):not(.correct):not(.incorrect) {
+        background: var(--bg-card-smaller);
+        border-color: var(--primary);
+    }
+
+
+    .option-row.selected {
+        background: var(--primary-soft);
+        border-color: var(--primary);
+        box-shadow: 0 0 0 2px var(--primary-soft);
+    }
+
+    .option-row.correct {
+        background: var(--accent-soft);
+        border-color: var(--accent);
+        box-shadow: 0 0 0 2px var(--accent-soft);
+    }
+
+    .option-row.incorrect {
+        background: rgba(239, 68, 68, 0.18);
+        border-color: var(--accent-red);
+        box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.18);
+    }
+
+    .option-row:disabled {
+        cursor: not-allowed;
+    }
+
+    .option-text {
+        flex: 1;
+        color: var(--text-main);
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
+
+    .question-number {
+        color: var(--text-muted);
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .feedback-section {
+        display: none;
+        margin-top: 24px;
+        padding: 24px;
+        border-radius: 18px;
+        animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .feedback-section.show {
+        display: block;
+    }
+
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .feedback-correct {
+        background: var(--accent-soft);
+        border: 1px solid var(--accent);
+    }
+
+    .feedback-incorrect {
+        background: rgba(239, 68, 68, 0.18);
+        border: 1px solid var(--accent-red);
+    }
+
+    .feedback-title {
+        font-size: 20px;
+        font-weight: 700;
+        margin: 0 0 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .feedback-correct .feedback-title {
+        color: var(--accent);
+    }
+
+    .feedback-incorrect .feedback-title {
+        color: var(--accent-red);
+    }
+
+    .correct-answer {
+        margin: 16px 0;
+        padding: 16px;
+        background: rgba(15, 23, 42, 0.9);
+        border-radius: 18px;
+        border-left: 4px solid var(--primary);
+    }
+
+    .correct-answer strong {
+        color: var(--primary);
+        display: block;
+        margin-bottom: 8px;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .correct-answer-text {
+        color: var(--text-main);
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-top: 24px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border-subtle);
+    }
+
+
+    .action-button {
+        border: 1px solid rgba(99, 102, 241, 0.9);
+        background: linear-gradient(120deg, rgba(37, 99, 235, 0.95), rgba(124, 58, 237, 0.95));
+        color: white;
+        padding: 14px 28px;
+        font-size: 15px;
+        font-weight: 700;
+        border-radius: 999px;
+        cursor: pointer;
+        box-shadow: 0 16px 40px rgba(30, 64, 175, 0.85);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .action-button:hover:not(:disabled) {
+        transform: translateY(-1px);
+        box-shadow: 0 20px 50px rgba(30, 64, 175, 0.95);
+    }
+
+    .action-button:active:not(:disabled) {
+        transform: translateY(0);
+    }
+
+    .action-button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    .btn-previous {
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        background: rgba(15, 23, 42, 0.92);
+        color: var(--text-main);
+        padding: 14px 28px;
+        font-size: 15px;
+        font-weight: 700;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .btn-previous:hover:not(:disabled) {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.9);
+        border-color: rgba(129, 140, 248, 0.8);
+    }
+
+    .btn-previous:active:not(:disabled) {
+        transform: translateY(0);
+    }
+
+    .btn-previous:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+    }
+
+    .btn-continue {
+        border: 1px solid rgba(99, 102, 241, 0.9);
+        background: linear-gradient(120deg, rgba(37, 99, 235, 0.95), rgba(124, 58, 237, 0.95));
+        color: white;
+        padding: 14px 28px;
+        font-size: 15px;
+        font-weight: 700;
+        border-radius: 999px;
+        cursor: pointer;
+        box-shadow: 0 16px 40px rgba(30, 64, 175, 0.85);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .btn-continue:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 20px 50px rgba(30, 64, 175, 0.95);
+    }
+
+    .btn-continue:active {
+        transform: translateY(0);
+    }
+
+    .progress-bar {
+        width: 100%;
+        height: 8px;
+        background: rgba(15, 23, 42, 0.9);
+        border-radius: 4px;
+        margin-bottom: 30px;
+        overflow: hidden;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+        border: 1px solid var(--border-subtle);
+    }
+
+    .progress-fill {
+        height: 100%;
+        background: linear-gradient(120deg, rgba(37, 99, 235, 0.95), rgba(124, 58, 237, 0.95));
+        transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        border-radius: 4px;
+        box-shadow: 0 2px 8px rgba(99, 102, 241, 0.5);
+    }
+
+    @media (max-width: 1024px) {
+        .container {
+            flex-direction: column;
+            padding: 0 16px 40px;
+        }
+        .sidebar-card {
+            position: relative;
+            top: 0;
+            width: 100%;
+        }
+        .main-content {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .container {
+            padding: 0 12px 40px;
+        }
+        .question-card {
+            padding: 24px;
+            width: 100%;
+            max-width: 100%;
+        }
+        .question-text {
+            font-size: 18px;
+        }
+        .question-image-container {
+            max-width: 100%;
+        }
+        .question-image {
+            max-width: 100%;
+        }
+    }
+
+    .completion-card {
+        max-width: 100%;
+        width: 100%;
+        margin: 0 auto;
+        padding: 48px;
+    }
+
+    .chart-wrapper {
+        width: 100%;
+        margin: 32px 0;
+    }
+
+    .chart-container {
+        display: flex;
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .chart-y-axis {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding-right: 15px;
+        text-align: right;
+        font-weight: bold;
+        color: var(--text-muted);
+        font-size: 14px;
+    }
+
+    .chart-y-label {
+        color: var(--text-muted);
+    }
+
+    .chart-grid {
+        flex: 1;
+        border-left: 1px solid var(--border-subtle);
+        background: repeating-linear-gradient(
+            to bottom,
+            transparent 0px,
+            transparent 45px,
+            rgba(91, 192, 190, 0.1) 45px,
+            rgba(91, 192, 190, 0.1) 46px
+        );
+        position: relative;
+    }
+
+    .bars {
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-end;
+        height: 500px;
+        padding-top: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .bar-item {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        flex: 1;
+        max-width: 80px;
+    }
+
+    .chart-bar {
+        width: 60px;
+        border-radius: 4px;
+        box-shadow: 0px 5px 5px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
+    }
+
+    .chart-bar.pass {
+        background: var(--accent);
+    }
+
+    .chart-bar.almost {
+        background: var(--accent-orange);
+    }
+
+    .chart-bar.fail {
+        background: var(--accent-red);
+    }
+
+    .tooltip {
+        position: absolute;
+        top: -40px;
+        background: #333;
+        color: white;
+        padding: 4px 10px;
+        border-radius: 5px;
+        font-size: 13px;
+        opacity: 0.9;
+        white-space: nowrap;
+        z-index: 10;
+    }
+
+    .tooltip::after {
+        content: "";
+        position: absolute;
+        bottom: -7px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 7px;
+        border-style: solid;
+        border-color: #333 transparent transparent transparent;
+    }
+
+    .chart-bar-label {
+        margin-top: 10px;
+        font-size: 14px;
+        color: var(--text-main);
+        text-align: center;
+    }
+
+    .no-scores {
+        text-align: center;
+        color: var(--text-muted);
+        padding: 40px;
+        font-size: 14px;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Left Sidebar -->
+    <div class="sidebar-card">
+        <div class="sidebar-section">
+            <h2>Example Test</h2>
+        </div>
+        
+        <div class="sidebar-section">
+            <div class="timer-label">Time Remaining</div>
+            <div class="timer" id="timer">20:00</div>
+        </div>
+
+        <div class="sidebar-section">
+            <a href="theory-test.html" class="btn-back" id="backToHome">← Back to Home</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div id="questions-container">
+            <!-- Questions will be inserted here -->
+        </div>
+    </div>
+</div>
+
+<script>
+    const API_URL = "https://driving-test-backend-production.up.railway.app";
+    const TOTAL_TEST_TIME = 20 * 60; // 20 minutes in seconds
+    
+    let questions = [];
+    let userAnswers = {}; // Submitted answers
+    let selectedAnswers = {}; // Currently selected (not yet submitted)
+    let currentQuestionIndex = 0;
+    let timeRemaining = TOTAL_TEST_TIME; // 20 minutes in seconds
+    let scoreChart = null;
+    let timerInterval = null;
+    
+    // Image existence cache to prevent flicker
+    const imageExistsCache = new Map();
+
+    // Map category names to topic slugs (for reference, but we'll use all categories)
+    const categoryToTopicMap = {
+        'Control of Vehicle': 'controlofthevehicle',
+        'Legal Matters/Rules of the Road': 'legalmattersrulesoftheroad',
+        'Managing Risk': 'managingrisk',
+        'Safe and Responsible Driving': 'safeandresponsibledriving'
+    };
+
+    // Detect question category based on content
+    function detectQuestionCategory(q) {
+        const questionText = q.question.toLowerCase();
+        const hasImage = q.id && imageExistsCache.get(`signs copy/${q.id}.png`) === true;
+        
+        // Check for signs (questions with images or asking about signs)
+        if (hasImage || questionText.includes('what does this sign mean') || questionText.includes('sign')) {
+            return 'signs';
+        }
+        
+        // Check for hand signals
+        if (questionText.includes('hand signal') || questionText.includes('hand signals')) {
+            return 'hand_signals';
+        }
+        
+        // Check for speed limits
+        if (questionText.includes('speed limit') || questionText.includes('maximum speed')) {
+            return 'speed_limits';
+        }
+        
+        // Check for parking
+        if (questionText.includes('park') || questionText.includes('parking')) {
+            return 'parking';
+        }
+        
+        // Check for roundabouts
+        if (questionText.includes('roundabout') || questionText.includes('round about')) {
+            return 'roundabouts';
+        }
+        
+        // Check for junctions
+        if (questionText.includes('junction') || questionText.includes('intersection')) {
+            return 'junctions';
+        }
+        
+        // Use the original category if available, otherwise default to 'general'
+        if (q.category && q.category !== 'Uncategorized') {
+            return q.category.toLowerCase().replace(/\s+/g, '_').replace(/\//g, '_');
+        }
+        
+        return 'general';
+    }
+
+    // Convert question format from JSON to expected format
+    function convertQuestion(q) {
+        // Find the index of the correct answer
+        const correctAnswerIndex = q.options.findIndex(opt => opt === q.correct_answer);
+        
+        if (correctAnswerIndex === -1) {
+            console.warn('Could not find correct answer for question:', q.id);
+            return null;
+        }
+
+        // Map category to topic
+        const questionTopic = categoryToTopicMap[q.category];
+        
+        if (!questionTopic) {
+            // Skip uncategorized questions
+            return null;
+        }
+
+        // Detect category
+        const detectedCategory = detectQuestionCategory(q);
+
+        return {
+            id: q.id,
+            question: q.question,
+            options: q.options,
+            correctAnswer: correctAnswerIndex,
+            topic: questionTopic,
+            explanation: q.explanation || '',
+            image: q.image || null,
+            category: detectedCategory
+        };
+    }
+
+    // Load questions
+    async function loadQuestions() {
+        try {
+            const response = await fetch('questions_1_805.json');
+            const data = await response.json();
+            
+            // Convert all questions
+            const allQuestions = data
+                .map(convertQuestion)
+                .filter(q => q !== null);
+            
+            // Select 20 random questions
+            shuffleArray(allQuestions);
+            questions = allQuestions.slice(0, 20);
+            
+            if (questions.length === 0) {
+                document.getElementById('questions-container').innerHTML = 
+                    '<div class="question-card"><p>No questions available. Please ensure questions_1_805.json exists.</p></div>';
+                return;
+            }
+
+            currentQuestionIndex = 0;
+            userAnswers = {};
+            selectedAnswers = {};
+            
+            // Pre-check images for all questions
+            const imageCheckPromises = questions
+                .filter(q => q.id)
+                .map(q => checkImageExists(`signs copy/${q.id}.png`));
+            
+            // Wait for all image checks, then render
+            Promise.all(imageCheckPromises).then(() => {
+                // Re-detect categories now that images are checked
+                questions.forEach(q => {
+                    q.category = detectQuestionCategory(q);
+                });
+                
+                // Start timer
+                startTimer();
+                
+                renderCurrentQuestion();
+            });
+        } catch (error) {
+            console.error('Error loading questions:', error);
+            document.getElementById('questions-container').innerHTML = 
+                '<div class="question-card"><p>Error loading questions. Please ensure questions_1_805.json exists.</p></div>';
+        }
+    }
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    // Check if image exists (with caching)
+    function checkImageExists(src) {
+        if (imageExistsCache.has(src)) {
+            return Promise.resolve(imageExistsCache.get(src));
+        }
+        
+        return new Promise((resolve) => {
+            const img = new Image();
+            img.onload = () => {
+                imageExistsCache.set(src, true);
+                resolve(true);
+            };
+            img.onerror = () => {
+                imageExistsCache.set(src, false);
+                resolve(false);
+            };
+            img.src = src;
+        });
+    }
+
+    // Create image HTML only if image exists
+    function createImageHtml(q) {
+        if (!q.id) {
+            return `<div class="question-image-container no-image"></div>`;
+        }
+        
+        const imagePath = `signs copy/${q.id}.png`;
+        const exists = imageExistsCache.get(imagePath);
+        
+        if (exists === true) {
+            return `
+                <div class="question-image-container has-image">
+                    <img src="${imagePath}" alt="Example test question illustration for question ${q.id}" class="question-image">
+                </div>
+            `;
+        } else if (exists === false) {
+            return `<div class="question-image-container no-image"></div>`;
+        } else {
+            // Not checked yet - check now (async, but render without image first)
+            checkImageExists(imagePath).then(() => {
+                // Re-render if we're still on this question
+                if (currentQuestionIndex < questions.length && questions[currentQuestionIndex].id === q.id) {
+                    renderCurrentQuestion();
+                }
+            });
+            return `<div class="question-image-container no-image"></div>`;
+        }
+    }
+
+    function startTimer() {
+        updateTimerDisplay();
+        timerInterval = setInterval(() => {
+            timeRemaining--;
+            updateTimerDisplay();
+            
+            if (timeRemaining <= 0) {
+                clearInterval(timerInterval);
+                submitTest();
+            } else if (timeRemaining <= 120) { // 2 minutes
+                document.getElementById('timer').classList.add('danger');
+            } else if (timeRemaining <= 300) { // 5 minutes
+                document.getElementById('timer').classList.add('warning');
+            }
+        }, 1000);
+    }
+
+    function updateTimerDisplay() {
+        const minutes = Math.floor(timeRemaining / 60);
+        const seconds = timeRemaining % 60;
+        document.getElementById('timer').textContent = 
+            `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    function updateProgress() {
+        const answeredCount = Object.keys(userAnswers).length;
+        const progress = (answeredCount / questions.length) * 100;
+        document.getElementById('progressFill').style.width = Math.min(progress, 100) + '%';
+    }
+
+
+    function renderCurrentQuestion() {
+        if (currentQuestionIndex >= questions.length) {
+            // All questions completed
+            submitTest();
+            return;
+        }
+
+        const container = document.getElementById('questions-container');
+        const q = questions[currentQuestionIndex];
+        const hasSubmitted = userAnswers[currentQuestionIndex] !== undefined;
+        const submittedAnswer = userAnswers[currentQuestionIndex];
+        const selectedAnswer = selectedAnswers[currentQuestionIndex];
+        const isCorrect = hasSubmitted && submittedAnswer === q.correctAnswer;
+
+        // Image container - only create img tag if image exists (prevents flicker)
+        const imageHtml = createImageHtml(q);
+        
+        // Options with radio buttons
+        const optionsHtml = q.options.map((opt, optIndex) => {
+            const isChecked = hasSubmitted ? (submittedAnswer === optIndex) : (selectedAnswer === optIndex);
+            let classes = 'option-row';
+            
+            // Add correct/incorrect classes if answer has been submitted
+            if (hasSubmitted) {
+                if (optIndex === q.correctAnswer) {
+                    classes += ' correct';
+                } else if (optIndex === submittedAnswer && optIndex !== q.correctAnswer) {
+                    classes += ' incorrect';
+                }
+            } else if (isChecked) {
+                classes += ' selected';
+            }
+            
+            const isDisabled = hasSubmitted;
+            
+            return `
+                <div class="${classes}" id="opt-${optIndex}" ${!hasSubmitted ? `onclick="selectAnswer(${optIndex})"` : hasSubmitted ? 'style="cursor: default;"' : ''}>
+                    <div class="option-text">${opt}</div>
+                </div>
+            `;
+        }).join('');
+
+        // Button container with Previous and Submit/Continue buttons
+        let buttonContainerHtml = '';
+        let hasPrevious = currentQuestionIndex > 0;
+        
+        // Single action button that changes from Submit to Next
+        let actionButtonText = 'Submit';
+        let actionButtonDisabled = selectedAnswer === undefined;
+        if (hasSubmitted) {
+            actionButtonText = currentQuestionIndex < questions.length - 1 ? 'Next' : 'Finish Test';
+            actionButtonDisabled = false;
+        }
+        
+        buttonContainerHtml = `
+            <div class="button-container">
+                <button class="btn-previous" onclick="previousQuestion()" ${!hasPrevious ? 'disabled' : ''}>Previous</button>
+                <button class="action-button" onclick="handleActionButton()" ${actionButtonDisabled ? 'disabled' : ''}>${actionButtonText}</button>
+            </div>
+        `;
+
+        // Feedback section (shown after submission, below buttons)
+        let feedbackHtml = '';
+        if (hasSubmitted) {
+            const feedbackClass = isCorrect ? 'feedback-correct' : 'feedback-incorrect';
+            const feedbackIcon = isCorrect ? '✓' : '✗';
+            const feedbackText = isCorrect ? 'Correct!' : 'Incorrect';
+            
+            feedbackHtml = `
+                <div class="feedback-section ${feedbackClass} show">
+                    <div class="feedback-title">
+                        <span>${feedbackIcon}</span>
+                        <span>${feedbackText}</span>
+                    </div>
+                    <div class="correct-answer">
+                        <strong>Correct Answer:</strong>
+                        <div class="correct-answer-text">${q.options[q.correctAnswer]}</div>
+                    </div>
+                    ${q.explanation ? `
+                        <div class="correct-answer" style="margin-top: 12px;">
+                            <strong>Explanation:</strong>
+                            <div class="correct-answer-text">${q.explanation}</div>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        container.innerHTML = `
+            ${imageHtml}
+            <div class="question-card">
+                <div class="question-number">Question ${currentQuestionIndex + 1} of ${questions.length}</div>
+                <div class="question-text">${q.question}</div>
+                <div class="options">${optionsHtml}</div>
+                ${buttonContainerHtml}
+                ${feedbackHtml}
+            </div>
+        `;
+        
+        updateProgress();
+    }
+
+    function selectAnswer(optionIndex) {
+        // Only allow selection if not already submitted
+        if (userAnswers[currentQuestionIndex] !== undefined) {
+            return;
+        }
+        
+        // Toggle behavior: if clicking the same option, deselect it
+        if (selectedAnswers[currentQuestionIndex] === optionIndex) {
+            selectedAnswers[currentQuestionIndex] = undefined;
+        } else {
+            // Update selected answer (user can change before submitting)
+            selectedAnswers[currentQuestionIndex] = optionIndex;
+        }
+        
+        // Re-render to show/hide submit button and update radio button states with smooth transition
+        renderCurrentQuestion();
+    }
+
+    function handleActionButton() {
+        const hasSubmitted = userAnswers[currentQuestionIndex] !== undefined;
+        if (hasSubmitted) {
+            continueQuestion();
+        } else {
+            submitAnswer();
+        }
+    }
+
+    function submitAnswer() {
+        // Move selected answer to submitted answers
+        if (selectedAnswers[currentQuestionIndex] !== undefined) {
+            userAnswers[currentQuestionIndex] = selectedAnswers[currentQuestionIndex];
+            
+            // Re-render to show feedback with smooth transition
+            renderCurrentQuestion();
+        }
+    }
+
+    function previousQuestion() {
+        if (currentQuestionIndex > 0) {
+            // Clear selected answer for current question
+            selectedAnswers[currentQuestionIndex] = undefined;
+            currentQuestionIndex--;
+            renderCurrentQuestion();
+        }
+    }
+
+    function continueQuestion() {
+        // Clear selected answer for next question
+        selectedAnswers[currentQuestionIndex] = undefined;
+        currentQuestionIndex++;
+        renderCurrentQuestion();
+    }
+
+    // Calculate category breakdown from test results
+    function calculateCategoryBreakdown() {
+        const breakdown = {};
+        
+        questions.forEach((q, index) => {
+            const category = q.category || 'general';
+            if (!breakdown[category]) {
+                breakdown[category] = { correct: 0, total: 0 };
+            }
+            
+            breakdown[category].total++;
+            if (userAnswers[index] === q.correctAnswer) {
+                breakdown[category].correct++;
+            }
+        });
+        
+        return breakdown;
+    }
+
+    // Save test score to backend (if logged in) and localStorage
+    async function saveTestScore(correctCount, totalQuestions) {
+        const percentage = Math.round((correctCount / totalQuestions) * 100);
+        const passed = percentage >= 85; // 17/20 = 85%
+        const timeTakenSeconds = TOTAL_TEST_TIME - timeRemaining;
+        const timeRemainingSeconds = timeRemaining;
+        
+        // Calculate category breakdown
+        const categoryBreakdown = calculateCategoryBreakdown();
+        
+        const score = {
+            correct: correctCount,
+            total: totalQuestions,
+            percentage: percentage,
+            timestamp: Date.now(),
+            date: new Date().toLocaleDateString()
+        };
+
+        // Check if user is logged in
+        const token = localStorage.getItem('auth_token');
+        
+        // Try to save to backend if logged in
+        if (token) {
+            try {
+                console.log('Attempting to save example test result to backend...');
+                console.log('Data being sent:', {
+                    correct_count: correctCount,
+                    total_questions: totalQuestions,
+                    percentage: percentage,
+                    passed: passed,
+                    time_taken_seconds: timeTakenSeconds,
+                    time_remaining_seconds: timeRemainingSeconds,
+                    category_breakdown: categoryBreakdown
+                });
+                
+                const response = await fetch(`${API_URL}/mock-tests/example/save`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        correct_count: correctCount,
+                        total_questions: totalQuestions,
+                        percentage: percentage,
+                        passed: passed,
+                        time_taken_seconds: timeTakenSeconds,
+                        time_remaining_seconds: timeRemainingSeconds,
+                        category_breakdown: categoryBreakdown
+                    })
+                });
+
+                const responseText = await response.text();
+                console.log('Backend response status:', response.status);
+                console.log('Backend response:', responseText);
+
+                if (response.ok) {
+                    console.log('✅ Example test result saved to backend successfully');
+                } else {
+                    console.error('❌ Failed to save to backend. Status:', response.status);
+                    console.error('Response:', responseText);
+                }
+            } catch (err) {
+                console.error('❌ Error saving to backend:', err);
+                console.error('Error details:', err.message);
+                // Continue to save to localStorage as fallback
+            }
+        } else {
+            console.log('No auth token found, skipping backend save');
+        }
+
+        // Also save to localStorage as backup/for non-logged-in users
+        let storageKey;
+        
+        if (token) {
+            try {
+                const tokenHash = token.substring(0, 10);
+                storageKey = `example_test_scores_${tokenHash}`;
+            } catch (e) {
+                storageKey = 'example_test_scores_logged_in';
+            }
+        } else {
+            storageKey = 'example_test_scores_session';
+        }
+
+        // Get existing scores
+        const existingScores = JSON.parse(localStorage.getItem(storageKey) || '[]');
+        
+        // Add new score
+        existingScores.push(score);
+        
+        // Keep only last 10 scores
+        const recentScores = existingScores.slice(-10);
+        
+        // Save back to localStorage
+        localStorage.setItem(storageKey, JSON.stringify(recentScores));
+        
+        return recentScores;
+    }
+
+    // Get test scores from backend (if logged in) or localStorage
+    async function getTestScores() {
+        const token = localStorage.getItem('auth_token');
+        
+        // Try to fetch from backend if logged in
+        if (token) {
+            try {
+                const response = await fetch(`${API_URL}/mock-tests/example/results?limit=10`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    // Convert backend format to frontend format
+                    const scores = data.results.map(result => ({
+                        correct: result.correct_count,
+                        total: result.total_questions,
+                        percentage: result.percentage,
+                        timestamp: new Date(result.created_at).getTime(),
+                        date: new Date(result.created_at).toLocaleDateString()
+                    }));
+                    return scores;
+                }
+            } catch (err) {
+                console.error('Error fetching from backend:', err);
+                // Fall through to localStorage
+            }
+        }
+
+        // Fallback to localStorage
+        let storageKey;
+        
+        if (token) {
+            try {
+                const tokenHash = token.substring(0, 10);
+                storageKey = `example_test_scores_${tokenHash}`;
+            } catch (e) {
+                storageKey = 'example_test_scores_logged_in';
+            }
+        } else {
+            storageKey = 'example_test_scores_session';
+        }
+
+        return JSON.parse(localStorage.getItem(storageKey) || '[]');
+    }
+
+    // Initialize Chart.js chart
+    function initializeChart() {
+        const ctx = document.getElementById('myChart');
+        if (!ctx) return null;
+
+        return new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Scores',
+                    data: [],
+                    backgroundColor: []
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 20,
+                        ticks: {
+                            color: 'var(--text-muted)',
+                            font: {
+                                family: 'Inter'
+                            }
+                        },
+                        grid: {
+                            color: 'var(--border-subtle)'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: 'var(--text-muted)',
+                            font: {
+                                family: 'Inter'
+                            }
+                        },
+                        grid: {
+                            color: 'var(--border-subtle)'
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    function getScoreColor(score) {
+        if (score >= 17) return '#6fffe9'; // Pass - accent (teal/cyan)
+        if (score >= 15) return '#f97316'; // Almost - orange
+        return '#ef4444'; // Fail - red
+    }
+
+    // Update chart with scores
+    function updateChartWithScores(scores) {
+        if (scores.length === 0) {
+            const chartContainer = document.getElementById('chartContainer');
+            if (chartContainer) {
+                chartContainer.innerHTML = '<div class="no-scores">No previous test scores to display</div>';
+            }
+            return;
+        }
+
+        // Limit to 7 most recent scores
+        const recentScores = scores.slice(0, 7);
+        const labels = recentScores.map((score, index) => `Score ${index + 1}`);
+        const data = recentScores.map(score => score.correct);
+        const colors = recentScores.map(score => getScoreColor(score.correct));
+
+        // Initialize chart if not already done
+        if (!scoreChart) {
+            scoreChart = initializeChart();
+        }
+
+        if (scoreChart) {
+            scoreChart.data.labels = labels;
+            scoreChart.data.datasets[0].data = data;
+            scoreChart.data.datasets[0].backgroundColor = colors;
+            scoreChart.update();
+        }
+    }
+
+    async function submitTest() {
+        // Stop timer
+        if (timerInterval) {
+            clearInterval(timerInterval);
+        }
+
+        // Hide sidebar
+        const sidebar = document.querySelector('.sidebar-card');
+        if (sidebar) {
+            sidebar.style.display = 'none';
+        }
+
+        // Make main content full width
+        const mainContent = document.querySelector('.main-content');
+        if (mainContent) {
+            mainContent.style.width = '100%';
+            mainContent.style.maxWidth = '100%';
+        }
+
+        // Make container full width
+        const containerElement = document.querySelector('.container');
+        if (containerElement) {
+            containerElement.style.maxWidth = '100%';
+            containerElement.style.padding = '40px 20px';
+        }
+
+        const container = document.getElementById('questions-container');
+        const correctCount = Object.keys(userAnswers).filter(index => 
+            userAnswers[index] === questions[index].correctAnswer
+        ).length;
+        const percentage = Math.round((correctCount / questions.length) * 100);
+        const passThreshold = 17; // Need 17/20 to pass (85%)
+
+        // Show initial results display
+        container.innerHTML = `
+            <div class="question-card completion-card" style="text-align: center;">
+                <div style="font-size: 24px; font-weight: 700; margin-bottom: 12px; color: var(--text-main);">
+                    ${correctCount}/20
+                </div>
+                <div style="font-size: 16px; color: ${percentage >= 85 ? 'var(--accent)' : 'var(--accent-red)'}; margin-bottom: 40px; font-weight: 600;">
+                    ${percentage >= 85 ? '✓ Pass' : '✗ Fail'}
+                </div>
+                <div id="chartContainer" style="width: 100%; max-width: 800px; margin: 0 auto; padding: 20px;">
+                    <canvas id="myChart"></canvas>
+                </div>
+                <div style="margin-top: 40px; display: flex; gap: 12px; justify-content: center;">
+                    <button class="btn-continue" onclick="window.location.reload()" style="max-width: 200px; padding: 12px 24px; font-size: 14px;">
+                        Take Another Test
+                    </button>
+                    <a href="theory-test.html" class="btn-back" id="backToHomeComplete" style="display: inline-block; padding: 12px 24px; font-size: 14px;">← Back to Home</a>
+                </div>
+            </div>
+        `;
+        document.getElementById('progressFill').style.width = '100%';
+        
+        // Save this test score and load chart
+        try {
+            await saveTestScore(correctCount, questions.length);
+            const scoresForChart = await getTestScores();
+            // Small delay to ensure canvas is rendered
+            setTimeout(() => {
+                updateChartWithScores(scoresForChart);
+            }, 100);
+        } catch (err) {
+            console.error('Error saving/loading test results:', err);
+            // Show error message but still display basic results
+            const chartContainer = document.getElementById('chartContainer');
+            if (chartContainer) {
+                chartContainer.innerHTML = '<div class="no-scores">Unable to load previous scores</div>';
+            }
+        }
+    }
+
+    // Store the current section when navigating to example-test.html
+    const urlParams = new URLSearchParams(window.location.search);
+    const fromSection = urlParams.get('from');
+    const fromPage = urlParams.get('page') || (fromSection ? 'main' : null);
+    
+    if (fromSection) {
+        localStorage.setItem('lastMainSection', fromSection);
+    }
+    if (fromPage) {
+        localStorage.setItem('lastPage', fromPage);
+    }
+    
+    // Add event listeners for back buttons
+    const backToHomeBtn = document.getElementById('backToHome');
+
+    // Load questions when page loads
+    loadQuestions();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="chatbot-widget.js"></script>
+
+</body>
+</html>
+
