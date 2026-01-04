@@ -1092,6 +1092,7 @@
         { name: "Nenagh", routes: 7 },
         { name: "Raheny", routes: 5 },
         { name: "Tallaght", routes: 7 },
+        { name: "Tralee", routes: 7 },
         { name: "Westside", routes: 7 },
         { name: "Wexford", routes: 7 },
         { name: "Wicklow", routes: 7 },
@@ -1185,6 +1186,11 @@
         
         if (centre.name === "Wicklow") {
             window.location.href = 'wicklow-routes.html';
+            return;
+        }
+        
+        if (centre.name === "Tralee") {
+            window.location.href = 'tralee-routes.html';
             return;
         }
         

@@ -316,6 +316,14 @@
         </div>
 
         <div id="errorContainer"></div>
+        <div id="paywallContainer" style="display: none; border-radius: var(--radius-xl); background: var(--bg-card); border: 1px solid var(--border-subtle); box-shadow: var(--shadow-card); padding: 40px; margin-bottom: 40px; text-align: center;">
+            <h2 style="margin: 0 0 16px; color: var(--accent); font-size: 28px; font-weight: 800;">Access Required</h2>
+            <p style="margin: 0 0 24px; color: var(--text-main); font-size: 16px; line-height: 1.7;">Please log in or purchase access to view the Finglas driving test routes.</p>
+            <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                <a href="login.html" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; padding: 12px 24px;">Log In</a>
+                <a href="payment.html" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; padding: 12px 24px; background: var(--accent);">Purchase Access</a>
+            </div>
+        </div>
         <div id="routesContainer" class="routes-container"></div>
         <div id="loadingContainer" class="loading">Loading routes...</div>
 
@@ -332,12 +340,6 @@
         let tokenExpiresAt = null;
         let hasLicense = false;
         let licenseExpiresAt = null;
-
-        // Get token from localStorage
-        const token = localStorage.getItem('auth_token');
-        if (!token) {
-            window.location.href = 'login.html';
-        }
 
         // Check license status on page load
         async function checkLicenseStatus() {
@@ -383,15 +385,31 @@
 
         // Initialize on page load
         window.addEventListener('DOMContentLoaded', async () => {
+            const token = localStorage.getItem('auth_token');
+            const paywallContainer = document.getElementById('paywallContainer');
+            const loadingContainer = document.getElementById('loadingContainer');
+            const routesContainer = document.getElementById('routesContainer');
+            
+            // If no token, show paywall but don't redirect (allows Google to index)
+            if (!token) {
+                paywallContainer.style.display = 'block';
+                loadingContainer.style.display = 'none';
+                routesContainer.style.display = 'none';
+                return;
+            }
+            
             await checkLicenseStatus();
             
-            // If no license, immediately redirect to payment (no confirm dialog)
+            // If no license, show paywall but don't redirect (allows Google to index)
             if (!hasLicense) {
-                window.location.href = 'payment.html';
+                paywallContainer.style.display = 'block';
+                loadingContainer.style.display = 'none';
+                routesContainer.style.display = 'none';
                 return;
             }
             
             // User has premium access - load routes
+            paywallContainer.style.display = 'none';
             await loadRoutes();
         });
 
