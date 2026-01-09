@@ -1093,6 +1093,7 @@
         { name: "Raheny", routes: 5 },
         { name: "Tallaght", routes: 7 },
         { name: "Tralee", routes: 7 },
+        { name: "Waterford", routes: 7 },
         { name: "Westside", routes: 7 },
         { name: "Wexford", routes: 7 },
         { name: "Wicklow", routes: 7 },
@@ -1191,6 +1192,11 @@
         
         if (centre.name === "Tralee") {
             window.location.href = 'tralee-routes.html';
+            return;
+        }
+        
+        if (centre.name === "Waterford") {
+            window.location.href = 'waterford-routes.html';
             return;
         }
         
