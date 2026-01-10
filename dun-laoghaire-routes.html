@@ -87,6 +87,25 @@
         font-size: 16px;
     }
 
+    .page-header a {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 12px 24px;
+        background: var(--primary);
+        color: var(--bg-main);
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        transition: all 0.2s ease;
+    }
+
+    .page-header a:hover {
+        background: var(--accent);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(111, 255, 233, 0.4);
+    }
+
     .info-section {
         border-radius: var(--radius-xl);
         background: var(--bg-card);
@@ -113,6 +132,40 @@
 
     .info-section h3:first-of-type {
         margin-top: 0;
+    }
+
+    .info-section h4 {
+        margin: 24px 0 12px;
+        color: var(--text-main);
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    .info-section h4:first-of-type {
+        margin-top: 0;
+    }
+
+    .info-section ul {
+        margin: 0 0 16px 0;
+        padding: 0;
+        padding-left: 20px;
+        color: var(--text-main);
+        line-height: 1.8;
+        list-style: none;
+    }
+
+    .info-section ul li {
+        position: relative;
+        padding-left: 20px;
+        margin-bottom: 8px;
+    }
+
+    .info-section ul li::before {
+        content: '•';
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+        font-weight: 700;
     }
 
     .info-section p {
@@ -150,8 +203,16 @@
             font-size: 18px;
         }
 
+        .info-section h4 {
+            font-size: 16px;
+        }
+
         .info-section p {
             font-size: 15px;
+        }
+
+        .info-section ul {
+            font-size: 14px;
         }
     }
 
@@ -297,46 +358,142 @@
             <h1>Dun Laoghaire Driving Test Routes</h1>
             <p>Access detailed route information for the Dun Laoghaire test centre</p>
             <p style="margin-top: 16px; color: var(--accent); font-weight: 600; font-size: 16px;">Used by thousands of learners around Ireland to pass their test first try</p>
+            <a href="#routes" style="display: inline-block; margin-top: 20px; padding: 12px 24px; background: var(--primary); color: var(--bg-main); border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.2s ease;">View Routes →</a>
         </div>
 
         <div class="info-section">
-            <h2>What to Watch Out For in the Dún Laoghaire Driving Test</h2>
+            <h2>Why Dun Laoghaire Catches People Out</h2>
+            <p>These routes are designed to help learner drivers familiarise themselves with the exact areas commonly used in the Dun Laoghaire driving test. They focus on the roads, junction types, and driving conditions that people consistently say catch them out on test day.</p>
+            <p style="margin-top: 16px; font-weight: 600; color: var(--accent);">Dun Laoghaire isn't hard because of speed — it's hard because it demands precision and observation.</p>
+            <p style="margin-top: 16px; font-style: italic; color: var(--text-muted);">This test centre exposes small weaknesses very quickly.</p>
             
-            <h3>1. Hills & clutch control</h3>
-            <p>This area is not flat. You'll deal with uphill starts and downhill control. Rolling back, stalling, or riding the clutch gets noticed immediately.</p>
+            <h3>Where People Actually Fail in Dun Laoghaire</h3>
             
-            <h3>2. Tight residential roads</h3>
-            <p>Many streets are narrow with cars parked on both sides. You're constantly negotiating priority. Go too fast or fail to yield properly and you'll lose marks.</p>
+            <h4>1. Narrow residential roads</h4>
+            <p><strong>Cars parked tightly on both sides</strong></p>
+            <p><strong>Testers expect clear decision-making, not crawling</strong></p>
+            <p>You must:</p>
+            <ul>
+                <li>Position confidently</li>
+                <li>Commit when safe</li>
+                <li>Use mirrors constantly when passing parked cars</li>
+            </ul>
+            <p style="font-style: italic; color: var(--text-muted); margin-top: 8px;">Common fail: hugging the centre line without proper mirror checks.</p>
             
-            <h3>3. Junctions with poor visibility</h3>
-            <p>There are several blind or partially obscured junctions. You must stop properly, edge out cautiously, and show obvious head movement. Guessing is punished.</p>
+            <h4>2. Junction observation (the big one)</h4>
+            <p><strong>This is the number one failure reason reported.</strong></p>
+            <p>Testers look for:</p>
+            <ul>
+                <li>Full left–right–left checks</li>
+                <li>Visible head movement</li>
+                <li>Correct positioning before moving</li>
+            </ul>
+            <p style="font-style: italic; color: var(--text-muted); margin-top: 8px;">Common fail: "I checked, but not enough" — If the tester doesn't see it, it didn't happen.</p>
             
-            <h3>4. Speed control (especially downhill)</h3>
-            <p>Downhill sections tempt people to creep over the limit. Examiners watch speed discipline closely here. Over-speeding is a fast way to rack up serious faults.</p>
+            <h4>3. Hesitation vs. safety</h4>
+            <p>Dun Laoghaire has:</p>
+            <ul>
+                <li>Busy side roads</li>
+                <li>Continuous traffic flow</li>
+                <li>Coastal traffic that doesn't slow down for learners</li>
+            </ul>
+            <p>Common fail:</p>
+            <ul>
+                <li>Waiting too long at junctions</li>
+                <li>Missing obvious safe gaps</li>
+                <li>Causing unnecessary delays</li>
+            </ul>
+            <p style="font-style: italic; color: var(--text-muted); margin-top: 8px;">They want safe but decisive, not timid.</p>
             
-            <h3>5. Manoeuvres in cramped spaces</h3>
-            <p>Reverse around a corner or turnabout is very likely, often on sloped or narrow roads. Kerbing, poor observation, or weak steering control shows immediately.</p>
+            <h4>4. Roundabouts</h4>
+            <p>Smaller roundabouts appear simple but catch people out.</p>
+            <p>Testers watch:</p>
+            <ul>
+                <li>Lane discipline</li>
+                <li>Early signalling</li>
+                <li>Correct mirror–signal–position sequence</li>
+            </ul>
+            <p style="font-style: italic; color: var(--text-muted); margin-top: 8px;">Common fail: signalling late or changing lanes without mirrors.</p>
             
-            <h3>6. Mixed traffic near the seafront</h3>
-            <p>You may encounter buses, cyclists, pedestrians, and tourists. Observation and anticipation matter more than confidence. Rushing gaps or hesitating awkwardly costs marks.</p>
+            <h4>5. Coastal and main-road pressure</h4>
+            <p>Areas near the seafront and main routes introduce:</p>
+            <ul>
+                <li>Faster-moving traffic</li>
+                <li>Pedestrians</li>
+                <li>Cyclists</li>
+                <li>Buses pulling in and out</li>
+            </ul>
+            <p style="font-style: italic; color: var(--text-muted); margin-top: 8px;">Common fail: tunnel vision — focusing ahead and forgetting mirrors.</p>
             
-            <div class="bottom-line">
-                <p>Bottom line</p>
-                <p>Dún Laoghaire fails people on control and judgment, not aggression. If your clutch control, observation, and patience aren't solid, the hills and narrow roads will expose you fast.</p>
+            <h3 style="margin-top: 32px;">How These Practice Routes Help</h3>
+            <p>These routes let you:</p>
+            <ul>
+                <li>Drive the same road types repeatedly</li>
+                <li>Build confidence with junction timing</li>
+                <li>Get comfortable with tight spacing</li>
+                <li>Reduce test-day nerves by removing surprises</li>
+            </ul>
+            <p style="margin-top: 16px; font-weight: 600; color: var(--accent);">You're not learning rules — you're training familiarity.</p>
+            
+            <h3 style="margin-top: 32px;">Tips from People Who Passed in Dun Laoghaire</h3>
+            <ul>
+                <li>Over-exaggerate observation — turn your head</li>
+                <li>Talk yourself through junctions while practising</li>
+                <li>Don't rush, but don't freeze</li>
+                <li>Treat parked cars like moving hazards</li>
+                <li>Expect the tester to change direction suddenly</li>
+            </ul>
+            <p style="margin-top: 16px; font-weight: 600; color: var(--accent);">Most passes come from calm, boring driving — not perfection.</p>
+            
+            <div class="bottom-line" style="margin-top: 32px;">
+                <p>Final advice</p>
+                <p>People don't usually fail Dun Laoghaire for one massive mistake. They fail because of small things, done repeatedly.</p>
+                <p style="margin-top: 12px; font-weight: 600;">Familiarity removes pressure. Pressure causes mistakes.</p>
+                <p style="margin-top: 8px;">That's the edge these routes give you.</p>
+            </div>
+        </div>
+        
+        <div class="info-section" style="margin-top: 40px;">
+            <h2>Frequently Asked Questions</h2>
+            
+            <h4>Are these official RSA routes?</h4>
+            <p>No. These are practice routes created to help learners familiarise themselves with the Dun Laoghaire test area. The RSA does not publish official routes, and test routes can vary.</p>
+            
+            <h4>Can I use these on my phone during practice?</h4>
+            <p>Yes. The routes open directly in Google Maps on your phone, making them easy to follow during lessons or private practice.</p>
+            
+            <h4>Will the test use the exact same route?</h4>
+            <p>Not necessarily. However, the same roads and junction types are used repeatedly, which is why familiarity matters.</p>
+            
+            <h4>How long do I get access?</h4>
+            <p>You get access for the full duration stated at purchase, allowing you to repeat routes as often as you like.</p>
+            
+            <h4>Who are these routes best for?</h4>
+            <p>Learners who:</p>
+            <ul>
+                <li>Are close to test date</li>
+                <li>Feel nervous about unfamiliar roads</li>
+                <li>Want to reduce surprises on test day</li>
+            </ul>
+            
+            <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border-subtle);">
+                <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;"><strong>Disclaimer:</strong> Practice routes are provided for educational purposes only to help learners become familiar with the Dun Laoghaire test area. These are not official RSA routes and are subject to change.</p>
             </div>
         </div>
 
-        <div id="errorContainer"></div>
-        <div id="paywallContainer" style="display: none; border-radius: var(--radius-xl); background: var(--bg-card); border: 1px solid var(--border-subtle); box-shadow: var(--shadow-card); padding: 40px; margin-bottom: 40px; text-align: center;">
-            <h2 style="margin: 0 0 16px; color: var(--accent); font-size: 28px; font-weight: 800;">Access Required</h2>
-            <p style="margin: 0 0 24px; color: var(--text-main); font-size: 16px; line-height: 1.7;">Please log in or purchase access to view the Dun Laoghaire driving test routes.</p>
-            <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-                <a href="login.html" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; padding: 12px 24px;">Log In</a>
-                <a href="payment.html" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; padding: 12px 24px; background: var(--accent);">Purchase Access</a>
+        <div id="routes" style="scroll-margin-top: 120px;">
+            <div id="errorContainer"></div>
+            <div id="paywallContainer" style="display: none; border-radius: var(--radius-xl); background: var(--bg-card); border: 1px solid var(--border-subtle); box-shadow: var(--shadow-card); padding: 40px; margin-bottom: 40px; text-align: center;">
+                <h2 style="margin: 0 0 16px; color: var(--accent); font-size: 28px; font-weight: 800;">Access Required</h2>
+                <p style="margin: 0 0 24px; color: var(--text-main); font-size: 16px; line-height: 1.7;">Please log in or purchase access to view the Dun Laoghaire driving test routes.</p>
+                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                    <a href="login.html" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; padding: 12px 24px;">Log In</a>
+                    <a href="payment.html" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; padding: 12px 24px; background: var(--accent);">Purchase Access</a>
+                </div>
             </div>
+            <div id="routesContainer" class="routes-container"></div>
+            <div id="loadingContainer" class="loading">Loading routes...</div>
         </div>
-        <div id="routesContainer" class="routes-container"></div>
-        <div id="loadingContainer" class="loading">Loading routes...</div>
 
         <a href="routes.html" class="btn-back">← Back to All Routes</a>
     </div>
@@ -568,18 +725,42 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Are these official RSA driving test routes?",
+          "name": "Are these official RSA routes?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. These routes are unofficial practice routes designed to help learners become familiar with the Dun Laoghaire test area."
+            "text": "No. These are practice routes created to help learners familiarise themselves with the Dun Laoghaire test area. The RSA does not publish official routes, and test routes can vary."
           }
         },
         {
           "@type": "Question",
-          "name": "Can I use these routes on my phone?",
+          "name": "Can I use these on my phone during practice?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. You can open the routes directly in Google Maps on your phone and follow them while practicing."
+            "text": "Yes. The routes open directly in Google Maps on your phone, making them easy to follow during lessons or private practice."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Will the test use the exact same route?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not necessarily. However, the same roads and junction types are used repeatedly, which is why familiarity matters."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long do I get access?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You get access for the full duration stated at purchase, allowing you to repeat routes as often as you like."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who are these routes best for?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Learners who are close to test date, feel nervous about unfamiliar roads, or want to reduce surprises on test day."
           }
         }
       ]
