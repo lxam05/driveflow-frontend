@@ -696,18 +696,17 @@
         z-index: 10;
     }
     
+    /* Add small gap at edges for trust card */
+    .why-our-routes-content .trust-card {
+        margin-left: 8px;
+        margin-right: 8px;
+        width: calc(100% - 16px);
+        display: block;
+    }
+    
     @media (min-width: 1025px) {
         .why-our-routes-content {
             padding-right: 340px; /* Add padding to prevent content from going under video */
-        }
-        
-        /* Make the trust card span full width of .why-our-routes container */
-        .why-our-routes-content .trust-card {
-            margin-left: -40px;
-            margin-right: -380px;
-            width: calc(100% + 420px);
-            padding-left: 40px;
-            padding-right: 40px;
         }
     }
     
@@ -866,7 +865,7 @@
                     That's it. Simple, effective, and built to actually help you pass.
                 </p>
                 
-                <p class="trust-card" style="margin-top: 32px; padding: 24px; background: var(--primary-soft); border: 1px solid var(--primary); border-radius: 12px; text-align: center; font-size: 16px; line-height: 1.6; width: 100%; box-sizing: border-box;">
+                <p class="trust-card" style="margin-top: 32px; padding: 24px; background: var(--primary-soft); border: 1px solid var(--primary); border-radius: 12px; text-align: center; font-size: 16px; line-height: 1.6; box-sizing: border-box;">
                     <strong style="color: var(--accent); font-size: 18px;">Trusted by thousands of learners across Ireland</strong><br>
                     <span style="color: var(--text-main);">Join the community of drivers who passed their test first try using our routes</span>
                 </p>
