@@ -1097,6 +1097,7 @@
         { name: "Loughrea", routes: 5 },
         { name: "Mulhuddart", routes: 5 },
         { name: "Naas", routes: 7 },
+        { name: "Navan", routes: 6 },
         { name: "Nenagh", routes: 7 },
         { name: "Raheny", routes: 5 },
         { name: "Tallaght", routes: 7 },
@@ -1170,6 +1171,11 @@
         // Special handling for Naas, Tallaght, and Dun Laoghaire - redirect to dedicated pages
         if (centre.name === "Naas") {
             window.location.href = 'naas-routes.html';
+            return;
+        }
+        
+        if (centre.name === "Navan") {
+            window.location.href = 'navan-routes.html';
             return;
         }
         
