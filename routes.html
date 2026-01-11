@@ -1095,6 +1095,7 @@
         { name: "Dun Laoghaire", routes: 7 },
         { name: "Finglas", routes: 7 },
         { name: "Loughrea", routes: 5 },
+        { name: "Mitchelstown", routes: 6 },
         { name: "Mulhuddart", routes: 5 },
         { name: "Naas", routes: 7 },
         { name: "Navan", routes: 6 },
@@ -1231,6 +1232,11 @@
         
         if (centre.name === "Mulhuddart") {
             window.location.href = 'mulhuddart-routes.html';
+            return;
+        }
+        
+        if (centre.name === "Mitchelstown") {
+            window.location.href = 'mitchelstown-routes.html';
             return;
         }
         
