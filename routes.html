@@ -1326,7 +1326,7 @@
         // Display current user if not in top 3
         const isInTop3 = data.top3.some(entry => entry.isCurrentUser);
         if (!isInTop3) {
-            const rankText = data.currentUser.totalRoutes === 0 ? 'Unranked' : (data.currentUser.rank ? data.currentUser.rank : '-');
+            const rankText = data.currentUser.rank ? data.currentUser.rank : '-';
             const tierImage = getTierImage(data.currentUser.tier);
             html += `
                 <div class="leaderboard-entry current-user">
