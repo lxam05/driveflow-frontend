@@ -738,6 +738,12 @@
         flex: 1;
     }
 
+    .leaderboard-tier-image {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+    }
+
     .leaderboard-rank {
         font-size: 20px;
         font-weight: 800;
@@ -762,15 +768,6 @@
         font-size: 16px;
         font-weight: 600;
         color: var(--text-main);
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .leaderboard-tier-image {
-        width: 24px;
-        height: 24px;
-        object-fit: contain;
     }
 
     .leaderboard-routes {
@@ -1301,11 +1298,9 @@
                 html += `
                     <div class="leaderboard-entry rank-${entry.rank}">
                         <div class="leaderboard-entry-left">
+                            ${tierImage}
                             <div class="leaderboard-rank">${entry.rank}</div>
-                            <div class="leaderboard-username">
-                                ${entry.username}
-                                ${tierImage}
-                            </div>
+                            <div class="leaderboard-username">${entry.username}</div>
                         </div>
                         <div class="leaderboard-routes">${entry.totalRoutes}</div>
                     </div>
@@ -1331,11 +1326,9 @@
             html += `
                 <div class="leaderboard-entry current-user">
                     <div class="leaderboard-entry-left">
+                        ${tierImage}
                         <div class="leaderboard-rank">${rankText}</div>
-                        <div class="leaderboard-username">
-                            ${data.currentUser.username}
-                            ${tierImage}
-                        </div>
+                        <div class="leaderboard-username">${data.currentUser.username}</div>
                     </div>
                     <div class="leaderboard-routes">${data.currentUser.totalRoutes}</div>
                 </div>
