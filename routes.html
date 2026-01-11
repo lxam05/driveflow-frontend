@@ -961,13 +961,47 @@
     </div>
 </div>
 
-    <!-- Leaderboard and Why Our Routes Work Side by Side -->
+    <!-- Row 1: Leaderboard and Routes Selection Side by Side -->
     <div class="two-column-container">
         <!-- Left Column: Leaderboard -->
         <div>
             <div class="leaderboard-card" id="leaderboardCard">
                 <h2>🏆 Leaderboard</h2>
                 <div id="leaderboardContent" class="leaderboard-loading">Loading leaderboard...</div>
+            </div>
+        </div>
+
+        <!-- Right Column: Routes Selection -->
+        <div>
+            <div class="selection-card">
+                <h2>Select Test Centre</h2>
+                <div class="search-box">
+                    <input type="text" class="search-input" id="centreSearch" placeholder="Search for a test centre..." autocomplete="off">
+                </div>
+                <div class="centres-list" id="centresGrid"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Row 2: Request Card and Why Our Routes Work Side by Side -->
+    <div class="two-column-container">
+        <!-- Left Column: New Routes Request Card -->
+        <div>
+            <div class="new-routes-card">
+                <h2>🚀 New Routes Coming Next Week!</h2>
+                <p>We're adding <span class="highlight">new test centre routes</span> next week. Tell us which routes you want to see first!</p>
+                <form id="routeRequestForm" class="route-request-form">
+                    <div class="route-request-group">
+                        <label for="routeRequestCentre">Which test centre route would you like?</label>
+                        <input type="text" id="routeRequestCentre" class="route-request-input" placeholder="e.g., Cork, Galway, Limerick" required>
+                    </div>
+                    <div class="route-request-group">
+                        <label for="routeRequestEmail">Your Email</label>
+                        <input type="email" id="routeRequestEmail" class="route-request-input" placeholder="your.email@example.com" required>
+                    </div>
+                    <button type="submit" class="route-request-submit">Submit Request</button>
+                </form>
+                <div id="routeRequestMessage" class="route-request-message"></div>
             </div>
         </div>
 
@@ -1024,41 +1058,6 @@
                         Your browser does not support the video tag.
                     </video>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Two Column Layout: Routes on Left, New Routes Card on Right -->
-    <div class="two-column-container">
-        <!-- Left Column: Routes -->
-        <div>
-            <div class="selection-card">
-                <h2>Select Test Centre</h2>
-                <div class="search-box">
-                    <input type="text" class="search-input" id="centreSearch" placeholder="Search for a test centre..." autocomplete="off">
-                </div>
-                <div class="centres-list" id="centresGrid"></div>
-            </div>
-
-        </div>
-
-        <!-- Right Column: New Routes Coming Card -->
-        <div>
-            <div class="new-routes-card">
-                <h2>🚀 New Routes Coming Next Week!</h2>
-                <p>We're adding <span class="highlight">new test centre routes</span> next week. Tell us which routes you want to see first!</p>
-                <form id="routeRequestForm" class="route-request-form">
-                    <div class="route-request-group">
-                        <label for="routeRequestCentre">Which test centre route would you like?</label>
-                        <input type="text" id="routeRequestCentre" class="route-request-input" placeholder="e.g., Cork, Galway, Limerick" required>
-                    </div>
-                    <div class="route-request-group">
-                        <label for="routeRequestEmail">Your Email</label>
-                        <input type="email" id="routeRequestEmail" class="route-request-input" placeholder="your.email@example.com" required>
-                    </div>
-                    <button type="submit" class="route-request-submit">Submit Request</button>
-                </form>
-                <div id="routeRequestMessage" class="route-request-message"></div>
             </div>
         </div>
     </div>
