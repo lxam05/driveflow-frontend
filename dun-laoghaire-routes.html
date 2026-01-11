@@ -671,7 +671,7 @@
             `).join('');
         }
 
-        function openRoute(routeId) {
+        async function openRoute(routeId) {
             if (!accessToken) {
                 alert('Access token not available. Please refresh the page.');
                 return;
@@ -681,6 +681,33 @@
             if (new Date() > tokenExpiresAt) {
                 alert('Your access for this session has expired. Please refresh the page to get a new token.');
                 return;
+            }
+
+            // Record route click for leaderboard (don't block if it fails)
+            const token = localStorage.getItem('auth_token');
+            if (token && routesData) {
+                try {
+                    const clickResponse = await fetch(`${API_URL}/routes/record-click`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            centreName: routesData.location,
+                            routeId: routeId
+                        })
+                    });
+
+                    if (clickResponse.status === 429) {
+                        const error = await clickResponse.json();
+                        // Show cooldown message but still allow redirect
+                        console.log(`Cooldown: ${error.minutesRemaining} minutes remaining`);
+                    }
+                } catch (err) {
+                    // Don't block redirect if click tracking fails
+                    console.error('Error recording route click:', err);
+                }
             }
 
             // Redirect through proxy endpoint - link never exposed in frontend
