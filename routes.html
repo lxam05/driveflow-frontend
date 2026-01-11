@@ -762,6 +762,15 @@
         font-size: 16px;
         font-weight: 600;
         color: var(--text-main);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .leaderboard-tier-image {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
     }
 
     .leaderboard-routes {
@@ -1266,6 +1275,19 @@
         }
     }
 
+    function getTierImage(tier) {
+        if (!tier || tier === 'unranked') return '';
+        const imageMap = {
+            'bronze': 'bronze.png',
+            'silver': 'silver.png',
+            'gold': 'gold.png',
+            'champion': 'champion.png'
+        };
+        const imageName = imageMap[tier];
+        if (!imageName) return '';
+        return `<img src="${imageName}" alt="${tier}" class="leaderboard-tier-image">`;
+    }
+
     function displayLeaderboard(data) {
         const leaderboardContent = document.getElementById('leaderboardContent');
         
@@ -1275,11 +1297,15 @@
         for (let i = 0; i < 3; i++) {
             if (i < data.top3.length) {
                 const entry = data.top3[i];
+                const tierImage = getTierImage(entry.tier || 'champion'); // Top 3 are always champions
                 html += `
                     <div class="leaderboard-entry rank-${entry.rank}">
                         <div class="leaderboard-entry-left">
                             <div class="leaderboard-rank">${entry.rank}</div>
-                            <div class="leaderboard-username">${entry.username}</div>
+                            <div class="leaderboard-username">
+                                ${entry.username}
+                                ${tierImage}
+                            </div>
                         </div>
                         <div class="leaderboard-routes">${entry.totalRoutes}</div>
                     </div>
@@ -1301,11 +1327,15 @@
         const isInTop3 = data.top3.some(entry => entry.isCurrentUser);
         if (!isInTop3) {
             const rankText = data.currentUser.totalRoutes === 0 ? 'Unranked' : (data.currentUser.rank ? data.currentUser.rank : '-');
+            const tierImage = getTierImage(data.currentUser.tier);
             html += `
                 <div class="leaderboard-entry current-user">
                     <div class="leaderboard-entry-left">
                         <div class="leaderboard-rank">${rankText}</div>
-                        <div class="leaderboard-username">${data.currentUser.username}</div>
+                        <div class="leaderboard-username">
+                            ${data.currentUser.username}
+                            ${tierImage}
+                        </div>
                     </div>
                     <div class="leaderboard-routes">${data.currentUser.totalRoutes}</div>
                 </div>
