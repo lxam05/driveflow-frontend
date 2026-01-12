@@ -77,6 +77,24 @@
         padding: 0 20px 40px;
     }
 
+    /* Masonry layout container */
+    .masonry-container {
+        max-width: 1400px;
+        margin: 0 auto 40px;
+        padding: 0 20px 40px;
+        column-count: 2;
+        column-gap: 24px;
+    }
+
+    .masonry-item {
+        display: inline-block;
+        width: 100%;
+        break-inside: avoid;
+        margin-bottom: 24px;
+        page-break-inside: avoid; /* Fallback for older browsers */
+    }
+
+    /* Legacy two-column-container for other uses (if any) */
     .two-column-container {
         max-width: 1400px;
         margin: 0 auto 40px;
@@ -88,6 +106,10 @@
     }
 
     @media (max-width: 1024px) {
+        .masonry-container {
+            column-count: 1;
+        }
+
         .two-column-container {
             grid-template-columns: 1fr;
         }
@@ -971,10 +993,10 @@
     </div>
 </div>
 
-    <!-- Row 1: Routes Selection and Why Our Routes Work Side by Side -->
-    <div class="two-column-container">
-        <!-- Left Column: Routes Selection -->
-        <div>
+    <!-- Masonry Layout: All 4 cards in a single container -->
+    <div class="masonry-container">
+        <!-- Card 1: Routes Selection -->
+        <div class="masonry-item">
             <div class="selection-card">
                 <h2>Select Test Centre</h2>
                 <div class="search-box">
@@ -984,8 +1006,8 @@
             </div>
         </div>
 
-        <!-- Right Column: Why Our Routes Work -->
-        <div>
+        <!-- Card 2: Why Our Routes Work -->
+        <div class="masonry-item">
             <div class="why-our-routes">
                 <div class="why-our-routes-content">
                     <h2>Why Our Routes Work</h2>
@@ -1039,12 +1061,9 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Row 2: Leaderboard and Request Card Side by Side -->
-    <div class="two-column-container">
-        <!-- Left Column: Leaderboard -->
-        <div>
+        <!-- Card 3: Leaderboard -->
+        <div class="masonry-item">
             <div class="leaderboard-card" id="leaderboardCard">
                 <h2>🏆 Leaderboard</h2>
                 <p style="margin: -16px 0 24px; color: var(--text-muted); font-size: 14px; text-align: center;">Each route completed gets you 1 point</p>
@@ -1052,8 +1071,8 @@
             </div>
         </div>
 
-        <!-- Right Column: New Routes Request Card -->
-        <div>
+        <!-- Card 4: New Routes Request Card -->
+        <div class="masonry-item">
             <div class="new-routes-card">
                 <h2>🚀 New Routes Coming Next Week!</h2>
                 <p>We're adding <span class="highlight">new test centre routes</span> next week. Tell us which routes you want to see first!</p>
