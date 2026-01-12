@@ -731,14 +731,63 @@
     // Store all centres for filtering
     let allCentres = [];
     
+    // Centres with actual routes (in order of release)
+    const centresWithRoutes = [
+        "Naas",
+        "Tallaght",
+        "Dun Laoghaire",
+        "Wilton",
+        "Finglas",
+        "Raheny",
+        "Mulhuddart",
+        "Westside",
+        "Loughrea",
+        "Ballincollig",
+        "Nenagh",
+        "Wexford",
+        "Wicklow",
+        "Tralee",
+        "Waterford",
+        "Navan",
+        "Mitchelstown",
+        "Woodview"
+    ];
+    
+    // Sort centres: routes first (in release order), then rest alphabetically
+    function sortCentres(centres) {
+        const withRoutes = [];
+        const withoutRoutes = [];
+        
+        centres.forEach(centre => {
+            if (centresWithRoutes.includes(centre)) {
+                withRoutes.push(centre);
+            } else {
+                withoutRoutes.push(centre);
+            }
+        });
+        
+        // Sort withRoutes by the order in centresWithRoutes array
+        withRoutes.sort((a, b) => {
+            const indexA = centresWithRoutes.indexOf(a);
+            const indexB = centresWithRoutes.indexOf(b);
+            return indexA - indexB;
+        });
+        
+        // Sort withoutRoutes alphabetically
+        withoutRoutes.sort((a, b) => a.localeCompare(b));
+        
+        // Combine: routes first, then alphabetically sorted rest
+        return [...withRoutes, ...withoutRoutes];
+    }
+    
     // Load test centres on page load
     async function loadTestCentres() {
         try {
             const response = await fetch(`${API_URL}/routes/centres-list`);
             if (response.ok) {
                 const data = await response.json();
-                // Sort centres alphabetically
-                allCentres = [...data.centres].sort((a, b) => a.localeCompare(b));
+                // Sort: routes first, then alphabetically
+                allCentres = sortCentres(data.centres);
                 
                 populateSelects(allCentres);
             } else {
@@ -806,8 +855,8 @@
                     "Tuam",
                     "Tullamore"
                 ];
-                // Sort fallback centres alphabetically
-                allCentres = [...fallbackCentres].sort((a, b) => a.localeCompare(b));
+                // Sort: routes first, then alphabetically
+                allCentres = sortCentres(fallbackCentres);
                 
                 populateSelects(allCentres);
             }
@@ -876,8 +925,8 @@
                 "Tuam",
                 "Tullamore"
             ];
-                // Sort fallback centres alphabetically
-                allCentres = [...fallbackCentres].sort((a, b) => a.localeCompare(b));
+                // Sort: routes first, then alphabetically
+                allCentres = sortCentres(fallbackCentres);
                 
                 populateSelects(allCentres);
         }
