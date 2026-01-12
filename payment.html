@@ -259,6 +259,14 @@
         background: var(--bg-card);
         color: var(--text-main);
     }
+    
+    #singleCentreSearch:focus,
+    #bundleCentreSearch:focus {
+        outline: none;
+        border-color: var(--primary);
+        background: rgba(15, 23, 42, 0.8);
+        box-shadow: 0 0 0 3px rgba(91, 192, 190, 0.1);
+    }
 
     .package-btn {
         flex: 1;
@@ -551,6 +559,7 @@
 
                         <div class="form-group" id="singleCentreGroup">
                             <label for="testCentreSelect">Select Test Centre</label>
+                            <input type="text" id="singleCentreSearch" placeholder="Search test centres..." style="width: 100%; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--border-subtle); background: rgba(15, 23, 42, 0.6); color: var(--text-main); font-size: 15px; font-family: inherit; margin-bottom: 12px; transition: all 0.2s ease;" oninput="filterSingleCentres()">
                             <select id="testCentreSelect" class="test-centre-select">
                                 <option value="">-- Choose a test centre --</option>
                             </select>
@@ -558,6 +567,7 @@
 
                         <div class="form-group" id="bundleCentresGroup" style="display: none;">
                             <label>Select 3 Test Centres</label>
+                            <input type="text" id="bundleCentreSearch" placeholder="Search test centres..." style="width: 100%; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--border-subtle); background: rgba(15, 23, 42, 0.6); color: var(--text-main); font-size: 15px; font-family: inherit; margin-bottom: 12px; transition: all 0.2s ease;" oninput="filterBundleCentres()">
                             <select id="bundleCentre1" class="test-centre-select" style="margin-bottom: 12px;">
                                 <option value="">-- Choose first centre --</option>
                             </select>
@@ -718,32 +728,19 @@
         document.getElementById('christmasMessage').style.display = 'none';
     }
 
+    // Store all centres for filtering
+    let allCentres = [];
+    
     // Load test centres on page load
     async function loadTestCentres() {
         try {
             const response = await fetch(`${API_URL}/routes/centres-list`);
             if (response.ok) {
                 const data = await response.json();
-                const select = document.getElementById('testCentreSelect');
-                const bundle1 = document.getElementById('bundleCentre1');
-                const bundle2 = document.getElementById('bundleCentre2');
-                const bundle3 = document.getElementById('bundleCentre3');
+                // Sort centres alphabetically
+                allCentres = [...data.centres].sort((a, b) => a.localeCompare(b));
                 
-                data.centres.forEach(centre => {
-                    // Add to single select
-                    const option = document.createElement('option');
-                    option.value = centre;
-                    option.textContent = centre;
-                    select.appendChild(option);
-                    
-                    // Add to bundle selects
-                    [bundle1, bundle2, bundle3].forEach(bundleSelect => {
-                        const bundleOption = document.createElement('option');
-                        bundleOption.value = centre;
-                        bundleOption.textContent = centre;
-                        bundleSelect.appendChild(bundleOption);
-                    });
-                });
+                populateSelects(allCentres);
             } else {
                 console.error('Failed to load test centres');
                 // Fallback to only centres with actual routes available
@@ -809,29 +806,10 @@
                     "Tuam",
                     "Tullamore"
                 ];
-                const select = document.getElementById('testCentreSelect');
-                const bundle1 = document.getElementById('bundleCentre1');
-                const bundle2 = document.getElementById('bundleCentre2');
-                const bundle3 = document.getElementById('bundleCentre3');
+                // Sort fallback centres alphabetically
+                allCentres = [...fallbackCentres].sort((a, b) => a.localeCompare(b));
                 
-                [select, bundle1, bundle2, bundle3].forEach(sel => {
-                    sel.innerHTML = sel === select 
-                        ? '<option value="">-- Choose a test centre --</option>'
-                        : sel === bundle1 
-                            ? '<option value="">-- Choose first centre --</option>'
-                            : sel === bundle2
-                                ? '<option value="">-- Choose second centre --</option>'
-                                : '<option value="">-- Choose third centre --</option>';
-                });
-                
-                fallbackCentres.forEach(centre => {
-                    [select, bundle1, bundle2, bundle3].forEach(sel => {
-                        const option = document.createElement('option');
-                        option.value = centre;
-                        option.textContent = centre;
-                        sel.appendChild(option);
-                    });
-                });
+                populateSelects(allCentres);
             }
         } catch (err) {
             console.error('Error loading test centres:', err);
@@ -898,30 +876,112 @@
                 "Tuam",
                 "Tullamore"
             ];
-            const select = document.getElementById('testCentreSelect');
-            const bundle1 = document.getElementById('bundleCentre1');
-            const bundle2 = document.getElementById('bundleCentre2');
-            const bundle3 = document.getElementById('bundleCentre3');
-            
-            [select, bundle1, bundle2, bundle3].forEach(sel => {
-                sel.innerHTML = sel === select 
-                    ? '<option value="">-- Choose a test centre --</option>'
-                    : sel === bundle1 
-                        ? '<option value="">-- Choose first centre --</option>'
-                        : sel === bundle2
-                            ? '<option value="">-- Choose second centre --</option>'
-                            : '<option value="">-- Choose third centre --</option>';
-            });
-            
-            fallbackCentres.forEach(centre => {
-                [select, bundle1, bundle2, bundle3].forEach(sel => {
-                    const option = document.createElement('option');
-                    option.value = centre;
-                    option.textContent = centre;
-                    sel.appendChild(option);
-                });
-            });
+                // Sort fallback centres alphabetically
+                allCentres = [...fallbackCentres].sort((a, b) => a.localeCompare(b));
+                
+                populateSelects(allCentres);
         }
+    }
+    
+    // Populate all select dropdowns with centres
+    function populateSelects(centres) {
+        const select = document.getElementById('testCentreSelect');
+        const bundle1 = document.getElementById('bundleCentre1');
+        const bundle2 = document.getElementById('bundleCentre2');
+        const bundle3 = document.getElementById('bundleCentre3');
+        
+        // Store current selections
+        const singleSelected = select.value;
+        const bundle1Selected = bundle1.value;
+        const bundle2Selected = bundle2.value;
+        const bundle3Selected = bundle3.value;
+        
+        // Clear and repopulate single select
+        select.innerHTML = '<option value="">-- Choose a test centre --</option>';
+        centres.forEach(centre => {
+            const option = document.createElement('option');
+            option.value = centre;
+            option.textContent = centre;
+            if (centre === singleSelected) {
+                option.selected = true;
+            }
+            select.appendChild(option);
+        });
+        
+        // Clear and repopulate bundle selects
+        [bundle1, bundle2, bundle3].forEach((bundleSelect, index) => {
+            const selectedValue = index === 0 ? bundle1Selected : index === 1 ? bundle2Selected : bundle3Selected;
+            const placeholder = index === 0 ? '-- Choose first centre --' : index === 1 ? '-- Choose second centre --' : '-- Choose third centre --';
+            
+            bundleSelect.innerHTML = `<option value="">${placeholder}</option>`;
+            centres.forEach(centre => {
+                const option = document.createElement('option');
+                option.value = centre;
+                option.textContent = centre;
+                if (centre === selectedValue) {
+                    option.selected = true;
+                }
+                bundleSelect.appendChild(option);
+            });
+        });
+    }
+    
+    // Filter single centre dropdown
+    function filterSingleCentres() {
+        const searchInput = document.getElementById('singleCentreSearch');
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        const select = document.getElementById('testCentreSelect');
+        const currentSelection = select.value;
+        
+        // Filter centres based on search
+        const filteredCentres = searchTerm 
+            ? allCentres.filter(centre => centre.toLowerCase().includes(searchTerm))
+            : allCentres;
+        
+        // Repopulate with filtered results
+        select.innerHTML = '<option value="">-- Choose a test centre --</option>';
+        filteredCentres.forEach(centre => {
+            const option = document.createElement('option');
+            option.value = centre;
+            option.textContent = centre;
+            if (centre === currentSelection) {
+                option.selected = true;
+            }
+            select.appendChild(option);
+        });
+    }
+    
+    // Filter bundle centre dropdowns
+    function filterBundleCentres() {
+        const searchInput = document.getElementById('bundleCentreSearch');
+        const searchTerm = searchInput.value.toLowerCase().trim();
+        const bundle1 = document.getElementById('bundleCentre1');
+        const bundle2 = document.getElementById('bundleCentre2');
+        const bundle3 = document.getElementById('bundleCentre3');
+        
+        const currentSelections = [bundle1.value, bundle2.value, bundle3.value];
+        
+        // Filter centres based on search
+        const filteredCentres = searchTerm 
+            ? allCentres.filter(centre => centre.toLowerCase().includes(searchTerm))
+            : allCentres;
+        
+        // Repopulate all bundle selects with filtered results
+        [bundle1, bundle2, bundle3].forEach((bundleSelect, index) => {
+            const placeholder = index === 0 ? '-- Choose first centre --' : index === 1 ? '-- Choose second centre --' : '-- Choose third centre --';
+            const currentSelection = currentSelections[index];
+            
+            bundleSelect.innerHTML = `<option value="">${placeholder}</option>`;
+            filteredCentres.forEach(centre => {
+                const option = document.createElement('option');
+                option.value = centre;
+                option.textContent = centre;
+                if (centre === currentSelection) {
+                    option.selected = true;
+                }
+                bundleSelect.appendChild(option);
+            });
+        });
     }
 
     // Load centres when page loads
