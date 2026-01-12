@@ -537,7 +537,7 @@
                             <div style="display: flex; gap: 12px; margin-bottom: 20px;">
                                 <button type="button" id="singlePackageBtn" class="package-btn active" onclick="selectPackage('single')">
                                     <div style="font-weight: 700; font-size: 18px;">Single Centre</div>
-                                    <div style="font-size: 24px; font-weight: 800; color: var(--accent); margin: 8px 0;">€9.99</div>
+                                    <div style="font-size: 24px; font-weight: 800; color: var(--accent); margin: 8px 0;">€11.99</div>
                                     <div style="font-size: 13px; color: var(--text-muted);">1 test centre</div>
                                 </button>
                                 <button type="button" id="bundlePackageBtn" class="package-btn" onclick="selectPackage('bundle')">
@@ -572,7 +572,7 @@
 
                         <div class="price-info" id="priceInfo">
                             <div style="display: flex; align-items: baseline; justify-content: center; gap: 12px; margin-bottom: 8px;">
-                                <div class="price" id="currentPrice" style="margin: 0;">€9.99</div>
+                                <div class="price" id="currentPrice" style="margin: 0;">€11.99</div>
                                 <div id="originalPrice" style="color: var(--text-muted); font-size: 20px; text-decoration: line-through; opacity: 0.6; display: none;">€14.00</div>
                             </div>
                             <div class="price-label" id="priceLabel">per test centre</div>
@@ -593,7 +593,7 @@
                         </div>
 
                         <button class="btn-unlock" id="unlockBtn" onclick="showPaymentForm()">
-                            Unlock Routes (€9.99)
+                            Unlock Routes (€11.99)
                         </button>
 
                         <div class="scarcity-trust">
@@ -700,9 +700,9 @@
             bundleBtn.classList.remove('active');
             singleGroup.style.display = 'block';
             bundleGroup.style.display = 'none';
-            document.getElementById('currentPrice').textContent = '€9.99';
+            document.getElementById('currentPrice').textContent = '€11.99';
             priceLabel.textContent = 'per test centre';
-            unlockBtn.textContent = 'Unlock Routes (€9.99)';
+            unlockBtn.textContent = 'Unlock Routes (€11.99)';
         } else {
             bundleBtn.classList.add('active');
             singleBtn.classList.remove('active');
