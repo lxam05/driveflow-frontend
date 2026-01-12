@@ -458,6 +458,13 @@
             <div id="loadingContainer" class="loading">Loading routes...</div>
         </div>
 
+        <!-- Purchase Button Section (shown when logged in but no access) -->
+        <div id="purchaseSection" style="display: none; margin-top: 40px; text-align: center; padding: 40px; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); box-shadow: var(--shadow-card);">
+            <h3 style="margin: 0 0 16px; color: var(--text-main); font-size: 24px; font-weight: 700;">Ready to Practice These Routes?</h3>
+            <p style="margin: 0 0 24px; color: var(--text-muted); font-size: 16px; line-height: 1.6;">Get instant access to all Cavan driving test routes for just €11.99</p>
+            <a href="payment.html" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; padding: 14px 32px; font-size: 16px; font-weight: 600;">Buy Now - €11.99</a>
+        </div>
+
         <a href="routes.html" class="btn-back">← Back to All Routes</a>
     </div>
 
@@ -536,11 +543,16 @@
                 paywallContainer.style.display = 'block';
                 loadingContainer.style.display = 'none';
                 routesContainer.style.display = 'none';
+                // Show purchase button at bottom if user is logged in
+                if (token) {
+                    document.getElementById('purchaseSection').style.display = 'block';
+                }
                 return;
             }
             
             // User has premium access - load routes
             paywallContainer.style.display = 'none';
+            document.getElementById('purchaseSection').style.display = 'none';
             await loadRoutes();
         });
 
