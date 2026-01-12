@@ -1375,6 +1375,7 @@
         { name: "Mulhuddart", routes: 5 },
         { name: "Naas", routes: 7 },
         { name: "Navan", routes: 6 },
+        { name: "Woodview", routes: 6 },
         { name: "Nenagh", routes: 7 },
         { name: "Raheny", routes: 5 },
         { name: "Tallaght", routes: 7 },
@@ -1513,6 +1514,11 @@
         
         if (centre.name === "Mitchelstown") {
             window.location.href = 'mitchelstown-routes.html';
+            return;
+        }
+        
+        if (centre.name === "Woodview") {
+            window.location.href = 'woodview-routes.html';
             return;
         }
         
