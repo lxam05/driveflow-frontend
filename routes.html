@@ -1376,6 +1376,7 @@
         { name: "Naas", routes: 7 },
         { name: "Navan", routes: 6 },
         { name: "Woodview", routes: 6 },
+        { name: "Cavan", routes: 6 },
         { name: "Nenagh", routes: 7 },
         { name: "Raheny", routes: 5 },
         { name: "Tallaght", routes: 7 },
@@ -1394,7 +1395,6 @@
         { name: "Carnmore", routes: 0 },
         { name: "Carrick-on-Shannon", routes: 0 },
         { name: "Castlebar", routes: 0 },
-        { name: "Cavan", routes: 0 },
         { name: "Clifden", routes: 0 },
         { name: "Clonmel", routes: 0 },
         { name: "Clybaun", routes: 0 },
@@ -1564,6 +1564,11 @@
             return;
         }
         
+        if (centre.name === "Cavan") {
+            window.location.href = 'cavan-routes.html';
+            return;
+        }
+        
         if (centre.name === "Westside") {
             window.location.href = 'westside-routes.html';
             return;
@@ -1614,10 +1619,6 @@
         }
         if (centre.name === "Castlebar") {
             window.location.href = 'castlebar-routes.html';
-            return;
-        }
-        if (centre.name === "Cavan") {
-            window.location.href = 'cavan-routes.html';
             return;
         }
         if (centre.name === "Clifden") {
