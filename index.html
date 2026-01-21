@@ -48,6 +48,11 @@
 
     /* Enable scrolling on mobile devices and tablets */
     @media (max-width: 1024px) {
+        html,
+        body {
+            overflow-x: hidden;
+        }
+
         body {
             overflow: auto;
             overscroll-behavior: auto;
@@ -80,11 +85,12 @@
         #world {
             position: relative !important;
             height: auto !important;
+            min-height: 100vh;
             transform: none !important;
+            left: 0;
+            right: 0;
+            width: 100vw;
             background-attachment: scroll;
-            background-size: 100% auto;
-            background-position: center top;
-            background-repeat: no-repeat;
         }
         
         #car, #fog {
@@ -671,6 +677,11 @@
     }
 
     @media (max-width: 1024px) {
+        html,
+        body {
+            overflow-x: hidden;
+        }
+
         /* Enable scrolling on mobile devices and tablets */
         body {
             overflow: auto !important;
@@ -710,13 +721,11 @@
             position: fixed !important;
             top: 0;
             left: 0;
+            right: 0;
             width: 100vw;
-            height: 100vh !important;
+            min-height: 100vh;
             transform: none !important;
             background-attachment: scroll;
-            background-size: 100% auto;
-            background-position: center top;
-            background-repeat: no-repeat;
             z-index: 0;
         }
         
@@ -871,11 +880,18 @@
         width: 100%;
         height: var(--world-height, 8000px);
         background-image: url("backgroundForWeb.png");
-        background-size: auto 100%;
-        background-position: center top;
+        background-size: cover;
+        background-position: center center;
         background-repeat: no-repeat;
         will-change: transform;
         z-index: 0;
+    }
+
+    @media (min-width: 1025px) {
+        #world {
+            background-size: auto 100%;
+            background-position: center top;
+        }
     }
 
     @keyframes cloudDrift {
