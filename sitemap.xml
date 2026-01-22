@@ -169,6 +169,13 @@
 
   <!-- Learning Resources -->
   <url>
+    <loc>https://www.driveflow.ie/guides/why-learners-fail-driving-test-ireland</loc>
+    <lastmod>2026-01-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
     <loc>https://www.driveflow.ie/getting-started.html</loc>
     <lastmod>2025-01-11</lastmod>
     <changefreq>monthly</changefreq>
