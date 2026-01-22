@@ -1117,6 +1117,57 @@
     let licenseExpiresAt = null;
     let pendingRoute = null;
 
+    async function confirmPaymentFromRedirect() {
+        const params = new URLSearchParams(window.location.search);
+        const paymentIntentId = params.get('payment_intent')
+            || (params.get('payment_intent_client_secret') || '').split('_secret')[0]
+            || null;
+
+        if (!paymentIntentId) {
+            return false;
+        }
+
+        const token = localStorage.getItem('auth_token');
+        if (!token) {
+            return false;
+        }
+
+        try {
+            const confirmResponse = await fetch(`${API_URL}/routes/confirm-payment`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ paymentIntentId })
+            });
+
+            if (confirmResponse.ok) {
+                return true;
+            }
+
+            const errorData = await confirmResponse.json().catch(() => null);
+            if (errorData?.error && errorData.error.toLowerCase().includes('already created')) {
+                return true;
+            }
+
+            console.warn('Payment confirmation failed:', errorData?.error || confirmResponse.status);
+            return false;
+        } catch (err) {
+            console.error('Error confirming payment from redirect:', err);
+            return false;
+        } finally {
+            if (params.has('payment_intent') || params.has('payment_intent_client_secret') || params.has('redirect_status')) {
+                params.delete('payment_intent');
+                params.delete('payment_intent_client_secret');
+                params.delete('redirect_status');
+                const query = params.toString();
+                const nextUrl = query ? `${window.location.pathname}?${query}` : window.location.pathname;
+                history.replaceState({}, '', nextUrl);
+            }
+        }
+    }
+
     // Check license status on page load
     async function checkLicenseStatus() {
         const token = localStorage.getItem('auth_token');
@@ -1361,6 +1412,7 @@
     }
 
     window.addEventListener('DOMContentLoaded', async () => {
+        await confirmPaymentFromRedirect();
         await checkLicenseStatus();
         await loadLeaderboard();
     });
