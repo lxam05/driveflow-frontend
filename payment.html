@@ -1163,7 +1163,7 @@
         
         if (!centreName) {
             // Reset to default price
-            updatePriceDisplay(999, false);
+            updatePriceDisplay(1199, false);
             return;
         }
         
@@ -1188,19 +1188,19 @@
                 } else {
                     appliedDiscountSource = null;
                     appliedDiscountPercent = 0;
-                    updatePriceDisplay(data.originalPrice || 999, false);
+                    updatePriceDisplay(data.originalPrice || 1199, false);
                 }
             } else {
                 // Default to regular price on error
                 appliedDiscountSource = null;
                 appliedDiscountPercent = 0;
-                updatePriceDisplay(999, false);
+                updatePriceDisplay(1199, false);
             }
         } catch (err) {
             console.error('Error checking discount:', err);
             appliedDiscountSource = null;
             appliedDiscountPercent = 0;
-            updatePriceDisplay(999, false);
+            updatePriceDisplay(1199, false);
         }
     }
     
@@ -1255,7 +1255,7 @@
                 appliedDiscountCode = null;
                 appliedDiscountSource = null;
                 appliedDiscountPercent = 0;
-                updatePriceDisplay(currentPackage === 'bundle' ? 1899 : 999, false);
+                updatePriceDisplay(currentPackage === 'bundle' ? 1899 : 1199, false);
                 if (!silent) {
                     setDiscountCodeMessage('error', 'Invalid or expired discount code.');
                 }
