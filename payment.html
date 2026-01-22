@@ -223,6 +223,66 @@
         margin: 0;
     }
 
+    .discount-code-row {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        margin-top: 12px;
+    }
+
+    .discount-code-input {
+        flex: 1;
+        padding: 12px 14px;
+        border-radius: 12px;
+        border: 1px solid var(--border-subtle);
+        background: rgba(15, 23, 42, 0.6);
+        color: var(--text-main);
+        font-size: 14px;
+        font-family: inherit;
+        transition: all 0.2s ease;
+    }
+
+    .discount-code-input:focus {
+        outline: none;
+        border-color: var(--primary);
+        background: rgba(15, 23, 42, 0.8);
+        box-shadow: 0 0 0 3px rgba(91, 192, 190, 0.1);
+    }
+
+    .btn-apply-discount {
+        padding: 12px 16px;
+        border-radius: 12px;
+        border: 1px solid var(--border-subtle);
+        background: var(--bg-card-smaller);
+        color: var(--text-main);
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        white-space: nowrap;
+    }
+
+    .btn-apply-discount:hover {
+        border-color: var(--primary);
+        color: var(--accent);
+    }
+
+    .discount-code-message {
+        margin-top: 10px;
+        font-size: 13px;
+        display: none;
+    }
+
+    .discount-code-message.success {
+        color: var(--accent);
+        display: block;
+    }
+
+    .discount-code-message.error {
+        color: #ef4444;
+        display: block;
+    }
+
     .form-group {
         margin-bottom: 24px;
     }
@@ -589,9 +649,19 @@
                             <div id="discountMessage" style="color: var(--accent); font-size: 14px; font-weight: 600; margin-top: 8px; display: none;">
                                 🎉 50% Off - Returning Customer Discount!
                             </div>
+                            <div id="codeDiscountMessage" style="color: var(--accent); font-size: 14px; font-weight: 600; margin-top: 8px; display: none;"></div>
                             <div id="christmasMessage" style="color: var(--accent); font-size: 14px; font-weight: 600; margin-top: 8px; display: none;">
                                 🎄 Christmas Special - Save 29%
                             </div>
+                        </div>
+
+                        <div class="form-group" id="discountCodeGroup">
+                            <label for="discountCodeInput">Discount code</label>
+                            <div class="discount-code-row">
+                                <input type="text" id="discountCodeInput" class="discount-code-input" placeholder="Enter code" autocomplete="off">
+                                <button type="button" class="btn-apply-discount" id="applyDiscountBtn" onclick="applyDiscountCode()">Apply</button>
+                            </div>
+                            <div id="discountCodeMessage" class="discount-code-message"></div>
                         </div>
 
                         <div class="trust-badge">
@@ -693,6 +763,9 @@
     let selectedCentre = null;
     let selectedCentres = [];
     let currentPackage = 'single'; // 'single' or 'bundle'
+    let appliedDiscountCode = null;
+    let appliedDiscountSource = null;
+    let appliedDiscountPercent = 0;
 
     // Package selection
     function selectPackage(packageType) {
@@ -726,6 +799,14 @@
         // Hide discount messages when switching packages
         document.getElementById('discountMessage').style.display = 'none';
         document.getElementById('christmasMessage').style.display = 'none';
+        document.getElementById('codeDiscountMessage').style.display = 'none';
+        document.getElementById('discountCodeMessage').style.display = 'none';
+
+        if (appliedDiscountCode) {
+            applyDiscountCode();
+        } else if (packageType === 'single') {
+            checkDiscount();
+        }
     }
 
     // Store all centres for filtering
@@ -1057,10 +1138,25 @@
                 });
             }
         });
+
+        const discountInput = document.getElementById('discountCodeInput');
+        if (discountInput) {
+            discountInput.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    applyDiscountCode();
+                }
+            });
+        }
     });
     
     // Check discount eligibility when centre is selected (only for single purchases)
     async function checkDiscount() {
+        if (appliedDiscountCode) {
+            await validateDiscountCode(appliedDiscountCode, true);
+            return;
+        }
+
         // Don't check discount for bundle packages
         if (currentPackage === 'bundle') {
             return;
@@ -1090,26 +1186,143 @@
             if (response.ok) {
                 const data = await response.json();
                 if (data.eligible) {
-                    updatePriceDisplay(data.discountedPrice, true, data.originalPrice);
+                    appliedDiscountSource = 'returning';
+                    appliedDiscountPercent = data.discountPercent || 50;
+                    updatePriceDisplay(data.discountedPrice, true, data.originalPrice, 'returning');
                 } else {
+                    appliedDiscountSource = null;
+                    appliedDiscountPercent = 0;
                     updatePriceDisplay(data.originalPrice || 999, false);
                 }
             } else {
                 // Default to regular price on error
+                appliedDiscountSource = null;
+                appliedDiscountPercent = 0;
                 updatePriceDisplay(999, false);
             }
         } catch (err) {
             console.error('Error checking discount:', err);
+            appliedDiscountSource = null;
+            appliedDiscountPercent = 0;
             updatePriceDisplay(999, false);
         }
     }
     
+    function setDiscountCodeMessage(type, text) {
+        const message = document.getElementById('discountCodeMessage');
+        if (!message) return;
+        message.classList.remove('success', 'error');
+        if (!text) {
+            message.style.display = 'none';
+            message.textContent = '';
+            return;
+        }
+        message.classList.add(type);
+        message.textContent = text;
+        message.style.display = 'block';
+    }
+
+    async function validateDiscountCode(code, silent = false) {
+        const token = localStorage.getItem('auth_token');
+        if (!token) {
+            if (!silent) {
+                setDiscountCodeMessage('error', 'Please log in to apply a discount code.');
+            }
+            return;
+        }
+
+        const select = document.getElementById('testCentreSelect');
+        const centreName = select ? select.value : null;
+        const requestBody = {
+            code,
+            packageType: currentPackage,
+            centreName: centreName || null,
+            centreNames: selectedCentres
+        };
+
+        try {
+            const response = await fetch(`${API_URL}/routes/validate-discount-code`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(requestBody)
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to validate discount code');
+            }
+
+            const data = await response.json();
+            if (!data.codeValid) {
+                appliedDiscountCode = null;
+                appliedDiscountSource = null;
+                appliedDiscountPercent = 0;
+                updatePriceDisplay(currentPackage === 'bundle' ? 1899 : 999, false);
+                if (!silent) {
+                    setDiscountCodeMessage('error', 'Invalid or expired discount code.');
+                }
+                return;
+            }
+
+            appliedDiscountCode = data.code;
+            appliedDiscountSource = data.discountSource || null;
+            appliedDiscountPercent = data.discountPercent || 0;
+            updatePriceDisplay(data.discountedPrice, data.discountApplied, data.originalPrice, data.discountSource);
+            if (!silent) {
+                const appliedText = data.discountSource === 'returning'
+                    ? 'Returning customer discount applied (better than code).'
+                    : `${data.discountPercent}% off applied with code ${data.code}.`;
+                setDiscountCodeMessage('success', appliedText);
+            }
+        } catch (err) {
+            console.error('Error validating discount code:', err);
+            if (!silent) {
+                setDiscountCodeMessage('error', 'Could not validate that code. Please try again.');
+            }
+        }
+    }
+
+    async function applyDiscountCode() {
+        const input = document.getElementById('discountCodeInput');
+        const code = input ? input.value.trim() : '';
+        const singleSelect = document.getElementById('testCentreSelect');
+        const bundle1 = document.getElementById('bundleCentre1');
+        const bundle2 = document.getElementById('bundleCentre2');
+        const bundle3 = document.getElementById('bundleCentre3');
+
+        if (currentPackage === 'single') {
+            selectedCentre = singleSelect ? singleSelect.value : null;
+            selectedCentres = [];
+        } else {
+            const centres = [bundle1?.value, bundle2?.value, bundle3?.value].filter(Boolean);
+            selectedCentres = centres;
+            selectedCentre = null;
+        }
+
+        if (!code) {
+            appliedDiscountCode = null;
+            appliedDiscountSource = null;
+            appliedDiscountPercent = 0;
+            setDiscountCodeMessage('', '');
+            if (currentPackage === 'bundle') {
+                updatePriceDisplay(1899, false);
+            } else {
+                checkDiscount();
+            }
+            return;
+        }
+        await validateDiscountCode(code);
+    }
+
     // Update price display
-    function updatePriceDisplay(priceInCents, hasDiscount, originalPriceInCents = null) {
+    function updatePriceDisplay(priceInCents, hasDiscount, originalPriceInCents = null, discountSource = null) {
         const priceElement = document.getElementById('currentPrice');
         const originalPriceElement = document.getElementById('originalPrice');
         const discountMessage = document.getElementById('discountMessage');
         const christmasMessage = document.getElementById('christmasMessage');
+        const codeDiscountMessage = document.getElementById('codeDiscountMessage');
         const unlockBtn = document.getElementById('unlockBtn');
         const priceLabel = document.getElementById('priceLabel');
         
@@ -1125,17 +1338,34 @@
             if (originalPriceElement) originalPriceElement.style.display = 'none';
             if (discountMessage) discountMessage.style.display = 'none';
             if (christmasMessage) christmasMessage.style.display = 'none';
+            if (codeDiscountMessage) {
+                if (discountSource === 'code') {
+                    codeDiscountMessage.textContent = `💸 ${appliedDiscountPercent}% Off - Code Applied`;
+                    codeDiscountMessage.style.display = 'block';
+                } else {
+                    codeDiscountMessage.style.display = 'none';
+                }
+            }
         } else {
             if (priceLabel) priceLabel.textContent = 'per test centre';
             if (hasDiscount && originalPriceInCents) {
                 const originalPrice = (originalPriceInCents / 100).toFixed(2);
                 originalPriceElement.textContent = `€${originalPrice}`;
                 originalPriceElement.style.display = 'block';
-                if (discountMessage) discountMessage.style.display = 'block';
+                if (discountMessage) discountMessage.style.display = discountSource === 'returning' ? 'block' : 'none';
+                if (codeDiscountMessage) {
+                    if (discountSource === 'code') {
+                        codeDiscountMessage.textContent = `💸 ${appliedDiscountPercent}% Off - Code Applied`;
+                        codeDiscountMessage.style.display = 'block';
+                    } else {
+                        codeDiscountMessage.style.display = 'none';
+                    }
+                }
                 if (christmasMessage) christmasMessage.style.display = 'none';
             } else {
                 if (originalPriceElement) originalPriceElement.style.display = 'none';
                 if (discountMessage) discountMessage.style.display = 'none';
+                if (codeDiscountMessage) codeDiscountMessage.style.display = 'none';
                 if (christmasMessage) christmasMessage.style.display = 'block';
             }
             if (unlockBtn) unlockBtn.textContent = `Unlock Routes (€${price})`;
@@ -1221,8 +1451,8 @@
 
             // Create payment intent with selected centre(s)
             const requestBody = currentPackage === 'single' 
-                ? { centreName: selectedCentre, packageType: 'single' }
-                : { centreNames: selectedCentres, packageType: 'bundle' };
+                ? { centreName: selectedCentre, packageType: 'single', discountCode: appliedDiscountCode }
+                : { centreNames: selectedCentres, packageType: 'bundle', discountCode: appliedDiscountCode };
             
             const response = await fetch(`${API_URL}/routes/create-payment-intent`, {
                 method: 'POST',
@@ -1253,9 +1483,13 @@
             
             // Update price display if discount was applied (only for single purchases)
             if (data.packageType === 'bundle') {
-                updatePriceDisplay(1899, false);
+                if (data.discountApplied && data.finalPrice) {
+                    updatePriceDisplay(data.finalPrice, true, data.originalPrice, data.discountSource);
+                } else {
+                    updatePriceDisplay(1899, false);
+                }
             } else if (data.discountApplied && data.finalPrice) {
-                updatePriceDisplay(data.finalPrice, true, data.originalPrice);
+                updatePriceDisplay(data.finalPrice, true, data.originalPrice, data.discountSource);
             }
 
             // Create payment element
