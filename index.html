@@ -1450,7 +1450,7 @@ const levelSelector = document.getElementById("levelSelector");
 const footer        = document.getElementById("footer");
 
 const MIN_WORLD_HEIGHT = 8000;
-const sectionOrder = ["getting","theory","lessons","booking","preparing","guides","newdriver"];
+const sectionOrder = ["guides","getting","theory","lessons","booking","preparing","newdriver"];
 const sectionSpacingMultiplier = 1.35;
 
 let worldHeight = MIN_WORLD_HEIGHT;
@@ -1670,14 +1670,17 @@ function updateActiveSectionHighlight(){
 function recalcLayout(){
     viewportHeight = window.innerHeight;
     const spacing = viewportHeight * sectionSpacingMultiplier;
+    const header = document.getElementById("mainHeader");
+    const headerHeight = header ? header.offsetHeight : 80;
+    const firstOffset = headerHeight + 40;
 
     sectionOrder.forEach((id, index) => {
         if (index === 0) {
             // First section starts lower to give space from header
-            sectionOffsets[id] = spacing * 1.2;
+            sectionOffsets[id] = firstOffset;
         } else {
             // Subsequent sections maintain consistent spacing from first section
-            sectionOffsets[id] = spacing * 1.2 + spacing * index;
+            sectionOffsets[id] = firstOffset + spacing * index;
         }
     });
 
