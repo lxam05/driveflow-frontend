@@ -1434,7 +1434,7 @@
         { name: "Tallaght", routes: 7 },
         { name: "Tralee", routes: 7 },
         { name: "Waterford", routes: 7 },
-        { name: "Westside", routes: 7 },
+        { name: "Westside", displayName: "Westside Galway", routes: 7 },
         { name: "Wexford", routes: 7 },
         { name: "Wicklow", routes: 7 },
         { name: "Wilton", routes: 6 },
@@ -1449,7 +1449,7 @@
         { name: "Castlebar", routes: 0 },
         { name: "Clifden", routes: 0 },
         { name: "Clonmel", routes: 0 },
-        { name: "Clybaun", routes: 0 },
+        { name: "Clybaun", displayName: "Clybaun Galway", routes: 0 },
         { name: "Donegal", routes: 0 },
         { name: "Dundalk", routes: 0 },
         { name: "Dungarvan", routes: 0 },
@@ -1511,7 +1511,8 @@
         testCentres.forEach(centre => {
             const card = document.createElement('div');
             card.className = 'centre-card';
-            card.innerHTML = `<h3>${centre.name}</h3>`;
+            const centreLabel = centre.displayName || centre.name;
+            card.innerHTML = `<h3>${centreLabel}</h3>`;
             card.addEventListener('click', () => {
                 selectCentre(centre);
                 // Update selected state
