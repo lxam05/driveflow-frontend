@@ -558,20 +558,6 @@
             </ul>
         </div>
 
-        <div id="routes" style="scroll-margin-top: 120px;">
-            <div id="errorContainer"></div>
-            <div id="paywallContainer" style="display: none; border-radius: var(--radius-xl); background: var(--bg-card); border: 1px solid var(--border-subtle); box-shadow: var(--shadow-card); padding: 40px; margin-bottom: 40px; text-align: center;">
-                <h2 style="margin: 0 0 16px; color: var(--accent); font-size: 28px; font-weight: 800;">Access Required</h2>
-                <p style="margin: 0 0 24px; color: var(--text-main); font-size: 16px; line-height: 1.7;">Please log in or purchase access to view the Tallaght driving test routes.</p>
-                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-                    <a href="login.html" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; padding: 12px 24px;">Log In</a>
-                    <a href="payment.html" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; padding: 12px 24px; background: var(--accent);">Purchase Access</a>
-                </div>
-            </div>
-            <div id="routesContainer" class="routes-container"></div>
-            <div id="loadingContainer" class="loading">Loading routes...</div>
-        </div>
-
         <div class="info-section">
             <h3>Areas Used In Tallaght Driving Test Routes</h3>
             <p>These locations appear repeatedly across Tallaght driving test routes:</p>
@@ -615,6 +601,20 @@
             <h3>Resources</h3>
             <p>Get the full breakdown of why learners fail — and what actually improves pass rates.</p>
             <a href="guides/why-learners-fail-driving-test-ireland/" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; padding: 12px 24px;">Why Learners Fail the Irish Driving Test</a>
+        </div>
+
+        <div id="routes" style="scroll-margin-top: 120px;">
+            <div id="errorContainer"></div>
+            <div id="paywallContainer" style="display: none; border-radius: var(--radius-xl); background: var(--bg-card); border: 1px solid var(--border-subtle); box-shadow: var(--shadow-card); padding: 40px; margin-bottom: 40px; text-align: center;">
+                <h2 style="margin: 0 0 16px; color: var(--accent); font-size: 28px; font-weight: 800;">Access Required</h2>
+                <p style="margin: 0 0 24px; color: var(--text-main); font-size: 16px; line-height: 1.7;">Please log in or purchase access to view the Tallaght driving test routes.</p>
+                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                    <a href="login.html" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; padding: 12px 24px;">Log In</a>
+                    <a href="payment.html" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; padding: 12px 24px; background: var(--accent);">Purchase Access</a>
+                </div>
+            </div>
+            <div id="routesContainer" class="routes-container"></div>
+            <div id="loadingContainer" class="loading">Loading routes...</div>
         </div>
 
         <!-- Purchase Button Section (shown when logged in but no access) -->
