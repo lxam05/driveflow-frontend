@@ -650,9 +650,6 @@
                                 🎉 50% Off - Returning Customer Discount!
                             </div>
                             <div id="codeDiscountMessage" style="color: var(--accent); font-size: 14px; font-weight: 600; margin-top: 8px; display: none;"></div>
-                            <div id="christmasMessage" style="color: var(--accent); font-size: 14px; font-weight: 600; margin-top: 8px; display: none;">
-                                🎄 Christmas Special - Save 29%
-                            </div>
                         </div>
 
                         <div class="form-group" id="discountCodeGroup">
@@ -798,7 +795,6 @@
         
         // Hide discount messages when switching packages
         document.getElementById('discountMessage').style.display = 'none';
-        document.getElementById('christmasMessage').style.display = 'none';
         document.getElementById('codeDiscountMessage').style.display = 'none';
         document.getElementById('discountCodeMessage').style.display = 'none';
 
@@ -1321,7 +1317,6 @@
         const priceElement = document.getElementById('currentPrice');
         const originalPriceElement = document.getElementById('originalPrice');
         const discountMessage = document.getElementById('discountMessage');
-        const christmasMessage = document.getElementById('christmasMessage');
         const codeDiscountMessage = document.getElementById('codeDiscountMessage');
         const unlockBtn = document.getElementById('unlockBtn');
         const priceLabel = document.getElementById('priceLabel');
@@ -1337,7 +1332,6 @@
             if (unlockBtn) unlockBtn.textContent = `Unlock Bundle (€${price})`;
             if (originalPriceElement) originalPriceElement.style.display = 'none';
             if (discountMessage) discountMessage.style.display = 'none';
-            if (christmasMessage) christmasMessage.style.display = 'none';
             if (codeDiscountMessage) {
                 if (discountSource === 'code') {
                     codeDiscountMessage.textContent = `💸 ${appliedDiscountPercent}% Off - Code Applied`;
@@ -1361,12 +1355,10 @@
                         codeDiscountMessage.style.display = 'none';
                     }
                 }
-                if (christmasMessage) christmasMessage.style.display = 'none';
             } else {
                 if (originalPriceElement) originalPriceElement.style.display = 'none';
                 if (discountMessage) discountMessage.style.display = 'none';
                 if (codeDiscountMessage) codeDiscountMessage.style.display = 'none';
-                if (christmasMessage) christmasMessage.style.display = 'block';
             }
             if (unlockBtn) unlockBtn.textContent = `Unlock Routes (€${price})`;
         }
