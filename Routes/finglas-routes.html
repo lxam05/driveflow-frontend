@@ -53,8 +53,9 @@
             </div>
         </div>
 
-        <div id="errorContainer"></div>
+        
         </div>
+<div id="routes" class="routes-section" data-route="finglas" style="scroll-margin-top: 120px;"></div>
 <div id="sharedPurchase"></div>
 <div id="sharedFooter"></div>
     <script type="application/ld+json">
@@ -90,7 +91,7 @@
     <script>
         // Load chatbot widget if it exists
         const chatbotScript = document.createElement('script');
-        chatbotScript.src = 'chatbot-widget.js';
+        chatbotScript.src = '/chatbot-widget.js';
         chatbotScript.onerror = function() {
             // Silently fail if chatbot widget doesn't exist
             console.log('Chatbot widget not found, skipping...');
