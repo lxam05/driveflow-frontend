@@ -109,25 +109,25 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.driveflow.ie/dun-laoghaire-routes.html</loc>
+    <loc>https://www.driveflow.ie/Routes/dun-laoghaire-routes.html</loc>
     <lastmod>2025-01-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.driveflow.ie/naas-routes.html</loc>
+    <loc>https://www.driveflow.ie/Routes/naas-routes.html</loc>
     <lastmod>2025-01-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.driveflow.ie/tallaght-routes.html</loc>
+    <loc>https://www.driveflow.ie/Routes/tallaght-routes.html</loc>
     <lastmod>2025-01-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.driveflow.ie/wilton-routes.html</loc>
+    <loc>https://www.driveflow.ie/Routes/wilton-routes.html</loc>
     <lastmod>2025-01-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -139,7 +139,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.driveflow.ie/raheny-routes.html</loc>
+    <loc>https://www.driveflow.ie/Routes/raheny-routes.html</loc>
     <lastmod>2025-01-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -151,7 +151,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.driveflow.ie/westside-routes.html</loc>
+    <loc>https://www.driveflow.ie/Routes/westside-routes.html</loc>
     <lastmod>2025-01-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -536,6 +536,42 @@
   </url>
   <url>
     <loc>https://www.driveflow.ie/Routes/woodview-routes.html</loc>
+    <lastmod>2026-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.driveflow.ie/Routes/wexford-routes.html</loc>
+    <lastmod>2026-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.driveflow.ie/Routes/cavan-routes.html</loc>
+    <lastmod>2026-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.driveflow.ie/Routes/killarney-routes.html</loc>
+    <lastmod>2026-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.driveflow.ie/Routes/tullamore-routes.html</loc>
+    <lastmod>2026-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.driveflow.ie/Routes/limerick-castlemungret-routes.html</loc>
+    <lastmod>2026-01-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.driveflow.ie/Routes/mitchelstown-routes.html</loc>
     <lastmod>2026-01-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
