@@ -14,6 +14,7 @@
     let tokenExpiresAt = null;
     let hasLicense = false;
     let licenseExpiresAt = null;
+    let currentApiSlug = null;
 
     function deriveCentreName() {
         const h1 = document.querySelector('h1');
@@ -277,6 +278,11 @@
             return;
         }
 
+        if (!currentApiSlug) {
+            alert('Route information not available. Please refresh the page.');
+            return;
+        }
+
         if (new Date() > tokenExpiresAt) {
             alert('Your access has expired. Please refresh the page to get a new token.');
             return;
@@ -306,7 +312,7 @@
             }
         }
 
-        window.location.href = `${API_URL}/routes/${apiSlug}-route/${accessToken}/${routeId}`;
+        window.location.href = `${API_URL}/routes/${currentApiSlug}-route/${accessToken}/${routeId}`;
     }
 
     window.openRoute = openRoute;
@@ -315,6 +321,7 @@
         const config = await loadConfig();
         const routeConfig = config[routeKey] || {};
         const apiSlug = routeConfig.apiSlug || routeKey;
+        currentApiSlug = apiSlug;
         const centreName = formatCentreName(routeConfig.centreName);
 
         renderSharedSections(centreName);
