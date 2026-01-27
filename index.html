@@ -483,6 +483,8 @@
         }
 
         .info-card {
+            top: 72px;
+            height: calc(100vh - 72px);
             width: 100vw;
             right: -100vw;
         }
@@ -1530,7 +1532,8 @@ function updateEverything(){
     });
 
     /* footer moves same as world (glued to bottom of 8000px world) */
-    footer.style.transform = `translateY(${-scrollPos}px)`;
+    const clampedScroll = Math.max(0, Math.min(scrollPos, maxScroll));
+    footer.style.transform = `translateY(${-Math.round(clampedScroll)}px)`;
 
     /* car vertical movement */
     const carMin = viewportHeight * 0.25;
