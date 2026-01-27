@@ -1,26 +1,3 @@
 git add .
 git commit -m "27jan"
 git push
-
-NAAS ROUTES
-// route1 - my first route
-// route  - test app route 1
-// route  - brian route 1
-// route -  brian route 2
-// route  - brian route 3
-// route  - brian route 4
-// route  - csm route 5 
-
-TALLAGHT ROUTES
-// route adm
-
-DUN LAOGHAIRE ROUTES
-//route adm
-
-Wilton routes
-// route 1 - youdrive driving a full test route
-// route 2 - youdrive route 2 wilton
-// route 3 - youdrive a new full length route
-// route 4 - youdrive 2 part route
-// route 5 - youdrive another route
-// route 6 - complete start and end route
