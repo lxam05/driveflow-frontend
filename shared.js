@@ -192,7 +192,7 @@
     function displayRoutes(apiSlug, data) {
         const routesContainer = document.getElementById('routesContainer');
 
-        if (data.message) {
+        if (data.message && (!data.routes || data.routes.length === 0)) {
             const countdownKey = `routeReleaseCountdown_${apiSlug}`;
             let startTime = localStorage.getItem(countdownKey);
 
