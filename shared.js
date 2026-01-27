@@ -29,7 +29,7 @@
 
     async function loadConfig() {
         try {
-            const res = await fetch('/Routes/routes-config.json');
+            const res = await fetch('/routes-config.json');
             if (!res.ok) return {};
             return await res.json();
         } catch (err) {
@@ -65,7 +65,7 @@
 
         const footerEl = document.getElementById('sharedFooter');
         if (footerEl) {
-            fetch('/Routes/route-footer.html')
+            fetch('/route-footer.html')
                 .then((response) => response.text())
                 .then((html) => {
                     footerEl.innerHTML = html;
