@@ -265,20 +265,21 @@
         routesContainer.innerHTML = data.routes.map((route, index) => `
             <div class="route-card">
                 <h3>Route ${index + 1}</h3>
-                <button class="route-btn" onclick="openRoute(${route.id})">
+                <button class="route-btn" onclick="openRoute(${route.id}, '${apiSlug}')">
                     View Route ${index + 1} on Google Maps
                 </button>
             </div>
         `).join('');
     }
 
-    async function openRoute(routeId) {
+    async function openRoute(routeId, apiSlugOverride) {
         if (!accessToken) {
             alert('Access token not available. Please refresh the page.');
             return;
         }
 
-        if (!currentApiSlug) {
+        const activeSlug = apiSlugOverride || currentApiSlug || routeKey;
+        if (!activeSlug) {
             alert('Route information not available. Please refresh the page.');
             return;
         }
@@ -312,7 +313,7 @@
             }
         }
 
-        window.location.href = `${API_URL}/routes/${currentApiSlug}-route/${accessToken}/${routeId}`;
+        window.location.href = `${API_URL}/routes/${activeSlug}-route/${accessToken}/${routeId}`;
     }
 
     window.openRoute = openRoute;
