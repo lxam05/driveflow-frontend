@@ -1,0 +1,143 @@
+{
+  "athlone": {
+    "apiSlug": "athlone"
+  },
+  "ballina": {
+    "apiSlug": "ballina"
+  },
+  "ballincollig": {
+    "apiSlug": "ballincollig"
+  },
+  "birr-county-arms-hotel": {
+    "apiSlug": "birr-county-arms-hotel"
+  },
+  "buncrana": {
+    "apiSlug": "buncrana"
+  },
+  "carlow": {
+    "apiSlug": "carlow"
+  },
+  "carlow-talbot-hotel": {
+    "apiSlug": "carlow-talbot-hotel"
+  },
+  "carnmore": {
+    "apiSlug": "carnmore"
+  },
+  "carrick-on-shannon": {
+    "apiSlug": "carrick-on-shannon"
+  },
+  "castlebar": {
+    "apiSlug": "castlebar"
+  },
+  "clifden": {
+    "apiSlug": "clifden"
+  },
+  "clonmel": {
+    "apiSlug": "clonmel"
+  },
+  "clybaun": {
+    "apiSlug": "clybaun"
+  },
+  "donegal": {
+    "apiSlug": "donegal"
+  },
+  "dundalk": {
+    "apiSlug": "dundalk"
+  },
+  "dungarvan": {
+    "apiSlug": "dungarvan"
+  },
+  "ennis": {
+    "apiSlug": "ennis"
+  },
+  "finglas": {
+    "apiSlug": "finglas"
+  },
+  "gorey": {
+    "apiSlug": "gorey"
+  },
+  "kilkenny-government-buildings": {
+    "apiSlug": "kilkenny-government-buildings"
+  },
+  "kilkenny-oloughlin-gaels": {
+    "apiSlug": "kilkenny-oloughlin-gaels"
+  },
+  "killester": {
+    "apiSlug": "killester"
+  },
+  "kilrush": {
+    "apiSlug": "kilrush"
+  },
+  "letterkenny": {
+    "apiSlug": "letterkenny"
+  },
+  "longford": {
+    "apiSlug": "longford"
+  },
+  "maldron-hotel": {
+    "apiSlug": "maldron-hotel"
+  },
+  "mallow": {
+    "apiSlug": "mallow"
+  },
+  "maple-house": {
+    "apiSlug": "maple-house"
+  },
+  "monaghan": {
+    "apiSlug": "monaghan"
+  },
+  "mulhuddart": {
+    "apiSlug": "mulhuddart"
+  },
+  "mullingar": {
+    "apiSlug": "mullingar"
+  },
+  "navan": {
+    "apiSlug": "navan"
+  },
+  "nenagh": {
+    "apiSlug": "nenagh"
+  },
+  "newcastle-west-longcourt-house-hotel": {
+    "apiSlug": "newcastle-west-longcourt-house-hotel"
+  },
+  "newcastle-west": {
+    "apiSlug": "newcastle-west"
+  },
+  "portlaoise": {
+    "apiSlug": "portlaoise"
+  },
+  "roscommon": {
+    "apiSlug": "roscommon"
+  },
+  "shannon": {
+    "apiSlug": "shannon"
+  },
+  "skibbereen": {
+    "apiSlug": "skibbereen"
+  },
+  "sligo": {
+    "apiSlug": "sligo"
+  },
+  "thurles": {
+    "apiSlug": "thurles"
+  },
+  "tipperary": {
+    "apiSlug": "tipperary"
+  },
+  "tralee": {
+    "apiSlug": "tralee"
+  },
+  "tuam": {
+    "apiSlug": "tuam"
+  },
+  "waterford": {
+    "apiSlug": "waterford"
+  },
+  "wicklow": {
+    "apiSlug": "wicklow"
+  },
+  "woodview": {
+    "apiSlug": "woodview"
+  }
+}
