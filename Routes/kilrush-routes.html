@@ -496,8 +496,8 @@
             <h3>Other nearby centres</h3>
             <div class="routes-container" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-top: 16px;">
                 <a href="/limerick-castlemungret-routes.html" class="route-btn" style="display: inline-block; text-decoration: none; text-align: center;">Limerick Castlemungret Driving Test Routes</a>
-                <a href="/nenagh-routes.html" class="route-btn" style="display: inline-block; text-decoration: none; text-align: center;">Nenagh Driving Test Routes</a>
-                <a href="/tralee-routes.html" class="route-btn" style="display: inline-block; text-decoration: none; text-align: center;">Tralee Driving Test Routes</a>
+                <a href="/Routes/nenagh-routes.html" class="route-btn" style="display: inline-block; text-decoration: none; text-align: center;">Nenagh Driving Test Routes</a>
+                <a href="/Routes/tralee-routes.html" class="route-btn" style="display: inline-block; text-decoration: none; text-align: center;">Tralee Driving Test Routes</a>
                 <a href="/loughrea-routes.html" class="route-btn" style="display: inline-block; text-decoration: none; text-align: center;">Loughrea Driving Test Routes</a>
             </div>
             <h3 style="margin-top: 32px;">More from DriveFlow</h3>
@@ -575,7 +575,7 @@
 
         // All payment functionality moved to payment.html - redirect immediately
         function showPaywall() {
-            window.location.href = 'payment.html';
+            window.location.href = '/payment.html';
         }
 
         // Initialize on page load
@@ -633,7 +633,7 @@
                     if (error.error && error.error.includes('license')) {
                         await checkLicenseStatus();
                         if (!hasLicense) {
-                            window.location.href = 'payment.html';
+                            window.location.href = '/payment.html';
                             return;
                         }
                         errorContainer.innerHTML = `

@@ -12,18 +12,18 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-<meta name="description" content="Practice the Cavan driving test routes using real Google Maps directions. Learn tricky junctions, test areas, and common mistakes before your exam.">
-<link rel="canonical" href="https://www.driveflow.ie/cavan-routes.html">
+<meta name="description" content="Practice the Waterford driving test routes using real Google Maps directions. Learn tricky junctions, test areas, and common mistakes before your exam.">
+<link rel="canonical" href="https://www.driveflow.ie/Routes/waterford-routes.html">
 <link rel="icon" href="https://www.driveflow.ie/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="https://www.driveflow.ie/favicon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="https://www.driveflow.ie/favicon.png">
 <link rel="apple-touch-icon" href="https://www.driveflow.ie/favicon.png">
-<meta property="og:title" content="Cavan Driving Test Routes – Google Maps Practice">
-<meta property="og:description" content="Practice the real Cavan driving test routes using Google Maps. Learn tricky areas, junctions, and common test mistakes.">
-<meta property="og:url" content="https://www.driveflow.ie/cavan-routes.html">
+<meta property="og:title" content="Waterford Driving Test Routes – Google Maps Practice">
+<meta property="og:description" content="Practice the real Waterford driving test routes using Google Maps. Learn tricky areas, junctions, and common test mistakes.">
+<meta property="og:url" content="https://www.driveflow.ie/Routes/waterford-routes.html">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://www.driveflow.ie/og-cavan.png">
-<title>Cavan Driving Test Routes (Google Maps Practice) | DriveFlow</title>
+<meta property="og:image" content="https://www.driveflow.ie/og-waterford.png">
+<title>Waterford Driving Test Routes (Google Maps Practice) | DriveFlow</title>
 
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
@@ -96,181 +96,171 @@
         font-size: 16px;
     }
 
-    .page-header a {
-        display: inline-block;
-        margin-top: 20px;
-        padding: 12px 24px;
-        background: var(--primary);
-        color: var(--bg-main);
-        border-radius: 12px;
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 14px;
-        transition: all 0.2s ease;
-    }
-
-    .page-header a:hover {
-        background: var(--accent);
-        transform: translateY(-2px);
-    }
-
     .info-section {
+        border-radius: var(--radius-xl);
         background: var(--bg-card);
         border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-xl);
-        padding: 40px;
         box-shadow: var(--shadow-card);
+        padding: 40px;
         margin-bottom: 40px;
-        line-height: 1.7;
     }
 
     .info-section h2 {
-        margin: 0 0 20px;
+        margin: 0 0 24px;
         color: var(--accent);
         font-size: 28px;
         font-weight: 800;
+        letter-spacing: -0.02em;
     }
 
     .info-section h3 {
         margin: 32px 0 16px;
         color: var(--text-main);
-        font-size: 22px;
-        font-weight: 700;
-    }
-
-    .info-section h4 {
-        margin: 24px 0 12px;
-        color: var(--accent);
-        font-size: 18px;
-        font-weight: 600;
-    }
-
-    .info-section p {
-        margin: 12px 0;
-        color: var(--text-main);
-        font-size: 16px;
-    }
-
-    .info-section ul {
-        margin: 12px 0;
-        padding-left: 24px;
-        color: var(--text-main);
-    }
-
-    .info-section li {
-        margin: 8px 0;
-        font-size: 16px;
-        line-height: 1.6;
-    }
-
-    .info-section strong {
-        color: var(--accent);
-        font-weight: 600;
-    }
-
-    .bottom-line {
-        background: var(--primary-soft);
-        border-left: 4px solid var(--primary);
-        padding: 24px;
-        border-radius: 12px;
-        margin-top: 32px;
-    }
-
-    .bottom-line p {
-        margin: 8px 0;
-    }
-
-    .routes-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 24px;
-        margin-top: 40px;
-    }
-
-    .route-card {
-        background: var(--bg-card);
-        border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-lg);
-        padding: 24px;
-        box-shadow: var(--shadow-card);
-        text-align: center;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .route-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.7);
-    }
-
-    .route-card h3 {
-        margin: 0 0 16px;
-        color: var(--text-main);
         font-size: 20px;
         font-weight: 700;
     }
 
+    .info-section h3:first-of-type {
+        margin-top: 0;
+    }
+
+    .info-section p {
+        margin: 0 0 16px;
+        color: var(--text-main);
+        font-size: 16px;
+        line-height: 1.7;
+    }
+
+    .info-section p:last-child {
+        margin-bottom: 0;
+    }
+
+    .info-section .bottom-line {
+        margin-top: 32px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border-subtle);
+    }
+
+    .info-section .bottom-line p {
+        font-weight: 600;
+        color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+        .info-section {
+            padding: 24px;
+        }
+
+        .info-section h2 {
+            font-size: 24px;
+        }
+
+        .info-section h3 {
+            font-size: 18px;
+        }
+
+        .info-section p {
+            font-size: 15px;
+        }
+    }
+
+    .routes-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 24px;
+        margin-top: 24px;
+    }
+
+    .route-card {
+        padding: 24px;
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-lg);
+        transition: all 0.2s ease;
+    }
+
+    .route-card:hover {
+        background: var(--primary-soft);
+        border-color: var(--primary);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(91, 192, 190, 0.3);
+    }
+
+    .route-card h3 {
+        margin: 0 0 16px;
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--text-main);
+    }
+
     .route-btn {
         width: 100%;
-        padding: 14px 24px;
+        padding: 12px 24px;
         background: var(--primary);
         color: var(--bg-main);
         border: none;
         border-radius: 12px;
-        font-size: 16px;
         font-weight: 600;
+        font-size: 14px;
         cursor: pointer;
         transition: all 0.2s ease;
     }
 
     .route-btn:hover {
         background: var(--accent);
-        transform: translateY(-2px);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(111, 255, 233, 0.4);
     }
 
-    .btn-back {
-        display: inline-block;
-        margin-top: 40px;
-        padding: 12px 24px;
-        background: transparent;
-        color: var(--text-muted);
-        border: 1px solid var(--border-subtle);
-        border-radius: 12px;
-        text-decoration: none;
-        font-size: 14px;
-        font-weight: 500;
-        transition: all 0.2s ease;
-    }
-
-    .btn-back:hover {
-        color: var(--text-main);
-        border-color: var(--primary);
+    .route-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
     }
 
     .loading {
         text-align: center;
         padding: 40px;
         color: var(--text-muted);
-        font-size: 18px;
     }
 
     .error {
         background: rgba(239, 68, 68, 0.1);
         border: 1px solid rgba(239, 68, 68, 0.3);
-        border-radius: 12px;
+        border-radius: var(--radius-lg);
         padding: 20px;
-        margin-bottom: 24px;
+        margin: 20px 0;
         color: #ef4444;
-        text-align: center;
+    }
+
+    .btn-back {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 18px;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        background: rgba(15, 23, 42, 0.92);
+        color: var(--text-main);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 13px;
+        transition: all 0.18s ease-out;
+    }
+
+    .btn-back:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.9);
+        border-color: rgba(129, 140, 248, 0.8);
     }
 
     @media (max-width: 768px) {
         .container {
-            margin-top: 80px;
-            padding: 0 16px 32px;
+            margin: 20px auto 20px;
+            padding: 0 16px 20px;
         }
 
         .page-header {
-            padding: 24px;
+            padding: 24px 20px;
+            margin-bottom: 24px;
         }
 
         .page-header h1 {
@@ -302,111 +292,217 @@
 <body>
     <div class="container">
         <div class="page-header">
-            <h1>Cavan Driving Test Routes</h1>
-            <p>Access detailed route information for the Cavan test centre</p>
+            <h1>Waterford Driving Test Routes</h1>
+            <p>Access detailed route information for the Waterford test centre</p>
             <p style="margin-top: 16px; color: var(--accent); font-weight: 600; font-size: 16px;">Used by thousands of learners around Ireland to pass their test first try</p>
-            <a href="#routes" style="display: inline-block; margin-top: 20px; padding: 12px 24px; background: var(--primary); color: var(--bg-main); border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.2s ease;">View Routes →</a>
         </div>
 
         <div class="info-section">
-            <h2>Cavan Driving Test Routes – What to Expect, Common Mistakes &amp; Local Tips</h2>
-            <p>These practice routes are designed to help learner drivers become familiar with the roads, junctions, estates, and traffic conditions commonly used in the Cavan driving test. Understanding the specific challenges of the Cavan test centre can significantly improve your chances of passing.</p>
+            <h2>Waterford Driving Test Routes – What to Expect, Common Mistakes &amp; Local Tips</h2>
             
-            <p style="margin-top: 16px; font-weight: 600; color: var(--accent);">Cavan tests your ability to handle varied road conditions and make safe decisions consistently.</p>
+            <p>If you're searching for Waterford driving test routes, you're probably trying to figure out where the examiner will bring you, what junctions catch people out, and how to avoid silly fails. This page is built specifically to help learner drivers prepare for the Waterford RSA driving test centre, using real-world route patterns and local problem areas — not generic advice.</p>
             
-            <h3 style="margin-top: 32px;">Common things learners say after failing:</h3>
+            <p>Unlike vague blog posts, this page focuses on how the Waterford test actually feels, what learners commonly fail on, and how to practise properly using mapped routes.</p>
+
+            <h3>About the Waterford Driving Test Centre</h3>
+            
+            <p>The Waterford driving test centre serves learners from Waterford city and surrounding areas. Tests usually involve a mix of:</p>
+            
             <ul>
-                <li>"I didn't expect that junction."</li>
-                <li>"The route was different than I practiced."</li>
-                <li>"They failed me on observation."</li>
-                <li>"I made a mistake on a quiet road."</li>
+                <li>Residential estates</li>
+                <li>Busy town-centre junctions</li>
+                <li>Roundabouts</li>
+                <li>National / regional roads</li>
+                <li>Speed-limit transitions</li>
+                <li>Tight turns and observation-heavy areas</li>
             </ul>
             
-            <h3 style="margin-top: 32px;">Where People Actually Fail in Cavan</h3>
+            <p>The routes tend to loop back toward the test centre, meaning you'll often re-enter familiar roads from different directions.</p>
+
+            <h3>How Waterford Driving Test Routes Usually Work</h3>
             
-            <h4>1. Observation and awareness</h4>
-            <p>Testers focus heavily on:</p>
-            <ul>
-                <li>Mirror checks</li>
-                <li>Head movement</li>
-                <li>Constant awareness of surroundings</li>
-            </ul>
-            <p style="font-style: italic; color: var(--text-muted); margin-top: 8px;">Common fail: Failing to check mirrors regularly because traffic seems light.</p>
+            <p>There is no single fixed route, but examiners reuse the same road clusters again and again. If you practise enough of these, nothing on test day feels new.</p>
             
-            <h4>2. Junction positioning and decision-making</h4>
-            <p>Cavan routes include various junction types that require:</p>
-            <ul>
-                <li>Correct road positioning</li>
-                <li>Proper stopping when needed</li>
-                <li>Confident but safe pull-outs</li>
-            </ul>
-            <p style="font-style: italic; color: var(--text-muted); margin-top: 8px;">Common fail: Hesitation or incorrect positioning at junctions.</p>
+            <p>Typical features of Waterford test routes include:</p>
             
-            <h4>3. Speed control</h4>
-            <p>Learners struggle with:</p>
             <ul>
-                <li>Maintaining appropriate speed</li>
-                <li>Adapting to changing road conditions</li>
-                <li>Not driving too slowly or too fast</li>
+                <li>Residential estates with poor visibility</li>
+                <li>Multi-lane roundabouts</li>
+                <li>50 → 60 → 80 km/h transitions</li>
+                <li>Narrow roads requiring strong positioning</li>
+                <li>Junctions where hesitation causes faults</li>
+                <li>Areas where observation matters more than speed</li>
             </ul>
-            <p style="font-style: italic; color: var(--text-muted); margin-top: 8px;">Common fail: Inconsistent speed control.</p>
             
-            <h4>4. Roundabouts and complex intersections</h4>
-            <p>Cavan includes:</p>
+            <p>This is why using Google Maps–based practice routes is effective — you learn geography, not memorised instructions.</p>
+
+            <h3>Common Areas Used in Waterford Driving Test Routes</h3>
+            
+            <p>While routes vary, learners are often brought through or near:</p>
+            
             <ul>
-                <li>Various roundabout sizes</li>
-                <li>Complex intersections</li>
-                <li>Multi-lane roads</li>
+                <li>Town-centre approaches and main approach roads</li>
+                <li>Residential estates near the test centre</li>
+                <li>Main distributor roads with changing speeds</li>
+                <li>Local school zones and pedestrian areas</li>
+                <li>Roundabouts linking estates and main roads</li>
+                <li>Roads connecting nearby suburbs</li>
             </ul>
-            <p>Testers watch:</p>
+            
+            <p>You don't need to memorise one exact path — you need familiarity with patterns.</p>
+
+            <h3>Roundabouts Commonly Used in Waterford Tests</h3>
+            
+            <p>Roundabouts are one of the biggest fail points in Waterford.</p>
+            
+            <h4>Multi-lane roundabouts</h4>
+            
+            <p>These test:</p>
+            
             <ul>
-                <li>Early signalling</li>
                 <li>Lane discipline</li>
-                <li>Speed on approach</li>
+                <li>Early lane choice</li>
+                <li>Proper signalling</li>
+                <li>Mirror checks before changing lanes</li>
             </ul>
-            <p style="font-style: italic; color: var(--text-muted); margin-top: 8px;">Common fail: Entering roundabouts incorrectly or signalling late.</p>
             
-            <h3 style="margin-top: 32px;">How These Practice Routes Help</h3>
-            <p>These routes allow you to:</p>
+            <p>Mistakes here often come from:</p>
+            
             <ul>
-                <li>Practice real Cavan road types</li>
-                <li>Build confidence with the test routes</li>
-                <li>Learn common test areas</li>
-                <li>Train consistent observation habits</li>
+                <li>Drifting lanes</li>
+                <li>Late signalling</li>
+                <li>Cutting across exits</li>
+                <li>Hesitating unnecessarily</li>
             </ul>
-            <p style="margin-top: 16px; font-weight: 600; color: var(--accent);">Cavan is passed by people who stay focused and make safe decisions throughout the test.</p>
             
-            <h3 style="margin-top: 32px;">What's Included</h3>
+            <h4>Smaller residential roundabouts</h4>
+            
+            <p>These test:</p>
+            
             <ul>
-                <li>Real Cavan practice routes on Google Maps</li>
-                <li>Focused on common test areas</li>
-                <li>Works directly on your phone (no app required)</li>
-                <li>Repeat routes anytime during your access period</li>
+                <li>Observation</li>
+                <li>Yielding correctly</li>
+                <li>Smooth approach speed</li>
             </ul>
             
-            <h3 style="margin-top: 32px;">Tips from People Who Passed in Cavan</h3>
+            <p>Many learners slow too much or stop when they don't need to.</p>
+
+            <h3>Junction Types That Catch People Out</h3>
+            
+            <h4>1. Hidden / offset T-junctions</h4>
+            
+            <p>These appear simple but have poor visibility. Examiners watch for:</p>
+            
             <ul>
-                <li>Practice all routes multiple times</li>
-                <li>Exaggerate mirror checks</li>
-                <li>Stay calm and focused</li>
-                <li>Drive at appropriate speeds</li>
-                <li>Be decisive at junctions</li>
+                <li>Full stop when needed</li>
+                <li>Proper creep-and-peep</li>
+                <li>Looking both ways, not just right</li>
             </ul>
             
-            <div class="bottom-line" style="margin-top: 32px;">
-                <p>Final advice for Cavan</p>
-                <p style="margin-top: 12px; font-weight: 600;">Consistency and awareness are key to passing in Cavan.</p>
-            </div>
+            <h4>2. Wide junctions with fast traffic</h4>
+            
+            <p>These test judgment, not confidence. Pulling out too slowly = fault. Pulling out unsafely = fail.</p>
+            
+            <h4>3. Junctions after bends</h4>
+            
+            <p>You must position early and slow in advance — late braking is a common issue.</p>
+
+            <h3>Speed Limit Traps in Waterford</h3>
+            
+            <p>Speed awareness is one of the biggest reasons learners fail.</p>
+            
+            <p>Common problem areas:</p>
+            
+            <ul>
+                <li>Roads that look like 80 km/h but are actually 50 km/h</li>
+                <li>Transition zones where the sign appears late</li>
+                <li>Residential areas that feel "wide" but are still 50</li>
+                <li>Areas where limits drop suddenly near estates or schools</li>
+            </ul>
+            
+            <p>Examiners expect you to:</p>
+            
+            <ul>
+                <li>Actively scan for signs</li>
+                <li>Adjust speed quickly</li>
+                <li>Not rely on road width</li>
+            </ul>
+            
+            <p>Missing a speed change is an instant mark.</p>
+
+            <h3>Common Mistakes Learners Make in the Waterford Test</h3>
+            
+            <p>These come up repeatedly:</p>
+            
+            <ul>
+                <li>Poor mirror checks before signalling</li>
+                <li>Late or missing indicators</li>
+                <li>Hesitation at junctions</li>
+                <li>Rolling stops</li>
+                <li>Drifting wide on left turns</li>
+                <li>Poor lane discipline at roundabouts</li>
+                <li>Not checking blind spots</li>
+                <li>Overconfidence on familiar roads</li>
+                <li>Underconfidence at busy junctions</li>
+            </ul>
+            
+            <p>Most failures aren't dangerous — they're accumulated small errors.</p>
+
+            <h3>Local Examiner Behaviour (What People Notice)</h3>
+            
+            <p>While examiners follow RSA rules, learners often notice patterns:</p>
+            
+            <ul>
+                <li>They like smooth, predictable driving</li>
+                <li>They dislike hesitation more than calm commitment</li>
+                <li>They watch observation closely at junctions</li>
+                <li>They notice mirror–signal order</li>
+                <li>They expect confident speed control</li>
+            </ul>
+            
+            <p>You're not being "tricked" — you're being watched for consistency.</p>
+
+            <h3>Areas Where Learners Commonly Fail</h3>
+            
+            <p>Based on repeated feedback:</p>
+            
+            <ul>
+                <li>Roundabouts near main distributor roads</li>
+                <li>Estate exits with poor visibility</li>
+                <li>Speed-limit transitions</li>
+                <li>Busy junctions during peak hours</li>
+                <li>Tight left turns near kerbs</li>
+                <li>Pulling out too slowly</li>
+            </ul>
+            
+            <p>Practising these areas repeatedly makes a massive difference.</p>
+
+            <h3>FAQs – Waterford Driving Test</h3>
+            
+            <h4>How long is the Waterford driving test?</h4>
+            <p>Usually 40–45 minutes including questions and manoeuvres.</p>
+            
+            <h4>Are the routes fixed?</h4>
+            <p>No. There are multiple Waterford driving test routes, but they reuse the same roads.</p>
+            
+            <h4>Can I practise the exact routes?</h4>
+            <p>You can practise realistic practice routes that reflect how tests are structured, even if the exact path changes.</p>
+            
+            <h4>Is Waterford considered a hard test centre?</h4>
+            <p>It's average — not easy, not brutal. Most failures come from observation and hesitation, not "tricky roads".</p>
+            
+            <h4>What's the best way to prepare?</h4>
+            <p>Drive the area repeatedly, understand junction behaviour, and practise roundabouts under light and heavy traffic.</p>
         </div>
-        
+
         <div id="routes" style="scroll-margin-top: 120px;">
             <div id="errorContainer"></div>
             <div id="paywallContainer" style="display: none; border-radius: var(--radius-xl); background: var(--bg-card); border: 1px solid var(--border-subtle); box-shadow: var(--shadow-card); padding: 40px; margin-bottom: 40px; text-align: center;">
                 <h2 style="margin: 0 0 16px; color: var(--accent); font-size: 28px; font-weight: 800;">Access Required</h2>
-                <p style="margin: 0 0 24px; color: var(--text-main); font-size: 16px; line-height: 1.7;">Please log in or purchase access to view the Cavan driving test routes.</p>
+                <p style="margin: 0 0 24px; color: var(--text-main); font-size: 16px; line-height: 1.7;">Please log in or purchase access to view the Waterford driving test routes.</p>
                 <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-                    <a href="login.html" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; padding: 12px 24px;">Log In</a>
-                    <a href="payment.html" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; padding: 12px 24px; background: var(--accent);">Purchase Access</a>
+                    <a href="/login.html" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; padding: 12px 24px;">Log In</a>
+                    <a href="/payment.html" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; padding: 12px 24px; background: var(--accent);">Purchase Access</a>
                 </div>
             </div>
             <div id="routesContainer" class="routes-container"></div>
@@ -416,30 +512,42 @@
         <!-- Purchase Button Section (shown when logged in but no access) -->
         <div id="purchaseSection" style="display: none; margin-top: 40px; text-align: center; padding: 40px; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); box-shadow: var(--shadow-card);">
             <h3 style="margin: 0 0 16px; color: var(--text-main); font-size: 24px; font-weight: 700;">Ready to Practice These Routes?</h3>
-            <p style="margin: 0 0 24px; color: var(--text-muted); font-size: 16px; line-height: 1.6;">Get instant access to all Cavan driving test routes for just €11.99</p>
-            <a href="payment.html" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; padding: 14px 32px; font-size: 16px; font-weight: 600;">Buy Now - €11.99</a>
+            <p style="margin: 0 0 24px; color: var(--text-muted); font-size: 16px; line-height: 1.6;">Get instant access to all Waterford driving test routes for just €11.99</p>
+            <a href="/payment.html" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; padding: 14px 32px; font-size: 16px; font-weight: 600;">Buy Now - €11.99</a>
         </div>
-
-        <a href="routes.html" class="btn-back">← Back to All Routes</a>
+        <a href="/routes.html" class="btn-back">← Back to All Routes</a>
         <div class="info-section">
             <h3>Other nearby centres</h3>
             <div class="routes-container" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-top: 16px;">
-                <a href="/Routes/navan-routes.html" class="route-btn" style="display: inline-block; text-decoration: none; text-align: center;">Navan Driving Test Routes</a>
-                <a href="/Routes/mulhuddart-routes.html" class="route-btn" style="display: inline-block; text-decoration: none; text-align: center;">Mulhuddart Driving Test Routes</a>
-                <a href="/Routes/finglas-routes.html" class="route-btn" style="display: inline-block; text-decoration: none; text-align: center;">Finglas Driving Test Routes</a>
+                <a href="/wexford-routes.html" class="route-btn" style="display: inline-block; text-decoration: none; text-align: center;">Wexford Driving Test Routes</a>
+                <a href="/mitchelstown-routes.html" class="route-btn" style="display: inline-block; text-decoration: none; text-align: center;">Mitchelstown Driving Test Routes</a>
+                <a href="/wilton-routes.html" class="route-btn" style="display: inline-block; text-decoration: none; text-align: center;">Wilton Driving Test Routes</a>
             </div>
             <h3 style="margin-top: 32px;">More from DriveFlow</h3>
             <p>Keep learning with the guide and explore the full site.</p>
             <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-top: 16px;">
-                <a href="guides/why-learners-fail-driving-test-ireland/" class="route-btn" style="display: inline-block; text-decoration: none; width: auto;">Why Learners Fail the Irish Driving Test</a>
-                <a href="index.html" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; background: var(--accent);">DriveFlow Homepage</a>
+                <a href="/guides/why-learners-fail-driving-test-ireland/" class="route-btn" style="display: inline-block; text-decoration: none; width: auto;">Why Learners Fail the Irish Driving Test</a>
+                <a href="/index.html" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; background: var(--accent);">DriveFlow Homepage</a>
             </div>
             <div style="margin-top: 12px;">
-                <a href="about.html" style="color: var(--text-muted); text-decoration: underline; text-underline-offset: 3px; font-size: 14px;">About DriveFlow</a>
+                <a href="/about.html" style="color: var(--text-muted); text-decoration: underline; text-underline-offset: 3px; font-size: 14px;">About DriveFlow</a>
             </div>
         </div>
-    </div>
-
+    <div id="routeFooter"></div>
+<script>
+        (function () {
+            const target = document.getElementById('routeFooter');
+            if (!target) return;
+            fetch('/Routes/route-footer.html')
+                .then((response) => response.text())
+                .then((html) => {
+                    target.innerHTML = html;
+                })
+                .catch((err) => {
+                    console.error('Failed to load route footer:', err);
+                });
+        })();
+    </script>
     <script>
         const API_URL = location.hostname === "localhost" || location.hostname === "127.0.0.1"
             ? "http://localhost:8080"
@@ -490,7 +598,7 @@
 
         // All payment functionality moved to payment.html - redirect immediately
         function showPaywall() {
-            window.location.href = 'payment.html';
+            window.location.href = '/payment.html';
         }
 
         // Initialize on page load
@@ -536,7 +644,7 @@
 
             try {
                 // Generate access token
-                const tokenResponse = await fetch(`${API_URL}/routes/generate-cavan-token`, {
+                const tokenResponse = await fetch(`${API_URL}/routes/generate-waterford-token`, {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${token}`
@@ -548,15 +656,15 @@
                     if (error.error && error.error.includes('license')) {
                         await checkLicenseStatus();
                         if (!hasLicense) {
-                            window.location.href = 'payment.html';
+                            window.location.href = '/payment.html';
                             return;
                         }
                         errorContainer.innerHTML = `
                             <div class="error">
                                 <strong>Access Required</strong><br>
-                                You need an active license to view Cavan routes.
+                                You need an active license to view Waterford routes.
                                 <div style="margin-top: 20px;">
-                                    <a href="payment.html" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; padding: 12px 24px; margin-top: 12px;">Buy Now</a>
+                                    <a href="/payment.html" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; padding: 12px 24px; margin-top: 12px;">Buy Now</a>
                                 </div>
                             </div>
                         `;
@@ -577,7 +685,7 @@
                 tokenExpiresAt = new Date(tokenData.expiresAt);
 
                 // Fetch route data
-                const dataResponse = await fetch(`${API_URL}/routes/cavan-data/${accessToken}`, {
+                const dataResponse = await fetch(`${API_URL}/routes/waterford-data/${accessToken}`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -610,7 +718,7 @@
             // Check if routes are being updated
             if (data.message) {
                 // Initialize countdown timer
-                const countdownKey = 'routeReleaseCountdown_cavan';
+                const countdownKey = 'routeReleaseCountdown_waterford';
                 let startTime = localStorage.getItem(countdownKey);
                 
                 if (!startTime) {
@@ -632,7 +740,6 @@
                                 <p style="color: var(--text-main); font-size: 16px; line-height: 1.6;">Routes are being finalized and will be available very soon!</p>
                             </div>
                         `;
-                        clearInterval(window['countdownInterval_' + 'cavan']);
                         return;
                     }
                     
@@ -676,7 +783,7 @@
                 }, 1000);
                 
                 // Store interval ID to clear if needed (though it will run until routes are loaded)
-                window['countdownInterval_' + 'cavan'] = countdownInterval;
+                window['countdownInterval_' + 'waterford'] = countdownInterval;
                 
                 return;
             }
@@ -688,15 +795,15 @@
 
             routesContainer.innerHTML = data.routes.map((route, index) => `
                 <div class="route-card">
-                    <h3>Route ${index + 1}</h3>
+                    <h3>${route.name || `Route ${index + 1}`}</h3>
                     <button class="route-btn" onclick="openRoute(${route.id})">
-                        View Route ${index + 1} on Google Maps
+                        View ${route.name || `Route ${index + 1}`} on Google Maps
                     </button>
                 </div>
             `).join('');
         }
 
-        async function openRoute(routeId) {
+        function openRoute(routeId) {
             if (!accessToken) {
                 alert('Access token not available. Please refresh the page.');
                 return;
@@ -704,52 +811,25 @@
 
             // Check if token is still valid
             if (new Date() > tokenExpiresAt) {
-                alert('Your access has expired. Please refresh the page to get a new token.');
+                alert('Your access for this session has expired. Please refresh the page to get a new token.');
                 return;
             }
 
-            // Record route click for leaderboard (don't block if it fails)
-            const token = localStorage.getItem('auth_token');
-            if (token && routesData) {
-                try {
-                    const clickResponse = await fetch(`${API_URL}/routes/record-click`, {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': `Bearer ${token}`,
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            centreName: routesData.location,
-                            routeId: routeId
-                        })
-                    });
-
-                    if (clickResponse.status === 429) {
-                        const error = await clickResponse.json();
-                        // Show cooldown message but still allow redirect
-                        console.log(`Cooldown: ${error.minutesRemaining} minutes remaining`);
-                    }
-                } catch (err) {
-                    // Don't block redirect if click tracking fails
-                    console.error('Error recording route click:', err);
-                }
-            }
-
             // Redirect through proxy endpoint - link never exposed in frontend
-            window.location.href = `${API_URL}/routes/cavan-route/${accessToken}/${routeId}`;
+            window.location.href = `${API_URL}/routes/waterford-route/${accessToken}/${routeId}`;
         }
     </script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "HowTo",
-      "name": "How to Pass the Driving Test in Cavan",
-      "description": "Learn the Cavan driving test routes and Google Maps practice to improve your chances of passing.",
+      "name": "How to Pass the Driving Test in Waterford",
+      "description": "Learn the Waterford driving test routes and Google Maps practice to improve your chances of passing.",
       "step": [
         {
           "@type": "HowToStep",
           "name": "Follow the official driving test route",
-          "text": "Study the exact routes used by driving test examiners in Cavan test centre."
+          "text": "Study the exact routes used by driving test examiners in Waterford test centre."
         },
         {
           "@type": "HowToStep",
@@ -759,7 +839,7 @@
         {
           "@type": "HowToStep",
           "name": "Practice reversing around the corner",
-          "text": "Master the reversing maneuvers required on the Cavan test routes."
+          "text": "Master the reversing maneuvers required on the Waterford test routes."
         },
         {
           "@type": "HowToStep",
@@ -773,3 +853,4 @@
     <script src="chatbot-widget.js"></script>
 </body>
 </html>
+
