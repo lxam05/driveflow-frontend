@@ -489,20 +489,51 @@
                     const loginData = await loginResponse.json();
                     if (loginResponse.ok && loginData.token) {
                         token = loginData.token;
+                    } else {
+                        console.warn('Auto-login response:', loginData);
                     }
                 } catch (loginErr) {
                     console.warn('Auto-login failed after signup:', loginErr);
                 }
             }
 
-            if (token) {
-                localStorage.setItem('auth_token', token);
+            if (!token) {
+                showError('Account created, but auto-login failed. Please sign in.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Create Account';
+                return;
+            }
+
+            localStorage.setItem('auth_token', token);
+
+            try {
+                const verifyResponse = await fetch(`${API_URL}/auth/protected`, {
+                    method: 'GET',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (!verifyResponse.ok) {
+                    const verifyData = await verifyResponse.json();
+                    console.warn('Token verification failed:', verifyData);
+                    localStorage.removeItem('auth_token');
+                    showError('Account created, but login verification failed. Please sign in.');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Create Account';
+                    return;
+                }
+            } catch (verifyErr) {
+                console.warn('Token verification error:', verifyErr);
+                localStorage.removeItem('auth_token');
+                showError('Account created, but login verification failed. Please sign in.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Create Account';
+                return;
             }
 
             showSuccess('Account created successfully! Redirecting...');
 
             setTimeout(() => {
-                window.location.href = token ? 'index.html' : 'login.html';
+                window.location.href = 'index.html';
             }, 800);
 
         } catch (err) {
