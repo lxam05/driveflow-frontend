@@ -476,11 +476,34 @@
                 return;
             }
 
+            let token = data.token;
+
+            if (!token) {
+                try {
+                    const loginResponse = await fetch(`${API_URL}/auth/login`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                        body: JSON.stringify({ email, password })
+                    });
+
+                    const loginData = await loginResponse.json();
+                    if (loginResponse.ok && loginData.token) {
+                        token = loginData.token;
+                    }
+                } catch (loginErr) {
+                    console.warn('Auto-login failed after signup:', loginErr);
+                }
+            }
+
+            if (token) {
+                localStorage.setItem('auth_token', token);
+            }
+
             showSuccess('Account created successfully! Redirecting...');
 
             setTimeout(() => {
-                window.location.href = 'login.html';
-            }, 1500);
+                window.location.href = token ? 'index.html' : 'login.html';
+            }, 800);
 
         } catch (err) {
             showError('Cannot reach server.');
