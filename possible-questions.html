@@ -383,7 +383,7 @@
     // Parse the questions from the text file format
     async function loadQuestions() {
         try {
-            const response = await fetch('driving test theory.txt');
+            const response = await fetch('driving-test-theory.txt');
             const text = await response.text();
             const lines = text.split('\n').map(line => line.trim()).filter(line => line.length > 0);
             
