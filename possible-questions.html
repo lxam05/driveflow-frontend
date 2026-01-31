@@ -466,10 +466,12 @@
         document.getElementById('prevBtn').disabled = currentIndex === 0;
         document.getElementById('nextBtn').disabled = currentIndex === questions.length - 1;
         
-        // Scroll active item into view
-        const activeItem = document.querySelector('.question-list-item.active');
-        if (activeItem) {
-            activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        // Scroll active item into view on larger screens only
+        if (window.innerWidth > 1024) {
+            const activeItem = document.querySelector('.question-list-item.active');
+            if (activeItem) {
+                activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
         }
     }
 
