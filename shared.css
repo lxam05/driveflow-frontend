@@ -205,6 +205,30 @@
         transform: translateY(-2px);
     }
 
+    .route-btn-group {
+        display: flex;
+        gap: 12px;
+        align-items: stretch;
+    }
+
+    .route-btn-group .route-btn {
+        width: auto;
+        flex: 1;
+    }
+
+    .route-btn-group .route-btn-main {
+        flex: 2;
+    }
+
+    .route-btn-group .route-btn-manoeuvre {
+        flex: 1;
+        background: var(--accent);
+    }
+
+    .route-btn-group .route-btn-manoeuvre:hover {
+        background: var(--primary);
+    }
+
     .btn-back {
         display: inline-block;
         margin: 20px;
@@ -267,6 +291,16 @@
 
         .route-card {
             padding: 20px;
+        }
+
+        .route-btn-group {
+            flex-direction: column;
+        }
+
+        .route-btn-group .route-btn-main,
+        .route-btn-group .route-btn-manoeuvre {
+            flex: none;
+            width: 100%;
         }
 
         .btn-back {

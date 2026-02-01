@@ -262,14 +262,33 @@
             return;
         }
 
-        routesContainer.innerHTML = data.routes.map((route, index) => `
-            <div class="route-card">
-                <h3>Route ${index + 1}</h3>
-                <button class="route-btn" onclick="openRoute(${route.id}, '${apiSlug}')">
-                    View Route ${index + 1} on Google Maps
-                </button>
-            </div>
-        `).join('');
+        routesContainer.innerHTML = data.routes.map((route, index) => {
+            const hasManoeuvre = Boolean(route.manoeuvre);
+            if (hasManoeuvre) {
+                return `
+                    <div class="route-card">
+                        <h3>Route ${index + 1}</h3>
+                        <div class="route-btn-group">
+                            <button class="route-btn route-btn-main" onclick="openRoute(${route.id}, '${apiSlug}')">
+                                View Route
+                            </button>
+                            <button class="route-btn route-btn-manoeuvre" onclick="openManoeuvre(${route.id}, '${apiSlug}')">
+                                Manoeuvres
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            return `
+                <div class="route-card">
+                    <h3>Route ${index + 1}</h3>
+                    <button class="route-btn" onclick="openRoute(${route.id}, '${apiSlug}')">
+                        View Route ${index + 1} on Google Maps
+                    </button>
+                </div>
+            `;
+        }).join('');
     }
 
     async function openRoute(routeId, apiSlugOverride) {
@@ -317,6 +336,28 @@
     }
 
     window.openRoute = openRoute;
+
+    async function openManoeuvre(routeId, apiSlugOverride) {
+        if (!accessToken) {
+            alert('Access token not available. Please refresh the page.');
+            return;
+        }
+
+        const activeSlug = apiSlugOverride || currentApiSlug || routeKey;
+        if (!activeSlug) {
+            alert('Route information not available. Please refresh the page.');
+            return;
+        }
+
+        if (new Date() > tokenExpiresAt) {
+            alert('Your access has expired. Please refresh the page to get a new token.');
+            return;
+        }
+
+        window.location.href = `${API_URL}/routes/${activeSlug}-manoeuvre/${accessToken}/${routeId}`;
+    }
+
+    window.openManoeuvre = openManoeuvre;
 
     window.addEventListener('DOMContentLoaded', async () => {
         const config = await loadConfig();
