@@ -188,6 +188,153 @@
         line-height: 1.7;
     }
 
+    .page-tabs {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+    }
+
+    .tab-btn {
+        padding: 10px 18px;
+        border-radius: 999px;
+        border: 1px solid var(--border-subtle);
+        background: rgba(15, 23, 42, 0.6);
+        color: var(--text-main);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .tab-btn.active {
+        background: var(--accent);
+        color: var(--bg-main);
+        border-color: var(--accent);
+    }
+
+    .tab-panel {
+        display: none;
+    }
+
+    .tab-panel.active {
+        display: block;
+    }
+
+    .checklist-section {
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        padding: 32px;
+        margin-bottom: 24px;
+    }
+
+    .checklist-section h2 {
+        margin: 0 0 24px;
+        font-size: 24px;
+        font-weight: 800;
+        color: var(--text-main);
+        letter-spacing: -0.01em;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+    .btn-select-all {
+        padding: 6px 12px;
+        border-radius: 6px;
+        border: 1px solid var(--border-subtle);
+        background: var(--primary-soft);
+        color: var(--primary);
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.18s ease-out;
+    }
+
+    .btn-select-all:hover {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+    }
+
+    .checklist-section .checklist-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        transition: all 0.2s ease;
+    }
+
+    .checklist-section .checklist-item:last-child {
+        border-bottom: none;
+    }
+
+    .checklist-section .checklist-item:hover {
+        background: rgba(99, 102, 241, 0.05);
+        margin: 0 -12px;
+        padding: 12px;
+        border-radius: 8px;
+    }
+
+    .checklist-section .checklist-item.completed {
+        opacity: 0.7;
+    }
+
+    .checklist-section .checklist-item.completed .checklist-label {
+        text-decoration: line-through;
+        color: var(--text-muted);
+    }
+
+    .checklist-checkbox {
+        width: 20px;
+        height: 20px;
+        min-width: 20px;
+        border: 2px solid var(--border-subtle);
+        border-radius: 4px;
+        background: transparent;
+        cursor: pointer;
+        position: relative;
+        transition: all 0.2s ease;
+        margin-top: 2px;
+    }
+
+    .checklist-checkbox:hover {
+        border-color: var(--primary);
+    }
+
+    .checklist-checkbox:checked {
+        background: var(--accent);
+        border-color: var(--accent);
+    }
+
+    .checklist-checkbox:checked::after {
+        content: '✓';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    .checklist-label {
+        font-size: 15px;
+        color: var(--text-main);
+        line-height: 1.6;
+    }
+
+    .progress-indicator {
+        font-size: 13px;
+        color: var(--text-muted);
+        margin-top: 8px;
+    }
+
     .btn-back {
         display: inline-block;
         margin-top: 20px;
@@ -253,10 +400,15 @@
 
 <div class="container">
     <div class="page-header">
-        <h1>✅ The Final Theory Test Checklist (Ireland)</h1>
-        <p>Everything you need to do, in the exact order you actually do it.</p>
+        <h1>Book Your Theory Test + Checklist</h1>
+        <p>Choose booking steps or the full checklist depending on what you need.</p>
+        <div class="page-tabs" role="tablist" aria-label="Theory test views">
+            <button class="tab-btn active" type="button" data-tab="booking">Booking Steps</button>
+            <button class="tab-btn" type="button" data-tab="checklist">Checklist</button>
+        </div>
     </div>
 
+    <div id="bookingPanel" class="tab-panel active" data-panel="booking">
     <div class="content-section">
         <h2>1. Confirm you're eligible</h2>
         <p>You must be 16+ for most licence categories.</p>
@@ -377,6 +529,225 @@
             <li>If you fail → you can re-book immediately.</li>
         </ul>
     </div>
+    </div>
+
+    <div id="checklistPanel" class="tab-panel" data-panel="checklist">
+        <div class="checklist-section" data-section="1">
+            <h2>
+                <span>1️⃣ Before Booking Anything</span>
+                <button class="btn-select-all" onclick="selectAllInSection('1')">Select All</button>
+            </h2>
+            <div class="checklist-item" data-id="check-1-1">
+                <input type="checkbox" class="checklist-checkbox" id="check-1-1">
+                <label for="check-1-1" class="checklist-label">I have a Public Services Card (PSC)</label>
+            </div>
+            <div class="checklist-item" data-id="check-1-2">
+                <input type="checkbox" class="checklist-checkbox" id="check-1-2">
+                <label for="check-1-2" class="checklist-label">I have a verified MyGovID</label>
+            </div>
+            <div class="checklist-item" data-id="check-1-3">
+                <input type="checkbox" class="checklist-checkbox" id="check-1-3">
+                <label for="check-1-3" class="checklist-label">I know which permit I'm applying for (Category B – Car)</label>
+            </div>
+        </div>
+
+        <div class="checklist-section" data-section="2">
+            <h2>
+                <span>2️⃣ Book the Theory Test</span>
+                <button class="btn-select-all" onclick="selectAllInSection('2')">Select All</button>
+            </h2>
+            <div class="checklist-item" data-id="check-2-1">
+                <input type="checkbox" class="checklist-checkbox" id="check-2-1">
+                <label for="check-2-1" class="checklist-label">Go to <a href="https://theorytest.ie" target="_blank">theorytest.ie</a></label>
+            </div>
+            <div class="checklist-item" data-id="check-2-2">
+                <input type="checkbox" class="checklist-checkbox" id="check-2-2">
+                <label for="check-2-2" class="checklist-label">Click Book a Test</label>
+            </div>
+            <div class="checklist-item" data-id="check-2-3">
+                <input type="checkbox" class="checklist-checkbox" id="check-2-3">
+                <label for="check-2-3" class="checklist-label">Choose Driver Theory Test</label>
+            </div>
+            <div class="checklist-item" data-id="check-2-4">
+                <input type="checkbox" class="checklist-checkbox" id="check-2-4">
+                <label for="check-2-4" class="checklist-label">Select Category B</label>
+            </div>
+            <div class="checklist-item" data-id="check-2-5">
+                <input type="checkbox" class="checklist-checkbox" id="check-2-5">
+                <label for="check-2-5" class="checklist-label">Choose my test centre OR online proctored test</label>
+            </div>
+            <div class="checklist-item" data-id="check-2-6">
+                <input type="checkbox" class="checklist-checkbox" id="check-2-6">
+                <label for="check-2-6" class="checklist-label">Pick a date & time</label>
+            </div>
+            <div class="checklist-item" data-id="check-2-7">
+                <input type="checkbox" class="checklist-checkbox" id="check-2-7">
+                <label for="check-2-7" class="checklist-label">Pay the €45 fee</label>
+            </div>
+            <div class="checklist-item" data-id="check-2-8">
+                <input type="checkbox" class="checklist-checkbox" id="check-2-8">
+                <label for="check-2-8" class="checklist-label">Received email confirmation</label>
+            </div>
+        </div>
+
+        <div class="checklist-section" data-section="3">
+            <h2>
+                <span>3️⃣ Prepare for the Theory Test</span>
+                <button class="btn-select-all" onclick="selectAllInSection('3')">Select All</button>
+            </h2>
+            <div class="checklist-item" data-id="check-3-1">
+                <input type="checkbox" class="checklist-checkbox" id="check-3-1">
+                <label for="check-3-1" class="checklist-label">Installed official study app (RSA / iTheory)</label>
+            </div>
+            <div class="checklist-item" data-id="check-3-2">
+                <input type="checkbox" class="checklist-checkbox" id="check-3-2">
+                <label for="check-3-2" class="checklist-label">Completed all practice questions</label>
+            </div>
+            <div class="checklist-item" data-id="check-3-3">
+                <input type="checkbox" class="checklist-checkbox" id="check-3-3">
+                <label for="check-3-3" class="checklist-label">Scoring 45/45 consistently</label>
+            </div>
+            <div class="checklist-item" data-id="check-3-4">
+                <input type="checkbox" class="checklist-checkbox" id="check-3-4">
+                <label for="check-3-4" class="checklist-label">Practised hazard perception if needed (Only relevant if doing online test)</label>
+            </div>
+        </div>
+
+        <div class="checklist-section" data-section="4">
+            <h2>
+                <span>4️⃣ Test Day</span>
+                <button class="btn-select-all" onclick="selectAllInSection('4')">Select All</button>
+            </h2>
+            <div class="checklist-item" data-id="check-4-1">
+                <input type="checkbox" class="checklist-checkbox" id="check-4-1">
+                <label for="check-4-1" class="checklist-label">Bring PSC</label>
+            </div>
+            <div class="checklist-item" data-id="check-4-2">
+                <input type="checkbox" class="checklist-checkbox" id="check-4-2">
+                <label for="check-4-2" class="checklist-label">Bring booking confirmation email</label>
+            </div>
+            <div class="checklist-item" data-id="check-4-3">
+                <input type="checkbox" class="checklist-checkbox" id="check-4-3">
+                <label for="check-4-3" class="checklist-label">Arrive 10–15 minutes early</label>
+            </div>
+            <div class="checklist-item" data-id="check-4-4">
+                <input type="checkbox" class="checklist-checkbox" id="check-4-4">
+                <label for="check-4-4" class="checklist-label">Passed the theory test 🎉</label>
+            </div>
+            <div class="checklist-item" data-id="check-4-5">
+                <input type="checkbox" class="checklist-checkbox" id="check-4-5">
+                <label for="check-4-5" class="checklist-label">Collected/downloaded the Theory Test Certificate</label>
+            </div>
+        </div>
+
+        <div class="checklist-section" data-section="5">
+            <h2>
+                <span>5️⃣ Apply for Learner Permit (THIS starts the 6-month clock)</span>
+                <button class="btn-select-all" onclick="selectAllInSection('5')">Select All</button>
+            </h2>
+            <div class="checklist-item" data-id="check-5-1">
+                <input type="checkbox" class="checklist-checkbox" id="check-5-1">
+                <label for="check-5-1" class="checklist-label">Go to <a href="https://ndls.ie" target="_blank">NDLS.ie</a></label>
+            </div>
+            <div class="checklist-item" data-id="check-5-2">
+                <input type="checkbox" class="checklist-checkbox" id="check-5-2">
+                <label for="check-5-2" class="checklist-label">Click Apply Online</label>
+            </div>
+            <div class="checklist-item" data-id="check-5-3">
+                <input type="checkbox" class="checklist-checkbox" id="check-5-3">
+                <label for="check-5-3" class="checklist-label">Log in using MyGovID</label>
+            </div>
+            <div class="checklist-item" data-id="check-5-4">
+                <input type="checkbox" class="checklist-checkbox" id="check-5-4">
+                <label for="check-5-4" class="checklist-label">Upload Theory Test Certificate</label>
+            </div>
+            <div class="checklist-item" data-id="check-5-5">
+                <input type="checkbox" class="checklist-checkbox" id="check-5-5">
+                <label for="check-5-5" class="checklist-label">Confirm Category B application</label>
+            </div>
+            <div class="checklist-item" data-id="check-5-6">
+                <input type="checkbox" class="checklist-checkbox" id="check-5-6">
+                <label for="check-5-6" class="checklist-label">Pay the €35 fee</label>
+            </div>
+            <div class="checklist-item" data-id="check-5-7">
+                <input type="checkbox" class="checklist-checkbox" id="check-5-7">
+                <label for="check-5-7" class="checklist-label">Submitted the application successfully</label>
+            </div>
+            <div class="checklist-item" data-id="check-5-8">
+                <input type="checkbox" class="checklist-checkbox" id="check-5-8">
+                <label for="check-5-8" class="checklist-label">Permit arrived by post (Usually 7–10 working days)</label>
+            </div>
+        </div>
+
+        <div class="checklist-section" data-section="6">
+            <h2>
+                <span>6️⃣ After You Receive Your Learner Permit</span>
+                <button class="btn-select-all" onclick="selectAllInSection('6')">Select All</button>
+            </h2>
+            <div class="checklist-item" data-id="check-6-1">
+                <input type="checkbox" class="checklist-checkbox" id="check-6-1">
+                <label for="check-6-1" class="checklist-label">Checked the issue date on the permit</label>
+            </div>
+            <div class="checklist-item" data-id="check-6-2">
+                <input type="checkbox" class="checklist-checkbox" id="check-6-2">
+                <label for="check-6-2" class="checklist-label">Counted 6 months ahead (this is the earliest driving-test date)</label>
+            </div>
+            <div class="checklist-item" data-id="check-6-3">
+                <input type="checkbox" class="checklist-checkbox" id="check-6-3">
+                <label for="check-6-3" class="checklist-label">Created an account on <a href="https://myroadsafety.rsa.ie/home/login" target="_blank">my.rsa.ie</a></label>
+            </div>
+            <div class="checklist-item" data-id="check-6-4">
+                <input type="checkbox" class="checklist-checkbox" id="check-6-4">
+                <label for="check-6-4" class="checklist-label">Tick Short Notice Cancellation box (This helps you get a MUCH earlier test)</label>
+            </div>
+        </div>
+
+        <div class="checklist-section" data-section="7">
+            <h2>
+                <span>7️⃣ Start Driving Lessons (EDT)</span>
+                <button class="btn-select-all" onclick="selectAllInSection('7')">Select All</button>
+            </h2>
+            <div class="checklist-item" data-id="check-7-1">
+                <input type="checkbox" class="checklist-checkbox" id="check-7-1">
+                <label for="check-7-1" class="checklist-label">Found an ADI instructor near me</label>
+            </div>
+            <div class="checklist-item" data-id="check-7-2">
+                <input type="checkbox" class="checklist-checkbox" id="check-7-2">
+                <label for="check-7-2" class="checklist-label">Completed Lesson 1</label>
+            </div>
+            <div class="checklist-item" data-id="check-7-3">
+                <input type="checkbox" class="checklist-checkbox" id="check-7-3">
+                <label for="check-7-3" class="checklist-label">Started logging EDT lessons online</label>
+            </div>
+            <div class="checklist-item" data-id="check-7-4">
+                <input type="checkbox" class="checklist-checkbox" id="check-7-4">
+                <label for="check-7-4" class="checklist-label">Progressing toward 12 EDT lessons</label>
+            </div>
+        </div>
+
+        <div class="checklist-section" data-section="8">
+            <h2>
+                <span>8️⃣ When Ready</span>
+                <button class="btn-select-all" onclick="selectAllInSection('8')">Select All</button>
+            </h2>
+            <div class="checklist-item" data-id="check-8-1">
+                <input type="checkbox" class="checklist-checkbox" id="check-8-1">
+                <label for="check-8-1" class="checklist-label">Book driving test on <a href="https://myroadsafety.rsa.ie/home/login" target="_blank">my.rsa.ie</a></label>
+            </div>
+            <div class="checklist-item" data-id="check-8-2">
+                <input type="checkbox" class="checklist-checkbox" id="check-8-2">
+                <label for="check-8-2" class="checklist-label">Car insurance sorted</label>
+            </div>
+            <div class="checklist-item" data-id="check-8-3">
+                <input type="checkbox" class="checklist-checkbox" id="check-8-3">
+                <label for="check-8-3" class="checklist-label">Car with L plates</label>
+            </div>
+            <div class="checklist-item" data-id="check-8-4">
+                <input type="checkbox" class="checklist-checkbox" id="check-8-4">
+                <label for="check-8-4" class="checklist-label">Continue checking cancellations for earlier dates</label>
+            </div>
+        </div>
+    </div>
 
     <div style="text-align: center;">
         <a href="index.html" class="btn-back" id="backToHome">← Back to Home</a>
@@ -388,6 +759,7 @@
     const urlParams = new URLSearchParams(window.location.search);
     const fromSection = urlParams.get('from');
     const fromPage = urlParams.get('page') || (fromSection ? 'main' : null);
+    const viewParam = urlParams.get('view');
     
     if (fromSection) {
         localStorage.setItem('lastMainSection', fromSection);
@@ -395,6 +767,117 @@
     if (fromPage) {
         localStorage.setItem('lastPage', fromPage);
     }
+
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+
+    function setActiveTab(tabName, updateUrl = true) {
+        tabButtons.forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.tab === tabName);
+        });
+        tabPanels.forEach(panel => {
+            panel.classList.toggle('active', panel.dataset.panel === tabName);
+        });
+
+        if (updateUrl) {
+            const nextUrl = new URL(window.location.href);
+            nextUrl.searchParams.set('view', tabName);
+            history.replaceState({}, '', nextUrl);
+        }
+    }
+
+    tabButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            setActiveTab(btn.dataset.tab);
+        });
+    });
+
+    if (viewParam === 'checklist' || viewParam === 'booking') {
+        setActiveTab(viewParam, false);
+    }
+</script>
+
+<script>
+    // Load saved checklist state from localStorage
+    function loadChecklistState() {
+        const items = document.querySelectorAll('.checklist-section .checklist-item');
+        items.forEach(item => {
+            const id = item.dataset.id;
+            const checkbox = item.querySelector('.checklist-checkbox');
+            if (!id || !checkbox) {
+                return;
+            }
+            const savedState = localStorage.getItem(`checklist_${id}`);
+            
+            if (savedState === 'true') {
+                checkbox.checked = true;
+                item.classList.add('completed');
+            }
+        });
+    }
+
+    // Save checklist state to localStorage
+    function saveChecklistState(id, checked) {
+        localStorage.setItem(`checklist_${id}`, checked.toString());
+    }
+
+    // Handle checkbox changes
+    document.querySelectorAll('.checklist-section .checklist-checkbox').forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            const item = this.closest('.checklist-item');
+            const id = item.dataset.id;
+            if (!id) {
+                return;
+            }
+            
+            if (this.checked) {
+                item.classList.add('completed');
+            } else {
+                item.classList.remove('completed');
+            }
+            
+            saveChecklistState(id, this.checked);
+        });
+    });
+
+    // Allow clicking the label to toggle checkbox
+    document.querySelectorAll('.checklist-section .checklist-label').forEach(label => {
+        label.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A') {
+                return;
+            }
+            const checkbox = document.getElementById(this.getAttribute('for'));
+            if (checkbox) {
+                checkbox.checked = !checkbox.checked;
+                checkbox.dispatchEvent(new Event('change'));
+            }
+        });
+    });
+
+    // Select all checkboxes in a section
+    function selectAllInSection(sectionNum) {
+        const section = document.querySelector(`.checklist-section[data-section="${sectionNum}"]`);
+        if (!section) return;
+        
+        const checkboxes = section.querySelectorAll('.checklist-checkbox');
+        const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+        
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = !allChecked;
+            const item = checkbox.closest('.checklist-item');
+            const id = item.dataset.id;
+            
+            if (checkbox.checked) {
+                item.classList.add('completed');
+            } else {
+                item.classList.remove('completed');
+            }
+            
+            saveChecklistState(id, checkbox.checked);
+        });
+    }
+
+    loadChecklistState();
 </script>
 
 <script src="/chatbot-widget.js"></script>

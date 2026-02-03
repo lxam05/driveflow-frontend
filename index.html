@@ -1272,7 +1272,6 @@
 <nav id="levelSelector">
     <h3>What level are you at?</h3>
     <ul>
-        <li><a onclick="goTo('getting')" data-section="getting">Getting Started</a></li>
         <li><a onclick="goTo('theory')" data-section="theory">Theory Test</a></li>
         <li><a onclick="goTo('booking')" data-section="booking">Booking Test</a></li>
         <li><a onclick="goTo('preparing')" data-section="preparing">Preparing for Test + Routes!</a></li>
@@ -1281,24 +1280,14 @@
 
 <!-- ========= SECTIONS ========= -->
 
-<!-- Getting Started — LEFT -->
-<div id="section-getting" class="section" data-section="getting">
-    <div class="infoCard leftCard">
-        <h3>Getting Started</h3>
-        <p>Kick off your driving journey with the essentials.</p>
-        <ul>
-            <li><a href="bookingtheorytest.html?from=getting&page=main">How to Book Your Theory Test</a></li>
-            <li><a href="getting-started.html?from=getting&page=main">Getting Started Checklist</a></li>
-        </ul>
-    </div>
-</div>
-
 <!-- Theory Test — RIGHT -->
 <div id="section-theory" class="section" data-section="theory">
     <div class="infoCard rightCard">
         <h3>Theory Test</h3>
         <p>Pass the theory with practice and mock exams.</p>
         <ul>
+            <li><a href="bookingtheorytest.html?view=booking&from=theory&page=main">Book Your Theory Test</a></li>
+            <li><a href="bookingtheorytest.html?view=checklist&from=theory&page=main">Theory Test Checklist</a></li>
             <li><a href="theory-test.html?from=theory&page=main">Practice Theory Questions</a></li>
             <li><a href="mock-test.html?from=theory&page=main">Take a Mock Exam</a></li>
         </ul>
@@ -1439,7 +1428,7 @@ const levelSelector = document.getElementById("levelSelector");
 const footer        = document.getElementById("footer");
 
 const MIN_WORLD_HEIGHT = 8000;
-const sectionOrder = ["guides","getting","theory","booking","preparing"];
+const sectionOrder = ["guides","theory","booking","preparing"];
 const sectionSpacingMultiplier = 1.35;
 
 let worldHeight = MIN_WORLD_HEIGHT;
