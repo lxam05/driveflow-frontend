@@ -52,6 +52,12 @@
             <div id="loadingContainer" class="loading">Loading routes...</div>
         `;
 
+        const paywallContainer = document.getElementById('paywallContainer');
+        const pageHeader = document.querySelector('.page-header');
+        if (paywallContainer && pageHeader) {
+            pageHeader.insertAdjacentElement('afterend', paywallContainer);
+        }
+
         const purchaseEl = document.getElementById('sharedPurchase');
         if (purchaseEl) {
             purchaseEl.innerHTML = `
