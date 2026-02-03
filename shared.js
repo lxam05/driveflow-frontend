@@ -132,16 +132,12 @@
             if (!tokenResponse.ok) {
                 const error = await tokenResponse.json();
                 if (error.error && error.error.includes('license')) {
-                    await checkLicenseStatus();
-                    if (!hasLicense) {
-                        const paywallContainer = document.getElementById('paywallContainer');
-                        if (paywallContainer) {
-                            paywallContainer.style.display = 'block';
-                        }
-                        loadingContainer.style.display = 'none';
-                        routesContainer.style.display = 'none';
-                        return;
+                    const paywallContainer = document.getElementById('paywallContainer');
+                    if (paywallContainer) {
+                        paywallContainer.style.display = 'block';
                     }
+                    loadingContainer.style.display = 'none';
+                    routesContainer.style.display = 'none';
                     errorContainer.innerHTML = `
                         <div class="error">
                             <strong>Access Required</strong><br>
@@ -151,6 +147,7 @@
                             </div>
                         </div>
                     `;
+                    return;
                 } else {
                     errorContainer.innerHTML = `
                         <div class="error">
@@ -386,22 +383,6 @@
             return;
         }
 
-        await checkLicenseStatus();
-
-        if (!hasLicense) {
-            paywallContainer.style.display = 'block';
-            loadingContainer.style.display = 'none';
-            routesContainer.style.display = 'none';
-            if (token && purchaseSection) {
-                purchaseSection.style.display = 'block';
-            }
-            return;
-        }
-
-        paywallContainer.style.display = 'none';
-        if (purchaseSection) {
-            purchaseSection.style.display = 'none';
-        }
         await loadRoutes(apiSlug, centreName);
     });
 })();
