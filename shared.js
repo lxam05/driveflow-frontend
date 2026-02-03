@@ -138,15 +138,6 @@
                     }
                     loadingContainer.style.display = 'none';
                     routesContainer.style.display = 'none';
-                    errorContainer.innerHTML = `
-                        <div class="error">
-                            <strong>Access Required</strong><br>
-                            You need an active license to view ${centreName} routes.
-                            <div style="margin-top: 20px;">
-                                <a href="/payment.html" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; padding: 12px 24px; margin-top: 12px;">Buy Now</a>
-                            </div>
-                        </div>
-                    `;
                     return;
                 } else {
                     errorContainer.innerHTML = `
