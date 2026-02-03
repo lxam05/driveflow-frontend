@@ -1534,22 +1534,7 @@
 
     // Select a test centre
     async function selectCentre(centre) {
-        // Always check license status first
-        await checkLicenseStatus();
-        
-        // Debug: log the license status
-        console.log('selectCentre - hasLicense:', hasLicense, 'centre:', centre.name);
-        
-        // If no license, redirect to payment page
-        if (!hasLicense) {
-            console.log('No license - redirecting to payment.html');
-            window.location.href = 'payment.html';
-            return;
-        }
-        
-        // User has premium access - proceed to show routes
-        console.log('Has license - proceeding to routes');
-        
+        // Always allow navigation to the centre page
         // Special handling for Naas, Tallaght, and Dun Laoghaire - redirect to dedicated pages
         if (centre.name === "Naas") {
             window.location.href = 'naas-routes.html';
