@@ -204,7 +204,7 @@
             routesContainer.innerHTML = `
                 <div style="text-align: center; padding: 40px; background: var(--bg-card); border-radius: var(--radius-xl); border: 1px solid var(--border-subtle);">
                     <h3 style="color: var(--accent); margin-bottom: 16px;">Routes Updating</h3>
-                    <p style="color: var(--text-main); font-size: 16px; line-height: 1.7;">Routes are being updated and will be released within the hour. Please email <a href="mailto:driveflowweb@gmail.com" style="color: var(--accent); text-decoration: underline;">driveflowweb@gmail.com</a> if you need access sooner.</p>
+                    <p style="color: var(--text-main); font-size: 16px; line-height: 1.7;">Routes are being updated and will be released within the hour. Please email <a href="mailto:driveflowweb@gmail.com" style="color: var(--accent); text-decoration: underline;">driveflowweb@gmail.com</a> for any queries.</p>
                 </div>
             `;
             return;
