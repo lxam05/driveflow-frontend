@@ -44,9 +44,10 @@
                 <h2 style="margin: 0 0 8px; color: var(--text-main); font-size: 24px; font-weight: 800;">${centreName} Driving Test Routes</h2>
                 <p style="margin: 0 0 20px; color: var(--accent); font-size: 20px; font-weight: 700;">Unlock Full Routes – €11.99</p>
                 <p style="margin: 0 0 24px; color: var(--text-muted); font-size: 15px;">Used by learners passing first time</p>
+                <p style="margin: 0 0 20px; color: var(--text-muted); font-size: 14px;">Log in or sign up to purchase — then you can unlock the routes.</p>
                 <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; align-items: center;">
-                    <a href="/payment.html" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; padding: 14px 28px; font-size: 16px; font-weight: 600; background: var(--accent); color: var(--bg-main);">Get Access – €11.99</a>
-                    <a href="/login.html" style="color: var(--text-muted); font-size: 14px; text-decoration: underline; text-underline-offset: 3px;">Already have access? Log in</a>
+                    <a href="/login.html?redirect=payment" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; padding: 14px 28px; font-size: 16px; font-weight: 600; background: var(--accent); color: var(--bg-main);">Get Access – €11.99</a>
+                    <a href="/login.html?redirect=payment" style="color: var(--text-muted); font-size: 14px; text-decoration: underline; text-underline-offset: 3px;">Already have an account? Log in</a>
                 </div>
             </div>
             <div id="routesContainer" class="routes-container"></div>

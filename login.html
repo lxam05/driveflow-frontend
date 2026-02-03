@@ -383,7 +383,7 @@
 
         <div class="auth-links">
             <p><a href="forgot-password.html">Forgot your password?</a></p>
-            <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+            <p>Don't have an account? <a href="signup.html" id="signupLink">Sign up</a></p>
         </div>
     </div>
 </div>
@@ -394,9 +394,17 @@
         ? "http://localhost:8080"   // ← backend when running locally
         : "https://driving-test-backend-production.up.railway.app"; // ← built site
 
-    // if logged in already, go to main
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirectToPayment = urlParams.get('redirect') === 'payment';
+
+    // if logged in already, redirect based on intent
     if (localStorage.getItem('auth_token')) {
-        window.location.href = 'index.html';
+        window.location.href = redirectToPayment ? 'payment.html' : 'index.html';
+    }
+
+    const signupLink = document.getElementById('signupLink');
+    if (signupLink && redirectToPayment) {
+        signupLink.href = 'signup.html?redirect=payment';
     }
 
     const loginForm = document.getElementById('loginForm');
@@ -449,8 +457,8 @@
             showSuccess('Login successful! Redirecting...');
 
             setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 1000);
+                window.location.href = redirectToPayment ? 'payment.html' : 'index.html';
+            }, 800);
 
         } catch (err) {
             showError('Cannot reach server.');

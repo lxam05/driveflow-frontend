@@ -404,7 +404,7 @@
         </form>
 
         <div class="auth-links">
-            <p>Already have an account? <a href="login.html">Sign in</a></p>
+            <p>Already have an account? <a href="login.html" id="loginLink">Sign in</a></p>
         </div>
     </div>
 </div>
@@ -416,9 +416,17 @@
         : "https://driving-test-backend-production.up.railway.app"; // ← built site
 
 
-    // If logged in, go to dashboard
+    const urlParams = new URLSearchParams(window.location.search);
+    const redirectToPayment = urlParams.get('redirect') === 'payment';
+
+    // If logged in, redirect based on intent
     if (localStorage.getItem('auth_token')) {
-        window.location.href = 'index.html';
+        window.location.href = redirectToPayment ? 'payment.html' : 'index.html';
+    }
+
+    const loginLink = document.getElementById('loginLink');
+    if (loginLink && redirectToPayment) {
+        loginLink.href = 'login.html?redirect=payment';
     }
 
     const signupForm = document.getElementById('signupForm');
@@ -533,7 +541,7 @@
             showSuccess('Account created successfully! Redirecting...');
 
             setTimeout(() => {
-                window.location.href = 'index.html';
+                window.location.href = redirectToPayment ? 'payment.html' : 'index.html';
             }, 800);
 
         } catch (err) {
