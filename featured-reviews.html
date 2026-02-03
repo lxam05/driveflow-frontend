@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EJB69589QP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-EJB69589QP');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Read featured DriveFlow reviews from learner drivers across Ireland.">
+<link rel="canonical" href="https://www.driveflow.ie/featured-reviews.html">
+<link rel="icon" href="https://www.driveflow.ie/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.driveflow.ie/favicon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://www.driveflow.ie/favicon.png">
+<link rel="apple-touch-icon" href="https://www.driveflow.ie/favicon.png">
+<title>DriveFlow | Featured Reviews</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+    :root {
+        --bg-main: #0b132b;
+        --bg-glass: rgba(20, 30, 55, 0.92);
+        --bg-card: #22314e;
+        --primary: #5bc0be;
+        --accent: #6fffe9;
+        --text-main: #f2f4f8;
+        --text-muted: #a3adc2;
+        --border-subtle: rgba(255, 255, 255, 0.08);
+        --shadow-card: 0 18px 40px rgba(0, 0, 0, 0.28);
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        background: radial-gradient(circle at top, rgba(91, 192, 190, 0.2), transparent 45%) , var(--bg-main);
+        color: var(--text-main);
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 32px 20px 64px;
+    }
+
+    .page-header {
+        background: var(--bg-glass);
+        border: 1px solid var(--border-subtle);
+        border-radius: 20px;
+        padding: 32px;
+        text-align: center;
+        box-shadow: var(--shadow-card);
+        margin-bottom: 28px;
+    }
+
+    .page-header h1 {
+        margin: 0 0 12px;
+        font-size: 34px;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+    }
+
+    .page-header p {
+        margin: 0;
+        color: var(--text-muted);
+        font-size: 16px;
+        line-height: 1.6;
+    }
+
+    .review-panel {
+        background: var(--bg-glass);
+        border-radius: 22px;
+        padding: 24px;
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+    }
+
+    .review-panel-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 18px;
+        flex-wrap: wrap;
+    }
+
+    .review-panel-header h2 {
+        margin: 0;
+        font-size: 22px;
+        font-weight: 700;
+    }
+
+    .review-panel-header span {
+        color: var(--text-muted);
+        font-size: 14px;
+    }
+
+    .review-list {
+        display: grid;
+        gap: 16px;
+        max-height: 520px;
+        overflow-y: auto;
+        padding-right: 6px;
+    }
+
+    .review-list::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .review-list::-webkit-scrollbar-thumb {
+        background: rgba(111, 255, 233, 0.3);
+        border-radius: 999px;
+    }
+
+    .review-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        border-radius: 18px;
+        padding: 18px 20px;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .review-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 8px;
+    }
+
+    .review-name {
+        font-weight: 700;
+        font-size: 16px;
+    }
+
+    .review-meta {
+        color: var(--text-muted);
+        font-size: 13px;
+    }
+
+    .review-stars {
+        background: rgba(111, 255, 233, 0.14);
+        color: var(--accent);
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .review-text {
+        margin: 10px 0 0;
+        color: var(--text-main);
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    .review-tags {
+        margin-top: 12px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .tag {
+        background: rgba(91, 192, 190, 0.14);
+        color: var(--primary);
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .btn-row {
+        text-align: center;
+        margin-top: 28px;
+    }
+
+    .btn-primary {
+        display: inline-block;
+        padding: 12px 22px;
+        border-radius: 999px;
+        background: var(--accent);
+        color: #0b132b;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 14px;
+        box-shadow: 0 10px 20px rgba(111, 255, 233, 0.25);
+    }
+
+    .btn-primary:hover {
+        filter: brightness(1.05);
+    }
+
+    @media (max-width: 720px) {
+        .page-header {
+            padding: 24px;
+        }
+
+        .review-panel {
+            padding: 18px;
+        }
+
+        .review-list {
+            max-height: 480px;
+        }
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="page-header">
+            <h1>Featured Reviews</h1>
+            <p>Real feedback from learners who used DriveFlow to practise routes and pass with confidence.</p>
+        </div>
+
+        <section class="review-panel">
+            <div class="review-panel-header">
+                <h2>What learners are saying</h2>
+                <span>Scroll to explore recent reviews</span>
+            </div>
+            <div class="review-list">
+                <article class="review-card">
+                    <div class="review-header">
+                        <div>
+                            <div class="review-name">Aoife M.</div>
+                            <div class="review-meta">Tallaght • 2 days ago</div>
+                        </div>
+                        <div class="review-stars">★★★★★</div>
+                    </div>
+                    <p class="review-text">The manoeuvre buttons were a game changer. I practised the exact turnarounds and got them on the test.</p>
+                    <div class="review-tags">
+                        <span class="tag">Routes</span>
+                        <span class="tag">Manoeuvres</span>
+                    </div>
+                </article>
+
+                <article class="review-card">
+                    <div class="review-header">
+                        <div>
+                            <div class="review-name">James K.</div>
+                            <div class="review-meta">Dun Laoghaire • 5 days ago</div>
+                        </div>
+                        <div class="review-stars">★★★★★</div>
+                    </div>
+                    <p class="review-text">I used the routes with my instructor the week before. The map links saved so much time.</p>
+                    <div class="review-tags">
+                        <span class="tag">Instructor</span>
+                        <span class="tag">Time Saver</span>
+                    </div>
+                </article>
+
+                <article class="review-card">
+                    <div class="review-header">
+                        <div>
+                            <div class="review-name">Sarah P.</div>
+                            <div class="review-meta">Naas • 1 week ago</div>
+                        </div>
+                        <div class="review-stars">★★★★★</div>
+                    </div>
+                    <p class="review-text">Loved how clean the site is. I just clicked my centre and everything was right there.</p>
+                    <div class="review-tags">
+                        <span class="tag">Easy to Use</span>
+                        <span class="tag">Clean UI</span>
+                    </div>
+                </article>
+
+                <article class="review-card">
+                    <div class="review-header">
+                        <div>
+                            <div class="review-name">Liam R.</div>
+                            <div class="review-meta">Finglas • 2 weeks ago</div>
+                        </div>
+                        <div class="review-stars">★★★★☆</div>
+                    </div>
+                    <p class="review-text">The tips under the routes helped me spot common fail points. Felt way more prepared.</p>
+                    <div class="review-tags">
+                        <span class="tag">Tips</span>
+                        <span class="tag">Confidence</span>
+                    </div>
+                </article>
+
+                <article class="review-card">
+                    <div class="review-header">
+                        <div>
+                            <div class="review-name">Niamh S.</div>
+                            <div class="review-meta">Tralee • 3 weeks ago</div>
+                        </div>
+                        <div class="review-stars">★★★★★</div>
+                    </div>
+                    <p class="review-text">Booked my test and used the checklist and routes side by side. Passed first try.</p>
+                    <div class="review-tags">
+                        <span class="tag">Checklist</span>
+                        <span class="tag">Passed First Time</span>
+                    </div>
+                </article>
+
+                <article class="review-card">
+                    <div class="review-header">
+                        <div>
+                            <div class="review-name">Daniel B.</div>
+                            <div class="review-meta">Mulhuddart • 1 month ago</div>
+                        </div>
+                        <div class="review-stars">★★★★★</div>
+                    </div>
+                    <p class="review-text">The layout is slick and the reviews page is a nice touch. Feels premium.</p>
+                    <div class="review-tags">
+                        <span class="tag">Design</span>
+                        <span class="tag">Premium</span>
+                    </div>
+                </article>
+
+                <article class="review-card">
+                    <div class="review-header">
+                        <div>
+                            <div class="review-name">Emma L.</div>
+                            <div class="review-meta">Waterford • 1 month ago</div>
+                        </div>
+                        <div class="review-stars">★★★★★</div>
+                    </div>
+                    <p class="review-text">The site gave me a plan. I knew which routes to drive and when to practise.</p>
+                    <div class="review-tags">
+                        <span class="tag">Planning</span>
+                        <span class="tag">Routes</span>
+                    </div>
+                </article>
+
+                <article class="review-card">
+                    <div class="review-header">
+                        <div>
+                            <div class="review-name">Conor D.</div>
+                            <div class="review-meta">Ballincollig • 5 weeks ago</div>
+                        </div>
+                        <div class="review-stars">★★★★☆</div>
+                    </div>
+                    <p class="review-text">Great value for money. I only needed one lesson after using DriveFlow.</p>
+                    <div class="review-tags">
+                        <span class="tag">Value</span>
+                        <span class="tag">Practice</span>
+                    </div>
+                </article>
+
+                <article class="review-card">
+                    <div class="review-header">
+                        <div>
+                            <div class="review-name">Sophie T.</div>
+                            <div class="review-meta">Raheny • 6 weeks ago</div>
+                        </div>
+                        <div class="review-stars">★★★★★</div>
+                    </div>
+                    <p class="review-text">Loved the local advice sections. It felt like a friend explaining the tricky bits.</p>
+                    <div class="review-tags">
+                        <span class="tag">Local Advice</span>
+                        <span class="tag">Friendly</span>
+                    </div>
+                </article>
+
+                <article class="review-card">
+                    <div class="review-header">
+                        <div>
+                            <div class="review-name">Eoin H.</div>
+                            <div class="review-meta">Cavan • 2 months ago</div>
+                        </div>
+                        <div class="review-stars">★★★★★</div>
+                    </div>
+                    <p class="review-text">The route list at the top is perfect. I can jump right in and practise straight away.</p>
+                    <div class="review-tags">
+                        <span class="tag">Fast Access</span>
+                        <span class="tag">Routes</span>
+                    </div>
+                </article>
+
+                <article class="review-card">
+                    <div class="review-header">
+                        <div>
+                            <div class="review-name">Grace W.</div>
+                            <div class="review-meta">Wexford • 2 months ago</div>
+                        </div>
+                        <div class="review-stars">★★★★★</div>
+                    </div>
+                    <p class="review-text">The guides helped me understand the test flow. Everything is in one place.</p>
+                    <div class="review-tags">
+                        <span class="tag">Guides</span>
+                        <span class="tag">One Place</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <div class="btn-row">
+            <a href="index.html" class="btn-primary">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>
