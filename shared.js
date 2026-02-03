@@ -293,6 +293,11 @@
                 </div>
             `;
         }).join('');
+
+        const paywallContainer = document.getElementById('paywallContainer');
+        if (routesEl && paywallContainer) {
+            paywallContainer.insertAdjacentElement('afterend', routesEl);
+        }
     }
 
     async function openRoute(routeId, apiSlugOverride) {
