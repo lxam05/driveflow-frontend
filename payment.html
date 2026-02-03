@@ -292,6 +292,17 @@
         display: block;
     }
 
+    @media (max-width: 720px) {
+        .discount-code-row {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .btn-apply-discount {
+            width: 100%;
+        }
+    }
+
     .form-group {
         margin-bottom: 24px;
     }
@@ -602,11 +613,10 @@
 
                         <ul class="includes-list">
                             <li>Seamless integration into GoogleMaps</li>
-                            <li>7 hand-mapped routes</li>
+                            <li>5-7 hand-mapped routes</li>
                             <li>Safe turn-by-turn order</li>
                             <li>Test-style maneuvers</li>
                             <li>No ads</li>
-                            <li>Instant access after payment</li>
                         </ul>
 
                         <div class="form-group">
@@ -712,10 +722,10 @@
                     <div class="what-you-get">
                         <h3>Driving Test Routes (Full Access)</h3>
                         <ul class="benefits-list">
-                            <li>7 routes used by real examiners</li>
+                            <li>5-7 routes used by real examiners</li>
                             <li>Includes roundabouts, speed zones, tricky turns</li>
                             <li>Each route 100% accurate</li>
-                            <li>Updated regularly</li>
+                            <li>Updated weekly</li>
                             <li>Pass-focused structure</li>
                         </ul>
                     </div>
@@ -817,54 +827,9 @@
     // Store all centres for filtering
     let allCentres = [];
     
-    // Centres with actual routes (in order of release)
-    const centresWithRoutes = [
-        "Naas",
-        "Tallaght",
-        "Dun Laoghaire",
-        "Wilton",
-        "Finglas",
-        "Raheny",
-        "Mulhuddart",
-        "Westside",
-        "Loughrea",
-        "Ballincollig",
-        "Nenagh",
-        "Wexford",
-        "Wicklow",
-        "Tralee",
-        "Waterford",
-        "Navan",
-        "Mitchelstown",
-        "Woodview",
-        "Cavan"
-    ];
-    
-    // Sort centres: routes first (in release order), then rest alphabetically
+    // Sort centres alphabetically
     function sortCentres(centres) {
-        const withRoutes = [];
-        const withoutRoutes = [];
-        
-        centres.forEach(centre => {
-            if (centresWithRoutes.includes(centre)) {
-                withRoutes.push(centre);
-            } else {
-                withoutRoutes.push(centre);
-            }
-        });
-        
-        // Sort withRoutes by the order in centresWithRoutes array
-        withRoutes.sort((a, b) => {
-            const indexA = centresWithRoutes.indexOf(a);
-            const indexB = centresWithRoutes.indexOf(b);
-            return indexA - indexB;
-        });
-        
-        // Sort withoutRoutes alphabetically
-        withoutRoutes.sort((a, b) => a.localeCompare(b));
-        
-        // Combine: routes first, then alphabetically sorted rest
-        return [...withRoutes, ...withoutRoutes];
+        return [...centres].sort((a, b) => a.localeCompare(b));
     }
     
     // Load test centres on page load
@@ -879,143 +844,9 @@
                 populateSelects(allCentres);
             } else {
                 console.error('Failed to load test centres');
-                // Fallback to only centres with actual routes available
-                const fallbackCentres = [
-                    "Naas",
-                    "Tallaght",
-                    "Dun Laoghaire",
-                    "Wilton",
-                    "Finglas",
-                    "Raheny",
-                    "Mulhuddart",
-                    "Westside",
-                    "Loughrea",
-                    "Ballincollig",
-                    "Mitchelstown",
-                    "Navan",
-                    "Nenagh",
-                    "Wexford",
-                    "Woodview",
-                    "Wicklow",
-                    "Tralee",
-                    "Waterford",
-                    "Athlone",
-                    "Ballina",
-                    "Birr – County Arms Hotel",
-                    "Buncrana",
-                    "Carlow",
-                    "Carlow – Talbot Hotel",
-                    "Carnmore",
-                    "Carrick-on-Shannon",
-                    "Castlebar",
-                    "Cavan",
-                    "Clifden",
-                    "Clonmel",
-                    "Clybaun",
-                    "Donegal",
-                    "Dundalk",
-                    "Dungarvan",
-                    "Ennis",
-                    "Gorey",
-                    "Kilkenny – Government Buildings",
-                    "Kilkenny – O'Loughlin Gaels",
-                    "Killarney",
-                    "Killester",
-                    "Kilrush",
-                    "Letterkenny",
-                    "Limerick – Castlemungret",
-                    "Longford",
-                    "Maldron Hotel",
-                    "Mallow",
-                    "Maple House",
-                    "Monaghan",
-                    "Mullingar",
-                    "Newcastle West",
-                    "Newcastle West – Longcourt House Hotel",
-                    "Portlaoise",
-                    "Roscommon",
-                    "Shannon",
-                    "Skibbereen",
-                    "Sligo",
-                    "Thurles",
-                    "Tipperary",
-                    "Tuam",
-                    "Tullamore"
-                ];
-                // Sort: routes first, then alphabetically
-                allCentres = sortCentres(fallbackCentres);
-                
-                populateSelects(allCentres);
             }
         } catch (err) {
             console.error('Error loading test centres:', err);
-            // Fallback to only centres with actual routes available
-            const fallbackCentres = [
-                "Naas",
-                "Tallaght",
-                "Dun Laoghaire",
-                "Wilton",
-                "Finglas",
-                "Raheny",
-                "Mulhuddart",
-                "Westside",
-                "Loughrea",
-                "Ballincollig",
-                "Mitchelstown",
-                "Navan",
-                "Nenagh",
-                "Wexford",
-                "Woodview",
-                "Wicklow",
-                "Tralee",
-                "Waterford",
-                "Athlone",
-                "Ballina",
-                "Birr – County Arms Hotel",
-                "Buncrana",
-                "Carlow",
-                "Carlow – Talbot Hotel",
-                "Carnmore",
-                "Carrick-on-Shannon",
-                "Castlebar",
-                "Cavan",
-                "Clifden",
-                "Clonmel",
-                "Clybaun",
-                "Donegal",
-                "Dundalk",
-                "Dungarvan",
-                "Ennis",
-                "Gorey",
-                "Kilkenny – Government Buildings",
-                "Kilkenny – O'Loughlin Gaels",
-                "Killarney",
-                "Killester",
-                "Kilrush",
-                "Letterkenny",
-                "Limerick – Castlemungret",
-                "Longford",
-                "Maldron Hotel",
-                "Mallow",
-                "Maple House",
-                "Monaghan",
-                "Mullingar",
-                "Newcastle West",
-                "Newcastle West – Longcourt House Hotel",
-                "Portlaoise",
-                "Roscommon",
-                "Shannon",
-                "Skibbereen",
-                "Sligo",
-                "Thurles",
-                "Tipperary",
-                "Tuam",
-                "Tullamore"
-            ];
-                // Sort: routes first, then alphabetically
-                allCentres = sortCentres(fallbackCentres);
-                
-                populateSelects(allCentres);
         }
     }
     
