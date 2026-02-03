@@ -218,10 +218,21 @@
     }
 
     @media (max-width: 640px) {
+      header {
+        position: static;
+        box-shadow: none;
+      }
+
+      .content {
+        margin: 24px auto 40px;
+        padding-top: 0;
+      }
+
       .nav-inner {
         flex-direction: column;
         align-items: flex-start;
       }
+
       .nav-actions {
         align-self: stretch;
         justify-content: space-between;
@@ -741,8 +752,8 @@
             </div>
           </div>
           <div class="nav-actions">
-            <a href="index.html" class="nav-link">
-              <span>← Back to Journey Map</span>
+            <a href="index.html" class="nav-link" aria-label="Back to Home" title="Back to Home">
+              <span aria-hidden="true">←</span>
             </a>
             <a href="#" class="nav-link" id="contactUsLink">
               <span>Contact Us</span>
