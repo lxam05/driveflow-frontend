@@ -58,6 +58,10 @@
             pageHeader.insertAdjacentElement('afterend', paywallContainer);
         }
 
+        if (paywallContainer) {
+            paywallContainer.insertAdjacentElement('afterend', routesEl);
+        }
+
         const viewRoutesLink = document.querySelector('.page-header a[href="#routes"]');
         if (viewRoutesLink) {
             viewRoutesLink.remove();
@@ -197,67 +201,12 @@
         const routesContainer = document.getElementById('routesContainer');
 
         if (data.message && (!data.routes || data.routes.length === 0)) {
-            const countdownKey = `routeReleaseCountdown_${apiSlug}`;
-            let startTime = localStorage.getItem(countdownKey);
-
-            if (!startTime) {
-                startTime = Date.now() + (12 * 60 * 60 * 1000);
-                localStorage.setItem(countdownKey, startTime.toString());
-            } else {
-                startTime = parseInt(startTime, 10);
-            }
-
-            function updateCountdown() {
-                const now = Date.now();
-                const timeLeft = startTime - now;
-
-                if (timeLeft <= 0) {
-                    routesContainer.innerHTML = `
-                        <div style="text-align: center; padding: 40px; background: var(--bg-card); border-radius: var(--radius-xl); border: 1px solid var(--border-subtle);">
-                            <h3 style="color: var(--accent); margin-bottom: 16px;">Routes Coming Soon</h3>
-                            <p style="color: var(--text-main); font-size: 16px; line-height: 1.6;">Routes are being finalized and will be available very soon!</p>
-                        </div>
-                    `;
-                    return;
-                }
-
-                const hours = Math.floor(timeLeft / (1000 * 60 * 60));
-                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-                routesContainer.innerHTML = `
-                    <div style="text-align: center; padding: 40px; background: var(--bg-card); border-radius: var(--radius-xl); border: 1px solid var(--border-subtle);">
-                        <h3 style="color: var(--accent); margin-bottom: 16px;">Routes Coming Soon</h3>
-                        <p style="color: var(--text-main); font-size: 16px; line-height: 1.6; margin-bottom: 24px;">${data.message}</p>
-                        <div style="background: var(--primary-soft); border: 2px solid var(--primary); border-radius: 16px; padding: 24px; margin: 24px 0;">
-                            <div style="color: var(--text-muted); font-size: 14px; margin-bottom: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Routes Will Be Released In</div>
-                            <div style="display: flex; justify-content: center; gap: 16px; margin-top: 16px; flex-wrap: wrap;">
-                                <div style="text-align: center;">
-                                    <div style="font-size: 36px; font-weight: 800; color: var(--accent); line-height: 1;">${hours}</div>
-                                    <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px; text-transform: uppercase;">Hours</div>
-                                </div>
-                                <div style="font-size: 36px; font-weight: 800; color: var(--accent); line-height: 1;">:</div>
-                                <div style="text-align: center;">
-                                    <div style="font-size: 36px; font-weight: 800; color: var(--accent); line-height: 1;">${minutes.toString().padStart(2, '0')}</div>
-                                    <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px; text-transform: uppercase;">Minutes</div>
-                                </div>
-                                <div style="font-size: 36px; font-weight: 800; color: var(--accent); line-height: 1;">:</div>
-                                <div style="text-align: center;">
-                                    <div style="font-size: 36px; font-weight: 800; color: var(--accent); line-height: 1;">${seconds.toString().padStart(2, '0')}</div>
-                                    <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px; text-transform: uppercase;">Seconds</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
-
-            updateCountdown();
-            const countdownInterval = setInterval(() => {
-                updateCountdown();
-            }, 1000);
-
-            window['countdownInterval_' + apiSlug] = countdownInterval;
+            routesContainer.innerHTML = `
+                <div style="text-align: center; padding: 40px; background: var(--bg-card); border-radius: var(--radius-xl); border: 1px solid var(--border-subtle);">
+                    <h3 style="color: var(--accent); margin-bottom: 16px;">Routes Updating</h3>
+                    <p style="color: var(--text-main); font-size: 16px; line-height: 1.7;">Routes are being updated and will be released within the hour. Please email <a href="mailto:driveflowweb@gmail.com" style="color: var(--accent); text-decoration: underline;">driveflowweb@gmail.com</a> if you need access sooner.</p>
+                </div>
+            `;
             return;
         }
 
