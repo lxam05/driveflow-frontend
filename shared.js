@@ -58,6 +58,11 @@
             pageHeader.insertAdjacentElement('afterend', paywallContainer);
         }
 
+        const viewRoutesLink = document.querySelector('.page-header a[href="#routes"]');
+        if (viewRoutesLink) {
+            viewRoutesLink.remove();
+        }
+
         const purchaseEl = document.getElementById('sharedPurchase');
         if (purchaseEl) {
             purchaseEl.innerHTML = `
