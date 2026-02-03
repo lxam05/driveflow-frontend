@@ -134,7 +134,12 @@
                 if (error.error && error.error.includes('license')) {
                     await checkLicenseStatus();
                     if (!hasLicense) {
-                        window.location.href = '/payment.html';
+                        const paywallContainer = document.getElementById('paywallContainer');
+                        if (paywallContainer) {
+                            paywallContainer.style.display = 'block';
+                        }
+                        loadingContainer.style.display = 'none';
+                        routesContainer.style.display = 'none';
                         return;
                     }
                     errorContainer.innerHTML = `
