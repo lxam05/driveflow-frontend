@@ -248,6 +248,30 @@
         border-color: var(--primary);
     }
 
+    .about-driveflow-card {
+        max-width: 520px;
+        margin: 0 auto 16px;
+        padding: 20px 24px;
+        border-radius: 16px;
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
+        text-align: center;
+    }
+
+    .about-driveflow-card h3 {
+        margin: 0 0 8px;
+        font-size: 18px;
+        color: var(--text-main);
+        font-weight: 700;
+    }
+
+    .about-driveflow-card p {
+        margin: 0 0 12px;
+        font-size: 14px;
+        color: var(--text-muted);
+    }
+
     .loading {
         text-align: center;
         padding: 40px;
