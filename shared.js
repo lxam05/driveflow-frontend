@@ -41,11 +41,12 @@
         routesEl.innerHTML = `
             <div id="errorContainer"></div>
             <div id="paywallContainer" style="display: none; border-radius: var(--radius-xl); background: var(--bg-card); border: 1px solid var(--border-subtle); box-shadow: var(--shadow-card); padding: 40px; margin-bottom: 40px; text-align: center;">
-                <h2 style="margin: 0 0 16px; color: var(--accent); font-size: 28px; font-weight: 800;">Access Required</h2>
-                <p style="margin: 0 0 24px; color: var(--text-main); font-size: 16px; line-height: 1.7;">Please log in or purchase access to view the ${centreName} driving test routes.</p>
-                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-                    <a href="/login.html" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; padding: 12px 24px;">Log In</a>
-                    <a href="/payment.html" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; padding: 12px 24px; background: var(--accent);">Purchase Access</a>
+                <h2 style="margin: 0 0 8px; color: var(--text-main); font-size: 24px; font-weight: 800;">${centreName} Driving Test Routes</h2>
+                <p style="margin: 0 0 20px; color: var(--accent); font-size: 20px; font-weight: 700;">Unlock Full Routes – €11.99</p>
+                <p style="margin: 0 0 24px; color: var(--text-muted); font-size: 15px;">Used by learners passing first time</p>
+                <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; align-items: center;">
+                    <a href="/payment.html" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; padding: 14px 28px; font-size: 16px; font-weight: 600; background: var(--accent); color: var(--bg-main);">Get Access – €11.99</a>
+                    <a href="/login.html" style="color: var(--text-muted); font-size: 14px; text-decoration: underline; text-underline-offset: 3px;">Already have access? Log in</a>
                 </div>
             </div>
             <div id="routesContainer" class="routes-container"></div>
@@ -71,9 +72,10 @@
         if (purchaseEl) {
             purchaseEl.innerHTML = `
                 <div id="purchaseSection" style="display: none; margin-top: 40px; text-align: center; padding: 40px; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); box-shadow: var(--shadow-card);">
-                    <h3 style="margin: 0 0 16px; color: var(--text-main); font-size: 24px; font-weight: 700;">Ready to Practice These Routes?</h3>
-                    <p style="margin: 0 0 24px; color: var(--text-muted); font-size: 16px; line-height: 1.6;">Get instant access to all ${centreName} driving test routes for just €11.99</p>
-                    <a href="/payment.html" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; padding: 14px 32px; font-size: 16px; font-weight: 600;">Buy Now - €11.99</a>
+                    <h3 style="margin: 0 0 8px; color: var(--text-main); font-size: 24px; font-weight: 700;">${centreName} Driving Test Routes</h3>
+                    <p style="margin: 0 0 20px; color: var(--accent); font-size: 20px; font-weight: 700;">Unlock Full Routes – €11.99</p>
+                    <p style="margin: 0 0 24px; color: var(--text-muted); font-size: 15px;">Used by learners passing first time</p>
+                    <a href="/payment.html" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; padding: 14px 28px; font-size: 16px; font-weight: 600; background: var(--accent); color: var(--bg-main);">Get Access – €11.99</a>
                 </div>
             `;
         }
