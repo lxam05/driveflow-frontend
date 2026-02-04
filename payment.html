@@ -511,6 +511,49 @@
         color: #ef4444;
     }
 
+    .payment-review-card {
+        margin-top: 24px;
+        padding: 20px;
+        background: rgba(15, 23, 42, 0.5);
+        border: 1px solid var(--border-subtle);
+        border-radius: 12px;
+        margin-bottom: 0;
+    }
+
+    .payment-review-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+
+    .payment-review-name {
+        font-weight: 600;
+        font-size: 15px;
+        color: var(--text-main);
+    }
+
+    .payment-review-meta {
+        font-size: 13px;
+        color: var(--text-muted);
+        margin-top: 2px;
+    }
+
+    .payment-review-stars {
+        color: var(--accent);
+        font-size: 14px;
+        letter-spacing: 1px;
+    }
+
+    .payment-review-text {
+        margin: 0;
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--text-muted);
+        font-style: italic;
+    }
+
     .discount-modal-overlay {
         position: fixed;
         inset: 0;
@@ -804,6 +847,17 @@
                         <button class="btn-unlock" id="unlockBtn" onclick="showPaymentForm()">
                             Unlock Routes (€11.99)
                         </button>
+
+                        <div class="payment-review-card">
+                            <div class="payment-review-header">
+                                <div>
+                                    <div class="payment-review-name">Abhishek</div>
+                                    <div class="payment-review-meta">Dun Laoghaire Test Centre</div>
+                                </div>
+                                <div class="payment-review-stars">★★★★★</div>
+                            </div>
+                            <p class="payment-review-text">"Passed first time in Dun Laoghaire. DriveFlow was incredibly helpful for both theory questions and real test routes. I've already recommended it to friends — best resource in one place."</p>
+                        </div>
 
                         <div class="scarcity-trust">
                             <p><strong>Used by thousands of learners around Ireland to pass their test first try</strong></p>
