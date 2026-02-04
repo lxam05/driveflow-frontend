@@ -249,7 +249,7 @@
                 border: 1px solid var(--border-subtle, rgba(111, 255, 233, 0.2));
                 border-radius: 8px;
                 color: var(--text-dark, #e5e7eb);
-                font-size: 14px;
+                font-size: 16px;
                 font-family: 'Inter', system-ui, -apple-system, sans-serif;
                 outline: none;
                 transition: border-color 0.2s ease;
@@ -318,14 +318,6 @@
                     padding: 12px 16px;
                 }
 
-                #chatbot-input {
-                    font-size: 16px;
-                }
-
-                #chatbot-send {
-                    font-size: 16px;
-                }
-
                 .chatbot-message {
                     max-width: 90%;
                 }
@@ -368,9 +360,6 @@
         function toggleChatbot() {
             const isVisible = container.style.display !== 'none';
             container.style.display = isVisible ? 'none' : 'flex';
-            if (!isVisible && window.innerWidth > 768) {
-                input.focus();
-            }
         }
 
         toggle.addEventListener('click', toggleChatbot);
@@ -586,7 +575,6 @@
                 if (remainingQuestions > 0) {
                     input.disabled = false;
                     sendBtn.disabled = false;
-                    input.focus();
                 }
             }
         }
