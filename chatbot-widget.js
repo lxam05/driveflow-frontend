@@ -318,6 +318,14 @@
                     padding: 12px 16px;
                 }
 
+                #chatbot-input {
+                    font-size: 16px;
+                }
+
+                #chatbot-send {
+                    font-size: 16px;
+                }
+
                 .chatbot-message {
                     max-width: 90%;
                 }
@@ -360,7 +368,7 @@
         function toggleChatbot() {
             const isVisible = container.style.display !== 'none';
             container.style.display = isVisible ? 'none' : 'flex';
-            if (!isVisible) {
+            if (!isVisible && window.innerWidth > 768) {
                 input.focus();
             }
         }
