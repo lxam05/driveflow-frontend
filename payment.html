@@ -559,23 +559,29 @@
         flex-wrap: wrap;
     }
 
-    .discount-btn-copy {
+    .discount-btn-apply {
         flex: 1;
-        min-width: 120px;
+        min-width: 140px;
         padding: 12px 20px;
         border-radius: 12px;
         border: 1px solid var(--primary);
-        background: var(--primary-soft);
-        color: var(--accent);
+        background: var(--primary);
+        color: var(--bg-main);
         font-weight: 600;
         font-size: 15px;
         cursor: pointer;
         transition: all 0.2s ease;
     }
 
-    .discount-btn-copy:hover {
-        background: var(--primary);
+    .discount-btn-apply:hover {
+        background: var(--accent);
+        border-color: var(--accent);
         color: var(--bg-main);
+    }
+
+    .discount-btn-apply:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
     }
 
     .discount-btn-continue {
@@ -853,7 +859,7 @@
                 <h3>Wait! Get 15% off</h3>
                 <p>Use code <strong class="discount-code">PASS15</strong> for 15% off your purchase</p>
                 <div class="discount-modal-actions">
-                    <button type="button" class="discount-btn-copy" id="discountCopyBtn">Copy code</button>
+                    <button type="button" class="discount-btn-apply" id="discountApplyBtn">Apply 15% off & unlock routes</button>
                     <a href="routes.html" class="discount-btn-continue">Continue to Routes</a>
                 </div>
                 <button type="button" class="discount-modal-close" id="discountModalClose" aria-label="Close">×</button>
@@ -1547,7 +1553,7 @@
     (function initDiscountModal() {
         const backBtn = document.getElementById('backToRoutesBtn');
         const overlay = document.getElementById('discountModalOverlay');
-        const copyBtn = document.getElementById('discountCopyBtn');
+        const applyBtn = document.getElementById('discountApplyBtn');
         const closeBtn = document.getElementById('discountModalClose');
         const DISCOUNT_CODE = 'PASS15';
 
@@ -1566,18 +1572,16 @@
             closeBtn.addEventListener('click', () => { overlay.style.display = 'none'; });
         }
 
-        if (copyBtn) {
-            copyBtn.addEventListener('click', function() {
-                navigator.clipboard.writeText(DISCOUNT_CODE).then(() => {
-                    copyBtn.textContent = 'Copied!';
-                    copyBtn.style.background = 'var(--primary)';
-                    copyBtn.style.color = 'var(--bg-main)';
-                    setTimeout(() => {
-                        copyBtn.textContent = 'Copy code';
-                        copyBtn.style.background = '';
-                        copyBtn.style.color = '';
-                    }, 1500);
-                });
+        if (applyBtn) {
+            applyBtn.addEventListener('click', async function() {
+                applyBtn.disabled = true;
+                const discountInput = document.getElementById('discountCodeInput');
+                if (discountInput) {
+                    discountInput.value = DISCOUNT_CODE;
+                }
+                await applyDiscountCode();
+                overlay.style.display = 'none';
+                applyBtn.disabled = false;
             });
         }
     })();
