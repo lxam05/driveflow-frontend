@@ -86,6 +86,16 @@
         transform: translateY(-2px);
     }
 
+    .page-header-route-img {
+        display: block;
+        max-width: 420px;
+        width: 100%;
+        height: auto;
+        margin: 20px auto 0;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-card);
+    }
+
     .info-section {
         background: var(--bg-card);
         border: 1px solid var(--border-subtle);

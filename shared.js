@@ -68,6 +68,17 @@
             viewRoutesLink.remove();
         }
 
+        const usedByPara = Array.from(document.querySelectorAll('.page-header p')).find(p =>
+            p.textContent.includes('Used by thousands')
+        );
+        if (usedByPara) {
+            const img = document.createElement('img');
+            img.src = '/blurredroute.png';
+            img.alt = 'DriveFlow route preview';
+            img.className = 'page-header-route-img';
+            usedByPara.insertAdjacentElement('afterend', img);
+        }
+
         const purchaseEl = document.getElementById('sharedPurchase');
         if (purchaseEl) {
             purchaseEl.innerHTML = `
