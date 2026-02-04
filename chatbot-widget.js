@@ -287,6 +287,10 @@
             }
 
             @media (max-width: 768px) {
+                #chatbot-toggle {
+                    display: none;
+                }
+
                 #chatbot-container {
                     left: 10px;
                     right: 10px;
