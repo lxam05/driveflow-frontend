@@ -513,11 +513,11 @@
 
     .payment-review-card {
         margin-top: 24px;
-        padding: 20px;
-        background: rgba(15, 23, 42, 0.5);
-        border: 1px solid var(--border-subtle);
-        border-radius: 12px;
         margin-bottom: 0;
+        padding: 20px;
+        background: var(--primary-soft);
+        border: 1px solid var(--primary);
+        border-radius: 12px;
     }
 
     .payment-review-header {
@@ -550,8 +550,7 @@
         margin: 0;
         font-size: 14px;
         line-height: 1.6;
-        color: var(--text-muted);
-        font-style: italic;
+        color: var(--text-main);
     }
 
     .discount-modal-overlay {
@@ -848,17 +847,6 @@
                             Unlock Routes (€11.99)
                         </button>
 
-                        <div class="payment-review-card">
-                            <div class="payment-review-header">
-                                <div>
-                                    <div class="payment-review-name">Abhishek</div>
-                                    <div class="payment-review-meta">Dun Laoghaire Test Centre</div>
-                                </div>
-                                <div class="payment-review-stars">★★★★★</div>
-                            </div>
-                            <p class="payment-review-text">"Passed first time in Dun Laoghaire. DriveFlow was incredibly helpful for both theory questions and real test routes. I've already recommended it to friends — best resource in one place."</p>
-                        </div>
-
                         <div class="scarcity-trust">
                             <p><strong>Used by thousands of learners around Ireland to pass their test first try</strong></p>
                             <p>Failing the test costs €85 — get the routes for less</p>
@@ -869,9 +857,16 @@
                             <p style="margin: 0; color: var(--text-muted); font-size: 13px; line-height: 1.6; text-align: center;">
                                 <strong style="color: var(--text-muted);">For clarity:</strong> Routes are for practice and familiarity only, are not official, and may change.
                             </p>
-                            <p style="margin: 16px 0 0; color: var(--text-muted); font-size: 13px; line-height: 1.6; text-align: center;">
-                                Built by a UCD Computer Science student
-                            </p>
+                            <div class="payment-review-card" style="margin-top: 16px;">
+                                <div class="payment-review-header">
+                                    <div>
+                                        <div class="payment-review-name">Abhishek</div>
+                                        <div class="payment-review-meta">Dun Laoghaire Test Centre</div>
+                                    </div>
+                                    <div class="payment-review-stars">★★★★★</div>
+                                </div>
+                                <p class="payment-review-text" style="margin: 0; margin-top: 12px;">"Passed first time in Dun Laoghaire. DriveFlow was incredibly helpful for both theory questions and real test routes. I've already recommended it to friends — best resource in one place."</p>
+                            </div>
                         </div>
 
                         <a href="routes.html" class="btn-back" id="backToRoutesBtn">← Back to Routes</a>
