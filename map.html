@@ -23,7 +23,7 @@
     // 2) Read route name from URL: map.html?route=test-route
     const params = new URLSearchParams(window.location.search);
     const routeName = params.get("route") || "test-route";
-    const geojsonUrl = `/routes/${routeName}.geojson`;
+    const geojsonUrl = `/${routeName}.geojson`;
 
     // 3) Create the map
     const map = new mapboxgl.Map({
