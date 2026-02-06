@@ -279,30 +279,6 @@
             return;
         }
 
-        const token = localStorage.getItem('auth_token');
-        if (token && routesData) {
-            try {
-                const clickResponse = await fetch(`${API_URL}/routes/record-click`, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        centreName: routesData.location,
-                        routeId: routeId
-                    })
-                });
-
-                if (clickResponse.status === 429) {
-                    const error = await clickResponse.json();
-                    console.log(`Cooldown: ${error.minutesRemaining} minutes remaining`);
-                }
-            } catch (err) {
-                console.error('Error recording route click:', err);
-            }
-        }
-
         window.location.href = `${API_URL}/routes/${activeSlug}-route/${accessToken}/${routeId}`;
     }
 
