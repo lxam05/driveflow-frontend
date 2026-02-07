@@ -1022,6 +1022,22 @@
                 allCentres = sortCentres(data.centres);
                 
                 populateSelects(allCentres);
+                
+                // Pre-select centre from URL param (e.g. from route page "Get Access" click)
+                const urlParams = new URLSearchParams(window.location.search);
+                const centreParam = urlParams.get('centre');
+                if (centreParam) {
+                    const norm = s => (s || '').toLowerCase().normalize('NFD').replace(/\u0300-\u036f/g, '');
+                    const match = allCentres.find(c => c === centreParam || norm(c) === norm(centreParam));
+                    if (match) {
+                        selectPackage('single');
+                        const select = document.getElementById('testCentreSelect');
+                        if (select) {
+                            select.value = match;
+                            checkDiscount();
+                        }
+                    }
+                }
             } else {
                 console.error('Failed to load test centres');
             }

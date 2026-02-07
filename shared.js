@@ -60,7 +60,7 @@
                 <p style="margin: 0 0 24px; color: var(--text-muted); font-size: 15px;">Used by learners passing first time</p>
                 <p style="margin: 0 0 20px; color: var(--text-muted); font-size: 14px;">Log in or sign up to purchase — then you can unlock the routes.</p>
                 <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; align-items: center;">
-                    <a href="/login.html?redirect=payment" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; padding: 14px 28px; font-size: 16px; font-weight: 600; background: var(--accent); color: var(--bg-main);">Get Access – €11.99</a>
+                    <a href="/login.html?redirect=payment&centre=${encodeURIComponent(centreName)}" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; padding: 14px 28px; font-size: 16px; font-weight: 600; background: var(--accent); color: var(--bg-main);">Get Access – €11.99</a>
                 </div>
             </div>
             <div id="routesContainer" class="routes-container"></div>
@@ -100,7 +100,7 @@
                     <h3 style="margin: 0 0 8px; color: var(--text-main); font-size: 24px; font-weight: 700;">${centreName} Driving Test Routes</h3>
                     <p style="margin: 0 0 20px; color: var(--accent); font-size: 20px; font-weight: 700;">Unlock Full Routes – €11.99</p>
                     <p style="margin: 0 0 24px; color: var(--text-muted); font-size: 15px;">Used by learners passing first time</p>
-                    <a href="/payment.html" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; padding: 14px 28px; font-size: 16px; font-weight: 600; background: var(--accent); color: var(--bg-main);">Get Access – €11.99</a>
+                    <a href="/payment.html?centre=${encodeURIComponent(centreName)}" class="route-btn" style="display: inline-block; text-decoration: none; width: auto; padding: 14px 28px; font-size: 16px; font-weight: 600; background: var(--accent); color: var(--bg-main);">Get Access – €11.99</a>
                 </div>
             `;
         }
@@ -153,8 +153,9 @@
         }
     }
 
-    function showPaywall() {
-        window.location.href = '/payment.html';
+    function showPaywall(centreName) {
+        const q = centreName ? '?centre=' + encodeURIComponent(centreName) : '';
+        window.location.href = '/payment.html' + q;
     }
 
     async function loadRoutes(apiSlug, centreName) {

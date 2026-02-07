@@ -423,15 +423,19 @@
 
     const urlParams = new URLSearchParams(window.location.search);
     const redirectToPayment = urlParams.get('redirect') === 'payment';
+    const centreParam = urlParams.get('centre');
+    const paymentUrl = redirectToPayment
+        ? (centreParam ? 'payment.html?centre=' + encodeURIComponent(centreParam) : 'payment.html')
+        : 'index.html';
 
     // If logged in, redirect based on intent
     if (localStorage.getItem('auth_token')) {
-        window.location.href = redirectToPayment ? 'payment.html' : 'index.html';
+        window.location.href = paymentUrl;
     }
 
     const loginLink = document.getElementById('loginLink');
     if (loginLink && redirectToPayment) {
-        loginLink.href = 'login.html?redirect=payment';
+        loginLink.href = centreParam ? 'login.html?redirect=payment&centre=' + encodeURIComponent(centreParam) : 'login.html?redirect=payment';
     }
 
     const signupForm = document.getElementById('signupForm');
@@ -546,7 +550,7 @@
             showSuccess('Account created successfully! Redirecting...');
 
             setTimeout(() => {
-                window.location.href = redirectToPayment ? 'payment.html' : 'index.html';
+                window.location.href = paymentUrl;
             }, 800);
 
         } catch (err) {
