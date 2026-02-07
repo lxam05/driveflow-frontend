@@ -1481,7 +1481,12 @@
           body: JSON.stringify({ message }),
         });
 
-        const data = await res.json();
+        let data = {};
+        try {
+          data = await res.json();
+        } catch (parseErr) {
+          console.error("Server returned non-JSON response:", parseErr);
+        }
 
         if (res.ok) {
           contactMessage.className = "contact-message success";
@@ -1492,8 +1497,10 @@
           // Close modal immediately
           hideContactModal();
         } else {
+          const errMsg = data.error || `Server error (${res.status}). Please try again.`;
+          console.error("Contact form error:", res.status, data);
           contactMessage.className = "contact-message error";
-          contactMessage.textContent = data.error || "Failed to send message. Please try again.";
+          contactMessage.textContent = errMsg;
           contactMessage.style.display = "block";
         }
       } catch (err) {
@@ -1501,7 +1508,6 @@
         contactMessage.className = "contact-message error";
         contactMessage.textContent = "An error occurred. Please check your connection and try again.";
         contactMessage.style.display = "block";
-        console.error("Full error details:", err);
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = originalText;
