@@ -1,4 +1,18 @@
 (function () {
+    // Google Ads (gtag) - inject for route pages that load shared.js
+    if (!document.getElementById('google-ads-gtag')) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', 'AW-17936809057');
+        var s = document.createElement('script');
+        s.id = 'google-ads-gtag';
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=AW-17936809057';
+        document.head.appendChild(s);
+    }
+
     const routesEl = document.getElementById('routes');
     if (!routesEl) return;
 
