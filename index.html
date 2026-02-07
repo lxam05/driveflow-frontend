@@ -189,7 +189,7 @@
     #mainHeader .header-left {
         grid-column: 1;
         justify-self: start;
-        display: none; /* Hidden - no content needed */
+        display: flex;
         align-items: center;
     }
     #mainHeader .header-left a {
@@ -781,7 +781,7 @@
         #mainHeader .header-left {
             grid-column: 1;
             justify-self: start;
-            display: none; /* Hidden on mobile too */
+            display: flex;
         }
         #mainHeader .header-left a {
             font-size: 12px;
@@ -1152,6 +1152,9 @@
 
 <header id="mainHeader">
     <div class="header-content">
+        <div class="header-left">
+            <a href="#" id="leaveReviewLink">Leave a review</a>
+        </div>
         <h1>Welcome to DriveFlow</h1>
         <div class="header-right">
             <div class="user-greeting" id="userGreeting" style="display: none;"></div>
@@ -1373,10 +1376,10 @@
         if (contactUsLink) {
             contactUsLink.addEventListener("click", (e) => {
                 e.preventDefault();
+                const titleEl = document.getElementById("contactModalTitle");
+                if (titleEl) titleEl.textContent = "Contact Us";
                 const modal = document.getElementById("contactModal");
-                if (modal) {
-                    modal.classList.add("show");
-                }
+                if (modal) modal.classList.add("show");
             });
         }
 
@@ -1851,7 +1854,9 @@ window.addEventListener("resize", function() {
             return;
         }
 
-        function showContactModal() {
+        function showContactModal(title) {
+            const titleEl = document.getElementById("contactModalTitle");
+            if (titleEl) titleEl.textContent = title || "Contact Us";
             if (contactModal) {
                 contactModal.classList.add("show");
             }
@@ -1873,10 +1878,18 @@ window.addEventListener("resize", function() {
         if (contactUsLink) {
             contactUsLink.addEventListener("click", (e) => {
                 e.preventDefault();
-                showContactModal();
+                showContactModal("Contact Us");
             });
         } else {
             console.warn("Contact Us link not found");
+        }
+
+        const leaveReviewLink = document.getElementById("leaveReviewLink");
+        if (leaveReviewLink) {
+            leaveReviewLink.addEventListener("click", (e) => {
+                e.preventDefault();
+                showContactModal("Leave a review");
+            });
         }
 
         if (contactClose) {
@@ -1970,7 +1983,7 @@ window.addEventListener("resize", function() {
 <div id="contactModal" class="contact-modal">
     <div class="contact-content">
         <div class="contact-header">
-            <h2 class="contact-title">Contact Us</h2>
+            <h2 class="contact-title" id="contactModalTitle">Contact Us</h2>
             <button class="contact-close" id="contactClose" aria-label="Close">×</button>
         </div>
         <p style="color: var(--text-light); font-size: 14px; margin-bottom: 8px;">

@@ -757,6 +757,7 @@
             </div>
           </div>
           <div class="nav-actions">
+            <a href="#" class="nav-link" id="leaveReviewLink">Leave a review</a>
             <a href="index.html" class="nav-link" aria-label="Back to Home" title="Back to Home">
               <span aria-hidden="true">←</span>
             </a>
@@ -997,7 +998,7 @@
   <div id="contactModal" class="contact-modal">
     <div class="contact-content">
       <div class="contact-header">
-        <h2 class="contact-title">Contact Us</h2>
+        <h2 class="contact-title" id="contactModalTitle">Contact Us</h2>
         <button class="contact-close" id="contactClose" aria-label="Close">×</button>
       </div>
       <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 8px;">
@@ -1414,7 +1415,9 @@
     const contactForm = document.getElementById("contactForm");
     const contactMessage = document.getElementById("contactMessage");
 
-    function showContactModal() {
+    function showContactModal(title) {
+      const titleEl = document.getElementById("contactModalTitle");
+      if (titleEl) titleEl.textContent = title || "Contact Us";
       contactModal.classList.add("show");
     }
 
@@ -1427,7 +1430,13 @@
 
     contactUsLink.addEventListener("click", (e) => {
       e.preventDefault();
-      showContactModal();
+      showContactModal("Contact Us");
+    });
+
+    const leaveReviewLink = document.getElementById("leaveReviewLink");
+    leaveReviewLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      showContactModal("Leave a review");
     });
 
     contactClose.addEventListener("click", (e) => {
