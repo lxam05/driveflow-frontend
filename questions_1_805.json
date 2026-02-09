@@ -1016,10 +1016,10 @@
         "options": [
             "Tunnel ends ahead.",
             "Dual carriageway ends ahead.",
-            "End of central reserve or obstruction.",
+            "Beginning of central reserve or obstruction.",
             "Beware of vehicle with a wide load."
         ],
-        "correct_answer": "End of central reserve or obstruction.",
+        "correct_answer": "Beginning of central reserve or obstruction.",
         "explanation": "Explantion:This roadworks warning sign tells you that traffic previously separated by the central reserve or an obstruction will revert to two-way traffic.",
         "category": "Control of Vehicle",
         "next_question": "71",

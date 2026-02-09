@@ -4,12 +4,12 @@
 4. No Straight Ahead
 5. No Right Turn
 6. No Left Turn
-7. Overtaking
+7. No Overtaking
 8. No Entry For Large Vehicles (3T+)
-9. Max Speed Limit 80km/h
+9. Rural speed limit (60km/hr)
 10. Height Restriction
 11. No U-turn
-12. Parking Permitted
+12. Parking Permitted either side
 13. No Parking
 14. Taxi Rank
 15. Pedestrianised Street
@@ -33,7 +33,7 @@
 33. Two-Way Traffic
 34. One-Lane Crossover (Out)
 35. One-Lane Crossover (Back)
-36. End Of Central Reserve/Obstruction
+36. Start Of Central Reserve/Obstruction
 37. Start Of Central Reserve/Obstruction
 38. Road Narrows From Left
 39. Road Narrows From Right
@@ -62,7 +62,7 @@
 62. No Entry
 63. Traffic must not enter unless they can clear the box junction without stopping, or when turning right.
 64. Continuous white lines ahead.
-65. Drivers may not cross the lines to overtake.
+65. Obey the line on your side
 66. Parking Prohibited
 67. Parking Prohibited At Times Displayed
 68. Zebra Crossing
@@ -72,11 +72,11 @@
 73. Series Of Dangerous Bends Ahead
 74. Crossroads Ahead
 75. Side Road On The Left Ahead
-76. Side Road On The Right Ahead
+76. T-Junction with roads of equal importance
 77. Y-Junction
 78. Crossroads Ahead With Road Of Less Importance
 79. Side Road Of Less Importance On The Left Ahead
-80. T-Junction Ahead With Road Of Less Importance To The Right
+80. Right turn ahead with straight through of less importance
 81. Y-Junction Ahead With Road Of Less Importance To The Right
 82. Staggered Crossroads
 83. Traffic Cross-over Ahead
@@ -98,11 +98,11 @@
 99. Unguarded Level Crossing Ahead
 100. Unprotected Body Of Water Ahead
 101. Traffic Signals Ahead
-102. Beware Of Sheep
+102. Beware Of Cattle
 103. Pedestrian Crossing Ahead
 104. Two-Way Traffic
 105. Dual-Carriageway Ends
-106. Level Crossing With Lights & Barriers
+106. Level Crossing Guarded With Lights & Barriers
 107. Merging Traffic
 108. Merging & Diverging Traffic
 109. Road Narrows From The Left
@@ -131,8 +131,8 @@
 132. Keep Straight Ahead
 133. Turn Right
 134. Turn Left
-135. Turn Right Ahead
-136. Turn Left Ahead
+135. Turn Left Ahead
+136. Turn Right Ahead
 137. With Flow Bus Lane On Left
 138. With Flow Bus Lane On Right
 139. Contra-Flow Bus Lane
