@@ -163,12 +163,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.driveflow.ie/preparing-for-test.html</loc>
-    <lastmod>2026-01-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.driveflow.ie/checklist.html</loc>
     <lastmod>2026-01-27</lastmod>
     <changefreq>monthly</changefreq>
@@ -199,31 +193,13 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.driveflow.ie/bookingtheorytest.html</loc>
-    <lastmod>2026-01-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.driveflow.ie/how-to-book-theory-test.html</loc>
     <lastmod>2026-01-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.driveflow.ie/driving-test.html</loc>
-    <lastmod>2026-01-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.driveflow.ie/drivingtest-theory.html</loc>
-    <lastmod>2026-01-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.driveflow.ie/help-with-lessons.html</loc>
     <lastmod>2026-01-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
