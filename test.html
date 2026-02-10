@@ -165,13 +165,46 @@
       font-style: italic;
     }
 
+    .hero-title-wrap {
+      position: relative;
+      display: inline-block;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
     .hero h1 {
       font-size: clamp(3.5rem, 8vw, 5rem);
       font-weight: 700;
       letter-spacing: -0.03em;
-      margin-top: 2rem;
-      margin-bottom: 0.5rem;
+      margin: 0;
       line-height: 1.15;
+      clip-path: inset(0 100% 0 0);
+      animation: heroTextReveal 1.8s ease-out forwards;
+    }
+
+    .hero-title-car {
+      position: absolute;
+      left: -60px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 80px;
+      background-image: url("car.jpg");
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      animation: heroCarDrive 1.8s ease-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes heroTextReveal {
+      from { clip-path: inset(0 100% 0 0); }
+      to { clip-path: inset(0 0 0 0); }
+    }
+
+    @keyframes heroCarDrive {
+      from { left: -60px; }
+      to { left: 100%; }
     }
 
     .hero .hero-tagline {
@@ -520,6 +553,11 @@
         align-items: stretch;
       }
 
+      .hero-title-car {
+        width: 36px;
+        height: 58px;
+      }
+
       .hero h1 {
         font-size: clamp(2.25rem, 7vw, 3.5rem);
       }
@@ -827,7 +865,10 @@
     <section class="hero">
       <div class="hero-top">
         <div class="hero-content">
-          <h1>Welcome to Driveflow</h1>
+          <div class="hero-title-wrap">
+            <h1>Welcome to Driveflow</h1>
+            <div class="hero-title-car" aria-hidden="true"></div>
+          </div>
           <p class="hero-tagline">Train where you'll be Tested</p>
           <p class="subtext">Practise real driving test routes for your test centre, revise key theory, and go into your test confident because you already know the roads, layouts, and tricky spots examiners use — so nothing on test day feels unfamiliar or catches you off guard.</p>
           <div class="hero-bottom-row">
