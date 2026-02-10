@@ -174,9 +174,9 @@
     .btn-back {
         padding: 10px 18px;
         border-radius: 999px;
-        border: 1px solid rgba(148, 163, 184, 0.4);
-        background: rgba(15, 23, 42, 0.92);
-        color: var(--text-main);
+        border: none;
+        background: #1a1a1a;
+        color: #fff;
         font-size: 13px;
         font-weight: 600;
         text-decoration: none;
@@ -190,8 +190,7 @@
 
     .btn-back:hover {
         transform: translateY(-1px);
-        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.9);
-        border-color: rgba(129, 140, 248, 0.8);
+        background: #333;
     }
 
     /* Question Card - NO hover transform */
@@ -254,7 +253,7 @@
         align-items: center;
         padding: 16px 20px;
         margin-bottom: 12px;
-        background: #32445c;
+        background: var(--bg-card-smaller);
         border: 1px solid var(--border-subtle);
         border-radius: 12px;
         transition: all 0.2s ease;
@@ -395,21 +394,20 @@
 
 
     .action-button {
-        border: 1px solid rgba(99, 102, 241, 0.9);
-        background: linear-gradient(120deg, rgba(37, 99, 235, 0.95), rgba(124, 58, 237, 0.95));
+        border: none;
+        background: #1a1a1a;
         color: white;
         padding: 14px 28px;
         font-size: 15px;
         font-weight: 700;
         border-radius: 999px;
         cursor: pointer;
-        box-shadow: 0 16px 40px rgba(30, 64, 175, 0.85);
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .action-button:hover:not(:disabled) {
         transform: translateY(-1px);
-        box-shadow: 0 20px 50px rgba(30, 64, 175, 0.95);
+        background: #333;
     }
 
     .action-button:active:not(:disabled) {
@@ -422,9 +420,9 @@
     }
 
     .btn-previous {
-        border: 1px solid rgba(148, 163, 184, 0.4);
-        background: rgba(15, 23, 42, 0.92);
-        color: var(--text-main);
+        border: none;
+        background: #1a1a1a;
+        color: #fff;
         padding: 14px 28px;
         font-size: 15px;
         font-weight: 700;
@@ -435,8 +433,7 @@
 
     .btn-previous:hover:not(:disabled) {
         transform: translateY(-1px);
-        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.9);
-        border-color: rgba(129, 140, 248, 0.8);
+        background: #333;
     }
 
     .btn-previous:active:not(:disabled) {
@@ -449,21 +446,20 @@
     }
 
     .btn-continue {
-        border: 1px solid rgba(99, 102, 241, 0.9);
-        background: linear-gradient(120deg, rgba(37, 99, 235, 0.95), rgba(124, 58, 237, 0.95));
+        border: none;
+        background: #1a1a1a;
         color: white;
         padding: 14px 28px;
         font-size: 15px;
         font-weight: 700;
         border-radius: 999px;
         cursor: pointer;
-        box-shadow: 0 16px 40px rgba(30, 64, 175, 0.85);
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .btn-continue:hover {
         transform: translateY(-1px);
-        box-shadow: 0 20px 50px rgba(30, 64, 175, 0.95);
+        background: #333;
     }
 
     .btn-continue:active {
@@ -473,7 +469,7 @@
     .progress-bar {
         width: 100%;
         height: 8px;
-        background: rgba(15, 23, 42, 0.9);
+        background: var(--border-subtle);
         border-radius: 4px;
         margin-bottom: 30px;
         overflow: hidden;
@@ -483,10 +479,9 @@
 
     .progress-fill {
         height: 100%;
-        background: linear-gradient(120deg, rgba(37, 99, 235, 0.95), rgba(124, 58, 237, 0.95));
+        background: #1a1a1a;
         transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         border-radius: 4px;
-        box-shadow: 0 2px 8px rgba(99, 102, 241, 0.5);
     }
 
     @media (max-width: 1024px) {

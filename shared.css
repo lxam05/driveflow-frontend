@@ -246,15 +246,15 @@
     .btn-back {
         display: inline-block;
         margin: 20px;
-        padding: 12px 24px;
-        background: transparent;
-        color: var(--text-muted);
-        border: 1px solid var(--border-subtle);
-        border-radius: 12px;
+        padding: 0.875rem 1.75rem;
+        background: #1a1a1a;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
         text-decoration: none;
-        font-size: 14px;
-        font-weight: 500;
-        transition: all 0.2s ease;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: background 0.2s ease, transform 0.2s ease;
     }
 
     .btn-back.btn-back-floating {
@@ -270,14 +270,14 @@
         align-items: center;
         justify-content: center;
         border-radius: 999px;
-        background: var(--bg-card);
+        background: #1a1a1a;
         box-shadow: var(--shadow-card);
         font-size: 18px;
     }
 
     .btn-back:hover {
-        color: var(--text-main);
-        border-color: var(--primary);
+        background: #333;
+        transform: translateY(-1px);
     }
 
     .about-driveflow-card {
