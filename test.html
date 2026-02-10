@@ -117,13 +117,70 @@
       margin: 0 auto;
     }
 
+    .hero-top {
+      display: flex;
+      gap: 3rem;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    .hero-content {
+      flex: 1;
+      max-width: 100%;
+    }
+
+    .hero-review {
+      flex: 0 0 320px;
+      align-self: flex-end;
+      background: #f9f9f9;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    .hero-review .stars {
+      color: #e6b800;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-review .reviewer {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #1a1a1a;
+      margin-bottom: 0.25rem;
+    }
+
+    .hero-review .review-location {
+      font-size: 0.85rem;
+      color: #666;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-review .review-quote {
+      font-size: 0.95rem;
+      color: #444;
+      line-height: 1.6;
+      margin: 0;
+      font-style: italic;
+    }
+
     .hero h1 {
       font-size: clamp(3.5rem, 8vw, 5rem);
       font-weight: 700;
       letter-spacing: -0.03em;
       margin-top: 2rem;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
       line-height: 1.15;
+    }
+
+    .hero .hero-tagline {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #444;
+      margin: 0 0 1rem 0;
+      letter-spacing: -0.02em;
     }
 
     .hero .subtext {
@@ -149,6 +206,19 @@
     .hero-cta:hover {
       background: #333;
       transform: translateY(-1px);
+    }
+
+    .hero-bottom-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .hero-bottom-row .hero-cta {
+      margin-bottom: 0;
     }
 
     .hero-image-wrapper {
@@ -446,8 +516,17 @@
         padding: 1.5rem 1rem 2rem;
       }
 
+      .hero-bottom-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
       .hero h1 {
         font-size: clamp(2.25rem, 7vw, 3.5rem);
+      }
+
+      .hero .hero-tagline {
+        font-size: 1.2rem;
       }
 
       .hero .subtext {
@@ -747,9 +826,22 @@
 
   <main>
     <section class="hero">
-      <h1>Welcome to Driveflow</h1>
-      <p class="subtext">Practise real driving test routes for your test centre, revise key theory, and go into your test confident because you already know the roads, layouts, and tricky spots examiners use — so nothing on test day feels unfamiliar or catches you off guard.</p>
-      <a href="routes.html" class="hero-cta">Get the Routes</a>
+      <div class="hero-top">
+        <div class="hero-content">
+          <h1>Welcome to Driveflow</h1>
+          <p class="hero-tagline">Train where you'll be Tested</p>
+          <p class="subtext">Practise real driving test routes for your test centre, revise key theory, and go into your test confident because you already know the roads, layouts, and tricky spots examiners use — so nothing on test day feels unfamiliar or catches you off guard.</p>
+          <div class="hero-bottom-row">
+            <a href="routes.html" class="hero-cta">Get the Routes</a>
+            <div class="hero-review">
+          <div class="stars">★★★★★</div>
+          <div class="reviewer">Abhishek</div>
+          <div class="review-location">Dun Laoghaire Test Centre</div>
+          <p class="review-quote">"Passed first time in Dun Laoghaire. DriveFlow was incredibly helpful for both theory questions and real test routes. I've already recommended it to friends — best resource in one place."</p>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="hero-image-wrapper">
         <img src="othersstoblurr.png" alt="Driveflow" class="hero-image">
       </div>
