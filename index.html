@@ -1,2117 +1,1222 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- rebuild -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-EJB69589QP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-EJB69589QP');
-</script>
-<!-- Google tag (gtag.js) - Ads -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17936809057"></script>
-<script>
-  gtag('config', 'AW-17936809057');
-</script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Ireland's best website to get your driving license. Practice theory tests, access real test routes, and prepare for your driving test with DriveFlow.">
-<link rel="canonical" href="https://www.driveflow.ie/">
-<link rel="icon" href="https://www.driveflow.ie/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="https://www.driveflow.ie/favicon.png">
-<link rel="icon" type="image/png" sizes="192x192" href="https://www.driveflow.ie/favicon.png">
-<link rel="apple-touch-icon" href="https://www.driveflow.ie/favicon.png">
-<title>Ireland's Best Website to Get Your Driving License | DriveFlow</title>
-
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-    
-    :root {
-        --bg-main: #fafafa;
-        --bg-main-pattern: radial-gradient(circle, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
-        --bg-elevated: #f9f9f9;
-        --bg-card: #f9f9f9;
-        --bg-card-soft: #fafafa;
-        --bg-card-smaller: #f5f5f5;
-        --border-subtle: #eee;
-        --border-strong: #ddd;
-        --primary: #1a1a1a;
-        --primary-soft: rgba(26, 26, 26, 0.08);
-        --accent: #e6b800;
-        --accent-soft: rgba(230, 184, 0, 0.15);
-        --accent-orange: #f97316;
-        --accent-red: #ef4444;
-        --text-main: #1a1a1a;
-        --text-muted: #666;
-        --text-soft: #555;
-        --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.06);
-        --radius-lg: 22px;
-        --radius-xl: 26px;
-        --blur: 18px;
-        --button-bg: #1a1a1a;
-        --primary-blue: #1a1a1a;
-        --primary-blue-dark: #333;
-        --accent-purple: #e6b800;
-        --text-dark: #1a1a1a;
-        --text-light: #666;
-        --bg-glass: rgba(255, 255, 255, 0.95);
-        --shadow-lg: 0 2px 12px rgba(0, 0, 0, 0.06);
-    }
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ireland's best website to get your driving license. Practice theory tests, access real test routes, and prepare for your driving test with DriveFlow.">
+  <link rel="canonical" href="https://www.driveflow.ie/">
+  <link rel="icon" href="https://www.driveflow.ie/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://www.driveflow.ie/favicon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="https://www.driveflow.ie/favicon.png">
+  <link rel="apple-touch-icon" href="https://www.driveflow.ie/favicon.png">
+  <title>Ireland's Best Website to Get Your Driving License | DriveFlow</title>
+  <style>
     * {
-        box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
     body {
-        margin: 0;
-        overflow: hidden;
-        overscroll-behavior: none;
-        background: var(--bg-main);
-        background-image: var(--bg-main-pattern);
-        background-size: 20px 20px;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background-color: #fafafa;
+      background-image: radial-gradient(circle, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+      background-size: 20px 20px;
+      color: #1a1a1a;
+      line-height: 1.5;
     }
 
-    /* Enable scrolling on mobile devices and tablets */
-    @media (max-width: 1024px) {
-        html,
-        body {
-            overflow-x: hidden;
-        }
-
-        body {
-            overflow: auto;
-            overscroll-behavior: auto;
-        }
-        
-        /* Make sections use normal flow on mobile */
-        .section {
-            position: relative !important;
-            transform: none !important;
-            margin-bottom: 60px;
-            padding-top: 80px;
-        }
-        
-        .infoCard {
-            position: relative !important;
-            width: calc(100% - 40px) !important;
-            max-width: 500px;
-            margin: 0 auto;
-            opacity: 1 !important;
-            transform: none !important;
-            left: auto !important;
-            right: auto !important;
-        }
-        
-        .leftCard, .rightCard {
-            left: auto !important;
-            right: auto !important;
-        }
-        
-        #world {
-            position: relative !important;
-            height: auto !important;
-            min-height: 100vh;
-            transform: none !important;
-            left: 0;
-            right: 0;
-            width: 100vw;
-            background-attachment: scroll;
-        }
-        
-        #car, #fog {
-            display: none;
-        }
-        
-        #levelSelector {
-            position: relative !important;
-            top: auto !important;
-            left: auto !important;
-            width: calc(100% - 40px) !important;
-            max-width: 500px;
-            margin: 130px auto 20px;
-            transform: none !important;
-        }
-        
-        #footer {
-            position: relative !important;
-            transform: none !important;
-            top: auto !important;
-            margin-top: 60px;
-        }
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 3rem;
+      background-color: #fafafa;
+      background-image: radial-gradient(circle, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+      background-size: 20px 20px;
+      border: none;
+      outline: none;
     }
 
-    /* ---------------- HEADER ---------------- */
-    #mainHeader {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        padding: 16px 0;
-        text-align: center;
-        background: var(--bg-main);
-        background-image: var(--bg-main-pattern);
-        background-size: 20px 20px;
-        color: var(--text-main);
-        backdrop-filter: blur(20px) saturate(180%);
-        -webkit-backdrop-filter: blur(20px) saturate(180%);
-        border-bottom: 1px solid var(--border-subtle);
-        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-        z-index: 2000;
-        transition: transform 0.3s ease, opacity 0.3s ease;
-        transform: translateY(0);
-        opacity: 1;
-    }
-    #mainHeader.hidden {
-        transform: translateY(-100%);
-        opacity: 0;
-    }
-    #mainHeader .header-content {
-        max-width: 1400px;
-        margin: 0 auto;
-        padding: 0 24px;
-        display: grid;
-        grid-template-columns: 1fr auto 1fr;
-        align-items: center;
-        gap: 16px;
-    }
-    #mainHeader h1 {
-        margin: 0;
-        font-size: 24px;
-        font-weight: 800;
-        letter-spacing: -0.5px;
-        color: var(--text-main);
-        text-align: center;
-        grid-column: 2;
-        justify-self: center;
-    }
-    #mainHeader .user-greeting {
-        position: static;
-        color: var(--text-main);
-        font-size: 14px;
-        font-weight: 600;
-        margin-right: 16px;
-    }
-    #mainHeader .header-nav {
-        position: static;
-        display: flex;
-        gap: 20px;
-        align-items: center;
-    }
-    #mainHeader .header-left {
-        grid-column: 1;
-        justify-self: start;
-        display: flex;
-        align-items: center;
-    }
-    #mainHeader .header-left a {
-        color: var(--text-main);
-        text-decoration: underline;
-        text-underline-offset: 4px;
-        font-size: 14px;
-        font-weight: 500;
-        padding: 0;
-        border: none;
-        background: none;
-        transition: opacity 0.2s ease;
-    }
-    #mainHeader .header-left a:hover {
-        opacity: 0.7;
-    }
-    #mainHeader .header-right {
-        grid-column: 3;
-        justify-self: end;
-        display: flex;
-        align-items: center;
-        gap: 16px;
-    }
-    #mainHeader .header-nav a {
-        color: var(--text-main);
-        text-decoration: underline;
-        text-underline-offset: 4px;
-        font-size: 14px;
-        font-weight: 500;
-        padding: 0;
-        border: none;
-        background: none;
-        transition: opacity 0.2s ease;
-    }
-    #mainHeader .header-nav a:hover {
-        opacity: 0.7;
-    }
-    #mainHeader .header-nav .btn-login {
-        background: none;
-        border: none;
-    }
-    #mainHeader .header-nav .btn-signup {
-        background: none;
-        border: none;
-        color: var(--text-main);
-    }
-    #mainHeader .header-nav .btn-signup:hover {
-        background: none;
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
     }
 
-    /* ---------- INFO BUTTON & CARD ---------- */
-    .info-button {
-        position: fixed;
-        top: 80px;
-        right: 20px;
-        width: 50px;
-        height: 50px;
-        background: var(--bg-card);
-        border: 2px solid var(--accent-purple);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        z-index: 2000;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      font-size: 0.95rem;
     }
 
-    .info-button:hover {
-        transform: scale(1.1);
-        box-shadow: 0 6px 20px rgba(111, 255, 233, 0.4);
-        background: var(--bg-card-smaller);
+    nav a {
+      color: #1a1a1a;
+      text-decoration: none;
     }
 
-    .info-button svg {
-        width: 24px;
-        height: 24px;
-        stroke: var(--accent-purple);
-        fill: none;
-        stroke-width: 2.5;
-        transition: transform 0.3s ease;
+    nav a:hover {
+      color: #444;
     }
 
-    .info-button.active svg {
-        transform: rotate(180deg);
+    /* Review link (desktop) */
+    .nav-review-desktop {
+      display: inline;
     }
 
-    .info-card {
-        position: fixed;
-        top: 0;
-        right: -500px;
-        width: 500px;
-        max-width: 90vw;
-        height: 100vh;
-        background: var(--bg-card);
-        border-left: 2px solid var(--accent-purple);
-        box-shadow: -4px 0 24px rgba(0, 0, 0, 0.5);
-        z-index: 1999;
-        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column;
+    /* Contact us + Review dropdown (hidden on desktop) */
+    .nav-dropdown-mobile {
+      display: none;
     }
 
-    .info-card.open {
-        right: 0;
+    @media (min-width: 641px) {
+      .nav-dropdown-mobile {
+        display: none !important;
+      }
     }
 
-    .info-card-header {
-        padding: 24px;
-        border-bottom: 1px solid rgba(111, 255, 233, 0.2);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: var(--bg-card-smaller);
-        position: sticky;
-        top: 0;
-        z-index: 10;
+    .nav-dropdown-mobile summary {
+      list-style: none;
+      cursor: pointer;
+      color: #1a1a1a;
+      font-size: inherit;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
     }
 
-    .info-card-title {
-        font-size: 20px;
-        font-weight: 700;
-        color: var(--text-dark);
-        margin: 0;
+    .nav-dropdown-mobile summary::-webkit-details-marker {
+      display: none;
     }
 
-    .info-card-close {
-        background: none;
-        border: none;
-        color: var(--text-light);
-        font-size: 24px;
-        cursor: pointer;
-        padding: 4px;
-        width: 32px;
-        height: 32px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 8px;
-        transition: all 0.2s ease;
+    .nav-dropdown-mobile summary::after {
+      content: "▼";
+      font-size: 0.6rem;
     }
 
-    .info-card-close:hover {
-        background: rgba(111, 255, 233, 0.1);
-        color: var(--accent-purple);
+    .nav-dropdown-mobile[open] summary::after {
+      transform: rotate(180deg);
+      display: inline-block;
     }
 
-    .info-card-nav {
-        display: flex;
-        gap: 8px;
-        padding: 16px 24px;
-        border-bottom: 1px solid rgba(111, 255, 233, 0.2);
-        background: var(--bg-card-smaller);
-        position: sticky;
-        top: 73px;
-        z-index: 9;
+    .nav-dropdown-menu {
+      margin-top: 0.25rem;
+      background: #fafafa;
+      padding: 0.5rem 0;
+      min-width: 8rem;
+      border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-    .info-nav-button {
-        flex: 1;
-        padding: 10px 16px;
-        background: transparent;
-        border: 1px solid rgba(111, 255, 233, 0.3);
-        border-radius: 8px;
-        color: var(--text-light);
-        font-size: 13px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        text-align: center;
+    .nav-dropdown-menu a {
+      display: block;
+      padding: 0.4rem 1rem;
+      font-size: 0.9rem;
     }
 
-    .info-nav-button:hover {
-        background: rgba(111, 255, 233, 0.1);
-        border-color: var(--accent-purple);
-        color: var(--accent-purple);
+    /* Hero */
+    .hero {
+      padding: 3rem 3rem 4rem;
+      max-width: 1400px;
+      margin: 0 auto;
     }
 
-    .info-nav-button.active {
-        background: rgba(111, 255, 233, 0.2);
-        border-color: var(--accent-purple);
-        color: var(--accent-purple);
+    .hero-top {
+      display: flex;
+      gap: 3rem;
+      align-items: flex-end;
+      justify-content: space-between;
     }
 
-    .info-card-content {
-        flex: 1;
-        padding: 24px;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
+    .hero-content {
+      flex: 1;
+      max-width: 100%;
     }
 
-    .info-section {
+    .hero-review {
+      flex: 0 0 360px;
+      margin-top: -1.5rem;
+      background: #f9f9f9;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    .hero-review .stars {
+      color: #e6b800;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-review .reviewer {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #1a1a1a;
+      margin-bottom: 0.25rem;
+    }
+
+    .hero-review .review-location {
+      font-size: 0.85rem;
+      color: #666;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-review .review-quote {
+      font-size: 0.95rem;
+      color: #444;
+      line-height: 1.6;
+      margin: 0;
+      font-style: italic;
+    }
+
+    .hero-title-wrap {
+      position: relative;
+      display: inline-block;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(3.5rem, 8vw, 5rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin: 0;
+      line-height: 1.15;
+      clip-path: inset(0 100% 0 0);
+      animation: heroTextReveal 1.8s ease-out forwards;
+    }
+
+    .hero-title-car {
+      position: absolute;
+      left: -80px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1.35em;
+      height: 2.1em;
+      font-size: clamp(3.5rem, 8vw, 5rem);
+      background-image: url("car.png");
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      animation: heroCarDrive 1.8s ease-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes heroTextReveal {
+      from { clip-path: inset(0 100% 0 0); }
+      to { clip-path: inset(0 0 0 0); }
+    }
+
+    @keyframes heroCarDrive {
+      from { left: -80px; transform: translateY(-50%); }
+      to { left: 100%; transform: translateY(-50%); }
+    }
+
+    .hero .hero-tagline {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #444;
+      margin: 0 0 1rem 0;
+      letter-spacing: -0.02em;
+    }
+
+    .hero .subtext {
+      font-size: 1.1rem;
+      color: #555;
+      max-width: 560px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: 0.875rem 1.75rem;
+      background: #1a1a1a;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background 0.2s ease, transform 0.2s ease;
+      margin-bottom: 2rem;
+    }
+
+    .hero-cta:hover {
+      background: #333;
+      transform: translateY(-1px);
+    }
+
+    .hero-bottom-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 2rem;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .hero-bottom-row .hero-cta {
+      margin-bottom: 0;
+    }
+
+    .hero-image-wrapper {
+      margin-top: 20vh;
+    }
+
+    .hero-image {
+      width: 100%;
+      max-width: 1260px;
+      height: 640px;
+      border-radius: 8px;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Practice */
+    .practice {
+      padding: 4rem 3rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .practice h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      letter-spacing: -0.02em;
+    }
+
+    .practice-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .practice-item .card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .practice-item .card-image {
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 0.75rem;
+    }
+
+    .practice-item .card-image img {
+      width: 100%;
+      height: 100%;
+      aspect-ratio: 16/10;
+      object-fit: cover;
+      display: block;
+    }
+
+    .practice-item .card-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin: 0 0 0.5rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: transform 0.2s ease;
+    }
+
+    .practice-item .card:hover .card-title {
+      transform: scale(1.03);
+    }
+
+    .practice-item .card-title::after {
+      content: "→";
+      font-size: 1rem;
+      color: #1a1a1a;
+    }
+
+    .practice-item .card-body {
+      font-size: 0.9rem;
+      color: #666;
+      font-weight: 400;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* How we work */
+    .how-we-work {
+      padding: 4rem 3rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .how-we-work .content h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .how-we-work .content p {
+      color: #555;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .how-we-work .image {
+      width: 100%;
+      border-radius: 8px;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Reviews */
+    .reviews {
+      padding: 4rem 3rem 5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .reviews h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      letter-spacing: -0.02em;
+    }
+
+    .reviews-container {
+      overflow: hidden;
+      width: 100%;
+      position: relative;
+    }
+
+    .reviews-scroll {
+      display: flex;
+      gap: 2rem;
+      animation: scroll-reviews 30s linear infinite;
+      width: fit-content;
+    }
+
+    @keyframes scroll-reviews {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .reviews-grid {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .review-card {
+      background: #f9f9f9;
+      border-radius: 8px;
+      padding: 1.5rem;
+      border: 1px solid #eee;
+      width: calc((min(100vw - 6rem, 1400px - 6rem) - 4rem) / 3);
+      min-width: 280px;
+      flex-shrink: 0;
+    }
+
+    .review-card .stars {
+      color: #e6b800;
+      margin-bottom: 0.75rem;
+      font-size: 1rem;
+    }
+
+    .review-card p {
+      color: #444;
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    .review-card .author {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #1a1a1a;
+    }
+
+    /* More about us */
+    .more-about {
+      padding: 4rem 3rem 5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .more-about h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      letter-spacing: -0.02em;
+    }
+
+    .more-about-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem;
+    }
+
+    .more-about-item .more-about-img {
+      width: 100%;
+      aspect-ratio: 16/10;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+      margin-bottom: 1rem;
+      background: #e8e8e8;
+    }
+
+    .more-about-item h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #1a1a1a;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: transform 0.2s ease;
+    }
+
+    .more-about-item h3:hover {
+      transform: scale(1.03);
+    }
+
+    .more-about-item h3::after {
+      content: "→";
+      font-size: 1.25rem;
+      color: #1a1a1a;
+    }
+
+    .more-about-item p {
+      font-size: 1rem;
+      color: #555;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    @media (max-width: 900px) {
+      .how-we-work {
+        grid-template-columns: 1fr;
+      }
+      .how-we-work .image {
+        order: -1;
+      }
+      .practice-grid {
+        grid-template-columns: 1fr;
+      }
+      .review-card {
+        width: calc((100vw - 6rem - 2rem) / 3);
+        min-width: 280px;
+      }
+      .more-about-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Mobile (iPhone / small screens) */
+    @media (max-width: 640px) {
+      header {
+        padding: 1rem 1rem;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+      }
+
+      .logo {
+        font-size: 1.25rem;
+      }
+
+      nav {
+        gap: 1rem;
+        font-size: 0.8rem;
+        flex-wrap: wrap;
+      }
+
+      .nav-contact-desktop,
+      .nav-review-desktop {
         display: none;
-    }
+      }
 
-    .info-section.active {
+      .nav-dropdown-mobile {
         display: block;
-        animation: fadeIn 0.3s ease;
+        position: relative;
+      }
+
+      .hero {
+        padding: 1.5rem 1rem 2rem;
+      }
+
+      .hero-bottom-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hero-title-car {
+        font-size: clamp(2.25rem, 7vw, 3.5rem);
+      }
+
+      .hero h1 {
+        font-size: clamp(2.25rem, 7vw, 3.5rem);
+      }
+
+      .hero .hero-tagline {
+        font-size: 1.2rem;
+      }
+
+      .hero .subtext {
+        font-size: 0.95rem;
+      }
+
+      .hero-image-wrapper {
+        margin-top: 22vh;
+      }
+
+      .hero-image {
+        height: auto;
+        max-height: 50vh;
+      }
     }
 
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(10px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    /* Footer */
+    footer {
+      background: #2a2a2a;
+      color: #ccc;
+      padding: 3rem 3rem 2rem;
+      margin-top: 2rem;
     }
 
-    .info-section h2 {
-        font-size: 24px;
-        font-weight: 700;
-        color: var(--accent-purple);
-        margin: 0 0 20px 0;
+    .footer-inner {
+      max-width: 1400px;
+      margin: 0 auto;
     }
 
-    .info-section p {
-        font-size: 15px;
-        line-height: 1.7;
-        color: var(--text-dark);
-        margin: 0 0 16px 0;
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 2rem;
     }
 
-    .info-section ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
+    .footer-brand .logo {
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
     }
 
-    .info-section li {
-        margin-bottom: 20px;
-        padding-left: 0;
+    .footer-brand p {
+      font-size: 0.9rem;
+      color: #999;
+      max-width: 280px;
+      line-height: 1.5;
     }
 
-    .info-section li strong {
-        display: block;
-        font-size: 16px;
-        font-weight: 600;
-        color: var(--accent-purple);
-        margin-bottom: 8px;
+    .footer-column h4 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
     }
 
-    .info-section li p {
-        margin: 0;
-        font-size: 14px;
-        color: var(--text-light);
-        line-height: 1.6;
+    .footer-column ul {
+      list-style: none;
     }
 
-    .info-section ol {
-        padding-left: 20px;
-        margin: 0;
+    .footer-column a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 0.9rem;
+      line-height: 1.8;
     }
 
-    .info-section ol li {
-        margin-bottom: 24px;
-        padding-left: 8px;
-        color: var(--text-dark);
-        line-height: 1.7;
+    .footer-column a:hover {
+      color: #fff;
     }
 
-    .info-section ol li strong {
-        display: inline;
-        color: var(--accent-purple);
-        font-weight: 600;
+    .footer-bottom {
+      border-top: 1px solid #444;
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
 
-    .info-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 1998;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
+    .footer-bottom p {
+      font-size: 0.85rem;
+      color: #888;
+      margin: 0;
     }
 
-    .info-overlay.show {
-        opacity: 1;
-        visibility: visible;
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .footer-social a {
+      color: #888;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .footer-social a:hover {
+      color: #fff;
     }
 
     @media (max-width: 768px) {
-        .info-button {
-            top: 92px;
-            right: -6px;
-            width: 45px;
-            height: 45px;
-        }
-
-        .info-card {
-            top: 72px;
-            height: calc(100vh - 72px);
-            width: 100vw;
-            right: -100vw;
-        }
-
-        .info-card-header {
-            padding: 20px;
-        }
-
-        .info-card-nav {
-            padding: 12px 20px;
-            flex-wrap: wrap;
-        }
-
-        .info-nav-button {
-            font-size: 12px;
-            padding: 8px 12px;
-        }
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
     }
 
-    /* ---------- CONTACT MODAL ---------- */
+    /* Contact Modal (from index.html) */
     .contact-modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.8);
-        z-index: 3000;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 3000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
     }
-
     .contact-modal.show {
-        display: flex;
+      display: flex;
     }
-
     .contact-content {
-        background: var(--bg-card);
-        border: 1px solid rgba(111, 255, 233, 0.2);
-        border-radius: 22px;
-        padding: 40px;
-        max-width: 600px;
-        width: 100%;
-        max-height: 90vh;
-        overflow-y: auto;
-        box-shadow: var(--shadow-xl);
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
+      background: #2d3f5a;
+      border: 1px solid rgba(111, 255, 233, 0.2);
+      border-radius: 22px;
+      padding: 40px;
+      max-width: 600px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
     }
-
     .contact-content::-webkit-scrollbar {
-        width: 8px;
+      width: 8px;
     }
-
     .contact-content::-webkit-scrollbar-track {
-        background: rgba(15, 23, 42, 0.3);
-        border-radius: 4px;
+      background: rgba(15, 23, 42, 0.3);
+      border-radius: 4px;
     }
-
     .contact-content::-webkit-scrollbar-thumb {
-        background: var(--primary-blue);
-        border-radius: 4px;
+      background: #5bc0be;
+      border-radius: 4px;
     }
-
     .contact-content::-webkit-scrollbar-thumb:hover {
-        background: var(--accent-purple);
+      background: #6fffe9;
     }
-
     .contact-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
     }
-
     .contact-title {
-        font-size: 24px;
-        font-weight: 700;
-        letter-spacing: -0.02em;
-        color: var(--text-dark);
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #e5e7eb;
     }
-
     .contact-close {
-        background: none;
-        border: none;
-        color: var(--text-light);
-        font-size: 24px;
-        cursor: pointer;
-        padding: 0;
-        width: 32px;
-        height: 32px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 999px;
-        transition: all 0.18s ease-out;
+      background: none;
+      border: none;
+      color: #9ca3af;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 0;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      transition: all 0.18s ease-out;
     }
-
     .contact-close:hover {
-        background: rgba(148, 163, 184, 0.1);
-        color: var(--text-dark);
+      background: rgba(148, 163, 184, 0.1);
+      color: #e5e7eb;
     }
-
     .contact-form {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
-
     .contact-form-group {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
-
     .contact-form-label {
-        font-size: 13px;
-        font-weight: 600;
-        color: var(--text-light);
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
+      font-size: 13px;
+      font-weight: 600;
+      color: #9ca3af;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
     }
-
     .contact-form-input,
     .contact-form-textarea {
-        padding: 12px 16px;
-        border-radius: 12px;
-        border: 1px solid rgba(111, 255, 233, 0.2);
-        background: var(--bg-glass);
-        color: var(--text-dark);
-        font-size: 14px;
-        font-family: inherit;
-        transition: all 0.18s ease-out;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(111, 255, 233, 0.2);
+      background: rgba(28, 37, 65, 0.95);
+      color: #e5e7eb;
+      font-size: 14px;
+      font-family: inherit;
+      transition: all 0.18s ease-out;
     }
-
     .contact-form-input:focus,
     .contact-form-textarea:focus {
-        outline: none;
-        border-color: var(--primary-blue);
-        background: rgba(28, 37, 65, 0.98);
-        box-shadow: 0 0 0 3px rgba(91, 192, 190, 0.1);
+      outline: none;
+      border-color: #5bc0be;
+      background: rgba(28, 37, 65, 0.98);
+      box-shadow: 0 0 0 3px rgba(91, 192, 190, 0.1);
     }
-
     .contact-form-textarea {
-        min-height: 150px;
-        resize: vertical;
+      min-height: 150px;
+      resize: vertical;
     }
-
     .contact-submit-btn {
-        padding: 12px 24px;
-        border-radius: 999px;
-        border: 1px solid rgba(99, 102, 241, 0.9);
-        background: linear-gradient(
-            120deg,
-            rgba(37, 99, 235, 0.95),
-            rgba(124, 58, 237, 0.95)
-        );
-        color: #e5e7eb;
-        font-size: 14px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.18s ease-out;
-        box-shadow: 0 16px 40px rgba(30, 64, 175, 0.85);
-        margin-top: 8px;
+      padding: 12px 24px;
+      border-radius: 999px;
+      border: 1px solid rgba(99, 102, 241, 0.9);
+      background: linear-gradient(120deg, rgba(37, 99, 235, 0.95), rgba(124, 58, 237, 0.95));
+      color: #e5e7eb;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.18s ease-out;
+      box-shadow: 0 16px 40px rgba(30, 64, 175, 0.85);
+      margin-top: 8px;
     }
-
     .contact-submit-btn:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 20px 50px rgba(30, 64, 175, 0.95);
+      transform: translateY(-1px);
+      box-shadow: 0 20px 50px rgba(30, 64, 175, 0.95);
     }
-
     .contact-submit-btn:disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
-        transform: none;
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
     }
-
     .contact-message {
-        padding: 12px 16px;
-        border-radius: 12px;
-        font-size: 13px;
-        margin-top: 8px;
-        display: none;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 13px;
+      margin-top: 8px;
+      display: none;
     }
-
     .contact-message.success {
-        background: rgba(34, 197, 94, 0.1);
-        border: 1px solid rgba(34, 197, 94, 0.3);
-        color: #bbf7d0;
-        display: block;
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      color: #bbf7d0;
+      display: block;
     }
-
     .contact-message.error {
-        background: rgba(239, 68, 68, 0.1);
-        border: 1px solid rgba(239, 68, 68, 0.3);
-        color: #fecaca;
-        display: block;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #fecaca;
+      display: block;
     }
-
-    @media (max-width: 1024px) {
-        html,
-        body {
-            overflow-x: hidden;
-        }
-
-        /* Enable scrolling on mobile devices and tablets */
-        body {
-            overflow: auto !important;
-            overscroll-behavior: auto !important;
-        }
-        
-        html {
-            overflow: auto !important;
-        }
-        
-        /* Make sections use normal flow on mobile */
-        .section {
-            position: relative !important;
-            transform: none !important;
-            margin-bottom: 80px;
-            padding-top: 100px;
-            min-height: auto;
-        }
-        
-        .infoCard {
-            position: relative !important;
-            width: calc(100% - 40px) !important;
-            max-width: 500px;
-            margin: 0 auto;
-            opacity: 1 !important;
-            transform: none !important;
-            left: auto !important;
-            right: auto !important;
-        }
-        
-        .leftCard, .rightCard {
-            left: auto !important;
-            right: auto !important;
-        }
-        
-        #world {
-            position: fixed !important;
-            top: 0;
-            left: 0;
-            right: 0;
-            width: 100vw;
-            min-height: 100vh;
-            transform: none !important;
-            background-attachment: scroll;
-            z-index: 0;
-        }
-        
-        #car, #fog {
-            display: none;
-        }
-        
-        #levelSelector {
-            position: relative !important;
-            top: auto !important;
-            left: auto !important;
-            width: calc(100% - 40px) !important;
-            max-width: 500px;
-            margin: 130px auto 40px;
-            transform: none !important;
-            z-index: 10;
-        }
-        
-        #footer {
-            position: relative !important;
-            transform: none !important;
-            top: auto !important;
-            margin-top: 60px;
-            z-index: 10;
-        }
-        
-        #mainHeader .header-content {
-            grid-template-columns: 1fr;
-            gap: 8px;
-            padding: 12px 16px;
-        }
-        #mainHeader h1 {
-            font-size: 18px;
-            grid-column: 1;
-            text-align: center;
-        }
-        #mainHeader .header-left {
-            grid-column: 1;
-            justify-self: start;
-            display: flex;
-        }
-        #mainHeader .header-left a {
-            font-size: 12px;
-        }
-        #mainHeader .header-right {
-            grid-column: 1;
-            justify-self: end;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        #mainHeader .user-greeting {
-            font-size: 12px;
-            margin-right: 0;
-        }
-        #mainHeader .header-nav {
-            gap: 12px;
-        }
-        #mainHeader .header-nav a {
-            font-size: 12px;
-            padding: 0;
-        }
-    }
-
-    /* ---------------- LEVEL SELECTOR ---------------- */
-    #levelSelector {
-        position: fixed;
-        top: 100px;
-        left: 24px;
-        width: 260px;
-        padding: 20px;
-        background: var(--bg-card);
-        border-radius: 20px;
-        box-shadow: var(--shadow-xl);
-        z-index: 100;
-        backdrop-filter: blur(20px) saturate(180%);
-        -webkit-backdrop-filter: blur(20px) saturate(180%);
-        border: 1px solid rgba(111, 255, 233, 0.2);
-        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
-    }
-    #levelSelector:hover {
-        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.24);
-    }
-    #levelSelector.hidden {
-        transform: translateX(-250px);
-    }
-    #levelSelector.hidden:hover {
-        transform: translateX(-245px);
-    }
-    #levelSelector h3 {
-        margin: 0 0 16px 0;
-        font-size: 16px;
-        font-weight: 700;
-        color: var(--text-dark);
-        letter-spacing: -0.3px;
-    }
-    #levelSelector ul { 
-        list-style: none; 
-        margin: 0; 
-        padding: 0; 
-    }
-    #levelSelector li { 
-        margin-bottom: 8px; 
-    }
-    #levelSelector a {
-        color: var(--button-bg);
-        cursor: pointer; 
-        font-weight: 600;
-        font-size: 14px;
-        display: block;
-        padding: 10px 14px;
-        border-radius: 10px;
-        transition: all 0.2s ease;
-        text-decoration: none;
-        position: relative;
-        overflow: hidden;
-    }
-    #levelSelector a::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.1), transparent);
-        transition: left 0.5s ease;
-    }
-    #levelSelector a:hover::before {
-        left: 100%;
-    }
-    #levelSelector a:hover {
-        background: var(--bg-card-smaller);
-        color: var(--button-bg);
-        transform: translateX(4px);
-    }
-    #levelSelector a.active {
-        background: var(--bg-card-smaller);
-        color: var(--accent-purple);
-        transform: translateX(6px) scale(1.03);
-        box-shadow: 0 4px 16px rgba(111, 255, 233, 0.4);
-        border: 1px solid rgba(111, 255, 233, 0.5);
-        font-weight: 600;
-    }
-    #levelSelector a.active::before {
-        display: none;
-    }
-
-    /* ---------------- WORLD IMAGE (8000px) ---------------- */
-    #world {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: var(--world-height, 8000px);
-        background-image: url("backgroundForWeb.png");
-        background-size: cover;
-        background-position: center center;
-        background-repeat: no-repeat;
-        will-change: transform;
-        z-index: 0;
-    }
-
-    @media (min-width: 1025px) {
-        #world {
-            background-size: auto 100%;
-            background-position: center top;
-        }
-    }
-
-    @keyframes cloudDrift {
-        from { transform: translateX(0); }
-        to   { transform: translateX(-50%); }
-    }
-
-    /* fog */
-    #fog {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        background: radial-gradient(
-            circle at center,
-            rgba(255,255,255,0.0) 0%,
-            rgba(255,255,255,0.15) 50%,
-            rgba(255,255,255,0.35) 100%
-        );
-        opacity: 0;
-        z-index: 2;
-        transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    /* car */
-    #car {
-        position: fixed;
-        left: 50%;
-        top: 25vh;
-        transform: translate(-50%, -50%);
-        width: 30px;
-        height: 50px;
-        background-image: url("car.jpg");
-        background-size: contain;
-        background-position: center;
-        background-repeat: no-repeat;
-        z-index: 10;
-        filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3)) drop-shadow(0 8px 24px rgba(0, 0, 0, 0.2));
-        transition: filter 0.3s ease, transform 0.1s linear;
-        will-change: transform, filter;
-    }
-
-    /* ---------------- SECTIONS ---------------- */
-    .section {
-        position: absolute;
-        width: 100%;
-        padding-top: 20px;
-    }
-
-    .infoCard {
-        width: 360px;
-        background: var(--bg-card);
-        padding: 28px;
-        border-radius: 24px;
-        box-shadow: var(--shadow-lg);
-        backdrop-filter: blur(20px) saturate(180%);
-        -webkit-backdrop-filter: blur(20px) saturate(180%);
-        border: 1px solid rgba(111, 255, 233, 0.2);
-        position: absolute;
-        display: flex;
-        flex-direction: column;
-        gap: 18px;
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    .infoCard.visible {
-        opacity: 1;
-        transform: translateY(0);
-        animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    }
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-    .infoCard.visible:hover {
-        transform: translateY(-8px) scale(1.02) !important;
-        box-shadow: var(--shadow-xl);
-        border-color: rgba(111, 255, 233, 0.4);
-        background: #3a506b;
-    }
-    .leftCard  { left: 40px; }
-    .rightCard { right: 40px; }
-
-    .infoCard h3 {
-        margin: 0;
-        font-size: 22px;
-        font-weight: 800;
-        color: var(--text-dark);
-        letter-spacing: -0.5px;
-        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--button-bg) 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-
-    .infoCard p {
-        margin: 0;
-        font-size: 15px;
-        color: var(--text-light);
-        line-height: 1.6;
-        font-weight: 400;
-    }
-
-    .infoCard ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    .infoCard li {
-        font-size: 15px;
-        position: relative;
-        padding-left: 24px;
-    }
-    .infoCard li::before {
-        content: '→';
-        position: absolute;
-        left: 0;
-        color: var(--button-bg);
-        font-weight: 700;
-        transition: transform 0.2s ease;
-    }
-    .infoCard li:hover::before {
-        transform: translateX(4px);
-    }
-
-    .infoCard a {
-        color: var(--button-bg);
-        text-decoration: none;
-        font-weight: 600;
-        transition: all 0.2s ease;
-        display: inline-block;
-        position: relative;
-    }
-    .infoCard a::after {
-        content: '';
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background: linear-gradient(90deg, var(--primary-blue), var(--button-bg));
-        transition: width 0.3s ease;
-    }
-    .infoCard a:hover {
-        color: var(--primary-blue);
-        transform: translateX(4px);
-    }
-    .infoCard a:hover::after {
-        width: 100%;
-    }
-
-    /* ---------------- FOOTER (BOTTOM OF WORLD) ---------------- */
-    #footer {
-        position: absolute;
-        width: 100%;
-        text-align: center;
-        padding: 32px 0;
-        background: #2a2a2a;
-        color: #ccc;
-        font-size: 14px;
-        z-index: 150;
-        border-top: 1px solid #444;
-        box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.1);
-    }
-
-    #footer p {
-        margin: 0;
-        letter-spacing: 0.5px;
-        font-weight: 500;
-        font-size: 15px;
-    }
-    #footer small {
-        display: block;
-        margin-top: 8px;
-        font-size: 13px;
-        opacity: 0.7;
-        font-weight: 400;
-    }
-
-    /* Back to Top Button */
-    #back-to-top {
-        position: fixed;
-        bottom: 30px;
-        left: 30px;
-        padding: 12px 20px;
-        border-radius: 999px;
-        background: var(--primary);
-        border: 2px solid #333;
-        color: #fff;
-        cursor: pointer;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        box-shadow: 0 8px 24px rgba(91, 192, 190, 0.4);
-        z-index: 9997;
-        transition: all 0.3s ease;
-        font-size: 14px;
-        font-weight: 600;
-        opacity: 0;
-        transform: translateY(20px);
-        white-space: nowrap;
-    }
-
-    #back-to-top.show {
-        display: flex;
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    #back-to-top:hover {
-        transform: scale(1.05) translateY(0);
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-        background: #333;
-    }
-
-    #back-to-top .arrow {
-        font-size: 16px;
-        transition: transform 0.2s ease;
-    }
-
-    #back-to-top:hover .arrow {
-        transform: translateY(-2px);
-    }
-</style>
+  </style>
 </head>
-
 <body>
-
-<header id="mainHeader">
-    <div class="header-content">
-        <div class="header-left">
-            <a href="#" id="leaveReviewLink">Leave a review</a>
+  <header>
+    <a href="index.html" class="logo" style="color: inherit; text-decoration: none;">Driveflow</a>
+    <nav>
+      <span class="user-greeting" id="userGreeting" style="display: none;"></span>
+      <a href="#" id="contactUsLink" class="nav-contact-desktop">Contact us</a>
+      <a href="#" id="leaveReviewLink" class="nav-review-desktop">Review</a>
+      <details class="nav-dropdown-mobile">
+        <summary>Contact us</summary>
+        <div class="nav-dropdown-wrap">
+          <div class="nav-dropdown-menu">
+            <a href="#" id="contactUsLinkMobile">Contact us</a>
+            <a href="#" id="leaveReviewLinkMobile">Review</a>
+          </div>
         </div>
-        <h1>Welcome to DriveFlow</h1>
-        <div class="header-right">
-            <div class="user-greeting" id="userGreeting" style="display: none;"></div>
-            <nav class="header-nav" id="headerNav">
-                <a href="#" id="contactUsLink">Contact Us</a>
-                <a href="login.html" class="btn-login">Login</a>
-                <a href="signup.html" class="btn-signup">Sign Up</a>
-            </nav>
+      </details>
+      <span id="headerNav" style="display: inline-flex; gap: 2rem; align-items: center;">
+        <a href="login.html">Login</a>
+        <a href="signup.html">Sign Up</a>
+      </span>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-top">
+        <div class="hero-content">
+          <div class="hero-title-wrap">
+            <h1>Welcome to Driveflow</h1>
+            <div class="hero-title-car" aria-hidden="true"></div>
+          </div>
+          <p class="hero-tagline">Train where you'll be Tested</p>
+          <p class="subtext">Practise real driving test routes for your test centre, revise key theory, and go into your test confident because you already know the roads, layouts, and tricky spots examiners use — so nothing on test day feels unfamiliar or catches you off guard.</p>
+          <div class="hero-bottom-row">
+            <a href="routes.html" class="hero-cta">Get the Routes</a>
+            <div class="hero-review">
+          <div class="stars">★★★★★</div>
+          <div class="reviewer">Abhishek</div>
+          <div class="review-location">Dun Laoghaire Test Centre</div>
+          <p class="review-quote">"Passed first time in Dun Laoghaire. DriveFlow was incredibly helpful for both theory questions and real test routes. I've already recommended it to friends — best resource in one place."</p>
+            </div>
+          </div>
         </div>
-    </div>
-</header>
+      </div>
+      <div class="hero-image-wrapper">
+        <img src="othersstoblurr.png" alt="Driveflow" class="hero-image">
+      </div>
+    </section>
 
-<!-- Info Button -->
-<button class="info-button" id="infoButton" aria-label="Open information">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M9 18l6-6-6-6"/>
-    </svg>
-</button>
-
-<!-- Info Overlay -->
-<div class="info-overlay" id="infoOverlay"></div>
-
-<!-- Info Card -->
-<div class="info-card" id="infoCard">
-    <div class="info-card-header">
-        <h2 class="info-card-title" id="infoCardTitle">Why DriveFlow Works</h2>
-        <button class="info-card-close" id="infoCardClose" aria-label="Close">×</button>
-    </div>
-    
-    <div class="info-card-nav">
-        <button class="info-nav-button active" data-section="why">Why It Works</button>
-        <button class="info-nav-button" data-section="faq">FAQ</button>
-        <button class="info-nav-button" data-section="how">How It Works</button>
-        <button class="info-nav-button" data-section="about">About Me</button>
-    </div>
-    
-    <div class="info-card-content">
-        <!-- Why DriveFlow Works Section -->
-        <div class="info-section active" id="whySection">
-            <h2>Why DriveFlow Works</h2>
-            <p style="padding: 20px; background: rgba(91, 192, 190, 0.1); border: 1px solid rgba(111, 255, 233, 0.3); border-radius: 12px; margin-bottom: 20px; text-align: center; font-weight: 600; color: var(--accent-purple);">
-                Used by thousands of learners around Ireland to pass their test first try
-            </p>
-            <p>Most learners fail because they don't know the roads they're being tested on — not because they're bad drivers. DriveFlow fixes that. Every route is built directly on Google Maps using the same areas examiners use, so you can practise the real thing instead of guessing. It couldn't be easier: you open a single link, press start, and the route follows you exactly like any normal Google Maps journey. You learn the exact turns, roundabouts, speed changes, and hidden problem spots that catch people out every day. Combined with focused mock questions and a dashboard that tracks your progress, DriveFlow gives you a structured, realistic way to prepare. No fluff, no surprises — just the fastest, smartest way to get test-ready.</p>
+    <section class="practice">
+      <h2>Practice</h2>
+      <div class="practice-grid">
+        <div class="practice-item">
+          <a href="theory-test.html" class="card">
+            <div class="card-image"><img src="driveflowtheoryimg.jpg" alt="Mock theory test"></div>
+            <p class="card-title">Theory Test</p>
+            <p class="card-body">Practice with official-style questions that mirror the real exam format and build your confidence.</p>
+          </a>
         </div>
-        
-        <!-- FAQ Section -->
-        <div class="info-section" id="faqSection">
-            <h2>FAQ — Everything You Need to Know</h2>
-            <ul>
-                <li>
-                    <strong>What makes DriveFlow different from other driving test resources?</strong>
-                    <p>DriveFlow gives you real test routes, built directly on Google Maps. You're not looking at a PDF or guessing where to go — the route literally follows you in real time as you drive, exactly like normal navigation.</p>
-                </li>
-                <li>
-                    <strong>How accurate are the routes?</strong>
-                    <p>They're built around the same roads, junctions, roundabouts, and trouble-spots used by examiners in the busiest Irish test centres. Every route has been mapped carefully so you practise what actually appears on the test, not random roads.</p>
-                </li>
-                <li>
-                    <strong>Do the routes track my position while I drive?</strong>
-                    <p>Yes. Because everything runs through Google Maps, the route follows your location perfectly on your phone. You're never confused about where to turn or where the route goes next.</p>
-                </li>
-                <li>
-                    <strong>Do I need to download an app?</strong>
-                    <p>No downloads — no hassle. Just open the link, and the route loads instantly in Google Maps. It works on any device.</p>
-                </li>
-                <li>
-                    <strong>Will this actually help me pass faster?</strong>
-                    <p>Yes. When you already know the tricky parts of the test centre area, you remove the biggest cause of failure: unfamiliar roads. You practise smarter, not longer.</p>
-                </li>
-                <li>
-                    <strong>Are the routes updated?</strong>
-                    <p>Absolutely. If test centres change their layout or introduce new patterns, the route links get updated so learners always have the most accurate version.</p>
-                </li>
-                <li>
-                    <strong>Is this a replacement for driving lessons?</strong>
-                    <p>No — but it massively boosts the value of your lessons. Instead of wasting time learning the test area from scratch, you walk in already familiar with it.</p>
-                </li>
-            </ul>
+        <div class="practice-item">
+          <a href="routes.html" class="card">
+            <div class="card-image"><img src="add2.png" alt="Routes"></div>
+            <p class="card-title">Routes</p>
+            <p class="card-body">Explore common test routes around your test centre and familiarize yourself with the area.</p>
+          </a>
         </div>
-        
-        <!-- How It Works Section -->
-        <div class="info-section" id="howSection">
-            <h2>How It Works</h2>
-            <ol>
-                <li>
-                    <strong>Practise the real test questions</strong><br>
-                    Start with short, focused mock questions designed around what examiners actually ask on test day — road signs, hand signals, right-of-way rules, and the tricky scenarios most learners get wrong. No fluff. Just the stuff you need to know cold before you walk into the test centre.
-                </li>
-                <li>
-                    <strong>Track your progress on your personal dashboard</strong><br>
-                    Every answer updates your dashboard automatically. You'll see your scores, your weak areas, and how you're improving over time. No guessing. You know exactly what to revise, and you can repeat mock tests until you're confident.
-                </li>
-                <li>
-                    <strong>Unlock the official test-area routes</strong><br>
-                    When you're ready to practise on the road, you choose the test centre you want (e.g., Tallaght, Naas) and unlock its route pack. Each pack includes multiple real driving-test routes, mapped directly onto Google Maps. You open the link, hit start, and the route follows your car perfectly — just like normal navigation. Every turn, roundabout, and examiner hotspot is laid out for you.
-                </li>
-                <li>
-                    <strong>Practise smarter, not longer</strong><br>
-                    Because you study the exact theory questions and drive the exact test routes, your prep is laser-focused. No wasted lessons. No surprises on the day. You show up knowing the area, knowing the questions, and knowing what to expect.
-                </li>
-                <li>
-                    <strong>Pass with confidence</strong><br>
-                    DriveFlow's entire system is built to remove guesswork. You train the same way you'll be tested — with the real questions, real routes, and real examiner patterns. It's the closest you can get to doing the actual test without being in the car with the tester.
-                </li>
-            </ol>
+        <div class="practice-item">
+          <a href="drivingtest-theory.html" class="card">
+            <div class="card-image"><img src="testdaytheory.jpg" alt="Test day theory"></div>
+            <p class="card-title">Test day theory</p>
+            <p class="card-body">Review essential theory topics and road signs to ensure you're fully prepared for test day.</p>
+          </a>
         </div>
-        
-        <!-- About Me Section -->
-        <div class="info-section" id="aboutSection">
-            <h2>About Me</h2>
-            <p>Hey, I'm Liam. I study Computer Science and I'm currently learning to drive. While I was going through the whole process myself, I realised how messy and scattered all the resources were — routes in one place, theory questions somewhere else, no proper way to track progress.</p>
-            <p>So I decided to build an all-in-one app for anyone working toward their licence. Something simple, accurate, and actually useful: real driving routes, mock questions, progress tracking, and everything you need in one spot.</p>
-            <p>My goal is to make learning to drive easier, cheaper, and way less stressful for everyone coming after me.</p>
-            <p><a href="about.html">About DriveFlow</a></p>
+      </div>
+    </section>
+
+    <section class="how-we-work">
+      <div class="content">
+        <h2>How we work</h2>
+        <p>We take the guesswork out of learning to drive.</p>
+        <p>DriveFlow is built to prepare you for both parts of the test, the theory and the real drive, in a way that is clear, practical, and stress-free. Everything you see is focused on what actually matters on test day.</p>
+        <p>You practise with exam-style theory questions, short focused revision, and structured mock tests that reflect the real exam. This lets you build knowledge gradually without feeling overwhelmed or cramming at the last minute.</p>
+        <p>Alongside this, you get access to real driving test routes designed around your chosen test centre. These routes follow the roads, junctions, and manoeuvre areas that learners are commonly brought through, helping you understand how a test is likely to flow and what to expect at each stage of the drive.</p>
+        <p>By the time test day comes, nothing feels unfamiliar. You know the questions, you know the routes, and you know what's expected of you, so you can focus on driving with confidence.</p>
+      </div>
+      <img src="gingerlearner.png" alt="How we work" class="image">
+    </section>
+
+    <section class="more-about">
+      <h2>More about us</h2>
+      <div class="more-about-grid">
+        <div class="more-about-item">
+          <a href="guides/why-learners-fail-driving-test-ireland/"><img src="pixel-mixer-crash-test-1620591_1920.jpg" alt="Why learners fail the Irish driving test" class="more-about-img"></a>
+          <a href="guides/why-learners-fail-driving-test-ireland/" style="color: inherit; text-decoration: none;"><h3>Why learners fail the Irish driving test</h3></a>
+          <p>Understanding common pitfalls can help you avoid them. Many learners fail due to lack of practice on test routes, nerves on the day, or gaps in theory knowledge. We built Driveflow to address these issues so you can go into your test feeling prepared and confident.</p>
         </div>
+        <div class="more-about-item">
+          <a href="about.html"><img src="459e426c-dcfa-42ab-b4e8-6fd1f668ece6.png" alt="About us" class="more-about-img"></a>
+          <a href="about.html" style="color: inherit; text-decoration: none;"><h3>About us</h3></a>
+          <p>Driveflow was created to make Irish driving test preparation clearer and less stressful. We combine official-style theory practice with real test routes and focused revision so you know what to expect and how to prepare. Our goal is to help more learners pass first time.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="reviews">
+      <h2>What our users say</h2>
+      <div class="reviews-container">
+        <div class="reviews-scroll">
+          <div class="reviews-grid">
+            <div class="review-card">
+              <div class="stars">★★★★★</div>
+              <p>Driveflow made studying for my theory test so much easier. The mock tests felt just like the real thing and I passed first time.</p>
+              <span class="author">— Sarah M.</span>
+            </div>
+            <div class="review-card">
+              <div class="stars">★★★★★</div>
+              <p>Really helpful for learning the routes around my test centre. I knew exactly what to expect on the day. Highly recommend.</p>
+              <span class="author">— James K.</span>
+            </div>
+            <div class="review-card">
+              <div class="stars">★★★★★</div>
+              <p>Clear, simple, and actually works. I tried a few apps before and this one was the one that got me through.</p>
+              <span class="author">— Emma L.</span>
+            </div>
+            <div class="review-card">
+              <div class="stars">★★★★★</div>
+              <p>The route planning feature is brilliant. I practiced all the common test routes and felt so confident on my actual test day.</p>
+              <span class="author">— Michael R.</span>
+            </div>
+            <div class="review-card">
+              <div class="stars">★★★★★</div>
+              <p>Best investment I made for my driving test. The theory questions are spot-on and the interface is really user-friendly.</p>
+              <span class="author">— Lisa T.</span>
+            </div>
+          </div>
+          <div class="reviews-grid">
+            <div class="review-card">
+              <div class="stars">★★★★★</div>
+              <p>Driveflow made studying for my theory test so much easier. The mock tests felt just like the real thing and I passed first time.</p>
+              <span class="author">— Sarah M.</span>
+            </div>
+            <div class="review-card">
+              <div class="stars">★★★★★</div>
+              <p>Really helpful for learning the routes around my test centre. I knew exactly what to expect on the day. Highly recommend.</p>
+              <span class="author">— James K.</span>
+            </div>
+            <div class="review-card">
+              <div class="stars">★★★★★</div>
+              <p>Clear, simple, and actually works. I tried a few apps before and this one was the one that got me through.</p>
+              <span class="author">— Emma L.</span>
+            </div>
+            <div class="review-card">
+              <div class="stars">★★★★★</div>
+              <p>The route planning feature is brilliant. I practiced all the common test routes and felt so confident on my actual test day.</p>
+              <span class="author">— Michael R.</span>
+            </div>
+            <div class="review-card">
+              <div class="stars">★★★★★</div>
+              <p>Best investment I made for my driving test. The theory questions are spot-on and the interface is really user-friendly.</p>
+              <span class="author">— Lisa T.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">Driveflow</div>
+          <p>Your trusted partner for Irish driving test preparation. Practice theory, learn routes, and pass with confidence.</p>
+        </div>
+        <div class="footer-column">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Use</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="#" id="footerContactLink">Contact us</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Support</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Driveflow. All rights reserved.</p>
+        <div class="footer-social">
+          <a href="#">Facebook</a>
+          <a href="#">Instagram</a>
+          <a href="#">Twitter</a>
+        </div>
+      </div>
     </div>
-</div>
+  </footer>
 
-<div id="world"></div>
-
-<!-- SELECTOR -->
-<nav id="levelSelector">
-    <h3>What level are you at?</h3>
-    <ul>
-        <li><a onclick="goTo('theory')" data-section="theory">Theory Test</a></li>
-        <li><a onclick="goTo('booking')" data-section="booking">Booking Test</a></li>
-        <li><a onclick="goTo('preparing')" data-section="preparing">Preparing for Test + Routes!</a></li>
-    </ul>
-</nav>
-
-<!-- ========= SECTIONS ========= -->
-
-<!-- Theory Test — RIGHT -->
-<div id="section-theory" class="section" data-section="theory">
-    <div class="infoCard rightCard">
-        <h3>Theory Test</h3>
-        <p>Pass the theory with practice and mock exams.</p>
-        <ul>
-            <li><a href="theory-test.html?from=theory&page=main">Practice Theory Questions</a></li>
-            <li><a href="mock-test.html?from=theory&page=main">Take a Mock Exam</a></li>
-        </ul>
+  <!-- Contact Modal -->
+  <div id="contactModal" class="contact-modal">
+    <div class="contact-content">
+      <div class="contact-header">
+        <h2 class="contact-title" id="contactModalTitle">Contact Us</h2>
+        <button class="contact-close" id="contactClose" aria-label="Close">×</button>
+      </div>
+      <p style="color: #9ca3af; font-size: 14px; margin-bottom: 8px;">
+        Have a question or feedback? Send us a message and we'll get back to you as soon as possible.
+      </p>
+      <form id="contactForm" class="contact-form">
+        <div class="contact-form-group">
+          <label for="contactMessageText" class="contact-form-label">Your Message</label>
+          <textarea id="contactMessageText" class="contact-form-textarea" placeholder="Type your message here..." required></textarea>
+        </div>
+        <div id="contactMessage" class="contact-message"></div>
+        <button type="submit" class="contact-submit-btn">Send Message</button>
+      </form>
     </div>
-</div>
+  </div>
 
-<!-- Booking Test — RIGHT -->
-<div id="section-booking" class="section" data-section="booking">
-    <div class="infoCard rightCard">
-        <h3>Booking the Test</h3>
-        <p>Timing, locations, and what to expect on booking day.</p>
-        <ul>
-            <li><a href="booking.html?from=booking&page=main">Book Your Test</a></li>
-        </ul>
-    </div>
-</div>
+  <script>
+    const API_URL = location.hostname === "localhost" || location.hostname === "127.0.0.1"
+      ? "http://localhost:8080"
+      : "https://driving-test-backend-production.up.railway.app";
 
-<!-- Preparing for Test — RIGHT -->
-<div id="section-preparing" class="section" data-section="preparing">
-    <div class="infoCard rightCard">
-        <h3>Preparing for Test Day</h3>
-        <p>Refine your skills and learn the local routes.</p>
-        <ul>
-            <li><a href="routes.html?from=preparing&page=main">Routes</a></li>
-            <li><a href="drivingtest-theory.html?from=preparing&page=main">Test Theory</a></li>
-        </ul>
-    </div>
-</div>
-
-<!-- Featured Guide — RIGHT -->
-<div id="section-guides" class="section" data-section="guides">
-    <div class="infoCard rightCard">
-        <h3>Featured Guide</h3>
-        <p>Why learners fail the Irish driving test — and how to pass.</p>
-        <ul>
-            <li><a href="guides/why-learners-fail-driving-test-ireland/">Why Learners Fail the Irish Driving Test</a></li>
-            <li><a href="featured-reviews.html">Featured Reviews</a></li>
-        </ul>
-    </div>
-</div>
-
-<!-- Footer at bottom of 8000px world -->
-<footer id="footer">
-    <p>© 2026 DriveFlow — Helping Ireland learn to drive</p>
-    <small>driveflowweb@gmail.com</small>
-    <small>Developed by learners, for learners.</small>
-    <small><a href="about.html" style="color: var(--text-light); text-decoration: underline; text-underline-offset: 3px;">About DriveFlow</a></small>
-</footer>
-
-<div id="fog"></div>
-<div id="car"></div>
-<script>
-    const API_URL =
-    location.hostname === "localhost" || location.hostname === "127.0.0.1"
-        ? "http://localhost:8080"   // ← backend when running locally
-        : "https://driving-test-backend-production.up.railway.app"; // ← built site
-
-
-    // Replace login/signup buttons with logout + username
     function showUserUI(userData) {
-        const username = userData.username || userData.email?.split('@')[0] || 'User';
-        const userGreeting = document.getElementById("userGreeting");
-        const headerNav = document.getElementById("headerNav");
-        
-        userGreeting.textContent = `Hi, ${username}`;
-        userGreeting.style.display = "block";
-        // Show Contact Us, Dashboard, and Logout buttons
-        headerNav.innerHTML = `
-            <a href="#" id="contactUsLink">Contact Us</a>
-            <a href="dashboard.html" class="btn-login">Dashboard</a>
-            <a id="logoutBtn" class="btn-login" style="cursor:pointer">Logout</a>
-        `;
-
-        // Re-attach Contact Us event listener
-        const contactUsLink = headerNav.querySelector("#contactUsLink");
-        if (contactUsLink) {
-            contactUsLink.addEventListener("click", (e) => {
-                e.preventDefault();
-                const titleEl = document.getElementById("contactModalTitle");
-                if (titleEl) titleEl.textContent = "Contact Us";
-                const modal = document.getElementById("contactModal");
-                if (modal) modal.classList.add("show");
-            });
-        }
-
-        const logoutBtn = headerNav.querySelector("#logoutBtn");
-        logoutBtn.addEventListener("click", () => {
-            localStorage.removeItem("auth_token");
-            window.location.href = "login.html";
+      const username = userData.username || userData.email?.split('@')[0] || 'User';
+      const userGreeting = document.getElementById("userGreeting");
+      const headerNav = document.getElementById("headerNav");
+      userGreeting.textContent = "Hi, " + username;
+      userGreeting.style.display = "inline";
+      headerNav.innerHTML = '<a href="dashboard.html">Dashboard</a><a href="#" id="logoutBtn" style="cursor:pointer">Logout</a>';
+      const logoutBtn = headerNav.querySelector("#logoutBtn");
+      if (logoutBtn) {
+        logoutBtn.addEventListener("click", function(e) {
+          e.preventDefault();
+          localStorage.removeItem("auth_token");
+          window.location.href = "login.html";
         });
+      }
     }
 
     async function checkUser() {
-        const token = localStorage.getItem("auth_token");
-        if (!token) {
-            // user not logged in → leave login/signup buttons
-            return;
+      const token = localStorage.getItem("auth_token");
+      if (!token) return;
+      try {
+        const res = await fetch(API_URL + "/auth/protected", {
+          method: "GET",
+          headers: { "Authorization": "Bearer " + token }
+        });
+        const data = await res.json();
+        if (res.ok) {
+          showUserUI(data.user);
+        } else {
+          localStorage.removeItem("auth_token");
         }
-
-        try {
-            const res = await fetch(`${API_URL}/auth/protected`, {
-                method: "GET",
-                headers: {
-                    "Authorization": "Bearer " + token
-                }
-            });
-
-            const data = await res.json();
-
-            if (res.ok) {
-                // user is valid → update header UI
-                showUserUI(data.user);
-            } else {
-                // token invalid → clear and send to login
-                localStorage.removeItem("auth_token");
-            }
-        } catch (err) {
-            console.error("Auth check failed:", err);
-            localStorage.removeItem("auth_token");
-        }
+      } catch (err) {
+        console.error("Auth check failed:", err);
+        localStorage.removeItem("auth_token");
+      }
     }
 
-    // run on page load
     checkUser();
-</script>
 
-<script>
-/* === SCROLL ENGINE === */
-let scrollPos = 0;
-
-const world         = document.getElementById("world");
-const car           = document.getElementById("car");
-const fog           = document.getElementById("fog");
-const levelSelector = document.getElementById("levelSelector");
-const footer        = document.getElementById("footer");
-
-const MIN_WORLD_HEIGHT = 8000;
-const sectionOrder = ["guides","theory","booking","preparing"];
-const sectionSpacingMultiplier = 1.35;
-
-let worldHeight = MIN_WORLD_HEIGHT;
-let viewportHeight = window.innerHeight;
-let maxScroll = Math.max(0, worldHeight - viewportHeight);
-let sectionOffsets = {};
-
-function updateEverything(){
-    // On tablets/mobile, use native scrolling - don't update transforms
-    if (window.innerWidth <= 1024) {
-        // Only update header visibility based on native scroll
-        const header = document.getElementById("mainHeader");
-        const nativeScrollPos = window.pageYOffset || document.documentElement.scrollTop;
-        if (nativeScrollPos > 100) {
-            header.classList.add("hidden");
-        } else {
-            header.classList.remove("hidden");
-        }
-        return; // Skip all transform-based positioning
-    }
-    
-    // Desktop: use custom scroll system
-    // clamp scrollPos just in case
-    if (scrollPos < 0) scrollPos = 0;
-    if (scrollPos > maxScroll) scrollPos = maxScroll;
-
-    const ratio = maxScroll > 0 ? (scrollPos / maxScroll) : 0;
-
-    /* Header scroll behavior - hide on scroll */
-    const header = document.getElementById("mainHeader");
-    if (scrollPos > 100) {
-        header.classList.add("hidden");
-    } else {
-        header.classList.remove("hidden");
-    }
-
-    /* world background */
-    world.style.transform = `translateY(${-scrollPos}px)`;
-
-    /* selector - now fixed, no transform needed for Y position */
-    // Check if any left card is overlapping with levelSelector position
-    checkLevelSelectorCollision();
-    // Update active section highlighting
-    updateActiveSectionHighlight();
-
-    /* sections (move with world, spaced by viewport multiples) */
-    document.querySelectorAll(".section").forEach(sec => {
-        const id = sec.dataset.section || sec.id.replace("section-", "");
-        const yOffset = sectionOffsets[id] || 0;
-        sec.style.transform = `translateY(${-scrollPos + yOffset}px)`;
-        
-        // Animate cards when they come into view
-        const card = sec.querySelector(".infoCard");
-        if (card) {
-            const cardTop = yOffset - scrollPos;
-            const cardBottom = cardTop + card.offsetHeight;
-            const isVisible = cardBottom > 0 && cardTop < viewportHeight;
-            
-            if (isVisible && !card.classList.contains("visible")) {
-                card.classList.add("visible");
-                card.style.opacity = "1";
-            } else if (!isVisible && card.classList.contains("visible")) {
-                card.classList.remove("visible");
-            }
-        }
-    });
-
-    /* footer moves same as world (glued to bottom of 8000px world) */
-    const clampedScroll = Math.max(0, Math.min(scrollPos, maxScroll));
-    footer.style.transform = `translateY(${-Math.round(clampedScroll)}px)`;
-
-    /* car vertical movement */
-    const carMin = viewportHeight * 0.25;
-    const carMax = viewportHeight * 0.70;
-    car.style.top = carMin + (carMax - carMin) * ratio + "px";
-
-    /* car growth */
-    const size = 40 + ratio * (260 - 40);
-    car.style.width  = (size * 0.65) + "px";
-    car.style.height = size + "px";
-
-    /* fog intensity */
-    fog.style.opacity = ratio * 0.5;
-}
-
-/* wheel scrolling */
-function handleWheel(e){
-    // Disable custom scroll on tablets/mobile (use native scrolling instead)
-    if (window.innerWidth <= 1024) {
-        return; // Let native scrolling handle it
-    }
-    // Don't scroll background if info card is open and user is scrolling inside it
-    const infoCard = document.getElementById('infoCard');
-    if (infoCard && infoCard.classList.contains('open')) {
-        // Check if the scroll event is inside the info card
-        if (infoCard.contains(e.target)) {
-            return; // Let the card handle its own scrolling
-        }
-    }
-    e.preventDefault();
-    scrollPos += e.deltaY * 0.35;
-    updateEverything();
-}
-window.addEventListener("wheel", handleWheel, { passive: false });
-
-/* smooth scroll to position */
-function scrollToPosition(targetY){
-    // clamp targetY to maxScroll to avoid going past world bottom
-    targetY = Math.max(0, Math.min(targetY, maxScroll));
-
-    let start = scrollPos;
-    let dist = targetY - start;
-    let duration = 900;
-    let startTime = performance.now();
-
-    function anim(t){
-        let p = (t - startTime) / duration;
-        if(p > 1) p = 1;
-        let eased = 1 - Math.pow(1 - p, 3);
-        scrollPos = start + dist * eased;
-        updateEverything();
-        if(p < 1) requestAnimationFrame(anim);
-    }
-    requestAnimationFrame(anim);
-}
-
-/* click handler for selector */
-function goTo(sectionName){
-    // Use native scrolling on tablets/mobile
-    if (window.innerWidth <= 1024) {
-        const section = document.getElementById(`section-${sectionName}`);
-        if (section) {
-            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-        return;
-    }
-    // Use custom scroll on desktop
-    const yOffset = sectionOffsets[sectionName];
-    if (typeof yOffset !== "number") return;
-    const targetY = Math.max(0, Math.min(yOffset - viewportHeight * 0.2, maxScroll));
-    scrollToPosition(targetY);
-}
-
-function checkLevelSelectorCollision(){
-    // Only check on desktop (not mobile/tablet)
-    if (window.innerWidth <= 1024) {
-        levelSelector.classList.remove("hidden");
-        return;
-    }
-    
-    const levelSelectorTop = 100; // Fixed top position
-    const levelSelectorBottom = levelSelectorTop + levelSelector.offsetHeight;
-    let shouldHide = false;
-    
-    // Check all left cards (cards with class "leftCard")
-    document.querySelectorAll(".leftCard").forEach(card => {
-        const section = card.closest(".section");
-        if (!section) return;
-        
-        const id = section.dataset.section || section.id.replace("section-", "");
-        const yOffset = sectionOffsets[id] || 0;
-        const cardTop = yOffset - scrollPos;
-        const cardBottom = cardTop + card.offsetHeight;
-        
-        // Check if card is overlapping with levelSelector's vertical position
-        // Add some threshold (20px) to trigger slightly before exact overlap
-        if (cardTop < levelSelectorBottom + 20 && cardBottom > levelSelectorTop - 20) {
-            shouldHide = true;
-        }
-    });
-    
-    // Toggle hidden class based on collision
-    if (shouldHide) {
-        levelSelector.classList.add("hidden");
-    } else {
-        levelSelector.classList.remove("hidden");
-    }
-}
-
-function updateActiveSectionHighlight(){
-    // Only check on desktop (not mobile/tablet)
-    if (window.innerWidth <= 1024) {
-        return;
-    }
-    
-    const viewportCenter = viewportHeight * 0.5; // Center of viewport
-    const threshold = viewportHeight * 0.4; // Distance threshold for highlighting
-    
-    let activeSection = null;
-    let closestDistance = Infinity;
-    
-    // Check all sections to find which one is closest to viewport center
-    sectionOrder.forEach(sectionId => {
-        const yOffset = sectionOffsets[sectionId] || 0;
-        const sectionCenter = yOffset - scrollPos;
-        const distance = Math.abs(sectionCenter - viewportCenter);
-        
-        // Track the closest section regardless of threshold
-        if (distance < closestDistance) {
-            closestDistance = distance;
-            activeSection = sectionId;
-        }
-    });
-    
-    // If no section is within threshold, use the closest one anyway (ensures always highlighted)
-    // This ensures there's always something highlighted
-    
-    // Update active state on all links
-    levelSelector.querySelectorAll('a[data-section]').forEach(link => {
-        if (link.dataset.section === activeSection) {
-            link.classList.add('active');
-        } else {
-            link.classList.remove('active');
-        }
-    });
-}
-
-function recalcLayout(){
-    viewportHeight = window.innerHeight;
-    const spacing = viewportHeight * sectionSpacingMultiplier;
-    const header = document.getElementById("mainHeader");
-    const headerHeight = header ? header.offsetHeight : 80;
-    const firstOffset = headerHeight + 40;
-
-    sectionOrder.forEach((id, index) => {
-        if (index === 0) {
-            // First section starts lower to give space from header
-            sectionOffsets[id] = firstOffset;
-        } else {
-            // Subsequent sections maintain consistent spacing from first section
-            sectionOffsets[id] = firstOffset + spacing * index;
-        }
-    });
-
-    const lastOffset = sectionOffsets[sectionOrder[sectionOrder.length - 1]] || 0;
-    const neededWorldHeight = lastOffset + viewportHeight * 0.8;
-    worldHeight = Math.max(MIN_WORLD_HEIGHT, neededWorldHeight);
-    document.documentElement.style.setProperty("--world-height", `${worldHeight}px`);
-    world.style.height = `${worldHeight}px`;
-
-    maxScroll = Math.max(0, worldHeight - viewportHeight);
-
-    // Position footer at the bottom of the world
-    const footerHeight = footer.offsetHeight || 80;
-    footer.style.top = `${worldHeight - footerHeight}px`;
-
-    updateEverything();
-}
-
-/* handle resize so maxScroll updates correctly */
-window.addEventListener("resize", recalcLayout);
-
-recalcLayout();
-
-// Always start at the top of the page
-window.addEventListener("load", function() {
-    scrollPos = 0;
-    updateEverything();
-    
-    // On tablets/mobile, make sure all cards are visible and positioned
-    if (window.innerWidth <= 1024) {
-        // Make all cards visible on mobile
-        document.querySelectorAll(".infoCard").forEach(card => {
-            card.classList.add("visible");
-            card.style.opacity = "1";
-            card.style.transform = "none";
-        });
-        
-        // Listen to native scroll for header visibility
-        window.addEventListener('scroll', function() {
-            const header = document.getElementById("mainHeader");
-            const scrollPos = window.pageYOffset || document.documentElement.scrollTop;
-            if (scrollPos > 100) {
-                header.classList.add("hidden");
-            } else {
-                header.classList.remove("hidden");
-            }
-        }, { passive: true });
-    }
-});
-
-// Also handle resize to ensure mobile layout is correct
-window.addEventListener("resize", function() {
-    if (window.innerWidth <= 1024) {
-        // Make all cards visible on mobile after resize
-        document.querySelectorAll(".infoCard").forEach(card => {
-            card.classList.add("visible");
-            card.style.opacity = "1";
-            card.style.transform = "none";
-        });
-    }
-});
-</script>
-
-<script src="/chatbot-widget.js"></script>
-
-<!-- Back to Top Button -->
-<button id="back-to-top" aria-label="Back to top">
-    <span class="arrow">↑</span>
-    <span>Back To Top</span>
-</button>
-
-<script>
-    // Back to Top Button Functionality
-    (function() {
-        const backToTopButton = document.getElementById('back-to-top');
-        let scrollTimeout = null;
-        let isScrolling = false;
-        let lastScrollPos = 0;
-
-        // Function to check scroll position and show/hide button
-        function checkScrollPosition() {
-            // On tablets/mobile, use native scroll position
-            if (window.innerWidth <= 1024) {
-                const nativeScrollPos = window.pageYOffset || document.documentElement.scrollTop;
-                if (nativeScrollPos > 100) {
-                    backToTopButton.classList.add('show');
-                } else {
-                    backToTopButton.classList.remove('show');
-                }
-                lastScrollPos = nativeScrollPos;
-            } else if (typeof scrollPos !== 'undefined') {
-                // Desktop: use the custom scrollPos variable from the page's scroll system
-                if (scrollPos > 100) {
-                    backToTopButton.classList.add('show');
-                } else {
-                    backToTopButton.classList.remove('show');
-                }
-                lastScrollPos = scrollPos;
-            }
-        }
-
-        // Function to handle scroll detection
-        function handleScroll() {
-            // Hide button immediately when scrolling starts
-            if (!isScrolling) {
-                isScrolling = true;
-                backToTopButton.classList.remove('show');
-            }
-
-            // Clear existing timeout
-            if (scrollTimeout) {
-                clearTimeout(scrollTimeout);
-            }
-
-            // Set new timeout to show button after 0.3 seconds of no scrolling
-            scrollTimeout = setTimeout(() => {
-                isScrolling = false;
-                checkScrollPosition();
-            }, 300); // 0.3 seconds
-        }
-
-        // Listen to wheel events (this page uses custom wheel scrolling)
-        window.addEventListener('wheel', handleScroll, { passive: true });
-        
-        // Listen to touch events for mobile
-        window.addEventListener('touchmove', handleScroll, { passive: true });
-
-        // Monitor scroll changes by checking periodically
-        setInterval(() => {
-            if (window.innerWidth <= 1024) {
-                // On tablets/mobile, monitor native scroll
-                const nativeScrollPos = window.pageYOffset || document.documentElement.scrollTop;
-                if (nativeScrollPos !== lastScrollPos) {
-                    lastScrollPos = nativeScrollPos;
-                    handleScroll();
-                }
-            } else if (typeof scrollPos !== 'undefined' && scrollPos !== lastScrollPos) {
-                // Desktop: monitor custom scrollPos
-                lastScrollPos = scrollPos;
-                handleScroll();
-            }
-        }, 50);
-
-        // Click handler to scroll to top
-        backToTopButton.addEventListener('click', () => {
-            // Use native scrolling on tablets/mobile
-            if (window.innerWidth <= 1024) {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (typeof scrollToPosition !== 'undefined') {
-                // Use custom scroll on desktop
-                scrollToPosition(0);
-            } else {
-                // Fallback if scrollToPosition is not available
-                scrollPos = 0;
-                if (typeof updateEverything !== 'undefined') {
-                    updateEverything();
-                }
-            }
-            // Hide button immediately when clicked, but reset isScrolling so it can reappear
-            backToTopButton.classList.remove('show');
-            isScrolling = false;
-            // Clear any pending timeout
-            if (scrollTimeout) {
-                clearTimeout(scrollTimeout);
-            }
-        });
-
-        // Initial check on page load
-        setTimeout(() => {
-            checkScrollPosition();
-        }, 500);
-    })();
-
-    // Contact modal handlers
-    // API_URL already declared above, reusing it
     function initContactModal() {
-        const contactUsLink = document.getElementById("contactUsLink");
-        const contactModal = document.getElementById("contactModal");
-        const contactClose = document.getElementById("contactClose");
-        const contactForm = document.getElementById("contactForm");
-        const contactMessage = document.getElementById("contactMessage");
+      const contactModal = document.getElementById("contactModal");
+      const contactClose = document.getElementById("contactClose");
+      const contactForm = document.getElementById("contactForm");
+      const contactMessage = document.getElementById("contactMessage");
 
-        if (!contactModal) {
-            console.warn("Contact modal not found in DOM");
+      function showContactModal(title) {
+        const titleEl = document.getElementById("contactModalTitle");
+        if (titleEl) titleEl.textContent = title || "Contact Us";
+        if (contactModal) contactModal.classList.add("show");
+      }
+
+      function hideContactModal() {
+        if (contactModal) contactModal.classList.remove("show");
+        if (contactForm) contactForm.reset();
+        if (contactMessage) {
+          contactMessage.className = "contact-message";
+          contactMessage.style.display = "none";
+        }
+      }
+
+      function addContactListeners(el, title) {
+        if (!el) return;
+        el.addEventListener("click", function(e) {
+          e.preventDefault();
+          showContactModal(title);
+        });
+      }
+
+      addContactListeners(document.getElementById("contactUsLink"), "Contact Us");
+      addContactListeners(document.getElementById("leaveReviewLink"), "Leave a review");
+      addContactListeners(document.getElementById("contactUsLinkMobile"), "Contact Us");
+      addContactListeners(document.getElementById("leaveReviewLinkMobile"), "Leave a review");
+      addContactListeners(document.getElementById("footerContactLink"), "Contact Us");
+
+      if (contactClose) {
+        contactClose.addEventListener("click", function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          hideContactModal();
+        });
+      }
+
+      if (contactModal) {
+        contactModal.addEventListener("click", function(e) {
+          if (e.target === contactModal) hideContactModal();
+        });
+      }
+
+      if (contactForm) {
+        contactForm.addEventListener("submit", async function(e) {
+          e.preventDefault();
+          var submitBtn = contactForm.querySelector('button[type="submit"]');
+          var originalText = submitBtn.textContent;
+          submitBtn.disabled = true;
+          submitBtn.textContent = "Sending...";
+          var message = document.getElementById("contactMessageText").value.trim();
+          if (!message) {
+            contactMessage.className = "contact-message error";
+            contactMessage.textContent = "Please enter a message";
+            contactMessage.style.display = "block";
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
             return;
-        }
-
-        function showContactModal(title) {
-            const titleEl = document.getElementById("contactModalTitle");
-            if (titleEl) titleEl.textContent = title || "Contact Us";
-            if (contactModal) {
-                contactModal.classList.add("show");
-            }
-        }
-
-        function hideContactModal() {
-            if (contactModal) {
-                contactModal.classList.remove("show");
-            }
-            if (contactForm) {
-                contactForm.reset();
-            }
-            if (contactMessage) {
-                contactMessage.className = "contact-message";
-                contactMessage.style.display = "none";
-            }
-        }
-
-        if (contactUsLink) {
-            contactUsLink.addEventListener("click", (e) => {
-                e.preventDefault();
-                showContactModal("Contact Us");
+          }
+          try {
+            var token = localStorage.getItem("auth_token");
+            var res = await fetch(API_URL + "/contact/send", {
+              method: "POST",
+              headers: Object.assign(
+                { "Content-Type": "application/json" },
+                token ? { "Authorization": "Bearer " + token } : {}
+              ),
+              body: JSON.stringify({ message: message })
             });
-        } else {
-            console.warn("Contact Us link not found");
-        }
-
-        const leaveReviewLink = document.getElementById("leaveReviewLink");
-        if (leaveReviewLink) {
-            leaveReviewLink.addEventListener("click", (e) => {
-                e.preventDefault();
-                showContactModal("Leave a review");
-            });
-        }
-
-        if (contactClose) {
-            contactClose.addEventListener("click", (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                hideContactModal();
-            });
-        } else {
-            console.warn("Contact close button not found");
-        }
-
-        if (contactModal) {
-            contactModal.addEventListener("click", (e) => {
-                if (e.target === contactModal) {
-                    hideContactModal();
-                }
-            });
-        }
-
-        // Contact form submission handler
-        if (contactForm) {
-            contactForm.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            
-            const submitBtn = contactForm.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            submitBtn.disabled = true;
-            submitBtn.textContent = "Sending...";
-
-            const message = document.getElementById("contactMessageText").value.trim();
-
-            if (!message) {
-                contactMessage.className = "contact-message error";
-                contactMessage.textContent = "Please enter a message";
-                contactMessage.style.display = "block";
-                submitBtn.disabled = false;
-                submitBtn.textContent = originalText;
-                return;
+            var data = {};
+            try { data = await res.json(); } catch (parseErr) {}
+            if (res.ok) {
+              contactMessage.className = "contact-message success";
+              contactMessage.textContent = "Message sent successfully! We'll get back to you soon.";
+              contactMessage.style.display = "block";
+              contactForm.reset();
+              hideContactModal();
+            } else {
+              contactMessage.className = "contact-message error";
+              contactMessage.textContent = data.error || "Server error. Please try again.";
+              contactMessage.style.display = "block";
             }
-
-            try {
-                const token = localStorage.getItem("auth_token");
-                const res = await fetch(`${API_URL}/contact/send`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        ...(token && { Authorization: `Bearer ${token}` }),
-                    },
-                    body: JSON.stringify({ message }),
-                });
-
-                let data = {};
-                try {
-                    data = await res.json();
-                } catch (parseErr) {
-                    console.error("Server returned non-JSON response:", parseErr);
-                }
-
-                if (res.ok) {
-                    contactMessage.className = "contact-message success";
-                    contactMessage.textContent = "Message sent successfully! We'll get back to you soon.";
-                    contactMessage.style.display = "block";
-                    contactForm.reset();
-                    
-                    // Close modal immediately
-                    hideContactModal();
-                } else {
-                    const errMsg = data.error || `Server error (${res.status}). Please try again.`;
-                    console.error("Contact form error:", res.status, data);
-                    contactMessage.className = "contact-message error";
-                    contactMessage.textContent = errMsg;
-                    contactMessage.style.display = "block";
-                }
-            } catch (err) {
-                console.error("Error sending contact message:", err);
-                contactMessage.className = "contact-message error";
-                contactMessage.textContent = "An error occurred. Please check your connection and try again.";
-                contactMessage.style.display = "block";
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = originalText;
-            }
+          } catch (err) {
+            contactMessage.className = "contact-message error";
+            contactMessage.textContent = "An error occurred. Please check your connection and try again.";
+            contactMessage.style.display = "block";
+          } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+          }
         });
-        }
+      }
     }
 
-    // Initialize contact modal when DOM is ready
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initContactModal);
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initContactModal);
     } else {
-        initContactModal();
+      initContactModal();
     }
-</script>
-
-<!-- Contact Modal -->
-<div id="contactModal" class="contact-modal">
-    <div class="contact-content">
-        <div class="contact-header">
-            <h2 class="contact-title" id="contactModalTitle">Contact Us</h2>
-            <button class="contact-close" id="contactClose" aria-label="Close">×</button>
-        </div>
-        <p style="color: var(--text-light); font-size: 14px; margin-bottom: 8px;">
-            Have a question or feedback? Send us a message and we'll get back to you as soon as possible.
-        </p>
-        <form id="contactForm" class="contact-form">
-            <div class="contact-form-group">
-                <label for="contactMessageText" class="contact-form-label">Your Message</label>
-                <textarea
-                    id="contactMessageText"
-                    class="contact-form-textarea"
-                    placeholder="Type your message here..."
-                    required
-                ></textarea>
-            </div>
-            <div id="contactMessage" class="contact-message"></div>
-            <button type="submit" class="contact-submit-btn">
-                Send Message
-            </button>
-        </form>
-    </div>
-</div>
-
-<script>
-    // Info Card Functionality
-    const infoButton = document.getElementById('infoButton');
-    const infoCard = document.getElementById('infoCard');
-    const infoOverlay = document.getElementById('infoOverlay');
-    const infoCardClose = document.getElementById('infoCardClose');
-    const infoNavButtons = document.querySelectorAll('.info-nav-button');
-    const infoSections = document.querySelectorAll('.info-section');
-    const infoCardTitle = document.getElementById('infoCardTitle');
-
-    const sectionTitles = {
-        'why': 'Why DriveFlow Works',
-        'faq': 'FAQ — Everything You Need to Know',
-        'how': 'How It Works',
-        'about': 'About Me'
-    };
-
-    // Open/Close Info Card
-    function toggleInfoCard() {
-        const isOpen = infoCard.classList.contains('open');
-        if (isOpen) {
-            closeInfoCard();
-        } else {
-            openInfoCard();
-        }
-    }
-
-    function openInfoCard() {
-        infoCard.classList.add('open');
-        infoOverlay.classList.add('show');
-        infoButton.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeInfoCard() {
-        infoCard.classList.remove('open');
-        infoOverlay.classList.remove('show');
-        infoButton.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-
-
-    // Switch between sections
-    function switchSection(sectionId) {
-        // Update nav buttons
-        infoNavButtons.forEach(btn => {
-            if (btn.dataset.section === sectionId) {
-                btn.classList.add('active');
-            } else {
-                btn.classList.remove('active');
-            }
-        });
-
-        // Update sections
-        infoSections.forEach(section => {
-            if (section.id === sectionId + 'Section') {
-                section.classList.add('active');
-            } else {
-                section.classList.remove('active');
-            }
-        });
-
-        // Update title
-        if (sectionTitles[sectionId]) {
-            infoCardTitle.textContent = sectionTitles[sectionId];
-        }
-    }
-
-    // Event Listeners
-    infoButton.addEventListener('click', toggleInfoCard);
-    infoCardClose.addEventListener('click', closeInfoCard);
-    infoOverlay.addEventListener('click', closeInfoCard);
-
-    // Nav button clicks
-    infoNavButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const sectionId = btn.dataset.section;
-            switchSection(sectionId);
-        });
-    });
-
-    // Close on Escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && infoCard.classList.contains('open')) {
-            closeInfoCard();
-        }
-    });
-</script>
-
+  </script>
 </body>
 </html>
