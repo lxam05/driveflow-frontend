@@ -244,16 +244,6 @@
       ]
     }
     </script>
-    <script>
-        // Load chatbot widget if it exists
-        const chatbotScript = document.createElement('script');
-        chatbotScript.src = '/chatbot-widget.js';
-        chatbotScript.onerror = function() {
-            // Silently fail if chatbot widget doesn't exist
-            console.log('Chatbot widget not found, skipping...');
-        };
-        document.body.appendChild(chatbotScript);
-    </script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
