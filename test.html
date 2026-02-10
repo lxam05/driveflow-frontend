@@ -118,9 +118,10 @@
     }
 
     .hero h1 {
-      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      font-size: clamp(3.5rem, 8vw, 5rem);
       font-weight: 700;
       letter-spacing: -0.03em;
+      margin-top: 2rem;
       margin-bottom: 1rem;
       line-height: 1.15;
     }
@@ -132,16 +133,22 @@
       margin-bottom: 2rem;
     }
 
-    .hero-image {
+    .hero-image-wrapper {
       width: 100%;
       max-width: 1260px;
-      height: 640px;
+      height: 500vh;
       border-radius: 8px;
-      object-fit: contain;
-      object-position: center;
+      overflow: hidden;
+      margin: 2rem auto 0;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 100%;
+      border-radius: 8px;
+      object-fit: cover;
+      object-position: center top;
       display: block;
-      margin-left: auto;
-      margin-right: auto;
     }
 
     /* Practice */
@@ -424,19 +431,15 @@
       }
 
       .hero h1 {
-        font-size: 1.75rem;
+        font-size: clamp(2.25rem, 7vw, 3.5rem);
       }
 
       .hero .subtext {
         font-size: 0.95rem;
       }
 
-      .hero-image {
-        height: auto;
-        max-height: 50vh;
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
+      .hero-image-wrapper {
+        height: 500vh;
       }
     }
 
@@ -725,7 +728,9 @@
     <section class="hero">
       <h1>Welcome to Driveflow</h1>
       <p class="subtext">Your trusted partner for driving theory and test preparation. Get ready for your test with practice questions, route planning, and expert guidance.</p>
-      <img src="othersstoblurr.png" alt="Driveflow" class="hero-image">
+      <div class="hero-image-wrapper">
+        <img src="othersstoblurr.png" alt="Driveflow" class="hero-image">
+      </div>
     </section>
 
     <section class="practice">
