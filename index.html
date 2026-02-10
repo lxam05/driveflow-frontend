@@ -1063,7 +1063,7 @@
           <ul>
             <li><a href="#" id="footerContactLink">Contact us</a></li>
             <li><a href="#">FAQ</a></li>
-            <li><a href="#">Support</a></li>
+            <li><a href="#" id="footerSupportLink">Support</a></li>
           </ul>
         </div>
       </div>
@@ -1177,6 +1177,7 @@
       addContactListeners(document.getElementById("contactUsLinkMobile"), "Contact Us");
       addContactListeners(document.getElementById("leaveReviewLinkMobile"), "Leave a review");
       addContactListeners(document.getElementById("footerContactLink"), "Contact Us");
+      addContactListeners(document.getElementById("footerSupportLink"), "Support");
 
       if (contactClose) {
         contactClose.addEventListener("click", function(e) {

@@ -91,10 +91,9 @@
         z-index: 100;
         backdrop-filter: blur(var(--blur)) saturate(160%);
         -webkit-backdrop-filter: blur(var(--blur)) saturate(160%);
-        background: radial-gradient(circle at top left, rgba(30, 64, 175, 0.28), transparent 55%),
-                    linear-gradient(90deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.96));
-        border-bottom: 1px solid rgba(148, 163, 184, 0.3);
-        box-shadow: 0 14px 40px rgba(0, 0, 0, 0.8);
+        background: var(--bg-glass);
+        border-bottom: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-card);
         padding: 14px 20px;
     }
 
@@ -127,10 +126,7 @@
         font-weight: 800;
         letter-spacing: 0.03em;
         text-transform: uppercase;
-        background: linear-gradient(120deg, #e5e7eb, #a5b4fc);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
+        color: var(--text-main);
     }
 
     /* Auth Container */
@@ -144,22 +140,20 @@
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        color: var(--text-muted);
+        color: #fff;
         text-decoration: none;
         font-weight: 500;
         margin-bottom: 20px;
         padding: 7px 13px;
         border-radius: 999px;
-        border: 1px solid rgba(148, 163, 184, 0.25);
-        background: radial-gradient(circle at top left, rgba(30, 64, 175, 0.18), transparent 60%);
+        border: none;
+        background: #1a1a1a;
         transition: all 0.18s ease-out;
         font-size: 13px;
     }
 
     .back-link:hover {
-        color: #e5e7eb;
-        border-color: rgba(129, 140, 248, 0.7);
-        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.8);
+        background: #333;
         transform: translateY(-1px);
     }
 
@@ -219,7 +213,7 @@
         font-size: 15px;
         border: 1px solid var(--border-subtle);
         border-radius: 18px;
-        background: rgba(15, 23, 42, 0.9);
+        background: #fff;
         color: var(--text-main);
         transition: all 0.18s ease-out;
         font-family: 'Inter', sans-serif;
@@ -227,9 +221,8 @@
 
     .form-group input:focus {
         outline: none;
-        border-color: rgba(129, 140, 248, 0.7);
-        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
-        background: rgba(15, 23, 42, 0.95);
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px var(--primary-soft);
     }
 
     .form-group input::placeholder {
@@ -243,9 +236,9 @@
     }
 
     .error-message {
-        background: rgba(239, 68, 68, 0.1);
-        border: 1px solid rgba(239, 68, 68, 0.5);
-        color: #fecaca;
+        background: rgba(239, 68, 68, 0.12);
+        border: 1px solid rgba(239, 68, 68, 0.4);
+        color: #991b1b;
         padding: 12px 16px;
         border-radius: 18px;
         font-size: 13px;
@@ -259,9 +252,9 @@
     }
 
     .success-message {
-        background: rgba(34, 197, 94, 0.1);
-        border: 1px solid rgba(34, 197, 94, 0.5);
-        color: #bbf7d0;
+        background: rgba(34, 197, 94, 0.12);
+        border: 1px solid rgba(34, 197, 94, 0.4);
+        color: #166534;
         padding: 12px 16px;
         border-radius: 18px;
         font-size: 13px;
@@ -290,19 +283,18 @@
         padding: 14px;
         font-size: 15px;
         font-weight: 700;
-        border: 1px solid rgba(99, 102, 241, 0.9);
+        border: none;
         border-radius: 999px;
         cursor: pointer;
-        background: linear-gradient(120deg, rgba(37, 99, 235, 0.95), rgba(124, 58, 237, 0.95));
+        background: #1a1a1a;
         color: white;
-        box-shadow: 0 16px 40px rgba(30, 64, 175, 0.85);
         transition: all 0.18s ease-out;
         margin-top: 8px;
     }
 
     .btn-submit:hover:not(:disabled) {
         transform: translateY(-1px);
-        box-shadow: 0 20px 50px rgba(30, 64, 175, 0.95);
+        background: #333;
     }
 
     .btn-submit:active:not(:disabled) {
@@ -335,7 +327,7 @@
     }
 
     .auth-links a:hover {
-        color: #a5b4fc;
+        color: #333;
     }
 
     @media (max-width: 480px) {
