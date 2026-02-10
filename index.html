@@ -576,19 +576,23 @@
         order: 1;
       }
 
+      .hero-title-wrap {
+        padding-right: 1.6em;
+      }
+
+      .hero h1 {
+        font-size: clamp(1.9rem, 5.8vw, 2.85rem);
+      }
+
       .hero-title-car {
-        font-size: clamp(2.25rem, 7vw, 3.5rem);
-        left: 0;
+        font-size: clamp(1.9rem, 5.8vw, 2.85rem);
+        left: 0.15em;
         max-width: 100%;
       }
 
       @keyframes heroCarDrive {
-        from { left: 0; transform: translateY(-50%); }
-        to { left: calc(100% - 1.5em); transform: translateY(-50%); }
-      }
-
-      .hero h1 {
-        font-size: clamp(2.25rem, 7vw, 3.5rem);
+        from { left: 0.15em; transform: translateY(-50%); }
+        to { left: calc(100% - 1.4em); transform: translateY(-50%); }
       }
 
       .hero .hero-tagline {
