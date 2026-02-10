@@ -29,21 +29,35 @@
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
     
     :root {
-        --world-height: 8000px;
-        --bg-main: #0b132b;
-        --bg-card: #2d3f5a;
-        --bg-card-smaller: #3a506b;
-        --primary-blue: #5bc0be;
-        --primary-blue-dark: #3a506b;
-        --accent-purple: #6fffe9;
-        --text-dark: #e5e7eb;
-        --text-light: #9ca3af;
-        --bg-glass: rgba(28, 37, 65, 0.95);
-        --button-bg: #6fffe9;
-        --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
-        --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
-        --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
-        --shadow-xl: 0 12px 48px rgba(0, 0, 0, 0.2);
+        --bg-main: #fafafa;
+        --bg-main-pattern: radial-gradient(circle, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+        --bg-elevated: #f9f9f9;
+        --bg-card: #f9f9f9;
+        --bg-card-soft: #fafafa;
+        --bg-card-smaller: #f5f5f5;
+        --border-subtle: #eee;
+        --border-strong: #ddd;
+        --primary: #1a1a1a;
+        --primary-soft: rgba(26, 26, 26, 0.08);
+        --accent: #e6b800;
+        --accent-soft: rgba(230, 184, 0, 0.15);
+        --accent-orange: #f97316;
+        --accent-red: #ef4444;
+        --text-main: #1a1a1a;
+        --text-muted: #666;
+        --text-soft: #555;
+        --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.06);
+        --radius-lg: 22px;
+        --radius-xl: 26px;
+        --blur: 18px;
+        --button-bg: #1a1a1a;
+        --primary-blue: #1a1a1a;
+        --primary-blue-dark: #333;
+        --accent-purple: #e6b800;
+        --text-dark: #1a1a1a;
+        --text-light: #666;
+        --bg-glass: rgba(255, 255, 255, 0.95);
+        --shadow-lg: 0 2px 12px rgba(0, 0, 0, 0.06);
     }
 
     * {
@@ -55,6 +69,8 @@
         overflow: hidden;
         overscroll-behavior: none;
         background: var(--bg-main);
+        background-image: var(--bg-main-pattern);
+        background-size: 20px 20px;
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
@@ -136,12 +152,14 @@
         width: 100%;
         padding: 16px 0;
         text-align: center;
-        background: linear-gradient(135deg, rgba(11, 19, 43, 0.85) 0%, rgba(28, 37, 65, 0.9) 100%);
-        color: white;
+        background: var(--bg-main);
+        background-image: var(--bg-main-pattern);
+        background-size: 20px 20px;
+        color: var(--text-main);
         backdrop-filter: blur(20px) saturate(180%);
         -webkit-backdrop-filter: blur(20px) saturate(180%);
-        border-bottom: 1px solid rgba(111, 255, 233, 0.1);
-        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+        border-bottom: 1px solid var(--border-subtle);
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
         z-index: 2000;
         transition: transform 0.3s ease, opacity 0.3s ease;
         transform: translateY(0);
@@ -165,17 +183,14 @@
         font-size: 24px;
         font-weight: 800;
         letter-spacing: -0.5px;
-        background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        color: var(--text-main);
         text-align: center;
         grid-column: 2;
         justify-self: center;
     }
     #mainHeader .user-greeting {
         position: static;
-        color: white;
+        color: var(--text-main);
         font-size: 14px;
         font-weight: 600;
         margin-right: 16px;
@@ -193,7 +208,7 @@
         align-items: center;
     }
     #mainHeader .header-left a {
-        color: white;
+        color: var(--text-main);
         text-decoration: underline;
         text-underline-offset: 4px;
         font-size: 14px;
@@ -214,7 +229,7 @@
         gap: 16px;
     }
     #mainHeader .header-nav a {
-        color: white;
+        color: var(--text-main);
         text-decoration: underline;
         text-underline-offset: 4px;
         font-size: 14px;
@@ -234,7 +249,7 @@
     #mainHeader .header-nav .btn-signup {
         background: none;
         border: none;
-        color: white;
+        color: var(--text-main);
     }
     #mainHeader .header-nav .btn-signup:hover {
         background: none;
@@ -1078,12 +1093,12 @@
         width: 100%;
         text-align: center;
         padding: 32px 0;
-        background: linear-gradient(135deg, var(--bg-main) 0%, var(--bg-card) 50%, var(--bg-card-smaller) 100%);
-        color: white;
+        background: #2a2a2a;
+        color: #ccc;
         font-size: 14px;
         z-index: 150;
-        border-top: 1px solid rgba(111, 255, 233, 0.1);
-        box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.3);
+        border-top: 1px solid #444;
+        box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.1);
     }
 
     #footer p {
@@ -1107,9 +1122,9 @@
         left: 30px;
         padding: 12px 20px;
         border-radius: 999px;
-        background: var(--primary-blue, #5bc0be);
-        border: 2px solid var(--accent-purple, #6fffe9);
-        color: var(--bg-main, #0b132b);
+        background: var(--primary);
+        border: 2px solid #333;
+        color: #fff;
         cursor: pointer;
         display: none;
         align-items: center;
@@ -1133,8 +1148,8 @@
 
     #back-to-top:hover {
         transform: scale(1.05) translateY(0);
-        box-shadow: 0 12px 32px rgba(91, 192, 190, 0.6);
-        background: var(--accent-purple, #6fffe9);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        background: #333;
     }
 
     #back-to-top .arrow {
