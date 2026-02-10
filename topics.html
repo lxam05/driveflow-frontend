@@ -102,7 +102,6 @@
     
     .sidebar-card:hover {
         border-color: var(--border-strong);
-        background: #3a506b;
     }
 
     .sidebar-card h2 {
@@ -137,7 +136,7 @@
         padding: 10px 12px;
         border-radius: 12px;
         border: 1px solid var(--border-subtle);
-        background: #32445c;
+        background: var(--bg-card-smaller);
         color: var(--text-main);
         font-size: 14px;
         font-family: 'Inter', sans-serif;
@@ -148,14 +147,12 @@
 
     .question-select:focus {
         outline: none;
-        border-color: var(--border-strong);
+        border-color: var(--primary);
         box-shadow: 0 0 0 3px var(--primary-soft);
-        background: #3a506b;
     }
     
     .question-select:hover {
         border-color: var(--border-strong);
-        background: #3a506b;
     }
 
     .btn-star {
@@ -163,7 +160,7 @@
         padding: 10px;
         border-radius: 12px;
         border: 1px solid var(--border-subtle);
-        background: #32445c;
+        background: var(--bg-card-smaller);
         color: var(--text-main);
         font-size: 13px;
         font-weight: 600;
@@ -177,7 +174,6 @@
 
     .btn-star:hover {
         border-color: var(--border-strong);
-        background: #3a506b;
     }
 
     .btn-star.starred {
@@ -434,7 +430,7 @@
     .correct-answer {
         margin: 16px 0;
         padding: 16px;
-        background: #32445c;
+        background: var(--bg-card-smaller);
         border-radius: 18px;
         border-left: 4px solid var(--primary);
     }
@@ -560,9 +556,9 @@
     .btn-shuffle {
         padding: 10px 18px;
         border-radius: 999px;
-        border: 1px solid var(--border-subtle);
-        background: #32445c;
-        color: var(--text-main);
+        border: none;
+        background: #1a1a1a;
+        color: #fff;
         font-size: 13px;
         font-weight: 600;
         cursor: pointer;
@@ -571,9 +567,8 @@
     }
 
     .btn-shuffle:hover {
-        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.9);
-        border-color: var(--border-strong);
-        background: #3a506b;
+        transform: translateY(-1px);
+        background: #333;
     }
 
     @media (max-width: 1024px) {
