@@ -184,11 +184,12 @@
 
     .hero-title-car {
       position: absolute;
-      left: -60px;
+      left: -80px;
       top: 50%;
       transform: translateY(-50%);
-      width: 50px;
-      height: 80px;
+      width: 1em;
+      height: 1.6em;
+      font-size: clamp(3.5rem, 8vw, 5rem);
       background-image: url("car.png");
       background-size: contain;
       background-position: center;
@@ -203,7 +204,7 @@
     }
 
     @keyframes heroCarDrive {
-      from { left: -60px; transform: translateY(-50%); }
+      from { left: -80px; transform: translateY(-50%); }
       to { left: 100%; transform: translateY(-50%); }
     }
 
@@ -254,7 +255,7 @@
     }
 
     .hero-image-wrapper {
-      margin-top: 35vh;
+      margin-top: 25vh;
     }
 
     .hero-image {
@@ -554,8 +555,7 @@
       }
 
       .hero-title-car {
-        width: 36px;
-        height: 58px;
+        font-size: clamp(2.25rem, 7vw, 3.5rem);
       }
 
       .hero h1 {
