@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Esmae Hooper ♡</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Itim&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --red: #e63946;
+      --red-soft: #ff6b6b;
+      --red-dark: #c1121f;
+      --white: #fffef9;
+      --cream: #fff5f5;
+      --pink-blush: #ffe4e6;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(180deg, var(--white) 0%, var(--cream) 50%, var(--pink-blush) 100%);
+      min-height: 100vh;
+      color: #2d2d2d;
+      overflow-x: hidden;
+    }
+
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hearts span {
+      position: absolute;
+      font-size: 1.2rem;
+      opacity: 0.15;
+      animation: float 6s ease-in-out infinite;
+    }
+    .hearts span:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+    .hearts span:nth-child(2) { left: 85%; top: 30%; animation-delay: 1s; }
+    .hearts span:nth-child(3) { left: 25%; top: 70%; animation-delay: 2s; }
+    .hearts span:nth-child(4) { left: 70%; top: 80%; animation-delay: 0.5s; }
+    .hearts span:nth-child(5) { left: 50%; top: 50%; animation-delay: 1.5s; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-15px) scale(1.1); }
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .header {
+      font-family: 'Itim', cursive;
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      color: var(--red);
+      text-shadow: 2px 2px 0 rgba(255, 255, 255, 0.8);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.02em;
+    }
+
+    .sub {
+      font-size: 1.1rem;
+      color: var(--red-dark);
+      opacity: 0.9;
+      margin-bottom: 3rem;
+      font-weight: 500;
+    }
+
+    .scroll-btn {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 1rem 1.75rem;
+      background: var(--red);
+      color: white !important;
+      border: none;
+      border-radius: 50px;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 6px 0 var(--red-dark), 0 8px 20px rgba(230, 57, 70, 0.35);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .scroll-btn:hover {
+      transform: translateY(2px);
+      box-shadow: 0 4px 0 var(--red-dark), 0 6px 16px rgba(230, 57, 70, 0.4);
+    }
+    .scroll-btn:active {
+      transform: translateY(4px);
+      box-shadow: 0 2px 0 var(--red-dark);
+    }
+    .scroll-btn .arrow {
+      font-size: 1.4rem;
+      animation: bounce 2s ease-in-out infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(4px); }
+    }
+
+    /* Roadmap */
+    #roadmap {
+      position: relative;
+      z-index: 1;
+      padding: 2rem 0 4rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .road-stop {
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      padding: 3rem 1.5rem;
+      margin-bottom: 0;
+    }
+
+    .road-connector {
+      display: flex;
+      justify-content: center;
+      padding: 2.25rem 0;
+      margin: 0 1rem;
+    }
+    .road-connector svg {
+      width: 56px;
+      height: 64px;
+      color: var(--red-soft);
+    }
+    .road-connector svg path {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .road-connector svg .arrow-head {
+      fill: currentColor;
+    }
+    .road-connector.twirl-right svg {
+      transform: scaleX(-1);
+    }
+    .road-stop.right {
+      flex-direction: row-reverse;
+    }
+    .road-stop.left {
+      flex-direction: row;
+    }
+
+    .road-media {
+      flex: 0 0 42%;
+      max-width: 380px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(230, 57, 70, 0.15);
+      border: 3px solid var(--pink-blush);
+    }
+    .road-media img,
+    .road-media video {
+      display: block;
+      width: 100%;
+      height: auto;
+      vertical-align: middle;
+    }
+    .road-media video {
+      max-height: 400px;
+      object-fit: cover;
+    }
+
+    .road-text {
+      flex: 1;
+      min-width: 0;
+    }
+    .road-text .road-caption {
+      width: 100%;
+      min-height: 140px;
+      padding: 1rem 1.25rem;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      border: 2px solid var(--pink-blush);
+      border-radius: 16px;
+      background: white;
+      color: #333;
+    }
+
+    @media (max-width: 700px) {
+      .road-stop {
+        flex-direction: column !important;
+        min-height: auto;
+        padding: 2.5rem 1rem;
+      }
+      .road-media {
+        flex: none;
+        max-width: 100%;
+      }
+      .road-connector {
+        padding: 1.25rem 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts">
+    <span>♥</span><span>♥</span><span>♥</span><span>♥</span><span>♥</span>
+  </div>
+
+  <section class="hero">
+    <h1 class="header">Esmae Hooper</h1>
+    <p class="sub">♥ for you ♥</p>
+    <a href="#stop-1" class="scroll-btn">
+      See our times
+      <span class="arrow">↓</span>
+    </a>
+  </section>
+
+  <main id="roadmap">
+    <!-- 1: first.jpeg + text (left) -->
+    <section id="stop-1" class="road-stop left">
+      <div class="road-media">
+        <img src="pics/first.jpeg" alt="">
+      </div>
+      <div class="road-text">
+        <div class="road-caption">This is the first picture I have of one of our dates, and suprisingly I actually ate more than half of this burger. I was falling in love with you and I was all for it.</div>
+      </div>
+    </section>
+    <div class="road-connector twirl-left" aria-hidden="true">
+      <svg viewBox="0 0 56 64" xmlns="http://www.w3.org/2000/svg">
+        <path d="M28 2 C6 22 6 40 28 54" />
+        <path class="arrow-head" d="M24 50 L28 62 L32 50 Z" />
+      </svg>
+    </div>
+
+    <!-- 2: dayyouleft.mov + text (right) -->
+    <section id="stop-2" class="road-stop right">
+      <div class="road-media">
+        <video src="pics/dayyouleft.mov" controls playsinline></video>
+      </div>
+      <div class="road-text">
+        <div class="road-caption">This was the last day I saw you before you went interrailing. I remember being in work, you as my clock face and looking down and wishing the time away until id be able to see you again</div>
+      </div>
+    </section>
+    <div class="road-connector twirl-right" aria-hidden="true">
+      <svg viewBox="0 0 56 64" xmlns="http://www.w3.org/2000/svg">
+        <path d="M28 2 C50 22 50 40 28 54" />
+        <path class="arrow-head" d="M24 50 L28 62 L32 50 Z" />
+      </svg>
+    </div>
+
+    <!-- 3: firstcall.png + text (left) -->
+    <section id="stop-3" class="road-stop left">
+      <div class="road-media">
+        <img src="pics/firstcall.png" alt="">
+      </div>
+      <div class="road-text">
+        <div class="road-caption">This is our first phone call (or close to it) . I was so nervous about what you and all your friends would think. I had never facetimed a girl i liked like this before. But hey I'm glad you were a lil drunk so it was super fun.</div>
+      </div>
+    </section>
+    <div class="road-connector twirl-left" aria-hidden="true">
+      <svg viewBox="0 0 56 64" xmlns="http://www.w3.org/2000/svg">
+        <path d="M28 2 C28 2 12 18 12 32 C12 46 28 54 28 54" />
+        <path class="arrow-head" d="M24 50 L28 62 L32 50 Z" />
+      </svg>
+    </div>
+
+    <!-- 4: cardates.jpeg (right) -->
+    <section id="stop-4" class="road-stop right">
+      <div class="road-media">
+        <img src="pics/cardates.jpeg" alt="">
+      </div>
+      <div class="road-text">
+        <div class="road-caption">I loved our car dates. I would still be super nervous walking up to your car but I thought it was so cool that you were able to drive so young. I loved sitting there and getting to know you and having a little walk and snack aswell.</div>
+      </div>
+    </section>
+    <div class="road-connector twirl-right" aria-hidden="true">
+      <svg viewBox="0 0 56 64" xmlns="http://www.w3.org/2000/svg">
+        <path d="M28 2 C50 22 50 40 28 54" />
+        <path class="arrow-head" d="M24 50 L28 62 L32 50 Z" />
+      </svg>
+    </div>
+
+    <!-- 5: housevisits.jpeg + text (left) -->
+    <section id="stop-5" class="road-stop left">
+      <div class="road-media">
+        <img src="pics/housevisits.jpeg" alt="">
+      </div>
+      <div class="road-text">
+        <div class="road-caption">Movie nights were the best. Go to your house, get some snacks and watch a super good movie (usually good....) just being with you was more than enough to make my day.</div>
+      </div>
+    </section>
+    <div class="road-connector twirl-left" aria-hidden="true">
+      <svg viewBox="0 0 56 64" xmlns="http://www.w3.org/2000/svg">
+        <path d="M28 2 C28 2 12 18 12 32 C12 46 28 54 28 54" />
+        <path class="arrow-head" d="M24 50 L28 62 L32 50 Z" />
+      </svg>
+    </div>
+
+    <!-- 6: hike.jpeg (left) -->
+    <section id="stop-6" class="road-stop left">
+      <div class="road-media">
+        <img src="pics/hike.jpeg" alt="">
+      </div>
+      <div class="road-text">
+        <div class="road-caption">Our lil hike together up the mountain. We need to do more like this I think especially now with 2 cars. I loved this day so much it was a super fun thing to do with you!</div>
+      </div>
+    </section>
+    <div class="road-connector twirl-left" aria-hidden="true">
+      <svg viewBox="0 0 56 64" xmlns="http://www.w3.org/2000/svg">
+        <path d="M28 2 C28 2 12 18 12 32 C12 46 28 54 28 54" />
+        <path class="arrow-head" d="M24 50 L28 62 L32 50 Z" />
+      </svg>
+    </div>
+
+    <!-- 7: askout.jpeg + text (right) -->
+    <section id="stop-7" class="road-stop right">
+      <div class="road-media">
+        <img src="pics/askout.jpeg" alt="">
+      </div>
+      <div class="road-text">
+        <div class="road-caption">THE DAY, you know what day this was. I was so so so so nervous. I didn't know if it was too early or too late or just right. We got some nice pancakes from póg and walked down the pier. I tried painting this once and yeah we know how that went....</div>
+      </div>
+    </section>
+    <div class="road-connector twirl-right" aria-hidden="true">
+      <svg viewBox="0 0 56 64" xmlns="http://www.w3.org/2000/svg">
+        <path d="M28 2 C50 22 50 40 28 54" />
+        <path class="arrow-head" d="M24 50 L28 62 L32 50 Z" />
+      </svg>
+    </div>
+
+    <!-- 8: dublindate.jpeg (left) -->
+    <section id="stop-8" class="road-stop left">
+      <div class="road-media">
+        <img src="pics/dublindate.jpeg" alt="">
+      </div>
+      <div class="road-text">
+        <div class="road-caption">Then we kept on going on our dates to Dublin. These were THE BEST and funnest ever. I got to be with you all day and get to know you and do smt fun oooooo these were so so so fun i'll never forget them.</div>
+      </div>
+    </section>
+    <div class="road-connector twirl-left" aria-hidden="true">
+      <svg viewBox="0 0 56 64" xmlns="http://www.w3.org/2000/svg">
+        <path d="M28 2 C28 2 12 18 12 32 C12 46 28 54 28 54" />
+        <path class="arrow-head" d="M24 50 L28 62 L32 50 Z" />
+      </svg>
+    </div>
+
+    <!-- 9: dublindate1.jpeg (right) -->
+    <section id="stop-9" class="road-stop right">
+      <div class="road-media">
+        <img src="pics/dublindate1.jpeg" alt="">
+      </div>
+      <div class="road-text">
+        <div class="road-caption">Our date to lane7 was a stinker for you because you made the game of bowling so damn easy after all that big talk. Or did I just get lucky? I loved this date and still think about it every day</div>
+      </div>
+    </section>
+    <div class="road-connector twirl-right" aria-hidden="true">
+      <svg viewBox="0 0 56 64" xmlns="http://www.w3.org/2000/svg">
+        <path d="M28 2 C50 22 50 40 28 54" />
+        <path class="arrow-head" d="M24 50 L28 62 L32 50 Z" />
+      </svg>
+    </div>
+
+    <!-- 10: thesearepretty.jpeg (left) -->
+    <section id="stop-10" class="road-stop left">
+      <div class="road-media">
+        <img src="pics/thesearepretty.jpeg" alt="">
+      </div>
+      <div class="road-text">
+        <div class="road-caption">These were nice flowers</div>
+      </div>
+    </section>
+    <div class="road-connector twirl-left" aria-hidden="true">
+      <svg viewBox="0 0 56 64" xmlns="http://www.w3.org/2000/svg">
+        <path d="M28 2 C28 2 12 18 12 32 C12 46 28 54 28 54" />
+        <path class="arrow-head" d="M24 50 L28 62 L32 50 Z" />
+      </svg>
+    </div>
+
+    <!-- 11: bestdate1.jpeg (right) -->
+    <section id="stop-11" class="road-stop right">
+      <div class="road-media">
+        <img src="pics/bestdate1.jpeg" alt="">
+      </div>
+      <div class="road-text">
+        <div class="road-caption">Of all the dates we went on, the one you planned was my personal favourite, I loved guinness store house then the place we went after. You looked so amazing on this date. As you always do ofc</div>
+      </div>
+    </section>
+    <div class="road-connector twirl-right" aria-hidden="true">
+      <svg viewBox="0 0 56 64" xmlns="http://www.w3.org/2000/svg">
+        <path d="M28 2 C50 22 50 40 28 54" />
+        <path class="arrow-head" d="M24 50 L28 62 L32 50 Z" />
+      </svg>
+    </div>
+
+    <!-- 12: bestdate.jpeg (left) -->
+    <section id="stop-12" class="road-stop left">
+      <div class="road-media">
+        <img src="pics/bestdate.jpeg" alt="">
+      </div>
+      <div class="road-text">
+        <div class="road-caption">This is one of my favourite pics of you. I think it captures you very well. Your super easy to please with a little bit of food. I loved that drink, I loved that burrito and I love you even more THAN BOTH OF THEM COMBINED.</div>
+      </div>
+    </section>
+    <div class="road-connector twirl-left" aria-hidden="true">
+      <svg viewBox="0 0 56 64" xmlns="http://www.w3.org/2000/svg">
+        <path d="M28 2 C28 2 12 18 12 32 C12 46 28 54 28 54" />
+        <path class="arrow-head" d="M24 50 L28 62 L32 50 Z" />
+      </svg>
+    </div>
+
+    <!-- 13: evenwhenimdown.jpeg (left) -->
+    <section id="stop-13" class="road-stop left">
+      <div class="road-media">
+        <img src="pics/evenwhenimdown.jpeg" alt="">
+      </div>
+      <div class="road-text">
+        <div class="road-caption">SAN SABBBBB. For when I could eat these spice bags were amazingggg. As you know I wasn't doing amazing during this time but I had you to look forward to every week. AND you know what thinking about it this date was so good. Maybe another personal favourite</div>
+      </div>
+    </section>
+    <div class="road-connector twirl-left" aria-hidden="true">
+      <svg viewBox="0 0 56 64" xmlns="http://www.w3.org/2000/svg">
+        <path d="M28 2 C28 2 12 18 12 32 C12 46 28 54 28 54" />
+        <path class="arrow-head" d="M24 50 L28 62 L32 50 Z" />
+      </svg>
+    </div>
+
+    <!-- 14: chauffer.png (right) -->
+    <section id="stop-14" class="road-stop right">
+      <div class="road-media">
+        <img src="pics/chauffer.png" alt="">
+      </div>
+      <div class="road-text">
+        <div class="road-caption">Please shower</div>
+      </div>
+    </section>
+    <div class="road-connector twirl-right" aria-hidden="true">
+      <svg viewBox="0 0 56 64" xmlns="http://www.w3.org/2000/svg">
+        <path d="M28 2 C50 22 50 40 28 54" />
+        <path class="arrow-head" d="M24 50 L28 62 L32 50 Z" />
+      </svg>
+    </div>
+
+    <!-- 15: evenwhenimdown.jpeg (left) -->
+    <section id="stop-15" class="road-stop left">
+      <div class="road-media">
+        <img src="pics/evenwhenimdown.jpeg" alt="">
+      </div>
+      <div class="road-text">
+        <div class="road-caption">This is another of my favourite picture of you so I had to add it twice</div>
+      </div>
+    </section>
+    <div class="road-connector twirl-left" aria-hidden="true">
+      <svg viewBox="0 0 56 64" xmlns="http://www.w3.org/2000/svg">
+        <path d="M28 2 C28 2 12 18 12 32 C12 46 28 54 28 54" />
+        <path class="arrow-head" d="M24 50 L28 62 L32 50 Z" />
+      </svg>
+    </div>
+
+    <!-- 16: loveyou.jpeg (right) -->
+    <section id="stop-16" class="road-stop right">
+      <div class="road-media">
+        <img src="pics/loveyou.jpeg" alt="">
+      </div>
+      <div class="road-text">
+        <div class="road-caption">The day I told you I loved you because I really really really love you so much and your the best thing thats ever happened to me</div>
+      </div>
+    </section>
+    <div class="road-connector twirl-right" aria-hidden="true">
+      <svg viewBox="0 0 56 64" xmlns="http://www.w3.org/2000/svg">
+        <path d="M28 2 C50 22 50 40 28 54" />
+        <path class="arrow-head" d="M24 50 L28 62 L32 50 Z" />
+      </svg>
+    </div>
+
+    <!-- 17: picsofyou.jpeg (left) -->
+    <section id="stop-17" class="road-stop left">
+      <div class="road-media">
+        <img src="pics/picsofyou.jpeg" alt="">
+      </div>
+      <div class="road-text">
+        <div class="road-caption">Your so cute. I love taking lots of lil pics of you. I cant wait to spend so much more time with you theres nothing better in this whole world. Galway was a 10/10 trip aswell.</div>
+      </div>
+    </section>
+    <div class="road-connector twirl-left" aria-hidden="true">
+      <svg viewBox="0 0 56 64" xmlns="http://www.w3.org/2000/svg">
+        <path d="M28 2 C28 2 12 18 12 32 C12 46 28 54 28 54" />
+        <path class="arrow-head" d="M24 50 L28 62 L32 50 Z" />
+      </svg>
+    </div>
+
+    <!-- 18: picsofyou1.jpeg (right) -->
+    <section id="stop-18" class="road-stop right">
+      <div class="road-media">
+        <img src="pics/picsofyou1.jpeg" alt="">
+      </div>
+      <div class="road-text">
+        <div class="road-caption">Another picture of the most beautiful girl in the entirety of this planet I love you so much bby xxxxx</div>
+      </div>
+    </section>
+    <div class="road-connector twirl-right" aria-hidden="true">
+      <svg viewBox="0 0 56 64" xmlns="http://www.w3.org/2000/svg">
+        <path d="M28 2 C50 22 50 40 28 54" />
+        <path class="arrow-head" d="M24 50 L28 62 L32 50 Z" />
+      </svg>
+    </div>
+
+    <!-- 19: ucdvisits.jpeg (left) -->
+    <section id="stop-19" class="road-stop left">
+      <div class="road-media">
+        <img src="pics/ucdvisits.jpeg" alt="">
+      </div>
+      <div class="road-text">
+        <div class="road-caption">Our trips to UCD are the funnest I love that we get to spend a WHOLE 2 days together whatttttt and I get to do it again on valentines dayyyyy ya baby</div>
+      </div>
+    </section>
+    <div class="road-connector twirl-left" aria-hidden="true">
+      <svg viewBox="0 0 56 64" xmlns="http://www.w3.org/2000/svg">
+        <path d="M28 2 C28 2 12 18 12 32 C12 46 28 54 28 54" />
+        <path class="arrow-head" d="M24 50 L28 62 L32 50 Z" />
+      </svg>
+    </div>
+
+    <!-- 20: uspretty.jpeg (right) -->
+    <section id="stop-20" class="road-stop right">
+      <div class="road-media">
+        <img src="pics/uspretty.jpeg" alt="">
+      </div>
+      <div class="road-text">
+        <div class="road-caption">Here we should enter love island I dont think anyone could beat us in looks</div>
+      </div>
+    </section>
+    <div class="road-connector twirl-right" aria-hidden="true">
+      <svg viewBox="0 0 56 64" xmlns="http://www.w3.org/2000/svg">
+        <path d="M28 2 C50 22 50 40 28 54" />
+        <path class="arrow-head" d="M24 50 L28 62 L32 50 Z" />
+      </svg>
+    </div>
+
+    <!-- 21: uspretty2.jpeg (left) -->
+    <section id="stop-21" class="road-stop left">
+      <div class="road-media">
+        <img src="pics/uspretty2.jpeg" alt="">
+      </div>
+      <div class="road-text">
+        <div class="road-caption">And finally, Esmae I love you so much. Your the best thing thats ever happened to me I'm here to stay and I can't wait to see whats ahead for us. I appreciate you so much, like so so much. Everything you do and have done for me I appreciate so much you've never even done a thing wrong in all this time which is CRAZY I love you so much omg xxxxxx</div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
