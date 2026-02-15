@@ -267,7 +267,7 @@
         padding: 12px 14px;
         border-radius: 12px;
         border: 1px solid var(--border-subtle);
-        background: rgba(15, 23, 42, 0.6);
+        background: #fff;
         color: var(--text-main);
         font-size: 14px;
         font-family: inherit;
@@ -277,8 +277,12 @@
     .discount-code-input:focus {
         outline: none;
         border-color: var(--primary);
-        background: rgba(15, 23, 42, 0.8);
-        box-shadow: 0 0 0 3px rgba(91, 192, 190, 0.1);
+        background: #fff;
+        box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.1);
+    }
+
+    .discount-code-input::placeholder {
+        color: var(--text-muted);
     }
 
     .btn-apply-discount {
@@ -343,7 +347,7 @@
         padding: 14px 16px;
         border-radius: 12px;
         border: 1px solid var(--border-subtle);
-        background: rgba(15, 23, 42, 0.6);
+        background: #fff;
         color: var(--text-main);
         font-size: 15px;
         font-family: inherit;
@@ -354,21 +358,37 @@
     .test-centre-select:focus {
         outline: none;
         border-color: var(--primary);
-        background: rgba(15, 23, 42, 0.8);
-        box-shadow: 0 0 0 3px rgba(91, 192, 190, 0.1);
+        background: #fff;
+        box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.1);
     }
 
     .test-centre-select option {
-        background: var(--bg-card);
+        background: #fff;
         color: var(--text-main);
     }
-    
-    #singleCentreSearch:focus,
-    #bundleCentreSearch:focus {
+
+    .centre-search-input {
+        width: 100%;
+        padding: 14px 16px;
+        border-radius: 12px;
+        border: 1px solid var(--border-subtle);
+        background: #fff;
+        color: var(--text-main);
+        font-size: 15px;
+        font-family: inherit;
+        margin-bottom: 12px;
+        transition: all 0.2s ease;
+    }
+
+    .centre-search-input::placeholder {
+        color: var(--text-muted);
+    }
+
+    .centre-search-input:focus {
         outline: none;
         border-color: var(--primary);
-        background: rgba(15, 23, 42, 0.8);
-        box-shadow: 0 0 0 3px rgba(91, 192, 190, 0.1);
+        background: #fff;
+        box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.1);
     }
 
     .package-btn {
@@ -376,7 +396,7 @@
         padding: 20px;
         border-radius: 12px;
         border: 2px solid var(--border-subtle);
-        background: rgba(15, 23, 42, 0.4);
+        background: #fff;
         color: var(--text-main);
         cursor: pointer;
         transition: all 0.2s ease;
@@ -392,7 +412,7 @@
     .package-btn.active {
         border-color: var(--accent);
         background: var(--accent-soft);
-        box-shadow: 0 0 0 3px rgba(111, 255, 233, 0.2);
+        box-shadow: 0 0 0 3px rgba(230, 184, 0, 0.2);
     }
 
     .trust-badge {
@@ -816,7 +836,7 @@
 
                         <div class="form-group" id="singleCentreGroup">
                             <label for="testCentreSelect">Select Test Centre</label>
-                            <input type="text" id="singleCentreSearch" placeholder="Search test centres..." style="width: 100%; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--border-subtle); background: rgba(15, 23, 42, 0.6); color: var(--text-main); font-size: 15px; font-family: inherit; margin-bottom: 12px; transition: all 0.2s ease;" oninput="filterSingleCentres()">
+                            <input type="text" id="singleCentreSearch" class="centre-search-input" placeholder="Search test centres..." oninput="filterSingleCentres()">
                             <select id="testCentreSelect" class="test-centre-select">
                                 <option value="">-- Choose a test centre --</option>
                             </select>
@@ -824,7 +844,7 @@
 
                         <div class="form-group" id="bundleCentresGroup" style="display: none;">
                             <label>Select 3 Test Centres</label>
-                            <input type="text" id="bundleCentreSearch" placeholder="Search test centres..." style="width: 100%; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--border-subtle); background: rgba(15, 23, 42, 0.6); color: var(--text-main); font-size: 15px; font-family: inherit; margin-bottom: 12px; transition: all 0.2s ease;" oninput="filterBundleCentres()">
+                            <input type="text" id="bundleCentreSearch" class="centre-search-input" placeholder="Search test centres..." oninput="filterBundleCentres()">
                             <select id="bundleCentre1" class="test-centre-select" style="margin-bottom: 12px;">
                                 <option value="">-- Choose first centre --</option>
                             </select>
