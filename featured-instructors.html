@@ -138,6 +138,14 @@
       font-size: 1.5rem;
       font-weight: 700;
       flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .instructor-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .instructor-name-block h2 {
@@ -211,7 +219,9 @@
     <div class="instructors-grid">
       <article class="instructor-card">
         <div class="instructor-card-header">
-          <div class="instructor-avatar" aria-hidden="true">EM</div>
+          <div class="instructor-avatar">
+            <img src="SteadyEddie/SteadyEddiepfp.jpg" alt="Eddie Mahady">
+          </div>
           <div class="instructor-name-block">
             <h2>Eddie Mahady</h2>
             <p class="instructor-school">Steady Eddie's Driving School</p>
