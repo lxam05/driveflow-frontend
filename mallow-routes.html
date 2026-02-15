@@ -36,7 +36,7 @@
             <a href="#routes" style="display: inline-block; margin-top: 20px; padding: 12px 24px; background: var(--primary); color: var(--bg-main); border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.2s ease;">View Routes →</a>
         </div>
 
-        <div class="info-section">
+        <div class="info-section" id="mallowInfo">
             <h2>Why Mallow Catches People Out</h2>
             <p>Mallow looks easy on paper. That's the trap.</p>
             <p style="margin-top: 16px;">These practice routes are designed to help learner drivers become familiar with the roads, junctions, estates, and traffic conditions commonly used in the Mallow driving test. Mallow is known for quiet roads mixed with sudden decision points — which is exactly where people fail.</p>
@@ -154,9 +154,32 @@
         </div>
         
         <div id="routes" class="routes-section" data-route="mallow" style="scroll-margin-top: 120px;"></div>
-<div id="sharedPurchase"></div>
-<div id="sharedFooter"></div>
-</div>
+        <div id="sharedPurchase"></div>
+        <div id="sharedFooter"></div>
+    </div>
+
+    <script>
+    (function () {
+        var container = document.getElementById('mallowInfo');
+        if (!container) return;
+        fetch('txt%20files/mallow.txt')
+            .then(function (r) { return r.ok ? r.text() : Promise.reject(new Error('Failed to fetch')); })
+            .then(function (text) {
+                var trimmed = text.trim();
+                if (!trimmed) return;
+                container.innerHTML = '';
+                var blocks = trimmed.split(/\n\s*\n/);
+                blocks.forEach(function (block, index) {
+                    var cleaned = block.replace(/\s+/g, ' ').trim();
+                    if (!cleaned) return;
+                    var el = document.createElement(index === 0 ? 'h2' : 'p');
+                    el.textContent = cleaned;
+                    container.appendChild(el);
+                });
+            })
+            .catch(function () {});
+    })();
+    </script>
 
     <script type="application/ld+json">
     {
