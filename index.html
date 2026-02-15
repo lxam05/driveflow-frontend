@@ -261,6 +261,27 @@
       max-width: 100%;
     }
 
+    .hero-cta-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-cta-group .hero-cta {
+      margin-bottom: 0;
+    }
+
+    .hero-cta-secondary {
+      background: transparent;
+      color: #1a1a1a;
+      border: 2px solid #1a1a1a;
+    }
+
+    .hero-cta-secondary:hover {
+      background: #1a1a1a;
+      color: #fff;
+    }
+
     .hero-bottom-row .hero-cta {
       margin-bottom: 0;
     }
@@ -567,13 +588,17 @@
         gap: 1rem;
       }
 
+      .hero-cta-group {
+        order: 1;
+      }
+
       .hero-review {
         margin-top: 0;
         order: 2;
       }
 
       .hero-bottom-row .hero-cta {
-        order: 1;
+        order: unset;
       }
 
       .hero-title-wrap {
@@ -910,7 +935,10 @@
           <p class="hero-tagline">Train where you'll be Tested</p>
           <p class="subtext">Practise real driving test routes for your test centre, revise key theory, and go into your test confident because you already know the roads, layouts, and tricky spots examiners use — so nothing on test day feels unfamiliar or catches you off guard.</p>
           <div class="hero-bottom-row">
-            <a href="routes.html" class="hero-cta">Get the Routes</a>
+            <div class="hero-cta-group">
+              <a href="routes.html" class="hero-cta">Get the Routes</a>
+              <a href="featured-instructors.html" class="hero-cta hero-cta-secondary">Featured Instructors</a>
+            </div>
             <div class="hero-review">
           <div class="stars">★★★★★</div>
           <div class="reviewer">Abhishek</div>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Featured driving instructors recommended by DriveFlow. Find a professional instructor in your area.">
+  <link rel="canonical" href="https://www.driveflow.ie/featured-instructors.html">
+  <link rel="icon" href="https://www.driveflow.ie/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://www.driveflow.ie/favicon.png">
+  <link rel="apple-touch-icon" href="https://www.driveflow.ie/favicon.png">
+  <title>Featured Instructors | DriveFlow</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-main: #fafafa;
+      --bg-main-pattern: radial-gradient(circle, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+      --bg-card: #f9f9f9;
+      --border-subtle: #eee;
+      --primary: #1a1a1a;
+      --accent: #e6b800;
+      --accent-soft: rgba(230, 184, 0, 0.12);
+      --text-main: #1a1a1a;
+      --text-muted: #666;
+      --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.06);
+      --radius: 12px;
+      --radius-lg: 18px;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-main);
+      background-image: var(--bg-main-pattern);
+      background-size: 20px 20px;
+      color: var(--text-main);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      background: var(--bg-main);
+      background-image: var(--bg-main-pattern);
+      background-size: 20px 20px;
+      border-bottom: 1px solid var(--border-subtle);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    .logo-link {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-main);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .logo-link:hover {
+      color: var(--text-muted);
+    }
+
+    .back-link {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-card);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    .page-intro {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .instructors-grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .instructor-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-card);
+      transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .instructor-card:hover {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      border-color: #ddd;
+    }
+
+    .instructor-card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .instructor-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .instructor-name-block h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      color: var(--text-main);
+    }
+
+    .instructor-school {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .instructor-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .instructor-detail {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+      color: var(--text-main);
+    }
+
+    .instructor-detail .label {
+      color: var(--text-muted);
+      min-width: 5rem;
+      font-size: 0.875rem;
+    }
+
+    .instructor-detail a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .instructor-detail a:hover {
+      text-decoration: underline;
+    }
+
+    .areas-list {
+      color: var(--text-main);
+    }
+
+    @media (max-width: 640px) {
+      main {
+        padding: 2rem 1rem 3rem;
+      }
+
+      .instructor-card {
+        padding: 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo-link">DriveFlow</a>
+    <a href="index.html" class="back-link">← Back to Home</a>
+  </header>
+
+  <main>
+    <h1>Featured Instructors</h1>
+    <p class="page-intro">Driving instructors we recommend. Get in touch directly to book lessons in your area.</p>
+
+    <div class="instructors-grid">
+      <article class="instructor-card">
+        <div class="instructor-card-header">
+          <div class="instructor-avatar" aria-hidden="true">EM</div>
+          <div class="instructor-name-block">
+            <h2>Eddie Mahady</h2>
+            <p class="instructor-school">Steady Eddie's Driving School</p>
+          </div>
+        </div>
+        <div class="instructor-details">
+          <div class="instructor-detail">
+            <span class="label">Phone</span>
+            <a href="tel:0852140232">085 214 0232</a>
+          </div>
+          <div class="instructor-detail">
+            <span class="label">Areas</span>
+            <span class="areas-list">Finglas, Raheny, Killester</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+</body>
+</html>
