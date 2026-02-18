@@ -15,6 +15,27 @@
 <script>
   gtag('config', 'AW-17936809057');
 </script>
+<!-- Event snippet for Purchase conversion -->
+<script>
+function gtag_report_conversion(url, transactionId) {
+  var callback = function () {
+    if (typeof(url) != 'undefined' && url) {
+      window.location = url;
+    }
+  };
+  var payload = {
+    'send_to': 'AW-17936809057/aNt1CK3VrvobEOH49-hC',
+    'value': 1.0,
+    'currency': 'EUR',
+    'event_callback': callback
+  };
+  if (typeof transactionId === 'string' && transactionId) {
+    payload.transaction_id = transactionId;
+  }
+  gtag('event', 'conversion', payload);
+  return false;
+}
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Unlock access to real driving test routes for all Irish test centres. Get 3 months of access to practice the exact routes used by examiners.">
@@ -1636,9 +1657,7 @@
 
                 if (confirmResponse.ok) {
                     alert('Payment successful! Redirecting...');
-                    setTimeout(() => {
-                        window.location.href = 'routes.html?payment=success';
-                    }, 1000);
+                    gtag_report_conversion('routes.html?payment=success', currentPaymentIntentId || '');
                 } else {
                     const error = await confirmResponse.json();
                     throw new Error(error.error || 'Failed to confirm payment');

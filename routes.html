@@ -15,6 +15,27 @@
 <script>
   gtag('config', 'AW-17936809057');
 </script>
+<!-- Event snippet for Purchase conversion -->
+<script>
+function gtag_report_conversion(url, transactionId) {
+  var callback = function () {
+    if (typeof(url) != 'undefined' && url) {
+      window.location = url;
+    }
+  };
+  var payload = {
+    'send_to': 'AW-17936809057/aNt1CK3VrvobEOH49-hC',
+    'value': 1.0,
+    'currency': 'EUR',
+    'event_callback': callback
+  };
+  if (typeof transactionId === 'string' && transactionId) {
+    payload.transaction_id = transactionId;
+  }
+  gtag('event', 'conversion', payload);
+  return false;
+}
+</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Access real Irish driving test routes for all test centres. Navigate the exact roads used by testers and increase your pass chances with DriveFlow.">
@@ -867,12 +888,12 @@
             });
 
             if (confirmResponse.ok) {
-                return true;
+                return paymentIntentId;
             }
 
             const errorData = await confirmResponse.json().catch(() => null);
             if (errorData?.error && errorData.error.toLowerCase().includes('already created')) {
-                return true;
+                return paymentIntentId;
             }
 
             console.warn('Payment confirmation failed:', errorData?.error || confirmResponse.status);
@@ -1038,7 +1059,10 @@
     // resetPaymentForm removed - no payment form in this file
 
     window.addEventListener('DOMContentLoaded', async () => {
-        await confirmPaymentFromRedirect();
+        const confirmedPaymentIntentId = await confirmPaymentFromRedirect();
+        if (confirmedPaymentIntentId && typeof gtag_report_conversion === 'function') {
+            gtag_report_conversion(undefined, confirmedPaymentIntentId);
+        }
         await checkLicenseStatus();
     });
 
