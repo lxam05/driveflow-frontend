@@ -126,6 +126,12 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .brand:hover {
+      color: inherit;
     }
 
     .brand-logo {
@@ -739,10 +745,19 @@
       <!-- HEADER -->
       <header>
         <div class="nav-inner">
-          <a href="index.html" class="nav-link" aria-label="Back to Home" title="Back to Home">
-            <span aria-hidden="true">←</span>
+          <a href="index.html" class="brand">
+            <div class="brand-logo"></div>
+            <div class="brand-text">
+              <h1>DriveFlow</h1>
+              <span>Driver Learning Suite</span>
+            </div>
           </a>
-          <div class="user-name" id="usernameDisplay">User</div>
+          <div class="nav-actions">
+            <span class="user-name" id="usernameDisplay">Hi, User</span>
+            <a href="index.html" class="nav-link" aria-label="Back to Home" title="Back to Home">
+              <span aria-hidden="true">←</span>
+            </a>
+          </div>
         </div>
       </header>
 
@@ -1019,7 +1034,7 @@
 
         const username = data.user.username || data.user.email || "Driver";
 
-        usernameDisplay.textContent = username;
+        usernameDisplay.textContent = `Hi, ${username}`;
         heroUsername.textContent = `· Welcome back, ${username}`;
         statusMessage.textContent = "You're signed in. Data will populate here as features go live.";
 
