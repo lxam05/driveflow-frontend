@@ -739,29 +739,10 @@
       <!-- HEADER -->
       <header>
         <div class="nav-inner">
-          <div class="brand">
-            <div class="brand-logo"></div>
-            <div class="brand-text">
-              <h1>DriveFlow</h1>
-              <span>Driver Learning Suite</span>
-            </div>
-          </div>
-          <div class="nav-actions">
-            <a href="#" class="nav-link" id="leaveReviewLink">Leave a review</a>
-            <a href="index.html" class="nav-link" aria-label="Back to Home" title="Back to Home">
-              <span aria-hidden="true">←</span>
-            </a>
-            <a href="#" class="nav-link" id="contactUsLink">
-              <span>Contact Us</span>
-            </a>
-            <div class="user-pill" id="userPill" style="display:none;">
-              <div class="user-avatar"></div>
-              <div class="user-name" id="usernameDisplay">User</div>
-              <button class="logout-btn" id="logoutBtn">
-                <span>Logout</span>
-              </button>
-            </div>
-          </div>
+          <a href="index.html" class="nav-link" aria-label="Back to Home" title="Back to Home">
+            <span aria-hidden="true">←</span>
+          </a>
+          <div class="user-name" id="usernameDisplay">User</div>
         </div>
       </header>
 
@@ -920,9 +901,6 @@
                   As you complete more practice, this area will show trends, weak topics, and how close you are to being test-ready.
                 </div>
               </div>
-              <div class="badge-soft">
-                Coming soon · Deep analytics
-              </div>
             </div>
 
             <div class="overview-grid">
@@ -1013,16 +991,7 @@
 
     const usernameDisplay = document.getElementById("usernameDisplay");
     const heroUsername = document.getElementById("heroUsername");
-    const userPill = document.getElementById("userPill");
-    const logoutBtn = document.getElementById("logoutBtn");
     const statusMessage = document.getElementById("statusMessage");
-
-    function logout() {
-      localStorage.removeItem("auth_token");
-      window.location.href = "login.html";
-    }
-
-    logoutBtn.addEventListener("click", logout);
 
     async function loadUser() {
       const token = localStorage.getItem("auth_token");
@@ -1052,7 +1021,6 @@
 
         usernameDisplay.textContent = username;
         heroUsername.textContent = `· Welcome back, ${username}`;
-        userPill.style.display = "inline-flex";
         statusMessage.textContent = "You're signed in. Data will populate here as features go live.";
 
         // Load mock test statistics
@@ -1394,36 +1362,20 @@
 
     loadUser();
 
-    // Contact modal handlers
-    const contactUsLink = document.getElementById("contactUsLink");
+    // Contact modal handlers (contact/review links removed from dashboard header)
     const contactModal = document.getElementById("contactModal");
     const contactClose = document.getElementById("contactClose");
     const contactForm = document.getElementById("contactForm");
     const contactMessage = document.getElementById("contactMessage");
 
-    function showContactModal(title) {
-      const titleEl = document.getElementById("contactModalTitle");
-      if (titleEl) titleEl.textContent = title || "Contact Us";
-      contactModal.classList.add("show");
-    }
-
     function hideContactModal() {
-      contactModal.classList.remove("show");
-      contactForm.reset();
-      contactMessage.className = "contact-message";
-      contactMessage.style.display = "none";
+      if (contactModal) contactModal.classList.remove("show");
+      if (contactForm) contactForm.reset();
+      if (contactMessage) {
+        contactMessage.className = "contact-message";
+        contactMessage.style.display = "none";
+      }
     }
-
-    contactUsLink.addEventListener("click", (e) => {
-      e.preventDefault();
-      showContactModal("Contact Us");
-    });
-
-    const leaveReviewLink = document.getElementById("leaveReviewLink");
-    leaveReviewLink.addEventListener("click", (e) => {
-      e.preventDefault();
-      showContactModal("Leave a review");
-    });
 
     contactClose.addEventListener("click", (e) => {
       e.preventDefault();
