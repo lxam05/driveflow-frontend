@@ -243,6 +243,7 @@
             return;
         }
 
+        const moreComing = routeKey === 'portlaoise' && data.routes && data.routes.length < 5;
         routesContainer.innerHTML = data.routes.map((route, index) => {
             const hasManoeuvre = Boolean(route.manoeuvre);
             if (hasManoeuvre) {
@@ -270,6 +271,14 @@
                 </div>
             `;
         }).join('');
+
+        if (moreComing) {
+            routesContainer.insertAdjacentHTML('beforeend', `
+                <p style="margin-top: 20px; padding: 16px; background: var(--accent-soft, rgba(230, 184, 0, 0.15)); border-radius: 12px; color: var(--text-main); font-size: 15px; font-weight: 500;">
+                    The rest are on their way.
+                </p>
+            `);
+        }
 
         const paywallContainer = document.getElementById('paywallContainer');
         if (routesEl && paywallContainer) {
