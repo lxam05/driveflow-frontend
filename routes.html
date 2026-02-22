@@ -109,6 +109,7 @@ function gtag_report_conversion(url, transactionId) {
         z-index: 100;
         display: flex;
         align-items: center;
+        justify-content: space-between;
         padding: 1rem 20px;
         background: var(--bg-main);
         background-image: var(--bg-main-pattern);
@@ -126,6 +127,27 @@ function gtag_report_conversion(url, transactionId) {
 
     .routes-header .logo-link:hover {
         color: #444;
+    }
+
+    .routes-header .back-home-btn {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--text-main);
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        border: 1px solid var(--border-subtle);
+        background: var(--bg-card);
+        transition: all 0.18s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+    }
+
+    .routes-header .back-home-btn:hover {
+        color: var(--primary);
+        border-color: var(--border-strong);
+        background: var(--bg-card-smaller);
     }
 
     .container {
@@ -786,6 +808,7 @@ function gtag_report_conversion(url, transactionId) {
 
 <header class="routes-header">
     <a href="index.html" class="logo-link">Driveflow</a>
+    <a href="index.html" class="back-home-btn"><span aria-hidden="true">←</span> Back to Home</a>
 </header>
 
 <div class="container-bottom" style="margin-top: 96px; padding-bottom: 12px; margin-bottom: 0;">
