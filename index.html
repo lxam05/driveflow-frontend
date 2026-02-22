@@ -106,12 +106,13 @@
     }
 
     .nav-dropdown-menu {
-      margin-top: 0.25rem;
+      margin-top: 0;
       background: #fafafa;
       padding: 0.5rem 0;
       min-width: 8rem;
       border-radius: 6px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border: 1px solid var(--border-subtle, #eee);
     }
 
     .nav-dropdown-menu a {
@@ -553,7 +554,7 @@
     @media (max-width: 640px) {
       header {
         padding: 1rem 1rem;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
         gap: 0.75rem;
       }
 
@@ -564,7 +565,7 @@
       nav {
         gap: 1rem;
         font-size: 0.8rem;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
       }
 
       .nav-contact-desktop,
@@ -575,6 +576,14 @@
       .nav-dropdown-mobile {
         display: block;
         position: relative;
+      }
+
+      .nav-dropdown-wrap {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        margin-top: 4px;
+        z-index: 200;
       }
 
       .hero {
@@ -603,6 +612,8 @@
       .hero-review {
         margin-top: 0;
         order: 2;
+        flex: none;
+        width: 100%;
       }
 
       .hero-bottom-row .hero-cta {
@@ -1097,6 +1108,7 @@
         <div class="footer-column">
           <h4>Contact</h4>
           <ul>
+            <li><a href="mailto:driveflowweb@gmail.com">driveflowweb@gmail.com</a></li>
             <li><a href="#" id="footerContactLink">Contact us</a></li>
             <li><a href="#">FAQ</a></li>
             <li><a href="#" id="footerSupportLink">Support</a></li>
@@ -1105,11 +1117,6 @@
       </div>
       <div class="footer-bottom">
         <p>© 2025 Driveflow. All rights reserved.</p>
-        <div class="footer-social">
-          <a href="#">Facebook</a>
-          <a href="#">Instagram</a>
-          <a href="#">Twitter</a>
-        </div>
       </div>
     </div>
   </footer>

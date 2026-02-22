@@ -101,6 +101,33 @@ function gtag_report_conversion(url, transactionId) {
         -moz-osx-font-smoothing: grayscale;
     }
 
+    .routes-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        padding: 1rem 20px;
+        background: var(--bg-main);
+        background-image: var(--bg-main-pattern);
+        background-size: 20px 20px;
+        border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .routes-header .logo-link {
+        font-size: 1.5rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: var(--text-main);
+        text-decoration: none;
+    }
+
+    .routes-header .logo-link:hover {
+        color: #444;
+    }
+
     .container {
         max-width: 1400px;
         margin: 96px auto 40px;
@@ -168,7 +195,7 @@ function gtag_report_conversion(url, transactionId) {
         border: 1px solid var(--border-subtle);
         box-shadow: var(--shadow-card);
         padding: 40px;
-        margin-bottom: 40px;
+        margin-bottom: 12px;
         text-align: center;
         grid-column: 1 / -1;
     }
@@ -757,7 +784,11 @@ function gtag_report_conversion(url, transactionId) {
 </head>
 <body>
 
-<div class="container-bottom" style="margin-top: 96px;">
+<header class="routes-header">
+    <a href="index.html" class="logo-link">Driveflow</a>
+</header>
+
+<div class="container-bottom" style="margin-top: 96px; padding-bottom: 12px; margin-bottom: 0;">
     <div class="page-header">
         <h1>Test Routes</h1>
         <p>Practice the actual routes used in driving tests at each centre</p>
