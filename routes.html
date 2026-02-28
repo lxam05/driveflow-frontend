@@ -1147,6 +1147,38 @@ function gtag_report_conversion(url, transactionId) {
             gtag_report_conversion(undefined, paymentResult.paymentIntentId);
         }
         await checkLicenseStatus();
+        const msgEl = document.getElementById('paymentRedirectMessage');
+        if (paymentResult && msgEl) {
+            if (hasLicense) {
+                msgEl.textContent = 'Access activated. You can now open your routes.';
+                msgEl.style.display = 'block';
+                setTimeout(() => {
+                    msgEl.style.display = 'none';
+                }, 5000);
+            } else if (paymentResult.status === 'succeeded') {
+                // One more recovery attempt in case webhook/DB lagged
+                const token = localStorage.getItem('auth_token');
+                if (token) {
+                    try {
+                        await fetch(`${API_URL}/routes/reconcile-my-payments`, {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': `Bearer ${token}`
+                            }
+                        });
+                        await checkLicenseStatus();
+                    } catch (e) {
+                        console.warn('Final reconcile attempt failed:', e);
+                    }
+                }
+                if (hasLicense) {
+                    msgEl.textContent = 'Access activated. You can now open your routes.';
+                } else {
+                    msgEl.textContent = 'Payment confirmed, but access is still syncing. Refresh in 10-20 seconds.';
+                }
+                msgEl.style.display = 'block';
+            }
+        }
     });
 
     // Test centres data - sorted alphabetically
