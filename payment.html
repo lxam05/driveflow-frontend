@@ -1672,10 +1672,11 @@ function gtag_report_conversion(url, transactionId) {
                     const data = await confirmResponse.json().catch(() => ({}));
                     const status = data.status || '';
                     if (status === 'succeeded' || status === 'processing') {
+                        const redirectUrl = `${window.location.origin}/routes.html?payment=success&payment_intent=${encodeURIComponent(currentPaymentIntentId || '')}`;
                         if (typeof gtag_report_conversion === 'function') {
-                            gtag_report_conversion(window.location.origin + '/routes.html?payment=success', currentPaymentIntentId || '');
+                            gtag_report_conversion(redirectUrl, currentPaymentIntentId || '');
                         }
-                        window.location.href = window.location.origin + '/routes.html?payment=success';
+                        window.location.href = redirectUrl;
                         return;
                     }
                     throw new Error(data.message || 'Payment not completed');

@@ -958,6 +958,16 @@ function gtag_report_conversion(url, transactionId) {
                     msgEl.textContent = 'Payment confirmed. Activating access…';
                     msgEl.style.display = 'block';
                 }
+                try {
+                    await fetch(`${API_URL}/routes/reconcile-my-payments`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    });
+                } catch (reconcileErr) {
+                    console.warn('Reconcile attempt failed:', reconcileErr);
+                }
             } else if (status === 'processing') {
                 if (msgEl) {
                     msgEl.textContent = 'Payment processing. Access will activate shortly.';
