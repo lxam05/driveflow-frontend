@@ -1643,7 +1643,7 @@ function gtag_report_conversion(url, transactionId) {
             const { error } = await stripe.confirmPayment({
                 elements,
                 confirmParams: {
-                    return_url: `${window.location.origin}/routes.html?payment=success`
+                    return_url: `https://www.driveflow.ie/routes.html?payment=success`
                 },
                 redirect: 'if_required'
             });
@@ -1669,12 +1669,19 @@ function gtag_report_conversion(url, transactionId) {
                 });
 
                 if (confirmResponse.ok) {
-                    alert('Payment successful! Redirecting...');
-                    gtag_report_conversion('routes.html?payment=success', currentPaymentIntentId || '');
-                } else {
-                    const error = await confirmResponse.json();
-                    throw new Error(error.error || 'Failed to confirm payment');
+                    const data = await confirmResponse.json().catch(() => ({}));
+                    const status = data.status || '';
+                    if (status === 'succeeded' || status === 'processing') {
+                        if (typeof gtag_report_conversion === 'function') {
+                            gtag_report_conversion(window.location.origin + '/routes.html?payment=success', currentPaymentIntentId || '');
+                        }
+                        window.location.href = window.location.origin + '/routes.html?payment=success';
+                        return;
+                    }
+                    throw new Error(data.message || 'Payment not completed');
                 }
+                const error = await confirmResponse.json().catch(() => ({}));
+                throw new Error(error.error || 'Failed to confirm payment');
             }
         } catch (err) {
             console.error('Payment error:', err);

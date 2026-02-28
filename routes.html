@@ -824,6 +824,7 @@ function gtag_report_conversion(url, transactionId) {
         <p style="margin-top: 16px; color: var(--accent); font-weight: 600; font-size: 16px;">Used by thousands of Irish learners preparing for their driving test</p>
         <p class="promo-note" style="margin-top: 18px;">Any purchase after the first one is <span class="promo-highlight">50% off</span> — get multiple centres at a discounted rate.</p>
     </div>
+    <div id="paymentRedirectMessage" style="display: none; margin-top: 16px; padding: 20px; border-radius: 12px; background: var(--accent-soft, rgba(230, 184, 0, 0.15)); border: 1px solid var(--accent); color: var(--text-main); font-size: 16px; font-weight: 500;"></div>
 </div>
 
     <!-- Two-column layout: Select centre + Why our routes -->
@@ -922,14 +923,15 @@ function gtag_report_conversion(url, transactionId) {
             || null;
 
         if (!paymentIntentId) {
-            return false;
+            return null;
         }
 
         const token = localStorage.getItem('auth_token');
         if (!token) {
-            return false;
+            return null;
         }
 
+        const msgEl = document.getElementById('paymentRedirectMessage');
         try {
             const confirmResponse = await fetch(`${API_URL}/routes/confirm-payment`, {
                 method: 'POST',
@@ -940,25 +942,43 @@ function gtag_report_conversion(url, transactionId) {
                 body: JSON.stringify({ paymentIntentId })
             });
 
-            if (confirmResponse.ok) {
-                return paymentIntentId;
+            const data = await confirmResponse.json().catch(() => null);
+
+            if (!confirmResponse.ok) {
+                if (msgEl) {
+                    msgEl.textContent = 'Payment could not be verified. If you were charged, access will activate shortly.';
+                    msgEl.style.display = 'block';
+                }
+                return null;
             }
 
-            const errorData = await confirmResponse.json().catch(() => null);
-            if (errorData?.error && errorData.error.toLowerCase().includes('already created')) {
-                return paymentIntentId;
+            const status = data.status || 'succeeded';
+            if (status === 'succeeded') {
+                if (msgEl) {
+                    msgEl.textContent = 'Payment confirmed. Activating access…';
+                    msgEl.style.display = 'block';
+                }
+            } else if (status === 'processing') {
+                if (msgEl) {
+                    msgEl.textContent = 'Payment processing. Access will activate shortly.';
+                    msgEl.style.display = 'block';
+                }
             }
 
-            console.warn('Payment confirmation failed:', errorData?.error || confirmResponse.status);
-            return false;
+            return { status, paymentIntentId };
         } catch (err) {
             console.error('Error confirming payment from redirect:', err);
-            return false;
+            if (msgEl) {
+                msgEl.textContent = 'Payment could not be verified. If you were charged, access will activate shortly.';
+                msgEl.style.display = 'block';
+            }
+            return null;
         } finally {
-            if (params.has('payment_intent') || params.has('payment_intent_client_secret') || params.has('redirect_status')) {
+            if (params.has('payment_intent') || params.has('payment_intent_client_secret') || params.has('redirect_status') || params.has('payment')) {
                 params.delete('payment_intent');
                 params.delete('payment_intent_client_secret');
                 params.delete('redirect_status');
+                params.delete('payment');
                 const query = params.toString();
                 const nextUrl = query ? `${window.location.pathname}?${query}` : window.location.pathname;
                 history.replaceState({}, '', nextUrl);
@@ -1112,9 +1132,9 @@ function gtag_report_conversion(url, transactionId) {
     // resetPaymentForm removed - no payment form in this file
 
     window.addEventListener('DOMContentLoaded', async () => {
-        const confirmedPaymentIntentId = await confirmPaymentFromRedirect();
-        if (confirmedPaymentIntentId && typeof gtag_report_conversion === 'function') {
-            gtag_report_conversion(undefined, confirmedPaymentIntentId);
+        const paymentResult = await confirmPaymentFromRedirect();
+        if (paymentResult && typeof gtag_report_conversion === 'function') {
+            gtag_report_conversion(undefined, paymentResult.paymentIntentId);
         }
         await checkLicenseStatus();
     });
