@@ -1133,6 +1133,17 @@
       </p>
       <form id="contactForm" class="contact-form">
         <div class="contact-form-group">
+          <label for="contactEmailInput" class="contact-form-label">Your Email</label>
+          <input
+            type="email"
+            id="contactEmailInput"
+            class="contact-form-input"
+            placeholder="you@example.com"
+            autocomplete="email"
+            required
+          />
+        </div>
+        <div class="contact-form-group">
           <label for="contactMessageText" class="contact-form-label">Your Message</label>
           <textarea id="contactMessageText" class="contact-form-textarea" placeholder="Type your message here..." required></textarea>
         </div>
@@ -1191,11 +1202,47 @@
       const contactClose = document.getElementById("contactClose");
       const contactForm = document.getElementById("contactForm");
       const contactMessage = document.getElementById("contactMessage");
+      const contactEmailInput = document.getElementById("contactEmailInput");
+
+      function decodeJwtPayload(token) {
+        try {
+          const base64 = token.split(".")[1].replace(/-/g, "+").replace(/_/g, "/");
+          const padLength = base64.length % 4;
+          const paddedBase64 = padLength ? base64 + "=".repeat(4 - padLength) : base64;
+          const jsonPayload = decodeURIComponent(
+            atob(paddedBase64)
+              .split("")
+              .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+              .join("")
+          );
+          return JSON.parse(jsonPayload);
+        } catch (_) {
+          return null;
+        }
+      }
+
+      function isValidEmail(value) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+      }
+
+      let prefillEmail = "";
+      const token = localStorage.getItem("auth_token");
+      if (token) {
+        const payload = decodeJwtPayload(token);
+        prefillEmail = (payload?.email?.trim() || "").toLowerCase();
+      }
 
       function showContactModal(title) {
         const titleEl = document.getElementById("contactModalTitle");
         if (titleEl) titleEl.textContent = title || "Contact Us";
         if (contactModal) contactModal.classList.add("show");
+        if (
+          contactEmailInput &&
+          prefillEmail &&
+          !contactEmailInput.value?.trim()
+        ) {
+          contactEmailInput.value = prefillEmail;
+        }
       }
 
       function hideContactModal() {
@@ -1244,6 +1291,26 @@
           submitBtn.disabled = true;
           submitBtn.textContent = "Sending...";
           var message = document.getElementById("contactMessageText").value.trim();
+          var email = (contactEmailInput?.value?.trim() || "").toLowerCase();
+
+          if (!email) {
+            contactMessage.className = "contact-message error";
+            contactMessage.textContent = "Please enter your email";
+            contactMessage.style.display = "block";
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+            return;
+          }
+
+          if (!isValidEmail(email)) {
+            contactMessage.className = "contact-message error";
+            contactMessage.textContent = "Please enter a valid email address";
+            contactMessage.style.display = "block";
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+            return;
+          }
+
           if (!message) {
             contactMessage.className = "contact-message error";
             contactMessage.textContent = "Please enter a message";
@@ -1260,7 +1327,7 @@
                 { "Content-Type": "application/json" },
                 token ? { "Authorization": "Bearer " + token } : {}
               ),
-              body: JSON.stringify({ message: message })
+              body: JSON.stringify({ message: message, email: email })
             });
             var data = {};
             try { data = await res.json(); } catch (parseErr) {}
