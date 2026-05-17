@@ -531,6 +531,97 @@
       margin: 0;
     }
 
+    /* FAQ */
+    .faq {
+      padding: 4rem 3rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .faq h2 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      letter-spacing: -0.02em;
+    }
+
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .faq-item {
+      background: #f9f9f9;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .faq-item summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 1.25rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      transition: background 0.2s ease;
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item summary::after {
+      content: "+";
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: #666;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+
+    .faq-item[open] summary::after {
+      content: "−";
+    }
+
+    .faq-item summary:hover {
+      background: #f0f0f0;
+    }
+
+    .faq-answer {
+      padding: 0 1.5rem 1.25rem;
+      color: #555;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .faq-answer p {
+      margin: 0 0 1rem;
+    }
+
+    .faq-answer p:last-child {
+      margin-bottom: 0;
+    }
+
+    .faq-answer ul,
+    .faq-answer ol {
+      margin: 0 0 1rem;
+      padding-left: 1.5rem;
+    }
+
+    .faq-answer li {
+      margin-bottom: 0.35rem;
+    }
+
+    .faq-answer li:last-child {
+      margin-bottom: 0;
+    }
+
     @media (max-width: 900px) {
       .how-we-work {
         grid-template-columns: 1fr;
@@ -547,6 +638,9 @@
       }
       .more-about-grid {
         grid-template-columns: 1fr;
+      }
+      .faq {
+        padding: 3rem 1rem;
       }
     }
 
@@ -1027,6 +1121,184 @@
       </div>
     </section>
 
+    <section class="faq" id="faq">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Are Driveflow routes real Irish driving test routes?</summary>
+          <div class="faq-answer">
+            <p>Driveflow routes are based on the roads, junctions, roundabouts, manoeuvre areas, and common patterns learners are regularly brought through during Irish driving tests.</p>
+            <p>No route provider can guarantee the exact route you will get on the day, but practising these areas properly helps remove surprises and makes you far more comfortable with the test centre and surrounding roads.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>How do Driveflow test routes work?</summary>
+          <div class="faq-answer">
+            <p>Once you purchase a test centre, you unlock interactive routes that open directly in Google Maps with full turn-by-turn navigation.</p>
+            <p>You simply:</p>
+            <ol>
+              <li>Open Driveflow on your phone</li>
+              <li>Choose a route</li>
+              <li>Tap start</li>
+              <li>Drive it like normal GPS</li>
+            </ol>
+            <p>There is no app to download and no complicated setup.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>Are the routes updated regularly?</summary>
+          <div class="faq-answer">
+            <p>Yes. Routes are updated when road layouts, junctions, estates, or traffic systems change.</p>
+            <p>Driving test centres evolve over time, especially in busy areas like Tallaght, Raheny, Dun Laoghaire, and Mulhuddart, so keeping routes current matters.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>Is Driveflow worth it for nervous drivers?</summary>
+          <div class="faq-answer">
+            <p>Probably more than anyone else.</p>
+            <p>A huge amount of driving test nerves comes from unfamiliarity. Learners panic because they:</p>
+            <ul>
+              <li>don't know the area</li>
+              <li>get surprised by lane changes</li>
+              <li>hesitate at unfamiliar roundabouts</li>
+              <li>overthink directions</li>
+            </ul>
+            <p>When you've already driven the roads multiple times beforehand, your brain has far less to process during the real test.</p>
+            <p>That usually means calmer driving and fewer mistakes.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>Can Driveflow help me pass my Irish driving test first time?</summary>
+          <div class="faq-answer">
+            <p>It can absolutely improve your preparation, but it is not magic.</p>
+            <p>You still need:</p>
+            <ul>
+              <li>proper lessons</li>
+              <li>observation</li>
+              <li>mirror checks</li>
+              <li>good positioning</li>
+              <li>clutch/control skills</li>
+              <li>consistent practice</li>
+            </ul>
+            <p>What Driveflow does is remove uncertainty around the actual test environment so you can focus on driving properly instead of figuring out unfamiliar roads under pressure.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>What makes Driveflow different from free driving test routes online?</summary>
+          <div class="faq-answer">
+            <p>Most free routes online are static screenshots or rough map drawings.</p>
+            <p>Driveflow routes are fully integrated into Google Maps navigation so the route follows you in real time while driving.</p>
+            <p>That means:</p>
+            <ul>
+              <li>proper GPS navigation</li>
+              <li>clear turn instructions</li>
+              <li>easier repeat practice</li>
+              <li>no guessing where the route goes</li>
+            </ul>
+            <p>It is designed to work practically while you're actually in the car.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>How long do I get access to the routes?</summary>
+          <div class="faq-answer">
+            <p>You get access for over 90 days after purchase, which gives most learners enough time to repeatedly practise the area properly before their test.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>Do I need an app to use Driveflow?</summary>
+          <div class="faq-answer">
+            <p>No.</p>
+            <p>Everything works directly from your phone browser. You log in, choose your route, and open it instantly in Google Maps.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>Which Irish driving test centres does Driveflow support?</summary>
+          <div class="faq-answer">
+            <p>Driveflow supports test centres across Ireland including:</p>
+            <ul>
+              <li>Tallaght</li>
+              <li>Raheny</li>
+              <li>Dun Laoghaire</li>
+              <li>Mulhuddart</li>
+              <li>Finglas</li>
+              <li>Naas</li>
+              <li>Kilkenny</li>
+              <li>Gorey</li>
+              <li>Galway</li>
+              <li>Cork</li>
+              <li>Limerick</li>
+              <li>and many more.</li>
+            </ul>
+            <p>New centres and updated routes are added regularly.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>Should I practise the routes right before my driving test?</summary>
+          <div class="faq-answer">
+            <p>Yes, but not just once.</p>
+            <p>The biggest benefit comes from repetition. Ideally you should:</p>
+            <ul>
+              <li>drive routes at different times of day</li>
+              <li>practise difficult junctions repeatedly</li>
+              <li>get comfortable with speed limits and lane positioning</li>
+              <li>simulate real test conditions</li>
+            </ul>
+            <p>The goal is to make the area feel routine before test day.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>Can I use Driveflow without a driving instructor?</summary>
+          <div class="faq-answer">
+            <p>Yes, although combining Driveflow with professional lessons is usually the best approach.</p>
+            <p>Many learners use Driveflow:</p>
+            <ul>
+              <li>with parents</li>
+              <li>with sponsors</li>
+              <li>between lessons</li>
+              <li>before mock tests</li>
+              <li>while waiting months for a test date</li>
+            </ul>
+            <p>It works best as a practical supplement to real driving practice.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>What are the hardest parts of the Irish driving test?</summary>
+          <div class="faq-answer">
+            <p>For many learners it is:</p>
+            <ul>
+              <li>roundabouts</li>
+              <li>lane positioning</li>
+              <li>observation at junctions</li>
+              <li>progress hesitation</li>
+              <li>reacting under pressure in unfamiliar areas</li>
+            </ul>
+            <p>This is exactly why practising around your actual test centre matters so much.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>Is Driveflow useful if I already know how to drive?</summary>
+          <div class="faq-answer">
+            <p>Yes.</p>
+            <p>A lot of people fail despite being decent drivers because they are unfamiliar with:</p>
+            <ul>
+              <li>local road layouts</li>
+              <li>awkward junctions</li>
+              <li>tricky speed transitions</li>
+              <li>common tester routes</li>
+            </ul>
+            <p>Knowing the area well can make a major difference.</p>
+          </div>
+        </details>
+        <details class="faq-item">
+          <summary>How much does Driveflow cost?</summary>
+          <div class="faq-answer">
+            <p>Most test centres are unlocked instantly for €11.99.</p>
+            <p>Any additional centre after your first purchase is discounted by 50%.</p>
+          </div>
+        </details>
+      </div>
+    </section>
+
     <section class="reviews">
       <h2>What our users say</h2>
       <div class="reviews-container">
@@ -1110,7 +1382,7 @@
           <ul>
             <li><a href="mailto:driveflowweb@gmail.com">driveflowweb@gmail.com</a></li>
             <li><a href="#" id="footerContactLink">Contact us</a></li>
-            <li><a href="#">FAQ</a></li>
+            <li><a href="#faq">FAQ</a></li>
             <li><a href="#" id="footerSupportLink">Support</a></li>
           </ul>
         </div>
