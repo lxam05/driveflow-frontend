@@ -38,7 +38,7 @@ function gtag_report_conversion(url, transactionId) {
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Access real Irish driving test routes for all test centres. Navigate the exact roads used by testers and increase your pass chances with DriveFlow.">
+<meta name="description" content="Practice Irish driving test routes (2026) with real Google Maps navigation. RSA test centre routes across Ireland — instant access, no app download, works on iPhone and Android.">
 <link rel="canonical" href="https://www.driveflow.ie/routes.html">
 <link rel="icon" href="https://www.driveflow.ie/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="https://www.driveflow.ie/favicon.png">
@@ -47,7 +47,7 @@ function gtag_report_conversion(url, transactionId) {
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>Test Routes — DriveFlow | Real Driving Test Routes for All Centres</title>
+<title>Driving Test Routes Ireland (2026) — Google Maps Practice | DriveFlow</title>
 
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
@@ -166,41 +166,27 @@ function gtag_report_conversion(url, transactionId) {
         padding: 0 20px 40px;
     }
 
-    /* Masonry layout container */
-    .masonry-container {
+    /* Two independent columns — cards stack vertically with no shared row height */
+    .routes-layout {
         max-width: 1400px;
-        margin: 0 auto 40px;
-        padding: 0 20px 40px;
-        column-count: 2;
-        column-gap: 24px;
+        margin: 0 auto 24px;
+        padding: 0 20px 24px;
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
     }
 
-    .masonry-item {
-        display: inline-block;
-        width: 100%;
-        break-inside: avoid;
-        margin-bottom: 24px;
-        page-break-inside: avoid; /* Fallback for older browsers */
-    }
-
-    /* Legacy two-column-container for other uses (if any) */
-    .two-column-container {
-        max-width: 1400px;
-        margin: 0 auto 40px;
-        padding: 0 20px 40px;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 24px;
-        align-items: start;
+    .routes-column {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
     }
 
     @media (max-width: 1024px) {
-        .masonry-container {
-            column-count: 1;
-        }
-
-        .two-column-container {
-            grid-template-columns: 1fr;
+        .routes-layout {
+            flex-direction: column;
         }
     }
 
@@ -782,6 +768,113 @@ function gtag_report_conversion(url, transactionId) {
         font-size: 18px;
     }
 
+    .why-our-routes ul {
+        margin: 0 0 16px;
+        padding-left: 1.25rem;
+        line-height: 1.7;
+        color: var(--text-main);
+    }
+
+    .why-our-routes ul li {
+        margin-bottom: 0.5rem;
+    }
+
+    .why-our-routes .region-group {
+        margin-bottom: 1rem;
+    }
+
+    .why-our-routes .region-group strong {
+        color: var(--text-main);
+    }
+
+    .why-our-routes .region-group span {
+        color: var(--text-muted);
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    .why-our-routes .testimonial {
+        margin: 0 0 16px;
+        padding: 16px 18px;
+        background: var(--bg-card-smaller);
+        border: 1px solid var(--border-subtle);
+        border-radius: 12px;
+        font-size: 15px;
+        line-height: 1.65;
+        color: var(--text-main);
+        font-style: italic;
+    }
+
+    .why-our-routes .testimonial:last-child {
+        margin-bottom: 0;
+    }
+
+    .routes-faq-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .routes-faq-item {
+        background: var(--bg-card-smaller);
+        border: 1px solid var(--border-subtle);
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .routes-faq-item summary {
+        list-style: none;
+        cursor: pointer;
+        padding: 1rem 1.25rem;
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--text-main);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    .routes-faq-item summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .routes-faq-item summary::after {
+        content: "+";
+        font-size: 1.1rem;
+        font-weight: 400;
+        color: var(--text-muted);
+        flex-shrink: 0;
+    }
+
+    .routes-faq-item[open] summary::after {
+        content: "−";
+    }
+
+    .routes-faq-answer {
+        padding: 0 1.25rem 1rem;
+        font-size: 15px;
+        line-height: 1.65;
+        color: var(--text-muted);
+    }
+
+    .routes-cta-btn {
+        display: inline-block;
+        margin-top: 8px;
+        padding: 14px 28px;
+        background: var(--primary);
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 12px;
+        transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .routes-cta-btn:hover {
+        background: var(--primary-blue-dark);
+        transform: translateY(-1px);
+    }
 
     @media (max-width: 768px) {
         .why-our-routes {
@@ -799,13 +892,18 @@ function gtag_report_conversion(url, transactionId) {
         }
 
         .why-our-routes p,
-        .why-our-routes .route-steps li {
+        .why-our-routes .route-steps li,
+        .why-our-routes ul li {
             font-size: 15px;
         }
 
         .why-our-routes-video {
             position: static;
             max-width: 100%;
+        }
+
+        .page-header h1 {
+            font-size: 26px;
         }
     }
 </style>
@@ -819,75 +917,95 @@ function gtag_report_conversion(url, transactionId) {
 
 <div class="container-bottom" style="margin-top: 96px; padding-bottom: 12px; margin-bottom: 0;">
     <div class="page-header">
-        <h1>Know the Test Routes Before Test Day</h1>
-        <p>Interactive Google Maps routes showing the real roads, junctions and difficult areas used in Irish driving tests.</p>
-        <p style="margin-top: 16px; color: var(--accent); font-weight: 600; font-size: 16px;">Used by thousands of Irish learners preparing for their driving test</p>
-        <p class="promo-note" style="margin-top: 18px;">Any purchase after the first one is <span class="promo-highlight">50% off</span> — get multiple centres at a discounted rate.</p>
+        <h1>Driving Test Routes Ireland (2026) — Practice with Real Google Maps Navigation</h1>
+        <p style="margin-top: 16px; text-align: left; max-width: 900px; margin-left: auto; margin-right: auto;">Preparing for your Irish driving test? The roads you'll drive on test day are not random. DriveFlow gives you interactive driving test routes that open directly in Google Maps.</p>
+        <p style="margin-top: 12px; color: var(--accent); font-weight: 600; font-size: 16px;">No app to download. Works on iPhone and Android. Instant access after purchase.</p>
     </div>
     <div id="paymentRedirectMessage" style="display: none; margin-top: 16px; padding: 20px; border-radius: 12px; background: var(--accent-soft, rgba(230, 184, 0, 0.15)); border: 1px solid var(--accent); color: var(--text-main); font-size: 16px; font-weight: 500;"></div>
 </div>
 
-    <!-- Two-column layout: Select centre + Why our routes -->
-    <div class="two-column-container">
-        <!-- Card 1: Routes Selection -->
-        <div class="masonry-item">
+    <div class="routes-layout">
+        <div class="routes-column routes-column-left">
             <div class="selection-card">
                 <h2>Select Test Centre</h2>
-                <p class="selection-subtitle">Unlock full test routes · Instant access €11.99</p>
+                <p class="selection-subtitle">Unlock full test routes · Instant access €11.99 (No montly payments)</p>
                 <div class="search-box">
                     <input type="text" class="search-input" id="centreSearch" placeholder="Search for a test centre..." autocomplete="off">
                 </div>
                 <div class="centres-list" id="centresGrid"></div>
             </div>
+
+            <div class="why-our-routes">
+                <h2>Why So Many Irish Learners Fail Their Driving Test</h2>
+                <p>The RSA reports that over 50% of Irish learner drivers fail their driving test each year. The most common reasons aren't poor driving — they're poor preparation:</p>
+                <ul>
+                    <li>Unfamiliar junctions and roundabouts</li>
+                    <li>Not knowing which lane to be in</li>
+                    <li>Nerves caused by driving in an unknown area</li>
+                    <li>Hesitation at busy or complex intersections</li>
+                    <li>Incorrect positioning on roads they've never driven before</li>
+                </ul>
+                <p>If you've already driven the test area ten times before your test day, none of these feel like problems. That's what DriveFlow is designed to do.</p>
+            </div>
+
+            <div class="why-our-routes">
+                <h2>What's Included in Every DriveFlow Route</h2>
+                <p>Each DriveFlow route covers the types of roads and situations RSA examiners commonly use during tests:</p>
+                <ul>
+                    <li>Residential estates and speed ramp sections</li>
+                    <li>Major and minor junctions (with and without traffic lights)</li>
+                    <li>Roundabouts — including multi-lane and mini roundabouts</li>
+                    <li>Pedestrian crossings and school zones</li>
+                    <li>Dual carriageways and lane changes</li>
+                    <li>Hill starts and challenging parking areas</li>
+                    <li>Manoeuvre zones for reverse and turnabout</li>
+                    <li>Areas where learners most commonly make mistakes</li>
+                </ul>
+                <p>Routes typically take 25–35 minutes to drive and cover 8–10 kilometres, reflecting the length of an actual RSA driving test.</p>
+            </div>
+
+            <div class="why-our-routes">
+                <h2>Driving Test Routes Available by Test Centre</h2>
+                <p>DriveFlow covers RSA driving test centres across every county in Ireland, including:</p>
+                <div class="region-group"><strong>Dublin</strong><br><span>Tallaght · Mulhuddart · Finglas · Raheny · Dún Laoghaire · Deansgrange</span></div>
+                <div class="region-group"><strong>Cork &amp; Munster</strong><br><span>Cork Wilton · Mallow · Waterford · Limerick Woodview · Limerick Castlemungret · Tralee · Clonmel · Dungarvan · Tipperary · Thurles</span></div>
+                <div class="region-group"><strong>Galway &amp; Connacht</strong><br><span>Galway Westside · Galway Carnmore · Tuam · Castlebar · Ballina · Sligo · Roscommon · Clifden · Loughrea</span></div>
+                <div class="region-group"><strong>Leinster</strong><br><span>Naas · Wicklow · Gorey · Wexford · Carlow · Kilkenny · Portlaoise · Athlone · Tullamore · Mullingar · Longford · Birr</span></div>
+                <div class="region-group"><strong>Ulster &amp; Border Counties</strong><br><span>Letterkenny · Cavan · Monaghan · Dundalk · Drogheda</span></div>
+                <div class="region-group"><strong>Kerry &amp; Clare</strong><br><span>Killarney · Tralee · Ennis · Shannon · Kilrush</span></div>
+                <p style="margin-top: 16px; font-weight: 600;">Search your local driving test centre in the list above.</p>
+            </div>
+
+            <div class="why-our-routes" style="text-align: center;">
+                <h2>Start Practicing Your Driving Test Routes Today</h2>
+                <p>Choose your test centre, unlock your routes, and drive the roads before your test day. With DriveFlow, the roads won't feel unknown — they'll feel like home.</p>
+                <p style="font-weight: 600; color: var(--accent);">Any purchase after your first is 50% off.</p>
+                <a href="#centreSearch" class="routes-cta-btn">Search your test centre and get instant access →</a>
+            </div>
         </div>
 
-        <!-- Card 2: Why Our Routes Work -->
-        <div class="masonry-item">
+        <div class="routes-column routes-column-right">
             <div class="why-our-routes">
                 <div class="why-our-routes-content">
-                    <h2>Why Our Routes Work</h2>
-                    
-                    <p>
-                        Most driving test routes online are gimmicks — rough lines on a map that don't actually follow you when you drive.
-                        Our routes are different. Every route is fully integrated with Google Maps, so turn-by-turn navigation tracks you perfectly in real time, just like normal GPS. No guessing. No drifting off route.
-                    </p>
-                    
-                    <p>
-                        There's no app to download. Just log in on your phone, tap the route, and drive.
-                    </p>
-                    
-                    <p>
-                        The platform is cheap, regularly updated, and designed for real learners who want to practice properly — not flashy features that don't help you pass.
-                    </p>
-
-                    <h3>How the Routes Work</h3>
-                    
-                    <ul class="route-steps">
-                        <li>
-                            <strong>Purchase a route</strong><br>
-                            Once you buy a route, you get access for over 90 days — plenty of time to practice properly.
-                        </li>
-                        <li>
-                            <strong>Start a route anytime</strong><br>
-                            On your phone, open our website, log in, and tap the route you want to practice.<br>
-                            It opens instantly in Google Maps with full turn-by-turn navigation.
-                        </li>
-                        <li>
-                            <strong>Repeat until it's automatic</strong><br>
-                            Drive the routes as many times as you want until every junction, roundabout, and tricky section feels familiar.
-                        </li>
+                    <h2>Why DriveFlow Is Different</h2>
+                    <ul>
+                        <li>Live GPS tracking — always know exactly where you are on the route</li>
+                        <li>Voice navigation — no need to glance at your screen</li>
+                        <li>Automatic rerouting — if you miss a turn, it adjusts</li>
+                        <li>Real-time traffic — practice in actual conditions</li>
+                        <li>Works on any phone — iPhone or Android, no extra app required</li>
                     </ul>
-                    
-                    <p style="margin-top: 24px; font-weight: 600; color: var(--accent);">
-                        That's it. Simple, effective, and built to actually help you pass.
-                    </p>
-                    
-                    <p class="trust-card" style="margin-top: 32px; padding: 24px; background: var(--primary-soft); border: 1px solid var(--primary); border-radius: 12px; text-align: center; font-size: 16px; line-height: 1.6; box-sizing: border-box;">
-                        <strong style="color: var(--accent); font-size: 18px;">Trusted by thousands of learners across Ireland</strong><br>
-                        <span style="color: var(--text-main);">Join the community of drivers who passed their test first try using our routes</span>
-                    </p>
+                    <p>You simply choose your test centre, open the route on your phone, and start driving. It's that straightforward.</p>
+
+                    <h3>How DriveFlow Works</h3>
+                    <ul class="route-steps">
+                        <li><strong>Step 1 — Choose Your Test Centre</strong><br>Select your RSA driving test centre from anywhere in Ireland.</li>
+                        <li><strong>Step 2 — Unlock Your Routes</strong><br>Get instant access immediately after purchase. Any purchase after your first is 50% off.</li>
+                        <li><strong>Step 3 — Open the Route</strong><br>Each route opens directly in Google Maps — no setup, no downloads, no complications.</li>
+                        <li><strong>Step 4 — Practice Until It Feels Natural</strong><br>Drive the routes repeatedly. Learn the junctions. Know the roundabouts. Arrive on test day feeling at home on those roads.</li>
+                    </ul>
+                    <p>Access lasts over 90 days, giving you plenty of time to practice as often as you need.</p>
                 </div>
-                
                 <div class="why-our-routes-video">
                     <video controls autoplay muted loop playsinline class="route-video">
                         <source src="screenrecording.mp4" type="video/mp4">
@@ -895,10 +1013,53 @@ function gtag_report_conversion(url, transactionId) {
                     </video>
                 </div>
             </div>
+
+            <div class="why-our-routes">
+                <h2>Frequently Asked Questions</h2>
+                <div class="routes-faq-list">
+                    <details class="routes-faq-item">
+                        <summary>Are these the exact routes my examiner will use?</summary>
+                        <p class="routes-faq-answer">No company can guarantee the exact route chosen on the day — examiners have some flexibility. However, DriveFlow routes are based on the roads, junctions, estates and patterns commonly used at each RSA test centre. Practicing these routes means you'll be familiar with the area regardless of the variation chosen.</p>
+                    </details>
+                    <details class="routes-faq-item">
+                        <summary>Do I need to download an app?</summary>
+                        <p class="routes-faq-answer">No. Everything works directly in your browser. Routes open straight in Google Maps, which is already on your phone.</p>
+                    </details>
+                    <details class="routes-faq-item">
+                        <summary>Does it work on iPhone and Android?</summary>
+                        <p class="routes-faq-answer">Yes. DriveFlow works on both iPhone and Android. If you have Google Maps installed (which most people do), you're ready to go.</p>
+                    </details>
+                    <details class="routes-faq-item">
+                        <summary>How long do I have access?</summary>
+                        <p class="routes-faq-answer">You get access for over 90 days after purchase — plenty of time to practice your routes repeatedly before test day.</p>
+                    </details>
+                    <details class="routes-faq-item">
+                        <summary>How much does it cost?</summary>
+                        <p class="routes-faq-answer">Each test centre is available to purchase individually for €11.99. Any purchase after your first is 50% off, so adding a second or third centre is very affordable.</p>
+                    </details>
+                    <details class="routes-faq-item">
+                        <summary>Can I practice the routes more than once?</summary>
+                        <p class="routes-faq-answer">Yes — unlimited practice during your access period. The more times you drive a route, the more natural it feels.</p>
+                    </details>
+                    <details class="routes-faq-item">
+                        <summary>Are the routes kept up to date?</summary>
+                        <p class="routes-faq-answer">Yes. Routes are reviewed and updated regularly to reflect any changes in road layout, new road markings, or test centre adjustments.</p>
+                    </details>
+                    <details class="routes-faq-item">
+                        <summary>Can practicing routes actually help me pass?</summary>
+                        <p class="routes-faq-answer">Yes. Familiarity with the test area reduces nerves, improves your positioning and observation, and lets you focus on driving rather than navigation. These are the exact areas where most Irish learners lose marks.</p>
+                    </details>
+                </div>
+            </div>
+
+            <div class="why-our-routes">
+                <h2>What Learner Drivers Say</h2>
+                <p class="testimonial">"I practiced the Naas routes four times before my test. Every junction felt familiar and I passed first time."</p>
+                <p class="testimonial">"The Google Maps navigation makes it so easy — it's just like using maps normally. No fiddling around trying to follow a PDF."</p>
+                <p class="testimonial">"I'd tried another route app but it was hard to follow while driving. DriveFlow is completely different — it just works."</p>
+            </div>
         </div>
-
     </div>
-
 
     <!-- Back to Home Button -->
     <div class="container-bottom" style="text-align: center; padding-top: 0;">
