@@ -17,13 +17,13 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="DriveFlow helps Irish learners practise real driving test routes, avoid common fail points, and prepare for RSA test centres across Ireland.">
+<meta name="description" content="DriveFlow is an Irish learner driver platform helping you prepare for the RSA driving test with real test routes, local test centre insights, and Google Maps practice.">
 <link rel="canonical" href="https://www.driveflow.ie/about.html">
 <link rel="icon" href="https://www.driveflow.ie/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="https://www.driveflow.ie/favicon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="https://www.driveflow.ie/favicon.png">
 <link rel="apple-touch-icon" href="https://www.driveflow.ie/favicon.png">
-<title>DriveFlow | Irish Driving Test Routes &amp; Test Centre Practice</title>
+<title>About DriveFlow | Irish Driving Test Routes &amp; RSA Preparation</title>
 
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
@@ -73,6 +73,7 @@
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         -webkit-font-smoothing: antialiased;
         min-height: 100vh;
+        color: var(--text-main);
     }
 
     .container {
@@ -82,30 +83,43 @@
     }
 
     .page-header {
-        background: linear-gradient(135deg, rgba(11, 19, 43, 0.85) 0%, rgba(28, 37, 65, 0.9) 100%);
-        backdrop-filter: blur(20px);
-        border-radius: 16px;
-        padding: 32px;
-        margin-bottom: 40px;
+        border-radius: var(--radius-xl);
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        border-top: 4px solid var(--accent);
+        box-shadow: var(--shadow-card);
+        padding: 40px 32px;
+        margin-bottom: 24px;
         text-align: center;
-        box-shadow: var(--shadow-lg);
     }
 
     .page-header h1 {
-        margin: 0 0 12px;
-        color: white;
+        margin: 0 0 16px;
+        color: var(--text-main);
         font-size: 36px;
         font-weight: 800;
+        letter-spacing: -0.02em;
+    }
+
+    .page-header p {
+        margin: 0 0 16px;
+        color: var(--text-muted);
+        line-height: 1.8;
+        font-size: 16px;
+        text-align: left;
+    }
+
+    .page-header p:last-child {
+        margin-bottom: 0;
     }
 
     .content-section {
-        background: var(--bg-glass);
-        backdrop-filter: blur(20px);
-        border-radius: 20px;
+        background: var(--bg-card);
+        border-radius: var(--radius-xl);
         padding: 32px;
         margin-bottom: 24px;
-        box-shadow: var(--shadow-lg);
-        border: 1px solid rgba(255, 255, 255, 0.4);
+        box-shadow: var(--shadow-card);
+        border: 1px solid var(--border-subtle);
     }
 
     .content-section h2 {
@@ -113,6 +127,7 @@
         font-size: 28px;
         font-weight: 800;
         color: var(--text-dark);
+        letter-spacing: -0.02em;
     }
 
     .content-section p {
@@ -134,8 +149,52 @@
         margin-bottom: 8px;
     }
 
-    .content-section p:last-child {
+    .content-section p:last-child,
+    .content-section ul:last-child {
         margin-bottom: 0;
+    }
+
+    .content-section a {
+        color: var(--text-main);
+        font-weight: 600;
+        text-decoration: underline;
+        text-decoration-color: var(--accent);
+        text-underline-offset: 3px;
+    }
+
+    .content-section a:hover {
+        color: var(--accent);
+    }
+
+    .cta-links {
+        list-style: none;
+        padding: 0;
+        margin: 20px 0 0;
+    }
+
+    .cta-links li {
+        margin-bottom: 12px;
+    }
+
+    .cta-links a {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 600;
+        font-size: 16px;
+        text-decoration: none;
+        color: var(--text-main);
+        padding: 12px 18px;
+        border-radius: 12px;
+        background: var(--accent-soft);
+        border: 1px solid rgba(230, 184, 0, 0.35);
+        transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .cta-links a:hover {
+        background: rgba(230, 184, 0, 0.25);
+        transform: translateY(-1px);
+        color: var(--text-main);
     }
 
     .btn-back {
@@ -160,76 +219,81 @@
 
 <div class="container">
     <div class="page-header">
-        <h1>About DriveFlow – Irish Driving Test Routes &amp; Learner Driver Practice Platform</h1>
-        <p>DriveFlow is an Irish learner driver platform built to help people pass the RSA driving test by practising real driving test routes and understanding local test centre conditions.</p>
-    </div>
-
-    <div class="content-section">
-        <p>Most learners fail not because they can’t drive — but because they don’t know the test area. They arrive unfamiliar with junctions, roundabouts, speed-change zones, and local examiner routes. DriveFlow fixes this by giving learners access to centre-specific driving test route practice across Ireland.</p>
+        <h1>About DriveFlow</h1>
+        <p>DriveFlow is an Irish learner driver platform built to help people prepare for and pass the RSA driving test with greater confidence.</p>
+        <p>Most learner drivers fail their test for one simple reason: they are unfamiliar with the test area.</p>
+        <p>Unexpected roundabouts, difficult junctions, speed-limit changes, lane positioning, and busy local roads can catch learners off guard on test day — even if they are capable drivers. DriveFlow helps solve that problem by giving learners access to real Irish driving test routes, local test centre insights, and practical route preparation tools.</p>
     </div>
 
     <div class="content-section">
         <h2>What Is DriveFlow?</h2>
-        <p>DriveFlow is an online driving test preparation platform that provides:</p>
+        <p>DriveFlow is an online driving test preparation platform designed specifically for Irish learner drivers.</p>
+        <p>The platform provides:</p>
         <ul>
-            <li>Real Irish driving test route practice using Google Maps</li>
-            <li>Local test centre road layouts and common fail points</li>
-            <li>Area-specific tips based on learner feedback and instructor patterns</li>
+            <li>Real driving test route practice using Google Maps</li>
+            <li>Local RSA test centre road layouts</li>
+            <li>Common fail points and difficult junctions</li>
+            <li>Area-specific driving tips based on learner experiences and instructor feedback</li>
             <li>Mobile-friendly access with no app download required</li>
         </ul>
-        <p>Instead of generic advice, DriveFlow focuses on real RSA test centre routes so learners can practise the same types of roads they will face during their test.</p>
+        <p>Instead of relying on generic driving advice, DriveFlow focuses on helping learners become familiar with the exact types of roads and driving situations they are likely to face during their test.</p>
     </div>
 
     <div class="content-section">
         <h2>Why DriveFlow Was Created</h2>
-        <p>Many learner drivers spend hundreds of euro on lessons but still fail because they have never properly practised the actual test area.</p>
-        <p>Driving tests in Ireland are highly location-dependent. Each centre has different:</p>
+        <p>Many learner drivers spend hundreds — sometimes thousands — of euro on lessons but still fail because they never get enough practice in the actual test area.</p>
+        <p>Every RSA driving test centre is different. Some include:</p>
         <ul>
-            <li>Road layouts</li>
-            <li>Roundabout complexity</li>
-            <li>Speed limit transitions</li>
+            <li>Complex roundabouts</li>
+            <li>Challenging lane positioning</li>
+            <li>Busy urban traffic</li>
             <li>Residential estates</li>
-            <li>Traffic flow patterns</li>
+            <li>Sudden speed-limit transitions</li>
+            <li>Difficult junctions and merge points</li>
         </ul>
-        <p>DriveFlow was created to give learners affordable, on-demand access to this local knowledge so they can prepare smarter and avoid common mistakes.</p>
+        <p>DriveFlow was created to make local test-area preparation more accessible, affordable, and practical for learners across Ireland.</p>
+        <p>The goal is simple: help learners practise smarter before test day.</p>
     </div>
 
     <div class="content-section">
-        <h2>How DriveFlow Helps Learners Pass the Irish Driving Test</h2>
-        <p>DriveFlow improves pass rates by helping learners:</p>
+        <h2>How DriveFlow Helps Learners Pass</h2>
+        <p>DriveFlow helps learner drivers prepare more effectively by allowing them to:</p>
         <ul>
-            <li>Familiarise themselves with real driving test routes</li>
-            <li>Practise difficult junctions and roundabouts before test day</li>
+            <li>Practise real driving test routes before the test</li>
+            <li>Become familiar with local roads and layouts</li>
             <li>Identify common examiner “trap” areas</li>
-            <li>Build confidence driving unfamiliar areas</li>
-            <li>Reduce reliance on last-minute lessons</li>
+            <li>Improve confidence driving in unfamiliar areas</li>
+            <li>Reduce reliance on expensive last-minute lessons</li>
+            <li>Prepare between lessons at their own pace</li>
         </ul>
-        <p>The platform allows learners to practise independently between lessons and arrive at their test knowing what to expect.</p>
+        <p>By understanding the test area in advance, learners can focus more on driving safely and confidently during the exam.</p>
     </div>
 
     <div class="content-section">
         <h2>Driving Test Centres Covered</h2>
-        <p>DriveFlow provides coverage for RSA driving test centres across Ireland, including:</p>
+        <p>DriveFlow provides route coverage for RSA driving test centres across Ireland, including:</p>
         <ul>
-            <li>Dublin test centres</li>
-            <li>Cork test centres</li>
-            <li>Galway test centres</li>
-            <li>Limerick test centres</li>
+            <li>Dublin driving test centres</li>
+            <li>Cork driving test centres</li>
+            <li>Galway driving test centres</li>
+            <li>Limerick driving test centres</li>
             <li>Regional and rural test centres</li>
         </ul>
-        <p>Explore the <a href="test-centres.html">Irish driving test centres</a> covered or view our best-performing centre page for <a href="/naas-routes.html">Naas driving test routes</a>.</p>
+        <p>Learners can explore routes, practise difficult areas, and prepare using real road layouts from their chosen test centre.</p>
     </div>
 
     <div class="content-section">
         <h2>Built for Mobile Learners</h2>
-        <p>Most learners practise on their phones. DriveFlow is built mobile-first so users can:</p>
+        <p>Most learners practise on their phones, so DriveFlow is designed mobile-first.</p>
+        <p>Users can:</p>
         <ul>
             <li>Open routes directly in Google Maps</li>
             <li>Practise while sitting in the car</li>
-            <li>Navigate easily on test routes</li>
-            <li>Access tips on the go</li>
+            <li>Navigate routes easily on mobile</li>
+            <li>Access driving tips on the go</li>
+            <li>Start practising instantly with no app installation</li>
         </ul>
-        <p>No app installation required.</p>
+        <p>DriveFlow is designed to make preparation simple, flexible, and accessible anywhere.</p>
     </div>
 
     <div class="content-section">
@@ -237,25 +301,37 @@
         <p>DriveFlow is used by:</p>
         <ul>
             <li>First-time driving test candidates</li>
-            <li>Learners retaking the driving test</li>
-            <li>People changing test centres</li>
-            <li>Instructors recommending extra practice tools</li>
+            <li>Learners retaking the RSA test</li>
+            <li>Drivers changing test centres</li>
+            <li>Learners preparing independently between lessons</li>
+            <li>Instructors recommending extra route practice</li>
         </ul>
-        <p>For deeper preparation, read our guide on <a href="guides/why-learners-fail-driving-test-ireland/">why learners fail the Irish driving test</a>.</p>
+        <p>Whether someone is weeks away from their test or just beginning preparation, DriveFlow helps learners become more familiar with the roads they are likely to face on test day.</p>
     </div>
 
     <div class="content-section">
         <h2>Our Mission</h2>
         <p>DriveFlow’s mission is to make Irish driving test preparation more transparent, affordable, and effective.</p>
-        <p>By giving learners access to real test route practice and local knowledge, DriveFlow aims to:</p>
+        <p>By giving learners access to real driving test route practice and local knowledge, DriveFlow aims to:</p>
         <ul>
             <li>Improve first-time pass rates</li>
             <li>Reduce unnecessary repeat tests</li>
-            <li>Lower lesson costs</li>
-            <li>Make learners more confident drivers</li>
+            <li>Lower overall lesson costs</li>
+            <li>Build safer and more confident drivers</li>
+            <li>Make test preparation less stressful</li>
         </ul>
-        <p>If learners walk into their test calm, prepared, and familiar with the area — the system is working.</p>
-        <p>DriveFlow is the <a href="index.html">driving test route platform</a> built for Irish learners.</p>
+        <p>When learners arrive at their test calm, prepared, and familiar with the area, they drive better — and pass more often.</p>
+    </div>
+
+    <div class="content-section">
+        <h2>Start Practising Today</h2>
+        <p>Explore real Irish driving test routes and prepare smarter for your RSA driving test.</p>
+        <ul class="cta-links">
+            <li><a href="test-centres.html">👉 Browse Driving Test Centres</a></li>
+            <li><a href="routes.html">👉 View Test Routes</a></li>
+            <li><a href="routes.html">👉 Start Practising in Google Maps</a></li>
+        </ul>
+        <p style="margin-top: 20px;">DriveFlow is built for Irish learner drivers who want to practise with confidence before test day.</p>
     </div>
 
     <div style="text-align: center;">
@@ -265,4 +341,3 @@
 
 </body>
 </html>
-
