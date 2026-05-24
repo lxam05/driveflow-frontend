@@ -35,6 +35,7 @@ It will **not** run if `.github` only exists in the parent `DrivingTestApp` fold
 - Uses **`published_url`** from the CSV for the file path (e.g. `/guides/raheny-fail-spots.html` → `guides/raheny-fail-spots.html`)
 - Updates `content-plan.csv` to `done` (keeps the same `published_url`)
 - Adds SEO meta tags (robots, Open Graph, Twitter Card, Article JSON-LD) and appends the URL to `sitemap.xml`
+- Appends the guide to **`guides-index.json`** so it appears on **`/guides.html`** (the hub linked from the homepage)
 
 Centre **route-content** (`.txt` files on `*-routes.html` pages) is not in this plan — those stay manual.
 
@@ -49,6 +50,8 @@ python _agent/generate_article.py
 ```
 
 OpenClaw does **not** need GitHub Actions. It only needs read/write access to this repo and the same API key.
+
+**Important:** The guides hub is driven by `guides-index.json`. If OpenClaw writes a guide HTML file by hand (without running `generate_article.py`), it must also add an entry to `guides-index.json` or the guide will not show on `/guides.html`.
 
 ## Next planned topic
 

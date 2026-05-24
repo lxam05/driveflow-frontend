@@ -199,6 +199,8 @@ The content agent **post-processes** every generated guide to add any missing ta
 
 After each guide is published, **`sitemap.xml`** must list the canonical URL (`priority` 0.8, `changefreq` monthly). The generator appends this automatically.
 
+Also add the guide to **`guides-index.json`** (title, url, short description) so `/guides.html` lists it. `generate_article.py` does this automatically; manual publishes must update the JSON by hand.
+
 ---
 
 ## Internal link map — test centres
@@ -338,5 +340,5 @@ Display name → published URL (use these exact paths in links).
 - Auto-generates all SEO types in the plan: `fail-spots`, `pass-guide`, `roundabouts`, `checklist`, `comparison`, `city-guide`, `guide`, `article`
 - Saves to the path in **`published_url`** (e.g. `guides/raheny-fail-spots.html`)
 - Injects full SEO head tags (robots, OG, Twitter, Article JSON-LD, Google Ads) if the model omitted any
-- Appends the page to **`sitemap.xml`** (committed with the guide in CI)
+- Appends the page to **`sitemap.xml`** and **`guides-index.json`** (committed with the guide in CI)
 - Does **not** write centre `route-content` (`.txt` on `*-routes.html` pages) — not in the current plan
