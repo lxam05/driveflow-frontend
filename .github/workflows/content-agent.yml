@@ -1,0 +1,42 @@
+name: Content Agent — Generate Article
+
+on:
+  schedule:
+    # 08:00 UTC every 3 days
+    - cron: "0 8 */3 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r _agent/requirements.txt
+
+      - name: Generate article
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_MODEL: claude-opus-4-7
+        run: python _agent/generate_article.py
+
+      - name: Commit and push
+        run: |
+          git config user.name "DriveFlow Content Bot"
+          git config user.email "bot@driveflow.ie"
+          git add guides/ _agent/content-plan.csv
+          git diff --cached --quiet || git commit -m "chore: auto-publish guide [$(date '+%Y-%m-%d')]"
+          git push
