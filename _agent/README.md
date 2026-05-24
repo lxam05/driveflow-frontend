@@ -6,7 +6,7 @@ Automated guide generation for driveflow.ie using Claude + your content plan.
 
 | File | Purpose |
 |------|---------|
-| `site-knowledge.md` | Tone, HTML templates, internal links, guardrails |
+| `site-knowledge.md` | Tone, HTML templates, internal links, guardrails (no em dashes; use practice/practicing) |
 | `content-plan.csv` | What to write next (`status`: `planned` → `done`) |
 | `generate_article.py` | Picks next **planned** row (by priority), calls API, saves HTML |
 | `requirements.txt` | Python deps for local runs / CI |
@@ -34,6 +34,7 @@ It will **not** run if `.github` only exists in the parent `DrivingTestApp` fold
 - Picks **high** priority before **medium** before **low**
 - Uses **`published_url`** from the CSV for the file path (e.g. `/guides/raheny-fail-spots.html` → `guides/raheny-fail-spots.html`)
 - Updates `content-plan.csv` to `done` (keeps the same `published_url`)
+- Adds SEO meta tags (robots, Open Graph, Twitter Card, Article JSON-LD) and appends the URL to `sitemap.xml`
 
 Centre **route-content** (`.txt` files on `*-routes.html` pages) is not in this plan — those stay manual.
 

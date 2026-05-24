@@ -10,6 +10,7 @@ Requires: ANTHROPIC_API_KEY env var, pip install anthropic
 
 import anthropic
 import csv
+import json
 import os
 import re
 import sys
@@ -21,6 +22,17 @@ SITE_ROOT = AGENT_DIR.parent
 KNOWLEDGE_FILE = AGENT_DIR / "site-knowledge.md"
 CONTENT_PLAN = AGENT_DIR / "content-plan.csv"
 GUIDES_DIR = SITE_ROOT / "guides"
+SITEMAP_PATH = SITE_ROOT / "sitemap.xml"
+GUIDES_INDEX_PATH = SITE_ROOT / "guides-index.json"
+SITE_ORIGIN = "https://www.driveflow.ie"
+DEFAULT_OG_IMAGE = f"{SITE_ORIGIN}/favicon.png"
+GUIDE_SITEMAP_PRIORITY = "0.8"
+
+GOOGLE_ADS_TAG = """<!-- Google tag (gtag.js) - Ads -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17936809057"></script>
+<script>
+  gtag('config', 'AW-17936809057');
+</script>"""
 
 # All SEO guide types in the current content plan (not route-content / site-page).
 AUTOMATABLE_TYPES = {
@@ -38,11 +50,18 @@ PRIORITY_ORDER = {"high": 0, "medium": 1, "low": 2}
 
 MODEL = os.environ.get("ANTHROPIC_MODEL", "claude-opus-4-7")
 
+# Injected into every generation prompt
+STYLE_RULES = """
+**Mandatory style rules:**
+- Never use the em dash character (—). Do not use dashes to join two sentences. Use commas, periods, or parentheses instead.
+- Always write **practice** and **practicing**. Never use practise or practising.
+"""
+
 TYPE_INSTRUCTIONS = {
     "fail-spots": """
 **Article type: fail-spots**
 - Structure as a clear "Top 10" (or similar numbered) list of specific fail locations and mistakes.
-- Name real road types, junctions, roundabouts, or areas typical for this test centre (use careful wording — "commonly reported", "learners often fail here").
+- Name real road types, junctions, roundabouts, or areas typical for this test centre (use careful wording: "commonly reported", "learners often fail here").
 - Each item: what goes wrong + how to avoid it.
 - Strong internal link to the target centre's route page and /routes.html.
 """,
@@ -50,7 +69,7 @@ TYPE_INSTRUCTIONS = {
 **Article type: pass-guide**
 - Practical "how to pass" guide for the named test centre.
 - Cover preparation, what examiners focus on, common local challenges, and test-day mindset.
-- Include a clear CTA to practise routes on DriveFlow (link the centre's `-routes.html` page).
+- Include a clear CTA to practice routes on DriveFlow (link the centre's `-routes.html` page).
 - Do not guarantee a pass.
 """,
     "roundabouts": """
@@ -67,7 +86,7 @@ TYPE_INSTRUCTIONS = {
 """,
     "comparison": """
 **Article type: comparison**
-- Compare Irish test centres (hardest / easiest) using pass-rate context carefully — avoid false precision; cite that rates vary by year and source.
+- Compare Irish test centres (hardest / easiest) using pass-rate context carefully. Avoid false precision; cite that rates vary by year and source.
 - Help learners choose preparation strategy, not just "pick the easy centre".
 - Link to multiple centre route pages and /routes.html.
 """,
@@ -84,7 +103,7 @@ TYPE_INSTRUCTIONS = {
 """,
     "article": """
 **Article type: article**
-- Same as guide — educational SEO content for Irish learner drivers.
+- Same as guide: educational SEO content for Irish learner drivers.
 """,
 }
 
@@ -187,10 +206,10 @@ def build_prompt(knowledge: str, row: dict, published_url: str) -> str:
         )
     elif article_type == "city-guide" and topic:
         centre_line = (
-            f"City hub article — link every major test centre in that city from the internal link map."
+            f"City hub article: link every major test centre in that city from the internal link map."
         )
     else:
-        centre_line = "Not limited to a single test centre — link several relevant centres from the internal link map."
+        centre_line = "Not limited to a single test centre. Link several relevant centres from the internal link map."
 
     notes_line = f"\n**Editor notes:** {notes}" if notes else ""
     canonical = f"https://www.driveflow.ie{published_url}"
@@ -212,19 +231,274 @@ def build_prompt(knowledge: str, row: dict, published_url: str) -> str:
 
 {type_block}
 
+{STYLE_RULES}
+
 ## Task
 Write a complete, publication-ready HTML guide for driveflow.ie.
 
 Requirements:
 1. Match the tone, structure, and HTML conventions in the Site Knowledge Base exactly.
-2. Use the **guide article** HTML template from the Site Knowledge Base (guides/why-learners-fail-driving-test-ireland/index.html pattern) — inline DriveFlow CSS variables, <main> + article card.
+2. Use the **guide article** HTML template from the Site Knowledge Base (guides/why-learners-fail-driving-test-ireland/index.html pattern): inline DriveFlow CSS variables, <main> + article card.
 3. Set `<link rel="canonical">` and any og:url to **{canonical}** exactly.
 4. Aim for 700–1000 words unless the article type is a checklist (can be structured with shorter items).
 5. Include relevant internal links from the internal link map (paths like /raheny-routes.html, not /test-centres/raheny).
 6. Link the RSA to https://www.rsa.ie when mentioned.
 7. Do NOT include prices, phone numbers, or named instructor recommendations.
-8. Output ONLY the raw HTML — no markdown fences, no explanation, nothing before <!DOCTYPE or after </html>.
+8. Do NOT use em dashes (—). Do NOT use practise or practising; use practice and practicing only.
+9. Output ONLY the raw HTML: no markdown fences, no explanation, nothing before <!DOCTYPE or after </html>.
+10. Include full SEO in <head> (see Site Knowledge Base "Guide SEO head" section): robots, favicons, Open Graph, Twitter Card, Article JSON-LD, Google Ads tag.
 """
+
+
+def _extract_meta_content(html: str, name: str) -> str | None:
+    pattern = rf'<meta\s+name="{re.escape(name)}"\s+content="([^"]*)"'
+    m = re.search(pattern, html, re.I)
+    return m.group(1).strip() if m else None
+
+
+def _extract_og_content(html: str, prop: str) -> str | None:
+    pattern = rf'<meta\s+property="og:{re.escape(prop)}"\s+content="([^"]*)"'
+    m = re.search(pattern, html, re.I)
+    return m.group(1).strip() if m else None
+
+
+def _extract_title_text(html: str) -> str | None:
+    m = re.search(r"<title>([^<]*)</title>", html, re.I)
+    if not m:
+        return None
+    title = m.group(1).strip()
+    title = re.sub(r"\s*\|\s*DriveFlow\s*$", "", title, flags=re.I)
+    return title or None
+
+
+def _extract_h1_text(html: str) -> str | None:
+    m = re.search(r"<h1[^>]*>([^<]+)</h1>", html, re.I)
+    return m.group(1).strip() if m else None
+
+
+def _html_contains(html: str, fragment: str) -> bool:
+    return fragment.lower() in html.lower()
+
+
+def _insert_after_head_open(html: str, block: str) -> str:
+    m = re.search(r"(<head[^>]*>)", html, re.I)
+    if m:
+        pos = m.end()
+        return html[:pos] + "\n" + block + html[pos:]
+    return block + "\n" + html
+
+
+def _insert_before_style_or_body(html: str, block: str) -> str:
+    for marker in ("<style", "<main", "<body"):
+        m = re.search(marker, html, re.I)
+        if m:
+            return html[: m.start()] + block + "\n" + html[m.start() :]
+    return html.replace("</head>", block + "\n</head>", 1)
+
+
+def build_article_json_ld(
+    headline: str, description: str, canonical: str, published_url: str
+) -> str:
+    today = date.today().isoformat()
+    safe_headline = headline.replace('"', '\\"')
+    safe_desc = description.replace('"', '\\"')
+    return f"""<script type="application/ld+json">
+{{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{safe_headline}",
+  "description": "{safe_desc}",
+  "url": "{canonical}",
+  "mainEntityOfPage": {{
+    "@type": "WebPage",
+    "@id": "{canonical}"
+  }},
+  "image": "{DEFAULT_OG_IMAGE}",
+  "author": {{
+    "@type": "Organization",
+    "name": "DriveFlow",
+    "url": "{SITE_ORIGIN}/"
+  }},
+  "publisher": {{
+    "@type": "Organization",
+    "name": "DriveFlow",
+    "logo": {{
+      "@type": "ImageObject",
+      "url": "{DEFAULT_OG_IMAGE}"
+    }}
+  }},
+  "datePublished": "{today}",
+  "dateModified": "{today}",
+  "inLanguage": "en-IE"
+}}
+</script>"""
+
+
+def ensure_seo_tags(html: str, published_url: str, topic: str) -> str:
+    """Ensure guides have the same indexing tags as route pages (deterministic post-process)."""
+    canonical = f"{SITE_ORIGIN}{published_url}"
+    description = (
+        _extract_meta_content(html, "description")
+        or _extract_og_content(html, "description")
+        or f"Practical Irish driving test advice: {topic}. Learner-focused tips from DriveFlow."
+    )
+    headline = (
+        _extract_title_text(html)
+        or _extract_og_content(html, "title")
+        or _extract_h1_text(html)
+        or topic
+    )
+    og_title = _extract_og_content(html, "title") or headline
+
+    tags: list[str] = []
+
+    if not _html_contains(html, 'name="robots"'):
+        tags.append('<meta name="robots" content="index, follow, max-image-preview:large">')
+
+    favicon_tags = [
+        ('rel="icon" href="https://www.driveflow.ie/favicon.ico"', '<link rel="icon" href="https://www.driveflow.ie/favicon.ico">'),
+        ('sizes="32x32"', '<link rel="icon" type="image/png" sizes="32x32" href="https://www.driveflow.ie/favicon.png">'),
+        ('sizes="192x192"', '<link rel="icon" type="image/png" sizes="192x192" href="https://www.driveflow.ie/favicon.png">'),
+        ('apple-touch-icon"', '<link rel="apple-touch-icon" href="https://www.driveflow.ie/favicon.png">'),
+    ]
+    for needle, tag in favicon_tags:
+        if not _html_contains(html, needle):
+            tags.append(tag)
+
+    if not _html_contains(html, 'rel="canonical"'):
+        tags.append(f'<link rel="canonical" href="{canonical}">')
+    else:
+        html = re.sub(
+            r'<link\s+rel="canonical"\s+href="[^"]*"',
+            f'<link rel="canonical" href="{canonical}"',
+            html,
+            count=1,
+            flags=re.I,
+        )
+
+    og_pairs = [
+        ("og:title", og_title),
+        ("og:description", description),
+        ("og:url", canonical),
+        ("og:type", "article"),
+        ("og:image", DEFAULT_OG_IMAGE),
+        ("og:site_name", "DriveFlow"),
+        ("og:locale", "en_IE"),
+    ]
+    for prop, value in og_pairs:
+        if not _html_contains(html, f'property="{prop}"'):
+            esc = value.replace('"', "&quot;")
+            tags.append(f'<meta property="{prop}" content="{esc}">')
+
+    twitter_pairs = [
+        ("twitter:card", "summary_large_image"),
+        ("twitter:title", og_title),
+        ("twitter:description", description),
+        ("twitter:url", canonical),
+        ("twitter:image", DEFAULT_OG_IMAGE),
+    ]
+    for name, value in twitter_pairs:
+        if not _html_contains(html, f'name="{name}"'):
+            esc = value.replace('"', "&quot;")
+            tags.append(f'<meta name="{name}" content="{esc}">')
+
+    if tags:
+        block = "\n".join(tags) + "\n"
+        if _html_contains(html, "charset"):
+            html = re.sub(
+                r'(<meta\s+charset[^>]*>\s*)',
+                r"\1" + block,
+                html,
+                count=1,
+                flags=re.I,
+            )
+        else:
+            html = _insert_after_head_open(html, block)
+
+    if "AW-17936809057" not in html:
+        if _html_contains(html, "G-EJB69589QP"):
+            html = re.sub(
+                r"(</script>\s*)(?=<meta|<link|<title|<style)",
+                r"\1\n" + GOOGLE_ADS_TAG + "\n",
+                html,
+                count=1,
+                flags=re.I,
+            )
+        else:
+            html = _insert_after_head_open(html, GOOGLE_ADS_TAG)
+
+    json_ld = build_article_json_ld(headline, description, canonical, published_url)
+    if '"@type": "Article"' not in html and '"@type":"Article"' not in html:
+        html = _insert_before_style_or_body(html, json_ld)
+
+    return html
+
+
+def add_to_sitemap(published_url: str) -> bool:
+    """Append guide URL to sitemap.xml if not already listed. Returns True if added."""
+    if not SITEMAP_PATH.exists():
+        print(f"WARNING: {SITEMAP_PATH} not found; skipping sitemap update.")
+        return False
+
+    loc = f"{SITE_ORIGIN}{published_url}"
+    content = SITEMAP_PATH.read_text(encoding="utf-8")
+    if loc in content:
+        print(f"Sitemap already contains: {loc}")
+        return False
+
+    lastmod = date.today().isoformat()
+    entry = f"""  <url>
+    <loc>{loc}</loc>
+    <lastmod>{lastmod}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>{GUIDE_SITEMAP_PRIORITY}</priority>
+  </url>
+"""
+    if "</urlset>" not in content:
+        print("WARNING: sitemap.xml has no </urlset>; skipping sitemap update.")
+        return False
+
+    content = content.replace("</urlset>", entry + "</urlset>", 1)
+    SITEMAP_PATH.write_text(content, encoding="utf-8")
+    print(f"Sitemap updated: {loc}")
+    return True
+
+
+def update_guides_index(
+    published_url: str, title: str, description: str
+) -> bool:
+    """Add or update an entry in guides-index.json for the guides hub page."""
+    entry = {
+        "title": title,
+        "url": published_url,
+        "description": description[:200] if description else "",
+    }
+
+    guides: list[dict] = []
+    if GUIDES_INDEX_PATH.exists():
+        try:
+            guides = json.loads(GUIDES_INDEX_PATH.read_text(encoding="utf-8"))
+            if not isinstance(guides, list):
+                guides = []
+        except json.JSONDecodeError:
+            guides = []
+
+    updated = False
+    for i, g in enumerate(guides):
+        if g.get("url") == published_url:
+            guides[i] = entry
+            updated = True
+            break
+
+    if not updated:
+        guides.append(entry)
+
+    GUIDES_INDEX_PATH.write_text(
+        json.dumps(guides, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+    print(f"Guides index updated: {published_url}")
+    return True
 
 
 def main():
@@ -267,9 +541,23 @@ def main():
         html_content = re.sub(r"^```(?:html)?\s*", "", html_content)
         html_content = re.sub(r"\s*```$", "", html_content)
 
+    # Safety net: strip em dashes only (do not rewrite "practise" inside URL paths)
+    html_content = html_content.replace("—", ", ")
+
+    html_content = ensure_seo_tags(html_content, published_url, row.get("topic", "").strip())
+
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(html_content, encoding="utf-8")
     print(f"Saved: {output_path}")
+
+    add_to_sitemap(published_url)
+
+    index_title = _extract_title_text(html_content) or row.get("topic", "").strip()
+    index_description = (
+        _extract_meta_content(html_content, "description")
+        or f"Practical Irish driving test advice: {row.get('topic', '').strip()}."
+    )
+    update_guides_index(published_url, index_title, index_description)
 
     update_plan(CONTENT_PLAN, row_index, published_url)
     print(f"Content plan updated — status=done, published_url={published_url}")

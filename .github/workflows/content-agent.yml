@@ -37,6 +37,6 @@ jobs:
         run: |
           git config user.name "DriveFlow Content Bot"
           git config user.email "bot@driveflow.ie"
-          git add guides/ _agent/content-plan.csv
+          git add guides/ guides-index.json sitemap.xml _agent/content-plan.csv
           git diff --cached --quiet || git commit -m "chore: auto-publish guide [$(date '+%Y-%m-%d')]"
           git push

@@ -473,6 +473,62 @@
       color: #1a1a1a;
     }
 
+    /* Guides teaser (below reviews) */
+    .guides-teaser {
+      padding: 0 3rem 4rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .guides-teaser-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      padding: 1.25rem 1.5rem;
+      background: #f9f9f9;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      border-left: 4px solid #e6b800;
+    }
+
+    .guides-teaser-text {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .guides-teaser-text h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+      color: #1a1a1a;
+    }
+
+    .guides-teaser-text p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.5;
+    }
+
+    .guides-teaser-link {
+      display: inline-block;
+      padding: 0.65rem 1.25rem;
+      background: #1a1a1a;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border-radius: 8px;
+      white-space: nowrap;
+      transition: background 0.2s ease;
+    }
+
+    .guides-teaser-link:hover {
+      background: #333;
+    }
+
     /* More about us */
     .more-about {
       padding: 4rem 3rem 5rem;
@@ -638,6 +694,13 @@
       }
       .more-about-grid {
         grid-template-columns: 1fr;
+      }
+      .guides-teaser {
+        padding: 0 1rem 3rem;
+      }
+      .guides-teaser-inner {
+        flex-direction: column;
+        align-items: flex-start;
       }
       .faq {
         padding: 3rem 1rem;
@@ -1358,6 +1421,16 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="guides-teaser" aria-labelledby="guides-teaser-heading">
+      <div class="guides-teaser-inner">
+        <div class="guides-teaser-text">
+          <h3 id="guides-teaser-heading">Free driving test guides</h3>
+          <p>Short articles on fail spots, pass tips and local test-centre advice. Written for Irish learners preparing for the RSA test.</p>
+        </div>
+        <a href="guides.html" class="guides-teaser-link">Browse all guides</a>
       </div>
     </section>
   </main>

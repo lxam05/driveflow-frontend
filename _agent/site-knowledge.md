@@ -12,7 +12,9 @@ DriveFlow sounds **practical, local, and confident** — written for Irish learn
 - Focus on **what happens on test day**: roads, junctions, roundabouts, estates, speed-limit changes, common fail points.
 - Be **specific to the test centre** — name local roads, areas, and patterns. Avoid generic advice that could apply anywhere.
 - Use Irish driving terms naturally: **RSA**, **test centre**, **learner**, **roundabout**, **estate**, **national road**, **NDLS**, **EDT** (when relevant).
-- British/Irish spelling: **practise** (verb), **centre**, **licence** (noun). Product/code may say "license" — match the page type.
+- Use **practice** (noun/verb) and **practicing**, never **practise** or **practising**.
+- Keep **centre** and **licence** (noun) where natural for Ireland. Product/code may say "license"; match the page type.
+- **No em dashes (—).** Do not use "—" or dash-as-pause between clauses. Use commas, full stops, parentheses, or separate sentences instead. Hyphens in compound words (e.g. "test-day") are fine.
 - Do **not** guarantee a pass or claim examiners use one fixed route. Say examiners draw from a **local road network** with variation.
 - Pass rates may be mentioned only when sourced (e.g. from RSA stats or centre-specific reports in existing copy).
 - Route/product pages may mention pricing (€11.99) where `shared.js` purchase CTAs appear. Pure SEO guides should not hardcode prices unless intentional.
@@ -168,6 +170,35 @@ Key elements:
 - Internal links to relevant `{centre}-routes.html` pages
 - `← Back to Home` or link to `/routes.html`
 
+### Guide SEO head (required for indexing)
+
+The content agent **post-processes** every generated guide to add any missing tags below. When writing manually, include all of them.
+
+```html
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="description" content="...">
+<link rel="canonical" href="https://www.driveflow.ie/guides/{slug}.html">
+<link rel="icon" href="https://www.driveflow.ie/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="https://www.driveflow.ie/favicon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://www.driveflow.ie/favicon.png">
+<link rel="apple-touch-icon" href="https://www.driveflow.ie/favicon.png">
+<meta property="og:title" content="...">
+<meta property="og:description" content="...">
+<meta property="og:url" content="https://www.driveflow.ie/guides/{slug}.html">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://www.driveflow.ie/favicon.png">
+<meta property="og:site_name" content="DriveFlow">
+<meta property="og:locale" content="en_IE">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="...">
+<meta name="twitter:description" content="...">
+<meta name="twitter:url" content="https://www.driveflow.ie/guides/{slug}.html">
+<meta name="twitter:image" content="https://www.driveflow.ie/favicon.png">
+<script type="application/ld+json">… Article schema with datePublished, author DriveFlow …</script>
+```
+
+After each guide is published, **`sitemap.xml`** must list the canonical URL (`priority` 0.8, `changefreq` monthly). The generator appends this automatically.
+
 ---
 
 ## Internal link map — test centres
@@ -282,6 +313,7 @@ Display name → published URL (use these exact paths in links).
 - Do **not** use invalid HTML tags — always use standard elements (`<div>`, `<section>`, etc.)
 - When linking to the RSA, use `https://www.rsa.ie`
 - Do **not** copy generic driving tips without local centre detail
+- Do **not** use em dashes (—) or write **practise** / **practising** (use **practice** / **practicing**)
 - Do **not** add prices to guide articles unless explicitly requested
 - Do **not** skip canonical URLs and meta descriptions on new pages
 - Do **not** forget to deploy **backend** changes to Railway for route buttons to work in production
@@ -305,4 +337,6 @@ Display name → published URL (use these exact paths in links).
 - Secret: `ANTHROPIC_API_KEY`
 - Auto-generates all SEO types in the plan: `fail-spots`, `pass-guide`, `roundabouts`, `checklist`, `comparison`, `city-guide`, `guide`, `article`
 - Saves to the path in **`published_url`** (e.g. `guides/raheny-fail-spots.html`)
+- Injects full SEO head tags (robots, OG, Twitter, Article JSON-LD, Google Ads) if the model omitted any
+- Appends the page to **`sitemap.xml`** (committed with the guide in CI)
 - Does **not** write centre `route-content` (`.txt` on `*-routes.html` pages) — not in the current plan
