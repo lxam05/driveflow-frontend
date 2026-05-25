@@ -226,6 +226,7 @@ Display name → published URL (use these exact paths in links).
 | Donegal | /donegal-routes.html |
 | Dun Laoghaire | /dun-laoghaire-routes.html |
 | Dundalk | /dundalk-routes.html |
+| Drogheda | /drogheda-routes.html |
 | Dungarvan | /dungarvan-routes.html |
 | Ennis | /ennis-routes.html |
 | Finglas | /finglas-routes.html |

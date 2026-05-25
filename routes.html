@@ -1361,6 +1361,7 @@ function gtag_report_conversion(url, transactionId) {
         { name: "Donegal", routes: 5 },
         { name: "Dun Laoghaire", routes: 7 },
         { name: "Dundalk", routes: 2 },
+        { name: "Drogheda", routes: 5 },
         { name: "Dungarvan", routes: 0 },
         { name: "Ennis", routes: 5 },
         { name: "Finglas", routes: 7 },
@@ -1602,6 +1603,10 @@ function gtag_report_conversion(url, transactionId) {
         }
         if (centre.name === "Dundalk") {
             window.location.href = 'dundalk-routes.html';
+            return;
+        }
+        if (centre.name === "Drogheda") {
+            window.location.href = 'drogheda-routes.html';
             return;
         }
         if (centre.name === "Dungarvan") {
