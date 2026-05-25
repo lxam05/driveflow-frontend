@@ -36,122 +36,7 @@
             <a href="#routes" style="display: inline-block; margin-top: 20px; padding: 12px 24px; background: var(--primary); color: var(--bg-main); border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.2s ease;">View Routes →</a>
         </div>
 
-        <div class="info-section">
-            <h2>Why Ennis Catches People Out</h2>
-            <p>Ennis looks easy on paper. That's the trap.</p>
-            <p style="margin-top: 16px;">These practice routes are designed to help learner drivers become familiar with the roads, junctions, estates, and traffic conditions commonly used in the Ennis driving test. Ennis is known for quiet roads mixed with sudden decision points — which is exactly where people fail.</p>
-            
-            <p style="margin-top: 16px; font-weight: 600; color: var(--accent);">Ennis tests whether you stay fully switched on, even when the road feels calm.</p>
-            
-            <h3 style="margin-top: 32px;">Common things learners say after failing:</h3>
-            <ul>
-                <li>"It felt too quiet — then I made a silly mistake."</li>
-                <li>"I relaxed too much."</li>
-                <li>"They failed me on observation."</li>
-                <li>"I didn't expect the route to go there."</li>
-            </ul>
-            
-            <h3 style="margin-top: 32px;">Where People Actually Fail in Ennis</h3>
-            
-            <h4>1. Observation on quiet roads</h4>
-            <p>Because traffic is lighter, testers focus heavily on:</p>
-            <ul>
-                <li>Mirror checks</li>
-                <li>Head movement</li>
-                <li>Awareness, not reaction</li>
-            </ul>
-            <p style="font-style: italic; color: var(--text-muted); margin-top: 8px;">Common fail: Failing to check mirrors because "nothing was happening".</p>
-            <p style="font-style: italic; color: var(--text-muted);">Quiet ≠ no observation.</p>
-            
-            <h4>2. Housing estates</h4>
-            <p>Ennis routes often include:</p>
-            <ul>
-                <li>Tight residential estates</li>
-                <li>Parked cars</li>
-                <li>Speed ramps</li>
-                <li>Poor visibility at junctions</li>
-            </ul>
-            <p>Testers expect:</p>
-            <ul>
-                <li>Very low speed</li>
-                <li>Caution at every junction</li>
-                <li>Clear left–right checks</li>
-            </ul>
-            <p style="font-style: italic; color: var(--text-muted); margin-top: 8px;">Common fail: rolling through estate junctions.</p>
-            
-            <h4>3. Junction positioning</h4>
-            <p>Ennis uses junctions that require:</p>
-            <ul>
-                <li>Correct road positioning</li>
-                <li>Proper stopping when needed</li>
-                <li>Confident but safe pull-outs</li>
-            </ul>
-            <p>Common fail:</p>
-            <ul>
-                <li>Stopping too far back</li>
-                <li>Creeping forward without proper checks</li>
-                <li>Hesitation after committing</li>
-            </ul>
-            <p style="font-style: italic; color: var(--text-muted); margin-top: 8px;">They watch decision quality, not speed.</p>
-            
-            <h4>4. Speed control (major issue)</h4>
-            <p><strong>This is one of the biggest fail reasons here.</strong></p>
-            <p>Learners struggle with:</p>
-            <ul>
-                <li>Staying too slow</li>
-                <li>Dropping speed unnecessarily</li>
-                <li>Not reaching speed limits when safe</li>
-            </ul>
-            <p style="font-style: italic; color: var(--text-muted); margin-top: 8px;">Common fail: driving like you're scared instead of controlled.</p>
-            <p style="font-style: italic; color: var(--text-muted);">Testers want appropriate speed, not caution overload.</p>
-            
-            <h4>5. Roundabouts and bends</h4>
-            <p>Ennis includes:</p>
-            <ul>
-                <li>Smaller roundabouts</li>
-                <li>Curved approaches</li>
-                <li>Roads with limited forward visibility</li>
-            </ul>
-            <p>Testers watch:</p>
-            <ul>
-                <li>Early signalling</li>
-                <li>Lane discipline</li>
-                <li>Speed on approach</li>
-            </ul>
-            <p style="font-style: italic; color: var(--text-muted); margin-top: 8px;">Common fail: entering roundabouts too fast or signalling late.</p>
-            
-            <h3 style="margin-top: 32px;">How These Practice Routes Help</h3>
-            <p>These routes allow you to:</p>
-            <ul>
-                <li>Practise real Ennis road types</li>
-                <li>Build discipline on quiet roads</li>
-                <li>Avoid complacency</li>
-                <li>Train consistent observation habits</li>
-            </ul>
-            <p style="margin-top: 16px; font-weight: 600; color: var(--accent);">Ennis is passed by people who stay mentally engaged the entire test.</p>
-            
-            <h3 style="margin-top: 32px;">What's Included</h3>
-            <ul>
-                <li>Real Ennis practice routes on Google Maps</li>
-                <li>Focused on common test areas and estates</li>
-                <li>Works directly on your phone (no app required)</li>
-                <li>Repeat routes anytime during your access period</li>
-            </ul>
-            
-            <h3 style="margin-top: 32px;">Tips from People Who Passed in Ennis</h3>
-            <ul>
-                <li>Treat quiet roads like busy ones</li>
-                <li>Exaggerate mirror checks</li>
-                <li>Slow right down in estates</li>
-                <li>Drive at proper speed limits when safe</li>
-                <li>Don't relax just because it feels easy</li>
-            </ul>
-            
-            <div class="bottom-line" style="margin-top: 32px;">
-                <p>Final advice for Ennis</p>
-                <p style="margin-top: 12px; font-weight: 600;">Ennis punishes complacency more than mistakes.</p>
-            </div>
-        </div>
+        <div class="info-section" id="ennisInfo"></div>
         
         <div id="routes" class="routes-section" data-route="ennis" style="scroll-margin-top: 120px;"></div>
 <div id="sharedPurchase"></div>
@@ -188,9 +73,228 @@
       ]
     }
     </script>
+
+    <script>
+    (function () {
+        var container = document.getElementById('ennisInfo');
+        if (!container) return;
+
+        function plain(s) {
+            return (s || '').replace(/\*\*(.+?)\*\*/g, '$1');
+        }
+
+        function isLikelyHeading(line) {
+            line = plain(line || '').trim();
+            if (!line || line.length > 120) return false;
+            if (line.endsWith(':')) return false;
+            if (/^\d+\.\s/.test(line)) return true;
+            if (/[.!?]$/.test(line)) return false;
+            if (/^(If |You |This |There |They |Most |Are |Can |Is |What |No\.|Yes\.|Usually )/i.test(line)) return false;
+            return true;
+        }
+
+        function isMajorSectionTitle(line) {
+            return /^(About the Ennis Test Centre|How Test Routes Work at This Centre|Core Areas Examiners Frequently Use|Roundabout Behaviour at This Centre|Junction Types That Cause Fails|Speed Limit Traps|Common Mistakes at This Centre|Examiner Behaviour Patterns|High-Failure Locations \/ Hotspots|Test Day Flow at This Centre|Local Preparation Tips|About This Guide|FAQ)$/i.test(plain(line || '').trim());
+        }
+
+        function appendHeading(line) {
+            var trimmed = plain(line || '').trim();
+            var isH3 = trimmed === trimmed.toUpperCase() || trimmed.length > 42 || isMajorSectionTitle(trimmed);
+            var el = document.createElement(isH3 ? 'h3' : 'h4');
+            el.textContent = trimmed;
+            container.appendChild(el);
+        }
+
+        function splitIntoBlocks(text) {
+            var rawLines = text.split(/\r?\n/);
+            var blocks = [];
+            var buf = [];
+
+            for (var i = 0; i < rawLines.length; i++) {
+                var t = rawLines[i].trim();
+                if (t === '' || t === '---') {
+                    if (buf.length) {
+                        blocks.push(buf);
+                        buf = [];
+                    }
+                } else {
+                    buf.push(rawLines[i].trim());
+                }
+            }
+
+            if (buf.length) blocks.push(buf);
+            return blocks;
+        }
+
+        function normalizeListItem(line) {
+            return plain(line.replace(/^-+\s*/, '').trim());
+        }
+
+        function isBulletLine(line) {
+            return /^-\s+/.test(line);
+        }
+
+        function looksLikeListLines(lines) {
+            if (lines.length < 2) return false;
+            for (var i = 0; i < lines.length; i++) {
+                if (!isBulletLine(lines[i])) return false;
+            }
+            return true;
+        }
+
+        function mergeColonBlocks(blocks) {
+            var merged = [];
+            for (var i = 0; i < blocks.length; i++) {
+                var cur = blocks[i].slice();
+                while (cur.length === 1 && cur[0].endsWith(':') && i + 1 < blocks.length) {
+                    var nextFirst = blocks[i + 1][0];
+                    if (isMajorSectionTitle(nextFirst)) break;
+                    i++;
+                    cur = cur.concat(blocks[i]);
+                }
+                merged.push(cur);
+            }
+            return merged;
+        }
+
+        function appendList(lines) {
+            var ul = document.createElement('ul');
+            for (var i = 0; i < lines.length; i++) {
+                var li = document.createElement('li');
+                li.textContent = normalizeListItem(lines[i]);
+                ul.appendChild(li);
+            }
+            container.appendChild(ul);
+        }
+
+        function renderBlock(lines, isFirstBlock) {
+            if (!lines.length) return;
+
+            if (looksLikeListLines(lines)) {
+                appendList(lines);
+                return;
+            }
+
+            if (lines.length >= 2 && /^\*\*(.+)\*\*$/.test(lines[0])) {
+                var faqMatch = lines[0].match(/^\*\*(.+)\*\*$/);
+                var h4faq = document.createElement('h4');
+                h4faq.textContent = plain(faqMatch[1]);
+                container.appendChild(h4faq);
+                var pAns = document.createElement('p');
+                pAns.textContent = plain(lines.slice(1).join(' '));
+                container.appendChild(pAns);
+                return;
+            }
+
+            if (lines.length === 1) {
+                var line = lines[0];
+                var pl = plain(line);
+                var boldWrap = line.match(/^\*\*(.+)\*\*$/);
+                if (boldWrap) {
+                    var h4bold = document.createElement('h4');
+                    h4bold.textContent = plain(boldWrap[1]);
+                    container.appendChild(h4bold);
+                    return;
+                }
+                if (line.indexOf('### ') === 0) {
+                    var h4sub = document.createElement('h4');
+                    h4sub.textContent = plain(line.slice(4));
+                    container.appendChild(h4sub);
+                    return;
+                }
+                if (line.indexOf('## ') === 0) {
+                    var h3 = document.createElement('h3');
+                    h3.textContent = plain(line.slice(3));
+                    container.appendChild(h3);
+                    return;
+                }
+                if (line.indexOf('# ') === 0) {
+                    var h2 = document.createElement('h2');
+                    h2.textContent = plain(line.slice(2));
+                    container.appendChild(h2);
+                    return;
+                }
+                if (isFirstBlock) {
+                    var h2fb = document.createElement('h2');
+                    h2fb.textContent = pl;
+                    container.appendChild(h2fb);
+                } else if (/^\d+\.\s/.test(line) || line.charAt(line.length - 1) === '?') {
+                    var h4 = document.createElement('h4');
+                    h4.textContent = pl;
+                    container.appendChild(h4);
+                } else if (isLikelyHeading(line)) {
+                    appendHeading(line);
+                } else {
+                    var p = document.createElement('p');
+                    p.textContent = pl;
+                    container.appendChild(p);
+                }
+                return;
+            }
+
+            if (lines[0].indexOf('### ') === 0) {
+                var h4b = document.createElement('h4');
+                h4b.textContent = plain(lines[0].slice(4));
+                container.appendChild(h4b);
+                renderBlock(lines.slice(1), false);
+                return;
+            }
+
+            if (lines[0].indexOf('## ') === 0) {
+                var h3b = document.createElement('h3');
+                h3b.textContent = plain(lines[0].slice(3));
+                container.appendChild(h3b);
+                renderBlock(lines.slice(1), false);
+                return;
+            }
+
+            if (lines[0].indexOf('# ') === 0) {
+                var h2b = document.createElement('h2');
+                h2b.textContent = plain(lines[0].slice(2));
+                container.appendChild(h2b);
+                renderBlock(lines.slice(1), false);
+                return;
+            }
+
+            if (isLikelyHeading(lines[0]) || isMajorSectionTitle(lines[0])) {
+                appendHeading(lines[0]);
+                renderBlock(lines.slice(1), false);
+                return;
+            }
+
+            if (lines[0].endsWith(':')) {
+                var intro = document.createElement('p');
+                intro.textContent = plain(lines[0]);
+                container.appendChild(intro);
+                renderBlock(lines.slice(1), false);
+                return;
+            }
+
+            var pFallback = document.createElement('p');
+            pFallback.textContent = plain(lines.join(' '));
+            container.appendChild(pFallback);
+        }
+
+        fetch('txt%20files/ennis.txt')
+            .then(function (r) {
+                return r.ok ? r.text() : Promise.reject(new Error('Failed to fetch ennis.txt'));
+            })
+            .then(function (text) {
+                var trimmed = text.trim();
+                if (!trimmed) return;
+                container.innerHTML = '';
+                var blocks = mergeColonBlocks(splitIntoBlocks(trimmed));
+                for (var i = 0; i < blocks.length; i++) {
+                    renderBlock(blocks[i], i === 0);
+                }
+            })
+            .catch(function (err) {
+                console.error('Failed to load Ennis text file:', err);
+            });
+    })();
+    </script>
     
     <script src="/shared.js" defer></script>
 
 </body>
 </html>
-
