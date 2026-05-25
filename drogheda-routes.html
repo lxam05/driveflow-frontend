@@ -94,7 +94,7 @@
         }
 
         function isMajorSectionTitle(line) {
-            return /^(What This Page Covers|About the Drogheda Southgate RSA Test Centre|How Test Routes Work at This Centre|Core Areas Examiners Will Likely Use|Main Roads|Residential Estates|Roundabouts and Key Junctions|Roundabout Behaviour at This Centre|Larger Roundabouts|Smaller Residential Roundabouts|Junction Types That Cause Fails|Speed Limit Traps in the Drogheda Test Area|Common Mistakes at This Centre|Examiner Behaviour Patterns|High-Failure Locations and Hotspots|Test Day Flow at This Centre|Local Preparation Tips|About This Guide|FAQ — Drogheda Southgate RSA Test Centre)$/i.test(plain(line || '').trim());
+            return /^(About the Drogheda Southgate RSA Test Centre|How Test Routes Work at This Centre|Core Areas Examiners Will Likely Use|Roundabout Behaviour at This Centre|Junction Types That Cause Fails|Speed Limit Traps|Common Mistakes at This Centre|Examiner Behaviour Patterns|High-Failure Locations and Hotspots|Test Day Flow at This Centre|Local Preparation Tips|About This Guide|FAQ)$/i.test(plain(line || '').trim());
         }
 
         function appendHeading(line) {
