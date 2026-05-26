@@ -1087,6 +1087,7 @@
     <a href="index.html" class="logo" style="color: inherit; text-decoration: none;">Driveflow</a>
     <nav>
       <a href="#" id="leaveReviewLink">Help Others</a>
+      <a href="dashboard.html" id="dashboardNavLink" style="display: none;">Dashboard</a>
       <span id="headerNav">
         <a href="login.html">Log in</a>
       </span>
@@ -1521,9 +1522,11 @@
     function showUserUI(userData) {
       const username = userData.username || userData.email?.split('@')[0] || 'User';
       const headerNav = document.getElementById("headerNav");
+      const dashboardNavLink = document.getElementById("dashboardNavLink");
       const navUserMenu = document.getElementById("navUserMenu");
       const userMenuSummary = document.getElementById("userMenuSummary");
       if (headerNav) headerNav.style.display = "none";
+      if (dashboardNavLink) dashboardNavLink.style.display = "";
       if (navUserMenu) navUserMenu.style.display = "block";
       if (userMenuSummary) userMenuSummary.textContent = "Hi, " + username;
       wireLogout();
@@ -1531,8 +1534,10 @@
 
     function showGuestUI() {
       const headerNav = document.getElementById("headerNav");
+      const dashboardNavLink = document.getElementById("dashboardNavLink");
       const navUserMenu = document.getElementById("navUserMenu");
       if (headerNav) headerNav.style.display = "inline-flex";
+      if (dashboardNavLink) dashboardNavLink.style.display = "none";
       if (navUserMenu) {
         navUserMenu.style.display = "none";
         navUserMenu.removeAttribute("open");
