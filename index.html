@@ -1088,8 +1088,7 @@
     <nav>
       <a href="#" id="leaveReviewLink">Help Others</a>
       <span id="headerNav">
-        <a href="login.html">Login</a>
-        <a href="signup.html">Sign Up</a>
+        <a href="login.html">Log in</a>
       </span>
       <details class="nav-user-menu" id="navUserMenu">
         <summary id="userMenuSummary">Hi, User</summary>
@@ -1476,7 +1475,7 @@
         <h2 class="contact-title" id="contactModalTitle">Contact Us</h2>
         <button class="contact-close" id="contactClose" aria-label="Close">×</button>
       </div>
-      <p style="color: #666; font-size: 14px; margin-bottom: 8px;">
+      <p id="contactModalIntro" style="color: #666; font-size: 14px; margin-bottom: 8px;">
         Have a question or feedback? Send us a message and we'll get back to you as soon as possible.
       </p>
       <form id="contactForm" class="contact-form">
@@ -1598,9 +1597,17 @@
         prefillEmail = (payload?.email?.trim() || "").toLowerCase();
       }
 
-      function showContactModal(title) {
+      var contactModalDefaultIntro =
+        "Have a question or feedback? Send us a message and we'll get back to you as soon as possible.";
+
+      function showContactModal(title, options) {
+        options = options || {};
         const titleEl = document.getElementById("contactModalTitle");
+        const introEl = document.getElementById("contactModalIntro");
         if (titleEl) titleEl.textContent = title || "Contact Us";
+        if (introEl) {
+          introEl.textContent = options.intro || contactModalDefaultIntro;
+        }
         if (contactModal) contactModal.classList.add("show");
         if (
           contactEmailInput &&
@@ -1629,7 +1636,15 @@
       }
 
       addContactListeners(document.getElementById("contactUsLink"), "Contact");
-      addContactListeners(document.getElementById("leaveReviewLink"), "Leave a review");
+      var helpOthersLink = document.getElementById("leaveReviewLink");
+      if (helpOthersLink) {
+        helpOthersLink.addEventListener("click", function(e) {
+          e.preventDefault();
+          showContactModal("Tell us your route", {
+            intro: "Simply just type out the main landmarks you were taken through during your test, it helps us greatly."
+          });
+        });
+      }
       addContactListeners(document.getElementById("footerContactLink"), "Contact");
       addContactListeners(document.getElementById("footerSupportLink"), "Support");
 
