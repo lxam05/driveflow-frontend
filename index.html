@@ -65,51 +65,51 @@
       color: #444;
     }
 
-    /* Review link (desktop) */
-    .nav-review-desktop {
-      display: inline;
-    }
-
-    /* Contact us + Review dropdown (hidden on desktop) */
-    .nav-dropdown-mobile {
+  .nav-user-menu {
+      position: relative;
       display: none;
     }
 
-    @media (min-width: 641px) {
-      .nav-dropdown-mobile {
-        display: none !important;
-      }
-    }
-
-    .nav-dropdown-mobile summary {
+    .nav-user-menu summary {
       list-style: none;
       cursor: pointer;
       color: #1a1a1a;
       font-size: inherit;
+      font-weight: 500;
       display: flex;
       align-items: center;
       gap: 0.25rem;
+      white-space: nowrap;
     }
 
-    .nav-dropdown-mobile summary::-webkit-details-marker {
+    .nav-user-menu summary::-webkit-details-marker {
       display: none;
     }
 
-    .nav-dropdown-mobile summary::after {
+    .nav-user-menu summary::after {
       content: "▼";
-      font-size: 0.6rem;
+      font-size: 0.55rem;
+      opacity: 0.7;
     }
 
-    .nav-dropdown-mobile[open] summary::after {
+    .nav-user-menu[open] summary::after {
       transform: rotate(180deg);
       display: inline-block;
+    }
+
+    .nav-dropdown-wrap {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 4px;
+      z-index: 200;
     }
 
     .nav-dropdown-menu {
       margin-top: 0;
       background: #fafafa;
-      padding: 0.5rem 0;
-      min-width: 8rem;
+      padding: 0.35rem 0;
+      min-width: 7.5rem;
       border-radius: 6px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       border: 1px solid var(--border-subtle, #eee);
@@ -117,8 +117,14 @@
 
     .nav-dropdown-menu a {
       display: block;
-      padding: 0.4rem 1rem;
-      font-size: 0.9rem;
+      padding: 0.4rem 0.85rem;
+      font-size: 0.85rem;
+    }
+
+    #headerNav {
+      display: inline-flex;
+      gap: 2rem;
+      align-items: center;
     }
 
     /* Hero */
@@ -710,37 +716,26 @@
     /* Mobile (iPhone / small screens) */
     @media (max-width: 640px) {
       header {
-        padding: 1rem 1rem;
+        padding: 0.75rem 1rem;
         flex-wrap: nowrap;
-        gap: 0.75rem;
+        gap: 0.5rem;
+        justify-content: flex-end;
       }
 
       .logo {
-        font-size: 1.25rem;
-      }
-
-      nav {
-        gap: 1rem;
-        font-size: 0.8rem;
-        flex-wrap: nowrap;
-      }
-
-      .nav-contact-desktop,
-      .nav-review-desktop {
         display: none;
       }
 
-      .nav-dropdown-mobile {
-        display: block;
-        position: relative;
+      nav {
+        gap: 0.75rem;
+        font-size: 0.8rem;
+        flex-wrap: nowrap;
+        flex: 1;
+        justify-content: flex-end;
       }
 
-      .nav-dropdown-wrap {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        margin-top: 4px;
-        z-index: 200;
+      #headerNav {
+        gap: 0.75rem;
       }
 
       .hero {
@@ -1081,22 +1076,21 @@
   <header>
     <a href="index.html" class="logo" style="color: inherit; text-decoration: none;">Driveflow</a>
     <nav>
-      <span class="user-greeting" id="userGreeting" style="display: none;"></span>
-      <a href="#" id="contactUsLink" class="nav-contact-desktop">Contact us</a>
-      <a href="#" id="leaveReviewLink" class="nav-review-desktop">Review</a>
-      <details class="nav-dropdown-mobile">
-        <summary>Contact us</summary>
-        <div class="nav-dropdown-wrap">
-          <div class="nav-dropdown-menu">
-            <a href="#" id="contactUsLinkMobile">Contact us</a>
-            <a href="#" id="leaveReviewLinkMobile">Review</a>
-          </div>
-        </div>
-      </details>
-      <span id="headerNav" style="display: inline-flex; gap: 2rem; align-items: center;">
+      <a href="#" id="contactUsLink">Contact</a>
+      <a href="#" id="leaveReviewLink">Review</a>
+      <span id="headerNav">
         <a href="login.html">Login</a>
         <a href="signup.html">Sign Up</a>
       </span>
+      <details class="nav-user-menu" id="navUserMenu">
+        <summary id="userMenuSummary">Hi, User</summary>
+        <div class="nav-dropdown-wrap">
+          <div class="nav-dropdown-menu">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="#" id="logoutBtn">Logout</a>
+          </div>
+        </div>
+      </details>
     </nav>
   </header>
 
@@ -1454,7 +1448,7 @@
           <h4>Contact</h4>
           <ul>
             <li><a href="mailto:driveflowweb@gmail.com">driveflowweb@gmail.com</a></li>
-            <li><a href="#" id="footerContactLink">Contact us</a></li>
+            <li><a href="#" id="footerContactLink">Contact</a></li>
             <li><a href="#faq">FAQ</a></li>
             <li><a href="#" id="footerSupportLink">Support</a></li>
           </ul>
@@ -1503,20 +1497,35 @@
       ? "http://localhost:8080"
       : "https://driving-test-backend-production.up.railway.app";
 
+    function wireLogout() {
+      const logoutBtn = document.getElementById("logoutBtn");
+      if (!logoutBtn || logoutBtn.dataset.wired === "1") return;
+      logoutBtn.dataset.wired = "1";
+      logoutBtn.addEventListener("click", function(e) {
+        e.preventDefault();
+        localStorage.removeItem("auth_token");
+        window.location.href = "login.html";
+      });
+    }
+
     function showUserUI(userData) {
       const username = userData.username || userData.email?.split('@')[0] || 'User';
-      const userGreeting = document.getElementById("userGreeting");
       const headerNav = document.getElementById("headerNav");
-      userGreeting.textContent = "Hi, " + username;
-      userGreeting.style.display = "inline";
-      headerNav.innerHTML = '<a href="dashboard.html">Dashboard</a><a href="#" id="logoutBtn" style="cursor:pointer">Logout</a>';
-      const logoutBtn = headerNav.querySelector("#logoutBtn");
-      if (logoutBtn) {
-        logoutBtn.addEventListener("click", function(e) {
-          e.preventDefault();
-          localStorage.removeItem("auth_token");
-          window.location.href = "login.html";
-        });
+      const navUserMenu = document.getElementById("navUserMenu");
+      const userMenuSummary = document.getElementById("userMenuSummary");
+      if (headerNav) headerNav.style.display = "none";
+      if (navUserMenu) navUserMenu.style.display = "block";
+      if (userMenuSummary) userMenuSummary.textContent = "Hi, " + username;
+      wireLogout();
+    }
+
+    function showGuestUI() {
+      const headerNav = document.getElementById("headerNav");
+      const navUserMenu = document.getElementById("navUserMenu");
+      if (headerNav) headerNav.style.display = "inline-flex";
+      if (navUserMenu) {
+        navUserMenu.style.display = "none";
+        navUserMenu.removeAttribute("open");
       }
     }
 
@@ -1533,13 +1542,16 @@
           showUserUI(data.user);
         } else {
           localStorage.removeItem("auth_token");
+          showGuestUI();
         }
       } catch (err) {
         console.error("Auth check failed:", err);
         localStorage.removeItem("auth_token");
+        showGuestUI();
       }
     }
 
+    showGuestUI();
     checkUser();
 
     function initContactModal() {
@@ -1607,11 +1619,9 @@
         });
       }
 
-      addContactListeners(document.getElementById("contactUsLink"), "Contact Us");
+      addContactListeners(document.getElementById("contactUsLink"), "Contact");
       addContactListeners(document.getElementById("leaveReviewLink"), "Leave a review");
-      addContactListeners(document.getElementById("contactUsLinkMobile"), "Contact Us");
-      addContactListeners(document.getElementById("leaveReviewLinkMobile"), "Leave a review");
-      addContactListeners(document.getElementById("footerContactLink"), "Contact Us");
+      addContactListeners(document.getElementById("footerContactLink"), "Contact");
       addContactListeners(document.getElementById("footerSupportLink"), "Support");
 
       if (contactClose) {
