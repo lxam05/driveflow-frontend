@@ -241,6 +241,18 @@
       margin-bottom: 2rem;
     }
 
+    .hero .subtext a,
+    .hero .subtext a:link,
+    .hero .subtext a:visited {
+      color: #555;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .hero .subtext a:hover {
+      color: #333;
+    }
+
     .hero-cta {
       display: inline-block;
       padding: 0.875rem 1.75rem;
@@ -1113,7 +1125,7 @@
           </div>
           <p class="hero-tagline">Train where you'll be Tested</p>
           <p class="subtext">Practice real Irish driving test routes for your test centre and go into your test confident because you already know the tricky spots examiners use.
-            <br>If you're feeling kind after passing your test don't forget to come back and tell us the route your were taken on using the Help Others button.
+            <br>If you're feeling kind after passing your test don't forget to come back and tell us the route you were taken on using the <a href="#" id="helpOthersHeroLink">Help Others</a> button.
           </p>
           <div class="hero-bottom-row">
             <div class="hero-cta-group">
@@ -1642,16 +1654,18 @@
         });
       }
 
-      addContactListeners(document.getElementById("contactUsLink"), "Contact");
-      var helpOthersLink = document.getElementById("leaveReviewLink");
-      if (helpOthersLink) {
-        helpOthersLink.addEventListener("click", function(e) {
-          e.preventDefault();
-          showContactModal("Tell us your route", {
-            intro: "Simply just type out the main landmarks you were taken through during your test, it helps us greatly."
-          });
+      function openHelpOthersModal(e) {
+        if (e) e.preventDefault();
+        showContactModal("Tell us your route", {
+          intro: "Simply just type out the main landmarks you were taken through during your test, it helps us greatly."
         });
       }
+
+      addContactListeners(document.getElementById("contactUsLink"), "Contact");
+      var helpOthersLink = document.getElementById("leaveReviewLink");
+      if (helpOthersLink) helpOthersLink.addEventListener("click", openHelpOthersModal);
+      var helpOthersHeroLink = document.getElementById("helpOthersHeroLink");
+      if (helpOthersHeroLink) helpOthersHeroLink.addEventListener("click", openHelpOthersModal);
       addContactListeners(document.getElementById("footerContactLink"), "Contact");
       addContactListeners(document.getElementById("footerSupportLink"), "Support");
 
