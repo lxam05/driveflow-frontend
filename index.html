@@ -1098,7 +1098,7 @@
   <header>
     <a href="index.html" class="logo" style="color: inherit; text-decoration: none;">Driveflow</a>
     <nav>
-      <a href="#" id="leaveReviewLink">Help Others</a>
+      <a href="#help-others" id="leaveReviewLink">Help Others</a>
       <a href="dashboard.html" id="dashboardNavLink" style="display: none;">Dashboard</a>
       <span id="headerNav">
         <a href="login.html">Log in</a>
@@ -1125,7 +1125,7 @@
           </div>
           <p class="hero-tagline">Train where you'll be Tested</p>
           <p class="subtext">Practice real Irish driving test routes for your test centre and go into your test confident because you already know the tricky spots examiners use.
-            <br>If you're feeling kind after passing your test don't forget to come back and tell us the route you were taken on using the <a href="#" id="helpOthersHeroLink">Help Others</a> button.
+            <br>If you're feeling kind after passing your test don't forget to come back and tell us the route you were taken on using the <a href="#help-others" id="helpOthersHeroLink">Help Others</a> button.
           </p>
           <div class="hero-bottom-row">
             <div class="hero-cta-group">
@@ -1666,6 +1666,13 @@
       if (helpOthersLink) helpOthersLink.addEventListener("click", openHelpOthersModal);
       var helpOthersHeroLink = document.getElementById("helpOthersHeroLink");
       if (helpOthersHeroLink) helpOthersHeroLink.addEventListener("click", openHelpOthersModal);
+      function openHelpOthersFromHash() {
+        if (window.location.hash === "#help-others") {
+          openHelpOthersModal();
+        }
+      }
+      openHelpOthersFromHash();
+      window.addEventListener("hashchange", openHelpOthersFromHash);
       addContactListeners(document.getElementById("footerContactLink"), "Contact");
       addContactListeners(document.getElementById("footerSupportLink"), "Support");
 
