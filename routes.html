@@ -1355,7 +1355,7 @@ function gtag_report_conversion(url, transactionId) {
         { name: "Carrick-on-Shannon", routes: 0 },
         { name: "Castlebar", routes: 5 },
         { name: "Cavan", routes: 6 },
-        { name: "Clifden", routes: 0 },
+        { name: "Clifden", routes: 5 },
         { name: "Clonmel", routes: 5 },
         { name: "Clybaun", displayName: "Clybaun Galway", routes: 0 },
         { name: "Donegal", routes: 5 },
@@ -1371,7 +1371,7 @@ function gtag_report_conversion(url, transactionId) {
         { name: "Killarney", routes: 0 },
         { name: "Killester", routes: 5 },
         { name: "Kilrush", routes: 0 },
-        { name: "Letterkenny", routes: 0 },
+        { name: "Letterkenny", routes: 5 },
         { name: "Limerick – Castlemungret", routes: 0 },
         { name: "Longford", routes: 0 },
         { name: "Loughrea", routes: 5 },
@@ -1381,12 +1381,10 @@ function gtag_report_conversion(url, transactionId) {
         { name: "Mitchelstown", routes: 6 },
         { name: "Monaghan", routes: 0 },
         { name: "Mulhuddart", routes: 5 },
-        { name: "Mullingar", routes: 0 },
+        { name: "Mullingar", routes: 5 },
         { name: "Naas", routes: 7 },
         { name: "Navan", routes: 6 },
         { name: "Nenagh", routes: 7 },
-        { name: "Newcastle West", routes: 0 },
-        { name: "Newcastle West – Longcourt House Hotel", routes: 0 },
         { name: "Portlaoise", routes: 0 },
         { name: "Raheny", routes: 5 },
         { name: "Roscommon", routes: 5 },
@@ -1395,9 +1393,9 @@ function gtag_report_conversion(url, transactionId) {
         { name: "Sligo", routes: 0 },
         { name: "Tallaght", routes: 7 },
         { name: "Thurles", routes: 0 },
-        { name: "Tipperary", routes: 0 },
+        { name: "Tipperary", routes: 5 },
         { name: "Tralee", routes: 7 },
-        { name: "Tuam", routes: 0 },
+        { name: "Tuam", routes: 5 },
         { name: "Tullamore", routes: 0 },
         { name: "Waterford", routes: 7 },
         { name: "Westside", displayName: "Westside Galway", routes: 7 },
@@ -1671,14 +1669,6 @@ function gtag_report_conversion(url, transactionId) {
         }
         if (centre.name === "Mullingar") {
             window.location.href = 'mullingar-routes.html';
-            return;
-        }
-        if (centre.name === "Newcastle West") {
-            window.location.href = 'newcastle-west-routes.html';
-            return;
-        }
-        if (centre.name === "Newcastle West – Longcourt House Hotel") {
-            window.location.href = 'newcastle-west-longcourt-house-hotel-routes.html';
             return;
         }
         if (centre.name === "Portlaoise") {
