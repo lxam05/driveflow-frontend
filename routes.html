@@ -906,6 +906,48 @@ function gtag_report_conversion(url, transactionId) {
             font-size: 26px;
         }
     }
+
+    .centre-directory {
+        margin-top: 28px;
+        padding: 24px;
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-card);
+    }
+    .centre-directory h2 {
+        margin: 0 0 8px;
+        font-size: 22px;
+    }
+    .centre-directory > p {
+        margin: 0 0 18px;
+        color: var(--text-muted);
+    }
+    .centre-directory-region {
+        margin-bottom: 18px;
+    }
+    .centre-directory-region h3 {
+        margin: 0 0 8px;
+        font-size: 16px;
+    }
+    .centre-directory-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 14px;
+    }
+    .centre-directory-list a {
+        color: var(--primary);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        font-size: 14px;
+    }
+    .centre-directory-list a:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+    }
 </style>
 </head>
 <body>
@@ -966,13 +1008,102 @@ function gtag_report_conversion(url, transactionId) {
             <div class="why-our-routes">
                 <h2>Driving Test Routes Available by Test Centre</h2>
                 <p>DriveFlow covers RSA driving test centres across every county in Ireland, including:</p>
-                <div class="region-group"><strong>Dublin</strong><br><span>Tallaght · Mulhuddart · Finglas · Raheny · Dún Laoghaire · Deansgrange</span></div>
-                <div class="region-group"><strong>Cork &amp; Munster</strong><br><span>Cork Wilton · Mallow · Waterford · Limerick Woodview · Limerick Castlemungret · Tralee · Clonmel · Dungarvan · Tipperary · Thurles</span></div>
-                <div class="region-group"><strong>Galway &amp; Connacht</strong><br><span>Galway Westside · Galway Carnmore · Tuam · Castlebar · Ballina · Sligo · Roscommon · Clifden · Loughrea</span></div>
-                <div class="region-group"><strong>Leinster</strong><br><span>Naas · Wicklow · Gorey · Wexford · Carlow · Kilkenny · Portlaoise · Athlone · Tullamore · Mullingar · Longford · Birr</span></div>
-                <div class="region-group"><strong>Ulster &amp; Border Counties</strong><br><span>Letterkenny · Cavan · Monaghan · Dundalk · Drogheda</span></div>
-                <div class="region-group"><strong>Kerry &amp; Clare</strong><br><span>Killarney · Tralee · Ennis · Shannon · Kilrush</span></div>
-                <p style="margin-top: 16px; font-weight: 600;">Search your local driving test centre in the list above.</p>
+<nav class="centre-directory" aria-label="Driving test centres">
+<h2>All Irish driving test centres</h2>
+<p>Browse every RSA test centre available on DriveFlow. These links open each centre guide.</p>
+<section class="centre-directory-region"><h3>Dublin & Greater Dublin</h3>
+<ul class="centre-directory-list">
+<li><a href="/dun-laoghaire-routes.html">Dún Laoghaire</a></li>
+<li><a href="/finglas-routes.html">Finglas</a></li>
+<li><a href="/killester-routes.html">Killester</a></li>
+<li><a href="/mulhuddart-routes.html">Mulhuddart</a></li>
+<li><a href="/naas-routes.html">Naas</a></li>
+<li><a href="/raheny-routes.html">Raheny</a></li>
+<li><a href="/tallaght-routes.html">Tallaght</a></li>
+<li><a href="/wicklow-routes.html">Wicklow</a></li>
+</ul></section>
+<section class="centre-directory-region"><h3>Cork</h3>
+<ul class="centre-directory-list">
+<li><a href="/ballincollig-routes.html">Ballincollig</a></li>
+<li><a href="/mallow-routes.html">Mallow</a></li>
+<li><a href="/mitchelstown-routes.html">Mitchelstown</a></li>
+<li><a href="/skibbereen-routes.html">Skibbereen</a></li>
+<li><a href="/wilton-routes.html">Wilton</a></li>
+<li><a href="/woodview-routes.html">Woodview</a></li>
+</ul></section>
+<section class="centre-directory-region"><h3>Galway</h3>
+<ul class="centre-directory-list">
+<li><a href="/carnmore-routes.html">Carnmore</a></li>
+<li><a href="/clifden-routes.html">Clifden</a></li>
+<li><a href="/clybaun-routes.html">Clybaun Galway</a></li>
+<li><a href="/loughrea-routes.html">Loughrea</a></li>
+<li><a href="/tuam-routes.html">Tuam</a></li>
+<li><a href="/westside-routes.html">Westside Galway</a></li>
+</ul></section>
+<section class="centre-directory-region"><h3>Limerick & Clare</h3>
+<ul class="centre-directory-list">
+<li><a href="/ennis-routes.html">Ennis</a></li>
+<li><a href="/kilrush-routes.html">Kilrush</a></li>
+<li><a href="/limerick-castlemungret-routes.html">Limerick – Castlemungret</a></li>
+<li><a href="/maldron-hotel-routes.html">Maldron Hotel Limerick</a></li>
+<li><a href="/newcastle-west-routes.html">Newcastle West</a></li>
+<li><a href="/newcastle-west-longcourt-house-hotel-routes.html">Newcastle West – Longcourt House Hotel</a></li>
+<li><a href="/shannon-routes.html">Shannon</a></li>
+</ul></section>
+<section class="centre-directory-region"><h3>Kerry</h3>
+<ul class="centre-directory-list">
+<li><a href="/killarney-routes.html">Killarney</a></li>
+<li><a href="/tralee-routes.html">Tralee</a></li>
+</ul></section>
+<section class="centre-directory-region"><h3>Waterford & Tipperary</h3>
+<ul class="centre-directory-list">
+<li><a href="/clonmel-routes.html">Clonmel</a></li>
+<li><a href="/dungarvan-routes.html">Dungarvan</a></li>
+<li><a href="/nenagh-routes.html">Nenagh</a></li>
+<li><a href="/thurles-routes.html">Thurles</a></li>
+<li><a href="/tipperary-routes.html">Tipperary</a></li>
+<li><a href="/waterford-routes.html">Waterford</a></li>
+</ul></section>
+<section class="centre-directory-region"><h3>Wexford, Carlow & Kilkenny</h3>
+<ul class="centre-directory-list">
+<li><a href="/carlow-routes.html">Carlow</a></li>
+<li><a href="/carlow-talbot-hotel-routes.html">Carlow – Talbot Hotel</a></li>
+<li><a href="/gorey-routes.html">Gorey</a></li>
+<li><a href="/kilkenny-government-buildings-routes.html">Kilkenny – Government Buildings</a></li>
+<li><a href="/kilkenny-oloughlin-gaels-routes.html">Kilkenny – O'Loughlin Gaels</a></li>
+<li><a href="/portlaoise-routes.html">Portlaoise</a></li>
+<li><a href="/wexford-routes.html">Wexford</a></li>
+</ul></section>
+<section class="centre-directory-region"><h3>Midlands</h3>
+<ul class="centre-directory-list">
+<li><a href="/athlone-routes.html">Athlone</a></li>
+<li><a href="/birr-county-arms-hotel-routes.html">Birr – County Arms Hotel</a></li>
+<li><a href="/longford-routes.html">Longford</a></li>
+<li><a href="/mullingar-routes.html">Mullingar</a></li>
+<li><a href="/roscommon-routes.html">Roscommon</a></li>
+<li><a href="/tullamore-routes.html">Tullamore</a></li>
+</ul></section>
+<section class="centre-directory-region"><h3>North East</h3>
+<ul class="centre-directory-list">
+<li><a href="/cavan-routes.html">Cavan</a></li>
+<li><a href="/drogheda-routes.html">Drogheda</a></li>
+<li><a href="/dundalk-routes.html">Dundalk</a></li>
+<li><a href="/maple-house-routes.html">Maple House</a></li>
+<li><a href="/monaghan-routes.html">Monaghan</a></li>
+<li><a href="/navan-routes.html">Navan</a></li>
+</ul></section>
+<section class="centre-directory-region"><h3>North West</h3>
+<ul class="centre-directory-list">
+<li><a href="/ballina-routes.html">Ballina</a></li>
+<li><a href="/buncrana-routes.html">Buncrana</a></li>
+<li><a href="/carrick-on-shannon-routes.html">Carrick-on-Shannon</a></li>
+<li><a href="/castlebar-routes.html">Castlebar</a></li>
+<li><a href="/donegal-routes.html">Donegal</a></li>
+<li><a href="/letterkenny-routes.html">Letterkenny</a></li>
+<li><a href="/sligo-routes.html">Sligo</a></li>
+</ul></section>
+</nav>
+                <p style="margin-top: 16px; font-weight: 600;">Or search your local driving test centre in the selector above.</p>
             </div>
 
             <div class="why-our-routes" style="text-align: center;">
@@ -1720,6 +1851,67 @@ function gtag_report_conversion(url, transactionId) {
     // Modal handlers removed since modal HTML is removed
 </script>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.driveflow.ie/#organization",
+      "name": "DriveFlow",
+      "url": "https://www.driveflow.ie/",
+      "logo": "https://www.driveflow.ie/favicon.png",
+      "description": "DriveFlow helps Irish learner drivers practise RSA driving test routes with Google Maps navigation.",
+      "areaServed": {
+        "@type": "Country",
+        "name": "Ireland"
+      },
+      "sameAs": []
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.driveflow.ie/#website",
+      "url": "https://www.driveflow.ie/",
+      "name": "DriveFlow",
+      "publisher": {
+        "@id": "https://www.driveflow.ie/#organization"
+      },
+      "inLanguage": "en-IE"
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": "https://www.driveflow.ie/routes.html#webpage",
+      "url": "https://www.driveflow.ie/routes.html",
+      "name": "Driving Test Routes Ireland (2026) — Google Maps Practice | DriveFlow",
+      "description": "Practice Irish driving test routes (2026) with real Google Maps navigation across RSA test centres.",
+      "isPartOf": {
+        "@id": "https://www.driveflow.ie/#website"
+      },
+      "about": {
+        "@id": "https://www.driveflow.ie/#organization"
+      },
+      "inLanguage": "en-IE"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.driveflow.ie/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Driving Test Centres",
+          "item": "https://www.driveflow.ie/routes.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
 </body>
 </html>
 

@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+
+# App / auth surfaces — low SEO value; prefer crawl budget on public guides & centres
+Disallow: /dashboard.html
+Disallow: /payment.html
+Disallow: /forgot-password.html
+Disallow: /reset-password.html
+Disallow: /mock-test-results.html
+Disallow: /route-detail.html
+
+# Do not block shared CSS/JS required for rendering
+Allow: /shared.css
+Allow: /shared.js
+
+Sitemap: https://www.driveflow.ie/sitemap.xml

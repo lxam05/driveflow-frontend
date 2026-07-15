@@ -29,6 +29,9 @@
   "castlebar": {
     "apiSlug": "castlebar"
   },
+  "cavan": {
+    "apiSlug": "cavan"
+  },
   "clifden": {
     "apiSlug": "clifden"
   },
@@ -68,6 +71,9 @@
   "kilkenny-oloughlin-gaels": {
     "apiSlug": "kilkenny-oloughlin-gaels"
   },
+  "killarney": {
+    "apiSlug": "killarney"
+  },
   "killester": {
     "apiSlug": "killester"
   },
@@ -76,6 +82,9 @@
   },
   "letterkenny": {
     "apiSlug": "letterkenny"
+  },
+  "limerick-castlemungret": {
+    "apiSlug": "limerick-castlemungret"
   },
   "loughrea": {
     "apiSlug": "loughrea"
@@ -92,6 +101,9 @@
   "maple-house": {
     "apiSlug": "maple-house"
   },
+  "mitchelstown": {
+    "apiSlug": "mitchelstown"
+  },
   "monaghan": {
     "apiSlug": "monaghan"
   },
@@ -100,6 +112,9 @@
   },
   "mullingar": {
     "apiSlug": "mullingar"
+  },
+  "naas": {
+    "apiSlug": "naas"
   },
   "navan": {
     "apiSlug": "navan"
@@ -116,6 +131,9 @@
   "portlaoise": {
     "apiSlug": "portlaoise"
   },
+  "raheny": {
+    "apiSlug": "raheny"
+  },
   "roscommon": {
     "apiSlug": "roscommon"
   },
@@ -127,6 +145,9 @@
   },
   "sligo": {
     "apiSlug": "sligo"
+  },
+  "tallaght": {
+    "apiSlug": "tallaght"
   },
   "thurles": {
     "apiSlug": "thurles"
@@ -140,11 +161,23 @@
   "tuam": {
     "apiSlug": "tuam"
   },
+  "tullamore": {
+    "apiSlug": "tullamore"
+  },
   "waterford": {
     "apiSlug": "waterford"
   },
+  "westside": {
+    "apiSlug": "westside"
+  },
+  "wexford": {
+    "apiSlug": "wexford"
+  },
   "wicklow": {
     "apiSlug": "wicklow"
+  },
+  "wilton": {
+    "apiSlug": "wilton"
   },
   "woodview": {
     "apiSlug": "woodview"

@@ -435,14 +435,18 @@ def ensure_seo_tags(html: str, published_url: str, topic: str) -> str:
 
 
 def add_to_sitemap(published_url: str) -> bool:
-    """Append guide URL to sitemap.xml if not already listed. Returns True if added."""
+    """Append guide URL to sitemap.xml if not already listed. Returns True if added.
+
+    Dedupes by exact <loc> match to avoid reintroducing duplicate URLs.
+    """
     if not SITEMAP_PATH.exists():
         print(f"WARNING: {SITEMAP_PATH} not found; skipping sitemap update.")
         return False
 
     loc = f"{SITE_ORIGIN}{published_url}"
     content = SITEMAP_PATH.read_text(encoding="utf-8")
-    if loc in content:
+    # Exact <loc> match only (avoids false positives from substring overlaps)
+    if f"<loc>{loc}</loc>" in content:
         print(f"Sitemap already contains: {loc}")
         return False
 

@@ -1,0 +1,1037 @@
+{
+  "siteOrigin": "https://www.driveflow.ie",
+  "organizationId": "https://www.driveflow.ie/#organization",
+  "websiteId": "https://www.driveflow.ie/#website",
+  "ogImage": "https://www.driveflow.ie/backgroundForWeb.jpg",
+  "centres": [
+    {
+      "slug": "athlone",
+      "displayName": "Athlone",
+      "county": "Westmeath",
+      "region": "Midlands",
+      "nearby": [
+        "mullingar",
+        "tullamore",
+        "longford",
+        "birr-county-arms-hotel",
+        "roscommon"
+      ],
+      "title": "Athlone Driving Test Centre Routes (Ireland) | DriveFlow",
+      "description": "Prepare for the Athlone driving test centre in County Westmeath. Study local road patterns, junctions and Google Maps practice routes before test day.",
+      "canonical": "https://www.driveflow.ie/athlone-routes.html",
+      "h1": "Athlone Driving Test Routes"
+    },
+    {
+      "slug": "ballina",
+      "displayName": "Ballina",
+      "county": "Mayo",
+      "region": "NorthWest",
+      "nearby": [
+        "sligo",
+        "letterkenny",
+        "donegal",
+        "buncrana",
+        "castlebar"
+      ],
+      "title": "Ballina Driving Test Routes – Google Maps Practice | DriveFlow",
+      "description": "Get familiar with Ballina RSA driving test routes in Mayo. Review common examiner areas, roundabouts and manoeuvres used by Irish learners.",
+      "canonical": "https://www.driveflow.ie/ballina-routes.html",
+      "h1": "Ballina Driving Test Routes"
+    },
+    {
+      "slug": "ballincollig",
+      "displayName": "Ballincollig",
+      "county": "Cork",
+      "region": "Cork",
+      "nearby": [
+        "wilton",
+        "mallow",
+        "mitchelstown",
+        "skibbereen",
+        "woodview"
+      ],
+      "title": "Practice Ballincollig Driving Test Routes | DriveFlow Ireland",
+      "description": "Ballincollig driving test routes for County Cork learners. Practise realistic Google Maps navigation covering junctions, estates and speed-limit changes.",
+      "canonical": "https://www.driveflow.ie/ballincollig-routes.html",
+      "h1": "Ballincollig Driving Test Routes"
+    },
+    {
+      "slug": "birr-county-arms-hotel",
+      "displayName": "Birr – County Arms Hotel",
+      "county": "Offaly",
+      "region": "Midlands",
+      "nearby": [
+        "athlone",
+        "mullingar",
+        "tullamore",
+        "longford",
+        "roscommon"
+      ],
+      "title": "Birr – County Arms Hotel RSA Test Centre Routes & Local Tips | DriveFlow",
+      "description": "Learn how Birr – County Arms Hotel driving test routes typically run around County Offaly. Build confidence with local tips and structured route practice on DriveFlow.",
+      "canonical": "https://www.driveflow.ie/birr-county-arms-hotel-routes.html",
+      "h1": "Birr – County Arms Hotel Driving Test Routes"
+    },
+    {
+      "slug": "buncrana",
+      "displayName": "Buncrana",
+      "county": "Donegal",
+      "region": "NorthWest",
+      "nearby": [
+        "sligo",
+        "letterkenny",
+        "donegal",
+        "ballina",
+        "castlebar"
+      ],
+      "title": "Buncrana Driving Test Routes in County Donegal | DriveFlow",
+      "description": "County Donegal learners: practise Buncrana driving test centre routes with Google Maps. Focus on trickier junctions and the areas examiners reuse most often.",
+      "canonical": "https://www.driveflow.ie/buncrana-routes.html",
+      "h1": "Buncrana Driving Test Routes"
+    },
+    {
+      "slug": "carlow",
+      "displayName": "Carlow",
+      "county": "Carlow",
+      "region": "Wexford_Carlow_Kilkenny",
+      "nearby": [
+        "wexford",
+        "gorey",
+        "carlow-talbot-hotel",
+        "kilkenny-oloughlin-gaels",
+        "kilkenny-government-buildings"
+      ],
+      "title": "Carlow Driving Test Centre Routes (Ireland) | DriveFlow",
+      "description": "Prepare for the Carlow driving test centre in County Carlow. Study local road patterns, junctions and Google Maps practice routes before test day.",
+      "canonical": "https://www.driveflow.ie/carlow-routes.html",
+      "h1": "Carlow Driving Test Routes"
+    },
+    {
+      "slug": "carlow-talbot-hotel",
+      "displayName": "Carlow – Talbot Hotel",
+      "county": "Carlow",
+      "region": "Wexford_Carlow_Kilkenny",
+      "nearby": [
+        "wexford",
+        "gorey",
+        "carlow",
+        "kilkenny-oloughlin-gaels",
+        "kilkenny-government-buildings"
+      ],
+      "title": "Carlow – Talbot Hotel Driving Test Routes – Google Maps Practice | DriveFlow",
+      "description": "Get familiar with Carlow – Talbot Hotel RSA driving test routes in Carlow. Review common examiner areas, roundabouts and manoeuvres used by Irish learners.",
+      "canonical": "https://www.driveflow.ie/carlow-talbot-hotel-routes.html",
+      "h1": "Carlow – Talbot Hotel Driving Test Routes"
+    },
+    {
+      "slug": "carnmore",
+      "displayName": "Carnmore",
+      "county": "Galway",
+      "region": "Galway",
+      "nearby": [
+        "westside",
+        "clybaun",
+        "loughrea",
+        "tuam",
+        "clifden"
+      ],
+      "title": "Practice Carnmore Driving Test Routes | DriveFlow Ireland",
+      "description": "Carnmore driving test routes for County Galway learners. Practise realistic Google Maps navigation covering junctions, estates and speed-limit changes.",
+      "canonical": "https://www.driveflow.ie/carnmore-routes.html",
+      "h1": "Carnmore Driving Test Routes"
+    },
+    {
+      "slug": "carrick-on-shannon",
+      "displayName": "Carrick-on-Shannon",
+      "county": "Leitrim",
+      "region": "NorthWest",
+      "nearby": [
+        "sligo",
+        "letterkenny",
+        "donegal",
+        "buncrana",
+        "ballina"
+      ],
+      "title": "Carrick-on-Shannon RSA Test Centre Routes & Local Tips | DriveFlow",
+      "description": "Learn how Carrick-on-Shannon driving test routes typically run around County Leitrim. Build confidence with local tips and structured route practice on DriveFlow.",
+      "canonical": "https://www.driveflow.ie/carrick-on-shannon-routes.html",
+      "h1": "Carrick-on-Shannon Driving Test Routes"
+    },
+    {
+      "slug": "castlebar",
+      "displayName": "Castlebar",
+      "county": "Mayo",
+      "region": "NorthWest",
+      "nearby": [
+        "sligo",
+        "letterkenny",
+        "donegal",
+        "buncrana",
+        "ballina"
+      ],
+      "title": "Castlebar Driving Test Routes in County Mayo | DriveFlow",
+      "description": "County Mayo learners: practise Castlebar driving test centre routes with Google Maps. Focus on trickier junctions and the areas examiners reuse most often.",
+      "canonical": "https://www.driveflow.ie/castlebar-routes.html",
+      "h1": "Castlebar Driving Test Routes"
+    },
+    {
+      "slug": "cavan",
+      "displayName": "Cavan",
+      "county": "Cavan",
+      "region": "NorthEast",
+      "nearby": [
+        "drogheda",
+        "dundalk",
+        "navan",
+        "monaghan",
+        "maple-house"
+      ],
+      "title": "Cavan Driving Test Centre Routes (Ireland) | DriveFlow",
+      "description": "Prepare for the Cavan driving test centre in County Cavan. Study local road patterns, junctions and Google Maps practice routes before test day.",
+      "canonical": "https://www.driveflow.ie/cavan-routes.html",
+      "h1": "Cavan Driving Test Routes"
+    },
+    {
+      "slug": "clifden",
+      "displayName": "Clifden",
+      "county": "Galway",
+      "region": "Galway",
+      "nearby": [
+        "westside",
+        "clybaun",
+        "carnmore",
+        "loughrea",
+        "tuam"
+      ],
+      "title": "Clifden Driving Test Routes – Google Maps Practice | DriveFlow",
+      "description": "Get familiar with Clifden RSA driving test routes in Galway. Review common examiner areas, roundabouts and manoeuvres used by Irish learners.",
+      "canonical": "https://www.driveflow.ie/clifden-routes.html",
+      "h1": "Clifden Driving Test Routes"
+    },
+    {
+      "slug": "clonmel",
+      "displayName": "Clonmel",
+      "county": "Tipperary",
+      "region": "Waterford_Tipperary",
+      "nearby": [
+        "waterford",
+        "dungarvan",
+        "nenagh",
+        "thurles",
+        "tipperary"
+      ],
+      "title": "Practice Clonmel Driving Test Routes | DriveFlow Ireland",
+      "description": "Clonmel driving test routes for County Tipperary learners. Practise realistic Google Maps navigation covering junctions, estates and speed-limit changes.",
+      "canonical": "https://www.driveflow.ie/clonmel-routes.html",
+      "h1": "Clonmel Driving Test Routes"
+    },
+    {
+      "slug": "clybaun",
+      "displayName": "Clybaun Galway",
+      "county": "Galway",
+      "region": "Galway",
+      "nearby": [
+        "westside",
+        "carnmore",
+        "loughrea",
+        "tuam",
+        "clifden"
+      ],
+      "title": "Clybaun Galway RSA Test Centre Routes & Local Tips | DriveFlow",
+      "description": "Learn how Clybaun Galway driving test routes typically run around County Galway. Build confidence with local tips and structured route practice on DriveFlow.",
+      "canonical": "https://www.driveflow.ie/clybaun-routes.html",
+      "h1": "Clybaun Galway Driving Test Routes"
+    },
+    {
+      "slug": "donegal",
+      "displayName": "Donegal",
+      "county": "Donegal",
+      "region": "NorthWest",
+      "nearby": [
+        "sligo",
+        "letterkenny",
+        "buncrana",
+        "ballina",
+        "castlebar"
+      ],
+      "title": "Donegal Driving Test Routes in County Donegal | DriveFlow",
+      "description": "County Donegal learners: practise Donegal driving test centre routes with Google Maps. Focus on trickier junctions and the areas examiners reuse most often.",
+      "canonical": "https://www.driveflow.ie/donegal-routes.html",
+      "h1": "Donegal Driving Test Routes"
+    },
+    {
+      "slug": "drogheda",
+      "displayName": "Drogheda",
+      "county": "Louth",
+      "region": "NorthEast",
+      "nearby": [
+        "dundalk",
+        "navan",
+        "cavan",
+        "monaghan",
+        "maple-house"
+      ],
+      "title": "Drogheda Driving Test Centre Routes (Ireland) | DriveFlow",
+      "description": "Prepare for the Drogheda driving test centre in County Louth. Study local road patterns, junctions and Google Maps practice routes before test day.",
+      "canonical": "https://www.driveflow.ie/drogheda-routes.html",
+      "h1": "Drogheda Driving Test Routes"
+    },
+    {
+      "slug": "dun-laoghaire",
+      "displayName": "Dún Laoghaire",
+      "county": "Dublin",
+      "region": "Dublin",
+      "nearby": [
+        "tallaght",
+        "mulhuddart",
+        "finglas",
+        "raheny",
+        "killester"
+      ],
+      "title": "Dún Laoghaire Driving Test Routes – Google Maps Practice | DriveFlow",
+      "description": "Get familiar with Dún Laoghaire RSA driving test routes in Dublin. Review common examiner areas, roundabouts and manoeuvres used by Irish learners.",
+      "canonical": "https://www.driveflow.ie/dun-laoghaire-routes.html",
+      "h1": "Dún Laoghaire Driving Test Routes"
+    },
+    {
+      "slug": "dundalk",
+      "displayName": "Dundalk",
+      "county": "Louth",
+      "region": "NorthEast",
+      "nearby": [
+        "drogheda",
+        "navan",
+        "cavan",
+        "monaghan",
+        "maple-house"
+      ],
+      "title": "Practice Dundalk Driving Test Routes | DriveFlow Ireland",
+      "description": "Dundalk driving test routes for County Louth learners. Practise realistic Google Maps navigation covering junctions, estates and speed-limit changes.",
+      "canonical": "https://www.driveflow.ie/dundalk-routes.html",
+      "h1": "Dundalk Driving Test Routes"
+    },
+    {
+      "slug": "dungarvan",
+      "displayName": "Dungarvan",
+      "county": "Waterford",
+      "region": "Waterford_Tipperary",
+      "nearby": [
+        "waterford",
+        "clonmel",
+        "nenagh",
+        "thurles",
+        "tipperary"
+      ],
+      "title": "Dungarvan RSA Test Centre Routes & Local Tips | DriveFlow",
+      "description": "Learn how Dungarvan driving test routes typically run around County Waterford. Build confidence with local tips and structured route practice on DriveFlow.",
+      "canonical": "https://www.driveflow.ie/dungarvan-routes.html",
+      "h1": "Dungarvan Driving Test Routes"
+    },
+    {
+      "slug": "ennis",
+      "displayName": "Ennis",
+      "county": "Clare",
+      "region": "Limerick_Clare",
+      "nearby": [
+        "limerick-castlemungret",
+        "newcastle-west",
+        "newcastle-west-longcourt-house-hotel",
+        "shannon",
+        "kilrush"
+      ],
+      "title": "Ennis Driving Test Routes in County Clare | DriveFlow",
+      "description": "County Clare learners: practise Ennis driving test centre routes with Google Maps. Focus on trickier junctions and the areas examiners reuse most often.",
+      "canonical": "https://www.driveflow.ie/ennis-routes.html",
+      "h1": "Ennis Driving Test Routes"
+    },
+    {
+      "slug": "finglas",
+      "displayName": "Finglas",
+      "county": "Dublin",
+      "region": "Dublin",
+      "nearby": [
+        "tallaght",
+        "mulhuddart",
+        "raheny",
+        "killester",
+        "dun-laoghaire"
+      ],
+      "title": "Finglas Driving Test Centre Routes (Ireland) | DriveFlow",
+      "description": "Prepare for the Finglas driving test centre in County Dublin. Study local road patterns, junctions and Google Maps practice routes before test day.",
+      "canonical": "https://www.driveflow.ie/finglas-routes.html",
+      "h1": "Finglas Driving Test Routes"
+    },
+    {
+      "slug": "gorey",
+      "displayName": "Gorey",
+      "county": "Wexford",
+      "region": "Wexford_Carlow_Kilkenny",
+      "nearby": [
+        "wexford",
+        "carlow",
+        "carlow-talbot-hotel",
+        "kilkenny-oloughlin-gaels",
+        "kilkenny-government-buildings"
+      ],
+      "title": "Gorey Wexford Driving Test Routes – Local Guide | DriveFlow",
+      "description": "Real local guide to Gorey Wexford driving test routes. Learn which roads, roundabouts and junctions examiners use — and what causes people to fail at this centre.",
+      "canonical": "https://www.driveflow.ie/gorey-routes.html",
+      "h1": "Gorey Driving Test Routes"
+    },
+    {
+      "slug": "kilkenny-government-buildings",
+      "displayName": "Kilkenny – Government Buildings",
+      "county": "Kilkenny",
+      "region": "Wexford_Carlow_Kilkenny",
+      "nearby": [
+        "wexford",
+        "gorey",
+        "carlow",
+        "carlow-talbot-hotel",
+        "kilkenny-oloughlin-gaels"
+      ],
+      "title": "Practice Kilkenny – Government Buildings Driving Test Routes | DriveFlow Ireland",
+      "description": "Kilkenny – Government Buildings driving test routes for County Kilkenny learners. Practise realistic Google Maps navigation covering junctions, estates and speed-limit changes.",
+      "canonical": "https://www.driveflow.ie/kilkenny-government-buildings-routes.html",
+      "h1": "Kilkenny – Government Buildings Driving Test Routes"
+    },
+    {
+      "slug": "kilkenny-oloughlin-gaels",
+      "displayName": "Kilkenny – O'Loughlin Gaels",
+      "county": "Kilkenny",
+      "region": "Wexford_Carlow_Kilkenny",
+      "nearby": [
+        "wexford",
+        "gorey",
+        "carlow",
+        "carlow-talbot-hotel",
+        "kilkenny-government-buildings"
+      ],
+      "title": "Kilkenny (O'Loughlin Gaels) Driving Test Routes | DriveFlow",
+      "description": "Practice Kilkenny (O'Loughlin Gaels) driving test routes using real Google Maps directions. Dublin Road, Ring Road, Hebron area — learn junctions and common mistakes before your exam.",
+      "canonical": "https://www.driveflow.ie/kilkenny-oloughlin-gaels-routes.html",
+      "h1": "Kilkenny – O'Loughlin Gaels Driving Test Routes"
+    },
+    {
+      "slug": "killarney",
+      "displayName": "Killarney",
+      "county": "Kerry",
+      "region": "Kerry",
+      "nearby": [
+        "tralee"
+      ],
+      "title": "Killarney Driving Test Routes in County Kerry | DriveFlow",
+      "description": "County Kerry learners: practise Killarney driving test centre routes with Google Maps. Focus on trickier junctions and the areas examiners reuse most often.",
+      "canonical": "https://www.driveflow.ie/killarney-routes.html",
+      "h1": "Killarney Driving Test Routes"
+    },
+    {
+      "slug": "killester",
+      "displayName": "Killester",
+      "county": "Dublin",
+      "region": "Dublin",
+      "nearby": [
+        "tallaght",
+        "mulhuddart",
+        "finglas",
+        "raheny",
+        "dun-laoghaire"
+      ],
+      "title": "Killester Driving Test Routes (2026) – Maps, Tips & Common Fail Areas | DriveFlow",
+      "description": "Practice real Killester driving test routes with Google Maps, examiner tips, fail hotspots, roundabout guidance, and local junction walkthroughs used by Dublin learners in 2026.",
+      "canonical": "https://www.driveflow.ie/killester-routes.html",
+      "h1": "Killester Driving Test Routes"
+    },
+    {
+      "slug": "kilrush",
+      "displayName": "Kilrush",
+      "county": "Clare",
+      "region": "Limerick_Clare",
+      "nearby": [
+        "limerick-castlemungret",
+        "newcastle-west",
+        "newcastle-west-longcourt-house-hotel",
+        "shannon",
+        "ennis"
+      ],
+      "title": "Kilrush Driving Test Routes – Google Maps Practice | DriveFlow",
+      "description": "Get familiar with Kilrush RSA driving test routes in Clare. Review common examiner areas, roundabouts and manoeuvres used by Irish learners.",
+      "canonical": "https://www.driveflow.ie/kilrush-routes.html",
+      "h1": "Kilrush Driving Test Routes"
+    },
+    {
+      "slug": "letterkenny",
+      "displayName": "Letterkenny",
+      "county": "Donegal",
+      "region": "NorthWest",
+      "nearby": [
+        "sligo",
+        "donegal",
+        "buncrana",
+        "ballina",
+        "castlebar"
+      ],
+      "title": "Practice Letterkenny Driving Test Routes | DriveFlow Ireland",
+      "description": "Letterkenny driving test routes for County Donegal learners. Practise realistic Google Maps navigation covering junctions, estates and speed-limit changes.",
+      "canonical": "https://www.driveflow.ie/letterkenny-routes.html",
+      "h1": "Letterkenny Driving Test Routes"
+    },
+    {
+      "slug": "limerick-castlemungret",
+      "displayName": "Limerick – Castlemungret",
+      "county": "Limerick",
+      "region": "Limerick_Clare",
+      "nearby": [
+        "newcastle-west",
+        "newcastle-west-longcourt-house-hotel",
+        "shannon",
+        "ennis",
+        "kilrush"
+      ],
+      "title": "Limerick – Castlemungret RSA Test Centre Routes & Local Tips | DriveFlow",
+      "description": "Learn how Limerick – Castlemungret driving test routes typically run around County Limerick. Build confidence with local tips and structured route practice on DriveFlow.",
+      "canonical": "https://www.driveflow.ie/limerick-castlemungret-routes.html",
+      "h1": "Limerick – Castlemungret Driving Test Routes"
+    },
+    {
+      "slug": "longford",
+      "displayName": "Longford",
+      "county": "Longford",
+      "region": "Midlands",
+      "nearby": [
+        "athlone",
+        "mullingar",
+        "tullamore",
+        "birr-county-arms-hotel",
+        "roscommon"
+      ],
+      "title": "Longford Driving Test Routes in County Longford | DriveFlow",
+      "description": "County Longford learners: practise Longford driving test centre routes with Google Maps. Focus on trickier junctions and the areas examiners reuse most often.",
+      "canonical": "https://www.driveflow.ie/longford-routes.html",
+      "h1": "Longford Driving Test Routes"
+    },
+    {
+      "slug": "loughrea",
+      "displayName": "Loughrea",
+      "county": "Galway",
+      "region": "Galway",
+      "nearby": [
+        "westside",
+        "clybaun",
+        "carnmore",
+        "tuam",
+        "clifden"
+      ],
+      "title": "Loughrea Driving Test Centre Routes (Ireland) | DriveFlow",
+      "description": "Prepare for the Loughrea driving test centre in County Galway. Study local road patterns, junctions and Google Maps practice routes before test day.",
+      "canonical": "https://www.driveflow.ie/loughrea-routes.html",
+      "h1": "Loughrea Driving Test Routes"
+    },
+    {
+      "slug": "maldron-hotel",
+      "displayName": "Maldron Hotel Limerick",
+      "county": "Limerick",
+      "region": "Limerick_Clare",
+      "nearby": [
+        "limerick-castlemungret",
+        "newcastle-west",
+        "newcastle-west-longcourt-house-hotel",
+        "shannon",
+        "ennis"
+      ],
+      "title": "Maldron Hotel Limerick Driving Test Routes – Google Maps Practice | DriveFlow",
+      "description": "Get familiar with Maldron Hotel Limerick RSA driving test routes in Limerick. Review common examiner areas, roundabouts and manoeuvres used by Irish learners.",
+      "canonical": "https://www.driveflow.ie/maldron-hotel-routes.html",
+      "h1": "Maldron Hotel Limerick Driving Test Routes"
+    },
+    {
+      "slug": "mallow",
+      "displayName": "Mallow",
+      "county": "Cork",
+      "region": "Cork",
+      "nearby": [
+        "wilton",
+        "ballincollig",
+        "mitchelstown",
+        "skibbereen",
+        "woodview"
+      ],
+      "title": "Practice Mallow Driving Test Routes | DriveFlow Ireland",
+      "description": "Mallow driving test routes for County Cork learners. Practise realistic Google Maps navigation covering junctions, estates and speed-limit changes.",
+      "canonical": "https://www.driveflow.ie/mallow-routes.html",
+      "h1": "Mallow Driving Test Routes"
+    },
+    {
+      "slug": "maple-house",
+      "displayName": "Maple House",
+      "county": "Meath",
+      "region": "NorthEast",
+      "nearby": [
+        "drogheda",
+        "dundalk",
+        "navan",
+        "cavan",
+        "monaghan"
+      ],
+      "title": "Maple House RSA Test Centre Routes & Local Tips | DriveFlow",
+      "description": "Learn how Maple House driving test routes typically run around County Meath. Build confidence with local tips and structured route practice on DriveFlow.",
+      "canonical": "https://www.driveflow.ie/maple-house-routes.html",
+      "h1": "Maple House Driving Test Routes"
+    },
+    {
+      "slug": "mitchelstown",
+      "displayName": "Mitchelstown",
+      "county": "Cork",
+      "region": "Cork",
+      "nearby": [
+        "wilton",
+        "ballincollig",
+        "mallow",
+        "skibbereen",
+        "woodview"
+      ],
+      "title": "Mitchelstown Driving Test Routes in County Cork | DriveFlow",
+      "description": "County Cork learners: practise Mitchelstown driving test centre routes with Google Maps. Focus on trickier junctions and the areas examiners reuse most often.",
+      "canonical": "https://www.driveflow.ie/mitchelstown-routes.html",
+      "h1": "Mitchelstown Driving Test Routes"
+    },
+    {
+      "slug": "monaghan",
+      "displayName": "Monaghan",
+      "county": "Monaghan",
+      "region": "NorthEast",
+      "nearby": [
+        "drogheda",
+        "dundalk",
+        "navan",
+        "cavan",
+        "maple-house"
+      ],
+      "title": "Monaghan Driving Test Centre Routes (Ireland) | DriveFlow",
+      "description": "Prepare for the Monaghan driving test centre in County Monaghan. Study local road patterns, junctions and Google Maps practice routes before test day.",
+      "canonical": "https://www.driveflow.ie/monaghan-routes.html",
+      "h1": "Monaghan Driving Test Routes"
+    },
+    {
+      "slug": "mulhuddart",
+      "displayName": "Mulhuddart",
+      "county": "Dublin",
+      "region": "Dublin",
+      "nearby": [
+        "tallaght",
+        "finglas",
+        "raheny",
+        "killester",
+        "dun-laoghaire"
+      ],
+      "title": "Mulhuddart Driving Test Routes (2026) + Tips to Pass First Time | DriveFlow",
+      "description": "Mulhuddart driving test routes (2026): real RSA-style practice routes, key roads, pass tips and common mistakes to help you pass your Mulhuddart driving test first time.",
+      "canonical": "https://www.driveflow.ie/mulhuddart-routes.html",
+      "h1": "Mulhuddart Driving Test Routes"
+    },
+    {
+      "slug": "mullingar",
+      "displayName": "Mullingar",
+      "county": "Westmeath",
+      "region": "Midlands",
+      "nearby": [
+        "athlone",
+        "tullamore",
+        "longford",
+        "birr-county-arms-hotel",
+        "roscommon"
+      ],
+      "title": "Practice Mullingar Driving Test Routes | DriveFlow Ireland",
+      "description": "Mullingar driving test routes for County Westmeath learners. Practise realistic Google Maps navigation covering junctions, estates and speed-limit changes.",
+      "canonical": "https://www.driveflow.ie/mullingar-routes.html",
+      "h1": "Mullingar Driving Test Routes"
+    },
+    {
+      "slug": "naas",
+      "displayName": "Naas",
+      "county": "Kildare",
+      "region": "Dublin",
+      "nearby": [
+        "tallaght",
+        "mulhuddart",
+        "finglas",
+        "raheny",
+        "killester"
+      ],
+      "title": "Naas RSA Test Centre Routes & Local Tips | DriveFlow",
+      "description": "Learn how Naas driving test routes typically run around County Kildare. Build confidence with local tips and structured route practice on DriveFlow.",
+      "canonical": "https://www.driveflow.ie/naas-routes.html",
+      "h1": "Naas Driving Test Routes"
+    },
+    {
+      "slug": "navan",
+      "displayName": "Navan",
+      "county": "Meath",
+      "region": "NorthEast",
+      "nearby": [
+        "drogheda",
+        "dundalk",
+        "cavan",
+        "monaghan",
+        "maple-house"
+      ],
+      "title": "Navan Driving Test Routes in County Meath | DriveFlow",
+      "description": "County Meath learners: practise Navan driving test centre routes with Google Maps. Focus on trickier junctions and the areas examiners reuse most often.",
+      "canonical": "https://www.driveflow.ie/navan-routes.html",
+      "h1": "Navan Driving Test Routes"
+    },
+    {
+      "slug": "nenagh",
+      "displayName": "Nenagh",
+      "county": "Tipperary",
+      "region": "Waterford_Tipperary",
+      "nearby": [
+        "waterford",
+        "dungarvan",
+        "clonmel",
+        "thurles",
+        "tipperary"
+      ],
+      "title": "Nenagh Driving Test Centre Routes (Ireland) | DriveFlow",
+      "description": "Prepare for the Nenagh driving test centre in County Tipperary. Study local road patterns, junctions and Google Maps practice routes before test day.",
+      "canonical": "https://www.driveflow.ie/nenagh-routes.html",
+      "h1": "Nenagh Driving Test Routes"
+    },
+    {
+      "slug": "newcastle-west",
+      "displayName": "Newcastle West",
+      "county": "Limerick",
+      "region": "Limerick_Clare",
+      "nearby": [
+        "limerick-castlemungret",
+        "newcastle-west-longcourt-house-hotel",
+        "shannon",
+        "ennis",
+        "kilrush"
+      ],
+      "title": "Newcastle West Driving Test Routes – Google Maps Practice | DriveFlow",
+      "description": "Get familiar with Newcastle West RSA driving test routes in Limerick. Review common examiner areas, roundabouts and manoeuvres used by Irish learners.",
+      "canonical": "https://www.driveflow.ie/newcastle-west-routes.html",
+      "h1": "Newcastle West Driving Test Routes"
+    },
+    {
+      "slug": "newcastle-west-longcourt-house-hotel",
+      "displayName": "Newcastle West – Longcourt House Hotel",
+      "county": "Limerick",
+      "region": "Limerick_Clare",
+      "nearby": [
+        "limerick-castlemungret",
+        "newcastle-west",
+        "shannon",
+        "ennis",
+        "kilrush"
+      ],
+      "title": "Practice Newcastle West – Longcourt House Hotel Driving Test Routes | DriveFlow Ireland",
+      "description": "Newcastle West – Longcourt House Hotel driving test routes for County Limerick learners. Practise realistic Google Maps navigation covering junctions, estates and speed-limit changes.",
+      "canonical": "https://www.driveflow.ie/newcastle-west-longcourt-house-hotel-routes.html",
+      "h1": "Newcastle West – Longcourt House Hotel Driving Test Routes"
+    },
+    {
+      "slug": "portlaoise",
+      "displayName": "Portlaoise",
+      "county": "Laois",
+      "region": "Wexford_Carlow_Kilkenny",
+      "nearby": [
+        "wexford",
+        "gorey",
+        "carlow",
+        "carlow-talbot-hotel",
+        "kilkenny-oloughlin-gaels"
+      ],
+      "title": "Portlaoise RSA Test Centre Routes & Local Tips | DriveFlow",
+      "description": "Learn how Portlaoise driving test routes typically run around County Laois. Build confidence with local tips and structured route practice on DriveFlow.",
+      "canonical": "https://www.driveflow.ie/portlaoise-routes.html",
+      "h1": "Portlaoise Driving Test Routes"
+    },
+    {
+      "slug": "raheny",
+      "displayName": "Raheny",
+      "county": "Dublin",
+      "region": "Dublin",
+      "nearby": [
+        "tallaght",
+        "mulhuddart",
+        "finglas",
+        "killester",
+        "dun-laoghaire"
+      ],
+      "title": "Raheny Driving Test Routes (2026) – Maps, Tips & Common Fail Areas | DriveFlow",
+      "description": "Practice real Raheny driving test routes with Google Maps, local fail hotspots, examiner tips, and junction walkthroughs used by Dublin learners in 2026.",
+      "canonical": "https://www.driveflow.ie/raheny-routes.html",
+      "h1": "Raheny Driving Test Routes"
+    },
+    {
+      "slug": "roscommon",
+      "displayName": "Roscommon",
+      "county": "Roscommon",
+      "region": "Midlands",
+      "nearby": [
+        "athlone",
+        "mullingar",
+        "tullamore",
+        "longford",
+        "birr-county-arms-hotel"
+      ],
+      "title": "Roscommon Driving Test Centre Routes (Ireland) | DriveFlow",
+      "description": "Prepare for the Roscommon driving test centre in County Roscommon. Study local road patterns, junctions and Google Maps practice routes before test day.",
+      "canonical": "https://www.driveflow.ie/roscommon-routes.html",
+      "h1": "Roscommon Driving Test Routes"
+    },
+    {
+      "slug": "shannon",
+      "displayName": "Shannon",
+      "county": "Clare",
+      "region": "Limerick_Clare",
+      "nearby": [
+        "limerick-castlemungret",
+        "newcastle-west",
+        "newcastle-west-longcourt-house-hotel",
+        "ennis",
+        "kilrush"
+      ],
+      "title": "Shannon Driving Test Routes – Google Maps Practice | DriveFlow",
+      "description": "Get familiar with Shannon RSA driving test routes in Clare. Review common examiner areas, roundabouts and manoeuvres used by Irish learners.",
+      "canonical": "https://www.driveflow.ie/shannon-routes.html",
+      "h1": "Shannon Driving Test Routes"
+    },
+    {
+      "slug": "skibbereen",
+      "displayName": "Skibbereen",
+      "county": "Cork",
+      "region": "Cork",
+      "nearby": [
+        "wilton",
+        "ballincollig",
+        "mallow",
+        "mitchelstown",
+        "woodview"
+      ],
+      "title": "Practice Skibbereen Driving Test Routes | DriveFlow Ireland",
+      "description": "Skibbereen driving test routes for County Cork learners. Practise realistic Google Maps navigation covering junctions, estates and speed-limit changes.",
+      "canonical": "https://www.driveflow.ie/skibbereen-routes.html",
+      "h1": "Skibbereen Driving Test Routes"
+    },
+    {
+      "slug": "sligo",
+      "displayName": "Sligo",
+      "county": "Sligo",
+      "region": "NorthWest",
+      "nearby": [
+        "letterkenny",
+        "donegal",
+        "buncrana",
+        "ballina",
+        "castlebar"
+      ],
+      "title": "Sligo RSA Test Centre Routes & Local Tips | DriveFlow",
+      "description": "Learn how Sligo driving test routes typically run around County Sligo. Build confidence with local tips and structured route practice on DriveFlow.",
+      "canonical": "https://www.driveflow.ie/sligo-routes.html",
+      "h1": "Sligo Driving Test Routes"
+    },
+    {
+      "slug": "tallaght",
+      "displayName": "Tallaght",
+      "county": "Dublin",
+      "region": "Dublin",
+      "nearby": [
+        "mulhuddart",
+        "finglas",
+        "raheny",
+        "killester",
+        "dun-laoghaire"
+      ],
+      "title": "Tallaght Driving Test Routes in County Dublin | DriveFlow",
+      "description": "County Dublin learners: practise Tallaght driving test centre routes with Google Maps. Focus on trickier junctions and the areas examiners reuse most often.",
+      "canonical": "https://www.driveflow.ie/tallaght-routes.html",
+      "h1": "Tallaght Driving Test Routes"
+    },
+    {
+      "slug": "thurles",
+      "displayName": "Thurles",
+      "county": "Tipperary",
+      "region": "Waterford_Tipperary",
+      "nearby": [
+        "waterford",
+        "dungarvan",
+        "clonmel",
+        "nenagh",
+        "tipperary"
+      ],
+      "title": "Thurles Driving Test Centre Routes (Ireland) | DriveFlow",
+      "description": "Prepare for the Thurles driving test centre in County Tipperary. Study local road patterns, junctions and Google Maps practice routes before test day.",
+      "canonical": "https://www.driveflow.ie/thurles-routes.html",
+      "h1": "Thurles Driving Test Routes"
+    },
+    {
+      "slug": "tipperary",
+      "displayName": "Tipperary",
+      "county": "Tipperary",
+      "region": "Waterford_Tipperary",
+      "nearby": [
+        "waterford",
+        "dungarvan",
+        "clonmel",
+        "nenagh",
+        "thurles"
+      ],
+      "title": "Tipperary Driving Test Routes – Google Maps Practice | DriveFlow",
+      "description": "Get familiar with Tipperary RSA driving test routes in Tipperary. Review common examiner areas, roundabouts and manoeuvres used by Irish learners.",
+      "canonical": "https://www.driveflow.ie/tipperary-routes.html",
+      "h1": "Tipperary Driving Test Routes"
+    },
+    {
+      "slug": "tralee",
+      "displayName": "Tralee",
+      "county": "Kerry",
+      "region": "Kerry",
+      "nearby": [
+        "killarney"
+      ],
+      "title": "Practice Tralee Driving Test Routes | DriveFlow Ireland",
+      "description": "Tralee driving test routes for County Kerry learners. Practise realistic Google Maps navigation covering junctions, estates and speed-limit changes.",
+      "canonical": "https://www.driveflow.ie/tralee-routes.html",
+      "h1": "Tralee Driving Test Routes"
+    },
+    {
+      "slug": "tuam",
+      "displayName": "Tuam",
+      "county": "Galway",
+      "region": "Galway",
+      "nearby": [
+        "westside",
+        "clybaun",
+        "carnmore",
+        "loughrea",
+        "clifden"
+      ],
+      "title": "Tuam RSA Test Centre Routes & Local Tips | DriveFlow",
+      "description": "Learn how Tuam driving test routes typically run around County Galway. Build confidence with local tips and structured route practice on DriveFlow.",
+      "canonical": "https://www.driveflow.ie/tuam-routes.html",
+      "h1": "Tuam Driving Test Routes"
+    },
+    {
+      "slug": "tullamore",
+      "displayName": "Tullamore",
+      "county": "Offaly",
+      "region": "Midlands",
+      "nearby": [
+        "athlone",
+        "mullingar",
+        "longford",
+        "birr-county-arms-hotel",
+        "roscommon"
+      ],
+      "title": "Tullamore Driving Test Routes in County Offaly | DriveFlow",
+      "description": "County Offaly learners: practise Tullamore driving test centre routes with Google Maps. Focus on trickier junctions and the areas examiners reuse most often.",
+      "canonical": "https://www.driveflow.ie/tullamore-routes.html",
+      "h1": "Tullamore Driving Test Routes"
+    },
+    {
+      "slug": "waterford",
+      "displayName": "Waterford",
+      "county": "Waterford",
+      "region": "Waterford_Tipperary",
+      "nearby": [
+        "dungarvan",
+        "clonmel",
+        "nenagh",
+        "thurles",
+        "tipperary"
+      ],
+      "title": "Waterford Driving Test Centre Routes (Ireland) | DriveFlow",
+      "description": "Prepare for the Waterford driving test centre in County Waterford. Study local road patterns, junctions and Google Maps practice routes before test day.",
+      "canonical": "https://www.driveflow.ie/waterford-routes.html",
+      "h1": "Waterford Driving Test Routes"
+    },
+    {
+      "slug": "westside",
+      "displayName": "Westside Galway",
+      "county": "Galway",
+      "region": "Galway",
+      "nearby": [
+        "clybaun",
+        "carnmore",
+        "loughrea",
+        "tuam",
+        "clifden"
+      ],
+      "title": "Westside Galway Driving Test Routes – Google Maps Practice | DriveFlow",
+      "description": "Get familiar with Westside Galway RSA driving test routes in Galway. Review common examiner areas, roundabouts and manoeuvres used by Irish learners.",
+      "canonical": "https://www.driveflow.ie/westside-routes.html",
+      "h1": "Westside Galway Driving Test Routes"
+    },
+    {
+      "slug": "wexford",
+      "displayName": "Wexford",
+      "county": "Wexford",
+      "region": "Wexford_Carlow_Kilkenny",
+      "nearby": [
+        "gorey",
+        "carlow",
+        "carlow-talbot-hotel",
+        "kilkenny-oloughlin-gaels",
+        "kilkenny-government-buildings"
+      ],
+      "title": "Practice Wexford Driving Test Routes | DriveFlow Ireland",
+      "description": "Wexford driving test routes for County Wexford learners. Practise realistic Google Maps navigation covering junctions, estates and speed-limit changes.",
+      "canonical": "https://www.driveflow.ie/wexford-routes.html",
+      "h1": "Wexford Driving Test Routes"
+    },
+    {
+      "slug": "wicklow",
+      "displayName": "Wicklow",
+      "county": "Wicklow",
+      "region": "Dublin",
+      "nearby": [
+        "tallaght",
+        "mulhuddart",
+        "finglas",
+        "raheny",
+        "killester"
+      ],
+      "title": "Wicklow RSA Test Centre Routes & Local Tips | DriveFlow",
+      "description": "Learn how Wicklow driving test routes typically run around County Wicklow. Build confidence with local tips and structured route practice on DriveFlow.",
+      "canonical": "https://www.driveflow.ie/wicklow-routes.html",
+      "h1": "Wicklow Driving Test Routes"
+    },
+    {
+      "slug": "wilton",
+      "displayName": "Wilton",
+      "county": "Cork",
+      "region": "Cork",
+      "nearby": [
+        "ballincollig",
+        "mallow",
+        "mitchelstown",
+        "skibbereen",
+        "woodview"
+      ],
+      "title": "Wilton Driving Test Routes in County Cork | DriveFlow",
+      "description": "County Cork learners: practise Wilton driving test centre routes with Google Maps. Focus on trickier junctions and the areas examiners reuse most often.",
+      "canonical": "https://www.driveflow.ie/wilton-routes.html",
+      "h1": "Wilton Driving Test Routes"
+    },
+    {
+      "slug": "woodview",
+      "displayName": "Woodview",
+      "county": "Cork",
+      "region": "Cork",
+      "nearby": [
+        "wilton",
+        "ballincollig",
+        "mallow",
+        "mitchelstown",
+        "skibbereen"
+      ],
+      "title": "Woodview Driving Test Centre Routes (Ireland) | DriveFlow",
+      "description": "Prepare for the Woodview driving test centre in County Cork. Study local road patterns, junctions and Google Maps practice routes before test day.",
+      "canonical": "https://www.driveflow.ie/woodview-routes.html",
+      "h1": "Woodview Driving Test Routes"
+    }
+  ]
+}

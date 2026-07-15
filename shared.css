@@ -95,9 +95,107 @@
         max-width: 420px;
         width: 100%;
         height: auto;
+        aspect-ratio: 2782 / 1726;
         margin: 20px auto 0;
         border-radius: var(--radius-lg);
         box-shadow: var(--shadow-card);
+    }
+
+    .breadcrumb {
+        font-size: 13px;
+        color: var(--text-muted);
+        margin: 0 0 16px;
+        text-align: left;
+    }
+
+    .breadcrumb-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px 8px;
+        align-items: center;
+    }
+
+    .breadcrumb-list li {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .breadcrumb-list li:not(:last-child)::after {
+        content: "›";
+        color: var(--text-muted);
+        margin-left: 2px;
+    }
+
+    .breadcrumb a {
+        color: var(--primary);
+        text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+        text-decoration: underline;
+    }
+
+    .nearby-centres {
+        background: var(--bg-card);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-card);
+        padding: 28px 32px;
+        margin-bottom: 40px;
+    }
+
+    .nearby-centres h2 {
+        margin: 0 0 8px;
+        font-size: 22px;
+        font-weight: 700;
+    }
+
+    .nearby-centres p {
+        margin: 0 0 14px;
+        color: var(--text-muted);
+        font-size: 15px;
+    }
+
+    .nearby-centres ul {
+        margin: 0;
+        padding-left: 20px;
+    }
+
+    .nearby-centres li {
+        margin: 8px 0;
+        font-size: 15px;
+    }
+
+    .nearby-centres a {
+        color: var(--primary);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+
+    a:focus-visible,
+    .route-btn:focus-visible,
+    button:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+    }
+
+    .route-footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 16px;
+        margin-top: 16px;
+        justify-content: center;
+    }
+
+    .route-footer-links a {
+        color: var(--text-muted);
+        font-size: 14px;
+        text-decoration: underline;
+        text-underline-offset: 2px;
     }
 
     .info-section {

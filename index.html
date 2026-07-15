@@ -1142,7 +1142,7 @@
         </div>
       </div>
       <div class="hero-image-wrapper">
-        <img src="othersstoblurr.png" alt="Driveflow" class="hero-image">
+        <img src="othersstoblurr.png" alt="Driveflow" class="hero-image" width="1200" height="800" decoding="async" fetchpriority="high">
       </div>
     </section>
 
@@ -1767,5 +1767,35 @@
       initContactModal();
     }
   </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.driveflow.ie/#organization",
+      "name": "DriveFlow",
+      "url": "https://www.driveflow.ie/",
+      "logo": "https://www.driveflow.ie/favicon.png",
+      "description": "DriveFlow helps Irish learner drivers practise RSA driving test routes with Google Maps navigation.",
+      "areaServed": {
+        "@type": "Country",
+        "name": "Ireland"
+      },
+      "sameAs": []
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.driveflow.ie/#website",
+      "url": "https://www.driveflow.ie/",
+      "name": "DriveFlow",
+      "publisher": {
+        "@id": "https://www.driveflow.ie/#organization"
+      },
+      "inLanguage": "en-IE"
+    }
+  ]
+}
+</script>
 </body>
 </html>
