@@ -68,16 +68,17 @@
         `;
 
         const paywallContainer = document.getElementById('paywallContainer');
-        // Keep the guide (.info-section) above the paywall so July notes / headings
-        // are visible before the unlock CTA. Fall back to after page-header.
         const infoSection = document.querySelector('.info-section');
         const pageHeader = document.querySelector('.page-header');
-        const paywallAnchor = infoSection || pageHeader;
-        if (paywallContainer && paywallAnchor) {
-            paywallAnchor.insertAdjacentElement('afterend', paywallContainer);
+        // Force order: header → guide → paywall → routes (never bury the guide)
+        if (pageHeader && infoSection) {
+            pageHeader.insertAdjacentElement('afterend', infoSection);
         }
-
         if (paywallContainer) {
+            const paywallAnchor = infoSection || pageHeader;
+            if (paywallAnchor) {
+                paywallAnchor.insertAdjacentElement('afterend', paywallContainer);
+            }
             paywallContainer.insertAdjacentElement('afterend', routesEl);
         }
 
@@ -89,7 +90,12 @@
         const usedByPara = Array.from(document.querySelectorAll('.page-header p')).find(p =>
             p.textContent.includes('Used by thousands')
         );
-        if (usedByPara) {
+        const updateStamp = Array.from(document.querySelectorAll('.page-header p')).find(p =>
+            /Updated\s+July\s+2026/i.test(p.textContent || '')
+        );
+        // Place blurred preview AFTER the July stamp so the stamp stays above the fold
+        const imgAnchor = updateStamp || usedByPara;
+        if (imgAnchor) {
             const img = document.createElement('img');
             img.src = '/blurredroute.png';
             img.alt = 'Blurred preview of a DriveFlow driving test route map';
@@ -98,7 +104,7 @@
             img.height = 521;
             img.decoding = 'async';
             img.loading = 'eager';
-            usedByPara.insertAdjacentElement('afterend', img);
+            imgAnchor.insertAdjacentElement('afterend', img);
         }
 
         const purchaseEl = document.getElementById('sharedPurchase');
