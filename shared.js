@@ -68,9 +68,13 @@
         `;
 
         const paywallContainer = document.getElementById('paywallContainer');
+        // Keep the guide (.info-section) above the paywall so July notes / headings
+        // are visible before the unlock CTA. Fall back to after page-header.
+        const infoSection = document.querySelector('.info-section');
         const pageHeader = document.querySelector('.page-header');
-        if (paywallContainer && pageHeader) {
-            pageHeader.insertAdjacentElement('afterend', paywallContainer);
+        const paywallAnchor = infoSection || pageHeader;
+        if (paywallContainer && paywallAnchor) {
+            paywallAnchor.insertAdjacentElement('afterend', paywallContainer);
         }
 
         if (paywallContainer) {
