@@ -70,16 +70,15 @@
         const paywallContainer = document.getElementById('paywallContainer');
         const infoSection = document.querySelector('.info-section');
         const pageHeader = document.querySelector('.page-header');
-        // Force order: header → guide → paywall → routes (never bury the guide)
-        if (pageHeader && infoSection) {
-            pageHeader.insertAdjacentElement('afterend', infoSection);
+        // Classic order: header → paywall/routes → guide (routes stay near the top)
+        if (paywallContainer && pageHeader) {
+            pageHeader.insertAdjacentElement('afterend', paywallContainer);
         }
         if (paywallContainer) {
-            const paywallAnchor = infoSection || pageHeader;
-            if (paywallAnchor) {
-                paywallAnchor.insertAdjacentElement('afterend', paywallContainer);
-            }
             paywallContainer.insertAdjacentElement('afterend', routesEl);
+        }
+        if (infoSection && routesEl) {
+            routesEl.insertAdjacentElement('afterend', infoSection);
         }
 
         const viewRoutesLink = document.querySelector('.page-header a[href="#routes"]');
