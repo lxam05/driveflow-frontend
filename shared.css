@@ -252,6 +252,46 @@
         font-weight: 600;
     }
 
+    /* SEO centre photos: float so copy wraps beside them */
+    .info-section .seo-figure {
+        max-width: min(320px, 46%);
+        margin: 6px 0 16px;
+        padding: 0;
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        background: var(--bg-card-soft, #fafafa);
+    }
+
+    .info-section .seo-figure--left {
+        float: left;
+        margin-right: 20px;
+    }
+
+    .info-section .seo-figure--right {
+        float: right;
+        margin-left: 20px;
+    }
+
+    .info-section .seo-figure img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .info-section .seo-figure figcaption {
+        margin: 0;
+        padding: 8px 10px 10px;
+        font-size: 13px;
+        line-height: 1.45;
+        color: var(--text-muted);
+    }
+
+    .info-section .seo-media-block::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
     .bottom-line {
         background: var(--primary-soft);
         border-left: 4px solid var(--primary);
@@ -435,6 +475,15 @@
 
         .page-header p {
             font-size: 14px;
+        }
+
+        .info-section .seo-figure,
+        .info-section .seo-figure--left,
+        .info-section .seo-figure--right {
+            float: none;
+            max-width: 100%;
+            margin-left: 0;
+            margin-right: 0;
         }
 
         .routes-container {

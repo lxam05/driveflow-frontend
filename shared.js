@@ -92,9 +92,10 @@
         const updateStamp = Array.from(document.querySelectorAll('.page-header p')).find(p =>
             /Updated\s+July\s+2026/i.test(p.textContent || '')
         );
-        // Place blurred preview AFTER the July stamp so the stamp stays above the fold
+        // Place blurred preview AFTER the July stamp so the stamp stays above the fold.
+        // Skip if the page already provides a centre-specific hero image.
         const imgAnchor = updateStamp || usedByPara;
-        if (imgAnchor) {
+        if (imgAnchor && !document.querySelector('.page-header-route-img')) {
             const img = document.createElement('img');
             img.src = '/blurredroute.png';
             img.alt = 'Blurred preview of a DriveFlow driving test route map';
