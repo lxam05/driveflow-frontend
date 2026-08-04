@@ -1,9 +1,15 @@
 (function () {
-    // Google Ads (gtag) - inject for route pages that load shared.js
-    if (!document.getElementById('google-ads-gtag')) {
+    // Google Ads only after cookie consent (handled by cookie-consent.js)
+    function maybeInjectAds() {
+        if (!(window.DriveflowCookieConsent && window.DriveflowCookieConsent.hasAccepted())) {
+            return;
+        }
+        if (document.getElementById('google-ads-gtag') || window.__driveflowAnalyticsLoaded) {
+            return;
+        }
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
-        window.gtag = gtag;
+        window.gtag = window.gtag || gtag;
         gtag('js', new Date());
         gtag('config', 'AW-17936809057');
         var s = document.createElement('script');
@@ -12,6 +18,10 @@
         s.src = 'https://www.googletagmanager.com/gtag/js?id=AW-17936809057';
         document.head.appendChild(s);
     }
+    maybeInjectAds();
+    window.addEventListener('driveflow:cookie-consent', function (e) {
+        if (e.detail && e.detail.accepted) maybeInjectAds();
+    });
 
     const routesEl = document.getElementById('routes');
     if (!routesEl) return;

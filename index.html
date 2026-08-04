@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script src="/cookie-consent.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Practice real Irish driving test routes with interactive Google Maps routes, local test centre roads, difficult junctions and learner driver tips for RSA driving tests across Ireland."> 
@@ -1510,11 +1511,13 @@
           <textarea id="contactMessageText" class="contact-form-textarea" placeholder="Type your message here..." required></textarea>
         </div>
         <div id="contactMessage" class="contact-message"></div>
+        <div id="contactTurnstile" class="contact-form-group"></div>
         <button type="submit" class="contact-submit-btn">Send Message</button>
       </form>
     </div>
   </div>
 
+  <script src="contact-form-security.js"></script>
   <script>
     const API_URL = location.hostname === "localhost" || location.hostname === "127.0.0.1"
       ? "http://localhost:8080"
@@ -1628,6 +1631,9 @@
           introEl.textContent = options.intro || contactModalDefaultIntro;
         }
         if (contactModal) contactModal.classList.add("show");
+        if (window.ContactFormSecurity) {
+          ContactFormSecurity.init(API_URL, "contactTurnstile");
+        }
         if (
           contactEmailInput &&
           prefillEmail &&
@@ -1640,6 +1646,9 @@
       function hideContactModal() {
         if (contactModal) contactModal.classList.remove("show");
         if (contactForm) contactForm.reset();
+        if (window.ContactFormSecurity) {
+          ContactFormSecurity.reset();
+        }
         if (contactMessage) {
           contactMessage.className = "contact-message";
           contactMessage.style.display = "none";
@@ -1726,15 +1735,35 @@
             submitBtn.textContent = originalText;
             return;
           }
+
+          if (window.ContactFormSecurity) {
+            await ContactFormSecurity.init(API_URL, "contactTurnstile");
+            if (ContactFormSecurity.isRequired() && !ContactFormSecurity.getToken()) {
+              contactMessage.className = "contact-message error";
+              contactMessage.textContent = "Please complete the captcha before sending.";
+              contactMessage.style.display = "block";
+              submitBtn.disabled = false;
+              submitBtn.textContent = originalText;
+              return;
+            }
+          }
+
           try {
             var token = localStorage.getItem("auth_token");
+            var captchaToken = window.ContactFormSecurity
+              ? ContactFormSecurity.getToken()
+              : "";
             var res = await fetch(API_URL + "/contact/send", {
               method: "POST",
               headers: Object.assign(
                 { "Content-Type": "application/json" },
                 token ? { "Authorization": "Bearer " + token } : {}
               ),
-              body: JSON.stringify({ message: message, email: email })
+              body: JSON.stringify({
+                message: message,
+                email: email,
+                captchaToken: captchaToken || undefined,
+              })
             });
             var data = {};
             try { data = await res.json(); } catch (parseErr) {}
@@ -1748,6 +1777,9 @@
               contactMessage.className = "contact-message error";
               contactMessage.textContent = data.error || "Server error. Please try again.";
               contactMessage.style.display = "block";
+              if (window.ContactFormSecurity) {
+                ContactFormSecurity.reset();
+              }
             }
           } catch (err) {
             contactMessage.className = "contact-message error";

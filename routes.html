@@ -1,20 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-EJB69589QP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-EJB69589QP');
-</script>
-<!-- Google tag (gtag.js) - Ads -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17936809057"></script>
-<script>
-  gtag('config', 'AW-17936809057');
-</script>
+<script src="/cookie-consent.js"></script>
 <!-- Event snippet for Purchase conversion -->
 <script>
 function gtag_report_conversion(url, transactionId) {
@@ -23,6 +10,11 @@ function gtag_report_conversion(url, transactionId) {
       window.location = url;
     }
   };
+  var consented = window.DriveflowCookieConsent && window.DriveflowCookieConsent.hasAccepted();
+  if (!consented || typeof gtag !== 'function') {
+    callback();
+    return false;
+  }
   var payload = {
     'send_to': 'AW-17936809057/aNt1CK3VrvobEOH49-hC',
     'value': 1.0,

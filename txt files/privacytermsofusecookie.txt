@@ -1,82 +1,178 @@
 Privacy Policy
 
-Last updated: 10 February 2026
+Last updated: 4 August 2026
 
-DriveFlow (“we”, “our”, “us”) respects your privacy. This Privacy Policy explains how we collect, use, and protect your personal information when you use www.driveflow.ie
-.
+DriveFlow ("we", "our", "us") respects your privacy. This Privacy Policy explains how we collect, use, share, retain, and delete personal information when you use www.driveflow.ie and the DriveFlow mobile app (together, the "Services").
+
+DriveFlow is the data controller. We operate from Ireland. For privacy requests, contact us at driveflowweb@gmail.com.
 
 1. Information We Collect
 
-We may collect the following information:
+Depending on how you use the Services, we may collect:
 
-Personal information you provide (such as name and email address when contacting us or purchasing access)
+Account details — email address, username, and related account metadata.
 
-Payment information (processed securely by third-party payment providers; we do not store card details)
+Password information — when you create a password-based account, we store a password hash only. We do not store your password in plain text.
 
-Usage data (pages visited, test centres viewed, device type, browser, IP address)
+Sign-in identifiers — if you use Google Sign-In or Sign in with Apple, we receive and store the relevant provider identifiers (such as Google or Apple subject IDs) needed to authenticate your account. We may also receive a profile image URL where the provider supplies one.
 
-Cookies and tracking data (see Cookie Policy)
+Mock-test progress — scores, timing, category breakdowns, and related practice history when you take mock or example tests while signed in.
+
+Purchased test-centre access — records of which centres you have unlocked, licence periods, and related purchase identifiers.
+
+Contact and support messages — information you submit through contact forms or by email.
+
+Authentication tokens — on the website, a session/auth token may be stored in your browser (for example in localStorage). In the mobile app, authentication tokens are stored using SecureStore on your device.
+
+Technical and usage data — such as IP address, device/browser type, pages viewed, and similar diagnostic data needed for security, rate limiting, and (with consent on the website) analytics.
 
 2. How We Use Your Information
 
-We use your information to:
+We use personal information to:
 
-Provide access to driving test routes and theory resources
+Create and manage your account, and keep you signed in
 
-Process payments and manage purchases
+Provide driving test routes, theory resources, and mock-test features
 
-Improve website performance and user experience
+Track and display your mock-test progress
 
-Respond to support or contact requests
+Process purchases and manage access to paid test-centre content
 
-Monitor usage and prevent abuse or fraud
+Send transactional emails (for example password resets, purchase confirmations, and replies to contact requests)
+
+Protect the Services against abuse, fraud, and unauthorised access
+
+Improve the website and app experience
+
+Analyse website traffic only where you have given cookie/analytics consent (see Cookie Policy)
 
 3. Legal Basis for Processing
 
-We process personal data based on:
+Where the GDPR applies, we process personal data based on:
 
-Your consent
+Contract — to provide the Services you request (account, purchases, content access)
 
-Contractual necessity (e.g. providing purchased content)
+Consent — for non-essential website analytics/advertising cookies, and where otherwise required
 
-Legitimate interests (analytics, security, service improvement)
+Legitimate interests — security, fraud prevention, service improvement, and basic operations, balanced against your rights
 
-4. Sharing of Data
+Legal obligation — where we must retain or disclose information to comply with law
 
-We may share data with:
+4. Payments and Purchases
 
-Payment processors (e.g. Stripe)
+Website purchases are processed by Stripe. DriveFlow does not store your full card details.
 
-Analytics providers (e.g. Google Analytics)
+App purchases (including test-centre access) are processed through the Apple App Store and managed with RevenueCat. Apple and RevenueCat process payment information according to their own policies. DriveFlow receives purchase/entitlement information needed to unlock content.
 
-Hosting and infrastructure providers
-All third parties are required to handle your data securely and lawfully.
+5. Emails
 
-5. Data Retention
+We use MailerSend to send emails such as contact-form messages, password-reset emails, and purchase confirmations. These emails contain the personal data needed to deliver the message (for example your email address and reset link).
 
-We only retain personal data for as long as necessary to provide services or comply with legal obligations.
+6. Hosting and Infrastructure
 
-6. Your Rights
+Our API and database are hosted and processed using Railway. Website content is served from our web hosting for www.driveflow.ie. These providers process data on our behalf to operate the Services.
 
-Under GDPR, you have the right to:
+7. Other Service Providers
 
-Access your data
+We may also use:
+
+Google Analytics and Google Ads on the website — only after you accept non-essential cookies
+
+Cloudflare Turnstile — to help prevent spam and abuse on forms such as signup and contact
+
+OpenAI — where a website chatbot is available, to process messages you send to the assistant
+
+We do not sell your personal information.
+
+8. Sharing of Data
+
+We share personal data with the processors and platforms needed to run the Services, including:
+
+Apple (Sign in with Apple; App Store purchases)
+
+Google (Sign-In where used; Analytics/Ads on the website with consent)
+
+RevenueCat (app purchase entitlements)
+
+Stripe (website payments)
+
+MailerSend (transactional email)
+
+Railway (hosting and database)
+
+Cloudflare (Turnstile)
+
+OpenAI (chatbot, where used)
+
+These parties process data under their terms and applicable law. We may also disclose information if required by law or to protect rights, safety, or the integrity of the Services.
+
+9. International Data Transfers
+
+Some providers (including Apple, Google, RevenueCat, Stripe, MailerSend, Railway, Cloudflare, and OpenAI) may process data in countries outside Ireland/the EEA, including the United States. Where required, we rely on appropriate safeguards such as the providers' standard contractual clauses or other lawful transfer mechanisms.
+
+10. Data Retention
+
+We retain personal data only for as long as needed to provide the Services and meet legal obligations:
+
+Account data (including email, username, password hashes, and Google/Apple sign-in identifiers) — while your account remains active
+
+Mock-test progress and purchased centre access — while your account remains active and access is relevant to the service
+
+Purchase records — as needed for accounting, tax, and dispute handling
+
+Authentication tokens — until they expire, you sign out, or you delete your account
+
+Contact messages — for as long as needed to respond and keep a reasonable support record
+
+When you delete your account, we delete or anonymise associated personal data from our systems, except where we must retain limited records for legal or accounting reasons.
+
+11. Account Deletion
+
+If you have a DriveFlow account in the mobile app, you can delete it in-app:
+
+Open the app and go to Account
+
+Choose Delete Account and confirm
+
+This permanently deletes your account and related data we hold (such as profile details, mock-test progress, and centre access records linked to your account), subject to any limited legal retention. Where applicable, we also request cleanup of related RevenueCat subscriber data.
+
+If you need help deleting an account, or used the website only, email driveflowweb@gmail.com and we will assist.
+
+12. Your Rights and Withdrawing Consent
+
+Under the GDPR, you may have the right to:
+
+Access your personal data
 
 Request correction or deletion
 
-Object to or restrict processing
+Object to or restrict certain processing
 
-Withdraw consent at any time
+Data portability, where applicable
 
-To exercise your rights, contact us via the website.
+Withdraw consent at any time where processing is based on consent
 
-7. Security
+You can withdraw website analytics/advertising cookie consent at any time via the cookie banner controls (or by clearing site data and choosing Reject when prompted again). Withdrawing consent does not affect the lawfulness of processing before withdrawal.
 
-We use appropriate technical and organisational measures to protect your data, but no system is 100% secure.
+To exercise your rights, contact driveflowweb@gmail.com. You may also lodge a complaint with the Irish Data Protection Commission.
 
-8. Changes to This Policy
+13. Cookies
 
-We may update this policy from time to time. Continued use of the site means you accept the updated policy.
+The website may use cookies and similar technologies. Non-essential analytics and advertising cookies are used only with your prior consent. Details are in our Cookie Policy.
+
+The native mobile app does not use browser cookies.
+
+14. Children
+
+The Services are not directed at children under 16. We do not knowingly collect personal data from children under 16. If you believe a child has provided personal data, contact us and we will take appropriate steps.
+
+15. Security
+
+We use appropriate technical and organisational measures to protect personal data, including hashed passwords, encrypted transport (HTTPS), and secure on-device token storage in the app (SecureStore). No system is completely secure.
+
+16. Changes to This Policy
+
+We may update this Privacy Policy from time to time. When we do, we will change the "Last updated" date at the top of this page. Please review this page periodically. Material changes that require consent will be handled as required by law.
 
 Terms of Use
 
@@ -141,49 +237,62 @@ These terms are governed by the laws of Ireland.
 
 Cookie Policy
 
-Last updated: 10 February 2026
+Last updated: 4 August 2026
 
-This Cookie Policy explains how DriveFlow uses cookies on www.driveflow.ie
-.
+This Cookie Policy explains how DriveFlow uses cookies and similar technologies on www.driveflow.ie only. The DriveFlow mobile app does not use browser cookies. For the full picture of how we process personal data, see our Privacy Policy.
 
 1. What Are Cookies?
 
-Cookies are small text files stored on your device that help websites function and collect usage information.
+Cookies are small text files stored on your device that help websites function and, where permitted, collect usage information. Similar technologies (such as local storage) may be used for the same purposes.
 
 2. Cookies We Use
 
 We use:
 
-Essential cookies – required for basic site functionality
+Essential cookies / storage — required for basic site functionality, such as keeping you signed in and completing purchases. These do not require consent.
 
-Analytics cookies – to understand how users interact with the site (e.g. Google Analytics)
+Analytics cookies — Google Analytics, used to understand how visitors use the site. These are non-essential and are only used if you Accept.
 
-Payment/session cookies – to manage purchases and secure access
+Advertising cookies — Google Ads measurement tags, used for advertising measurement. These are non-essential and are only used if you Accept.
 
-3. Why We Use Cookies
+3. Consent
 
-Cookies help us:
+Non-essential analytics and advertising cookies are not set by default. When you visit the website, you will see a cookie banner asking you to Accept or Reject non-essential cookies.
 
-Keep the site working properly
+Accept — we may load Google Analytics and Google Ads tags and set related cookies.
 
-Improve performance and usability
+Reject — we will not load those non-essential tags for analytics/advertising purposes.
 
-Understand which pages and routes are most useful
+Your choice is stored locally in your browser so we can remember it on later visits. Continued browsing without accepting is not treated as consent for non-essential cookies.
 
-4. Managing Cookies
+4. Why We Use Cookies
+
+Cookies and similar technologies help us:
+
+Keep the site working properly (essential)
+
+Manage secure access and purchases (essential)
+
+Understand which pages and routes are most useful (analytics — with consent)
+
+Measure advertising performance (advertising — with consent)
+
+5. Managing Cookies
 
 You can:
 
-Disable cookies in your browser settings
+Use the on-site cookie banner to Accept or Reject non-essential cookies
 
-Delete existing cookies at any time
+Clear site data in your browser to reset your choice and see the banner again
 
-Note: disabling cookies may affect site functionality.
+Control or delete cookies through your browser settings
 
-5. Third-Party Cookies
+Note: disabling essential cookies or storage may affect sign-in and purchase functionality.
 
-Some cookies are set by third-party services we use (such as analytics and payment providers).
+6. Third-Party Cookies
 
-6. Changes to This Policy
+If you Accept, third-party services such as Google Analytics and Google Ads may set cookies. Payment providers (for example Stripe) may also use cookies or similar technologies as part of the checkout process. Those parties process data under their own policies.
 
-We may update this Cookie Policy as required. Continued use of the site indicates acceptance.
+7. Changes to This Policy
+
+We may update this Cookie Policy from time to time. When we do, we will change the "Last updated" date on this page. Please review it periodically.
