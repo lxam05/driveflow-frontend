@@ -4,7 +4,7 @@
 <p>What surprises most people is that most failures are not caused by one massive mistake.</p>
 <p>They come from small, repeated habits that quietly stack up during the test.</p>
 
-<p>To understand what actually causes learners to fail, we analysed feedback from Irish driving instructors, learner experiences, and road safety contributors — including common patterns seen in busy centres like <a href="/tallaght-routes.html">Tallaght driving test practice routes</a>, <a href="/naas-routes.html">Naas driving test routes</a>, and <a href="/dun-laoghaire-routes.html">Dún Laoghaire driving test routes</a>.</p>
+<p>To understand what actually causes learners to fail, we analysed feedback from Irish driving instructors, learner experiences, and road safety contributors — including common patterns seen in busy centres like <a href="/tallaght-routes.html">Tallaght driving test practice routes</a>, <a href="/naas-routes.html">Naas driving test routes</a>, and <a href="/dun-laoghaire-routes.html">Dun Laoghaire driving test routes</a>.</p>
 
 <h2>Poor Observation at Junctions Is the Biggest Problem</h2>
 
@@ -25,7 +25,7 @@
 
 <h2>Mirror Use Is Constantly Assessed (And Often Done Wrong)</h2>
 
-<p>Mirror checks are another major failure point — especially in higher-traffic areas such as <a href="/dun-laoghaire-routes.html">Dún Laoghaire driving test routes</a> where lane changes and bus activity are common.</p>
+<p>Mirror checks are another major failure point — especially in higher-traffic areas such as <a href="/dun-laoghaire-routes.html">Dun Laoghaire</a> where lane changes and bus activity are common.</p>
 <p>Top Driving notes that “not checking enough mirrors” is a frequent mistake.</p>
 <p>Strive 2 Drive reinforces this, stating that learners fail to use mirrors correctly throughout the test.</p>
 <p>National Driving School also reports “incorrect or inadequate use of mirrors and signals” as a common reason for faults.</p>
@@ -83,7 +83,7 @@
 
 <h2>Learner Experience: Familiarity With Test Areas Reduces Pressure</h2>
 
-<p>A learner who recently passed in <a href="/dun-laoghaire-routes.html">Dún Laoghaire driving test routes</a> shared that practising the area reduced nerves and made junction layouts more predictable.</p>
+<p>A learner who recently passed in <a href="/dun-laoghaire-routes.html">Dun Laoghaire</a> shared that practising the area reduced nerves and made junction layouts more predictable.</p>
 <p>However, they warned that roadworks and diversions often force examiners onto unfamiliar roads.</p>
 <p>This is why you should practise real-world driving scenarios, not just memorised routes.</p>
 <blockquote>— Learner driver, Dún Laoghaire (via Reddit)</blockquote>
@@ -121,7 +121,7 @@
 <ul>
   <li><a href="/tallaght-routes.html">Tallaght driving test practice routes</a></li>
   <li><a href="/naas-routes.html">Naas driving test routes</a></li>
-  <li><a href="/dun-laoghaire-routes.html">Dún Laoghaire driving test routes</a></li>
+  <li><a href="/dun-laoghaire-routes.html">Dun Laoghaire driving test routes</a></li>
   <li><a href="/routes">Explore all driving test practice routes</a></li>
 </ul>
 

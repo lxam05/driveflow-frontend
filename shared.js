@@ -80,19 +80,22 @@
         const paywallContainer = document.getElementById('paywallContainer');
         const infoSection = document.querySelector('.info-section');
         const pageHeader = document.querySelector('.page-header');
-        // Classic order: header → paywall/routes → guide (routes stay near the top)
-        if (paywallContainer && pageHeader) {
-            pageHeader.insertAdjacentElement('afterend', paywallContainer);
+        // Default: header → paywall/routes → first guide section.
+        // Opt-in: [data-routes-insert-after] keeps snapshot/preview above the paywall (centre template).
+        const insertAnchor = document.querySelector('[data-routes-insert-after]');
+        const insertAfter = insertAnchor || pageHeader;
+        if (paywallContainer && insertAfter) {
+            insertAfter.insertAdjacentElement('afterend', paywallContainer);
         }
         if (paywallContainer) {
             paywallContainer.insertAdjacentElement('afterend', routesEl);
         }
-        if (infoSection && routesEl) {
+        if (!insertAnchor && infoSection && routesEl) {
             routesEl.insertAdjacentElement('afterend', infoSection);
         }
 
         const viewRoutesLink = document.querySelector('.page-header a[href="#routes"]');
-        if (viewRoutesLink) {
+        if (viewRoutesLink && !insertAnchor) {
             viewRoutesLink.remove();
         }
 
@@ -100,7 +103,7 @@
             p.textContent.includes('Used by thousands')
         );
         const updateStamp = Array.from(document.querySelectorAll('.page-header p')).find(p =>
-            /Updated\s+July\s+2026/i.test(p.textContent || '')
+            /Updated\s+\w+\s+2026/i.test(p.textContent || '')
         );
         // Place blurred preview AFTER the July stamp so the stamp stays above the fold.
         // Skip if the page already provides a centre-specific hero image.

@@ -1,0 +1,248 @@
+{
+  "slug": "dun-laoghaire",
+  "routeKey": "dun-laoghaire",
+  "displayName": "Dun Laoghaire",
+  "displayNameGa": "Dún Laoghaire",
+  "county": "Dublin",
+  "url": "/dun-laoghaire-routes.html",
+  "canonical": "https://www.driveflow.ie/dun-laoghaire-routes.html",
+  "title": "Dun Laoghaire Driving Test Routes (2026) | DriveFlow",
+  "h1": "Dun Laoghaire Driving Test Routes (2026)",
+  "metaDescription": "Dun Laoghaire driving test routes for 2026 — practice Google Maps routes around Pottery Road, Bakers Corner, Sallynoggin and Deansgrange, plus RSA manoeuvre areas.",
+  "updated": "2026-08-05",
+  "centre": {
+    "name": "Dun Laoghaire Driving Test Centre",
+    "alternateNames": [
+      "Dún Laoghaire RSA Test Centre",
+      "Pottery Road Driving Test Centre",
+      "Deansgrange Test Centre",
+      "Bakers Point Test Centre"
+    ],
+    "streetAddress": "Highline Building, Baker's Point, Pottery Rd, Kill Of The Grange",
+    "addressLocality": "Dún Laoghaire",
+    "addressRegion": "County Dublin",
+    "postalCode": "A96 KW29",
+    "addressCountry": "IE",
+    "lat": 53.2757676,
+    "lng": -6.1590942,
+    "googleMapsDirections": "https://www.google.com/maps/dir/?api=1&destination=Highline+Building,+Baker%27s+Point,+Pottery+Rd,+Kill+Of+The+Grange,+D%C3%BAn+Laoghaire,+Co.+Dublin,+A96+KW29",
+    "previewKml": "/data/dunlaoghairepreview.kml",
+    "radiusKm": 5,
+    "heroImage": {
+      "src": "/images/centres/dun-laoghaire/dun-laoghaire-rsa-driving-test-centre-building.webp",
+      "alt": "Dun Laoghaire RSA driving test centre building at Bakers Point, Pottery Road",
+      "width": 1400,
+      "height": 771
+    }
+  },
+  "stats": {
+    "passRate": {
+      "value": 55.4,
+      "unit": "percent",
+      "comparison": "Slightly above the ~53% national Category B average in recent RSA years",
+      "source": "RSA Category B pass-rate figures as reflected in DriveFlow centre data",
+      "asOf": "2026-08",
+      "estimated": false
+    },
+    "waitingTime": {
+      "value": 15,
+      "unit": "weeks",
+      "note": "Approximate; live slots change — check MyRoadSafety for current Dun Laoghaire availability and cancellations",
+      "source": "RSA waiting-time patterns for Dublin centres",
+      "asOf": "2026-08",
+      "estimated": true
+    },
+    "testLength": {
+      "driveMinutes": "30–35",
+      "minDistanceKm": 7.5,
+      "note": "Plus signs, rules questions and technical checks at the centre"
+    }
+  },
+  "manoeuvres": [
+    {
+      "id": "reverse-around-corner",
+      "name": "Reverse around corner",
+      "areas": [
+        "Pearse Road near Pearse Park → outside Church of Our Lady of Victories",
+        "Beech Park Grove → Meadow Vale (beside Clonkeen Playground, around house 130)",
+        "Pearse Villas → Park Close",
+        "Monkstown Farm and Sallynoggin side roads"
+      ],
+      "faults": [
+        "Mounting the kerb",
+        "Over-steering",
+        "Weak pedestrian awareness",
+        "Poor start position"
+      ]
+    },
+    {
+      "id": "turnabout",
+      "name": "Turnabout",
+      "areas": [
+        "Sycamore Walk / Sycamore Avenue",
+        "Churchview Drive toward Silchester Park"
+      ],
+      "faults": [
+        "Missing mirror checks between movements",
+        "Blocking traffic longer than needed",
+        "Poor steering judgement on tight width"
+      ]
+    },
+    {
+      "id": "hill-start",
+      "name": "Hill start",
+      "areas": [
+        "Hillcourt Road toward Killiney Golf Club",
+        "Granitefield area toward Auburn Road",
+        "Inclines inside Monkstown Farm and Sallynoggin"
+      ],
+      "faults": [
+        "Rolling back",
+        "Over-revving",
+        "No observation before moving off"
+      ]
+    }
+  ],
+  "corridors": [
+    "Bakers Corner and Graduate Roundabout approaches",
+    "Kill Avenue",
+    "Rochestown Avenue",
+    "Sallynoggin residential estates",
+    "Monkstown Farm",
+    "Glenageary Road Upper / Lower",
+    "Deansgrange junction area",
+    "Watson’s Estate / Killiney manoeuvre zones",
+    "Churchview and Sycamore Walk turnabout areas"
+  ],
+  "hotspots": [
+    {
+      "name": "Kill Avenue",
+      "why": "Wide multi-lane distributor with bus activity, signal junctions and lane-discipline pressure.",
+      "faults": [
+        "Missing mirrors before lane changes",
+        "Late lane positioning at lights",
+        "Sitting in bus lanes unintentionally",
+        "Hesitating on right turns"
+      ],
+      "speedContext": "Expect steady near-limit progress on open sections; do not crawl."
+    },
+    {
+      "name": "Rochestown Avenue",
+      "why": "Links estates to busier roads; straight sections used for speed and cyclist awareness.",
+      "faults": [
+        "Driving too close to parked cars",
+        "Speed creeping downhill",
+        "Poor right-turn positioning"
+      ],
+      "speedContext": "Maintain appropriate speed on straights; watch parked-car clearance."
+    },
+    {
+      "name": "Monkstown Farm",
+      "why": "Tight residential roads, speed ramps, limited visibility and manoeuvre space.",
+      "faults": [
+        "Rolling through estate junctions",
+        "Weak observation",
+        "Kerb contact on reverse",
+        "Clutch control on inclines"
+      ],
+      "speedContext": "Slow, controlled estate speed — ramps and parked cars everywhere."
+    },
+    {
+      "name": "Sallynoggin",
+      "why": "Narrow residential layout with parked cars and tight corners examiners reuse.",
+      "faults": [
+        "Cutting corners",
+        "Poor clearance from parked vehicles",
+        "Forgotten blind-spot checks when moving off",
+        "Mounting kerbs reversing"
+      ],
+      "speedContext": "Low-speed control; observation over progress."
+    },
+    {
+      "name": "Glenageary",
+      "why": "Southern corridor with downhill stretches, bus stops and crossings.",
+      "faults": [
+        "Coasting too fast downhill",
+        "Braking late near crossings",
+        "Missing mirrors near bus activity"
+      ],
+      "speedContext": "Manage downhill speed early; do not rely on late braking."
+    },
+    {
+      "name": "Deansgrange / Bakers Corner",
+      "why": "High traffic flow, lane choices and pedestrian interaction near the centre approach.",
+      "faults": [
+        "Late lane choice",
+        "Hesitating while blocking traffic",
+        "Poor signal timing"
+      ],
+      "speedContext": "Decisive but safe commitment at busy junctions."
+    }
+  ],
+  "tips": [
+    "Treat the Bakers Point exit as the first marked junction: full stop, clear observation, then commit when the gap is real.",
+    "Practise Kill Avenue in real daytime traffic so bus lanes, signals and right turns feel routine.",
+    "On Rochestown Avenue, set clearance from parked cars early — squeezing past is a common grade-2 pattern.",
+    "In Monkstown Farm and Sallynoggin, exaggerate visible head checks at every estate exit.",
+    "Do reverse practice on narrow streets with parked cars, not empty car parks.",
+    "Hill starts on Hillcourt Road and Granitefield: hold without rollback, then check mirrors and blind spot before moving.",
+    "At Deansgrange / Bakers Corner, choose your lane early; late switches attract faults.",
+    "Match speed to the road: near-limit on Kill Avenue straights, slow and controlled in estates.",
+    "Expect mini-roundabouts — signal exits and check mirrors on approach.",
+    "Use MyRoadSafety cancellations if you want an earlier Dun Laoghaire slot; waiting times move."
+  ],
+  "nearby": [
+    { "slug": "tallaght", "label": "Tallaght driving test routes", "href": "/tallaght-routes.html" },
+    { "slug": "raheny", "label": "Raheny driving test routes", "href": "/raheny-routes.html" },
+    { "slug": "finglas", "label": "Finglas driving test routes", "href": "/finglas-routes.html" },
+    { "slug": "mulhuddart", "label": "Mulhuddart driving test routes", "href": "/mulhuddart-routes.html" },
+    { "slug": "killester", "label": "Killester driving test routes", "href": "/killester-routes.html" }
+  ],
+  "spokes": [
+    { "href": "/guides/pass-dun-laoghaire-driving-test.html", "label": "How to pass the Dun Laoghaire driving test" },
+    { "href": "/guides/dun-laoghaire-fail-spots.html", "label": "Dun Laoghaire fail spots" },
+    { "href": "/guides/dublin-driving-test-routes.html", "label": "Dublin driving test routes hub" }
+  ],
+  "faqs": [
+    {
+      "q": "Where do testers take you on Dun Laoghaire driving test routes?",
+      "a": "Examiners work within roughly a 5 km radius of Bakers Point on Pottery Road. Common corridors include Bakers Corner, Kill Avenue, Rochestown Avenue, Sallynoggin, Monkstown Farm, Glenageary, Deansgrange and toward Killiney / Watson’s Estate."
+    },
+    {
+      "q": "Where is the reverse around the corner done on the Dun Laoghaire test?",
+      "a": "Common reverse areas include Pearse Road near Pearse Park (outside Church of Our Lady of Victories), Beech Park Grove toward Meadow Vale, and Pearse Villas toward Park Close — narrow residential streets with parked cars."
+    },
+    {
+      "q": "Where is the hill start on the Dun Laoghaire driving test?",
+      "a": "Hill starts often appear on Hillcourt Road toward Killiney Golf Club, in the Granitefield area toward Auburn Road, and on inclines inside Monkstown Farm and Sallynoggin. Any rollback is marked."
+    },
+    {
+      "q": "Where is the turnabout done on the Dun Laoghaire test route?",
+      "a": "Turnabouts are often done around Sycamore Walk / Sycamore Avenue and Churchview Drive toward Silchester Park — quieter estate roads that are tighter than they look."
+    },
+    {
+      "q": "How long is the driving test in Dun Laoghaire?",
+      "a": "The drive is typically about 30–35 minutes and at least 7.5 km. Including signs, questions and technical checks, plan for longer at the centre."
+    },
+    {
+      "q": "What manoeuvres are on the Dun Laoghaire RSA driving test?",
+      "a": "Expect reverse around a corner, hill start and turnabout. Parallel parking and bay parking are not the standard RSA car-test manoeuvres used at this centre."
+    },
+    {
+      "q": "What is the Dun Laoghaire driving test pass rate?",
+      "a": "About 55.4% for Category B — close to the national average (~53%). Local junction and estate practice still moves the needle here."
+    },
+    {
+      "q": "How long is the waiting time for a Dun Laoghaire driving test?",
+      "a": "Around 15 weeks is a recent estimate for many Dublin centres including Dun Laoghaire. Check MyRoadSafety for live availability and cancellations."
+    },
+    {
+      "q": "Is the Pottery Road / Deansgrange test centre the same as Dun Laoghaire?",
+      "a": "Yes. The RSA centre at Highline Building, Baker's Point, Pottery Rd (A96 KW29) is commonly called Dun Laoghaire, Pottery Road or Deansgrange — always confirm the address on your booking letter."
+    },
+    {
+      "q": "Can I change my Dun Laoghaire driving test date?",
+      "a": "If your test is more than 10 days away you can usually change date or time free via MyRoadSafety. Closer than that, cancelling typically means losing the fee unless RSA rules for your situation allow otherwise — check rsa.ie."
+    }
+  ]
+}
