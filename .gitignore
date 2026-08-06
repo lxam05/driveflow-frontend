@@ -1,0 +1,8 @@
+# Facebook groups agent — never commit the browser session
+_agent/facebook/.fb-profile/
+_agent/facebook/post_log.jsonl
+_agent/facebook/groups.raw.json
+_agent/facebook/drafts/
+
+# Local Python env for the agent
+_agent/.venv/
