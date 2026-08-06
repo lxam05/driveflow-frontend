@@ -1,0 +1,247 @@
+{
+  "slug": "tallaght",
+  "routeKey": "tallaght",
+  "displayName": "Tallaght",
+  "county": "Dublin",
+  "url": "/tallaght-routes.html",
+  "canonical": "https://www.driveflow.ie/tallaght-routes.html",
+  "title": "Tallaght Driving Test Routes (2026) | DriveFlow",
+  "h1": "Tallaght Driving Test Routes (2026)",
+  "metaDescription": "Tallaght driving test routes for 2026 — practice Google Maps routes around Broomhill Road, Greenhills, Castletymon and Belgard, plus RSA manoeuvre areas.",
+  "updated": "2026-08-06",
+  "centre": {
+    "name": "Tallaght Driving Test Centre",
+    "alternateNames": [
+      "Tallaght RSA Test Centre",
+      "Broomhill Road Driving Test Centre",
+      "Premier Business Park Test Centre"
+    ],
+    "streetAddress": "Premier Business Park, 52 Broomhill Rd",
+    "addressLocality": "Tallaght",
+    "addressRegion": "Dublin",
+    "postalCode": "D24 VE8E",
+    "addressCountry": "IE",
+    "lat": 53.2962489,
+    "lng": -6.3618702,
+    "googleMapsDirections": "https://www.google.com/maps/dir/?api=1&destination=Premier+Business+Park,+52+Broomhill+Rd,+Tallaght,+Dublin,+D24+VE8E",
+    "googleMapsEmbedQuery": "Premier Business Park, 52 Broomhill Rd, Tallaght, Dublin, D24 VE8E",
+    "radiusKm": 5,
+    "heroImage": {
+      "src": "/images/centres/tallaght/tallaght-rsa-driving-test-centre-building.webp",
+      "alt": "Tallaght RSA driving test centre building at Premier Business Park, Broomhill Road",
+      "width": 1400,
+      "height": 964
+    }
+  },
+  "stats": {
+    "passRate": {
+      "value": 47.7,
+      "unit": "percent",
+      "comparison": "Below the ~53% national Category B average — local preparation matters more here",
+      "source": "RSA Category B pass-rate figures as reflected in DriveFlow centre data",
+      "asOf": "2026-08",
+      "estimated": false
+    },
+    "waitingTime": {
+      "value": 12,
+      "unit": "weeks",
+      "note": "Approximate; live slots change — check MyRoadSafety for current Tallaght availability and cancellations",
+      "source": "RSA waiting-time patterns for Dublin centres",
+      "asOf": "2026-08",
+      "estimated": true
+    },
+    "testLength": {
+      "driveMinutes": "30–40",
+      "minDistanceKm": 7.5,
+      "note": "Plus signs, rules questions and technical checks at the centre"
+    }
+  },
+  "manoeuvres": [
+    {
+      "id": "reverse-around-corner",
+      "name": "Reverse around corner",
+      "areas": [
+        "Killinarden Estate → The Meadows West → Alpine Rise",
+        "Redwood Way → Treepark Road (beside Dunnes Stores) → Redwood Walk",
+        "Parkhill Road → Parkhill Avenue",
+        "St Aongus Green"
+      ],
+      "faults": [
+        "Mounting the kerb",
+        "Poor positioning on slope plus limited space (Parkhill)",
+        "Weak observation with parked cars",
+        "Rushing the reverse"
+      ]
+    },
+    {
+      "id": "turnabout",
+      "name": "Turnabout",
+      "areas": [
+        "Glenview Park",
+        "Onto the Court from The Heath → The Oaks → The Meadows East",
+        "Avonbeg Park → Mountain Park (outside basketball court)",
+        "Homelawn Villas → Mountain Park area"
+      ],
+      "faults": [
+        "Missing mirror checks between movements",
+        "Poor steering judgement in tight width",
+        "Blocking traffic longer than needed"
+      ]
+    },
+    {
+      "id": "hill-start",
+      "name": "Hill start",
+      "areas": [
+        "Treepark Road (outside Tamarisk Heights)",
+        "Elmcastle Park (beside the field)",
+        "Tymonville Park"
+      ],
+      "faults": [
+        "Rolling back on steeper Tallaght gradients",
+        "Over-revving",
+        "No observation before moving off"
+      ]
+    }
+  ],
+  "corridors": [
+    "Broomhill Road (centre leave / return)",
+    "Greenhills Road (R819)",
+    "Castletymon Road",
+    "Belgard Road junction and roundabout approaches",
+    "St Aongus Park / St Aongus Crescent",
+    "Tymon North Avenue and Tymonville Park",
+    "Bancroft Road / Bancroft Grove",
+    "Redwood and Treepark estates",
+    "Parkhill and Killinarden manoeuvre zones"
+  ],
+  "hotspots": [
+    {
+      "name": "Broomhill Road",
+      "why": "Leave and return corridor for the Premier Business Park centre — first and last minutes are marked.",
+      "faults": [
+        "Weak observation leaving the site",
+        "Hesitation joining traffic",
+        "Poor positioning near industrial entrances"
+      ],
+      "speedContext": "Treat the exit as a real junction: stop, scan, then commit."
+    },
+    {
+      "name": "Greenhills Road",
+      "why": "Busy R819 commuter corridor with chains of light-controlled junctions.",
+      "faults": [
+        "Late lane choice",
+        "Hesitation that blocks traffic",
+        "Missing mirrors before pulls and turns",
+        "Speed creeping or crawling"
+      ],
+      "speedContext": "Steady near-limit progress; scan signs — width does not mean 60."
+    },
+    {
+      "name": "Castletymon Road",
+      "why": "Links estates to main roads; estate exits and progress both tested.",
+      "faults": [
+        "Rolling stops at estate exits",
+        "Unsafe or timid gap selection onto the main road",
+        "Late braking after bends"
+      ],
+      "speedContext": "Drop speed into estates; commit safely onto distributors."
+    },
+    {
+      "name": "Belgard Road / hospital roundabout area",
+      "why": "Multi-lane roundabout and junction pressure near major flows.",
+      "faults": [
+        "Drifting across lanes",
+        "Late indicators",
+        "Cutting exits",
+        "Freezing at entry"
+      ],
+      "speedContext": "Early lane position, correct signal, decisive entry when the gap is real."
+    },
+    {
+      "name": "Parkhill / Killinarden / Redwood estates",
+      "why": "Tight residential manoeuvre zones with parked cars and gradients.",
+      "faults": [
+        "Kerb contact on reverse",
+        "Weak observation at limited-visibility exits",
+        "Clutch panic on hills"
+      ],
+      "speedContext": "Slow, controlled estate speed — observation over progress."
+    },
+    {
+      "name": "Tymon / Bancroft",
+      "why": "Restricted-visibility estate exits and manoeuvre practice streets.",
+      "faults": [
+        "Incomplete creep-and-peep",
+        "Rushing out without full scan",
+        "Wide left turns near kerbs"
+      ],
+      "speedContext": "Full stop when required; peep, then move."
+    }
+  ],
+  "tips": [
+    "Treat leaving Premier Business Park / Broomhill Road as the first marked junction.",
+    "Practise Greenhills Road lights in real daytime traffic until lane choice feels automatic.",
+    "At Belgard and hospital-area roundabouts, pick your lane early and hold it.",
+    "On Parkhill reverse: expect slope plus tight space — control first, then observation.",
+    "Tallaght hill starts are steeper than many Dublin centres — zero rollback.",
+    "Estate exits in Tymon, Bancroft and Redwood need visible head checks every time.",
+    "Do not trust road width for speed — watch 50 → 60 transitions near distributors.",
+    "Hesitation on Greenhills and Castletymon is marked as hard as unsafe gaps — be decisive and safe.",
+    "Repeat Glenview and Mountain Park turnabouts until mirror checks between moves are automatic.",
+    "Use MyRoadSafety cancellations if you want an earlier Tallaght slot."
+  ],
+  "nearby": [
+    { "slug": "mulhuddart", "label": "Mulhuddart driving test routes", "href": "/mulhuddart-routes.html" },
+    { "slug": "finglas", "label": "Finglas driving test routes", "href": "/finglas-routes.html" },
+    { "slug": "raheny", "label": "Raheny driving test routes", "href": "/raheny-routes.html" },
+    { "slug": "killester", "label": "Killester driving test routes", "href": "/killester-routes.html" },
+    { "slug": "dun-laoghaire", "label": "Dun Laoghaire driving test routes", "href": "/dun-laoghaire-routes.html" }
+  ],
+  "spokes": [
+    { "href": "/guides/pass-tallaght-driving-test.html", "label": "How to pass the Tallaght driving test" },
+    { "href": "/guides/tallaght-fail-spots.html", "label": "Tallaght fail spots" },
+    { "href": "/guides/dublin-driving-test-routes.html", "label": "Dublin driving test routes hub" }
+  ],
+  "faqs": [
+    {
+      "q": "Where do testers take you on Tallaght driving test routes?",
+      "a": "Examiners reuse corridors around Broomhill Road, Greenhills Road, Castletymon Road, Belgard Road, St Aongus, Tymon, Bancroft, Redwood / Treepark, Parkhill and Killinarden — typically within a few kilometres of Premier Business Park."
+    },
+    {
+      "q": "Where is the reverse around the corner done on the Tallaght test?",
+      "a": "Common reverse areas include Killinarden → The Meadows West → Alpine Rise, Redwood Way → Treepark Road → Redwood Walk, Parkhill Road → Parkhill Avenue, and St Aongus Green. Parkhill is especially tight because of slope plus limited space."
+    },
+    {
+      "q": "Where is the hill start on the Tallaght driving test?",
+      "a": "Hill starts often appear on Treepark Road outside Tamarisk Heights, Elmcastle Park beside the field, and Tymonville Park. Gradients here are steeper than many Dublin centres — any rollback is marked."
+    },
+    {
+      "q": "Where is the turnabout done on the Tallaght test route?",
+      "a": "Turnabouts are often done in Glenview Park, from The Heath toward The Oaks / The Meadows East, Avonbeg Park → Mountain Park, and Homelawn Villas toward Mountain Park."
+    },
+    {
+      "q": "How long is the driving test in Tallaght?",
+      "a": "Plan for about 30–40 minutes including checks and manoeuvres, with a drive of at least 7.5 km. Signs, questions and technical checks add time at the centre."
+    },
+    {
+      "q": "What manoeuvres are on the Tallaght RSA driving test?",
+      "a": "Expect reverse around a corner, hill start and turnabout. Parallel parking and bay parking are not the standard RSA car-test manoeuvres used at this centre."
+    },
+    {
+      "q": "What is the Tallaght driving test pass rate?",
+      "a": "About 47.7% for Category B — below the national average (~53%). Junction density, hills and estate manoeuvres make local practice especially valuable."
+    },
+    {
+      "q": "How long is the waiting time for a Tallaght driving test?",
+      "a": "Around 12 weeks is a recent estimate. Check MyRoadSafety for live Tallaght availability and cancellations."
+    },
+    {
+      "q": "Where is the Tallaght driving test centre?",
+      "a": "Premier Business Park, 52 Broomhill Rd, Tallaght, Dublin, D24 VE8E. Always confirm the address on your RSA booking letter."
+    },
+    {
+      "q": "Can I change my Tallaght driving test date?",
+      "a": "If your test is more than 10 days away you can usually change date or time free via MyRoadSafety. Closer than that, cancelling typically means losing the fee unless RSA rules for your situation allow otherwise — check rsa.ie."
+    }
+  ]
+}

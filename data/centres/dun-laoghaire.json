@@ -26,7 +26,7 @@
     "lat": 53.2757676,
     "lng": -6.1590942,
     "googleMapsDirections": "https://www.google.com/maps/dir/?api=1&destination=Highline+Building,+Baker%27s+Point,+Pottery+Rd,+Kill+Of+The+Grange,+D%C3%BAn+Laoghaire,+Co.+Dublin,+A96+KW29",
-    "previewKml": "/data/dunlaoghairepreview.kml",
+    "googleMapsEmbedQuery": "Highline Building, Baker's Point, Pottery Rd, Kill Of The Grange, Dun Laoghaire, A96 KW29",
     "radiusKm": 5,
     "heroImage": {
       "src": "/images/centres/dun-laoghaire/dun-laoghaire-rsa-driving-test-centre-building.webp",

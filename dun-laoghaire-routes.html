@@ -24,7 +24,7 @@
 <meta name="twitter:image" content="https://www.driveflow.ie/images/centres/dun-laoghaire/dun-laoghaire-rsa-driving-test-centre-building.webp">
 <title>Dun Laoghaire Driving Test Routes (2026) | DriveFlow</title>
 
-<link rel="stylesheet" href="/shared.css?v=20260805b">
+<link rel="stylesheet" href="/shared.css?v=20260805c">
 </head>
 
 <body>
@@ -94,9 +94,9 @@
 
         <div class="info-section centre-map-teaser" id="map">
             <h2>Where is the Dun Laoghaire driving test centre?</h2>
-            <p>The RSA centre is at <strong>Highline Building, Baker’s Point, Pottery Rd, Kill Of The Grange, Dún Laoghaire, Co. Dublin, A96 KW29</strong>. The map shows the centre pin plus a free corridor preview — unlock below for full turn-by-turn Google Maps practice routes.</p>
+            <p>The RSA centre is at <strong>Highline Building, Baker’s Point, Pottery Rd, Kill Of The Grange, Dún Laoghaire, Co. Dublin, A96 KW29</strong>. Use the map for directions to the test centre — unlock below for full turn-by-turn Google Maps practice routes.</p>
             <div class="centre-map-teaser__wrap">
-                <div id="dl-preview-map" class="centre-map-teaser__frame" role="region" aria-label="Dun Laoghaire test centre and route preview map"></div>
+                <div id="dl-centre-map" class="centre-map-teaser__frame" role="region" aria-label="Directions to Dun Laoghaire driving test centre"></div>
                 <a class="centre-map-teaser__directions"
                    href="https://www.google.com/maps/dir/?api=1&amp;destination=Highline+Building,+Baker%27s+Point,+Pottery+Rd,+Kill+Of+The+Grange,+D%C3%BAn+Laoghaire,+Co.+Dublin,+A96+KW29"
                    target="_blank"
@@ -420,104 +420,37 @@
 
 <script>
 (function () {
-  var mapEl = document.getElementById('dl-preview-map');
+  var mapEl = document.getElementById('dl-centre-map');
   if (!mapEl) return;
 
-  var CENTRE = { lat: 53.2757676, lng: -6.1590942 };
-  var KML_URL = '/data/dunlaoghairepreview.kml';
+  var MAP_SRC = 'https://maps.google.com/maps?q=Highline+Building,+Baker%27s+Point,+Pottery+Rd,+Kill+Of+The+Grange,+Dun+Laoghaire,+A96+KW29&z=16&output=embed';
   var started = false;
 
-  function loadScript(src) {
-    return new Promise(function (resolve, reject) {
-      if (document.querySelector('script[src="' + src + '"]')) {
-        resolve();
-        return;
-      }
-      var s = document.createElement('script');
-      s.src = src;
-      s.async = true;
-      s.onload = resolve;
-      s.onerror = reject;
-      document.head.appendChild(s);
-    });
-  }
-
-  function loadCss(href) {
-    if (document.querySelector('link[href="' + href + '"]')) return;
-    var link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = href;
-    document.head.appendChild(link);
-  }
-
-  function parseKmlLineString(xmlText) {
-    var doc = new DOMParser().parseFromString(xmlText, 'application/xml');
-    var node = doc.querySelector('LineString coordinates');
-    if (!node || !node.textContent) return [];
-    return node.textContent.trim().split(/\s+/).filter(Boolean).map(function (pair) {
-      var parts = pair.split(',');
-      return [parseFloat(parts[1]), parseFloat(parts[0])];
-    }).filter(function (ll) {
-      return isFinite(ll[0]) && isFinite(ll[1]);
-    });
-  }
-
-  async function initMap() {
-    if (started || typeof L === 'undefined') return;
+  function showMap() {
+    if (started) return;
     started = true;
-
-    var map = L.map(mapEl, {
-      scrollWheelZoom: false,
-      attributionControl: true
-    }).setView([CENTRE.lat, CENTRE.lng], 13);
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap',
-      maxZoom: 19
-    }).addTo(map);
-
-    L.marker([CENTRE.lat, CENTRE.lng])
-      .addTo(map)
-      .bindPopup('Dun Laoghaire RSA test centre<br>Highline Building, Baker’s Point, A96 KW29');
-
-    try {
-      var res = await fetch(KML_URL);
-      if (!res.ok) throw new Error('KML fetch failed');
-      var latlngs = parseKmlLineString(await res.text());
-      if (latlngs.length) {
-        var line = L.polyline(latlngs, {
-          color: '#1a1a1a',
-          weight: 3,
-          opacity: 0.85
-        }).addTo(map);
-        map.fitBounds(line.getBounds().pad(0.12));
-      }
-    } catch (err) {
-      console.warn('Dun Laoghaire preview route unavailable', err);
-    }
-
-    setTimeout(function () { map.invalidateSize(); }, 100);
-  }
-
-  async function boot() {
-    loadCss('https://unpkg.com/leaflet@1.9.4/dist/leaflet.css');
-    await loadScript('https://unpkg.com/leaflet@1.9.4/dist/leaflet.js');
-    await initMap();
+    var iframe = document.createElement('iframe');
+    iframe.title = 'Directions to Dun Laoghaire driving test centre at Baker’s Point';
+    iframe.loading = 'lazy';
+    iframe.referrerPolicy = 'no-referrer-when-downgrade';
+    iframe.allowFullscreen = true;
+    iframe.src = MAP_SRC;
+    mapEl.appendChild(iframe);
   }
 
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
       if (entries.some(function (e) { return e.isIntersecting; })) {
         io.disconnect();
-        boot();
+        showMap();
       }
     }, { rootMargin: '200px' });
     io.observe(mapEl);
   } else {
-    boot();
+    showMap();
   }
 })();
 </script>
-<script src="/shared.js?v=20260805b" defer></script>
+<script src="/shared.js?v=20260805c" defer></script>
 </body>
 </html>
