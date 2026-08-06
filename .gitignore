@@ -1,8 +1,20 @@
-# Facebook groups agent — never commit the browser session
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+_agent/.venv/
+
+# Facebook groups agent — never commit the browser session / drafts
 _agent/facebook/.fb-profile/
 _agent/facebook/post_log.jsonl
 _agent/facebook/groups.raw.json
 _agent/facebook/drafts/
 
-# Local Python env for the agent
-_agent/.venv/
+# TikTok agent local session / drafts
+_agent/tiktok/.tiktok-profile/
+_agent/tiktok/drafts/
+_agent/tiktok/assets/generated/
