@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.driveflow.ie/</loc>
     <lastmod>2026-07-15</lastmod>
@@ -380,9 +381,14 @@
   </url>
   <url>
     <loc>https://www.driveflow.ie/mulhuddart-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.driveflow.ie/images/centres/mulhuddart/mulhuddart-driving-test-route-map.jpg</image:loc>
+      <image:title>Mulhuddart driving test route map</image:title>
+      <image:caption>Satellite map of a Mulhuddart driving test route in west Dublin.</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://www.driveflow.ie/mullingar-routes.html</loc>
@@ -392,15 +398,25 @@
   </url>
   <url>
     <loc>https://www.driveflow.ie/naas-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.driveflow.ie/images/centres/naas/naas-driving-test-route-map.jpg</image:loc>
+      <image:title>Naas driving test route map</image:title>
+      <image:caption>Satellite map of a Naas driving test route around Devoy Park, County Kildare.</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://www.driveflow.ie/navan-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.driveflow.ie/images/centres/navan/navan-driving-test-route-map.jpg</image:loc>
+      <image:title>Navan driving test route map</image:title>
+      <image:caption>Satellite map of a Navan driving test route around the Navan RSA test centre, County Meath.</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://www.driveflow.ie/nenagh-routes.html</loc>
@@ -428,9 +444,14 @@
   </url>
   <url>
     <loc>https://www.driveflow.ie/raheny-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.driveflow.ie/images/centres/raheny/raheny-driving-test-route-map.jpg</image:loc>
+      <image:title>Raheny driving test route map</image:title>
+      <image:caption>Satellite map of a Raheny driving test route in north Dublin.</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://www.driveflow.ie/roscommon-routes.html</loc>
@@ -458,9 +479,14 @@
   </url>
   <url>
     <loc>https://www.driveflow.ie/tallaght-routes.html</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.driveflow.ie/images/centres/tallaght/tallaght-driving-test-route-map.jpg</image:loc>
+      <image:title>Tallaght driving test route map</image:title>
+      <image:caption>Satellite map of a Tallaght driving test route from Broomhill Industrial Estate, Dublin.</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://www.driveflow.ie/thurles-routes.html</loc>
@@ -494,9 +520,14 @@
   </url>
   <url>
     <loc>https://www.driveflow.ie/waterford-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-08-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.driveflow.ie/images/centres/waterford/waterford-driving-test-route-map.jpg</image:loc>
+      <image:title>Waterford driving test route map</image:title>
+      <image:caption>Satellite map of a Waterford driving test route in County Waterford.</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://www.driveflow.ie/westside-routes.html</loc>

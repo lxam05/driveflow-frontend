@@ -27,10 +27,10 @@
     "googleMapsEmbedQuery": "Premier Business Park, 52 Broomhill Rd, Tallaght, Dublin, D24 VE8E",
     "radiusKm": 5,
     "heroImage": {
-      "src": "/images/centres/tallaght/tallaght-rsa-driving-test-centre-building.webp",
-      "alt": "Tallaght RSA driving test centre building at Premier Business Park, Broomhill Road",
-      "width": 1400,
-      "height": 964
+      "src": "/images/centres/tallaght/tallaght-driving-test-route-map.jpg",
+      "alt": "Satellite map of a Tallaght driving test route from Broomhill Industrial Estate, Dublin.",
+      "width": 1600,
+      "height": 803
     }
   },
   "stats": {
