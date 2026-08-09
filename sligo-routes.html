@@ -43,6 +43,38 @@
             <p style="margin-top: 12px; color: var(--text-muted); font-size: 14px;"><em>Updated July 2026</em></p>
             <a href="#routes" style="display: inline-block; margin-top: 20px; padding: 12px 24px; background: var(--primary); color: var(--bg-main); border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 14px; transition: all 0.2s ease;">View Routes →</a>
         </header>
+
+        <section class="centre-snapshot" data-routes-insert-after aria-label="Sligo test centre snapshot">
+            <h2>Sligo test centre snapshot</h2>
+            <dl>
+                <dt>Pass rate</dt>
+                <dd>53.2% Category B — close to the 52.3% national Category B average. Source: CSO / RSA driving test statistics (ROA), Category B, July 2026. Last updated July 2026.</dd>
+                <dt>Waiting time</dt>
+                <dd>11 weeks to driving test invite (CSO month-end figure). Live availability moves — confirm on MyRoadSafety. Source: CSO / RSA driving test statistics (ROA), Category B, July 2026. Last updated July 2026.</dd>
+                <dt>Test length</dt>
+                <dd>Drive typically 30–40 minutes and at least 7.5&nbsp;km, plus signs, questions and technical checks.</dd>
+                <dt>Typical manoeuvres</dt>
+                <dd>Reverse around corner, turnabout, hill start (RSA car test).</dd>
+            </dl>
+            <p class="snapshot-note">Source: CSO / RSA driving test statistics (ROA), Category B, July 2026. Always confirm the exact centre address on your RSA booking letter.</p>
+        </section>
+
+<div id="routes" class="routes-section" data-route="sligo" style="scroll-margin-top: 120px;"></div>
+
+        <div class="info-section centre-map-teaser" id="map">
+            <h2>Where is the Sligo driving test centre?</h2>
+            <p>The RSA centre is at <strong>Old Dublin Road, Carraroe, Sligo, F91 VK11</strong>. Use the map for directions to the test centre — unlock above for full turn-by-turn Google Maps practice routes.</p>
+            <div class="centre-map-teaser__wrap">
+                <div id="sligo-centre-map" class="centre-map-teaser__frame" role="region" aria-label="Directions to Sligo driving test centre"></div>
+                <a class="centre-map-teaser__directions"
+                   href="https://www.google.com/maps/dir/?api=1&amp;destination=Old+Dublin+Road%2C+Carraroe%2C+Sligo%2C+F91+VK11"
+                   target="_blank"
+                   rel="noopener noreferrer">Get directions</a>
+            </div>
+        </div>
+
+
+
 <main>
 
         <div class="info-section">
@@ -324,8 +356,16 @@
             <p>Drive Carraroe, Pearse Road, Meadowvale and Oakfield repeatedly until lane choice and junction behaviour become automatic.</p>
         </div>
         
-        <div id="routes" class="routes-section" data-route="sligo" style="scroll-margin-top: 120px;"></div>
+        
 </main>
+                <div class="info-section" id="pass-rate-waiting">
+            <h2>What is the Sligo pass rate and waiting time?</h2>
+            <p><strong>Pass rate:</strong> <strong>53.2%</strong> Category B. Source: CSO / RSA driving test statistics (ROA), Category B, July 2026.</p>
+            <p><strong>Waiting time:</strong> <strong>11 weeks</strong> to invite. Check MyRoadSafety for live slots and cancellations. Source: CSO / RSA driving test statistics (ROA), Category B, July 2026. Last updated July 2026.</p>
+            <p>Compare every centre on our <a href="/guides/driving-test-pass-rates-by-centre.html">pass rates ranking</a> and <a href="/guides/driving-test-waiting-times-by-centre.html">waiting times ranking</a>.</p>
+        </div>
+
+<p class="author-byline">Written by <a href="/about.html">Liam O'Connor</a>. Centre statistics last updated July 2026.</p>
 <aside class="nearby-centres" aria-label="Nearby driving test centres">
   <h2>Nearby driving test centres</h2>
   <p>Also useful if you are practising around County Sligo.</p>
@@ -359,6 +399,7 @@
       "about": {
         "@id": "https://www.driveflow.ie/#organization"
       },
+            "author": {"@type": "Person", "name": "Liam O'Connor", "url": "https://www.driveflow.ie/about.html"},
       "publisher": {
         "@id": "https://www.driveflow.ie/#organization"
       },
@@ -438,6 +479,40 @@
 }
 </script>
 
+
+<script>
+(function () {
+  var mapEl = document.getElementById('sligo-centre-map');
+  if (!mapEl) return;
+
+  var MAP_SRC = "https://maps.google.com/maps?q=Old+Dublin+Road%2C+Carraroe%2C+Sligo%2C+F91+VK11&z=16&output=embed";
+  var started = false;
+
+  function showMap() {
+    if (started) return;
+    started = true;
+    var iframe = document.createElement('iframe');
+    iframe.title = "Directions to Sligo driving test centre";
+    iframe.loading = 'lazy';
+    iframe.referrerPolicy = 'no-referrer-when-downgrade';
+    iframe.allowFullscreen = true;
+    iframe.src = MAP_SRC;
+    mapEl.appendChild(iframe);
+  }
+
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      if (entries.some(function (e) { return e.isIntersecting; })) {
+        io.disconnect();
+        showMap();
+      }
+    }, { rootMargin: '200px' });
+    io.observe(mapEl);
+  } else {
+    showMap();
+  }
+})();
+</script>
 <script src="/shared.js?v=20260725c" defer></script>
 </body>
 </html>

@@ -1,0 +1,623 @@
+{
+  "period": "2026-07",
+  "lastUpdatedLabel": "July 2026",
+  "lastUpdatedDate": "2026-07-31",
+  "citation": "Source: CSO / RSA driving test statistics (ROA), Category B, July 2026.",
+  "national": {
+    "passRate": 52.3,
+    "waitWeeks": 12.1,
+    "abandoned": 2175
+  },
+  "centres": {
+    "athlone": {
+      "slug": "athlone",
+      "csoName": "Athlone, Co. Westmeath",
+      "displayName": "Athlone",
+      "url": "/athlone-routes.html",
+      "region": null,
+      "passRate": 45.2,
+      "waitWeeks": 13,
+      "abandoned": 28
+    },
+    "ballina": {
+      "slug": "ballina",
+      "csoName": "Ballina, Co. Mayo",
+      "displayName": "Ballina",
+      "url": "/ballina-routes.html",
+      "region": null,
+      "passRate": 54.6,
+      "waitWeeks": 13,
+      "abandoned": 13
+    },
+    "birr-county-arms-hotel": {
+      "slug": "birr-county-arms-hotel",
+      "csoName": "Birr (County Arms Hotel), Co. Offaly",
+      "displayName": "Birr (County Arms Hotel)",
+      "url": "/birr-county-arms-hotel-routes.html",
+      "region": null,
+      "passRate": null,
+      "waitWeeks": null,
+      "abandoned": null
+    },
+    "buncrana": {
+      "slug": "buncrana",
+      "csoName": "Buncrana, Co. Donegal",
+      "displayName": "Buncrana",
+      "url": "/buncrana-routes.html",
+      "region": null,
+      "passRate": 57.5,
+      "waitWeeks": 11,
+      "abandoned": 10
+    },
+    "carlow-talbot-hotel": {
+      "slug": "carlow-talbot-hotel",
+      "csoName": "Carlow Talbot Hotel, Co. Carlow",
+      "displayName": "Carlow Talbot Hotel",
+      "url": "/carlow-talbot-hotel-routes.html",
+      "region": null,
+      "passRate": 40.6,
+      "waitWeeks": 11,
+      "abandoned": 47
+    },
+    "carlow": {
+      "slug": "carlow",
+      "csoName": "Carlow, Co. Carlow",
+      "displayName": "Carlow",
+      "url": "/carlow-routes.html",
+      "region": null,
+      "passRate": 55.3,
+      "waitWeeks": 10,
+      "abandoned": 24
+    },
+    "carrick-on-shannon": {
+      "slug": "carrick-on-shannon",
+      "csoName": "Carrick On Shannon, Co. Leitrim",
+      "displayName": "Carrick-on-Shannon",
+      "url": "/carrick-on-shannon-routes.html",
+      "region": null,
+      "passRate": 56.7,
+      "waitWeeks": 13,
+      "abandoned": 6
+    },
+    "castlebar": {
+      "slug": "castlebar",
+      "csoName": "Castlebar, Co. Mayo",
+      "displayName": "Castlebar",
+      "url": "/castlebar-routes.html",
+      "region": null,
+      "passRate": 54.2,
+      "waitWeeks": 14,
+      "abandoned": 11
+    },
+    "cavan": {
+      "slug": "cavan",
+      "csoName": "Cavan, Co. Cavan",
+      "displayName": "Cavan",
+      "url": "/cavan-routes.html",
+      "region": null,
+      "passRate": 57.6,
+      "waitWeeks": 12,
+      "abandoned": 16
+    },
+    "clifden": {
+      "slug": "clifden",
+      "csoName": "Clifden, Co. Galway",
+      "displayName": "Clifden",
+      "url": "/clifden-routes.html",
+      "region": "Galway",
+      "passRate": 68.5,
+      "waitWeeks": 13,
+      "abandoned": 2
+    },
+    "clonmel": {
+      "slug": "clonmel",
+      "csoName": "Clonmel, Co. Tipperary",
+      "displayName": "Clonmel",
+      "url": "/clonmel-routes.html",
+      "region": null,
+      "passRate": 49.4,
+      "waitWeeks": 10,
+      "abandoned": 36
+    },
+    "ballincollig": {
+      "slug": "ballincollig",
+      "csoName": "Cork (Ballincollig), Co. Cork",
+      "displayName": "Ballincollig",
+      "url": "/ballincollig-routes.html",
+      "region": "Cork",
+      "passRate": null,
+      "waitWeeks": null,
+      "abandoned": null
+    },
+    "wilton": {
+      "slug": "wilton",
+      "csoName": "Cork (Wilton), Co. Cork",
+      "displayName": "Cork (Wilton)",
+      "url": "/wilton-routes.html",
+      "region": "Cork",
+      "passRate": 53,
+      "waitWeeks": 10,
+      "abandoned": 140
+    },
+    "donegal": {
+      "slug": "donegal",
+      "csoName": "Donegal, Co. Donegal",
+      "displayName": "Donegal",
+      "url": "/donegal-routes.html",
+      "region": null,
+      "passRate": 59.8,
+      "waitWeeks": 9,
+      "abandoned": 16
+    },
+    "drogheda": {
+      "slug": "drogheda",
+      "csoName": "Drogheda – Southgate, Co. Louth",
+      "displayName": "Drogheda (Southgate)",
+      "url": "/drogheda-routes.html",
+      "region": null,
+      "passRate": 48,
+      "waitWeeks": 19,
+      "abandoned": 50
+    },
+    "dun-laoghaire": {
+      "slug": "dun-laoghaire",
+      "csoName": "Dun Laoghaire / Deansgrange, Co. Dublin",
+      "displayName": "Dun Laoghaire",
+      "url": "/dun-laoghaire-routes.html",
+      "region": "Dublin",
+      "passRate": 44,
+      "waitWeeks": 14,
+      "abandoned": 160
+    },
+    "dundalk": {
+      "slug": "dundalk",
+      "csoName": "Dundalk, Co. Louth",
+      "displayName": "Dundalk",
+      "url": "/dundalk-routes.html",
+      "region": null,
+      "passRate": 62.2,
+      "waitWeeks": 10,
+      "abandoned": 25
+    },
+    "dungarvan": {
+      "slug": "dungarvan",
+      "csoName": "Dungarvan, Co. Waterford",
+      "displayName": "Dungarvan",
+      "url": "/dungarvan-routes.html",
+      "region": null,
+      "passRate": 52.3,
+      "waitWeeks": 14,
+      "abandoned": 12
+    },
+    "ennis": {
+      "slug": "ennis",
+      "csoName": "Ennis, Co. Clare",
+      "displayName": "Ennis",
+      "url": "/ennis-routes.html",
+      "region": null,
+      "passRate": 61.9,
+      "waitWeeks": 12,
+      "abandoned": 24
+    },
+    "finglas": {
+      "slug": "finglas",
+      "csoName": "Finglas, Co. Dublin",
+      "displayName": "Finglas",
+      "url": "/finglas-routes.html",
+      "region": "Dublin",
+      "passRate": 48.1,
+      "waitWeeks": 9,
+      "abandoned": 102
+    },
+    "carnmore": {
+      "slug": "carnmore",
+      "csoName": "Galway (Carnmore), Co. Galway",
+      "displayName": "Galway (Carnmore)",
+      "url": "/carnmore-routes.html",
+      "region": "Galway",
+      "passRate": 59.1,
+      "waitWeeks": 12,
+      "abandoned": 18
+    },
+    "clybaun": {
+      "slug": "clybaun",
+      "csoName": "Galway (Clybaun Hotel), Co. Galway",
+      "displayName": "Galway (Clybaun)",
+      "url": "/clybaun-routes.html",
+      "region": "Galway",
+      "passRate": 54.2,
+      "waitWeeks": 9,
+      "abandoned": 32
+    },
+    "westside": {
+      "slug": "westside",
+      "csoName": "Galway (Westside), Co. Galway",
+      "displayName": "Galway (Westside)",
+      "url": "/westside-routes.html",
+      "region": "Galway",
+      "passRate": null,
+      "waitWeeks": null,
+      "abandoned": null
+    },
+    "gorey": {
+      "slug": "gorey",
+      "csoName": "Gorey, Co. Wexford",
+      "displayName": "Gorey",
+      "url": "/gorey-routes.html",
+      "region": null,
+      "passRate": 49.2,
+      "waitWeeks": 11,
+      "abandoned": 29
+    },
+    "kilkenny-government-buildings": {
+      "slug": "kilkenny-government-buildings",
+      "csoName": "Kilkenny (Govt Buildings), Co. Kilkenny",
+      "displayName": "Kilkenny (Government Buildings)",
+      "url": "/kilkenny-government-buildings-routes.html",
+      "region": null,
+      "passRate": 52,
+      "waitWeeks": 10,
+      "abandoned": 47
+    },
+    "kilkenny-oloughlin-gaels": {
+      "slug": "kilkenny-oloughlin-gaels",
+      "csoName": "Kilkenny (O'Loughlin Gaels), Co. Kilkenny",
+      "displayName": "Kilkenny (O'Loughlin Gaels)",
+      "url": "/kilkenny-oloughlin-gaels-routes.html",
+      "region": null,
+      "passRate": 66.4,
+      "waitWeeks": 9,
+      "abandoned": 14
+    },
+    "killarney": {
+      "slug": "killarney",
+      "csoName": "Killarney, Co. Kerry",
+      "displayName": "Killarney",
+      "url": "/killarney-routes.html",
+      "region": null,
+      "passRate": 44.6,
+      "waitWeeks": 16,
+      "abandoned": 21
+    },
+    "killester": {
+      "slug": "killester",
+      "csoName": "Killester, Co. Dublin",
+      "displayName": "Killester",
+      "url": "/killester-routes.html",
+      "region": "Dublin",
+      "passRate": 47.3,
+      "waitWeeks": 14,
+      "abandoned": 61
+    },
+    "kilrush": {
+      "slug": "kilrush",
+      "csoName": "Kilrush, Co. Clare",
+      "displayName": "Kilrush",
+      "url": "/kilrush-routes.html",
+      "region": null,
+      "passRate": 66.3,
+      "waitWeeks": 12,
+      "abandoned": 10
+    },
+    "letterkenny": {
+      "slug": "letterkenny",
+      "csoName": "Letterkenny, Co. Donegal",
+      "displayName": "Letterkenny",
+      "url": "/letterkenny-routes.html",
+      "region": null,
+      "passRate": 62.4,
+      "waitWeeks": 13,
+      "abandoned": 22
+    },
+    "limerick-castlemungret": {
+      "slug": "limerick-castlemungret",
+      "csoName": "Limerick - Castlemungret, Co. Limerick",
+      "displayName": "Limerick Castlemungret",
+      "url": "/limerick-castlemungret-routes.html",
+      "region": "Limerick",
+      "passRate": 57.9,
+      "waitWeeks": 10,
+      "abandoned": 46
+    },
+    "woodview": {
+      "slug": "woodview",
+      "csoName": "Limerick - Woodview, Co. Limerick",
+      "displayName": "Limerick Woodview",
+      "url": "/woodview-routes.html",
+      "region": "Limerick",
+      "passRate": 53.1,
+      "waitWeeks": 10,
+      "abandoned": 39
+    },
+    "longford": {
+      "slug": "longford",
+      "csoName": "Longford, Co. Longford",
+      "displayName": "Longford",
+      "url": "/longford-routes.html",
+      "region": null,
+      "passRate": 60.6,
+      "waitWeeks": 14,
+      "abandoned": 9
+    },
+    "loughrea": {
+      "slug": "loughrea",
+      "csoName": "Loughrea, Co. Galway",
+      "displayName": "Loughrea",
+      "url": "/loughrea-routes.html",
+      "region": "Galway",
+      "passRate": 62.3,
+      "waitWeeks": 16,
+      "abandoned": 16
+    },
+    "mallow": {
+      "slug": "mallow",
+      "csoName": "Mallow (Cork Racecourse Mallow), Co. Cork",
+      "displayName": "Mallow",
+      "url": "/mallow-routes.html",
+      "region": "Cork",
+      "passRate": 56.6,
+      "waitWeeks": 10,
+      "abandoned": 29
+    },
+    "mitchelstown": {
+      "slug": "mitchelstown",
+      "csoName": "Mitchelstown, Co. Cork",
+      "displayName": "Mitchelstown",
+      "url": "/mitchelstown-routes.html",
+      "region": "Cork",
+      "passRate": 53.7,
+      "waitWeeks": 10,
+      "abandoned": 21
+    },
+    "monaghan": {
+      "slug": "monaghan",
+      "csoName": "Monaghan, Co. Monaghan",
+      "displayName": "Monaghan",
+      "url": "/monaghan-routes.html",
+      "region": null,
+      "passRate": 69.5,
+      "waitWeeks": 8,
+      "abandoned": 11
+    },
+    "maple-house": {
+      "slug": "maple-house",
+      "csoName": "Mulhuddart Maple House, Co. Dublin",
+      "displayName": "Maple House (Mulhuddart)",
+      "url": "/maple-house-routes.html",
+      "region": "Dublin",
+      "passRate": 46.7,
+      "waitWeeks": 12,
+      "abandoned": 24
+    },
+    "mulhuddart": {
+      "slug": "mulhuddart",
+      "csoName": "Mulhuddart, Co. Dublin",
+      "displayName": "Mulhuddart",
+      "url": "/mulhuddart-routes.html",
+      "region": "Dublin",
+      "passRate": 39.2,
+      "waitWeeks": 17,
+      "abandoned": 73
+    },
+    "mullingar": {
+      "slug": "mullingar",
+      "csoName": "Mullingar, Co. Westmeath",
+      "displayName": "Mullingar",
+      "url": "/mullingar-routes.html",
+      "region": null,
+      "passRate": 47.8,
+      "waitWeeks": 12,
+      "abandoned": 33
+    },
+    "naas": {
+      "slug": "naas",
+      "csoName": "Naas, Co. Kildare",
+      "displayName": "Naas",
+      "url": "/naas-routes.html",
+      "region": null,
+      "passRate": 53,
+      "waitWeeks": 9,
+      "abandoned": 135
+    },
+    "navan": {
+      "slug": "navan",
+      "csoName": "Navan, Co. Meath",
+      "displayName": "Navan",
+      "url": "/navan-routes.html",
+      "region": null,
+      "passRate": 55.8,
+      "waitWeeks": 9,
+      "abandoned": 68
+    },
+    "nenagh": {
+      "slug": "nenagh",
+      "csoName": "Nenagh, Co. Tipperary",
+      "displayName": "Nenagh",
+      "url": "/nenagh-routes.html",
+      "region": null,
+      "passRate": 52.7,
+      "waitWeeks": 9,
+      "abandoned": 17
+    },
+    "newcastle-west-longcourt-house-hotel": {
+      "slug": "newcastle-west-longcourt-house-hotel",
+      "csoName": "Newcastle West (Longcourt House Hotel), Co. Limerick",
+      "displayName": "Newcastle West (Longcourt House Hotel)",
+      "url": "/newcastle-west-longcourt-house-hotel-routes.html",
+      "region": "Limerick",
+      "passRate": null,
+      "waitWeeks": null,
+      "abandoned": null
+    },
+    "newcastle-west": {
+      "slug": "newcastle-west",
+      "csoName": "Newcastle West, Co. Limerick",
+      "displayName": "Newcastle West",
+      "url": "/newcastle-west-routes.html",
+      "region": "Limerick",
+      "passRate": 68.2,
+      "waitWeeks": 10,
+      "abandoned": 13
+    },
+    "maldron-hotel": {
+      "slug": "maldron-hotel",
+      "csoName": "Portlaoise (Maldron Hotel), Co. Laois",
+      "displayName": "Portlaoise (Maldron Hotel)",
+      "url": "/maldron-hotel-routes.html",
+      "region": null,
+      "passRate": 59.8,
+      "waitWeeks": 14,
+      "abandoned": 36
+    },
+    "portlaoise": {
+      "slug": "portlaoise",
+      "csoName": "Portlaoise, Co. Laois",
+      "displayName": "Portlaoise",
+      "url": "/portlaoise-routes.html",
+      "region": null,
+      "passRate": null,
+      "waitWeeks": null,
+      "abandoned": null
+    },
+    "raheny": {
+      "slug": "raheny",
+      "csoName": "Raheny, Co. Dublin",
+      "displayName": "Raheny",
+      "url": "/raheny-routes.html",
+      "region": "Dublin",
+      "passRate": 51.8,
+      "waitWeeks": 29,
+      "abandoned": 55
+    },
+    "roscommon": {
+      "slug": "roscommon",
+      "csoName": "Roscommon, Co. Roscommon",
+      "displayName": "Roscommon",
+      "url": "/roscommon-routes.html",
+      "region": null,
+      "passRate": 59.9,
+      "waitWeeks": 10,
+      "abandoned": 10
+    },
+    "shannon": {
+      "slug": "shannon",
+      "csoName": "Shannon, Co. Clare",
+      "displayName": "Shannon",
+      "url": "/shannon-routes.html",
+      "region": null,
+      "passRate": 55.4,
+      "waitWeeks": 7,
+      "abandoned": 14
+    },
+    "skibbereen": {
+      "slug": "skibbereen",
+      "csoName": "Skibbereen, Co. Cork",
+      "displayName": "Skibbereen",
+      "url": "/skibbereen-routes.html",
+      "region": "Cork",
+      "passRate": 56.3,
+      "waitWeeks": 10,
+      "abandoned": 18
+    },
+    "sligo": {
+      "slug": "sligo",
+      "csoName": "Sligo, Co. Sligo",
+      "displayName": "Sligo",
+      "url": "/sligo-routes.html",
+      "region": null,
+      "passRate": 53.2,
+      "waitWeeks": 11,
+      "abandoned": 24
+    },
+    "tallaght": {
+      "slug": "tallaght",
+      "csoName": "Tallaght, Co. Dublin",
+      "displayName": "Tallaght",
+      "url": "/tallaght-routes.html",
+      "region": "Dublin",
+      "passRate": 48.5,
+      "waitWeeks": 21,
+      "abandoned": 271
+    },
+    "thurles": {
+      "slug": "thurles",
+      "csoName": "Thurles, Co. Tipperary",
+      "displayName": "Thurles",
+      "url": "/thurles-routes.html",
+      "region": null,
+      "passRate": 86.8,
+      "waitWeeks": 12,
+      "abandoned": 9
+    },
+    "tipperary": {
+      "slug": "tipperary",
+      "csoName": "Tipperary, Co. Tipperary",
+      "displayName": "Tipperary",
+      "url": "/tipperary-routes.html",
+      "region": null,
+      "passRate": 65.9,
+      "waitWeeks": 9,
+      "abandoned": 6
+    },
+    "tralee": {
+      "slug": "tralee",
+      "csoName": "Tralee, Co. Kerry",
+      "displayName": "Tralee",
+      "url": "/tralee-routes.html",
+      "region": null,
+      "passRate": 56,
+      "waitWeeks": 15,
+      "abandoned": 29
+    },
+    "tuam": {
+      "slug": "tuam",
+      "csoName": "Tuam, Co. Galway",
+      "displayName": "Tuam",
+      "url": "/tuam-routes.html",
+      "region": "Galway",
+      "passRate": 54.1,
+      "waitWeeks": 10,
+      "abandoned": 9
+    },
+    "tullamore": {
+      "slug": "tullamore",
+      "csoName": "Tullamore, Co. Offaly",
+      "displayName": "Tullamore",
+      "url": "/tullamore-routes.html",
+      "region": null,
+      "passRate": 56.6,
+      "waitWeeks": 13,
+      "abandoned": 19
+    },
+    "waterford": {
+      "slug": "waterford",
+      "csoName": "Waterford, Co. Waterford",
+      "displayName": "Waterford",
+      "url": "/waterford-routes.html",
+      "region": null,
+      "passRate": 48.5,
+      "waitWeeks": 13,
+      "abandoned": 83
+    },
+    "wexford": {
+      "slug": "wexford",
+      "csoName": "Wexford, Co. Wexford",
+      "displayName": "Wexford",
+      "url": "/wexford-routes.html",
+      "region": null,
+      "passRate": 52.2,
+      "waitWeeks": 13,
+      "abandoned": 32
+    },
+    "wicklow": {
+      "slug": "wicklow",
+      "csoName": "Wicklow, Co. Wicklow",
+      "displayName": "Wicklow",
+      "url": "/wicklow-routes.html",
+      "region": null,
+      "passRate": 37.8,
+      "waitWeeks": 13,
+      "abandoned": 32
+    }
+  }
+}

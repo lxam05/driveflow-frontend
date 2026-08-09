@@ -85,6 +85,31 @@
     "description": "Which are the easiest driving test centres in Ireland? A look at rural centres with higher pass rates, why it matters, and how to choose smart in 2026."
   },
   {
+    "title": "Driving Test Pass Rates by Centre (Ireland)",
+    "url": "/guides/driving-test-pass-rates-by-centre.html",
+    "description": "Full Category B pass rates for Irish RSA centres (July 2026), ranked and linked to every DriveFlow centre guide. CSO / RSA ROA data."
+  },
+  {
+    "title": "Driving Test Waiting Times by Centre (Ireland)",
+    "url": "/guides/driving-test-waiting-times-by-centre.html",
+    "description": "RSA invite waiting times by centre (July 2026), ranked shortest to longest from CSO data, with links to DriveFlow centre guides."
+  },
+  {
+    "title": "Best Driving Test Centre in Dublin?",
+    "url": "/guides/best-driving-test-centre-dublin.html",
+    "description": "Compare Dublin RSA centres by Category B pass rate and waiting time using CSO data, then open the matching DriveFlow route guide."
+  },
+  {
+    "title": "Best Driving Test Centre in Cork?",
+    "url": "/guides/best-driving-test-centre-cork.html",
+    "description": "Compare Cork RSA centres by pass rate and waiting time with July 2026 CSO figures and links to Wilton, Mallow, Skibbereen and more."
+  },
+  {
+    "title": "Best Driving Test Centre in Galway?",
+    "url": "/guides/best-driving-test-centre-galway.html",
+    "description": "Compare Galway RSA centres by pass rate and waiting time using CSO data, including Carnmore, Clybaun, Tuam, Loughrea and Clifden."
+  },
+  {
     "title": "Dublin Driving Test Routes Explained",
     "url": "/guides/dublin-driving-test-routes.html",
     "description": "A complete guide to Dublin driving test routes. Compare Raheny, Finglas, Tallaght, Dun Laoghaire and more, and learn how to practice the right roads for your centre."

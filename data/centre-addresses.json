@@ -1,0 +1,535 @@
+{
+  "source": "_agent/data/rsa_test_centre_addresses.csv",
+  "centres": {
+    "athlone": {
+      "slug": "athlone",
+      "csvName": "Athlone",
+      "displayName": "Athlone",
+      "county": "Westmeath",
+      "address": "McCormacks Shopping Centre, Dublin Rd, Athlone",
+      "eircode": "N37 Y0X8",
+      "notes": null
+    },
+    "ballina": {
+      "slug": "ballina",
+      "csvName": "Ballina",
+      "displayName": "Ballina",
+      "county": "Mayo",
+      "address": "Moy Valley Business Park, Primrose Hill, Ballina",
+      "eircode": "F26 V6E4",
+      "notes": null
+    },
+    "ballincollig": {
+      "slug": "ballincollig",
+      "csvName": "Ballincollig",
+      "displayName": "Ballincollig",
+      "county": "Cork",
+      "address": "C/O Ballincollig Rugby Club, Tanner Park (West Village), Ballincollig",
+      "eircode": "P31 DA38",
+      "notes": null
+    },
+    "birr-county-arms-hotel": {
+      "slug": "birr-county-arms-hotel",
+      "csvName": "Birr County Arms Hotel",
+      "displayName": "Birr (County Arms Hotel)",
+      "county": "Offaly",
+      "address": "The Courtyard Office Centre, Emmet St, Townparks, Birr, Co. Offaly",
+      "eircode": "R42 K528",
+      "notes": "Eircode not confirmed - verify before publishing"
+    },
+    "buncrana": {
+      "slug": "buncrana",
+      "csvName": "Buncrana",
+      "displayName": "Buncrana",
+      "county": "Donegal",
+      "address": "McCarter's Road, Ardaravan, Buncrana",
+      "eircode": "F93 KVY6",
+      "notes": null
+    },
+    "carlow": {
+      "slug": "carlow",
+      "csvName": "Carlow",
+      "displayName": "Carlow",
+      "county": "Carlow",
+      "address": "Church Street, Graiguecullen, Carlow",
+      "eircode": "R93 T3H1",
+      "notes": null
+    },
+    "carlow-talbot-hotel": {
+      "slug": "carlow-talbot-hotel",
+      "csvName": "Carlow Talbot Hotel",
+      "displayName": "Carlow Talbot Hotel",
+      "county": "Carlow",
+      "address": "Carlow Talbot Hotel, Graigue, Portlaoise Road, Carlow",
+      "eircode": "R93 Y504",
+      "notes": null
+    },
+    "carnmore": {
+      "slug": "carnmore",
+      "csvName": "Carnmore",
+      "displayName": "Carnmore",
+      "county": "Galway",
+      "address": "Carnmore Commercial Centre, Carnmore",
+      "eircode": "H91 Y48X",
+      "notes": null
+    },
+    "carrick-on-shannon": {
+      "slug": "carrick-on-shannon",
+      "csvName": "Carrick-on-Shannon",
+      "displayName": "Carrick-on-Shannon",
+      "county": "Leitrim",
+      "address": "Government Offices, Shannon Lodge, Carrick on Shannon",
+      "eircode": "N41 Y1X4",
+      "notes": null
+    },
+    "castlebar": {
+      "slug": "castlebar",
+      "csvName": "Castlebar",
+      "displayName": "Castlebar",
+      "county": "Mayo",
+      "address": "An Sportlann, Mitchells GAA Club, McHale Rd, Castlebar",
+      "eircode": "F23 Y990",
+      "notes": null
+    },
+    "cavan": {
+      "slug": "cavan",
+      "csvName": "Cavan",
+      "displayName": "Cavan",
+      "county": "Cavan",
+      "address": "C/O Cavan Crystal Hotel, Dublin Road, Cavan",
+      "eircode": "H12 P6E5",
+      "notes": null
+    },
+    "clifden": {
+      "slug": "clifden",
+      "csvName": "Clifden",
+      "displayName": "Clifden",
+      "county": "Galway",
+      "address": "Clifden Station House Hotel, Galway Road, Clifden",
+      "eircode": "H71 AK52",
+      "notes": null
+    },
+    "clonmel": {
+      "slug": "clonmel",
+      "csvName": "Clonmel",
+      "displayName": "Clonmel",
+      "county": "Tipperary",
+      "address": "Park Hotel, Poppyfield Retail Park, Business Suite 2, Clonmel",
+      "eircode": "E91 X0N7",
+      "notes": null
+    },
+    "clybaun": {
+      "slug": "clybaun",
+      "csvName": "Clybaun",
+      "displayName": "Clybaun",
+      "county": "Galway",
+      "address": "The Clybaun Hotel, Clybaun Road, Knocknacarra",
+      "eircode": "H91 F62V",
+      "notes": "Temporary relocation of Galway centre from Westside since April 2025 - confirm current status"
+    },
+    "donegal": {
+      "slug": "donegal",
+      "csvName": "Donegal",
+      "displayName": "Donegal",
+      "county": "Donegal",
+      "address": "Donegal Public Service Centre, Drumlonagher",
+      "eircode": "F94 DK6C",
+      "notes": null
+    },
+    "drogheda": {
+      "slug": "drogheda",
+      "csvName": "Drogheda",
+      "displayName": "Drogheda",
+      "county": "Louth",
+      "address": "Southgate Shopping Centre, Drogheda",
+      "eircode": null,
+      "notes": "New centre opened May 2026 - eircode not confirmed"
+    },
+    "dundalk": {
+      "slug": "dundalk",
+      "csvName": "Dundalk",
+      "displayName": "Dundalk",
+      "county": "Louth",
+      "address": "Newry Rd, Lisdoo, Dundalk, Co. Louth",
+      "eircode": "A91 RY8X",
+      "notes": "One source lists an alternate venue (The Fairways Hotel"
+    },
+    "dungarvan": {
+      "slug": "dungarvan",
+      "csvName": "Dungarvan",
+      "displayName": "Dungarvan",
+      "county": "Waterford",
+      "address": "New Civic Offices, Davitts Quay, Dungarvan",
+      "eircode": "X35 Y326",
+      "notes": null
+    },
+    "ennis": {
+      "slug": "ennis",
+      "csvName": "Ennis",
+      "displayName": "Ennis",
+      "county": "Clare",
+      "address": "New Government Offices, Kilrush Road, Ennis",
+      "eircode": "V95 DH8E",
+      "notes": null
+    },
+    "finglas": {
+      "slug": "finglas",
+      "csvName": "Finglas",
+      "displayName": "Finglas",
+      "county": "Dublin",
+      "address": "Block 3/5, Jamestown Business Park, Jamestown Road, Finglas",
+      "eircode": "D11 TDE9",
+      "notes": null
+    },
+    "gorey": {
+      "slug": "gorey",
+      "csvName": "Gorey",
+      "displayName": "Gorey",
+      "county": "Wexford",
+      "address": "Naomh Eanna GAA Complex, Clonattin, Gorey",
+      "eircode": "Y25 P7K7",
+      "notes": null
+    },
+    "kilkenny-government-buildings": {
+      "slug": "kilkenny-government-buildings",
+      "csvName": "Kilkenny Government Buildings",
+      "displayName": "Kilkenny (Government Buildings)",
+      "county": "Kilkenny",
+      "address": "Government Offices, Hebron Road, Kilkenny",
+      "eircode": "R95 WV59",
+      "notes": null
+    },
+    "kilkenny-oloughlin-gaels": {
+      "slug": "kilkenny-oloughlin-gaels",
+      "csvName": "Kilkenny O'Loughlin Gaels",
+      "displayName": "Kilkenny (O'Loughlin Gaels)",
+      "county": "Kilkenny",
+      "address": "O'Loughlin Gaels GAA Club, Hebron Road, Kilkenny",
+      "eircode": "R95 RX63",
+      "notes": null
+    },
+    "killarney": {
+      "slug": "killarney",
+      "csvName": "Killarney",
+      "displayName": "Killarney",
+      "county": "Kerry",
+      "address": "Killarney Racecourse Grounds, Ross Road, Killarney",
+      "eircode": "V93 HW52",
+      "notes": null
+    },
+    "killester": {
+      "slug": "killester",
+      "csvName": "Killester",
+      "displayName": "Killester",
+      "county": "Dublin",
+      "address": "St. Brigid's Parish Resource Centre, 306 Howth Road, Killester",
+      "eircode": "D05 FF96",
+      "notes": null
+    },
+    "kilrush": {
+      "slug": "kilrush",
+      "csvName": "Kilrush",
+      "displayName": "Kilrush",
+      "county": "Clare",
+      "address": "Kilrush Golf & Sports Clubhouse, Ennis Road, Kilrush",
+      "eircode": "V15 W025",
+      "notes": null
+    },
+    "letterkenny": {
+      "slug": "letterkenny",
+      "csvName": "Letterkenny",
+      "displayName": "Letterkenny",
+      "county": "Donegal",
+      "address": "5 Pearse Road, Letterkenny",
+      "eircode": "F92 N795",
+      "notes": null
+    },
+    "limerick-castlemungret": {
+      "slug": "limerick-castlemungret",
+      "csvName": "Limerick Castlemungret",
+      "displayName": "Limerick Castlemungret",
+      "county": "Limerick",
+      "address": "Castlemungret Industrial Estate, Dock Road, Limerick",
+      "eircode": "V94 DV7K",
+      "notes": null
+    },
+    "longford": {
+      "slug": "longford",
+      "csvName": "Longford",
+      "displayName": "Longford",
+      "county": "Longford",
+      "address": "Government Offices, Ballinalee Road, Longford",
+      "eircode": "N39 E4E0",
+      "notes": null
+    },
+    "loughrea": {
+      "slug": "loughrea",
+      "csvName": "Loughrea",
+      "displayName": "Loughrea",
+      "county": "Galway",
+      "address": "Clonfert House, Bride St, Loughrea",
+      "eircode": "H62 ET93",
+      "notes": null
+    },
+    "maldron-hotel": {
+      "slug": "maldron-hotel",
+      "csvName": "Maldron Hotel",
+      "displayName": "Maldron Hotel",
+      "county": "Limerick",
+      "address": "Maldron Hotel, Southern Ring Road, Roxboro, Limerick",
+      "eircode": "V94 EDP4",
+      "notes": "Hotel's own address - confirm this matches the RSA test centre entrance/venue"
+    },
+    "mallow": {
+      "slug": "mallow",
+      "csvName": "Mallow",
+      "displayName": "Mallow",
+      "county": "Cork",
+      "address": "The Pavilion Stand, Cork Racecourse, Killarney Road, Mallow",
+      "eircode": "P51 XV74",
+      "notes": null
+    },
+    "maple-house": {
+      "slug": "maple-house",
+      "csvName": "Maple House",
+      "displayName": "Maple House",
+      "county": "Dublin",
+      "address": "Unit C - Unit 3A, Maple House, Rosemount Business Park, Mulhuddart",
+      "eircode": "D11 RPE8",
+      "notes": null
+    },
+    "mitchelstown": {
+      "slug": "mitchelstown",
+      "csvName": "Mitchelstown",
+      "displayName": "Mitchelstown",
+      "county": "Cork",
+      "address": "Mitchelstown",
+      "eircode": "P67 A2F3",
+      "notes": "Only town-level address found - street/building name not confirmed"
+    },
+    "monaghan": {
+      "slug": "monaghan",
+      "csvName": "Monaghan",
+      "displayName": "Monaghan",
+      "county": "Monaghan",
+      "address": "The Plantation, Kilnacloy, Monaghan",
+      "eircode": "H18 PD25",
+      "notes": null
+    },
+    "mullingar": {
+      "slug": "mullingar",
+      "csvName": "Mullingar",
+      "displayName": "Mullingar",
+      "county": "Westmeath",
+      "address": "Government Offices, Bellview Estate, Dublin Road, Mullingar",
+      "eircode": "N91 HDA2",
+      "notes": null
+    },
+    "naas": {
+      "slug": "naas",
+      "csvName": "Naas",
+      "displayName": "Naas",
+      "county": "Kildare",
+      "address": "The Conference Centre, Osprey Hotel & Spa, Devoy Quarter, Naas",
+      "eircode": "W91 X40K",
+      "notes": null
+    },
+    "navan": {
+      "slug": "navan",
+      "csvName": "Navan",
+      "displayName": "Navan",
+      "county": "Meath",
+      "address": "Government Offices, Athlumney, Navan",
+      "eircode": "C15 FEF2",
+      "notes": null
+    },
+    "nenagh": {
+      "slug": "nenagh",
+      "csvName": "Nenagh",
+      "displayName": "Nenagh",
+      "county": "Tipperary",
+      "address": "Government Offices, St Conlan's Road, Nenagh North, Nenagh",
+      "eircode": "E45 T611",
+      "notes": null
+    },
+    "newcastle-west": {
+      "slug": "newcastle-west",
+      "csvName": "Newcastle West",
+      "displayName": "Newcastle West",
+      "county": "Limerick",
+      "address": "Intreo Centre, Gortboy, Newcastle West",
+      "eircode": "V42 RK52",
+      "notes": null
+    },
+    "newcastle-west-longcourt-house-hotel": {
+      "slug": "newcastle-west-longcourt-house-hotel",
+      "csvName": "Newcastle West Longcourt House Hotel",
+      "displayName": "Newcastle West (Longcourt House Hotel)",
+      "county": "Limerick",
+      "address": "Longcourt House Hotel, St. Mary's Road, Rathnaneane, Newcastle West",
+      "eircode": "V42 TD72",
+      "notes": null
+    },
+    "portlaoise": {
+      "slug": "portlaoise",
+      "csvName": "Portlaoise",
+      "displayName": "Portlaoise",
+      "county": "Laois",
+      "address": "The Maldron Hotel, Abbeyleix Road, Meelick, Portlaoise",
+      "eircode": "R32 HKN3",
+      "notes": null
+    },
+    "raheny": {
+      "slug": "raheny",
+      "csvName": "Raheny",
+      "displayName": "Raheny",
+      "county": "Dublin",
+      "address": "4 All Saints Park, Raheny",
+      "eircode": "D05 HH42",
+      "notes": null
+    },
+    "roscommon": {
+      "slug": "roscommon",
+      "csvName": "Roscommon",
+      "displayName": "Roscommon",
+      "county": "Roscommon",
+      "address": "Government Offices, Circular Road, Roscommon",
+      "eircode": "F42 CH70",
+      "notes": null
+    },
+    "shannon": {
+      "slug": "shannon",
+      "csvName": "Shannon",
+      "displayName": "Shannon",
+      "county": "Clare",
+      "address": "Treacys Oakwood Hotel, Airport Road, Shannon",
+      "eircode": "V14 NH97",
+      "notes": null
+    },
+    "skibbereen": {
+      "slug": "skibbereen",
+      "csvName": "Skibbereen",
+      "displayName": "Skibbereen",
+      "county": "Cork",
+      "address": "Skibbereen Rugby Club, Mill Road, Skibbereen",
+      "eircode": "P81 K308",
+      "notes": null
+    },
+    "sligo": {
+      "slug": "sligo",
+      "csvName": "Sligo",
+      "displayName": "Sligo",
+      "county": "Sligo",
+      "address": "Old Dublin Road, Carraroe, Sligo",
+      "eircode": "F91 VK11",
+      "notes": null
+    },
+    "thurles": {
+      "slug": "thurles",
+      "csvName": "Thurles",
+      "displayName": "Thurles",
+      "county": "Tipperary",
+      "address": "Government Offices, Stradavoher, Thurles",
+      "eircode": "E41 N857",
+      "notes": null
+    },
+    "tipperary": {
+      "slug": "tipperary",
+      "csvName": "Tipperary",
+      "displayName": "Tipperary",
+      "county": "Tipperary",
+      "address": "Canon Hayes Recreation Centre, Avondale Crescent, Tipperary",
+      "eircode": "E34 HF98",
+      "notes": null
+    },
+    "tralee": {
+      "slug": "tralee",
+      "csvName": "Tralee",
+      "displayName": "Tralee",
+      "county": "Kerry",
+      "address": "Government Offices, Spa Road, Tralee",
+      "eircode": "V92 VX4V",
+      "notes": null
+    },
+    "tuam": {
+      "slug": "tuam",
+      "csvName": "Tuam",
+      "displayName": "Tuam",
+      "county": "Galway",
+      "address": "Airglooney Business Park, Ballygaddy, Tuam",
+      "eircode": "H54 YD59",
+      "notes": null
+    },
+    "tullamore": {
+      "slug": "tullamore",
+      "csvName": "Tullamore",
+      "displayName": "Tullamore",
+      "county": "Offaly",
+      "address": "Government Office, Clonminch, Portlaoise Road, Tullamore",
+      "eircode": "R35 Y259",
+      "notes": null
+    },
+    "waterford": {
+      "slug": "waterford",
+      "csvName": "Waterford",
+      "displayName": "Waterford",
+      "county": "Waterford",
+      "address": "Unit 7, Six Cross Roads Business Park, Waterford",
+      "eircode": "X91 PW31",
+      "notes": null
+    },
+    "westside": {
+      "slug": "westside",
+      "csvName": "Westside",
+      "displayName": "Westside",
+      "county": "Galway",
+      "address": "Unit 4, Westside Shopping Centre, Seamus Quirke Road, Galway",
+      "eircode": "H91 W7D9",
+      "notes": "May be inactive while Clybaun temporary relocation is in effect - verify current status"
+    },
+    "wexford": {
+      "slug": "wexford",
+      "csvName": "Wexford",
+      "displayName": "Wexford",
+      "county": "Wexford",
+      "address": "Killeens, beside Jeffares Osteopathic Clinic, Wexford",
+      "eircode": "Y35 RY80",
+      "notes": null
+    },
+    "wicklow": {
+      "slug": "wicklow",
+      "csvName": "Wicklow",
+      "displayName": "Wicklow",
+      "county": "Wicklow",
+      "address": "Government Offices, The Murrough, Wicklow",
+      "eircode": "A67 K039",
+      "notes": null
+    },
+    "wilton": {
+      "slug": "wilton",
+      "csvName": "Wilton",
+      "displayName": "Wilton",
+      "county": "Cork",
+      "address": "Doughcloyne Industrial Estate, Sarsfield Road, Wilton",
+      "eircode": "T12 WD21",
+      "notes": null
+    },
+    "woodview": {
+      "slug": "woodview",
+      "csvName": "Woodview",
+      "displayName": "Woodview",
+      "county": "Limerick",
+      "address": "Woodview Shopping Centre, Old Cratloe Road, Limerick",
+      "eircode": "V94 X593",
+      "notes": null
+    },
+    "mulhuddart": {
+      "slug": "mulhuddart",
+      "csvName": "mulhuddart",
+      "displayName": "Mulhuddart",
+      "address": "Beside M3 Mulhuddart Services/Supermacs, Old Navan Rd, Damastown, Co. Dublin",
+      "eircode": "D15 XHP3",
+      "county": "Dublin"
+    }
+  }
+}

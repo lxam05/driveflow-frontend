@@ -328,6 +328,17 @@
         color: var(--text-main);
     }
 
+    .author-byline {
+        margin: 24px 0 8px;
+        font-size: 14px;
+        color: var(--text-muted);
+    }
+
+    .author-byline a {
+        color: var(--text-main);
+        font-weight: 600;
+    }
+
     .centre-snapshot .snapshot-note {
         margin: 14px 0 0;
         font-size: 13px;

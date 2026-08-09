@@ -99,62 +99,21 @@ Static pages like `about.html` — card sections (`.content-section`), light hea
 
 ## HTML template — route page
 
-Use this skeleton. Replace `{PLACEHOLDERS}`.
+**Canonical structure** (free answers above unlock; paid Maps routes only behind paywall):
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-EJB69589QP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-EJB69589QP');
-</script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-<meta name="description" content="{META_DESCRIPTION}">
-<link rel="canonical" href="https://www.driveflow.ie/{SLUG}-routes.html">
-<link rel="icon" href="https://www.driveflow.ie/favicon.ico">
-<link rel="icon" type="image/png" sizes="32x32" href="https://www.driveflow.ie/favicon.png">
-<link rel="icon" type="image/png" sizes="192x192" href="https://www.driveflow.ie/favicon.png">
-<link rel="apple-touch-icon" href="https://www.driveflow.ie/favicon.png">
-<meta property="og:title" content="{OG_TITLE}">
-<meta property="og:description" content="{OG_DESCRIPTION}">
-<meta property="og:url" content="https://www.driveflow.ie/{SLUG}-routes.html">
-<meta property="og:type" content="website">
-<meta property="og:image" content="https://www.driveflow.ie/og-{SLUG}.png">
-<title>{PAGE_TITLE} | DriveFlow</title>
-<link rel="stylesheet" href="/shared.css">
-</head>
-<body>
-    <div class="container">
-        <div class="page-header">
-            <h1>{CENTRE_NAME} Driving Test Routes</h1>
-            <p>Access detailed route information for the {CENTRE_NAME} test centre</p>
-            <p style="margin-top: 16px; color: var(--accent); font-weight: 600; font-size: 16px;">Used by thousands of learners around Ireland to pass their test first try</p>
-            <a href="#routes" style="display: inline-block; margin-top: 20px; padding: 12px 24px; background: var(--primary); color: var(--bg-main); border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 14px;">View Routes →</a>
-        </div>
+1. Breadcrumb → `/routes.html`
+2. `header.page-header` — H1, intro, Updated stamp, hero
+3. `section.centre-snapshot` — CSO pass rate + wait weeks (cite ROA, July 2026)
+4. `#routes-preview` with `data-routes-insert-after` + `<noscript>` corridor summary
+5. `#routes` — `shared.js` paywall / unlocked routes
+6. Map teaser, `#hotspots`, `#manoeuvres`, `#pass-rate-waiting`, `#tips`, `#faq`
+7. Nearby centres + author byline (Liam O'Connor → `/about.html`)
 
-        <div class="info-section" id="{SLUG}Info"></div>
+**Stats:** `data/centre-stats.json` (from `python3 _agent/compile_cso_stats.py`).  
+**Migrate shell:** `python3 _agent/migrate_centre_structure.py`.  
+**Reference:** `dun-laoghaire-routes.html`, `tallaght-routes.html`. See `data/centres/README.md`.
 
-        <div id="routes" class="routes-section" data-route="{ROUTE_CONFIG_KEY}" style="scroll-margin-top: 120px;"></div>
-        <div id="sharedPurchase"></div>
-        <div id="sharedFooter"></div>
-    </div>
-
-    <!-- Optional: HowTo schema.org JSON-LD -->
-
-    <!-- Inline script: fetch txt files/{TXT_FILE}.txt and render (copy from ballina-routes.html) -->
-
-    <script src="/shared.js" defer></script>
-</body>
-</html>
-```
-
-**Reference implementation:** `ballina-routes.html`, `carlow-routes.html`, `carnmore-routes.html`
+**Schema author:** Person `Liam O'Connor` (`url`: `/about.html`); publisher remains DriveFlow.
 
 ---
 

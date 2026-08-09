@@ -8,7 +8,7 @@
   "title": "Tallaght Driving Test Routes (2026) | DriveFlow",
   "h1": "Tallaght Driving Test Routes (2026)",
   "metaDescription": "Tallaght driving test routes for 2026 — practice Google Maps routes around Broomhill Road, Greenhills, Castletymon and Belgard, plus RSA manoeuvre areas.",
-  "updated": "2026-08-06",
+  "updated": "2026-07-31",
   "centre": {
     "name": "Tallaght Driving Test Centre",
     "alternateNames": [
@@ -35,20 +35,20 @@
   },
   "stats": {
     "passRate": {
-      "value": 47.7,
+      "value": 48.5,
       "unit": "percent",
-      "comparison": "Below the ~53% national Category B average — local preparation matters more here",
-      "source": "RSA Category B pass-rate figures as reflected in DriveFlow centre data",
-      "asOf": "2026-08",
+      "comparison": "Below the 52.3% national Category B average",
+      "source": "Source: CSO / RSA driving test statistics (ROA), Category B, July 2026.",
+      "asOf": "2026-07",
       "estimated": false
     },
     "waitingTime": {
-      "value": 12,
+      "value": 21,
       "unit": "weeks",
-      "note": "Approximate; live slots change — check MyRoadSafety for current Tallaght availability and cancellations",
-      "source": "RSA waiting-time patterns for Dublin centres",
-      "asOf": "2026-08",
-      "estimated": true
+      "note": "CSO estimated time to driving test invite at month end; confirm live slots on MyRoadSafety",
+      "source": "Source: CSO / RSA driving test statistics (ROA), Category B, July 2026.",
+      "asOf": "2026-07",
+      "estimated": false
     },
     "testLength": {
       "driveMinutes": "30–40",
@@ -191,16 +191,45 @@
     "Use MyRoadSafety cancellations if you want an earlier Tallaght slot."
   ],
   "nearby": [
-    { "slug": "mulhuddart", "label": "Mulhuddart driving test routes", "href": "/mulhuddart-routes.html" },
-    { "slug": "finglas", "label": "Finglas driving test routes", "href": "/finglas-routes.html" },
-    { "slug": "raheny", "label": "Raheny driving test routes", "href": "/raheny-routes.html" },
-    { "slug": "killester", "label": "Killester driving test routes", "href": "/killester-routes.html" },
-    { "slug": "dun-laoghaire", "label": "Dun Laoghaire driving test routes", "href": "/dun-laoghaire-routes.html" }
+    {
+      "slug": "mulhuddart",
+      "label": "Mulhuddart driving test routes",
+      "href": "/mulhuddart-routes.html"
+    },
+    {
+      "slug": "finglas",
+      "label": "Finglas driving test routes",
+      "href": "/finglas-routes.html"
+    },
+    {
+      "slug": "raheny",
+      "label": "Raheny driving test routes",
+      "href": "/raheny-routes.html"
+    },
+    {
+      "slug": "killester",
+      "label": "Killester driving test routes",
+      "href": "/killester-routes.html"
+    },
+    {
+      "slug": "dun-laoghaire",
+      "label": "Dun Laoghaire driving test routes",
+      "href": "/dun-laoghaire-routes.html"
+    }
   ],
   "spokes": [
-    { "href": "/guides/pass-tallaght-driving-test.html", "label": "How to pass the Tallaght driving test" },
-    { "href": "/guides/tallaght-fail-spots.html", "label": "Tallaght fail spots" },
-    { "href": "/guides/dublin-driving-test-routes.html", "label": "Dublin driving test routes hub" }
+    {
+      "href": "/guides/pass-tallaght-driving-test.html",
+      "label": "How to pass the Tallaght driving test"
+    },
+    {
+      "href": "/guides/tallaght-fail-spots.html",
+      "label": "Tallaght fail spots"
+    },
+    {
+      "href": "/guides/dublin-driving-test-routes.html",
+      "label": "Dublin driving test routes hub"
+    }
   ],
   "faqs": [
     {
@@ -229,11 +258,11 @@
     },
     {
       "q": "What is the Tallaght driving test pass rate?",
-      "a": "About 47.7% for Category B — below the national average (~53%). Junction density, hills and estate manoeuvres make local practice especially valuable."
+      "a": "The Category B pass rate at Tallaght was 48.5% in July 2026. Source: CSO / RSA driving test statistics (ROA), Category B, July 2026."
     },
     {
       "q": "How long is the waiting time for a Tallaght driving test?",
-      "a": "Around 12 weeks is a recent estimate. Check MyRoadSafety for live Tallaght availability and cancellations."
+      "a": "CSO reported 21 weeks to driving test invite at month end (July 2026). Confirm live slots on MyRoadSafety. Source: CSO / RSA driving test statistics (ROA), Category B, July 2026."
     },
     {
       "q": "Where is the Tallaght driving test centre?",
