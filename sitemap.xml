@@ -728,12 +728,12 @@
     <priority>0.8</priority>
   </url>
   <url>
-<<<<<<< HEAD
     <loc>https://www.driveflow.ie/guides/practise-driving-test-routes-alone.html</loc>
     <lastmod>2026-08-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-=======
+  </url>
+  <url>
     <loc>https://www.driveflow.ie/guides/driving-test-pass-rates-by-centre.html</loc>
     <lastmod>2026-08-09</lastmod>
     <changefreq>monthly</changefreq>
@@ -762,6 +762,5 @@
     <lastmod>2026-08-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
->>>>>>> 01da3b2 (Add CSO-backed centre stats, ranking hubs, and location maps.)
   </url>
 </urlset>
