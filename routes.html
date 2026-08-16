@@ -1509,6 +1509,7 @@ function gtag_report_conversion(url, transactionId) {
         { name: "Naas", routes: 7 },
         { name: "Navan", routes: 6 },
         { name: "Nenagh", routes: 7 },
+        { name: "Newcastle West", routes: 5 },
         { name: "Portlaoise", routes: 0 },
         { name: "Raheny", routes: 5 },
         { name: "Roscommon", routes: 5 },
@@ -1793,6 +1794,10 @@ function gtag_report_conversion(url, transactionId) {
         }
         if (centre.name === "Mullingar") {
             window.location.href = 'mullingar-routes.html';
+            return;
+        }
+        if (centre.name === "Newcastle West") {
+            window.location.href = 'newcastle-west-routes.html';
             return;
         }
         if (centre.name === "Portlaoise") {
