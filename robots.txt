@@ -13,4 +13,10 @@ Disallow: /route-detail.html
 Allow: /shared.css
 Allow: /shared.js
 
+# LLM-oriented site maps (https://llmstxt.org/) — already allowed by User-agent: *
+# https://www.driveflow.ie/llms.txt
+# https://www.driveflow.ie/llms-full.txt
+# https://www.driveflow.ie/llm.txt
+# https://www.driveflow.ie/.well-known/llms.txt
+
 Sitemap: https://www.driveflow.ie/sitemap.xml

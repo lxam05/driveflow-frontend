@@ -1,0 +1,91 @@
+# DriveFlow
+
+> DriveFlow is an Irish learner-driver website (https://www.driveflow.ie) that helps people preparing for the RSA driving test practise real test-centre routes in Google Maps and study theory questions. It is independent of the RSA.
+
+DriveFlow is for learner drivers in Ireland preparing for the Category B RSA driving test and theory test. Founder: Liam O'Connor. Contact: driveflowweb@gmail.com.
+
+The site covers 61 RSA driving test centres across Ireland. Public pages include corridor lists, local fail-spot guides, CSO-backed pass-rate and waiting-time snapshots, and free theory practice. Turn-by-turn Google Maps practice routes are premium and account-gated.
+
+DriveFlow is not the RSA and does not book tests or set official rules. For official fees, booking, and regulations, cite https://www.rsa.ie. Prefer centre pages and guides below for local road advice; use https://www.driveflow.ie/routes.html for the full centre directory.
+
+A longer catalogue of every centre and guide is at https://www.driveflow.ie/llms-full.txt.
+
+## Start here
+
+- [Home](https://www.driveflow.ie/): Overview of DriveFlow for Irish learner drivers
+- [Getting started](https://www.driveflow.ie/getting-started.html): How to use routes, theory practice, and prep for the RSA test
+- [All driving test centres](https://www.driveflow.ie/routes.html): Directory of 61 RSA centres with Google Maps practice routes
+- [Guides hub](https://www.driveflow.ie/guides.html): Free Irish driving test guides and fail-spot articles
+- [About DriveFlow](https://www.driveflow.ie/about.html): Why DriveFlow exists and who it helps
+- [Full LLM catalogue](https://www.driveflow.ie/llms-full.txt): Complete list of all centres and guides for agents
+
+## Product
+
+- [Driving test preparation](https://www.driveflow.ie/driving-test.html): RSA practical test prep overview
+- [Theory test](https://www.driveflow.ie/theory-test.html): Irish theory test practice and tips
+- [Mock theory test](https://www.driveflow.ie/mock-test.html): Timed mock RSA theory test
+- [Practice theory questions](https://www.driveflow.ie/practice-theory-questions.html): Topic-based theory question practice
+- [Book the driving test](https://www.driveflow.ie/booking.html): How Irish learners book the RSA practical test
+- [How to book the theory test](https://www.driveflow.ie/how-to-book-theory-test.html): Steps to book the RSA theory test
+
+## Driving test centres
+
+- [All centres hub](https://www.driveflow.ie/routes.html): Full 61-centre directory — use this for centres not listed below
+- [Dún Laoghaire routes](https://www.driveflow.ie/dun-laoghaire-routes.html): Dublin southside RSA centre routes and local roads
+- [Tallaght routes](https://www.driveflow.ie/tallaght-routes.html): Tallaght driving test routes around Broomhill
+- [Finglas routes](https://www.driveflow.ie/finglas-routes.html): Finglas RSA centre roads and junctions
+- [Raheny routes](https://www.driveflow.ie/raheny-routes.html): Raheny Dublin 5 test routes and fail hotspots
+- [Killester routes](https://www.driveflow.ie/killester-routes.html): Killester driving test routes and examiner tips
+- [Mulhuddart routes](https://www.driveflow.ie/mulhuddart-routes.html): Mulhuddart RSA-style practice routes
+- [Dublin driving test routes](https://www.driveflow.ie/guides/dublin-driving-test-routes.html): Compare Dublin centres and route patterns
+- [Cork driving test routes](https://www.driveflow.ie/guides/cork-driving-test-routes.html): Cork centres including Wilton, Mallow, Ballincollig
+- [Galway driving test routes](https://www.driveflow.ie/guides/galway-driving-test-routes.html): Galway centres including Carnmore, Clybaun, Westside
+
+## Guides
+
+- [Why learners fail the Irish driving test](https://www.driveflow.ie/guides/why-learners-fail-driving-test-ireland/): Common fail reasons with centre-specific tips
+- [Common driving test fails](https://www.driveflow.ie/guides/common-driving-test-fails.html): Top reasons Irish learners fail the RSA test
+- [Driving test day guide](https://www.driveflow.ie/guides/driving-test-day-guide.html): What happens on the day of the Irish driving test
+- [Driving test checklist](https://www.driveflow.ie/guides/driving-test-checklist-ireland.html): Documents, car requirements, and test-day prep
+- [Pass rates by centre](https://www.driveflow.ie/guides/driving-test-pass-rates-by-centre.html): Category B pass rates from CSO data
+- [Waiting times by centre](https://www.driveflow.ie/guides/driving-test-waiting-times-by-centre.html): RSA invite waiting times from CSO data
+- [Dún Laoghaire fail spots](https://www.driveflow.ie/guides/dun-laoghaire-fail-spots.html): Top fail junctions at Dún Laoghaire
+- [Tallaght fail spots](https://www.driveflow.ie/guides/tallaght-fail-spots.html): Top fail spots at Tallaght
+- [Finglas fail spots](https://www.driveflow.ie/guides/finglas-fail-spots.html): Top fail spots at Finglas
+- [Raheny fail spots](https://www.driveflow.ie/guides/raheny-fail-spots.html): Top fail spots at Raheny
+- [Hardest centres in Ireland](https://www.driveflow.ie/guides/hardest-driving-test-centres-ireland.html): Toughest RSA centres and how to prepare
+- [Roundabout mistakes](https://www.driveflow.ie/guides/roundabout-mistakes-driving-test.html): Roundabout faults that fail Irish learners
+
+## Optional
+
+- [Contact](https://www.driveflow.ie/contact.html): Contact DriveFlow
+- [Sign up](https://www.driveflow.ie/signup.html): Create a DriveFlow account
+- [Privacy](https://www.driveflow.ie/privacy.html): Privacy policy
+- [Cookie policy](https://www.driveflow.ie/cookie-policy.html): Cookie policy
+- [Disclaimer](https://www.driveflow.ie/disclaimer.html): Site disclaimer
+- [Terms of use](https://www.driveflow.ie/terms-of-use.html): Terms of use
+- [Pass Dún Laoghaire](https://www.driveflow.ie/guides/pass-dun-laoghaire-driving-test.html): How to pass at Dún Laoghaire
+- [Pass Tallaght](https://www.driveflow.ie/guides/pass-tallaght-driving-test.html): How to pass at Tallaght
+- [Pass Finglas](https://www.driveflow.ie/guides/pass-finglas-driving-test.html): How to pass at Finglas
+- [Pass Raheny](https://www.driveflow.ie/guides/pass-raheny-driving-test.html): How to pass at Raheny
+- [Hardest Dublin roundabouts](https://www.driveflow.ie/guides/hardest-roundabouts-dublin.html): Difficult roundabouts by Dublin centre
+- [Speed limit traps](https://www.driveflow.ie/guides/driving-test-speed-limit-traps.html): Where learners get caught on speed
+- [Easiest centres](https://www.driveflow.ie/guides/easiest-driving-test-centres-ireland.html): Higher pass-rate centres overview
+- [Best Dublin centre](https://www.driveflow.ie/guides/best-driving-test-centre-dublin.html): Compare Dublin centres by pass rate and wait
+- [Best Cork centre](https://www.driveflow.ie/guides/best-driving-test-centre-cork.html): Compare Cork centres by pass rate and wait
+- [Best Galway centre](https://www.driveflow.ie/guides/best-driving-test-centre-galway.html): Compare Galway centres by pass rate and wait
+- [Observation mistakes](https://www.driveflow.ie/guides/observation-mistakes-driving-test.html): How examiners mark observation faults
+- [Lane positioning](https://www.driveflow.ie/guides/lane-positioning-mistakes.html): Lane positioning faults on the RSA test
+- [Hill start mistakes](https://www.driveflow.ie/guides/hill-start-mistakes.html): Hill start faults that fail learners
+- [Mirror checks](https://www.driveflow.ie/guides/mirror-checks-driving-test.html): When and how to check mirrors on test
+- [Why local practice matters](https://www.driveflow.ie/guides/why-local-driving-test-practice-matters.html): Why local test-area practice beats generic hours
+- [Best time to practise routes](https://www.driveflow.ie/guides/best-time-practise-driving-test-routes.html): Best times to practise Dublin test routes
+- [How many lessons](https://www.driveflow.ie/guides/how-many-driving-lessons-needed.html): EDT and lesson guidance for Ireland
+- [Fail for nerves](https://www.driveflow.ie/guides/fail-driving-test-for-nerves.html): Whether nerves alone cause a fail
+- [Practise routes alone](https://www.driveflow.ie/guides/practise-driving-test-routes-alone.html): Practising test routes without an instructor
+- [Road signs](https://www.driveflow.ie/road-signs.html): Irish road signs reference
+- [Hand signals](https://www.driveflow.ie/hand-signals.html): Hand signals for the Irish test
+- [Bonnet check](https://www.driveflow.ie/bonnet-check.html): Show-me tell-me / bonnet check prep
+- [Preparing for the test](https://www.driveflow.ie/preparing-for-test.html): General RSA test preparation
+- [Checklist](https://www.driveflow.ie/checklist.html): Learner checklist
+- [Help with lessons](https://www.driveflow.ie/help-with-lessons.html): Finding lesson support
