@@ -44,6 +44,10 @@ AUTOMATABLE_TYPES = {
     "checklist",
     "comparison",
     "city-guide",
+    "centre-guide",
+    "route-guide",
+    "manoeuvre",
+    "junctions",
 }
 
 PRIORITY_ORDER = {"high": 0, "medium": 1, "low": 2}
@@ -95,6 +99,32 @@ TYPE_INSTRUCTIONS = {
 - Hub-style guide for driving tests in that city (Dublin, Cork, or Galway).
 - List major test centres in the area with short descriptions and internal links to each `-routes.html` page.
 - Explain why local route practice matters in that city.
+""",
+    "centre-guide": """
+**Article type: centre-guide**
+- Complete local guide for one named RSA test centre: roads, areas, junctions, and what to expect.
+- Cover typical route corridors, pressure points, and how to prepare in that specific area.
+- Strong CTA and internal links to that centre's `-routes.html` page and /routes.html.
+- Do not invent exact official RSA route maps; use careful wording (commonly reported / typical areas).
+""",
+    "route-guide": """
+**Article type: route-guide**
+- National or educational guide about practicing RSA driving test routes (why, how, how often, finding local routes).
+- Emphasize local test-area practice and DriveFlow as the way to open centre routes in Google Maps.
+- Link heavily to /routes.html and relevant centre `-routes.html` pages where natural.
+- Strong commercial/route-intent focus without hard-sell hype.
+""",
+    "manoeuvre": """
+**Article type: manoeuvre**
+- Focus on one practical test manoeuvre for the named centre (e.g. reverse around the corner, hill start).
+- Explain where learners commonly practice or encounter it, what examiners watch for, and how to avoid faults.
+- Link to the centre's `-routes.html` page and related fail-spot or pass guides if relevant.
+""",
+    "junctions": """
+**Article type: junctions**
+- Focus on difficult junctions and roundabouts for the named test centre.
+- Cover approach, lane choice, observation, signalling, and common marks lost at specific local pressure points.
+- Link to the centre's `-routes.html` page and /routes.html.
 """,
     "guide": """
 **Article type: guide**
