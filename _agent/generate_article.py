@@ -596,6 +596,22 @@ def main():
     update_plan(CONTENT_PLAN, row_index, published_url)
     print(f"Content plan updated — status=done, published_url={published_url}")
 
+    # Queue IndexNow for CI (or local) after the page is live on Pages
+    try:
+        if str(AGENT_DIR) not in sys.path:
+            sys.path.insert(0, str(AGENT_DIR))
+        from indexnow import SITE_ORIGIN, write_pending
+
+        abs_url = (
+            published_url
+            if published_url.startswith("http")
+            else f"{SITE_ORIGIN}{published_url if published_url.startswith('/') else '/' + published_url}"
+        )
+        write_pending([abs_url])
+        print(f"IndexNow pending: {abs_url}")
+    except Exception as exc:
+        print(f"WARNING: could not queue IndexNow ({exc})")
+
 
 if __name__ == "__main__":
     main()

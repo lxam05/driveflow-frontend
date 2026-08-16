@@ -40,3 +40,11 @@ jobs:
           git add guides/ guides-index.json sitemap.xml _agent/content-plan.csv
           git diff --cached --quiet || git commit -m "chore: auto-publish guide [$(date '+%Y-%m-%d')]"
           git push
+
+      - name: Notify IndexNow (Bing + partners)
+        run: |
+          if [ -f _agent/.indexnow-pending ]; then
+            python _agent/indexnow.py --wait 90 --file _agent/.indexnow-pending
+          else
+            echo "No IndexNow pending file — skip"
+          fi

@@ -7,6 +7,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 _agent/.venv/
+_agent/.indexnow-pending
 
 # Facebook groups agent — never commit the browser session / drafts
 _agent/facebook/.fb-profile/

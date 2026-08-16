@@ -1,22 +1,96 @@
-User-agent: *
-Allow: /
+# DriveFlow robots.txt — https://www.driveflow.ie
+# Goal: spend crawl budget on centres, guides, and product pages; stay open to
+# search + AI-answer crawlers (GEO); keep private/app surfaces closed.
+#
+# LLM orientation map (not a robots directive — discovery for agents):
+#   https://www.driveflow.ie/llms.txt
+#   https://www.driveflow.ie/llms-full.txt
+#
+# Note: each User-agent group is independent and does NOT inherit rules from *.
+# Disallows below are therefore repeated for AI groups on purpose.
 
-# App / auth surfaces — low SEO value; prefer crawl budget on public guides & centres
+# ---------------------------------------------------------------------------
+# GEO / AI answer + retrieval crawlers (citations in ChatGPT, Claude, Perplexity,
+# Gemini grounding via Google-Extended, Apple Intelligence extended, Amazon)
+# ---------------------------------------------------------------------------
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: GPTBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: ClaudeBot
+User-agent: anthropic-ai
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Google-Extended
+User-agent: Applebot
+User-agent: Applebot-Extended
+User-agent: Amazonbot
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /llm.txt
+Allow: /.well-known/llms.txt
+Allow: /shared.css
+Allow: /shared.js
+Allow: /cookie-consent.js
 Disallow: /dashboard.html
 Disallow: /payment.html
+Disallow: /login.html
+Disallow: /signup.html
+Disallow: /forgot-password.html
+Disallow: /reset-password.html
+Disallow: /mock-test-results.html
+Disallow: /route-detail.html
+Disallow: /oldindex.html
+Disallow: /EsmaeHooper.html
+Disallow: /test-centres.html
+Disallow: /_agent/
+Disallow: /data/
+
+# ---------------------------------------------------------------------------
+# Low-value / aggressive scrapers — blocked to protect crawl & origin load
+# (does not affect Google, Bing, or the AI answer crawlers above)
+# ---------------------------------------------------------------------------
+User-agent: Bytespider
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+# ---------------------------------------------------------------------------
+# Everyone else (Googlebot, Bingbot, DuckDuckBot, etc.)
+# ---------------------------------------------------------------------------
+User-agent: *
+Allow: /
+Allow: /llms.txt
+Allow: /llms-full.txt
+Allow: /llm.txt
+Allow: /.well-known/llms.txt
+Allow: /shared.css
+Allow: /shared.js
+Allow: /cookie-consent.js
+
+# Auth, checkout, and personalised app surfaces (also noindex in HTML)
+Disallow: /dashboard.html
+Disallow: /payment.html
+Disallow: /login.html
+Disallow: /signup.html
 Disallow: /forgot-password.html
 Disallow: /reset-password.html
 Disallow: /mock-test-results.html
 Disallow: /route-detail.html
 
-# Do not block shared CSS/JS required for rendering
-Allow: /shared.css
-Allow: /shared.js
+# Duplicate / non-public / thin URLs — prefer canonical hubs
+Disallow: /oldindex.html
+Disallow: /EsmaeHooper.html
+Disallow: /test-centres.html
 
-# LLM-oriented site maps (https://llmstxt.org/) — already allowed by User-agent: *
-# https://www.driveflow.ie/llms.txt
-# https://www.driveflow.ie/llms-full.txt
-# https://www.driveflow.ie/llm.txt
-# https://www.driveflow.ie/.well-known/llms.txt
+# Internal tooling & raw data (if ever served from Pages)
+Disallow: /_agent/
+Disallow: /data/
+
+# Prefer www host (honoured by Bing; ignored by Google)
+Host: www.driveflow.ie
 
 Sitemap: https://www.driveflow.ie/sitemap.xml
