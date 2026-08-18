@@ -148,6 +148,46 @@
       max-width: 100%;
     }
 
+    .hero-cta-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .app-now-card {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin: 0;
+      padding: 0.5rem 0.9rem;
+      border: 2px solid #1a1a1a;
+      border-radius: 8px;
+      background: transparent;
+      color: #1a1a1a;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      text-decoration: none;
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+
+    .app-now-card:hover {
+      background: #1a1a1a;
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .app-now-card svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    .app-now-card span {
+      color: inherit;
+    }
+
     .hero-review {
       flex: 0 0 360px;
       margin-top: -3.5rem;
@@ -549,6 +589,138 @@
       background: #333;
     }
 
+    /* App Store CTA */
+    .app-cta {
+      padding: 0 3rem 4rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .app-cta-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.15fr);
+      gap: 1.5rem 2rem;
+      align-items: center;
+      padding: 1.75rem 1.5rem;
+      background: #f9f9f9;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      border-left: 4px solid #e6b800;
+      overflow: hidden;
+    }
+
+    .app-cta-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+    }
+
+    .app-cta-brand img {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 6px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .app-cta-brand-name {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #1a1a1a;
+      letter-spacing: -0.02em;
+    }
+
+    .app-cta-title {
+      margin: 0 0 0.75rem;
+      font-size: clamp(1.5rem, 3vw, 1.85rem);
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      color: #1a1a1a;
+    }
+
+    .app-cta-title span {
+      color: #1a1a1a;
+    }
+
+    .app-cta-lede {
+      margin: 0 0 1rem;
+      max-width: 28rem;
+      color: #555;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .app-cta-features {
+      margin: 0 0 1.35rem;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 0.5rem;
+    }
+
+    .app-cta-features li {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: #1a1a1a;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .app-cta-features li::before {
+      content: '';
+      width: 1.1rem;
+      height: 1.1rem;
+      flex-shrink: 0;
+      border-radius: 999px;
+      background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23fff' d='M6.5 11.2 3.3 8l1.1-1.1 2.1 2.1 4.6-4.6L12.2 5.5z'/%3E%3C/svg%3E")
+        center / 0.75rem no-repeat,
+        #1a1a1a;
+    }
+
+    .app-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.65rem 1.25rem;
+      border-radius: 8px;
+      background: #1a1a1a;
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .app-cta-btn:hover {
+      background: #333;
+      transform: translateY(-1px);
+    }
+
+    .app-cta-btn svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      display: block;
+      overflow: visible;
+    }
+
+    .app-cta-visual {
+      display: grid;
+      place-items: center;
+      min-height: 14rem;
+    }
+
+    .app-cta-visual img {
+      display: block;
+      width: 100%;
+      max-width: 32rem;
+      height: auto;
+    }
+
     /* More about us */
     .more-about {
       padding: 4rem 3rem 5rem;
@@ -722,6 +894,16 @@
         flex-direction: column;
         align-items: flex-start;
       }
+      .app-cta {
+        padding: 0 1rem 3rem;
+      }
+      .app-cta-inner {
+        grid-template-columns: 1fr;
+        padding: 1.35rem 1.15rem 1.15rem;
+      }
+      .app-cta-visual img {
+        max-width: 24rem;
+      }
       .faq {
         padding: 3rem 1rem;
       }
@@ -773,8 +955,11 @@
         gap: 1rem;
       }
 
-      .hero-cta-group {
+      .hero-cta-col {
         order: 1;
+      }
+
+      .hero-cta-group {
         flex-wrap: nowrap;
         gap: 0.5rem;
       }
@@ -1126,13 +1311,19 @@
             <div class="hero-title-car" aria-hidden="true"></div>
           </div>
           <p class="hero-tagline">Train where you'll be Tested</p>
-          <p class="subtext">Practice real Irish driving test routes for your test centre and go into your test confident because you already know the tricky spots examiners use.
-            <br>If you're feeling kind after passing your test don't forget to come back and tell us the route you were taken on using the <a href="#help-others" id="helpOthersHeroLink">Help Others</a> button.
-          </p>
+          <p class="subtext">Practice real Irish driving test routes for your test centre and go into your test confident because you already know the tricky spots examiners use.</p>
           <div class="hero-bottom-row">
-            <div class="hero-cta-group">
-              <a href="routes.html" class="hero-cta">Get the Routes</a>
-              <a href="featured-instructors.html" class="hero-cta hero-cta-secondary">Featured Instructors</a>
+            <div class="hero-cta-col">
+              <div class="hero-cta-group">
+                <a href="routes.html" class="hero-cta">Get the Routes</a>
+                <a href="featured-instructors.html" class="hero-cta hero-cta-secondary">Featured Instructors</a>
+              </div>
+              <a class="app-now-card" href="https://apps.apple.com/app/driveflow-test-prep/id6797528209" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                </svg>
+                We have an app now <span aria-hidden="true">→</span>
+              </a>
             </div>
             <div class="hero-review">
           <div class="stars">★★★★★</div>
@@ -1450,6 +1641,44 @@
           <p>Short articles on fail spots, pass tips and local test-centre advice. Written for Irish learners preparing for the RSA test.</p>
         </div>
         <a href="guides.html" class="guides-teaser-link">Browse all guides</a>
+      </div>
+    </section>
+
+    <section class="app-cta" aria-labelledby="app-cta-heading">
+      <div class="app-cta-inner">
+        <div class="app-cta-copy">
+          <div class="app-cta-brand">
+            <img src="favicon.png" alt="" width="40" height="40">
+            <span class="app-cta-brand-name">DriveFlow</span>
+          </div>
+          <h2 id="app-cta-heading" class="app-cta-title">
+            The iPhone app is here.<br>
+            <span>Practice on the go.</span>
+          </h2>
+          <p class="app-cta-lede">Download DriveFlow Test Prep on the App Store and take routes, practice and test-day guides with you — not just on the website.</p>
+          <ul class="app-cta-features">
+            <li>Driving test routes on your iPhone</li>
+            <li>Practice tools in your pocket</li>
+            <li>Local test-centre guides</li>
+            <li>Built for Irish RSA test prep</li>
+          </ul>
+          <a class="app-cta-btn" href="https://apps.apple.com/app/driveflow-test-prep/id6797528209" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+            </svg>
+            Download on the App Store
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+        <div class="app-cta-visual">
+          <img
+            src="images/driveflow-phones.jpg"
+            alt="DriveFlow iPhone app screens showing test routes, practice tools, and test-day guides"
+            width="1024"
+            height="682"
+            loading="lazy"
+            decoding="async">
+        </div>
       </div>
     </section>
   </main>
