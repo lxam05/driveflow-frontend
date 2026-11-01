@@ -103,7 +103,7 @@ Static pages like `about.html` — card sections (`.content-section`), light hea
 
 1. Breadcrumb → `/routes.html`
 2. `header.page-header` — H1, intro, Updated stamp, hero
-3. `section.centre-snapshot` — CSO pass rate + wait weeks (cite ROA, July 2026)
+3. `section.centre-snapshot` — CSO pass rate + wait weeks (cite ROA, September 2026)
 4. `#routes-preview` with `data-routes-insert-after` + `<noscript>` corridor summary
 5. `#routes` — `shared.js` paywall / unlocked routes
 6. Map teaser, `#hotspots`, `#manoeuvres`, `#pass-rate-waiting`, `#tips`, `#faq`

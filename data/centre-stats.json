@@ -1,12 +1,12 @@
 {
-  "period": "2026-07",
-  "lastUpdatedLabel": "July 2026",
-  "lastUpdatedDate": "2026-07-31",
-  "citation": "Source: CSO / RSA driving test statistics (ROA), Category B, July 2026.",
+  "period": "2026-09",
+  "lastUpdatedLabel": "September 2026",
+  "lastUpdatedDate": "2026-09-30",
+  "citation": "Source: CSO / RSA driving test statistics (ROA), Category B, September 2026.",
   "national": {
-    "passRate": 52.3,
-    "waitWeeks": 12.1,
-    "abandoned": 2175
+    "passRate": 52.2,
+    "waitWeeks": 11.9,
+    "abandoned": 1944
   },
   "centres": {
     "athlone": {
@@ -15,7 +15,7 @@
       "displayName": "Athlone",
       "url": "/athlone-routes.html",
       "region": null,
-      "passRate": 45.2,
+      "passRate": 46,
       "waitWeeks": 13,
       "abandoned": 28
     },
@@ -25,9 +25,9 @@
       "displayName": "Ballina",
       "url": "/ballina-routes.html",
       "region": null,
-      "passRate": 54.6,
-      "waitWeeks": 13,
-      "abandoned": 13
+      "passRate": 61.9,
+      "waitWeeks": 11,
+      "abandoned": 8
     },
     "birr-county-arms-hotel": {
       "slug": "birr-county-arms-hotel",
@@ -45,8 +45,8 @@
       "displayName": "Buncrana",
       "url": "/buncrana-routes.html",
       "region": null,
-      "passRate": 57.5,
-      "waitWeeks": 11,
+      "passRate": 54.9,
+      "waitWeeks": 13,
       "abandoned": 10
     },
     "carlow-talbot-hotel": {
@@ -55,9 +55,9 @@
       "displayName": "Carlow Talbot Hotel",
       "url": "/carlow-talbot-hotel-routes.html",
       "region": null,
-      "passRate": 40.6,
-      "waitWeeks": 11,
-      "abandoned": 47
+      "passRate": 42.7,
+      "waitWeeks": 13,
+      "abandoned": 33
     },
     "carlow": {
       "slug": "carlow",
@@ -65,9 +65,9 @@
       "displayName": "Carlow",
       "url": "/carlow-routes.html",
       "region": null,
-      "passRate": 55.3,
-      "waitWeeks": 10,
-      "abandoned": 24
+      "passRate": 53.5,
+      "waitWeeks": 12,
+      "abandoned": 21
     },
     "carrick-on-shannon": {
       "slug": "carrick-on-shannon",
@@ -75,9 +75,9 @@
       "displayName": "Carrick-on-Shannon",
       "url": "/carrick-on-shannon-routes.html",
       "region": null,
-      "passRate": 56.7,
-      "waitWeeks": 13,
-      "abandoned": 6
+      "passRate": 62.6,
+      "waitWeeks": 12,
+      "abandoned": 4
     },
     "castlebar": {
       "slug": "castlebar",
@@ -85,9 +85,9 @@
       "displayName": "Castlebar",
       "url": "/castlebar-routes.html",
       "region": null,
-      "passRate": 54.2,
-      "waitWeeks": 14,
-      "abandoned": 11
+      "passRate": 56.2,
+      "waitWeeks": 11,
+      "abandoned": 31
     },
     "cavan": {
       "slug": "cavan",
@@ -95,9 +95,9 @@
       "displayName": "Cavan",
       "url": "/cavan-routes.html",
       "region": null,
-      "passRate": 57.6,
-      "waitWeeks": 12,
-      "abandoned": 16
+      "passRate": 52.8,
+      "waitWeeks": 11,
+      "abandoned": 25
     },
     "clifden": {
       "slug": "clifden",
@@ -105,9 +105,9 @@
       "displayName": "Clifden",
       "url": "/clifden-routes.html",
       "region": "Galway",
-      "passRate": 68.5,
-      "waitWeeks": 13,
-      "abandoned": 2
+      "passRate": 75,
+      "waitWeeks": 15,
+      "abandoned": null
     },
     "clonmel": {
       "slug": "clonmel",
@@ -115,9 +115,9 @@
       "displayName": "Clonmel",
       "url": "/clonmel-routes.html",
       "region": null,
-      "passRate": 49.4,
-      "waitWeeks": 10,
-      "abandoned": 36
+      "passRate": 48.5,
+      "waitWeeks": 12,
+      "abandoned": 9
     },
     "ballincollig": {
       "slug": "ballincollig",
@@ -135,9 +135,9 @@
       "displayName": "Cork (Wilton)",
       "url": "/wilton-routes.html",
       "region": "Cork",
-      "passRate": 53,
-      "waitWeeks": 10,
-      "abandoned": 140
+      "passRate": 50.2,
+      "waitWeeks": 11,
+      "abandoned": 117
     },
     "donegal": {
       "slug": "donegal",
@@ -145,9 +145,9 @@
       "displayName": "Donegal",
       "url": "/donegal-routes.html",
       "region": null,
-      "passRate": 59.8,
-      "waitWeeks": 9,
-      "abandoned": 16
+      "passRate": 66.7,
+      "waitWeeks": 12,
+      "abandoned": 3
     },
     "drogheda": {
       "slug": "drogheda",
@@ -155,9 +155,9 @@
       "displayName": "Drogheda (Southgate)",
       "url": "/drogheda-routes.html",
       "region": null,
-      "passRate": 48,
-      "waitWeeks": 19,
-      "abandoned": 50
+      "passRate": 55.1,
+      "waitWeeks": 11,
+      "abandoned": 109
     },
     "dun-laoghaire": {
       "slug": "dun-laoghaire",
@@ -165,9 +165,9 @@
       "displayName": "Dun Laoghaire",
       "url": "/dun-laoghaire-routes.html",
       "region": "Dublin",
-      "passRate": 44,
-      "waitWeeks": 14,
-      "abandoned": 160
+      "passRate": 41.5,
+      "waitWeeks": 19,
+      "abandoned": 109
     },
     "dundalk": {
       "slug": "dundalk",
@@ -175,9 +175,9 @@
       "displayName": "Dundalk",
       "url": "/dundalk-routes.html",
       "region": null,
-      "passRate": 62.2,
-      "waitWeeks": 10,
-      "abandoned": 25
+      "passRate": 54.9,
+      "waitWeeks": 11,
+      "abandoned": 33
     },
     "dungarvan": {
       "slug": "dungarvan",
@@ -185,9 +185,9 @@
       "displayName": "Dungarvan",
       "url": "/dungarvan-routes.html",
       "region": null,
-      "passRate": 52.3,
-      "waitWeeks": 14,
-      "abandoned": 12
+      "passRate": 46,
+      "waitWeeks": 15,
+      "abandoned": 13
     },
     "ennis": {
       "slug": "ennis",
@@ -195,9 +195,9 @@
       "displayName": "Ennis",
       "url": "/ennis-routes.html",
       "region": null,
-      "passRate": 61.9,
-      "waitWeeks": 12,
-      "abandoned": 24
+      "passRate": 59.4,
+      "waitWeeks": 10,
+      "abandoned": 19
     },
     "finglas": {
       "slug": "finglas",
@@ -205,9 +205,9 @@
       "displayName": "Finglas",
       "url": "/finglas-routes.html",
       "region": "Dublin",
-      "passRate": 48.1,
-      "waitWeeks": 9,
-      "abandoned": 102
+      "passRate": 46.9,
+      "waitWeeks": 14,
+      "abandoned": 97
     },
     "carnmore": {
       "slug": "carnmore",
@@ -215,9 +215,9 @@
       "displayName": "Galway (Carnmore)",
       "url": "/carnmore-routes.html",
       "region": "Galway",
-      "passRate": 59.1,
-      "waitWeeks": 12,
-      "abandoned": 18
+      "passRate": 58.8,
+      "waitWeeks": 9,
+      "abandoned": 38
     },
     "clybaun": {
       "slug": "clybaun",
@@ -225,9 +225,9 @@
       "displayName": "Galway (Clybaun)",
       "url": "/clybaun-routes.html",
       "region": "Galway",
-      "passRate": 54.2,
+      "passRate": 50.7,
       "waitWeeks": 9,
-      "abandoned": 32
+      "abandoned": 18
     },
     "westside": {
       "slug": "westside",
@@ -245,9 +245,9 @@
       "displayName": "Gorey",
       "url": "/gorey-routes.html",
       "region": null,
-      "passRate": 49.2,
-      "waitWeeks": 11,
-      "abandoned": 29
+      "passRate": 47,
+      "waitWeeks": 16,
+      "abandoned": 20
     },
     "kilkenny-government-buildings": {
       "slug": "kilkenny-government-buildings",
@@ -255,9 +255,9 @@
       "displayName": "Kilkenny (Government Buildings)",
       "url": "/kilkenny-government-buildings-routes.html",
       "region": null,
-      "passRate": 52,
-      "waitWeeks": 10,
-      "abandoned": 47
+      "passRate": 47.2,
+      "waitWeeks": 11,
+      "abandoned": 31
     },
     "kilkenny-oloughlin-gaels": {
       "slug": "kilkenny-oloughlin-gaels",
@@ -265,9 +265,9 @@
       "displayName": "Kilkenny (O'Loughlin Gaels)",
       "url": "/kilkenny-oloughlin-gaels-routes.html",
       "region": null,
-      "passRate": 66.4,
-      "waitWeeks": 9,
-      "abandoned": 14
+      "passRate": 54.3,
+      "waitWeeks": 10,
+      "abandoned": 13
     },
     "killarney": {
       "slug": "killarney",
@@ -275,9 +275,9 @@
       "displayName": "Killarney",
       "url": "/killarney-routes.html",
       "region": null,
-      "passRate": 44.6,
-      "waitWeeks": 16,
-      "abandoned": 21
+      "passRate": 46.7,
+      "waitWeeks": 12,
+      "abandoned": 41
     },
     "killester": {
       "slug": "killester",
@@ -285,9 +285,9 @@
       "displayName": "Killester",
       "url": "/killester-routes.html",
       "region": "Dublin",
-      "passRate": 47.3,
-      "waitWeeks": 14,
-      "abandoned": 61
+      "passRate": 52.4,
+      "waitWeeks": 15,
+      "abandoned": 80
     },
     "kilrush": {
       "slug": "kilrush",
@@ -295,9 +295,9 @@
       "displayName": "Kilrush",
       "url": "/kilrush-routes.html",
       "region": null,
-      "passRate": 66.3,
-      "waitWeeks": 12,
-      "abandoned": 10
+      "passRate": 63.2,
+      "waitWeeks": 8,
+      "abandoned": 7
     },
     "letterkenny": {
       "slug": "letterkenny",
@@ -305,9 +305,9 @@
       "displayName": "Letterkenny",
       "url": "/letterkenny-routes.html",
       "region": null,
-      "passRate": 62.4,
-      "waitWeeks": 13,
-      "abandoned": 22
+      "passRate": 60.8,
+      "waitWeeks": 12,
+      "abandoned": 20
     },
     "limerick-castlemungret": {
       "slug": "limerick-castlemungret",
@@ -315,9 +315,9 @@
       "displayName": "Limerick Castlemungret",
       "url": "/limerick-castlemungret-routes.html",
       "region": "Limerick",
-      "passRate": 57.9,
-      "waitWeeks": 10,
-      "abandoned": 46
+      "passRate": 59.1,
+      "waitWeeks": 13,
+      "abandoned": 28
     },
     "woodview": {
       "slug": "woodview",
@@ -325,9 +325,9 @@
       "displayName": "Limerick Woodview",
       "url": "/woodview-routes.html",
       "region": "Limerick",
-      "passRate": 53.1,
-      "waitWeeks": 10,
-      "abandoned": 39
+      "passRate": 51.3,
+      "waitWeeks": 12,
+      "abandoned": 27
     },
     "longford": {
       "slug": "longford",
@@ -335,9 +335,9 @@
       "displayName": "Longford",
       "url": "/longford-routes.html",
       "region": null,
-      "passRate": 60.6,
-      "waitWeeks": 14,
-      "abandoned": 9
+      "passRate": 56,
+      "waitWeeks": 12,
+      "abandoned": 10
     },
     "loughrea": {
       "slug": "loughrea",
@@ -345,9 +345,9 @@
       "displayName": "Loughrea",
       "url": "/loughrea-routes.html",
       "region": "Galway",
-      "passRate": 62.3,
-      "waitWeeks": 16,
-      "abandoned": 16
+      "passRate": 67.4,
+      "waitWeeks": 13,
+      "abandoned": 13
     },
     "mallow": {
       "slug": "mallow",
@@ -355,9 +355,9 @@
       "displayName": "Mallow",
       "url": "/mallow-routes.html",
       "region": "Cork",
-      "passRate": 56.6,
-      "waitWeeks": 10,
-      "abandoned": 29
+      "passRate": 57.9,
+      "waitWeeks": 11,
+      "abandoned": 28
     },
     "mitchelstown": {
       "slug": "mitchelstown",
@@ -365,9 +365,9 @@
       "displayName": "Mitchelstown",
       "url": "/mitchelstown-routes.html",
       "region": "Cork",
-      "passRate": 53.7,
-      "waitWeeks": 10,
-      "abandoned": 21
+      "passRate": 61,
+      "waitWeeks": 8,
+      "abandoned": 12
     },
     "monaghan": {
       "slug": "monaghan",
@@ -375,9 +375,9 @@
       "displayName": "Monaghan",
       "url": "/monaghan-routes.html",
       "region": null,
-      "passRate": 69.5,
-      "waitWeeks": 8,
-      "abandoned": 11
+      "passRate": 63.6,
+      "waitWeeks": 11,
+      "abandoned": 3
     },
     "maple-house": {
       "slug": "maple-house",
@@ -385,9 +385,9 @@
       "displayName": "Maple House (Mulhuddart)",
       "url": "/maple-house-routes.html",
       "region": "Dublin",
-      "passRate": 46.7,
-      "waitWeeks": 12,
-      "abandoned": 24
+      "passRate": 51.5,
+      "waitWeeks": 11,
+      "abandoned": 32
     },
     "mulhuddart": {
       "slug": "mulhuddart",
@@ -395,9 +395,9 @@
       "displayName": "Mulhuddart",
       "url": "/mulhuddart-routes.html",
       "region": "Dublin",
-      "passRate": 39.2,
+      "passRate": 38.6,
       "waitWeeks": 17,
-      "abandoned": 73
+      "abandoned": 84
     },
     "mullingar": {
       "slug": "mullingar",
@@ -405,9 +405,9 @@
       "displayName": "Mullingar",
       "url": "/mullingar-routes.html",
       "region": null,
-      "passRate": 47.8,
-      "waitWeeks": 12,
-      "abandoned": 33
+      "passRate": 54.8,
+      "waitWeeks": 13,
+      "abandoned": 34
     },
     "naas": {
       "slug": "naas",
@@ -415,9 +415,9 @@
       "displayName": "Naas",
       "url": "/naas-routes.html",
       "region": null,
-      "passRate": 53,
+      "passRate": 49.2,
       "waitWeeks": 9,
-      "abandoned": 135
+      "abandoned": 86
     },
     "navan": {
       "slug": "navan",
@@ -425,9 +425,9 @@
       "displayName": "Navan",
       "url": "/navan-routes.html",
       "region": null,
-      "passRate": 55.8,
+      "passRate": 54,
       "waitWeeks": 9,
-      "abandoned": 68
+      "abandoned": 79
     },
     "nenagh": {
       "slug": "nenagh",
@@ -435,9 +435,9 @@
       "displayName": "Nenagh",
       "url": "/nenagh-routes.html",
       "region": null,
-      "passRate": 52.7,
-      "waitWeeks": 9,
-      "abandoned": 17
+      "passRate": 66,
+      "waitWeeks": 10,
+      "abandoned": 4
     },
     "newcastle-west-longcourt-house-hotel": {
       "slug": "newcastle-west-longcourt-house-hotel",
@@ -455,9 +455,9 @@
       "displayName": "Newcastle West",
       "url": "/newcastle-west-routes.html",
       "region": "Limerick",
-      "passRate": 68.2,
-      "waitWeeks": 10,
-      "abandoned": 13
+      "passRate": 64.3,
+      "waitWeeks": 14,
+      "abandoned": 11
     },
     "maldron-hotel": {
       "slug": "maldron-hotel",
@@ -465,9 +465,9 @@
       "displayName": "Portlaoise (Maldron Hotel)",
       "url": "/maldron-hotel-routes.html",
       "region": null,
-      "passRate": 59.8,
-      "waitWeeks": 14,
-      "abandoned": 36
+      "passRate": 63.2,
+      "waitWeeks": 17,
+      "abandoned": 8
     },
     "portlaoise": {
       "slug": "portlaoise",
@@ -485,9 +485,9 @@
       "displayName": "Raheny",
       "url": "/raheny-routes.html",
       "region": "Dublin",
-      "passRate": 51.8,
-      "waitWeeks": 29,
-      "abandoned": 55
+      "passRate": 52,
+      "waitWeeks": null,
+      "abandoned": 43
     },
     "roscommon": {
       "slug": "roscommon",
@@ -495,9 +495,9 @@
       "displayName": "Roscommon",
       "url": "/roscommon-routes.html",
       "region": null,
-      "passRate": 59.9,
-      "waitWeeks": 10,
-      "abandoned": 10
+      "passRate": 59.6,
+      "waitWeeks": 11,
+      "abandoned": 12
     },
     "shannon": {
       "slug": "shannon",
@@ -505,9 +505,9 @@
       "displayName": "Shannon",
       "url": "/shannon-routes.html",
       "region": null,
-      "passRate": 55.4,
-      "waitWeeks": 7,
-      "abandoned": 14
+      "passRate": 46.7,
+      "waitWeeks": 8,
+      "abandoned": 13
     },
     "skibbereen": {
       "slug": "skibbereen",
@@ -515,9 +515,9 @@
       "displayName": "Skibbereen",
       "url": "/skibbereen-routes.html",
       "region": "Cork",
-      "passRate": 56.3,
-      "waitWeeks": 10,
-      "abandoned": 18
+      "passRate": 55,
+      "waitWeeks": 8,
+      "abandoned": 17
     },
     "sligo": {
       "slug": "sligo",
@@ -525,9 +525,9 @@
       "displayName": "Sligo",
       "url": "/sligo-routes.html",
       "region": null,
-      "passRate": 53.2,
-      "waitWeeks": 11,
-      "abandoned": 24
+      "passRate": 54.7,
+      "waitWeeks": 12,
+      "abandoned": 19
     },
     "tallaght": {
       "slug": "tallaght",
@@ -535,9 +535,9 @@
       "displayName": "Tallaght",
       "url": "/tallaght-routes.html",
       "region": "Dublin",
-      "passRate": 48.5,
-      "waitWeeks": 21,
-      "abandoned": 271
+      "passRate": 50.7,
+      "waitWeeks": 22,
+      "abandoned": 141
     },
     "thurles": {
       "slug": "thurles",
@@ -545,9 +545,9 @@
       "displayName": "Thurles",
       "url": "/thurles-routes.html",
       "region": null,
-      "passRate": 86.8,
+      "passRate": 70.7,
       "waitWeeks": 12,
-      "abandoned": 9
+      "abandoned": 14
     },
     "tipperary": {
       "slug": "tipperary",
@@ -555,9 +555,9 @@
       "displayName": "Tipperary",
       "url": "/tipperary-routes.html",
       "region": null,
-      "passRate": 65.9,
-      "waitWeeks": 9,
-      "abandoned": 6
+      "passRate": 60,
+      "waitWeeks": 10,
+      "abandoned": 8
     },
     "tralee": {
       "slug": "tralee",
@@ -565,9 +565,9 @@
       "displayName": "Tralee",
       "url": "/tralee-routes.html",
       "region": null,
-      "passRate": 56,
-      "waitWeeks": 15,
-      "abandoned": 29
+      "passRate": 61.1,
+      "waitWeeks": 13,
+      "abandoned": 28
     },
     "tuam": {
       "slug": "tuam",
@@ -575,9 +575,9 @@
       "displayName": "Tuam",
       "url": "/tuam-routes.html",
       "region": "Galway",
-      "passRate": 54.1,
-      "waitWeeks": 10,
-      "abandoned": 9
+      "passRate": 51.9,
+      "waitWeeks": 11,
+      "abandoned": 8
     },
     "tullamore": {
       "slug": "tullamore",
@@ -585,9 +585,9 @@
       "displayName": "Tullamore",
       "url": "/tullamore-routes.html",
       "region": null,
-      "passRate": 56.6,
-      "waitWeeks": 13,
-      "abandoned": 19
+      "passRate": 50.6,
+      "waitWeeks": 12,
+      "abandoned": 27
     },
     "waterford": {
       "slug": "waterford",
@@ -595,9 +595,9 @@
       "displayName": "Waterford",
       "url": "/waterford-routes.html",
       "region": null,
-      "passRate": 48.5,
+      "passRate": 50.4,
       "waitWeeks": 13,
-      "abandoned": 83
+      "abandoned": 42
     },
     "wexford": {
       "slug": "wexford",
@@ -605,9 +605,9 @@
       "displayName": "Wexford",
       "url": "/wexford-routes.html",
       "region": null,
-      "passRate": 52.2,
-      "waitWeeks": 13,
-      "abandoned": 32
+      "passRate": 47.6,
+      "waitWeeks": 14,
+      "abandoned": 30
     },
     "wicklow": {
       "slug": "wicklow",
@@ -615,9 +615,9 @@
       "displayName": "Wicklow",
       "url": "/wicklow-routes.html",
       "region": null,
-      "passRate": 37.8,
-      "waitWeeks": 13,
-      "abandoned": 32
+      "passRate": 46.4,
+      "waitWeeks": 11,
+      "abandoned": 37
     }
   }
 }

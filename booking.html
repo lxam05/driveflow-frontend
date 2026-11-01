@@ -535,69 +535,59 @@
         { name: "Wicklow", lat: 52.9750, lng: -6.0500, passRate: 37.8, address: "Wicklow" }
     ];
 
-    // Wait times in weeks from CSO ROA36 (July 2026). Confirm live slots on MyRoadSafety.
+    // Wait times in weeks from CSO ROA36 (September 2026). Centres missing here had no published figure. Confirm live slots on MyRoadSafety.
         const waitTimes = {
         "Athlone": 13,
-        "Ballina": 13,
-        "Birr": 6,
-        "Birr (County Arms Hotel)": 12,
-        "Buncrana": 11,
-        "Carlow (Talbot Hotel)": 11,
-        "Carrick-on-Shannon": 13,
-        "Castlebar": 14,
-        "Cavan": 12,
-        "Charlestown (Dublin)": 3,
-        "Clifden": 13,
-        "Clonmel": 10,
-        "Cork (Ballincollig)": 14,
-        "Cork (St. Finbarr's GAA Club, Togher)": 5,
-        "Cork (Wilton)": 10,
-        "Donegal": 9,
-        "Drogheda": 19,
-        "Dún Laoghaire / Deansgrange": 14,
-        "Dundalk": 10,
-        "Dungarvan": 14,
-        "Ennis": 12,
-        "Finglas": 9,
-        "Galway (Carnmore)": 12,
-        "Galway (Westside)": 7,
-        "Gorey": 11,
-        "Kilkenny (Government Buildings)": 10,
-        "Kilkenny (O'Loughlin Gaels)": 9,
-        "Killarney": 16,
-        "Killester": 14,
-        "Kilrush": 12,
-        "Letterkenny": 13,
-        "Limerick (Castlemungret)": 10,
-        "Limerick (Woodview)": 10,
-        "Longford": 14,
-        "Loughrea": 16,
-        "Loughrea (Lough Rea Hotel & Spa)": 8,
-        "Mallow (Cork Racecourse, Mallow)": 10,
-        "Monaghan": 8,
+        "Ballina": 11,
+        "Birr": 7,
+        "Buncrana": 13,
+        "Carlow (Talbot Hotel)": 13,
+        "Carrick-on-Shannon": 12,
+        "Castlebar": 11,
+        "Cavan": 11,
+        "Clifden": 15,
+        "Clonmel": 12,
+        "Cork (Wilton)": 11,
+        "Donegal": 12,
+        "Drogheda": 11,
+        "Dún Laoghaire / Deansgrange": 19,
+        "Dundalk": 11,
+        "Dungarvan": 15,
+        "Ennis": 10,
+        "Finglas": 14,
+        "Galway (Carnmore)": 9,
+        "Gorey": 16,
+        "Kilkenny (Government Buildings)": 11,
+        "Kilkenny (O'Loughlin Gaels)": 10,
+        "Killarney": 12,
+        "Killester": 15,
+        "Kilrush": 8,
+        "Letterkenny": 12,
+        "Limerick (Castlemungret)": 13,
+        "Limerick (Woodview)": 12,
+        "Longford": 12,
+        "Loughrea": 13,
+        "Mallow (Cork Racecourse, Mallow)": 11,
+        "Monaghan": 11,
         "Mulhuddart": 17,
-        "Mul(l)huddart (Carlton Hotel)": 2,
-        "Mullingar": 12,
+        "Mullingar": 13,
         "Naas": 9,
         "Navan": 9,
-        "Nenagh": 9,
-        "Newcastle West": 10,
-        "Newcastle West (Longcourt House Hotel)": 7,
-        "Portlaoise": 6,
-        "Raheny": 29,
-        "Roscommon": 10,
-        "Shannon": 7,
-        "Skibbereen": 10,
-        "Sligo": 11,
-        "Tallaght": 21,
+        "Nenagh": 10,
+        "Newcastle West": 14,
+        "Roscommon": 11,
+        "Shannon": 8,
+        "Skibbereen": 8,
+        "Sligo": 12,
+        "Tallaght": 22,
         "Thurles": 12,
-        "Tipperary": 9,
-        "Tralee": 15,
-        "Tuam": 10,
-        "Tullamore": 13,
+        "Tipperary": 10,
+        "Tralee": 13,
+        "Tuam": 11,
+        "Tullamore": 12,
         "Waterford": 13,
-        "Wexford": 13,
-        "Wicklow": 13
+        "Wexford": 14,
+        "Wicklow": 11
     };
 
     // Real user reviews (from Reddit, forums, etc.)
@@ -800,9 +790,9 @@
         const sortedCentres = testCentres
             .map(centre => ({
                 ...centre,
-                waitTime: waitTimes[centre.name] || 6
+                waitTime: waitTimes[centre.name] ?? null
             }))
-            .sort((a, b) => a.waitTime - b.waitTime);
+            .sort((a, b) => (a.waitTime ?? Infinity) - (b.waitTime ?? Infinity));
 
         sortedCentres.forEach(centre => {
             const item = document.createElement('div');
@@ -811,7 +801,9 @@
             let badgeClass = 'wait-time-medium';
             let badgeText = `${centre.waitTime} weeks`;
             
-            if (centre.waitTime <= 4) {
+            if (centre.waitTime === null) {
+                badgeText = 'Not published';
+            } else if (centre.waitTime <= 4) {
                 badgeClass = 'wait-time-low';
             } else if (centre.waitTime >= 10) {
                 badgeClass = 'wait-time-high';

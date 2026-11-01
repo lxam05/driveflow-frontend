@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Compile CSO ROA CSVs into data/cso-driving-test-stats-2026-07.json and data/centre-stats.json."""
+"""Compile CSO ROA CSVs into data/cso-driving-test-stats-<PERIOD>.json and data/centre-stats.json.
+
+To refresh: export the three CSVs for the new month into _agent/data/cso/, then update the
+PERIOD constants below and run this script.
+"""
 from __future__ import annotations
 
 import csv
@@ -8,6 +12,11 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 CSO = Path(__file__).resolve().parent / "data" / "cso"
+
+PERIOD = "2026-09"
+MONTH_LABEL = "2026 September"  # as written in the CSO "Month" column
+PERIOD_LABEL = "September 2026"
+PERIOD_END_DATE = "2026-09-30"
 
 MANUAL = {
     "All driving test centres": None,
@@ -191,9 +200,9 @@ def read_csv(path: Path) -> dict:
 
 
 def main() -> None:
-    pass_rates = read_csv(CSO / "ROA30-pass-rates-2026-07.csv")
-    abandoned = read_csv(CSO / "ROA30-abandoned-2026-07.csv")
-    waits = read_csv(CSO / "ROA36-waiting-times-2026-07.csv")
+    pass_rates = read_csv(CSO / f"ROA30-pass-rates-{PERIOD}.csv")
+    abandoned = read_csv(CSO / f"ROA30-abandoned-{PERIOD}.csv")
+    waits = read_csv(CSO / f"ROA36-waiting-times-{PERIOD}.csv")
     all_names = sorted(set(pass_rates) | set(abandoned) | set(waits))
 
     unmapped = []
@@ -252,24 +261,24 @@ def main() -> None:
     missing_pages = sorted(route_slugs - set(by_slug))
 
     payload = {
-        "period": "2026-07",
-        "monthLabel": "2026 July",
-        "lastUpdatedLabel": "July 2026",
-        "lastUpdatedDate": "2026-07-31",
+        "period": PERIOD,
+        "monthLabel": MONTH_LABEL,
+        "lastUpdatedLabel": PERIOD_LABEL,
+        "lastUpdatedDate": PERIOD_END_DATE,
         "source": {
             "publisher": "Central Statistics Office (CSO)",
             "series": "RSA driving test statistics (ROA)",
             "category": "Category B (Car or light van)",
-            "citation": "Source: CSO / RSA driving test statistics (ROA), Category B, July 2026.",
+            "citation": f"Source: CSO / RSA driving test statistics (ROA), Category B, {PERIOD_LABEL}.",
             "tables": {
                 "passRate": "ROA30 Driving Test Pass Rate",
                 "abandoned": "ROA30 Driving Tests Not Conducted / Abandoned",
                 "waitWeeks": "ROA36 Estimated Time to Driving Test Invite at Month End",
             },
             "files": [
-                "_agent/data/cso/ROA30-pass-rates-2026-07.csv",
-                "_agent/data/cso/ROA30-abandoned-2026-07.csv",
-                "_agent/data/cso/ROA36-waiting-times-2026-07.csv",
+                f"_agent/data/cso/ROA30-pass-rates-{PERIOD}.csv",
+                f"_agent/data/cso/ROA30-abandoned-{PERIOD}.csv",
+                f"_agent/data/cso/ROA36-waiting-times-{PERIOD}.csv",
             ],
         },
         "national": national,
@@ -282,7 +291,7 @@ def main() -> None:
         },
     }
 
-    (ROOT / "data" / "cso-driving-test-stats-2026-07.json").write_text(
+    (ROOT / "data" / f"cso-driving-test-stats-{PERIOD}.json").write_text(
         json.dumps(payload, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
     )
     slim = {
