@@ -10,6 +10,7 @@ Requires: ANTHROPIC_API_KEY env var, pip install anthropic
 
 import anthropic
 import csv
+import html as html_lib
 import json
 import os
 import re
@@ -24,15 +25,25 @@ CONTENT_PLAN = AGENT_DIR / "content-plan.csv"
 GUIDES_DIR = SITE_ROOT / "guides"
 SITEMAP_PATH = SITE_ROOT / "sitemap.xml"
 GUIDES_INDEX_PATH = SITE_ROOT / "guides-index.json"
+GUIDES_HUB_PATH = SITE_ROOT / "guides.html"
 SITE_ORIGIN = "https://www.driveflow.ie"
 DEFAULT_OG_IMAGE = f"{SITE_ORIGIN}/favicon.png"
 GUIDE_SITEMAP_PRIORITY = "0.8"
 
-GOOGLE_ADS_TAG = """<!-- Google tag (gtag.js) - Ads -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17936809057"></script>
-<script>
-  gtag('config', 'AW-17936809057');
-</script>"""
+# Analytics load only through the shared consent banner (same as every other page).
+# Never let the model write its own gtag snippets: it invents tag IDs.
+COOKIE_CONSENT_TAG = '<script src="/cookie-consent.js"></script>'
+GTAG_EXTERNAL_RE = re.compile(
+    r'[ \t]*<script[^>]*src="https://www\.googletagmanager\.com/gtag/js[^"]*"[^>]*>\s*</script>[ \t]*\n?',
+    re.I,
+)
+GTAG_COMMENT_RE = re.compile(r"[ \t]*<!--\s*Google tag \(gtag\.js\)[^>]*-->[ \t]*\n?", re.I)
+GTAG_INLINE_RE = re.compile(r"[ \t]*<script>(?P<body>[^<]*?)</script>[ \t]*\n?")
+GTAG_LINE_RE = re.compile(
+    r"^\s*(window\.dataLayer\s*=\s*window\.dataLayer\s*\|\|\s*\[\];"
+    r"|function gtag\(\)\{\s*dataLayer\.push\(arguments\);\s*\}"
+    r"|gtag\('(js|config)',[^;]*\);)?\s*$"
+)
 
 # All SEO guide types in the current content plan (not route-content / site-page).
 AUTOMATABLE_TYPES = {
@@ -276,7 +287,9 @@ Requirements:
 7. Do NOT include prices, phone numbers, or named instructor recommendations.
 8. Do NOT use em dashes (—). Do NOT use practise or practising; use practice and practicing only.
 9. Output ONLY the raw HTML: no markdown fences, no explanation, nothing before <!DOCTYPE or after </html>.
-10. Include full SEO in <head> (see Site Knowledge Base "Guide SEO head" section): robots, favicons, Open Graph, Twitter Card, Article JSON-LD, Google Ads tag.
+10. Include full SEO in <head> (see Site Knowledge Base "Guide SEO head" section): robots, favicons, Open Graph, Twitter Card, Article JSON-LD. Do NOT add any Google Analytics, Google Ads or gtag scripts; tracking is added automatically after generation.
+11. If the article is about one test centre, do NOT use "<Centre> Driving Test Routes" as the start of the <title> or <h1>. That phrase belongs to the centre's /<slug>-routes.html page; give the guide its own angle (fail spots, roundabouts, how to pass, test-day tips) and link to the centre page.
+12. Only state facts about a test centre (address, area, roads) that appear in the Site Knowledge Base or the internal link map. If unsure, describe the area generally rather than guessing.
 """
 
 
@@ -364,6 +377,24 @@ def build_article_json_ld(
 </script>"""
 
 
+def replace_tracking_with_consent_banner(html: str) -> str:
+    """Drop any model-written gtag snippets and load cookie-consent.js instead."""
+    head, sep, rest = html.partition("</head>")
+    head = GTAG_EXTERNAL_RE.sub("", head)
+    head = GTAG_COMMENT_RE.sub("", head)
+
+    def drop_gtag_inline(m: re.Match) -> str:
+        body = m.group("body")
+        if "gtag" in body and all(GTAG_LINE_RE.match(line) for line in body.splitlines()):
+            return ""
+        return m.group(0)
+
+    head = GTAG_INLINE_RE.sub(drop_gtag_inline, head)
+    if "cookie-consent.js" not in head:
+        head = _insert_after_head_open(head, COOKIE_CONSENT_TAG + "\n")
+    return head + sep + rest
+
+
 def ensure_seo_tags(html: str, published_url: str, topic: str) -> str:
     """Ensure guides have the same indexing tags as route pages (deterministic post-process)."""
     canonical = f"{SITE_ORIGIN}{published_url}"
@@ -445,17 +476,7 @@ def ensure_seo_tags(html: str, published_url: str, topic: str) -> str:
         else:
             html = _insert_after_head_open(html, block)
 
-    if "AW-17936809057" not in html:
-        if _html_contains(html, "G-EJB69589QP"):
-            html = re.sub(
-                r"(</script>\s*)(?=<meta|<link|<title|<style)",
-                r"\1\n" + GOOGLE_ADS_TAG + "\n",
-                html,
-                count=1,
-                flags=re.I,
-            )
-        else:
-            html = _insert_after_head_open(html, GOOGLE_ADS_TAG)
+    html = replace_tracking_with_consent_banner(html)
 
     json_ld = build_article_json_ld(headline, description, canonical, published_url)
     if '"@type": "Article"' not in html and '"@type":"Article"' not in html:
@@ -535,6 +556,38 @@ def update_guides_index(
     return True
 
 
+def render_guides_hub() -> bool:
+    """Write guide cards into guides.html as plain HTML so crawlers see every link."""
+    if not GUIDES_HUB_PATH.exists():
+        print(f"WARNING: {GUIDES_HUB_PATH} not found; skipping hub render.")
+        return False
+
+    guides = json.loads(GUIDES_INDEX_PATH.read_text(encoding="utf-8"))
+    cards = []
+    for g in guides:
+        title = re.sub(r"\s*\|\s*DriveFlow\s*$", "", g.get("title") or "Guide")
+        cards.append(
+            f'        <a class="guide-card" href="{html_lib.escape(g.get("url") or "#")}">'
+            f"<h3>{html_lib.escape(title, quote=False)}</h3>"
+            f'<p>{html_lib.escape(g.get("description") or "", quote=False)}</p></a>'
+        )
+
+    hub = GUIDES_HUB_PATH.read_text(encoding="utf-8")
+    new_hub, n = re.subn(
+        r"(<!-- GUIDES:START[^>]*-->\n).*?(<!-- GUIDES:END -->)",
+        lambda m: m.group(1) + "\n".join(cards) + "\n" + m.group(2),
+        hub,
+        count=1,
+        flags=re.S,
+    )
+    if n == 0:
+        print("WARNING: guides.html has no GUIDES:START/END markers; skipping hub render.")
+        return False
+    GUIDES_HUB_PATH.write_text(new_hub, encoding="utf-8")
+    print(f"Guides hub rendered: {len(cards)} guides")
+    return True
+
+
 def main():
     for path in [KNOWLEDGE_FILE, CONTENT_PLAN]:
         if not path.exists():
@@ -592,6 +645,7 @@ def main():
         or f"Practical Irish driving test advice: {row.get('topic', '').strip()}."
     )
     update_guides_index(published_url, index_title, index_description)
+    render_guides_hub()
 
     update_plan(CONTENT_PLAN, row_index, published_url)
     print(f"Content plan updated — status=done, published_url={published_url}")

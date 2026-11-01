@@ -346,7 +346,7 @@
     
     <div class="auth-card">
         <h2>Create Account</h2>
-        <p>Join thousands of learners preparing for their theory test</p>
+        <p id="signupIntro">Create a free account to practice for your theory test and unlock driving test routes</p>
 
         <div class="error-message" id="errorMessage"></div>
         <div class="success-message" id="successMessage"></div>
@@ -425,6 +425,13 @@
     // If logged in, redirect based on intent
     if (localStorage.getItem('auth_token')) {
         window.location.href = paymentUrl;
+    }
+
+    const signupIntro = document.getElementById('signupIntro');
+    if (signupIntro && redirectToPayment) {
+        signupIntro.textContent = centreParam
+            ? 'Create your free account, then you can unlock the ' + centreParam + ' driving test routes'
+            : 'Create your free account, then you can unlock your driving test routes';
     }
 
     const loginLink = document.getElementById('loginLink');

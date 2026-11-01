@@ -3,7 +3,7 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.driveflow.ie/</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -15,7 +15,7 @@
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -63,7 +63,7 @@
   </url>
   <url>
     <loc>https://www.driveflow.ie/topics.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -152,110 +152,98 @@
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://www.driveflow.ie/login.html</loc>
-    <lastmod>2026-07-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://www.driveflow.ie/signup.html</loc>
-    <lastmod>2026-07-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
     <loc>https://www.driveflow.ie/athlone-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/ballina-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/ballincollig-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/birr-county-arms-hotel-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/buncrana-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/carlow-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/carlow-talbot-hotel-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/carnmore-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/carrick-on-shannon-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/castlebar-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/cavan-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/clifden-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/clonmel-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/clybaun-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/donegal-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/drogheda-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -267,121 +255,121 @@
   </url>
   <url>
     <loc>https://www.driveflow.ie/dundalk-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/dungarvan-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/ennis-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/finglas-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/gorey-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/kilkenny-government-buildings-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/kilkenny-oloughlin-gaels-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/killarney-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/killester-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/kilrush-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/letterkenny-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/limerick-castlemungret-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/longford-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/loughrea-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/maldron-hotel-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/mallow-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/maple-house-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/mitchelstown-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/monaghan-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/mulhuddart-routes.html</loc>
-    <lastmod>2026-08-07</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -392,13 +380,13 @@
   </url>
   <url>
     <loc>https://www.driveflow.ie/mullingar-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/naas-routes.html</loc>
-    <lastmod>2026-08-07</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -409,7 +397,7 @@
   </url>
   <url>
     <loc>https://www.driveflow.ie/navan-routes.html</loc>
-    <lastmod>2026-08-07</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -420,13 +408,13 @@
   </url>
   <url>
     <loc>https://www.driveflow.ie/nenagh-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/newcastle-west-longcourt-house-hotel-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -438,13 +426,13 @@
   </url>
   <url>
     <loc>https://www.driveflow.ie/portlaoise-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/raheny-routes.html</loc>
-    <lastmod>2026-08-07</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -455,25 +443,25 @@
   </url>
   <url>
     <loc>https://www.driveflow.ie/roscommon-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/shannon-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/skibbereen-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/sligo-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -490,37 +478,37 @@
   </url>
   <url>
     <loc>https://www.driveflow.ie/thurles-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/tipperary-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/tralee-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/tuam-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/tullamore-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/waterford-routes.html</loc>
-    <lastmod>2026-08-07</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -531,31 +519,31 @@
   </url>
   <url>
     <loc>https://www.driveflow.ie/westside-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/wexford-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/wicklow-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/wilton-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/woodview-routes.html</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -675,7 +663,7 @@
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/why-learners-fail-driving-test-ireland/</loc>
-    <lastmod>2026-07-15</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -693,7 +681,7 @@
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/hill-start-mistakes.html</loc>
-    <lastmod>2026-07-22</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -717,19 +705,19 @@
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/how-many-driving-lessons-needed.html</loc>
-    <lastmod>2026-08-01</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/fail-driving-test-for-nerves.html</loc>
-    <lastmod>2026-08-04</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/practise-driving-test-routes-alone.html</loc>
-    <lastmod>2026-08-07</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -765,205 +753,187 @@
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/traffic-light-mistakes-driving-test.html</loc>
-    <lastmod>2026-08-10</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/rsa-grade-sheet-explained.html</loc>
-    <lastmod>2026-08-13</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.driveflow.ie/llms.txt</loc>
-    <lastmod>2026-08-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://www.driveflow.ie/llm.txt</loc>
-    <lastmod>2026-08-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://www.driveflow.ie/llms-full.txt</loc>
-    <lastmod>2026-08-16</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
     <loc>https://www.driveflow.ie/guides/naas-driving-test-routes-guide.html</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/naas-driving-test-fail-spots.html</loc>
-    <lastmod>2026-08-22</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/pass-naas-driving-test.html</loc>
-    <lastmod>2026-08-23</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/killester-driving-test-routes-guide.html</loc>
-    <lastmod>2026-08-23</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/killester-driving-test-fail-spots.html</loc>
-    <lastmod>2026-08-23</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/raheny-vs-killester-driving-test.html</loc>
-    <lastmod>2026-08-23</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/finglas-driving-test-routes-guide.html</loc>
-    <lastmod>2026-08-23</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/finglas-driving-test-roundabouts.html</loc>
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/tallaght-driving-test-routes-guide.html</loc>
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/tallaght-reverse-around-corner.html</loc>
-    <lastmod>2026-09-04</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/tallaght-driving-test-hill-start.html</loc>
-    <lastmod>2026-09-07</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/dun-laoghaire-driving-test-routes-guide.html</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/dun-laoghaire-roundabouts-junctions.html</loc>
-    <lastmod>2026-09-13</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/mulhuddart-driving-test-routes-guide.html</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/mulhuddart-driving-test-fail-spots.html</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/pass-mulhuddart-driving-test.html</loc>
-    <lastmod>2026-09-22</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/navan-driving-test-routes-guide.html</loc>
-    <lastmod>2026-09-25</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/navan-driving-test-fail-spots.html</loc>
-    <lastmod>2026-09-28</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/cork-wilton-driving-test-routes-guide.html</loc>
-    <lastmod>2026-10-01</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/cork-wilton-driving-test-fail-spots.html</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/galway-westside-driving-test-routes-guide.html</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/galway-westside-driving-test-fail-spots.html</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/limerick-driving-test-routes-guide.html</loc>
-    <lastmod>2026-10-13</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/waterford-driving-test-routes-guide.html</loc>
-    <lastmod>2026-10-16</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/where-driving-test-examiners-take-you.html</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/should-you-practise-driving-test-routes.html</loc>
-    <lastmod>2026-10-22</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/how-many-times-practise-driving-test-routes.html</loc>
-    <lastmod>2026-10-25</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/how-to-practise-driving-test-routes.html</loc>
-    <lastmod>2026-10-28</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.driveflow.ie/guides/driving-test-routes-near-me.html</loc>
-    <lastmod>2026-10-31</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

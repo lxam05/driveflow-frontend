@@ -589,6 +589,32 @@
       background: #333;
     }
 
+    .centre-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 0.75rem 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .centre-links a {
+      display: inline-block;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid #ddd;
+      border-radius: 999px;
+      background: #fff;
+      color: #1a1a1a;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .centre-links a:hover {
+      border-color: #e6b800;
+    }
+
     /* App Store CTA */
     .app-cta {
       padding: 0 3rem 4rem;
@@ -1307,7 +1333,7 @@
       <div class="hero-top">
         <div class="hero-content">
           <div class="hero-title-wrap">
-            <h1>Welcome to Driveflow</h1>
+            <h1>Irish Driving Test Routes</h1>
             <div class="hero-title-car" aria-hidden="true"></div>
           </div>
           <p class="hero-tagline">Train where you'll be Tested</p>
@@ -1335,7 +1361,7 @@
         </div>
       </div>
       <div class="hero-image-wrapper">
-        <img src="othersstoblurr.png" alt="Driveflow" class="hero-image" width="1200" height="800" decoding="async" fetchpriority="high">
+        <img src="images/home/hero.webp" alt="DriveFlow driving test route practice on Google Maps" class="hero-image" width="1400" height="920" decoding="async" fetchpriority="high">
       </div>
     </section>
 
@@ -1344,21 +1370,21 @@
       <div class="practice-grid">
         <div class="practice-item">
           <a href="theory-test.html" class="card">
-            <div class="card-image"><img src="driveflowtheoryimg.jpg" alt="Mock theory test"></div>
+            <div class="card-image"><img src="images/home/theory-test-card.webp" alt="Mock theory test" loading="lazy" decoding="async"></div>
             <p class="card-title">Theory Test</p>
             <p class="card-body">Practice with official-style questions that mirror the real exam format and build your confidence.</p>
           </a>
         </div>
         <div class="practice-item">
           <a href="routes.html" class="card">
-            <div class="card-image"><img src="add2.png" alt="Routes"></div>
+            <div class="card-image"><img src="images/home/routes-card.webp" alt="Routes" loading="lazy" decoding="async"></div>
             <p class="card-title">Routes</p>
             <p class="card-body">Explore common test routes around your test centre and familiarize yourself with the area.</p>
           </a>
         </div>
         <div class="practice-item">
           <a href="drivingtest-theory.html" class="card">
-            <div class="card-image"><img src="testdaytheory.jpg" alt="Test day theory"></div>
+            <div class="card-image"><img src="images/home/test-day-theory.webp" alt="Test day theory" loading="lazy" decoding="async"></div>
             <p class="card-title">Test day theory</p>
             <p class="card-body">Review essential theory topics and road signs to ensure you're fully prepared for test day.</p>
           </a>
@@ -1375,19 +1401,19 @@
         <p>Alongside this, you get access to real driving test routes designed around your chosen test centre. These routes follow the roads, junctions, and manoeuvre areas that learners are commonly brought through, helping you understand how a test is likely to flow and what to expect at each stage of the drive.</p>
         <p>By the time test day comes, nothing feels unfamiliar. You know the questions, you know the routes, and you know what's expected of you, so you can focus on driving with confidence.</p>
       </div>
-      <img src="gingerlearner.png" alt="How we work" class="image">
+      <img src="images/home/learner-card.webp" alt="How we work" class="image" loading="lazy" decoding="async">
     </section>
 
     <section class="more-about">
       <h2>More about us</h2>
       <div class="more-about-grid">
         <div class="more-about-item">
-          <a href="guides/why-learners-fail-driving-test-ireland/"><img src="pixel-mixer-crash-test-1620591_1920.jpg" alt="Why learners fail the Irish driving test" class="more-about-img"></a>
+          <a href="guides/why-learners-fail-driving-test-ireland/"><img src="images/home/road-safety.webp" alt="Why learners fail the Irish driving test" class="more-about-img" loading="lazy" decoding="async"></a>
           <a href="guides/why-learners-fail-driving-test-ireland/" style="color: inherit; text-decoration: none;"><h3>Why learners fail the Irish driving test</h3></a>
           <p>Understanding common pitfalls can help you avoid them. Many learners fail due to lack of practice on test routes, nerves on the day, or gaps in theory knowledge. We built Driveflow to address these issues so you can go into your test feeling prepared and confident.</p>
         </div>
         <div class="more-about-item">
-          <a href="about.html"><img src="459e426c-dcfa-42ab-b4e8-6fd1f668ece6.png" alt="About us" class="more-about-img"></a>
+          <a href="about.html"><img src="images/home/about-us.webp" alt="About us" class="more-about-img" loading="lazy" decoding="async"></a>
           <a href="about.html" style="color: inherit; text-decoration: none;"><h3>About us</h3></a>
           <p>Driveflow was created to make Irish driving test preparation clearer and less stressful. We combine official-style theory practice with real test routes and focused revision so you know what to expect and how to prepare. Our goal is to help more learners pass first time.</p>
         </div>
@@ -1631,6 +1657,32 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="guides-teaser" aria-labelledby="centres-teaser-heading">
+      <div class="guides-teaser-inner">
+        <div class="guides-teaser-text">
+          <h2 id="centres-teaser-heading" style="font-size: 1.1rem; font-weight: 600; margin-bottom: 0.35rem; color: #1a1a1a;">Driving test routes by test centre</h2>
+          <p>Local roads, roundabouts, pass rates and waiting times for each RSA test centre.</p>
+          <ul class="centre-links">
+            <li><a href="tallaght-routes.html">Tallaght</a></li>
+            <li><a href="finglas-routes.html">Finglas</a></li>
+            <li><a href="raheny-routes.html">Raheny</a></li>
+            <li><a href="dun-laoghaire-routes.html">Dun Laoghaire</a></li>
+            <li><a href="killester-routes.html">Killester</a></li>
+            <li><a href="mulhuddart-routes.html">Mulhuddart</a></li>
+            <li><a href="naas-routes.html">Naas</a></li>
+            <li><a href="navan-routes.html">Navan</a></li>
+            <li><a href="drogheda-routes.html">Drogheda</a></li>
+            <li><a href="wilton-routes.html">Cork (Wilton)</a></li>
+            <li><a href="ballincollig-routes.html">Ballincollig</a></li>
+            <li><a href="westside-routes.html">Galway (Westside)</a></li>
+            <li><a href="limerick-castlemungret-routes.html">Limerick (Castlemungret)</a></li>
+            <li><a href="waterford-routes.html">Waterford</a></li>
+          </ul>
+        </div>
+        <a href="routes.html" class="guides-teaser-link">All test centres</a>
       </div>
     </section>
 

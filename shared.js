@@ -68,10 +68,11 @@
                 <h2 style="margin: 0 0 8px; color: var(--text-main); font-size: 24px; font-weight: 800;">${centreName} Driving Test Routes</h2>
                 <p style="margin: 0 0 20px; color: var(--accent); font-size: 20px; font-weight: 700;">Unlock Full Routes – €11.99</p>
                 <p style="margin: 0 0 24px; color: var(--text-muted); font-size: 15px;">Used by learners passing first time</p>
-                <p style="margin: 0 0 20px; color: var(--text-muted); font-size: 14px;">Log in or sign up to purchase — then you can unlock the routes.</p>
+                <p style="margin: 0 0 20px; color: var(--text-muted); font-size: 14px;">Create a free account, then unlock the routes. One-off payment, no subscription.</p>
                 <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; align-items: center;">
-                    <a href="/login.html?redirect=payment&centre=${encodeURIComponent(centreName)}" class="route-btn" aria-label="Get access to ${centreName} driving test routes for 11.99 euro" style="display: inline-block; text-decoration: none; width: auto; padding: 14px 28px; font-size: 16px; font-weight: 600; background: var(--accent); color: var(--bg-main);">Get Access – €11.99</a>
+                    <a href="/signup.html?redirect=payment&centre=${encodeURIComponent(centreName)}" class="route-btn" aria-label="Get access to ${centreName} driving test routes for 11.99 euro" style="display: inline-block; text-decoration: none; width: auto; padding: 14px 28px; font-size: 16px; font-weight: 600; background: var(--accent); color: var(--bg-main);">Get Access – €11.99</a>
                 </div>
+                <p style="margin: 16px 0 0; color: var(--text-muted); font-size: 14px;">Already have an account? <a href="/login.html?redirect=payment&centre=${encodeURIComponent(centreName)}" style="color: var(--accent);">Log in</a></p>
             </div>
             <div id="routesContainer" class="routes-container"></div>
             <div id="loadingContainer" class="loading">Loading routes...</div>

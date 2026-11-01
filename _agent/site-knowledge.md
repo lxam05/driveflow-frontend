@@ -122,7 +122,7 @@ Static pages like `about.html` — card sections (`.content-section`), light hea
 **Reference:** `guides/why-learners-fail-driving-test-ireland/index.html`
 
 Key elements:
-- GA + Google Ads tags in `<head>`
+- `<script src="/cookie-consent.js"></script>` first in `<head>` (loads GA only after consent). Never hand-write gtag / Google Ads snippets.
 - `<meta name="description">` and `<link rel="canonical">`
 - Inline `:root` CSS (`--accent: #e6b800`, `--bg-main: #fafafa`, dot pattern background)
 - `<main>` with `.article-card` wrapper
@@ -299,6 +299,6 @@ Display name → published URL (use these exact paths in links).
 - Secret: `ANTHROPIC_API_KEY`
 - Auto-generates all SEO types in the plan: `fail-spots`, `pass-guide`, `roundabouts`, `checklist`, `comparison`, `city-guide`, `guide`, `article`
 - Saves to the path in **`published_url`** (e.g. `guides/raheny-fail-spots.html`)
-- Injects full SEO head tags (robots, OG, Twitter, Article JSON-LD, Google Ads) if the model omitted any
+- Injects full SEO head tags (robots, OG, Twitter, Article JSON-LD) if the model omitted any, strips model-written gtag snippets and adds cookie-consent.js
 - Appends the page to **`sitemap.xml`** and **`guides-index.json`** (committed with the guide in CI)
 - Does **not** write centre `route-content` (`.txt` on `*-routes.html` pages) — not in the current plan

@@ -917,7 +917,7 @@ function gtag_report_conversion(url, transactionId) {
                         </ul>
 
                         <div class="scarcity-trust">
-                            <p><strong>Used by thousands of learners around Ireland to pass their test first try</strong></p>
+                            <p><strong>Practice the local roads, junctions and roundabouts before test day</strong></p>
                             <p>Failing the test costs €85 — get the routes for less</p>
                             <p><strong>3 month access.</strong></p>
                         </div>
@@ -947,7 +947,7 @@ function gtag_report_conversion(url, transactionId) {
                     <h2>What You'll Get</h2>
                     
                     <div style="padding: 20px; background: var(--primary-soft); border: 1px solid var(--primary); border-radius: 12px; margin-bottom: 32px; text-align: center;">
-                        <p style="margin: 0; color: var(--accent); font-weight: 700; font-size: 16px;">Used by thousands of learners around Ireland to pass their test first try</p>
+                        <p style="margin: 0; color: var(--accent); font-weight: 700; font-size: 16px;">Practice the local roads, junctions and roundabouts before test day</p>
                     </div>
                     
                     <div class="what-you-get">
@@ -1524,8 +1524,12 @@ function gtag_report_conversion(url, transactionId) {
         const token = localStorage.getItem('auth_token');
         
         if (!token) {
-            alert('Please log in to complete your purchase');
-            window.location.href = 'login.html';
+            // Keep the buyer's chosen centre so they come straight back here after signing up
+            const chosenCentre = (document.getElementById('testCentreSelect') || {}).value
+                || new URLSearchParams(window.location.search).get('centre');
+            window.location.href = chosenCentre
+                ? 'signup.html?redirect=payment&centre=' + encodeURIComponent(chosenCentre)
+                : 'signup.html?redirect=payment';
             return;
         }
 
