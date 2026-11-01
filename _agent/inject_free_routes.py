@@ -44,14 +44,20 @@ def direction_lines(route: dict) -> list[str]:
     return [str(line).strip() for line in lines if str(line).strip()]
 
 
+# Route 1 is a paid route, so the public card only previews its opening steps.
+TEASER_STEPS = 4
+
+
 def card_html(route: dict) -> str:
     display = route["displayName"]
     short = re.sub(r"\s+Driving Test Centre$", "", display, flags=re.I)
     lines = direction_lines(route)
-    body = "\n".join(f"                    <p>{html_lib.escape(line)}</p>" for line in lines)
-    maps_url = html_lib.escape(route["googleMapsUrl"], quote=True)
-    aria = html_lib.escape(f"{short} free sample route")
-    title = html_lib.escape(f"{short} Free Driving Test Route")
+    preview = lines[:TEASER_STEPS]
+    remaining = max(len(lines) - len(preview), 0)
+    body = "\n".join(f"                    <p>{html_lib.escape(line)}</p>" for line in preview)
+    aria = html_lib.escape(f"{short} route preview")
+    title = html_lib.escape(f"{short} Route 1 Preview")
+    short_esc = html_lib.escape(short)
     return f"""        <section class="info-section free-route-card" id="free-route-1" aria-label="{aria}">
             <details class="free-route-details">
                 <summary class="free-route-summary">
@@ -60,17 +66,25 @@ def card_html(route: dict) -> str:
                     <span class="free-route-chevron" aria-hidden="true"></span>
                 </summary>
                 <div class="free-route-panel">
-                    <p class="free-route-lede">A turn-by-turn practice route from the {html_lib.escape(short)} test centre. Follow it locally before test day.</p>
+                    <p class="free-route-lede">The opening turns of a {short_esc} practice route, starting at the test centre.</p>
                     <div class="free-route-directions">
 {body}
                     </div>
+                    <p class="free-route-more">{remaining} more steps, plus this route and every other {short_esc} route on Google Maps, are included when you unlock the {short_esc} routes.</p>
                     <p class="free-route-cta">
-                        <a href="{maps_url}" target="_blank" rel="noopener noreferrer">Try the free Google Maps test route</a>
+                        <a href="#routes">Unlock the full {short_esc} routes</a>
                     </p>
                 </div>
             </details>
         </section>
 """
+
+
+def teaser_route(route: dict) -> dict:
+    """Public copy of a free route: preview steps only, no Maps link."""
+    preview = direction_lines(route)[:TEASER_STEPS]
+    keep = {k: route[k] for k in ("slug", "displayName", "centreAddress") if k in route}
+    return {**keep, "directions": preview, "totalSteps": len(direction_lines(route))}
 
 
 def strip_insert_after(html: str) -> str:

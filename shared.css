@@ -455,6 +455,15 @@
         color: var(--text-main);
     }
 
+    .free-route-more {
+        margin: 16px 0 0;
+        padding-top: 12px;
+        border-top: 1px dashed var(--border-subtle);
+        font-size: 15px;
+        line-height: 1.5;
+        color: var(--text-muted);
+    }
+
     .free-route-cta {
         margin: 20px 0 0;
     }
